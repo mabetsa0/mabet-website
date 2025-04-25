@@ -4,7 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
-import Navbar from "./components/layout"
+import Navbar from "./components/navbar"
 import { setRequestLocale } from "next-intl/server"
 
 export default async function LocaleLayout({
