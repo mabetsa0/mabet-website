@@ -1,4 +1,5 @@
-import { createTheme } from "@mantine/core"
+"use client"
+import { Button, createTheme } from "@mantine/core"
 
 const theme = createTheme({
   breakpoints: {
@@ -9,18 +10,28 @@ const theme = createTheme({
     xl: "88em",
   },
   colors: {
-    brand: [
-      "#e6f7ff",
-      "#bae7ff",
-      "#91d5ff",
-      "#69c0ff",
-      "#40a9ff",
-      "#1890ff",
-      "#096dd9",
-      "#0050b3",
-      "#003a8c",
-      "#002766",
+    primary: [
+      "#eefcfb",
+      "#def6f4",
+      "#b7ede9",
+      "#8ee4dd",
+      "#6fddd3",
+      "#5dd8cd",
+      "#188078",
+      "#42bdb2",
+      "#35a89e",
+      "#1b9289",
     ],
+  },
+  primaryColor: "primary",
+  defaultRadius: "8px",
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        color: "primary",
+        size: "md",
+      },
+    }),
   },
 })
 

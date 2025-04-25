@@ -24,15 +24,19 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   return (
-    <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} {...mantineHtmlProps}>
+    <html
+      lang={locale}
+      dir={locale == "ar" ? "rtl" : "ltr"}
+      {...mantineHtmlProps}
+    >
       <head>
         <ColorSchemeScript />
       </head>
       <body>
         <MyMantineProvider>
-          <Navbar>
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
-          </Navbar>
+          <NextIntlClientProvider>
+            <Navbar>{children}</Navbar>
+          </NextIntlClientProvider>
         </MyMantineProvider>
       </body>
     </html>

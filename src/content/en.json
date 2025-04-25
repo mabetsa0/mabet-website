@@ -2,5 +2,11 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "header": {
+    "about-us": "About Mabet",
+    "blog": "blog",
+    "contact-us": "Contact us",
+    "download-app": "Mabet App"
   }
 }
