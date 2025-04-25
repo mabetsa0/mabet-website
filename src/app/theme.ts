@@ -1,4 +1,4 @@
-import { createTheme } from "@mantine/core";
+import { createTheme } from "@mantine/core"
 
 const theme = createTheme({
   breakpoints: {
@@ -22,6 +22,6 @@ const theme = createTheme({
       "#002766",
     ],
   },
-});
+})
 
-export default theme;
+export default theme
