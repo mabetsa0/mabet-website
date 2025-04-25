@@ -1,9 +1,11 @@
 import { routing } from "@/lib/i18n/routing"
-import { ColorSchemeScript, MantineProvider } from "@mantine/core"
-import { NextIntlClientProvider, hasLocale } from "next-intl"
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core"
+import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
-import theme from "../theme"
-import "./globals.css"
+import "../globals.css"
+import MyMantineProvider from "../mantine-provider"
+import Navbar from "./components/layout"
+import { setRequestLocale } from "next-intl/server"
 
 export default async function LocaleLayout({
   children,
@@ -18,17 +20,20 @@ export default async function LocaleLayout({
     notFound()
   }
 
+  // for static rendering
+  setRequestLocale(locale)
+
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
-        <head>
-          <ColorSchemeScript />
-        </head>
-        <body className="antialiased">
-          <MantineProvider theme={theme}>
+        <MyMantineProvider>
+          <Navbar>
             <NextIntlClientProvider>{children}</NextIntlClientProvider>
-          </MantineProvider>
-        </body>
+          </Navbar>
+        </MyMantineProvider>
       </body>
     </html>
   )
