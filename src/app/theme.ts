@@ -1,5 +1,5 @@
 "use client"
-import { Button, createTheme } from "@mantine/core"
+import { Button, createTheme, rem } from "@mantine/core"
 
 const theme = createTheme({
   breakpoints: {
@@ -23,6 +23,7 @@ const theme = createTheme({
       "#1b9289",
     ],
   },
+  black: "#020A0A",
   primaryColor: "primary",
   defaultRadius: "8px",
   components: {
@@ -32,6 +33,31 @@ const theme = createTheme({
         size: "md",
       },
     }),
+  },
+  headings: {
+    fontFamily: "var(--font)",
+    sizes: {
+      h1: {
+        fontSize: rem(52),
+        lineHeight: "110%",
+      },
+      h2: {
+        fontSize: rem(40),
+        lineHeight: "110%",
+      },
+      h3: {
+        fontSize: rem(28),
+        lineHeight: "110%",
+      },
+      h4: {
+        fontSize: rem(24),
+        lineHeight: "150%",
+      },
+      h5: {
+        fontSize: rem(24),
+        lineHeight: "150%",
+      },
+    },
   },
 })
 
