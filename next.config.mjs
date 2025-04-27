@@ -12,6 +12,7 @@ const nextConfig = withNextIntl({
       "@mantine/modals",
       "@mantine/notifications",
       "@mantine/carousel",
+      "lucide-react",
     ],
   },
 })

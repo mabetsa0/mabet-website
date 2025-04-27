@@ -6,6 +6,14 @@ import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import Navbar from "./components/navbar"
 import { setRequestLocale } from "next-intl/server"
+import { IBM_Plex_Sans_Arabic } from "next/font/google"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
+
+const arFont = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font",
+})
 
 export default async function LocaleLayout({
   children,
@@ -32,12 +40,14 @@ export default async function LocaleLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body>
-        <MyMantineProvider>
-          <NextIntlClientProvider>
-            <Navbar>{children}</Navbar>
-          </NextIntlClientProvider>
-        </MyMantineProvider>
+      <body className={`${arFont.className} ${arFont.variable}`}>
+        <NuqsAdapter>
+          <MyMantineProvider locale={locale}>
+            <NextIntlClientProvider>
+              <Navbar>{children}</Navbar>
+            </NextIntlClientProvider>
+          </MyMantineProvider>
+        </NuqsAdapter>
       </body>
     </html>
   )
