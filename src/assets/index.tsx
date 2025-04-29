@@ -2,4 +2,23 @@ import logo from "./logo.svg"
 import calenderIn from "./calendar-check-in-01.svg"
 import calenderOut from "./calendar-check-out-01.svg"
 import heroBackground from "./Hero-Image.png"
-export { logo, heroBackground, calenderIn, calenderOut }
+import type1Icon from "./Cahlet.svg"
+import type2Icon from "./Camps.svg"
+import type3Icon from "./Rest-House.svg"
+import type4Icon from "./Apartment-Rental-Icon.svg"
+export {
+  logo,
+  heroBackground,
+  calenderIn,
+  calenderOut,
+  type1Icon,
+  type2Icon,
+  type3Icon,
+  type4Icon,
+}
+export const UnitTypeIcons = {
+  "2": type1Icon.src as string,
+  "5": type4Icon.src as string,
+  "3": type2Icon.src as string,
+  "8": type3Icon.src as string,
+}

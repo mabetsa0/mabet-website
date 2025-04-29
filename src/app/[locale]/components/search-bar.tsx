@@ -1,7 +1,19 @@
 "use client"
 
 import { Building2, MapPin, Search } from "lucide-react"
-import { ActionIcon, Divider, Group, Select, Grid } from "@mantine/core"
+import {
+  ActionIcon,
+  Divider,
+  Group,
+  Select,
+  Grid,
+  Stack,
+  Text,
+  Popover,
+  Radio,
+  SimpleGrid,
+  Image,
+} from "@mantine/core"
 import { useTranslations } from "next-intl"
 import DateRangePicker from "./date-range-picker"
 import { City } from "@/@types/cities"
@@ -10,6 +22,8 @@ import { createFormContext } from "@mantine/form"
 import { useRouter } from "@/lib/i18n/navigation"
 import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import dayjs from "dayjs"
+import { cn } from "@/lib/cn"
+import { UnitTypeIcons } from "@/assets"
 
 // Definition of form values is required
 type FormValues = {
@@ -31,6 +45,7 @@ const SearchBar = ({
   cities: City[]
   unitTypes: UnitType[]
 }) => {
+  console.log("🚀 ~ unitTypes:", unitTypes)
   const t = useTranslations("general")
   const form = useForm({
     mode: "controlled",
@@ -86,7 +101,81 @@ const SearchBar = ({
                 <Grid.Col span={3}>
                   <Group wrap="nowrap">
                     <Divider orientation="vertical" />
-                    <Select
+                    <Popover withArrow shadow="md">
+                      <Popover.Target>
+                        <Stack className="w-full " gap={2}>
+                          <Group gap={4}>
+                            <Building2 size={17} strokeWidth={1.5} />
+
+                            <Text className="text-sm">
+                              {" "}
+                              {t("select-unit-type")}
+                            </Text>
+                          </Group>
+                          <Group
+                            className={cn(
+                              "h-[50px] items-center text-gray-600 text-lg",
+                              form.values.unit_type && "text-gray-700"
+                            )}
+                          >
+                            {form.values.unit_type
+                              ? unitTypes.find(
+                                  (element) =>
+                                    element.id + "" == form.values.unit_type
+                                )!.name
+                              : t("select")}
+                          </Group>
+                        </Stack>
+                      </Popover.Target>
+                      <Popover.Dropdown>
+                        <Radio.Group
+                          key={form.key("unit_type")}
+                          {...form.getInputProps("unit_type")}
+                        >
+                          <SimpleGrid cols={2}>
+                            {unitTypes.map((type) => {
+                              return (
+                                <Radio.Card
+                                  key={type.id}
+                                  radius="md"
+                                  value={type.id + ""}
+                                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-2.5 py-2.5 relative"
+                                >
+                                  <Group wrap="nowrap" align="flex-start">
+                                    <Radio.Indicator className="absolute opacity-0" />
+                                    <Stack gap={"xs"} ta={"center"}>
+                                      <Image
+                                        h={40}
+                                        w={40}
+                                        mx={"auto"}
+                                        src={
+                                          UnitTypeIcons[
+                                            (type.id +
+                                              "") as keyof typeof UnitTypeIcons
+                                          ]
+                                        }
+                                        alt={type.name}
+                                      />
+                                      <Text
+                                        fz={"sm"}
+                                        fw={700}
+                                        className="duration-300 group-data-[checked]:text-primary"
+                                      >
+                                        {type.name}
+                                      </Text>
+                                      <Text ta={"center"} size="sm" c={"gray"}>
+                                        {type.units_count_text}
+                                      </Text>
+                                    </Stack>
+                                  </Group>
+                                </Radio.Card>
+                              )
+                            })}
+                          </SimpleGrid>
+                        </Radio.Group>
+                      </Popover.Dropdown>
+                    </Popover>
+                    {/* <Select
                       size="lg"
                       classNames={{
                         label: "text-sm",
@@ -109,7 +198,7 @@ const SearchBar = ({
                       searchable
                       key={form.key("unit_type")}
                       {...form.getInputProps("unit_type")}
-                    />
+                    /> */}
                   </Group>
                 </Grid.Col>
                 <Grid.Col span={6}>

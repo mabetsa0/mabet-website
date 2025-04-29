@@ -1,0 +1,50 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_205_76516)">
+<mask id="mask0_205_76516" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+<path d="M39 39V1H1V39H39Z" fill="white" stroke="white" stroke-width="2"/>
+</mask>
+<g mask="url(#mask0_205_76516)">
+<path d="M1.15747 38.8281H38.8136" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M22.3332 1.17199H2.802V38.8281H22.3332V1.17199Z" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M1.15747 1.172H23.9571" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+</g>
+<path d="M12.5676 5.92089V7.89221" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M7.72388 5.92089V7.89221" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M17.4114 5.92089V7.89221" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M12.5573 12.5988V14.5701" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M7.7135 12.5988V14.5701" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M17.401 12.5988V14.5701" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M12.5573 19.2297V21.201" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M7.7135 19.2297V21.201" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M17.401 19.2297V21.201" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M12.5469 25.9076V27.8789" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M7.70312 25.9076V27.8789" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M17.3906 25.9076V27.8789" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<mask id="mask1_205_76516" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+<path d="M39 39V1H1V39H39Z" fill="white" stroke="white" stroke-width="2"/>
+</mask>
+<g mask="url(#mask1_205_76516)">
+<path d="M37.2662 14.5703H22.3331V38.8281H37.2662V14.5703Z" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M22.3331 14.5163H38.8135" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+</g>
+<path d="M32.2268 19.2297V21.201" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M27.3831 19.2297V21.201" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M32.2164 25.9076V27.8789" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M27.3727 25.9076V27.8789" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<mask id="mask2_205_76516" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+<path d="M39 39V1H1V39H39Z" fill="white" stroke="white" stroke-width="2"/>
+</mask>
+<g mask="url(#mask2_205_76516)">
+<path d="M32.2217 33.0258V38.8281" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M27.3779 33.0258V38.8281" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M12.5469 32.532V38.3343" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M7.70312 32.532V38.3343" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M17.3906 32.532V38.3343" stroke="#020A0A" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_205_76516">
+<rect width="40" height="40" fill="white"/>
+</clipPath>
+</defs>
+</svg>

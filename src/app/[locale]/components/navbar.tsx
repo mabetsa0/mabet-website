@@ -43,7 +43,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             wrap="nowrap"
             style={{ flex: 1 }}
           >
-            <img alt="logo" src={logo.src} className="max-md:h-2.5" />
+            <img alt="logo" src={logo.src} className="max-md:h-2" />
             <Group>
               <Group me="md" gap={0} visibleFrom="md">
                 <UnstyledButton

@@ -1,15 +1,23 @@
 "use client"
-import { Button } from "@mantine/core"
+import { Burger, Button, Group } from "@mantine/core"
 import { Drawer } from "vaul"
 import { Search } from "lucide-react"
 import { useTranslations } from "next-intl"
 import React from "react"
+import { City } from "@/@types/cities"
+import { UnitType } from "@/@types/unit-types"
 
-const MobileSearch = () => {
+const MobileSearch = ({
+  cities,
+  unitTypes,
+}: {
+  cities: City[]
+  unitTypes: UnitType[]
+}) => {
   const t = useTranslations("general")
   return (
     <>
-      <div className="flex justify-center py-1.5 px-1">
+      <div className="flex justify-center py-1.5 px-1 md:hidden">
         <Drawer.Root>
           <Drawer.Trigger>
             <Button
@@ -26,8 +34,18 @@ const MobileSearch = () => {
           </Drawer.Trigger>
           <Drawer.Portal>
             <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-            <Drawer.Content className="bg-gray-100 h-fit fixed bottom-0 left-0 right-0 outline-none">
-              <div className="p-4 bg-white">{/* Content */}</div>
+            <Drawer.Content className=" h-fit fixed bottom-0 left-0 right-0 outline-none">
+              <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+                <Drawer.Title className="font-bold text-xl">
+                  <Group gap={"xs"} align="center">
+                    <Drawer.Close>
+                      <Burger component={"span"} opened size={"md"} />
+                    </Drawer.Close>
+
+                    {t("select-city")}
+                  </Group>
+                </Drawer.Title>
+              </div>
             </Drawer.Content>
           </Drawer.Portal>
         </Drawer.Root>

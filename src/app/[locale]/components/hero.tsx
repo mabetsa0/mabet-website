@@ -37,7 +37,7 @@ export default async function Hero() {
           </Stack>
         </div>
       </section>
-      <MobileSearch />
+      <MobileSearch cities={cities} unitTypes={unitTypes} />
     </>
   )
 }
