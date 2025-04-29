@@ -11,7 +11,7 @@ export default async function Hero() {
   const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
   return (
     <>
-      <section className=" h-[30svh] lg:h-[calc(100svh_-_74px)] flex items-center relative ">
+      <section className=" h-[30svh] md:h-[calc(100svh_-_74px)] flex items-center relative ">
         <Image
           src={heroBackground}
           alt="background"

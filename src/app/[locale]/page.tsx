@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import Hero from "./components/hero"
+import UnitTypes from "./components/unit-types"
 
 export const revalidate = 3600
 export default async function Page({
@@ -27,6 +28,7 @@ export default async function Page({
   return (
     <>
       <Hero />
+      <UnitTypes />
     </>
   )
 }
