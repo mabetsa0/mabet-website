@@ -1,11 +1,13 @@
 import { heroBackground } from "@/assets"
+import { getCities, getUnitTypes } from "@/services/lists"
 import { Space, Stack, Text, Title } from "@mantine/core"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import Image from "next/image"
 import SearchBar from "./search-bar"
 
-export default function Hero() {
-  const t = useTranslations("home.hero")
+export default async function Hero() {
+  const t = await getTranslations("home.hero")
+  const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
   return (
     <section className=" h-[70svh] lg:h-[calc(100svh_-_74px)] flex items-center ">
       <Image
@@ -14,7 +16,7 @@ export default function Hero() {
         className="w-full h-full object-cover  absolute inset-0"
       />
       <div className="container relative text-white mx-auto">
-        <Stack gap={"xl"}>
+        <Stack gap={"xl"} mt={"90"}>
           <Stack gap={"xs"}>
             <Title order={1}>{t("title")}</Title>
             <Text className="lg:max-w-3xl" fz={28}>
@@ -23,7 +25,7 @@ export default function Hero() {
           </Stack>
           <Space />
           <div className=" max-w-5xl">
-            <SearchBar />
+            <SearchBar cities={cities} unitTypes={unitTypes} />
           </div>
         </Stack>
       </div>

@@ -4,8 +4,16 @@ import { Building2, MapPin, Search } from "lucide-react"
 import { ActionIcon, Divider, Group, Select, Grid } from "@mantine/core"
 import { useTranslations } from "next-intl"
 import DateRangePicker from "./date-range-picker"
+import { City } from "@/@types/cities"
+import { UnitType } from "@/@types/unit-types"
 
-const SearchBar = () => {
+const SearchBar = ({
+  cities,
+  unitTypes,
+}: {
+  cities: City[]
+  unitTypes: UnitType[]
+}) => {
   const t = useTranslations("general")
 
   return (
@@ -33,7 +41,10 @@ const SearchBar = () => {
                     </Group>
                   }
                   placeholder={t("select")}
-                  data={["React", "Angular", "Vue", "Svelte"]}
+                  data={cities.map((city) => ({
+                    value: city.id + "",
+                    label: city.name,
+                  }))}
                   rightSection={<div></div>}
                   rightSectionWidth={0}
                   searchable
@@ -56,7 +67,10 @@ const SearchBar = () => {
                       </Group>
                     }
                     placeholder={t("select")}
-                    data={["React", "Angular", "Vue", "Svelte"]}
+                    data={unitTypes.map((type) => ({
+                      value: type.id + "",
+                      label: type.name,
+                    }))}
                     rightSection={<div></div>}
                     rightSectionWidth={0}
                     searchable

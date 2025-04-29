@@ -18,7 +18,7 @@ const DateRangePicker = () => {
   return (
     <Popover withArrow shadow="md">
       <Popover.Target>
-        <Group wrap="nowrap" className="w-full h-full">
+        <Group wrap="nowrap" className="w-full h-full cursor-pointer">
           <Stack className="w-full " gap={2}>
             <Group gap={4}>
               <img alt="icon" src={calenderIn.src} />
