@@ -98,7 +98,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             </Group>
           </Group>
           <Group hiddenFrom="md">
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
 
             <ActionIcon size={"lg"}>
               <svg

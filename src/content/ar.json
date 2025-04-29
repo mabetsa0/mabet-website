@@ -19,7 +19,8 @@
   "general": {
     "select-city": "إختر المدينة",
     "select": "إختر ",
-    "select-unit-type": "نوع المبيت"
+    "select-unit-type": "نوع المبيت",
+    "mobile-search": "ابحث عن شقق, استديوا, فلل, شاليه واستراحه, مزارع ومخيمات"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

@@ -3,15 +3,15 @@
 import { calenderIn, calenderOut } from "@/assets"
 import "@mantine/dates/styles.css"
 
+import { cn } from "@/lib/cn"
 import { Divider, Group, Popover, Stack, Text } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
-import { useTranslations } from "next-intl"
-import { useState } from "react"
-import { cn } from "@/lib/cn"
 import dayjs from "dayjs"
+import { useTranslations } from "next-intl"
+import { useSearchBarFormContext } from "./search-bar"
 
 const DateRangePicker = () => {
-  const [value, setValue] = useState<[Date | null, Date | null]>([null, null])
+  const form = useSearchBarFormContext()
 
   const t = useTranslations("date-range-picker")
 
@@ -27,11 +27,11 @@ const DateRangePicker = () => {
             <Group
               className={cn(
                 "h-[50px] items-center text-gray-600 text-lg",
-                value[0] && "text-gray-700"
+                form.values.dates[0] && "text-gray-700"
               )}
             >
-              {value[0]
-                ? dayjs(value[0]).format("dddd MM, YYYY")
+              {form.values.dates[0]
+                ? dayjs(form.values.dates[0]).format("dddd MM, YYYY")
                 : t("select-date")}
             </Group>
           </Stack>
@@ -45,11 +45,11 @@ const DateRangePicker = () => {
             <Group
               className={cn(
                 "h-[50px] items-center text-gray-600 text-lg",
-                value[1] && "text-gray-700"
+                form.values.dates[1] && "text-gray-700"
               )}
             >
-              {value[1]
-                ? dayjs(value[1]).format("dddd MM, YYYY")
+              {form.values.dates[1]
+                ? dayjs(form.values.dates[1]).format("dddd MM, YYYY")
                 : t("select-date")}
             </Group>
           </Stack>
@@ -61,8 +61,10 @@ const DateRangePicker = () => {
           hideOutsideDates
           minDate={new Date()}
           type="range"
-          value={value}
-          onChange={setValue}
+          // value={value}
+          // onChange={setValue}
+          key={form.key("dates")}
+          {...form.getInputProps("dates")}
         />
       </Popover.Dropdown>
     </Popover>

@@ -4,6 +4,7 @@ import { Space, Stack, Text, Title } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 import Image from "next/image"
 import SearchBar from "./search-bar"
+import MobileSearch from "./mobile-search"
 
 export default async function Hero() {
   const t = await getTranslations("home.hero")
@@ -36,6 +37,7 @@ export default async function Hero() {
           </Stack>
         </div>
       </section>
+      <MobileSearch />
     </>
   )
 }
