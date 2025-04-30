@@ -5,13 +5,13 @@
 import { LOCALES } from "@/config"
 import { usePathname } from "@/lib/i18n/navigation"
 import { Button, Menu } from "@mantine/core"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useCallback } from "react"
-import { RiyalIcon } from "../icons"
 import { Globe } from "lucide-react"
 
 const LanguageSwitcher = () => {
+  const t = useTranslations()
   const pathname = usePathname()
   const router = useRouter()
   const currentLocale = useLocale()
@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
             color="black"
             leftSection={<Globe strokeWidth={1.3} />}
           >
-            {currentLocale}
+            {t(`general.locales.${currentLocale}`)}
           </Button>
         </Menu.Target>
 
@@ -47,9 +47,8 @@ const LanguageSwitcher = () => {
                 onClick={() => changeLanguage(element)}
                 disabled={element === currentLocale}
                 key={element}
-                leftSection={<RiyalIcon />}
               >
-                {element}
+                {t(`general.locales.${element}`)}
               </Menu.Item>
             )
           })}
