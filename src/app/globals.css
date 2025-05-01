@@ -1,2 +1,7 @@
 @import "tailwind-preset-mantine";
 @import "./theme.css";
+
+@utility container {
+  padding-inline: 14px;
+  margin-inline: auto;
+}

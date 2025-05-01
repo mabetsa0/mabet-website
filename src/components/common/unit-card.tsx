@@ -41,8 +41,7 @@ const UnitCard = (props: Unit) => {
       padding="xs"
       radius="md"
       withBorder
-      className="border-[#F3F3F3]"
-      maw={400}
+      className="border-[#F3F3F3] w-full sm:max-w-[400px]"
     >
       <div className=" aspect-[4/3] w-full overflow-hidden rounded relative">
         <ActionIcon
@@ -127,7 +126,28 @@ const UnitCard = (props: Unit) => {
               </Text>
             ) : null}
           </div>
-          <div></div>
+          <div>
+            <Badge
+              h={40}
+              className="p-[4px] min-w-7 "
+              classNames={{
+                label: "text-start",
+              }}
+              size="xl"
+              radius={"8"}
+              color={props.badge.bg_color}
+              style={{
+                color: props.badge.color,
+              }}
+              leftSection={
+                <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                  <img className="w-full" src={props.badge.icon} alt="icon" />
+                </div>
+              }
+            >
+              {props.badge.text}{" "}
+            </Badge>
+          </div>
         </Group>
         <Space />
         <Divider />

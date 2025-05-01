@@ -33,13 +33,13 @@ const SpecialUnits = ({ data }: Props) => {
     <section className="py-3">
       <div className="container mx-auto">
         <Group justify="space-between" align="center" wrap="nowrap">
-          <div className="mb-1.5">
+          <div className="mb-1.5 ">
             <Text className="max-md:text-sm" c={"primary"} fw={500}>
-              {t("title")}
+              {t("desciption")}
             </Text>
-            <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
+            <Title className=" text-h3 md:text-h2">{t("title")}</Title>
           </div>
-          <Group justify="center">
+          <Group justify="center" wrap="nowrap">
             <ActionIcon
               radius={"50%"}
               variant="outline"
@@ -72,8 +72,9 @@ const SpecialUnits = ({ data }: Props) => {
             plugins={[autoplay.current]}
             onMouseEnter={autoplay.current.stop}
             onMouseLeave={autoplay.current.reset}
-            type="container"
-            slideSize={"auto"}
+            // type="container"
+            type="media"
+            slideSize={{ base: "100%", sm: "400" }}
             slideGap={{ base: "lg" }}
             loop
             align="start"
