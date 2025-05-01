@@ -18,6 +18,10 @@
     "unit-types": {
       "title": "أنواع العقارات",
       "desciption": "عن ماذا تبحث ؟"
+    },
+    "special-units": {
+      "title": "العروض المميزة",
+      "desciption": "إستكشف عروض مبيت!"
     }
   },
   "general": {
@@ -34,5 +38,10 @@
     "check-in": "تسجيل الوصول",
     "check-out": "تسجيل المغادرة",
     "select-date": "حدد التاريخ"
+  },
+  "unit-card": {
+    "features": "بعض المميزات",
+    "bedrooms": "غرفة",
+    "toilets": "مغسلة"
   }
 }

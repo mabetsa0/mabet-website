@@ -4,6 +4,9 @@ import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import Hero from "./components/hero"
 import UnitTypes from "./components/unit-types"
+import SpecialUnits from "./components/special-units"
+import { getSpecialUnits } from "./helpers/get-special-units"
+import { getTopRatedUnits } from "./helpers/get-top-rated-units"
 
 export const revalidate = 3600
 export default async function Page({
@@ -20,15 +23,16 @@ export default async function Page({
   // for static rendering
   setRequestLocale(locale)
 
-  // const [specialUnits, topRatedUnits] = await Promise.all([
-  //   getSpecialUnits(),
-  //   getTopRatedUnits(),
-  // ])
+  const [specialUnits, topRatedUnits] = await Promise.all([
+    getSpecialUnits(),
+    getTopRatedUnits(),
+  ])
 
   return (
     <>
       <Hero />
       <UnitTypes />
+      <SpecialUnits data={specialUnits} />
     </>
   )
 }

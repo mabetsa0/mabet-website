@@ -1,9 +1,9 @@
 "use client"
 import { DirectionProvider, MantineProvider } from "@mantine/core"
-import "dayjs/locale/ar"
-import theme from "./theme"
 import { DatesProvider } from "@mantine/dates"
 import dayjs from "dayjs"
+import "dayjs/locale/ar"
+import theme from "./theme"
 
 export default function MyMantineProvider({
   children,
@@ -14,7 +14,10 @@ export default function MyMantineProvider({
 }) {
   dayjs.locale(locale)
   return (
-    <DirectionProvider>
+    <DirectionProvider
+      detectDirection
+      initialDirection={locale == "ar" ? "rtl" : "ltr"}
+    >
       <MantineProvider theme={theme}>
         <DatesProvider
           settings={{

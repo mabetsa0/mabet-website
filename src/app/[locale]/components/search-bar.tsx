@@ -45,7 +45,6 @@ const SearchBar = ({
   cities: City[]
   unitTypes: UnitType[]
 }) => {
-  console.log("🚀 ~ unitTypes:", unitTypes)
   const t = useTranslations("general")
   const form = useForm({
     mode: "controlled",

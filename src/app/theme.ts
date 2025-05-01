@@ -54,7 +54,7 @@ const theme = createTheme({
         lineHeight: "150%",
       },
       h5: {
-        fontSize: rem(24),
+        fontSize: rem(20),
         lineHeight: "150%",
       },
     },

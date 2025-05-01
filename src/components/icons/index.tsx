@@ -3,7 +3,7 @@ export const RiyalIcon = (props: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      style={{ display: "inline-block", marginInlineStart: "0.2em" }}
+      style={{ display: "inline-block", marginInlineStart: "0.05em" }}
       width={"1em"}
       viewBox="0 0 1124.14 1256.39"
       {...props}
