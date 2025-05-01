@@ -40,6 +40,10 @@
     "unit-types": {
       "title": "Unit types",
       "desciption": "What are you looking for ?"
+    },
+    "new-units": {
+      "desciption": "New additive",
+      "title": "Explore a new overnight!"
     }
   },
   "unit-card": {

@@ -9,6 +9,7 @@ import {
   Divider,
   Group,
   Image,
+  lighten,
   Space,
   Stack,
   Text,
@@ -93,7 +94,7 @@ const UnitCard = (props: Unit) => {
         </Carousel>
       </div>
       <Stack gap={4}>
-        <Title order={5} mt={"8px"}>
+        <Title className="truncate" order={5} mt={"8px"}>
           {props.name}
         </Title>
         <Group className="text-[#767676] " align="center" gap={"4"}>
@@ -127,26 +128,28 @@ const UnitCard = (props: Unit) => {
             ) : null}
           </div>
           <div>
-            <Badge
-              h={40}
-              className="p-[4px] min-w-7 "
-              classNames={{
-                label: "text-start",
-              }}
-              size="xl"
-              radius={"8"}
-              color={props.badge.bg_color}
-              style={{
-                color: props.badge.color,
-              }}
-              leftSection={
-                <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
-                  <img className="w-full" src={props.badge.icon} alt="icon" />
-                </div>
-              }
-            >
-              {props.badge.text}{" "}
-            </Badge>
+            {props.badge?.border_color ? (
+              <Badge
+                h={40}
+                className="p-[4px] min-w-7 "
+                classNames={{
+                  label: "text-start",
+                }}
+                size="xl"
+                radius={"8"}
+                color={lighten(props.badge.border_color, 0.2)}
+                style={{
+                  color: "white",
+                }}
+                leftSection={
+                  <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                    <img className="w-full" src={props.badge.icon} alt="icon" />
+                  </div>
+                }
+              >
+                {props.badge.text}{" "}
+              </Badge>
+            ) : null}
           </div>
         </Group>
         <Space />

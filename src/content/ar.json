@@ -22,6 +22,10 @@
     "special-units": {
       "title": "العروض المميزة",
       "desciption": "إستكشف عروض مبيت!"
+    },
+    "new-units": {
+      "desciption": "المضافة حديثاً",
+      "title": "إستكشف جديد مبيت!"
     }
   },
   "general": {

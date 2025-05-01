@@ -7,6 +7,7 @@ import UnitTypes from "./components/unit-types"
 import SpecialUnits from "./components/special-units"
 import { getSpecialUnits } from "./helpers/get-special-units"
 import { getTopRatedUnits } from "./helpers/get-top-rated-units"
+import NewUnits from "./components/new-units"
 
 export const revalidate = 3600
 export default async function Page({
@@ -33,6 +34,7 @@ export default async function Page({
       <Hero />
       <UnitTypes />
       <SpecialUnits data={specialUnits} />
+      <NewUnits data={topRatedUnits} />
     </>
   )
 }
