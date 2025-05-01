@@ -32,6 +32,14 @@
     "locales": {
       "ar": "عربي",
       "en": "English"
+    },
+    "favorite": {
+      "success": "تمت العملية بنجاح",
+      "added-to-favorite": "تم اضافة العقار للمفضلة",
+      "failer": "فشلت العملية",
+      "removed-from-favorite": "تم حذف العقار من المفضلة",
+      "error-remove-unit": "لم يتم حذف العقار من المفضلة",
+      "error-add-unit": "لم يتم اضافة العقار للمفضلة"
     }
   },
   "date-range-picker": {

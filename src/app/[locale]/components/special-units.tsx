@@ -2,7 +2,6 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
-import "@mantine/carousel/styles.css"
 
 import { Unit } from "@/@types"
 import { Carousel, Embla } from "@mantine/carousel"

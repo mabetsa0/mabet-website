@@ -4,6 +4,10 @@ import { DatesProvider } from "@mantine/dates"
 import dayjs from "dayjs"
 import "dayjs/locale/ar"
 import theme from "./theme"
+import { Notifications } from "@mantine/notifications"
+import "@mantine/notifications/styles.css"
+import "@mantine/dates/styles.css"
+import "@mantine/carousel/styles.css"
 
 export default function MyMantineProvider({
   children,
@@ -28,6 +32,7 @@ export default function MyMantineProvider({
           }}
         >
           {children}
+          <Notifications />
         </DatesProvider>
       </MantineProvider>
     </DirectionProvider>

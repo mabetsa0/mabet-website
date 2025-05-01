@@ -8,6 +8,7 @@ import Navbar from "./components/navbar"
 import { setRequestLocale } from "next-intl/server"
 import { IBM_Plex_Sans_Arabic } from "next/font/google"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
+import MyReactQueryProvider from "@/lib/react-query"
 
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -41,13 +42,15 @@ export default async function LocaleLayout({
         <ColorSchemeScript />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
-        <NuqsAdapter>
-          <MyMantineProvider locale={locale}>
-            <NextIntlClientProvider>
-              <Navbar>{children}</Navbar>
-            </NextIntlClientProvider>
-          </MyMantineProvider>
-        </NuqsAdapter>
+        <MyReactQueryProvider>
+          <NuqsAdapter>
+            <MyMantineProvider locale={locale}>
+              <NextIntlClientProvider>
+                <Navbar>{children}</Navbar>
+              </NextIntlClientProvider>
+            </MyMantineProvider>
+          </NuqsAdapter>
+        </MyReactQueryProvider>
       </body>
     </html>
   )

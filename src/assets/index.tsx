@@ -6,6 +6,7 @@ import type1Icon from "./Cahlet.svg"
 import type2Icon from "./Camps.svg"
 import type3Icon from "./Rest-House.svg"
 import type4Icon from "./Apartment-Rental-Icon.svg"
+import fallingStar from "./falling-star.svg"
 export {
   logo,
   heroBackground,
@@ -15,6 +16,7 @@ export {
   type2Icon,
   type3Icon,
   type4Icon,
+  fallingStar,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

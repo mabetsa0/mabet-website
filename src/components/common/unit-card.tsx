@@ -1,7 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { Unit } from "@/@types"
 import { Carousel } from "@mantine/carousel"
 import {
+  ActionIcon,
+  Badge,
   Card,
   Divider,
   Group,
@@ -11,12 +14,27 @@ import {
   Text,
   Title,
 } from "@mantine/core"
-import { Bath, BedSingle, Expand, MapPin, QrCode, Users } from "lucide-react"
+import {
+  Bath,
+  BedSingle,
+  Expand,
+  Heart,
+  MapPin,
+  QrCode,
+  Users,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import { RiyalIcon } from "../icons"
+import useFavorite from "@/hooks/use-favorite"
+import { fallingStar } from "@/assets"
 
 const UnitCard = (props: Unit) => {
   const t = useTranslations("unit-card")
+
+  const { mutate, isPending, isFavorite } = useFavorite({
+    is_favourite: props.is_favourite,
+    id: props.id,
+  })
 
   return (
     <Card
@@ -26,7 +44,29 @@ const UnitCard = (props: Unit) => {
       className="border-[#F3F3F3]"
       maw={400}
     >
-      <div className=" aspect-[4/3] w-full overflow-hidden rounded">
+      <div className=" aspect-[4/3] w-full overflow-hidden rounded relative">
+        <ActionIcon
+          className="absolute top-0 left-0 z-10"
+          variant="light"
+          color="white"
+          size={"lg"}
+          loading={isPending}
+          onClick={() => mutate()}
+        >
+          <Heart
+            fill={isFavorite ? "red" : "white"}
+            color={isFavorite ? "red" : "white"}
+          />
+        </ActionIcon>
+        <Badge
+          leftSection={<img src={fallingStar.src} alt="stars" />}
+          size="lg"
+          radius={"0"}
+          className="border border-white absolute top-0 right-0 z-10 rounded-bl-md"
+        >
+          {props.stars || "00"}{" "}
+          {props.reviews_count ? `${props.reviews_count_text}` : ""}
+        </Badge>
         <Carousel
           slideSize={"100%"}
           h={"100%"}

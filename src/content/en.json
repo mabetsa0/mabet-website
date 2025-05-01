@@ -18,7 +18,15 @@
     "select-city": "Choose the city",
     "select": "Select",
     "select-unit-type": "Unit type",
-    "mobile-search": "Find apartments, studio, villas, chalet , rest houses, farms and camps"
+    "mobile-search": "Find apartments, studio, villas, chalet , rest houses, farms and camps",
+    "favorite": {
+      "success": "The operation was successful",
+      "added-to-favorite": "The property was added to the favorite",
+      "failer": "The operation failed",
+      "removed-from-favorite": "The property was removed from the favorite",
+      "error-remove-unit": "The property has not been deleted from the favorite",
+      "error-add-unit": "The property has not been added to the favorite"
+    }
   },
   "home": {
     "special-units": {
@@ -38,5 +46,10 @@
     "features": "Some features",
     "bedrooms": "room",
     "toilets": "Toilets"
+  },
+  "date-range-picker": {
+    "check-out": "Check out",
+    "check-in": "Check out",
+    "select-date": "Select Date"
   }
 }

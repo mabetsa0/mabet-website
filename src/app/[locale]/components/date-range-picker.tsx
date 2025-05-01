@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { calenderIn, calenderOut } from "@/assets"
-import "@mantine/dates/styles.css"
 
 import { cn } from "@/lib/cn"
 import { Divider, Group, Popover, Stack, Text } from "@mantine/core"
