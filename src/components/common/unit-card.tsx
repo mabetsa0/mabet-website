@@ -28,8 +28,9 @@ import { useTranslations } from "next-intl"
 import { RiyalIcon } from "../icons"
 import useFavorite from "@/hooks/use-favorite"
 import { fallingStar } from "@/assets"
+import { cn } from "@/lib/cn"
 
-const UnitCard = (props: Unit) => {
+const UnitCard = (props: Unit & { className?: string }) => {
   const t = useTranslations("unit-card")
 
   const { mutate, isPending, isFavorite } = useFavorite({
@@ -42,7 +43,10 @@ const UnitCard = (props: Unit) => {
       padding="xs"
       radius="md"
       withBorder
-      className="border-[#F3F3F3] w-full sm:max-w-[400px]"
+      className={cn(
+        "border-[#F3F3F3] w-full sm:max-w-[400px]",
+        props.className
+      )}
     >
       <div className=" aspect-[4/3] w-full overflow-hidden rounded relative">
         <ActionIcon

@@ -68,6 +68,10 @@
           "description": "Share your real estate link directly with your customers and get reservations."
         }
       }
+    },
+    "top-rated-units": {
+      "desciption": "Top Rated",
+      "title": "Try real estate that others like!"
     }
   },
   "unit-card": {
