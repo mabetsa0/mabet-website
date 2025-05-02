@@ -72,6 +72,11 @@
     "top-rated-units": {
       "desciption": "Top Rated",
       "title": "Try real estate that others like!"
+    },
+    "download-app-banner": {
+      "desciption": "Control your reservations, review real estate, and try an easy and fast experience through Mabet mobile Application. \nAll you need in one place at any time and anywhere.",
+      "title": "Smart overnight experience in your hands!",
+      "sup-title": "Download a overnight application"
     }
   },
   "unit-card": {

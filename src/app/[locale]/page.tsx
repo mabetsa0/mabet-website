@@ -10,6 +10,7 @@ import { getTopRatedUnits } from "./helpers/get-top-rated-units"
 import NewUnits from "./components/new-units"
 import AddYourUnit from "./components/add-your-unit"
 import TopRatedUnits from "./components/top-rated-units"
+import DownLoadApp from "./components/download-app"
 
 export const revalidate = 3600
 export default async function Page({
@@ -39,6 +40,7 @@ export default async function Page({
       <NewUnits data={topRatedUnits} />
       <AddYourUnit />
       <TopRatedUnits />
+      <DownLoadApp />
     </>
   )
 }
