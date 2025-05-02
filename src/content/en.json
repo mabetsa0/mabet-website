@@ -44,6 +44,30 @@
     "new-units": {
       "desciption": "New additive",
       "title": "Explore a new overnight!"
+    },
+    "add-your-unit": {
+      "title": "Mabet Business",
+      "desciption": "The mechanism of adding a real estate!",
+      "sub-description": "Join Mabet, the licensed platform from the Ministry of Tourism, and start achieving income from your property through a smooth and safe experience, a comprehensive management system and professional benefits.",
+      "add-button": "Add your property now",
+      "card": {
+        "1": {
+          "description": "Start by adding your property within minutes through a clear and fast model.",
+          "title": "Easy registration"
+        },
+        "2": {
+          "title": "A safe payment",
+          "description": "An integrated and safe payment system to protect your transactions and follow your profits."
+        },
+        "3": {
+          "title": "Control panel",
+          "description": "Turn your reservations, monitor performance, and contact customers from one place."
+        },
+        "4": {
+          "title": "Easy share",
+          "description": "Share your real estate link directly with your customers and get reservations."
+        }
+      }
     }
   },
   "unit-card": {

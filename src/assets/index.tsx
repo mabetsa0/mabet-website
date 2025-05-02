@@ -7,6 +7,9 @@ import type2Icon from "./Camps.svg"
 import type3Icon from "./Rest-House.svg"
 import type4Icon from "./Apartment-Rental-Icon.svg"
 import fallingStar from "./falling-star.svg"
+import logoWithoutWindows from "./mabet-logo-without-windows.svg"
+import arrow1 from "./Ellipse 81.svg"
+import arrow2 from "./Ellipse 79.svg"
 export {
   logo,
   heroBackground,
@@ -17,6 +20,9 @@ export {
   type3Icon,
   type4Icon,
   fallingStar,
+  logoWithoutWindows,
+  arrow1,
+  arrow2,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

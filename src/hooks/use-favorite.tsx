@@ -8,16 +8,10 @@ import { useMutation } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 
 const addToFavorite = async (id: number) => {
-  if (!isAuthenticated()) {
-    return
-  }
   const response = await Mabet.post("/favourite/add/" + id, {})
   return response
 }
 const removeFromFavorite = async (id: number) => {
-  if (!isAuthenticated()) {
-    return
-  }
   const response = await Mabet.delete("/favourite/remove/" + id)
   return response
 }
@@ -51,9 +45,6 @@ const useFavorite = ({ is_favourite, id }: Props) => {
       }
     },
     onSuccess(data, vars) {
-      if (!isAuthenticated()) {
-        return
-      }
       if (vars.is_favourite) {
         notifications.show({
           color: "green",
@@ -85,6 +76,9 @@ const useFavorite = ({ is_favourite, id }: Props) => {
   })
 
   const mutate = () => {
+    if (!isAuthenticated()) {
+      return
+    }
     mutation.mutate({ is_favourite: isFavorite })
   }
   return { isFavorite, ...mutation, mutate }
