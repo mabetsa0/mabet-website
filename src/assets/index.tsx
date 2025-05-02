@@ -10,6 +10,7 @@ import fallingStar from "./falling-star.svg"
 import logoWithoutWindows from "./mabet-logo-without-windows.svg"
 import arrow1 from "./Ellipse 81.svg"
 import arrow2 from "./Ellipse 79.svg"
+import mobileArrows from "./mobile-arrows.svg"
 export {
   logo,
   heroBackground,
@@ -23,6 +24,7 @@ export {
   logoWithoutWindows,
   arrow1,
   arrow2,
+  mobileArrows,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

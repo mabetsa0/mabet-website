@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { arrow1, arrow2, logoWithoutWindows } from "@/assets"
+import { arrow1, arrow2, logoWithoutWindows, mobileArrows } from "@/assets"
 import { Button, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 
@@ -23,7 +23,14 @@ const AddYourUnit = async () => {
             </Button>
           </Stack>
         </div>
-        <SimpleGrid mt={"xl"} maw={1250} mx={"auto"} spacing="xl" cols={4}>
+        <SimpleGrid
+          mt={"xl"}
+          maw={1250}
+          mx={"auto"}
+          spacing="xl"
+          visibleFrom="md"
+          cols={4}
+        >
           <Stack className="relative">
             <div className="w-[90px] h-[65px] relative flex items-center justify-center">
               <img
@@ -40,7 +47,7 @@ const AddYourUnit = async () => {
             <img
               alt="arrow"
               src={arrow1.src}
-              className="absolute -bottom-2 start-[20%]"
+              className="absolute  max-lg:w-[190px] -bottom-2 start-[20%]"
             />
           </Stack>
           <Stack className="relative">
@@ -59,7 +66,7 @@ const AddYourUnit = async () => {
             <img
               alt="arrow"
               src={arrow2.src}
-              className="absolute bottom-0.5 start-[35%]"
+              className="absolute  max-lg:w-[190px] bottom-0.5 start-[35%]"
             />
           </Stack>
           <Stack className="relative">
@@ -78,7 +85,7 @@ const AddYourUnit = async () => {
             <img
               alt="arrow"
               src={arrow1.src}
-              className="absolute -bottom-2 start-[20%]"
+              className="absolute  max-lg:w-[190px] -bottom-2 start-[20%]"
             />
           </Stack>
           <Stack className="relative">
@@ -93,6 +100,69 @@ const AddYourUnit = async () => {
                 className="w-full h-full object-contain absolute inset-0"
               />
               <Text className="relative text-h4 font-bold z-[1] ">04</Text>
+            </div>
+          </Stack>
+        </SimpleGrid>
+        <SimpleGrid mt={"xl"} mx={"auto"} spacing="md" hiddenFrom="md" cols={1}>
+          <Stack className="relative" gap="sm">
+            <div className="w-[84px] h-[61px]  relative flex items-center justify-center">
+              <img
+                src={logoWithoutWindows.src}
+                alt="logo"
+                className="w-full h-full object-contain absolute inset-0"
+              />
+              <Text className="relative text-h4 font-bold z-[1] ">01</Text>
+            </div>
+            <div>
+              <Title order={4}>{t("card.1.title")}</Title>
+              <Text c={"#767676"}>{t("card.1.description")}</Text>
+            </div>
+            <img
+              src={mobileArrows.src}
+              alt="mobile arrows"
+              className="absolute start-[75px]  top-[5px] max-w-[calc(100vw_-_90px)]"
+            />
+          </Stack>
+          <Stack className="relative" gap="sm">
+            <div className="w-[84px] h-[61px]   relative flex items-center justify-center">
+              <img
+                src={logoWithoutWindows.src}
+                alt="logo"
+                className="w-full h-full object-contain absolute inset-0"
+              />
+              <Text className="relative text-h4 font-bold z-[1] ">02</Text>
+            </div>
+            <div>
+              <Title order={4}>{t("card.2.title")}</Title>
+              <Text c={"#767676"}>{t("card.2.description")}</Text>
+            </div>
+          </Stack>
+          <Stack className="relative" gap="sm">
+            <div className="w-[84px] h-[61px]   relative flex items-center justify-center">
+              <img
+                src={logoWithoutWindows.src}
+                alt="logo"
+                className="w-full h-full object-contain absolute inset-0"
+              />
+              <Text className="relative text-h4 font-bold z-[1] ">03</Text>
+            </div>
+            <div>
+              <Title order={4}>{t("card.3.title")}</Title>
+              <Text c={"#767676"}>{t("card.3.description")}</Text>
+            </div>
+          </Stack>
+          <Stack className="relative" gap="sm">
+            <div className="w-[84px] h-[61px]   relative flex items-center justify-center">
+              <img
+                src={logoWithoutWindows.src}
+                alt="logo"
+                className="w-full h-full object-contain absolute inset-0"
+              />
+              <Text className="relative text-h4 font-bold z-[1] ">04</Text>
+            </div>
+            <div>
+              <Title order={4}>{t("card.4.title")}</Title>
+              <Text c={"#767676"}>{t("card.4.description")}</Text>
             </div>
           </Stack>
         </SimpleGrid>
