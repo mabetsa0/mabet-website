@@ -22,6 +22,14 @@ import mada from "./madfu-icon.svg"
 import visa from "./visa_icon.svg"
 import applePay from "./apple-pay-icon.svg"
 import tabby from "./Tabby-icon.svg"
+import man from "./man.png"
+import paymentSuccess from "./payment-success-02.svg"
+import moneySecurity from "./money-security.svg"
+import searchList from "./search-list-01.svg"
+import newReleases from "./new-releases.svg"
+import headset from "./headset.svg"
+import imageIcon from "./image-composition-oval.svg"
+
 export {
   logo,
   heroBackground,
@@ -47,6 +55,13 @@ export {
   visa,
   applePay,
   tabby,
+  man,
+  paymentSuccess,
+  moneySecurity,
+  searchList,
+  newReleases,
+  headset,
+  imageIcon,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

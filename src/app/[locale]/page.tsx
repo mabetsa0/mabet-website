@@ -13,6 +13,7 @@ import TopRatedUnits from "./components/top-rated-units"
 import DownLoadApp from "./components/download-app"
 import Blogs from "./components/blogs"
 import Footer from "@/components/common/footer"
+import WhyMabet from "./components/why-mabet"
 
 export const revalidate = 3600
 export default async function Page({
@@ -40,6 +41,7 @@ export default async function Page({
       <UnitTypes />
       <SpecialUnits data={specialUnits} />
       <NewUnits data={topRatedUnits} />
+      <WhyMabet />
       <AddYourUnit />
       <TopRatedUnits />
       <DownLoadApp />

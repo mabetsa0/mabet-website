@@ -87,6 +87,36 @@
         "continue": "Continue Reading "
       },
       "go-to-blog": "Go to the blog"
+    },
+    "why-mabet": {
+      "desciption": "What makes booking with overnight stay special?",
+      "title": "Mabet Features",
+      "card": {
+        "1": {
+          "title": "Guaranteed booking",
+          "description": "Book your unit in seconds and relax — instant, 100% guaranteed confirmation."
+        },
+        "2": {
+          "title": "Financial security",
+          "description": " Multiple fully secure payment options, with protection of your personal data."
+        },
+        "3": {
+          "title": " Easy browsing",
+          "description": "Advanced search tools to help you find the right property in moments."
+        },
+        "4": {
+          "title": "Licensed Entity",
+          "description": "Officially licensed by the Saudi Ministry of Tourism to ensure the highest level of trust.\n\n"
+        },
+        "5": {
+          "title": "Instant Support",
+          "description": "Our customer service team is with you all week, ready to assist you anytime.\n\n"
+        },
+        "6": {
+          "title": "Visual Experience",
+          "description": "Browse real photos and videos of each unit so you can book with confidence.\n\n"
+        }
+      }
     }
   },
   "unit-card": {
