@@ -30,7 +30,7 @@ export interface Unit {
   unit_type: string
   is_favourite: boolean
   label: null
-  dates_suggestions: any[]
+  dates_suggestions: unknown[]
   badge: Badge
   prices: Prices
   tabby_enabled: boolean
@@ -94,7 +94,7 @@ export interface Prices {
   profit: number
   profit_taxes: number
   profit_percentage: number
-  additionals: any[]
+  additionals: unknown[]
   timer: number | null
 }
 

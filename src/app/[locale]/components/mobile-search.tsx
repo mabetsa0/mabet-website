@@ -14,6 +14,9 @@ const MobileSearch = ({
   cities: City[]
   unitTypes: UnitType[]
 }) => {
+  console.log("🚀 ~ unitTypes:", unitTypes)
+  console.log("🚀 ~ cities:", cities)
+
   const t = useTranslations("general")
   return (
     <>
