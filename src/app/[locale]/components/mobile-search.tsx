@@ -30,7 +30,7 @@ const MobileSearch = ({
               }
               size="lg"
               variant="outline"
-              className="text-[12px] border-[1.5] [box-shadow:_0px_16px_40px_0px_#0000001A]  font-normal rounded-[50px] h-[76px] text-[#767676]"
+              className="text-[12px] max-w-[85vw] border-[1.5] [box-shadow:_0px_16px_40px_0px_#0000001A]  font-normal rounded-[50px] h-[76px] text-[#767676]"
             >
               {t("mobile-search")}
             </Button>

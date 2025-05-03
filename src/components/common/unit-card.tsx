@@ -44,7 +44,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
       radius="md"
       withBorder
       className={cn(
-        "border-[#F3F3F3] w-full sm:max-w-[400px]",
+        "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
         props.className
       )}
     >
@@ -86,13 +86,15 @@ const UnitCard = (props: Unit & { className?: string }) => {
           }}
         >
           {props.images.map((image, index) => (
-            <Carousel.Slide key={index}>
-              <Image
-                loading="lazy"
-                className="w-full h-full object-cover"
-                src={image.image_path}
-                alt={image.alt}
-              />
+            <Carousel.Slide className="w-full aspect-[4/3] " key={index}>
+              <div className="w-full aspect-[4/3]  ">
+                <Image
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                  src={image.image_path}
+                  alt={image.alt}
+                />
+              </div>
             </Carousel.Slide>
           ))}
         </Carousel>
