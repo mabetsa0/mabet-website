@@ -39,7 +39,8 @@
     },
     "unit-types": {
       "title": "Unit types",
-      "desciption": "What are you looking for ?"
+      "desciption": "What are you looking for ?",
+      "unit-types": "Unit types"
     },
     "new-units": {
       "desciption": "New additive",
@@ -77,6 +78,15 @@
       "desciption": "Control your reservations, review real estate, and try an easy and fast experience through Mabet mobile Application. \nAll you need in one place at any time and anywhere.",
       "title": "Smart overnight experience in your hands!",
       "sup-title": "Download a overnight application"
+    },
+    "blogs": {
+      "title": "Mabet Blog!",
+      "desciption": "We write to travel smarter",
+      "sub-description": "Discover everything you need to know about the best destinations, smart reservation tips, and the latest hospitality news. \nOur articles are carefully written to inspire you and help you make better decisions.",
+      "card": {
+        "continue": "Continue Reading "
+      },
+      "go-to-blog": "Go to the blog"
     }
   },
   "unit-card": {
@@ -88,5 +98,16 @@
     "check-out": "Check out",
     "check-in": "Check out",
     "select-date": "Select Date"
+  },
+  "footer": {
+    "desciption": "The platform for the best site for displaying apartments for rent in Saudi Arabia, self -entry apartments, chalets on the sea, villas, farms, and camps",
+    "unit-types": "Unit types",
+    "contact-us": "Contact us",
+    "time": "\"From 9:30 am to 1:00 pm.\"",
+    "follow-us": "Follow us via",
+    "terms-and-conditions": "Terms and Conditions",
+    "privacy-policy": "Privacy Policy",
+    "reservation-policy": "Reservation",
+    "rights": "All rights reserved to Mabet ©{value}"
   }
 }

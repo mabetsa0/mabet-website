@@ -15,6 +15,13 @@ import dotImages from "./MobileBG-Dot-Image.png"
 import phoneImage from "./Mabet-Download-App 1.png"
 import googlePlay from "./googleplay.svg"
 import appStore from "./appstore.svg"
+import licience from "./Licience.png"
+import madfu from "./madfu-icon.svg"
+import masterCard from "./mastercard_icon.svg"
+import mada from "./madfu-icon.svg"
+import visa from "./visa_icon.svg"
+import applePay from "./apple-pay-icon.svg"
+import tabby from "./Tabby-icon.svg"
 export {
   logo,
   heroBackground,
@@ -33,6 +40,13 @@ export {
   phoneImage,
   googlePlay,
   appStore,
+  licience,
+  madfu,
+  masterCard,
+  mada,
+  visa,
+  applePay,
+  tabby,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,
