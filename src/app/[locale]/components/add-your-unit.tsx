@@ -1,13 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import { arrow1, arrow2, logoWithoutWindows, mobileArrows } from "@/assets"
+import {
+  arrow1,
+  arrow2,
+  logoWithoutWindows,
+  mobileArrows,
+  whiteCurve,
+} from "@/assets"
 import { Button, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 
 const AddYourUnit = async () => {
   const t = await getTranslations("home.add-your-unit")
   return (
-    <section className="bg-[#FFFCF5]">
-      <div className="container py-4.5 mx-auto">
+    <section className="relative bg-[#FFFCF5]">
+      <img alt="curve" src={whiteCurve.src} className="w-full" />
+      <div className="container pt-3 pb-5 mx-auto">
         <div className="text-center flex flex-col gap-[4px]">
           <Text className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}

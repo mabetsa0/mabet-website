@@ -29,6 +29,8 @@ import searchList from "./search-list-01.svg"
 import newReleases from "./new-releases.svg"
 import headset from "./headset.svg"
 import imageIcon from "./image-composition-oval.svg"
+import whiteCurve from "./Curve-Section-Shape.svg"
+import sharpShape from "./Tag-Sharp-Shape.svg"
 
 export {
   logo,
@@ -62,6 +64,8 @@ export {
   newReleases,
   headset,
   imageIcon,
+  whiteCurve,
+  sharpShape,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

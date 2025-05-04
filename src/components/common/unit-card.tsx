@@ -27,7 +27,7 @@ import {
 import { useTranslations } from "next-intl"
 import { RiyalIcon } from "../icons"
 import useFavorite from "@/hooks/use-favorite"
-import { fallingStar } from "@/assets"
+import { fallingStar, sharpShape } from "@/assets"
 import { cn } from "@/lib/cn"
 
 const UnitCard = (props: Unit & { className?: string }) => {
@@ -66,7 +66,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           leftSection={<img src={fallingStar.src} alt="stars" />}
           size="lg"
           radius={"0"}
-          className="border border-white absolute top-0 right-0 z-10 rounded-bl-md"
+          className="border border-white absolute top-0 right-0 z-10 rounded-bl-md "
         >
           {props.stars || "00"}{" "}
           {props.reviews_count ? `${props.reviews_count_text}` : ""}
@@ -137,13 +137,12 @@ const UnitCard = (props: Unit & { className?: string }) => {
             {props.badge?.border_color ? (
               <Badge
                 h={40}
-                className="p-[4px] min-w-7 "
+                className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
                 classNames={{
                   label: "text-start",
                 }}
                 size="xl"
-                radius={"8"}
-                color={lighten(props.badge.border_color, 0.2)}
+                color={lighten(props.badge.border_color, 0.25)}
                 style={{
                   color: "white",
                 }}
@@ -154,6 +153,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
                 }
               >
                 {props.badge.text}{" "}
+                <img
+                  alt="sharp"
+                  src={sharpShape.src}
+                  className=" absolute end-0 top-0 bottom-0"
+                />
               </Badge>
             ) : null}
           </div>
