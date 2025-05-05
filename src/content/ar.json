@@ -117,7 +117,8 @@
       "removed-from-favorite": "تم حذف العقار من المفضلة",
       "error-remove-unit": "لم يتم حذف العقار من المفضلة",
       "error-add-unit": "لم يتم اضافة العقار للمفضلة"
-    }
+    },
+    "empty": "لا نتائج"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

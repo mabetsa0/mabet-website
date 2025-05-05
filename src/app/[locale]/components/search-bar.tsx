@@ -1,29 +1,29 @@
 "use client"
 
-import { Building2, MapPin, Search } from "lucide-react"
+import { City } from "@/@types/cities"
+import { UnitType } from "@/@types/unit-types"
+import { UnitTypeIcons } from "@/assets"
+import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { cn } from "@/lib/cn"
+import { useRouter } from "@/lib/i18n/navigation"
+import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import {
   ActionIcon,
   Divider,
-  Group,
-  Select,
   Grid,
-  Stack,
-  Text,
+  Group,
+  Image,
   Popover,
   Radio,
   SimpleGrid,
-  Image,
+  Stack,
+  Text,
 } from "@mantine/core"
+import { createFormContext } from "@mantine/form"
+import dayjs from "dayjs"
+import { Building2, MapPin, Search } from "lucide-react"
 import { useTranslations } from "next-intl"
 import DateRangePicker from "./date-range-picker"
-import { City } from "@/@types/cities"
-import { UnitType } from "@/@types/unit-types"
-import { createFormContext } from "@mantine/form"
-import { useRouter } from "@/lib/i18n/navigation"
-import { objectToSearchParams } from "@/utils/obj-to-searchParams"
-import dayjs from "dayjs"
-import { cn } from "@/lib/cn"
-import { UnitTypeIcons } from "@/assets"
 
 // Definition of form values is required
 type FormValues = {
@@ -72,7 +72,7 @@ const SearchBar = ({
             >
               <Grid className="grow " px={"lg"}>
                 <Grid.Col span={3}>
-                  <Select
+                  {/* <Select
                     size="lg"
                     classNames={{
                       label: "text-sm",
@@ -93,6 +93,27 @@ const SearchBar = ({
                     rightSection={<div></div>}
                     rightSectionWidth={0}
                     searchable
+                    key={form.key("city_id")}
+                    {...form.getInputProps("city_id")}
+                  /> */}
+                  <SelectDropdownSearch
+                    size="lg"
+                    classNames={{
+                      label: "text-sm",
+                      input: "text-gray-700 placeholder:text-gray-600",
+                    }}
+                    variant="unstyled"
+                    label={
+                      <Group gap={"4"}>
+                        <MapPin size={17} strokeWidth={1.5} />
+                        {t("select-city")}
+                      </Group>
+                    }
+                    placeholder={t("select")}
+                    data={cities.map((city) => ({
+                      value: city.id + "",
+                      label: city.name,
+                    }))}
                     key={form.key("city_id")}
                     {...form.getInputProps("city_id")}
                   />

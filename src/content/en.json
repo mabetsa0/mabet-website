@@ -26,7 +26,8 @@
       "removed-from-favorite": "The property was removed from the favorite",
       "error-remove-unit": "The property has not been deleted from the favorite",
       "error-add-unit": "The property has not been added to the favorite"
-    }
+    },
+    "empty": "No results"
   },
   "home": {
     "special-units": {
