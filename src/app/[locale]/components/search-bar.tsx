@@ -72,34 +72,13 @@ const SearchBar = ({
             >
               <Grid className="grow " px={"lg"}>
                 <Grid.Col span={3}>
-                  {/* <Select
-                    size="lg"
-                    classNames={{
-                      label: "text-sm",
-                      input: "text-gray-700 placeholder:text-gray-600",
-                    }}
-                    variant="unstyled"
-                    label={
-                      <Group gap={"4"}>
-                        <MapPin size={17} strokeWidth={1.5} />
-                        {t("select-city")}
-                      </Group>
-                    }
-                    placeholder={t("select")}
-                    data={cities.map((city) => ({
-                      value: city.id + "",
-                      label: city.name,
-                    }))}
-                    rightSection={<div></div>}
-                    rightSectionWidth={0}
-                    searchable
-                    key={form.key("city_id")}
-                    {...form.getInputProps("city_id")}
-                  /> */}
                   <SelectDropdownSearch
+                    searchLabel={t("select-city")}
+                    searchPlaceholder={t("city-search-placeholder")}
                     size="lg"
                     classNames={{
-                      label: "text-sm",
+                      label: "text-sm font-normal",
+
                       input: "text-gray-700 placeholder:text-gray-600",
                     }}
                     variant="unstyled"
@@ -121,7 +100,11 @@ const SearchBar = ({
                 <Grid.Col span={3}>
                   <Group wrap="nowrap">
                     <Divider orientation="vertical" />
-                    <Popover withArrow shadow="md">
+                    <Popover
+                      transitionProps={{ duration: 200, transition: "pop" }}
+                      withArrow
+                      shadow="md"
+                    >
                       <Popover.Target>
                         <Stack className="w-full " gap={2}>
                           <Group gap={4}>
@@ -195,30 +178,6 @@ const SearchBar = ({
                         </Radio.Group>
                       </Popover.Dropdown>
                     </Popover>
-                    {/* <Select
-                      size="lg"
-                      classNames={{
-                        label: "text-sm",
-                        input: "text-gray-700 placeholder:text-gray-600",
-                      }}
-                      variant="unstyled"
-                      label={
-                        <Group gap={"4"}>
-                          <Building2 size={17} strokeWidth={1.5} />
-                          {t("select-unit-type")}
-                        </Group>
-                      }
-                      placeholder={t("select")}
-                      data={unitTypes.map((type) => ({
-                        value: type.id + "",
-                        label: type.name,
-                      }))}
-                      rightSection={<div></div>}
-                      rightSectionWidth={0}
-                      searchable
-                      key={form.key("unit_type")}
-                      {...form.getInputProps("unit_type")}
-                    /> */}
                   </Group>
                 </Grid.Col>
                 <Grid.Col span={6}>

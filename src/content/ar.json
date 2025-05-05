@@ -118,7 +118,9 @@
       "error-remove-unit": "لم يتم حذف العقار من المفضلة",
       "error-add-unit": "لم يتم اضافة العقار للمفضلة"
     },
-    "empty": "لا نتائج"
+    "empty": "لا نتائج",
+    "search": "يبحث...",
+    "city-search-placeholder": "ابحث عن اسم المدينة"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

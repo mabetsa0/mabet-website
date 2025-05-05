@@ -27,7 +27,9 @@
       "error-remove-unit": "The property has not been deleted from the favorite",
       "error-add-unit": "The property has not been added to the favorite"
     },
-    "empty": "No results"
+    "empty": "No results",
+    "search": "Search...",
+    "city-search-placeholder": "Search for city"
   },
   "home": {
     "special-units": {

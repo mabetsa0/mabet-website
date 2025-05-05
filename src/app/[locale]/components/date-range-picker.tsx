@@ -15,7 +15,11 @@ const DateRangePicker = () => {
   const t = useTranslations("date-range-picker")
 
   return (
-    <Popover withArrow shadow="md">
+    <Popover
+      transitionProps={{ duration: 200, transition: "pop" }}
+      withArrow
+      shadow="md"
+    >
       <Popover.Target>
         <Group wrap="nowrap" className="w-full h-full cursor-pointer">
           <Stack className="w-full " gap={2}>

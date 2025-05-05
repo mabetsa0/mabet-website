@@ -4,26 +4,27 @@ import {
   Input,
   InputBase,
   InputBaseProps,
+  ScrollArea,
+  Text,
   useCombobox,
 } from "@mantine/core"
 import { useTranslations } from "next-intl"
+import { Search } from "lucide-react"
 
 type Props = {
   data: { value: string; label: string }[]
   onChange?: (value: string) => void
-  // onFocus?: () => void
-  // onBlur?: () => void
+
   value?: string
-  // label: React.ReactNode
   placeholder: React.ReactNode
-  // classNames?: {
-  //   input?: string
-  //   label?: string
-  //   placeholder?: string
-  // }
+  searchPlaceholder?: string
+  searchLabel?: React.ReactNode
 } & InputBaseProps
 const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
-  function Component({ value, onChange, ...props }, ref) {
+  function Component(
+    { value, onChange, searchLabel, searchPlaceholder, ...props },
+    ref
+  ) {
     const [search, setSearch] = useState("")
     const combobox = useCombobox({
       onDropdownClose: () => {
@@ -51,6 +52,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
 
     return (
       <Combobox
+        transitionProps={{ duration: 200, transition: "pop" }}
         store={combobox}
         withinPortal={false}
         onOptionSubmit={(val) => {
@@ -73,18 +75,32 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
           </InputBase>
         </Combobox.Target>
 
-        <Combobox.Dropdown>
+        <Combobox.Dropdown miw={330} p={"md"}>
+          {searchLabel && (
+            <Text mb={"sm"} fw={500} fz={"sm"}>
+              {searchLabel}
+            </Text>
+          )}
           <Combobox.Search
+            h={50}
+            variant="default"
+            radius={"md"}
             value={search}
+            leftSection={<Search size={18} className="text-primary" />}
+            classNames={{
+              input: "border border-gray-300 rounded-[30px]  h-full",
+            }}
             onChange={(event) => setSearch(event.currentTarget.value)}
-            placeholder="Search groceries"
+            placeholder={searchPlaceholder || t("search")}
           />
-          <Combobox.Options mah={200} style={{ overflowY: "auto" }}>
-            {options.length > 0 ? (
-              options
-            ) : (
-              <Combobox.Empty>{t("empty")}</Combobox.Empty>
-            )}
+          <Combobox.Options>
+            <ScrollArea.Autosize mah={200} type="scroll">
+              {options.length > 0 ? (
+                options
+              ) : (
+                <Combobox.Empty>{t("empty")}</Combobox.Empty>
+              )}
+            </ScrollArea.Autosize>
           </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
