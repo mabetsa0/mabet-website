@@ -106,7 +106,7 @@ const SearchBar = ({
                       shadow="md"
                     >
                       <Popover.Target>
-                        <Stack className="w-full " gap={2}>
+                        <Stack className="w-full   " gap={2}>
                           <Group gap={4}>
                             <Building2 size={17} strokeWidth={1.5} />
 
@@ -117,7 +117,7 @@ const SearchBar = ({
                           </Group>
                           <Group
                             className={cn(
-                              "h-[50px] items-center text-gray-600 text-lg",
+                              "h-[50px] items-center text-gray-600 text-lg !cursor-pointer",
                               form.values.unit_type && "text-gray-700"
                             )}
                           >
