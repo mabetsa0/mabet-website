@@ -3,7 +3,14 @@
 import { calenderIn, calenderOut } from "@/assets"
 
 import { cn } from "@/lib/cn"
-import { Divider, Group, Popover, Stack, Text } from "@mantine/core"
+import {
+  Divider,
+  Group,
+  Popover,
+  SegmentedControl,
+  Stack,
+  Text,
+} from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
@@ -14,6 +21,11 @@ const DateRangePicker = () => {
 
   const t = useTranslations("date-range-picker")
 
+  const duration = dayjs(form.values.dates[1]).diff(
+    dayjs(form.values.dates[0]),
+    "days"
+  )
+  console.log("🚀 ~ DateRangePicker ~ duration:", duration)
   return (
     <Popover
       transitionProps={{ duration: 200, transition: "pop" }}
@@ -59,6 +71,29 @@ const DateRangePicker = () => {
         </Group>
       </Popover.Target>
       <Popover.Dropdown>
+        <div className="mb-xs">
+          <SegmentedControl
+            value={
+              duration >= 27 ? "monthly" : duration >= 7 ? "weekly" : "daily"
+            }
+            fullWidth
+            readOnly
+            data={[
+              {
+                value: "daily",
+                label: t("daily"),
+              },
+              {
+                value: "weekly",
+                label: t("weekly"),
+              },
+              {
+                value: "monthly",
+                label: t("monthly"),
+              },
+            ]}
+          />
+        </div>
         <DatePicker
           numberOfColumns={2}
           hideOutsideDates

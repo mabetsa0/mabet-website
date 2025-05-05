@@ -70,7 +70,9 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             {...props}
           >
             {props.data.find((ele) => ele.value === value)?.label || (
-              <Input.Placeholder>{props.placeholder}</Input.Placeholder>
+              <Input.Placeholder className="text-gray-600 ">
+                {props.placeholder}
+              </Input.Placeholder>
             )}
           </InputBase>
         </Combobox.Target>

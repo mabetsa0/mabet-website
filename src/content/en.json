@@ -130,7 +130,10 @@
   "date-range-picker": {
     "check-out": "Check out",
     "check-in": "Check out",
-    "select-date": "Select Date"
+    "select-date": "Select Date",
+    "daily": "Daily",
+    "weekly": "weekly",
+    "monthly": "Monthly"
   },
   "footer": {
     "desciption": "The platform for the best site for displaying apartments for rent in Saudi Arabia, self -entry apartments, chalets on the sea, villas, farms, and camps",

@@ -125,7 +125,10 @@
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
     "check-out": "تسجيل المغادرة",
-    "select-date": "حدد التاريخ"
+    "select-date": "حدد التاريخ",
+    "daily": "يومي",
+    "weekly": "اسبوعي",
+    "monthly": "شهري"
   },
   "unit-card": {
     "features": "بعض المميزات",
