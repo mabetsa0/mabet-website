@@ -8,22 +8,36 @@ import { loginImage1, loginImage2 } from "@/assets"
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
 import PhoneNumberForm from "./phone-number-form"
+import { parseAsString, useQueryStates } from "nuqs"
+import VerifyOtp from "./verify-otp"
+import { useTranslations } from "next-intl"
 
 const AuthModal = () => {
   const [opened, { onClose }] = useAuthModal()
   const autoplay = useRef(Autoplay({ delay: 12000 }))
+  const [phoneNumber] = useQueryStates({
+    phonenumber: parseAsString.withDefault(""),
+    country_code: parseAsString.withDefault(""),
+  })
+  const t = useTranslations("auth")
   return (
-    <ModalDrawer size={"xl"} state={opened} onClose={onClose}>
-      <SimpleGrid cols={2} spacing={"lg"}>
+    <ModalDrawer
+      title={t("title")}
+      size={"992"}
+      state={opened}
+      onClose={onClose}
+    >
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing={"xl"}>
         <div className="ps-1.5 py-2">
-          <PhoneNumberForm />
+          {!phoneNumber.phonenumber ? <PhoneNumberForm /> : null}
+          {phoneNumber.phonenumber ? <VerifyOtp /> : null}
         </div>
         <Carousel
           visibleFrom="md"
           classNames={{
             slide: "!h-full",
             container: "!h-full",
-            root: "!h-full",
+            root: " max-h-[70vh]",
             viewport: "!h-full",
           }}
           slideSize={"100%"}

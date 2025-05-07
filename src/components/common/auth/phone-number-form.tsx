@@ -13,7 +13,7 @@ import ar from "react-phone-number-input/locale/ar.json"
 import en from "react-phone-number-input/locale/en.json"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
-import { parseAsString, useQueryStates } from "nuqs"
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 
 const PhoneNumberForm = () => {
   const t = useTranslations("auth")
@@ -21,6 +21,7 @@ const PhoneNumberForm = () => {
   const [_, setPhoneNumber] = useQueryStates({
     phonenumber: parseAsString.withDefault(""),
     country_code: parseAsString.withDefault(""),
+    time: parseAsInteger,
   })
   const locale = useLocale()
   const form = useForm({
@@ -45,7 +46,7 @@ const PhoneNumberForm = () => {
     try {
       console.log("🚀 ~ onSubmit ~ data:", data)
       await Mabet.post("/account/login", data)
-      setPhoneNumber(data)
+      setPhoneNumber({ ...data, time: Date.now() })
     } catch (error) {
       handleFormError(error, form)
     }

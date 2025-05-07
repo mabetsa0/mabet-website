@@ -160,6 +160,17 @@
     "to-reseve-otp": "Enter your mobile phone number to log in or create a new account, be sure to link the number you entered with the WhatsApp application to receive the verification code.",
     "continue": "Continue",
     "invalid-phone-number": "Invalid phone number",
-    "welcome-to-mabet": "Welcome to Mabet"
+    "welcome-to-mabet": "Welcome to Mabet",
+    "verify-otp": {
+      "title": "Please enter the code to continue",
+      "description": "The verification code has been sent to: {value}",
+      "continue": "Verify code",
+      "didnot-get-code": "Didn't receive code yet?",
+      "resend": "Resend otp",
+      "resend-error-title": "Failer",
+      "resend-error-message": "Could not resend otp!",
+      "update-phonenumber": "Update phone number"
+    },
+    "title": "Log in or sign up"
   }
 }

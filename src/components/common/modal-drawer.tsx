@@ -9,9 +9,10 @@ type Props = {
   onClose: () => void
   children: React.ReactNode
   size?: ModalBaseProps["size"]
+  title?: string
 }
 
-const ModalDrawer = ({ state, children, onClose, size }: Props) => {
+const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
   const smallScreen = useMediaQuery("(max-width: 62em")
 
   if (smallScreen)
@@ -25,6 +26,7 @@ const ModalDrawer = ({ state, children, onClose, size }: Props) => {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
           <Drawer.Content className=" max-h-[85vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
+            <Drawer.Title>{title}</Drawer.Title>
             <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
               {children}
             </div>
@@ -39,9 +41,13 @@ const ModalDrawer = ({ state, children, onClose, size }: Props) => {
       onClose={onClose}
       size={size || "xl"}
       centered
+      title={title}
+      classNames={{
+        title: "grow w-full text-h5 font-bold  text-center ",
+        header: "px-2",
+      }}
       radius={14}
       padding={0}
-      withCloseButton={false}
       overlayProps={{
         backgroundOpacity: 0.55,
         blur: 3,
