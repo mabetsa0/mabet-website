@@ -29,7 +29,13 @@
     },
     "empty": "No results",
     "search": "Search...",
-    "city-search-placeholder": "Search for city"
+    "city-search-placeholder": "Search for city",
+    "continue": "Continue",
+    "all-cities": "All cities",
+    "select-unitType": "Select unit type",
+    "select-select-search-date": "Choose the date of reservation",
+    "search-now": "Search now",
+    "from": "from"
   },
   "home": {
     "special-units": {

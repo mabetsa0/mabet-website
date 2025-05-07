@@ -102,7 +102,7 @@
     }
   },
   "general": {
-    "select-city": "إختر المدينة",
+    "select-city": "اختر المدينة",
     "select": "إختر ",
     "select-unit-type": "نوع المبيت",
     "mobile-search": "ابحث عن شقق, استديوا, فلل, شاليه واستراحه, مزارع ومخيمات",
@@ -120,7 +120,13 @@
     },
     "empty": "لا نتائج",
     "search": "يبحث...",
-    "city-search-placeholder": "ابحث عن اسم المدينة"
+    "city-search-placeholder": "ابحث عن اسم المدينة",
+    "continue": "المتابعة",
+    "all-cities": "كل المدن",
+    "select-unitType": "اختر نوع المبيت",
+    "select-select-search-date": "اختر تاريخ الحجز",
+    "search-now": "ابحث الان",
+    "from": "من"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

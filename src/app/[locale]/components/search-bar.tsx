@@ -31,13 +31,19 @@ type FormValues = {
   unit_type: string
   dates: [Date | null, Date | null]
 }
+type TransformedValues = (values: FormValues) => {
+  city_id: string
+  unit_type: string
+  from: string
+  to: string
+}
 
 // createFormContext returns a tuple with 3 items:
 // FormProvider is a component that sets form context
 // useFormContext hook return form object that was previously set in FormProvider
 // useForm hook works the same way as useForm exported from the package but has predefined type
 export const [FormProvider, useSearchBarFormContext, useForm] =
-  createFormContext<FormValues>()
+  createFormContext<FormValues, TransformedValues>()
 const SearchBar = ({
   cities,
   unitTypes,
@@ -52,6 +58,18 @@ const SearchBar = ({
       city_id: "",
       unit_type: "",
       dates: [dayjs().toDate(), dayjs().add(1, "day").toDate()],
+    },
+    transformValues(values) {
+      return {
+        city_id: values.city_id,
+        unit_type: values.unit_type,
+        from: values.dates[0]
+          ? dayjs(values.dates[0]).format("YYYY-MM-DD")
+          : dayjs().format("YYYY-MM-DD"),
+        to: values.dates[1]
+          ? dayjs(values.dates[1]).format("YYYY-MM-DD")
+          : dayjs().add(1, "day").format("YYYY-MM-DD"),
+      }
     },
   })
 
