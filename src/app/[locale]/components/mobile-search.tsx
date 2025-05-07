@@ -1,7 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { City } from "@/@types/cities"
 import { UnitType } from "@/@types/unit-types"
+import "@/app/transition-css.css"
 import { UnitTypeIcons } from "@/assets"
+import AutoHeight from "@/components/ui/auto-height"
 import { useRouter } from "@/lib/i18n/navigation"
 import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import {
@@ -10,7 +13,6 @@ import {
   Button,
   Divider,
   Group,
-  Image,
   Radio,
   ScrollArea,
   SegmentedControl,
@@ -24,13 +26,14 @@ import {
 import { DatePicker } from "@mantine/dates"
 import { createFormContext } from "@mantine/form"
 import dayjs from "dayjs"
+import "dayjs/locale/ar"
+import durations from "dayjs/plugin/duration"
+import relativeTime from "dayjs/plugin/relativeTime"
 import { Check, ChevronRight, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import { useState } from "react"
+import { ElementRef, useRef, useState } from "react"
+import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Drawer } from "vaul"
-import "dayjs/locale/ar"
-import relativeTime from "dayjs/plugin/relativeTime"
-import durations from "dayjs/plugin/duration"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 // Definition of form values is required
@@ -140,10 +143,10 @@ const SelectUnitType = ({ unitTypes }: { unitTypes: UnitType[] }) => {
                   <Group wrap="nowrap" align="flex-start">
                     <Radio.Indicator className="absolute opacity-0" />
                     <Stack gap={"xs"} ta={"center"}>
-                      <Image
-                        h={35}
-                        w={35}
-                        mx={"auto"}
+                      <img
+                        height={35}
+                        width={35}
+                        className="mx-auto"
                         src={
                           UnitTypeIcons[
                             (type.id + "") as keyof typeof UnitTypeIcons
@@ -286,6 +289,7 @@ const MobileSearch = (props: { cities: City[]; unitTypes: UnitType[] }) => {
     },
   })
   const step = form.values.step
+  const nodeRef = useRef<ElementRef<"div">>(null)
 
   const Router = useRouter()
   const onSubmit = form.onSubmit((values) => {
@@ -312,6 +316,9 @@ const MobileSearch = (props: { cities: City[]; unitTypes: UnitType[] }) => {
             <Drawer.Overlay className="fixed inset-0 bg-black/40" />
             <Drawer.Content className=" h-fit fixed bottom-0 left-0 right-0 outline-none">
               <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+                <div className="flex justify-center pt-0.5">
+                  <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
+                </div>
                 <Drawer.Title className="font-bold text-xl">
                   <Group gap={"xs"} align="center">
                     {step == 0 ? (
@@ -338,15 +345,35 @@ const MobileSearch = (props: { cities: City[]; unitTypes: UnitType[] }) => {
                   </Group>
                 </Drawer.Title>
                 <Divider />
-                <FormProvider form={form}>
-                  <form onSubmit={onSubmit}>
-                    {step === 0 && <SelectCity cities={props.cities} />}
-                    {step === 1 && (
-                      <SelectUnitType unitTypes={props.unitTypes} />
-                    )}
-                    {step === 2 && <SelectDate {...props} />}
-                  </form>
-                </FormProvider>
+                <AutoHeight>
+                  <FormProvider form={form}>
+                    <form onSubmit={onSubmit}>
+                      <SwitchTransition>
+                        <CSSTransition
+                          key={step}
+                          nodeRef={nodeRef}
+                          addEndListener={(done: () => void) => {
+                            nodeRef.current?.addEventListener(
+                              "transitionend",
+                              done,
+                              false
+                            )
+                          }}
+                          timeout={300}
+                          classNames="fade-slide"
+                        >
+                          <div ref={nodeRef}>
+                            {step === 0 && <SelectCity cities={props.cities} />}
+                            {step === 1 && (
+                              <SelectUnitType unitTypes={props.unitTypes} />
+                            )}
+                            {step === 2 && <SelectDate {...props} />}
+                          </div>
+                        </CSSTransition>
+                      </SwitchTransition>
+                    </form>
+                  </FormProvider>
+                </AutoHeight>
               </div>
             </Drawer.Content>
           </Drawer.Portal>
