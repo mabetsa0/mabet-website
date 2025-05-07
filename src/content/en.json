@@ -151,5 +151,7 @@
     "privacy-policy": "Privacy Policy",
     "reservation-policy": "Reservation",
     "rights": "All rights reserved to Mabet ©{value}"
-  }
+  },
+  "brows-in-arabic": "تصفح بالعربية",
+  "brows-in-english": "Brows in English"
 }

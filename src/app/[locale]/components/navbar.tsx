@@ -138,6 +138,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
           {t("blog")}
         </UnstyledButton>
+        <LanguageSwitcher />
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>
