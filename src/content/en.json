@@ -153,5 +153,13 @@
     "rights": "All rights reserved to Mabet ©{value}"
   },
   "brows-in-arabic": "تصفح بالعربية",
-  "brows-in-english": "Brows in English"
+  "brows-in-english": "Brows in English",
+  "auth": {
+    "Welcome-to-mabet": "Welcome to a Mabet",
+    "enter-your-phone-number": "Enter your mobile phone number to create an account or log in.",
+    "to-reseve-otp": "Enter your mobile phone number to log in or create a new account, be sure to link the number you entered with the WhatsApp application to receive the verification code.",
+    "continue": "Continue",
+    "invalid-phone-number": "Invalid phone number",
+    "welcome-to-mabet": "Welcome to Mabet"
+  }
 }

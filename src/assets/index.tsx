@@ -31,6 +31,8 @@ import headset from "./headset.svg"
 import imageIcon from "./image-composition-oval.svg"
 import whiteCurve from "./Curve-Section-Shape.svg"
 import sharpShape from "./Tag-Sharp-Shape.svg"
+import loginImage1 from "./login-1.jpeg"
+import loginImage2 from "./login-2.jpeg"
 
 export {
   logo,
@@ -66,6 +68,8 @@ export {
   imageIcon,
   whiteCurve,
   sharpShape,
+  loginImage1,
+  loginImage2,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

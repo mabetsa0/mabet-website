@@ -153,5 +153,12 @@
     "rights": "جميع الحقوق محفوظة لمبيت ©{value}"
   },
   "brows-in-arabic": "تصفح بالعربية",
-  "brows-in-english": "Brows in English"
+  "brows-in-english": "Brows in English",
+  "auth": {
+    "welcome-to-mabet": "أهلا بك في مبيت",
+    "enter-your-phone-number": "أدخل رقم هاتفك الجوال لإنشاء حساب أو تسجيل الدخول.",
+    "to-reseve-otp": "أدخل رقم هاتفك الجوال لتسجيل الدخول او انشاء حساب جديد, تأكد من ربط الرقم الذي ادخلته بتطبيق الواتس اب لإستلام كود التحقق.",
+    "continue": "المتابعة",
+    "invalid-phone-number": "رقم هاتف غير صالح"
+  }
 }

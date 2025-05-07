@@ -32,6 +32,7 @@
     "react": "^18.3.1",
     "react-animate-height": "^3.2.3",
     "react-dom": "^18.3.1",
+    "react-phone-number-input": "^3.4.12",
     "react-transition-group": "^4.4.5",
     "tailwind-merge": "^3.2.0",
     "tailwind-preset-mantine": "^2.0.1",
