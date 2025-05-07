@@ -6,6 +6,7 @@ import { parseAsBoolean, useQueryState } from "nuqs"
 import { isAuthenticated } from "@/utils/is-authenticated"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
+import { useAuthModal } from "./use-auth-modal"
 
 const addToFavorite = async (id: number) => {
   const response = await Mabet.post("/favourite/add/" + id, {})
@@ -24,10 +25,7 @@ type Props = {
 const useFavorite = ({ is_favourite, id }: Props) => {
   const t = useTranslations("general.favorite")
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setShowLogin] = useQueryState(
-    "login",
-    parseAsBoolean.withDefault(false)
-  )
+  const [_, { onOpen }] = useAuthModal()
 
   const [isFavorite, setIsFavorite] = useState(!!is_favourite)
 
@@ -38,12 +36,6 @@ const useFavorite = ({ is_favourite, id }: Props) => {
       } else return addToFavorite(id)
     },
 
-    onMutate() {
-      if (!isAuthenticated()) {
-        setShowLogin(true)
-        return
-      }
-    },
     onSuccess(data, vars) {
       if (vars.is_favourite) {
         notifications.show({
@@ -77,6 +69,7 @@ const useFavorite = ({ is_favourite, id }: Props) => {
 
   const mutate = () => {
     if (!isAuthenticated()) {
+      onOpen()
       return
     }
     mutation.mutate({ is_favourite: isFavorite })
