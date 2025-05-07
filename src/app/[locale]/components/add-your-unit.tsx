@@ -127,7 +127,7 @@ const AddYourUnit = async () => {
             <img
               src={mobileArrows.src}
               alt="mobile arrows"
-              className="absolute start-[75px]  top-[5px] max-w-[calc(100vw_-_90px)]"
+              className="absolute ltr:scale-x-[-1] start-[75px]  top-[5px] max-w-[calc(100vw_-_90px)]"
             />
           </Stack>
           <Stack className="relative" gap="sm">

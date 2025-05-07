@@ -25,7 +25,7 @@ import { DatePicker } from "@mantine/dates"
 import { createFormContext } from "@mantine/form"
 import dayjs from "dayjs"
 import { Check, ChevronRight, Search } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { Drawer } from "vaul"
 import "dayjs/locale/ar"
@@ -194,6 +194,8 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
 
   const duration = dayjs(to).diff(dayjs(from), "days")
 
+  const locale = useLocale()
+
   return (
     <Stack>
       <Text py={"xs"} c={"#767676"}>
@@ -215,7 +217,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
         </Text>
         {from && to ? (
           <Text c={"primary"}>
-            ({dayjs.duration(duration, "day").locale("ar").humanize()})
+            ({dayjs.duration(duration, "day").locale(locale).humanize()})
           </Text>
         ) : null}
       </Group>
