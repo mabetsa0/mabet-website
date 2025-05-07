@@ -1,0 +1,55 @@
+"use client"
+import { Modal, ModalBaseProps } from "@mantine/core"
+import { useMediaQuery } from "@mantine/hooks"
+import React from "react"
+import { Drawer } from "vaul"
+
+type Props = {
+  state: boolean
+  onClose: () => void
+  children: React.ReactNode
+  size?: ModalBaseProps["size"]
+}
+
+const ModalDrawer = ({ state, children, onClose, size }: Props) => {
+  const smallScreen = useMediaQuery("(max-width: 62em")
+
+  if (smallScreen)
+    return (
+      <Drawer.Root
+        repositionInputs={false}
+        open={state}
+        onClose={onClose}
+        shouldScaleBackground
+      >
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+          <Drawer.Content className=" max-h-[85vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
+            <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+              {children}
+            </div>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
+    )
+
+  return (
+    <Modal
+      opened={state}
+      onClose={onClose}
+      size={size || "xl"}
+      centered
+      radius={14}
+      padding={0}
+      withCloseButton={false}
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
+    >
+      {children}
+    </Modal>
+  )
+}
+
+export default ModalDrawer
