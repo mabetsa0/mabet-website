@@ -1,9 +1,8 @@
 "use client"
 
-import { City } from "@/@types/cities"
-import { UnitType } from "@/@types/unit-types"
 import { UnitTypeIcons } from "@/assets"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { useCities, useUnitTypes } from "@/context/global-date-context"
 import { cn } from "@/lib/cn"
 import { useRouter } from "@/lib/i18n/navigation"
 import { objectToSearchParams } from "@/utils/obj-to-searchParams"
@@ -44,13 +43,9 @@ type TransformedValues = (values: FormValues) => {
 // useForm hook works the same way as useForm exported from the package but has predefined type
 export const [FormProvider, useSearchBarFormContext, useForm] =
   createFormContext<FormValues, TransformedValues>()
-const SearchBar = ({
-  cities,
-  unitTypes,
-}: {
-  cities: City[]
-  unitTypes: UnitType[]
-}) => {
+const SearchBar = () => {
+  const cities = useCities()
+  const unitTypes = useUnitTypes()
   const t = useTranslations("general")
   const form = useForm({
     mode: "controlled",

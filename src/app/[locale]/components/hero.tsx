@@ -1,14 +1,12 @@
 import { heroBackground } from "@/assets"
-import { getCities, getUnitTypes } from "@/services/lists"
 import { Space, Stack, Text, Title } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 import Image from "next/image"
-import SearchBar from "./search-bar"
 import MobileSearch from "./mobile-search"
+import SearchBar from "./search-bar"
 
 export default async function Hero() {
   const t = await getTranslations("home.hero")
-  const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
   return (
     <>
       <section className=" h-[30svh] md:h-[calc(100svh_-_74px)] flex items-center relative ">
@@ -32,12 +30,12 @@ export default async function Hero() {
             </Stack>
             <Space visibleFrom="md" />
             <div className=" hidden md:block max-w-5xl">
-              <SearchBar cities={cities} unitTypes={unitTypes} />
+              <SearchBar />
             </div>
           </Stack>
         </div>
       </section>
-      <MobileSearch cities={cities} unitTypes={unitTypes} />
+      <MobileSearch />
     </>
   )
 }

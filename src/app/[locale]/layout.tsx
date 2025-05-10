@@ -1,15 +1,17 @@
+import AuthModal from "@/components/common/auth/auth-modal"
+import GlobalDataContextProvider from "@/context/global-date-context"
 import { routing } from "@/lib/i18n/routing"
+import MyReactQueryProvider from "@/lib/react-query"
+import { getCities, getUnitTypes } from "@/services/lists"
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
+import { setRequestLocale } from "next-intl/server"
+import { IBM_Plex_Sans_Arabic } from "next/font/google"
 import { notFound } from "next/navigation"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import Navbar from "./components/navbar"
-import { setRequestLocale } from "next-intl/server"
-import { IBM_Plex_Sans_Arabic } from "next/font/google"
-import { NuqsAdapter } from "nuqs/adapters/next/app"
-import MyReactQueryProvider from "@/lib/react-query"
-import AuthModal from "@/components/common/auth/auth-modal"
 
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -33,6 +35,7 @@ export default async function LocaleLayout({
   // for static rendering
   setRequestLocale(locale)
 
+  const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
   return (
     <html
       lang={locale}
@@ -43,16 +46,18 @@ export default async function LocaleLayout({
         <ColorSchemeScript />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
-        <MyReactQueryProvider>
-          <NuqsAdapter>
-            <MyMantineProvider locale={locale}>
-              <NextIntlClientProvider>
-                <Navbar>{children}</Navbar>
-                <AuthModal />
-              </NextIntlClientProvider>
-            </MyMantineProvider>
-          </NuqsAdapter>
-        </MyReactQueryProvider>
+        <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
+          <MyReactQueryProvider>
+            <NuqsAdapter>
+              <MyMantineProvider locale={locale}>
+                <NextIntlClientProvider>
+                  <Navbar>{children}</Navbar>
+                  <AuthModal />
+                </NextIntlClientProvider>
+              </MyMantineProvider>
+            </NuqsAdapter>
+          </MyReactQueryProvider>
+        </GlobalDataContextProvider>
       </body>
     </html>
   )

@@ -5,6 +5,7 @@ import { UnitType } from "@/@types/unit-types"
 import "@/app/transition-css.css"
 import { UnitTypeIcons } from "@/assets"
 import AutoHeight from "@/components/ui/auto-height"
+import { useCities, useUnitTypes } from "@/context/global-date-context"
 import { useRouter } from "@/lib/i18n/navigation"
 import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import {
@@ -265,7 +266,9 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
     </Stack>
   )
 }
-const MobileSearch = (props: { cities: City[]; unitTypes: UnitType[] }) => {
+const MobileSearch = () => {
+  const cities = useCities()
+  const unitTypes = useUnitTypes()
   const t = useTranslations("general")
   const form = useForm({
     mode: "controlled",
@@ -363,11 +366,16 @@ const MobileSearch = (props: { cities: City[]; unitTypes: UnitType[] }) => {
                           classNames="fade-slide"
                         >
                           <div ref={nodeRef}>
-                            {step === 0 && <SelectCity cities={props.cities} />}
+                            {step === 0 && <SelectCity cities={cities} />}
                             {step === 1 && (
-                              <SelectUnitType unitTypes={props.unitTypes} />
+                              <SelectUnitType unitTypes={unitTypes} />
                             )}
-                            {step === 2 && <SelectDate {...props} />}
+                            {step === 2 && (
+                              <SelectDate
+                                cities={cities}
+                                unitTypes={unitTypes}
+                              />
+                            )}
                           </div>
                         </CSSTransition>
                       </SwitchTransition>
