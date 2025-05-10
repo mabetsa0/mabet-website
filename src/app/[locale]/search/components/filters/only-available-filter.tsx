@@ -12,6 +12,7 @@ const OnlyAvailable = () => {
   )
   return (
     <Button
+      className={show_only_available ? "border-primary border" : ""}
       color={show_only_available ? "primary" : "dark"}
       variant={show_only_available ? "light" : "outline"}
       onClick={() => {

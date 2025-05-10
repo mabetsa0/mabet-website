@@ -99,7 +99,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           ))}
         </Carousel>
       </div>
-      <Stack gap={4}>
+      <Stack className="grow" gap={4}>
         <Title className="truncate" order={5} mt={"8px"}>
           {props.name}
         </Title>
@@ -135,9 +135,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               ) : null}
             </div>
           ) : (
-            <div>
-              <Text c={"red"}>{t("not-avalibel")}</Text>
-            </div>
+            <div>{/* <Text c={"red"}>{t("not-avalibel")}</Text> */}</div>
           )}
           <div>
             {props.prices?.discount ? (
@@ -194,7 +192,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           </div>
         </Group>
         <Space />
-        <Divider />
+        <Divider mt={"auto"} />
         <Space />
         <Stack gap={"xs"}>
           <Text className="text-sm font-medium">{t("features")}</Text>
