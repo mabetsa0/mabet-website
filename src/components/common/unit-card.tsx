@@ -170,12 +170,14 @@ const UnitCard = (props: Unit & { className?: string }) => {
           <Group wrap="nowrap" className="text-xs text-[#767676]">
             <Group gap={"4"} wrap="nowrap">
               <Users width={16} strokeWidth={1.25} className="text-primary" />
-              <span>{props.unit_for_sentence}</span>
+              <span className=" whitespace-nowrap">
+                {props.unit_for_sentence}
+              </span>
             </Group>
             <Divider orientation="vertical" />
             <Group gap={"4"} wrap="nowrap">
               <Expand width={16} strokeWidth={1.25} className="text-primary" />
-              <span>{props.area}</span>
+              <span className=" whitespace-nowrap">{props.area}</span>
             </Group>
             <Divider orientation="vertical" />
             <Group gap={"4"} wrap="nowrap">
@@ -184,7 +186,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                 strokeWidth={1.25}
                 className="text-primary"
               />
-              <span>
+              <span className=" whitespace-nowrap">
                 {props.unit_content.find((e) => e.key === "bedrooms")?.count ||
                   0}{" "}
                 {t("bedrooms")}
@@ -193,7 +195,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
             <Divider orientation="vertical" />
             <Group gap={"4"} wrap="nowrap">
               <Bath width={16} strokeWidth={1.25} className="text-primary" />
-              <span>
+              <span className=" whitespace-nowrap">
                 {props.unit_content.find((e) => e.key === "toilets")?.count ||
                   0}{" "}
                 {t("toilets")}

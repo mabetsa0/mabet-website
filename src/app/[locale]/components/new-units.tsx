@@ -27,7 +27,7 @@ const NewUnits = ({ data }: Props) => {
     embla.scrollNext()
   }, [embla])
 
-  const autoplay = useRef(Autoplay({ delay: 3000 }))
+  const autoplay = useRef(Autoplay({ delay: 10000 }))
 
   return (
     <section className="py-3">
@@ -63,7 +63,6 @@ const NewUnits = ({ data }: Props) => {
             overflow: "hidden",
             maxWidth: "100%",
             minWidth: 250,
-            padding: 10,
           }}
           className="w-full "
         >

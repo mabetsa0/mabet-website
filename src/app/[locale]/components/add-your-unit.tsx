@@ -12,7 +12,7 @@ import { getTranslations } from "next-intl/server"
 const AddYourUnit = async () => {
   const t = await getTranslations("home.add-your-unit")
   return (
-    <section className="relative bg-[#FFFCF5]">
+    <section className="relative bg-[#FFFCF5] max-xs:overflow-hidden">
       <img alt="curve" src={whiteCurve.src} className="w-full" />
       <div className="container pt-3 pb-5 mx-auto">
         <div className="text-center flex flex-col gap-[4px]">
