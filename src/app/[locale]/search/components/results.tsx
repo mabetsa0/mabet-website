@@ -29,7 +29,7 @@ const Results = () => {
           </div>
         ) : null}
         {status === "success" ? (
-          <SimpleGrid cols={3}>
+          <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
             {data.data.map((unit) => {
               return <UnitCard key={unit.id} {...unit} />
             })}
