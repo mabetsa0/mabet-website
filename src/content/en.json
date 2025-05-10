@@ -131,7 +131,8 @@
   "unit-card": {
     "features": "Some features",
     "bedrooms": "room",
-    "toilets": "Toilets"
+    "toilets": "Toilets",
+    "not-avalibel": "This unit is not available"
   },
   "date-range-picker": {
     "check-out": "Check out",

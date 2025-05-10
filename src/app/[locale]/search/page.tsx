@@ -1,13 +1,13 @@
 import { Space, Stack } from "@mantine/core"
 import SearchBar from "../components/search-bar"
 import { Suspense } from "react"
+import { SearchParams } from "./@types/search-params"
+import Results from "./components/results"
 
 const Page = async ({
-  params,
+  searchParams,
 }: {
-  params: Promise<{
-    city_id: string
-  }>
+  searchParams: Promise<SearchParams>
 }) => {
   return (
     <Stack gap={"xl"}>
@@ -15,6 +15,7 @@ const Page = async ({
       <Suspense>
         <SearchBar />
       </Suspense>
+      <Results searchparams={searchParams} />
     </Stack>
   )
 }

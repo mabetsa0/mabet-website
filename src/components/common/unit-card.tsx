@@ -113,28 +113,59 @@ const UnitCard = (props: Unit & { className?: string }) => {
         </Group>
         <Space />
         <Group justify="space-between">
+          {props.prices ? (
+            <div>
+              <Group gap={"4"}>
+                <Title order={5} c={"#188078"}>
+                  {props.prices?.price_plain}
+                  <RiyalIcon />
+                </Title>
+                <Text className="text-[#767676] text-sm">
+                  /{props.prices?.duration_text}
+                </Text>
+              </Group>
+              {props.prices?.discount ? (
+                <Text className="text-[#767676] text-[12px]  line-through">
+                  {" "}
+                  {Number(props.prices.sub_price)} <RiyalIcon />
+                  <span className="text-[10px]">
+                    /{props.prices.duration_text}
+                  </span>
+                </Text>
+              ) : null}
+            </div>
+          ) : (
+            <div>
+              <Text c={"red"}>{t("not-avalibel")}</Text>
+            </div>
+          )}
           <div>
-            <Group gap={"4"}>
-              <Title order={5} c={"#188078"}>
-                {props.prices.price_plain}
-                <RiyalIcon />
-              </Title>
-              <Text className="text-[#767676] text-sm">
-                /{props.prices.duration_text}
-              </Text>
-            </Group>
-            {props.prices.discount ? (
-              <Text className="text-[#767676] text-[12px]  line-through">
-                {" "}
-                {Number(props.prices.sub_price)} <RiyalIcon />
-                <span className="text-[10px]">
-                  /{props.prices.duration_text}
-                </span>
-              </Text>
-            ) : null}
-          </div>
-          <div>
-            {props.badge?.border_color ? (
+            {props.prices?.discount ? (
+              <Badge
+                h={40}
+                className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                classNames={{
+                  label: "text-start text-xs",
+                }}
+                size="xl"
+                color={"#E8123D26"}
+                style={{
+                  color: "#E8123D",
+                }}
+                leftSection={
+                  <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                    {props.prices.discount_percent_text}%
+                  </div>
+                }
+              >
+                {props.prices.discount_amount} <RiyalIcon />
+                <img
+                  alt="sharp"
+                  src={sharpShape.src}
+                  className=" absolute end-0 top-0 bottom-0"
+                />
+              </Badge>
+            ) : props.badge?.border_color ? (
               <Badge
                 h={40}
                 className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "

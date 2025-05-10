@@ -2,18 +2,17 @@ import { routing } from "@/lib/i18n/routing"
 import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
+import AddYourUnit from "./components/add-your-unit"
+import Blogs from "./components/blogs"
+import DownLoadApp from "./components/download-app"
 import Hero from "./components/hero"
-import UnitTypes from "./components/unit-types"
+import NewUnits from "./components/new-units"
 import SpecialUnits from "./components/special-units"
+import TopRatedUnits from "./components/top-rated-units"
+import UnitTypes from "./components/unit-types"
+import WhyMabet from "./components/why-mabet"
 import { getSpecialUnits } from "./helpers/get-special-units"
 import { getTopRatedUnits } from "./helpers/get-top-rated-units"
-import NewUnits from "./components/new-units"
-import AddYourUnit from "./components/add-your-unit"
-import TopRatedUnits from "./components/top-rated-units"
-import DownLoadApp from "./components/download-app"
-import Blogs from "./components/blogs"
-import Footer from "@/components/common/footer"
-import WhyMabet from "./components/why-mabet"
 
 export const revalidate = 3600
 export default async function Page({
@@ -46,7 +45,6 @@ export default async function Page({
       <TopRatedUnits />
       <DownLoadApp />
       <Blogs />
-      <Footer />
     </>
   )
 }

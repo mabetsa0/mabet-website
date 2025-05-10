@@ -29,13 +29,18 @@ export interface Unit {
   unit_content: UnitContent[]
   unit_type: string
   is_favourite: boolean
-  label: null
+  label: Label | null
   dates_suggestions: unknown[]
   badge: Badge
-  prices: Prices
+  prices: Prices | null
   tabby_enabled: boolean
   madfu_enabled: boolean
   images: Image[]
+}
+export interface Label {
+  text: string
+  type: string
+  bg_color: string
 }
 
 export interface Badge {
