@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import Image from "next/image"
 import MobileSearch from "./mobile-search"
 import SearchBar from "./search-bar"
+import { Suspense } from "react"
 
 export default async function Hero() {
   const t = await getTranslations("home.hero")
@@ -30,12 +31,16 @@ export default async function Hero() {
             </Stack>
             <Space visibleFrom="md" />
             <div className=" hidden md:block max-w-5xl">
-              <SearchBar />
+              <Suspense>
+                <SearchBar />
+              </Suspense>
             </div>
           </Stack>
         </div>
       </section>
-      <MobileSearch />
+      <Suspense>
+        <MobileSearch />
+      </Suspense>
     </>
   )
 }

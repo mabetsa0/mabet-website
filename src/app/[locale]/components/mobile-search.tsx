@@ -32,6 +32,7 @@ import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Check, ChevronRight, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import { ElementRef, useRef, useState } from "react"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Drawer } from "vaul"
@@ -270,12 +271,21 @@ const MobileSearch = () => {
   const cities = useCities()
   const unitTypes = useUnitTypes()
   const t = useTranslations("general")
+  const searchparams = useSearchParams()
   const form = useForm({
     mode: "controlled",
     initialValues: {
-      city_id: "0",
-      unit_type: "",
-      dates: [dayjs().toDate(), dayjs().add(1, "day").toDate()],
+      city_id: searchparams.get("city_id") || "0",
+      unit_type: searchparams.get("unit_type") || "",
+      dates: [
+        searchparams.get("from")
+          ? new Date(searchparams.get("from") as string)
+          : dayjs().toDate(),
+
+        searchparams.get("to")
+          ? new Date(searchparams.get("to") as string)
+          : dayjs().add(1, "day").toDate(),
+      ],
       step: 0,
     },
     transformValues(values) {

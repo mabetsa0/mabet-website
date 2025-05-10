@@ -23,6 +23,7 @@ import dayjs from "dayjs"
 import { Building2, MapPin, Search } from "lucide-react"
 import { useTranslations } from "next-intl"
 import DateRangePicker from "./date-range-picker"
+import { useSearchParams } from "next/navigation"
 
 // Definition of form values is required
 type FormValues = {
@@ -46,13 +47,22 @@ export const [FormProvider, useSearchBarFormContext, useForm] =
 const SearchBar = () => {
   const cities = useCities()
   const unitTypes = useUnitTypes()
+  const searchparams = useSearchParams()
   const t = useTranslations("general")
   const form = useForm({
     mode: "controlled",
     initialValues: {
-      city_id: "",
-      unit_type: "",
-      dates: [dayjs().toDate(), dayjs().add(1, "day").toDate()],
+      city_id: searchparams.get("city_id") || "",
+      unit_type: searchparams.get("unit_type") || "",
+      dates: [
+        searchparams.get("from")
+          ? new Date(searchparams.get("from") as string)
+          : dayjs().toDate(),
+
+        searchparams.get("to")
+          ? new Date(searchparams.get("to") as string)
+          : dayjs().add(1, "day").toDate(),
+      ],
     },
     transformValues(values) {
       return {

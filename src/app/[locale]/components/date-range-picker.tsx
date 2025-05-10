@@ -46,7 +46,7 @@ const DateRangePicker = () => {
               )}
             >
               {form.values.dates[0]
-                ? dayjs(form.values.dates[0]).format("dddd MM, YYYY")
+                ? dayjs(form.values.dates[0]).format("dddd DD MM, YYYY")
                 : t("select-date")}
             </Group>
           </Stack>
@@ -64,7 +64,7 @@ const DateRangePicker = () => {
               )}
             >
               {form.values.dates[1]
-                ? dayjs(form.values.dates[1]).format("dddd MM, YYYY")
+                ? dayjs(form.values.dates[1]).format("dddd DD MM, YYYY")
                 : t("select-date")}
             </Group>
           </Stack>

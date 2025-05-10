@@ -21,7 +21,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         breakpoint: "md",
         collapsed: { desktop: true, mobile: !opened },
       }}
-      withBorder={false}
+      withBorder={true}
     >
       <AppShell.Header>
         <Group
