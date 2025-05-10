@@ -177,5 +177,18 @@
   },
   "generl": {
     "search-results": "نتاج بحث"
+  },
+  "search": {
+    "filter": {
+      "unit-code-filter": {
+        "button": "كود الوحدة",
+        "title": "ادخل كود الوحدة",
+        "search-now": "ابحث الان",
+        "placeholder": "مثال: JED-7502"
+      },
+      "show_only_available-filter": {
+        "button": "العقارات المتاحة فقط"
+      }
+    }
   }
 }

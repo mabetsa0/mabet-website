@@ -1,7 +1,14 @@
 "use client"
 import UnitCard from "@/components/common/unit-card"
 import Mabet from "@/services"
-import { Group, Loader, SimpleGrid, Text, Title } from "@mantine/core"
+import {
+  Group,
+  Loader,
+  ScrollArea,
+  SimpleGrid,
+  Text,
+  Title,
+} from "@mantine/core"
 
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
@@ -9,6 +16,8 @@ import { SearchResultsResponse } from "../@types/results"
 import Pagination from "./pagination"
 import { useTranslations } from "next-intl"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
+import UnitCodeFilter from "./filters/unit-code-filter"
+import OnlyAvailable from "./filters/only-available-filter"
 
 const Results = () => {
   const t = useTranslations()
@@ -45,8 +54,14 @@ const Results = () => {
             </Text>
           ) : null}
         </Group>
+        <ScrollArea.Autosize>
+          <Group pb={"md"}>
+            <UnitCodeFilter />
+            <OnlyAvailable />
+          </Group>
+        </ScrollArea.Autosize>
         {status === "pending" ? (
-          <div className="flex items-center justify-center min-h-[100vh]">
+          <div className="flex items-center justify-center min-h-[30vh]">
             <Loader />
           </div>
         ) : null}

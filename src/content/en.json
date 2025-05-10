@@ -178,5 +178,18 @@
   },
   "generl": {
     "search-results": "Results for"
+  },
+  "search": {
+    "filter": {
+      "unit-code-filter": {
+        "button": "Unit code",
+        "title": "Enter unit code",
+        "search-now": "Search now",
+        "placeholder": "Exmple: JED-7502"
+      },
+      "show_only_available-filter": {
+        "button": "Available only"
+      }
+    }
   }
 }
