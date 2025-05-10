@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import {
   Combobox,
+  Group,
   Input,
   InputBase,
   InputBaseProps,
@@ -9,7 +10,7 @@ import {
   useCombobox,
 } from "@mantine/core"
 import { useTranslations } from "next-intl"
-import { Search } from "lucide-react"
+import { Check, Search } from "lucide-react"
 
 type Props = {
   data: { value: string; label: string }[]
@@ -44,7 +45,12 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
       )
       .map((item) => (
         <Combobox.Option value={item.value} key={item.value}>
-          {item.label}
+          <Group>
+            {value == item.value + "" ? (
+              <Check size={18} color="#767676" />
+            ) : null}
+            {item.label}
+          </Group>
         </Combobox.Option>
       ))
 
@@ -69,7 +75,10 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             onClick={() => combobox.toggleDropdown()}
             {...props}
           >
-            {props.data.find((ele) => ele.value === value)?.label || (
+            {props.data.find((ele) => ele.value === value)?.label ||
+            value == "0" ? (
+              t("all-cities")
+            ) : (
               <Input.Placeholder className="text-gray-600 ">
                 {props.placeholder}
               </Input.Placeholder>
@@ -96,9 +105,19 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             placeholder={searchPlaceholder || t("search")}
           />
           <Combobox.Options>
-            <ScrollArea.Autosize mah={200} type="scroll">
+            <ScrollArea.Autosize pt={"xs"} mah={200} type="scroll">
               {options.length > 0 ? (
-                options
+                <>
+                  <Combobox.Option value={"0"} key={"0"}>
+                    <Group>
+                      {value == "0" ? (
+                        <Check size={18} color="#767676" />
+                      ) : null}
+                      {t("all-cities")}
+                    </Group>
+                  </Combobox.Option>
+                  {options}
+                </>
               ) : (
                 <Combobox.Empty>{t("empty")}</Combobox.Empty>
               )}
