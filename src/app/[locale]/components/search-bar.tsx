@@ -5,7 +5,6 @@ import SelectDropdownSearch from "@/components/ui/select-with-search"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
 import { cn } from "@/lib/cn"
 import { useRouter } from "@/lib/i18n/navigation"
-import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import {
   ActionIcon,
   Divider,
@@ -22,8 +21,8 @@ import { createFormContext } from "@mantine/form"
 import dayjs from "dayjs"
 import { Building2, MapPin, Search } from "lucide-react"
 import { useTranslations } from "next-intl"
-import DateRangePicker from "./date-range-picker"
 import { useSearchParams } from "next/navigation"
+import DateRangePicker from "./date-range-picker"
 
 // Definition of form values is required
 type FormValues = {
@@ -79,8 +78,14 @@ const SearchBar = () => {
   })
 
   const Router = useRouter()
+
   const onSubmit = form.onSubmit((values) => {
-    Router.push(`/search?${objectToSearchParams(values).toString()}`)
+    const newSearchParams = new URLSearchParams(searchparams)
+    Object.entries(values).map(([key, value]) => {
+      newSearchParams.delete(key)
+      newSearchParams.append(key, value)
+    })
+    Router.push(`/search?${newSearchParams.toString()}`)
   })
   return (
     <section>

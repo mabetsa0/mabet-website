@@ -75,10 +75,13 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             onClick={() => combobox.toggleDropdown()}
             {...props}
           >
-            {props.data.find((ele) => ele.value === value)?.label ||
-            value == "0" ? (
-              t("all-cities")
-            ) : (
+            {[
+              ...props.data,
+              {
+                value: "0",
+                label: t("all-cities"),
+              },
+            ].find((ele) => ele.value === value)?.label || (
               <Input.Placeholder className="text-gray-600 ">
                 {props.placeholder}
               </Input.Placeholder>

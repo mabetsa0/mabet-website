@@ -8,6 +8,7 @@ import LanguageSwitcher from "@/components/common/lang-switch"
 import { useDisclosure } from "@mantine/hooks"
 import { useTranslations } from "next-intl"
 import React from "react"
+import { Link } from "@/lib/i18n/navigation"
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure()
@@ -37,7 +38,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             wrap="nowrap"
             style={{ flex: 1 }}
           >
-            <img alt="logo" src={logo.src} className="max-md:h-2" />
+            <Link href={"/"}>
+              <img alt="logo" src={logo.src} className="max-md:h-2" />
+            </Link>
             <Group>
               <Group me="md" gap={0} visibleFrom="md">
                 <UnstyledButton
