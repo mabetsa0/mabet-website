@@ -1,5 +1,5 @@
 "use client"
-import { Modal, ModalBaseProps } from "@mantine/core"
+import { Burger, Divider, Group, Modal, ModalBaseProps } from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks"
 import React from "react"
 import { Drawer } from "vaul"
@@ -26,8 +26,19 @@ const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
           <Drawer.Content className=" max-h-[85vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
-            <Drawer.Title>{title}</Drawer.Title>
             <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+              <div className="flex justify-center pt-0.5">
+                <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
+              </div>
+              <Drawer.Title className=" text-h5 font-bold">
+                <Group align="center" gap={"sm"}>
+                  <Drawer.Close>
+                    <Burger component={"span"} opened size={"md"} />
+                  </Drawer.Close>
+                  {title}
+                </Group>
+              </Drawer.Title>
+              <Divider />
               {children}
             </div>
           </Drawer.Content>
