@@ -126,7 +126,9 @@
     "select-unitType": "اختر نوع المبيت",
     "select-select-search-date": "اختر تاريخ الحجز",
     "search-now": "ابحث الان",
-    "from": "من"
+    "from": "من",
+    "in": "في",
+    "unit": "وحدة"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -172,5 +174,8 @@
       "update-phonenumber": "تعديل رقم الهاتف"
     },
     "title": "تسجيل الدخول أو سجل حساب جديد"
+  },
+  "generl": {
+    "search-results": "نتاج بحث"
   }
 }

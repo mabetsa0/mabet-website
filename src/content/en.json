@@ -35,7 +35,9 @@
     "select-unitType": "Select unit type",
     "select-select-search-date": "Choose the date of reservation",
     "search-now": "Search now",
-    "from": "from"
+    "from": "from",
+    "in": "in",
+    "unit": "Units"
   },
   "home": {
     "special-units": {
@@ -173,5 +175,8 @@
       "update-phonenumber": "Update phone number"
     },
     "title": "Log in or sign up"
+  },
+  "generl": {
+    "search-results": "Results for"
   }
 }

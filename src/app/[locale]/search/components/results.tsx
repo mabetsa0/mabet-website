@@ -1,14 +1,17 @@
 "use client"
 import UnitCard from "@/components/common/unit-card"
 import Mabet from "@/services"
-import { Loader, SimpleGrid } from "@mantine/core"
+import { Group, Loader, SimpleGrid, Text, Title } from "@mantine/core"
 
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
 import Pagination from "./pagination"
+import { useTranslations } from "next-intl"
+import { useCities, useUnitTypes } from "@/context/global-date-context"
 
 const Results = () => {
+  const t = useTranslations()
   const searchParams = useSearchParams()
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],
@@ -20,12 +23,36 @@ const Results = () => {
     },
   })
 
+  const unitTypes = useUnitTypes()
+  const cities = useCities()
+  const searchedUnitType =
+    unitTypes.find((ele) => ele.id + "" == searchParams.get("unit_type"))
+      ?.name || ""
+  const searchedUnit =
+    cities.find((ele) => ele.id + "" == searchParams.get("city_id"))?.name ||
+    t("general.all-cities")
+
   return (
     <section>
       <div className="container">
+        <Group mb={"xl"}>
+          <Title order={2}>{`${t("generl.search-results")} ${
+            searchedUnitType
+          } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
+          {data?.total ? (
+            <Text c={"gray"}>
+              ({data?.total} {t("general.unit")})
+            </Text>
+          ) : null}
+        </Group>
         {status === "pending" ? (
           <div className="flex items-center justify-center min-h-[100vh]">
             <Loader />
+          </div>
+        ) : null}
+        {status === "error" ? (
+          <div>
+            <Text c={"red"}>Error</Text>
           </div>
         ) : null}
         {status === "success" ? (
