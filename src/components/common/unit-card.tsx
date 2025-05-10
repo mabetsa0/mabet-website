@@ -232,6 +232,20 @@ const UnitCard = (props: Unit & { className?: string }) => {
             </Group>
           </Group>
         </Stack>
+        {props.label ? (
+          <>
+            <Divider />
+            <Text
+              fz={"xs"}
+              pt={"4"}
+              ta={"center"}
+              fw={"700"}
+              c={props.label.bg_color}
+            >
+              {props.label.text}
+            </Text>
+          </>
+        ) : null}
       </Stack>
     </Card>
   )
