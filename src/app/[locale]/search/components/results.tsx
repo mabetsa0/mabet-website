@@ -21,6 +21,7 @@ import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
+import PriceFilter from "./filters/price-filter"
 
 const Results = () => {
   const t = useTranslations()
@@ -72,8 +73,8 @@ const Results = () => {
             </Text>
           ) : null}
         </Group>
-        <ScrollArea.Autosize>
-          <Group pb={"md"}>
+        <ScrollArea w={"100%"}>
+          <Group wrap="nowrap" pb={"md"}>
             <UnitCodeFilter />
             <ToggleFilterButton
               filterKey="show_only_available"
@@ -102,8 +103,9 @@ const Results = () => {
             >
               {t("search.filt.load_offers.button")}
             </ToggleFilterButton>
+            <PriceFilter />
           </Group>
-        </ScrollArea.Autosize>
+        </ScrollArea>
         {status === "pending" ? (
           <div className="flex items-center justify-center min-h-[30vh]">
             <Loader />

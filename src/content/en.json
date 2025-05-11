@@ -194,6 +194,14 @@
       },
       "no_insurance": {
         "button": "No insurance"
+      },
+      "price-filter": {
+        "button": "Price",
+        "title": "Select the right price for you",
+        "search-now": "Search now",
+        "clear": "Clear",
+        "from": "from",
+        "to": "to"
       }
     },
     "filt": {

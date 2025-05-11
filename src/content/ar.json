@@ -193,6 +193,14 @@
       },
       "no_insurance": {
         "button": "بدون تأمين"
+      },
+      "price-filter": {
+        "button": "السعر",
+        "title": "حدد السعر المناسب لك",
+        "search-now": "ابحث الان",
+        "clear": "مسح",
+        "from": "من",
+        "to": "الى"
       }
     },
     "filt": {
