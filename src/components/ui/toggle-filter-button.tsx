@@ -1,13 +1,14 @@
 "use client"
-import { Button } from "@mantine/core"
-import { Building2, X } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { Button, ButtonProps } from "@mantine/core"
+import { X } from "lucide-react"
 import { parseAsStringLiteral, useQueryState } from "nuqs"
 
-const OnlyAvailable = () => {
-  const t = useTranslations("search.filter.show_only_available-filter")
+const ToggleFilterButton = ({
+  filterKey,
+  ...props
+}: ButtonProps & { filterKey: string }) => {
   const [show_only_available, set] = useQueryState(
-    "show_only_available",
+    filterKey,
     parseAsStringLiteral(["1"])
   )
   return (
@@ -18,12 +19,10 @@ const OnlyAvailable = () => {
       onClick={() => {
         set((value) => (value ? null : "1"))
       }}
-      leftSection={<Building2 strokeWidth={1.25} />}
       rightSection={show_only_available && <X strokeWidth={1.25} />}
-    >
-      {t("button")}
-    </Button>
+      {...props}
+    />
   )
 }
 
-export default OnlyAvailable
+export default ToggleFilterButton

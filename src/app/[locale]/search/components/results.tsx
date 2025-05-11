@@ -10,14 +10,17 @@ import {
   Title,
 } from "@mantine/core"
 
+import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
+import ToggleFilterButton from "@/components/ui/toggle-filter-button"
+import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { getRegions } from "@/services/lists"
 import { useQuery } from "@tanstack/react-query"
+import { Building2, Map, Shield, TicketPercent } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
-import Pagination from "./pagination"
-import { useTranslations } from "next-intl"
-import { useCities, useUnitTypes } from "@/context/global-date-context"
 import UnitCodeFilter from "./filters/unit-code-filter"
-import OnlyAvailable from "./filters/only-available-filter"
+import Pagination from "./pagination"
 
 const Results = () => {
   const t = useTranslations()
@@ -41,6 +44,21 @@ const Results = () => {
     cities.find((ele) => ele.id + "" == searchParams.get("city_id"))?.name ||
     t("general.all-cities")
 
+  // getting regions
+  const cityId = searchParams.get("city_id")
+  const regionsData = useQuery({
+    queryKey: ["region", cityId],
+    staleTime: Infinity,
+    enabled: !!cityId,
+    queryFn: async () => {
+      const response = await getRegions(cityId!)
+      return response.data.districts.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+
   return (
     <section>
       <div className="container">
@@ -57,7 +75,33 @@ const Results = () => {
         <ScrollArea.Autosize>
           <Group pb={"md"}>
             <UnitCodeFilter />
-            <OnlyAvailable />
+            <ToggleFilterButton
+              filterKey="show_only_available"
+              leftSection={<Building2 strokeWidth={1.25} />}
+            >
+              {t("search.filter.show_only_available-filter.button")}
+            </ToggleFilterButton>
+            <FilterButtonWithSearch
+              filterKey="region_id"
+              label={t("general.select-region")}
+              data={regionsData.data || []}
+              buttonProps={{
+                leftSection: <Map strokeWidth={1.25} />,
+                children: t("general.region"),
+              }}
+            />
+            <ToggleFilterButton
+              filterKey="no_insurance"
+              leftSection={<Shield strokeWidth={1.25} />}
+            >
+              {t("search.filter.no_insurance.button")}
+            </ToggleFilterButton>
+            <ToggleFilterButton
+              filterKey="load_offers"
+              leftSection={<TicketPercent strokeWidth={1.25} />}
+            >
+              {t("search.filt.load_offers.button")}
+            </ToggleFilterButton>
           </Group>
         </ScrollArea.Autosize>
         {status === "pending" ? (

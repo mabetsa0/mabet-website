@@ -128,7 +128,9 @@
     "search-now": "ابحث الان",
     "from": "من",
     "in": "في",
-    "unit": "وحدة"
+    "unit": "وحدة",
+    "region": "الحي",
+    "select-region": "حدد اسم الحي/الأحياء"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -188,6 +190,14 @@
       },
       "show_only_available-filter": {
         "button": "العقارات المتاحة فقط"
+      },
+      "no_insurance": {
+        "button": "بدون تأمين"
+      }
+    },
+    "filt": {
+      "load_offers": {
+        "button": "العروض"
       }
     }
   }

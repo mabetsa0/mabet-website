@@ -37,7 +37,9 @@
     "search-now": "Search now",
     "from": "from",
     "in": "in",
-    "unit": "Units"
+    "unit": "Units",
+    "region": "Region",
+    "select-region": "Select region"
   },
   "home": {
     "special-units": {
@@ -189,6 +191,14 @@
       },
       "show_only_available-filter": {
         "button": "Available only"
+      },
+      "no_insurance": {
+        "button": "No insurance"
+      }
+    },
+    "filt": {
+      "load_offers": {
+        "button": "Offers"
       }
     }
   }

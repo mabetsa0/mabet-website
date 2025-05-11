@@ -2,6 +2,7 @@ import React from "react"
 import Mabet from "."
 import { CitiesResponse } from "@/@types/cities"
 import { UnitTypesResponse } from "@/@types/unit-types"
+import { RegionsResponse } from "@/@types/regrions"
 
 export const getCities = React.cache(async () => {
   const response = await Mabet.get<CitiesResponse>(
@@ -16,3 +17,10 @@ export const getUnitTypes = React.cache(async () => {
   )
   return response.data.data.unit_types
 })
+
+export const getRegions = async (cityId: string) => {
+  const response = await Mabet.get<RegionsResponse>(
+    `/location/regions?sort_by=units_count&sort_order=desc&city_id=${cityId}`
+  )
+  return response.data
+}
