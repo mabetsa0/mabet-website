@@ -26,6 +26,7 @@ import PriceFilter from "./filters/price-filter"
 const Results = () => {
   const t = useTranslations()
   const searchParams = useSearchParams()
+
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],
     queryFn: async () => {

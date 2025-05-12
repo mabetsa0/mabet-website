@@ -25,7 +25,6 @@ const DateRangePicker = () => {
     dayjs(form.values.dates[0]),
     "days"
   )
-  console.log("🚀 ~ DateRangePicker ~ duration:", duration)
   return (
     <Popover
       transitionProps={{ duration: 200, transition: "pop" }}

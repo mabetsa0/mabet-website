@@ -201,6 +201,10 @@
         "clear": "مسح",
         "from": "من",
         "to": "الى"
+      },
+      "direction-filter": {
+        "button": "الإتجاهات",
+        "title": "حدد الاتجاه"
       }
     },
     "filt": {

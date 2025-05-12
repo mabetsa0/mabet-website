@@ -202,6 +202,10 @@
         "clear": "Clear",
         "from": "from",
         "to": "to"
+      },
+      "direction-filter": {
+        "button": "Directions",
+        "title": "Choose direction"
       }
     },
     "filt": {

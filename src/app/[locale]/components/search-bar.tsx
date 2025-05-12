@@ -65,7 +65,7 @@ const SearchBar = () => {
     },
     transformValues(values) {
       return {
-        city_id: values.city_id,
+        city_id: values.city_id == "0" ? "" : values.city_id,
         unit_type: values.unit_type,
         from: values.dates[0]
           ? dayjs(values.dates[0]).format("YYYY-MM-DD")

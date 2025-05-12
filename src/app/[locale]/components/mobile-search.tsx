@@ -7,7 +7,6 @@ import { UnitTypeIcons } from "@/assets"
 import AutoHeight from "@/components/ui/auto-height"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
 import { useRouter } from "@/lib/i18n/navigation"
-import { objectToSearchParams } from "@/utils/obj-to-searchParams"
 import {
   ActionIcon,
   Burger,
@@ -290,7 +289,7 @@ const MobileSearch = () => {
     },
     transformValues(values) {
       return {
-        city_id: values.city_id,
+        city_id: values.city_id == "0" ? "" : values.city_id,
         unit_type: values.unit_type,
         from: values.dates[0]
           ? dayjs(values.dates[0]).format("YYYY-MM-DD")
@@ -306,7 +305,12 @@ const MobileSearch = () => {
 
   const Router = useRouter()
   const onSubmit = form.onSubmit((values) => {
-    Router.push(`/search?${objectToSearchParams(values).toString()}`)
+    const newSearchParams = new URLSearchParams(searchparams)
+    Object.entries(values).map(([key, value]) => {
+      newSearchParams.delete(key)
+      newSearchParams.append(key, value)
+    })
+    Router.push(`/search?${newSearchParams.toString()}`)
   })
   return (
     <>
