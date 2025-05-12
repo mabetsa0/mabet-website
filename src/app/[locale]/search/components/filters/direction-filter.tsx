@@ -1,17 +1,13 @@
 "use client"
 import { Button, Divider, Popover, Radio, Stack, Title } from "@mantine/core"
-import { ChevronDown, Ticket } from "lucide-react"
+import { ChevronDown, SignpostBig } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { parseAsString, useQueryState } from "nuqs"
-import { useState } from "react"
 
 const DirectionFilter = () => {
   const t = useTranslations("search.filter.direction-filter")
-  const [value, setValue] = useState("")
   const [filter, set] = useQueryState("direction_id", parseAsString)
-  const onSubmit = () => {
-    set(value)
-  }
+
   return (
     <Popover radius={"16"} shadow="md" position="bottom-start">
       <Popover.Target>
@@ -19,7 +15,7 @@ const DirectionFilter = () => {
           className={filter ? "border-primary" : ""}
           color="dark"
           variant="outline"
-          leftSection={<Ticket strokeWidth={1.25} />}
+          leftSection={<SignpostBig strokeWidth={1.25} />}
           rightSection={<ChevronDown strokeWidth={1.25} />}
         >
           {t("button")}
@@ -30,11 +26,28 @@ const DirectionFilter = () => {
         <Stack gap={"lg"} p={"xs"}>
           <Title order={5}>{t("title")}</Title>
           <Divider />
-          <Radio.Group>
+          <Radio.Group value={filter} onChange={set}>
             <Stack>
-              <Radio />
-              <Radio />
-              <Radio />
+              <Radio
+                classNames={{ label: "text-base" }}
+                value="1"
+                label={t("north")}
+              />
+              <Radio
+                classNames={{ label: "text-base" }}
+                value="2"
+                label={t("south")}
+              />
+              <Radio
+                classNames={{ label: "text-base" }}
+                value="3"
+                label={t("west")}
+              />
+              <Radio
+                classNames={{ label: "text-base" }}
+                value="4"
+                label={t("east")}
+              />
             </Stack>
           </Radio.Group>
         </Stack>

@@ -22,6 +22,7 @@ import { SearchResultsResponse } from "../@types/results"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
 import PriceFilter from "./filters/price-filter"
+import DirectionFilter from "./filters/direction-filter"
 
 const Results = () => {
   const t = useTranslations()
@@ -105,6 +106,7 @@ const Results = () => {
               {t("search.filt.load_offers.button")}
             </ToggleFilterButton>
             <PriceFilter />
+            <DirectionFilter />
           </Group>
         </ScrollArea>
         {status === "pending" ? (

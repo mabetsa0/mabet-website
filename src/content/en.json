@@ -205,7 +205,11 @@
       },
       "direction-filter": {
         "button": "Directions",
-        "title": "Choose direction"
+        "title": "Choose direction",
+        "north": "North",
+        "south": "South",
+        "west": "west",
+        "east": "East"
       }
     },
     "filt": {

@@ -204,7 +204,11 @@
       },
       "direction-filter": {
         "button": "الإتجاهات",
-        "title": "حدد الاتجاه"
+        "title": "حدد الاتجاه",
+        "north": "شمال",
+        "south": "جنوب",
+        "west": "غرب",
+        "east": "شرق"
       }
     },
     "filt": {
