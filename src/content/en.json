@@ -213,6 +213,10 @@
       },
       "free_cancellation": {
         "button": "Free cancellation"
+      },
+      "rating-filter": {
+        "button": "Rating",
+        "title": "Select rating"
       }
     },
     "filt": {

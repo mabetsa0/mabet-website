@@ -25,10 +25,11 @@ import {
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
+import DirectionFilter from "./filters/direction-filter"
+import PriceFilter from "./filters/price-filter"
+import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
-import PriceFilter from "./filters/price-filter"
-import DirectionFilter from "./filters/direction-filter"
 
 const Results = () => {
   const t = useTranslations()
@@ -119,6 +120,7 @@ const Results = () => {
             >
               {t("search.filter.free_cancellation.button")}
             </ToggleFilterButton>
+            <RatingFilter />
           </Group>
         </ScrollArea>
         {status === "pending" ? (

@@ -212,6 +212,10 @@
       },
       "free_cancellation": {
         "button": "الغاء مجاني"
+      },
+      "rating-filter": {
+        "button": "مستوى التقييم",
+        "title": "حدد مستوى التقييم"
       }
     },
     "filt": {
