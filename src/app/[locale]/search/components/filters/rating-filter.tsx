@@ -19,7 +19,12 @@ const RatingFilter = () => {
   const [filter, set] = useQueryState("rating", parseAsArrayOf(parseAsString))
 
   return (
-    <Popover radius={"16"} shadow="md" position="bottom-start">
+    <Popover
+      transitionProps={{ duration: 200, transition: "pop" }}
+      radius={"16"}
+      shadow="md"
+      position="bottom-start"
+    >
       <Popover.Target>
         <Button
           className={filter ? "border-primary" : ""}

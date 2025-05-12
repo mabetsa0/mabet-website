@@ -10,22 +10,31 @@ import {
   Title,
 } from "@mantine/core"
 
+import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbox"
+import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
 import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
 import ToggleFilterButton from "@/components/ui/toggle-filter-button"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
-import { getRegions } from "@/services/lists"
+import {
+  getDirections,
+  getFacilities,
+  getPools,
+  getRegions,
+} from "@/services/lists"
 import { useQuery } from "@tanstack/react-query"
 import {
+  BadgePercent,
   Building2,
   CircleDollarSign,
   Map,
   Shield,
+  SignpostBig,
   TicketPercent,
+  WavesLadder,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
-import DirectionFilter from "./filters/direction-filter"
 import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
@@ -68,6 +77,41 @@ const Results = () => {
       }))
     },
   })
+  //
+  const poolsQuery = useQuery({
+    queryKey: ["pools"],
+    staleTime: Infinity,
+
+    queryFn: async () => {
+      const response = await getPools()
+      return response.data.amenities.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+  const facilitiesQuery = useQuery({
+    queryKey: ["facilities"],
+    staleTime: Infinity,
+    queryFn: async () => {
+      const response = await getFacilities()
+      return response.data.facilities.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+  const directionsQuery = useQuery({
+    queryKey: ["/location/directions"],
+    staleTime: Infinity,
+    queryFn: async () => {
+      const response = await getDirections()
+      return response.data.directions.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
 
   return (
     <section>
@@ -83,7 +127,7 @@ const Results = () => {
           ) : null}
         </Group>
         <ScrollArea w={"100%"}>
-          <Group wrap="nowrap" pb={"md"}>
+          <Group wrap="nowrap" px={"sm"} pb={"md"}>
             <UnitCodeFilter />
             <ToggleFilterButton
               filterKey="show_only_available"
@@ -113,7 +157,16 @@ const Results = () => {
               {t("search.filt.load_offers.button")}
             </ToggleFilterButton>
             <PriceFilter />
-            <DirectionFilter />
+            <FilterButtonWithRadio
+              filterKey="direction_id"
+              buttonProps={{
+                leftSection: <SignpostBig strokeWidth={1.25} />,
+                children: t("search.filter.direction-filter.button"),
+              }}
+              title={t("search.filter.direction-filter.title")}
+              data={directionsQuery.data || []}
+            />
+
             <ToggleFilterButton
               filterKey="free_cancellation"
               leftSection={<CircleDollarSign strokeWidth={1.25} />}
@@ -121,6 +174,29 @@ const Results = () => {
               {t("search.filter.free_cancellation.button")}
             </ToggleFilterButton>
             <RatingFilter />
+            <ToggleFilterButton
+              filterKey="last_hours_offer"
+              leftSection={<BadgePercent strokeWidth={1.25} />}
+            >
+              {t("search.filter.last_hours_offer-filter.button")}
+            </ToggleFilterButton>
+            <FilterButtonWithCheckbox
+              filterKey="amenities"
+              data={poolsQuery.data ? poolsQuery.data : []}
+              title={t("search.filter.pools-filter.title")}
+              buttonProps={{
+                children: t("search.filter.pools-filter.button"),
+                leftSection: <WavesLadder strokeWidth={1.25} />,
+              }}
+            />
+            <FilterButtonWithCheckbox
+              filterKey="facilities"
+              data={facilitiesQuery.data ? facilitiesQuery.data : []}
+              title={t("search.filter.facilities-filter.title")}
+              buttonProps={{
+                children: t("search.filter.facilities-filter.button"),
+              }}
+            />
           </Group>
         </ScrollArea>
         {status === "pending" ? (

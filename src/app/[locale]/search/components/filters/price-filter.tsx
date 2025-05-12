@@ -30,7 +30,12 @@ const PriceFilter = () => {
     })
   }
   return (
-    <Popover radius={"16"} shadow="md" position="bottom-start">
+    <Popover
+      transitionProps={{ duration: 200, transition: "pop" }}
+      radius={"16"}
+      shadow="md"
+      position="bottom-start"
+    >
       <Popover.Target>
         <Button
           className={price.priceFrom && price.priceTo ? "border-primary" : ""}

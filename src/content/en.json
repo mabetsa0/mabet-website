@@ -217,6 +217,17 @@
       "rating-filter": {
         "button": "Rating",
         "title": "Select rating"
+      },
+      "last_hours_offer-filter": {
+        "button": "Last hours offer"
+      },
+      "pools-filter": {
+        "title": "Determine the type of swimming pools",
+        "button": "Pools"
+      },
+      "facilities-filter": {
+        "title": "Choose from the available facilities",
+        "button": "Available facilities"
       }
     },
     "filt": {

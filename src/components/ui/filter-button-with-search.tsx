@@ -58,6 +58,7 @@ export function FilterButtonWithSearch(props: Props) {
   return (
     <>
       <Combobox
+        transitionProps={{ duration: 200, transition: "pop" }}
         store={combobox}
         width={350}
         shadow="md"

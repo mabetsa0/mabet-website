@@ -21,14 +21,19 @@ const UnitCodeFilter = () => {
   })
 
   const [unit_code, setUnitCode] = useQueryState(
-    "unit_code",
+    "unit_query",
     parseAsString.withDefault("")
   )
   const onSubmit = () => {
     setUnitCode(field.getValue())
   }
   return (
-    <Popover radius={"16"} shadow="md" position="bottom-start">
+    <Popover
+      transitionProps={{ duration: 200, transition: "pop" }}
+      radius={"16"}
+      shadow="md"
+      position="bottom-start"
+    >
       <Popover.Target>
         <Button
           className={unit_code && "border-primary"}

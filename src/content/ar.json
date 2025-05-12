@@ -216,6 +216,17 @@
       "rating-filter": {
         "button": "مستوى التقييم",
         "title": "حدد مستوى التقييم"
+      },
+      "last_hours_offer-filter": {
+        "button": "عرض الساعات الاخيرة"
+      },
+      "pools-filter": {
+        "title": "حدد نوع المسابح",
+        "button": "المسابح"
+      },
+      "facilities-filter": {
+        "title": "اختر من المرافق المتوفرة",
+        "button": "المرافق المتوفرة"
       }
     },
     "filt": {
