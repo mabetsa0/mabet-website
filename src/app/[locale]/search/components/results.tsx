@@ -15,7 +15,13 @@ import ToggleFilterButton from "@/components/ui/toggle-filter-button"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
 import { getRegions } from "@/services/lists"
 import { useQuery } from "@tanstack/react-query"
-import { Building2, Map, Shield, TicketPercent } from "lucide-react"
+import {
+  Building2,
+  CircleDollarSign,
+  Map,
+  Shield,
+  TicketPercent,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { SearchResultsResponse } from "../@types/results"
@@ -107,6 +113,12 @@ const Results = () => {
             </ToggleFilterButton>
             <PriceFilter />
             <DirectionFilter />
+            <ToggleFilterButton
+              filterKey="free_cancellation"
+              leftSection={<CircleDollarSign strokeWidth={1.25} />}
+            >
+              {t("search.filter.free_cancellation.button")}
+            </ToggleFilterButton>
           </Group>
         </ScrollArea>
         {status === "pending" ? (

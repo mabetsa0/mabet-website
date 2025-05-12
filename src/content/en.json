@@ -210,6 +210,9 @@
         "south": "South",
         "west": "west",
         "east": "East"
+      },
+      "free_cancellation": {
+        "button": "Free cancellation"
       }
     },
     "filt": {

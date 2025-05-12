@@ -209,6 +209,9 @@
         "south": "جنوب",
         "west": "غرب",
         "east": "شرق"
+      },
+      "free_cancellation": {
+        "button": "الغاء مجاني"
       }
     },
     "filt": {
