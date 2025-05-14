@@ -133,7 +133,12 @@
     "select-region": "حدد اسم الحي/الأحياء",
     "for-families": "مخصص للعائلات",
     "for-singles": "مخصص للأفراد",
-    "for-both": "للافراد والعائلات"
+    "for-both": "للافراد والعائلات",
+    "defult": "افتراضي",
+    "mostly_viewed": "الأكتر مشاهدة",
+    "default": "افتراضي",
+    "highest_price": "الأعلى سعرا",
+    "lowest_price": "الأقل سعرا"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -243,6 +248,9 @@
       "unit_for-filter": {
         "button": "الفئة المستهدفة",
         "title": "اختر الفئة المستهدفة"
+      },
+      "result_type-filter": {
+        "button": "الترتيب حسب"
       }
     },
     "filt": {

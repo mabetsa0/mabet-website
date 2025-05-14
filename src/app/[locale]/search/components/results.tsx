@@ -220,6 +220,31 @@ const Results = () => {
                 },
               ]}
             />
+            <FilterButtonWithRadio
+              filterKey="result_type"
+              buttonProps={{
+                children: t("search.filter.result_type-filter.button"),
+              }}
+              title={t("search.filter.result_type-filter.button")}
+              data={[
+                {
+                  label: t("general.default"),
+                  value: "default",
+                },
+                {
+                  label: t("general.mostly_viewed"),
+                  value: "mostly_viewed",
+                },
+                {
+                  label: t("general.lowest_price"),
+                  value: "lowest_price",
+                },
+                {
+                  label: t("general.highest_price"),
+                  value: "highest_price",
+                },
+              ]}
+            />
           </Group>
         </ScrollArea>
         {status === "pending" ? (

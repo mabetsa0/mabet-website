@@ -42,7 +42,12 @@
     "select-region": "Select region",
     "for-families": "For families",
     "for-singles": "For individuals",
-    "for-both": "For individuals and families"
+    "for-both": "For individuals and families",
+    "defult": "Default",
+    "mostly_viewed": "Most viewed",
+    "default": "Default",
+    "highest_price": "Highest price",
+    "lowest_price": "Lowest price"
   },
   "home": {
     "special-units": {
@@ -244,6 +249,9 @@
       "unit_for-filter": {
         "button": "Targeted category",
         "title": "Choose targeted category"
+      },
+      "result_type-filter": {
+        "button": "Ordering by"
       }
     },
     "filt": {
