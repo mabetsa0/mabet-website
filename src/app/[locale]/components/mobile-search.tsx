@@ -314,81 +314,76 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
   })
   return (
     <>
-      <div className="flex justify-center py-1.5 px-1 md:hidden relative">
-        <Drawer.Root onClose={() => form.reset()}>
-          <Drawer.Trigger>{children}</Drawer.Trigger>
-          <Drawer.Portal>
-            <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
-            <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
-              <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
-                <div className="flex justify-center pt-0.5">
-                  <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
-                </div>
-                <Drawer.Title className="font-bold text-xl">
-                  <Group gap={"xs"} align="center">
-                    {step == 0 ? (
-                      <Drawer.Close>
-                        <Burger component={"span"} opened size={"md"} />
-                      </Drawer.Close>
-                    ) : (
-                      <div className="py-1">
-                        <ActionIcon
-                          onClick={() => {
-                            form.setFieldValue("step", form.values.step - 1)
-                          }}
-                          variant="white"
-                          size={"lg"}
-                        >
-                          <ChevronRight className="text-primary ltr:rotate-180" />
-                        </ActionIcon>
-                      </div>
-                    )}
-
-                    {step == 0 ? t("select-city") : null}
-                    {step == 1 ? t("select-unitType") : null}
-                    {step == 2 ? t("select-select-search-date") : null}
-                  </Group>
-                </Drawer.Title>
-                <Divider />
-                <AutoHeight>
-                  <FormProvider form={form}>
-                    <form onSubmit={onSubmit}>
-                      <SwitchTransition>
-                        <CSSTransition
-                          key={step}
-                          nodeRef={nodeRef}
-                          addEndListener={(done: () => void) => {
-                            nodeRef.current?.addEventListener(
-                              "transitionend",
-                              done,
-                              false
-                            )
-                          }}
-                          timeout={300}
-                          classNames="fade-slide"
-                        >
-                          <div ref={nodeRef}>
-                            {step === 0 && <SelectCity cities={cities} />}
-                            {step === 1 && (
-                              <SelectUnitType unitTypes={unitTypes} />
-                            )}
-                            {step === 2 && (
-                              <SelectDate
-                                cities={cities}
-                                unitTypes={unitTypes}
-                              />
-                            )}
-                          </div>
-                        </CSSTransition>
-                      </SwitchTransition>
-                    </form>
-                  </FormProvider>
-                </AutoHeight>
+      <Drawer.Root onClose={() => form.reset()}>
+        <Drawer.Trigger className="w-full">{children}</Drawer.Trigger>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
+          <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
+            <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+              <div className="flex justify-center pt-0.5">
+                <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
               </div>
-            </Drawer.Content>
-          </Drawer.Portal>
-        </Drawer.Root>
-      </div>
+              <Drawer.Title className="font-bold text-xl">
+                <Group gap={"xs"} align="center">
+                  {step == 0 ? (
+                    <Drawer.Close>
+                      <Burger component={"span"} opened size={"md"} />
+                    </Drawer.Close>
+                  ) : (
+                    <div className="py-1">
+                      <ActionIcon
+                        onClick={() => {
+                          form.setFieldValue("step", form.values.step - 1)
+                        }}
+                        variant="white"
+                        size={"lg"}
+                      >
+                        <ChevronRight className="text-primary ltr:rotate-180" />
+                      </ActionIcon>
+                    </div>
+                  )}
+
+                  {step == 0 ? t("select-city") : null}
+                  {step == 1 ? t("select-unitType") : null}
+                  {step == 2 ? t("select-select-search-date") : null}
+                </Group>
+              </Drawer.Title>
+              <Divider />
+              <AutoHeight>
+                <FormProvider form={form}>
+                  <form onSubmit={onSubmit}>
+                    <SwitchTransition>
+                      <CSSTransition
+                        key={step}
+                        nodeRef={nodeRef}
+                        addEndListener={(done: () => void) => {
+                          nodeRef.current?.addEventListener(
+                            "transitionend",
+                            done,
+                            false
+                          )
+                        }}
+                        timeout={300}
+                        classNames="fade-slide"
+                      >
+                        <div ref={nodeRef}>
+                          {step === 0 && <SelectCity cities={cities} />}
+                          {step === 1 && (
+                            <SelectUnitType unitTypes={unitTypes} />
+                          )}
+                          {step === 2 && (
+                            <SelectDate cities={cities} unitTypes={unitTypes} />
+                          )}
+                        </div>
+                      </CSSTransition>
+                    </SwitchTransition>
+                  </form>
+                </FormProvider>
+              </AutoHeight>
+            </div>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
     </>
   )
 }

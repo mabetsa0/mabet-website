@@ -41,17 +41,21 @@ export default async function Hero() {
         </div>
       </section>
       <Suspense>
-        <MobileSearch>
-          <Button
-            component="div"
-            leftSection={<Search className="text-primary" strokeWidth={1.25} />}
-            size="lg"
-            variant="outline"
-            className="text-[12px] max-w-[85vw] border-[1.5] [box-shadow:_0px_16px_40px_0px_#0000001A]  font-normal rounded-[50px] h-[76px] text-[#767676]"
-          >
-            {t("general.mobile-search")}
-          </Button>
-        </MobileSearch>
+        <div className="flex justify-center py-1.5 px-1 md:hidden relative">
+          <MobileSearch>
+            <Button
+              component="div"
+              leftSection={
+                <Search className="text-primary" strokeWidth={1.25} />
+              }
+              size="lg"
+              variant="outline"
+              className="text-[12px] max-w-[85vw] border-[1.5] [box-shadow:_0px_16px_40px_0px_#0000001A]  font-normal rounded-[50px] h-[76px] text-[#767676]"
+            >
+              {t("general.mobile-search")}
+            </Button>
+          </MobileSearch>
+        </div>
       </Suspense>
     </>
   )
