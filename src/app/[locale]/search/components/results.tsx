@@ -199,6 +199,27 @@ const Results = () => {
               }}
             />
             <CountFilter />
+            <FilterButtonWithRadio
+              filterKey="unit_for"
+              buttonProps={{
+                children: t("search.filter.unit_for-filter.button"),
+              }}
+              title={t("search.filter.unit_for-filter.title")}
+              data={[
+                {
+                  label: t("general.for-families"),
+                  value: "family",
+                },
+                {
+                  label: t("general.for-singles"),
+                  value: "single",
+                },
+                {
+                  label: t("general.for-both"),
+                  value: "both",
+                },
+              ]}
+            />
           </Group>
         </ScrollArea>
         {status === "pending" ? (

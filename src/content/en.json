@@ -39,7 +39,10 @@
     "in": "in",
     "unit": "Units",
     "region": "Region",
-    "select-region": "Select region"
+    "select-region": "Select region",
+    "for-families": "For families",
+    "for-singles": "For individuals",
+    "for-both": "For individuals and families"
   },
   "home": {
     "special-units": {
@@ -237,6 +240,10 @@
         "single-beds-count": "Number of single beds",
         "applay": "Apply",
         "delete": "Delete"
+      },
+      "unit_for-filter": {
+        "button": "Targeted category",
+        "title": "Choose targeted category"
       }
     },
     "filt": {

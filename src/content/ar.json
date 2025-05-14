@@ -130,7 +130,10 @@
     "in": "في",
     "unit": "وحدة",
     "region": "الحي",
-    "select-region": "حدد اسم الحي/الأحياء"
+    "select-region": "حدد اسم الحي/الأحياء",
+    "for-families": "مخصص للعائلات",
+    "for-singles": "مخصص للأفراد",
+    "for-both": "للافراد والعائلات"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -236,6 +239,10 @@
         "single-beds-count": "عدد الاسرة المفردة",
         "applay": "تطبيق",
         "delete": "حذف"
+      },
+      "unit_for-filter": {
+        "button": "الفئة المستهدفة",
+        "title": "اختر الفئة المستهدفة"
       }
     },
     "filt": {
