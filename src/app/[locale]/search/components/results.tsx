@@ -2,7 +2,7 @@
 import UnitCard from "@/components/common/unit-card"
 import Mabet from "@/services"
 import {
-  Box,
+  ActionIcon,
   Button,
   Group,
   Loader,
@@ -25,27 +25,29 @@ import {
   getRegions,
 } from "@/services/lists"
 import { useQuery } from "@tanstack/react-query"
+import dayjs from "dayjs"
 import {
   BadgePercent,
   Building2,
+  ChevronRight,
   CircleDollarSign,
   Map,
   Shield,
   SignpostBig,
+  SlidersHorizontal,
   TicketPercent,
   WavesLadder,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import MobileSearch from "../../components/mobile-search"
 import { SearchResultsResponse } from "../@types/results"
 import CountFilter from "./filters/count-filter"
 import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
-import { Suspense } from "react"
-import MobileSearch from "../../components/mobile-search"
-import dayjs from "dayjs"
 
 const Results = () => {
   const t = useTranslations()
@@ -122,9 +124,16 @@ const Results = () => {
 
   return (
     <>
-      <Box className="relative" hiddenFrom="md">
+      <Group wrap="nowrap" className="relative px-1" hiddenFrom="md">
+        <ActionIcon size={"lg"} color="dark" variant="subtle">
+          <ChevronRight
+            size={28}
+            strokeWidth={1.4}
+            className="ltr:rotate-180"
+          />
+        </ActionIcon>
         <Suspense>
-          <div className="w-full px-1">
+          <div className="w-full ">
             <MobileSearch>
               <Button
                 component="div"
@@ -132,12 +141,12 @@ const Results = () => {
                 w={"100%"}
                 color="'dark"
                 variant="outline"
-                className="text-[12px] w-full border-[1.5px] border-[#F3F3F3]  font-normal rounded-[50px] h-[80px] "
+                className="text-[12px] w-full border-[1.5px] border-[#F3F3F3]  font-normal rounded-[50px] h-[64px] "
                 classNames={{
                   inner: " justify-start",
                 }}
               >
-                <Stack justify="start" align="start" gap={"xs"}>
+                <Stack justify="start" align="start" gap={"4"}>
                   <Text c={"dark"} fw={700} fz={14}>
                     {searchedUnit}
                   </Text>
@@ -157,7 +166,15 @@ const Results = () => {
             </MobileSearch>
           </div>
         </Suspense>
-      </Box>
+        <ActionIcon
+          size={"lg"}
+          className="border-[#F3F3F3]"
+          color="dark"
+          variant="outline"
+        >
+          <SlidersHorizontal size={24} strokeWidth={1.4} />
+        </ActionIcon>
+      </Group>
       <section>
         <div className="container">
           <Group mb={{ base: "md", md: "xl" }} className=" gap-y-[2px]">
