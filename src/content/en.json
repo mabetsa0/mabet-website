@@ -228,6 +228,15 @@
       "facilities-filter": {
         "title": "Choose from the available facilities",
         "button": "Available facilities"
+      },
+      "count-filter": {
+        "title": "Select the number of rooms",
+        "button": "Number of rooms",
+        "room-count": "Number of bedrooms",
+        "beds-count": "Number of master beds",
+        "single-beds-count": "Number of single beds",
+        "applay": "Apply",
+        "delete": "Delete"
       }
     },
     "filt": {

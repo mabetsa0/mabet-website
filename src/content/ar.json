@@ -227,6 +227,15 @@
       "facilities-filter": {
         "title": "اختر من المرافق المتوفرة",
         "button": "المرافق المتوفرة"
+      },
+      "count-filter": {
+        "title": "حدد عدد الغرف",
+        "button": "عدد الغرف",
+        "room-count": "عدد غرف النوم",
+        "beds-count": "عدد الاسرة المزدوجة",
+        "single-beds-count": "عدد الاسرة المفردة",
+        "applay": "تطبيق",
+        "delete": "حذف"
       }
     },
     "filt": {
