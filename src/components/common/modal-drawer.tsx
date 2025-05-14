@@ -24,8 +24,8 @@ const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
         shouldScaleBackground
       >
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className=" max-h-[85vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
+          <Drawer.Overlay className="fixed z-overlay inset-0 bg-black/40" />
+          <Drawer.Content className=" z-max  max-h-[85vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
             <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
               <div className="flex justify-center pt-0.5">
                 <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
