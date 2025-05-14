@@ -48,6 +48,7 @@ import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
+import { useRouter } from "@/lib/i18n/navigation"
 
 const Results = () => {
   const t = useTranslations()
@@ -122,10 +123,15 @@ const Results = () => {
     },
   })
 
+  const Router = useRouter()
+  const back = () => {
+    Router.back()
+  }
+
   return (
     <>
       <Group wrap="nowrap" className="relative px-1" hiddenFrom="md">
-        <ActionIcon size={"lg"} color="dark" variant="subtle">
+        <ActionIcon onClick={back} size={"lg"} color="dark" variant="subtle">
           <ChevronRight
             size={28}
             strokeWidth={1.4}

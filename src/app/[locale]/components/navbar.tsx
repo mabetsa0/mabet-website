@@ -9,11 +9,14 @@ import { useDisclosure } from "@mantine/hooks"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { Link } from "@/lib/i18n/navigation"
+import { usePathname } from "next/navigation"
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure()
 
   const t = useTranslations("header")
+  const pathname = usePathname()
+  if (pathname.includes("search")) return <>{children}</>
   return (
     <AppShell
       header={{ height: { base: 65, md: 74 } }}
