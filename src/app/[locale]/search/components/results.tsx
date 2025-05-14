@@ -127,7 +127,7 @@ const Results = () => {
             </Text>
           ) : null}
         </Group>
-        <ScrollArea w={"100%"}>
+        <ScrollArea visibleFrom="md" w={"100%"}>
           <Group wrap="nowrap" px={"sm"} pb={"md"}>
             <UnitCodeFilter />
             <ToggleFilterButton

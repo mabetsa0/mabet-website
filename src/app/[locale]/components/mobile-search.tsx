@@ -266,7 +266,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
     </Stack>
   )
 }
-const MobileSearch = () => {
+const MobileSearch = ({ children }: { children: React.ReactNode }) => {
   const cities = useCities()
   const unitTypes = useUnitTypes()
   const t = useTranslations("general")
@@ -314,24 +314,12 @@ const MobileSearch = () => {
   })
   return (
     <>
-      <div className="flex justify-center py-1.5 px-1 md:hidden">
+      <div className="flex justify-center py-1.5 px-1 md:hidden relative">
         <Drawer.Root onClose={() => form.reset()}>
-          <Drawer.Trigger>
-            <Button
-              component="div"
-              leftSection={
-                <Search className="text-primary" strokeWidth={1.25} />
-              }
-              size="lg"
-              variant="outline"
-              className="text-[12px] max-w-[85vw] border-[1.5] [box-shadow:_0px_16px_40px_0px_#0000001A]  font-normal rounded-[50px] h-[76px] text-[#767676]"
-            >
-              {t("mobile-search")}
-            </Button>
-          </Drawer.Trigger>
+          <Drawer.Trigger>{children}</Drawer.Trigger>
           <Drawer.Portal>
-            <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-            <Drawer.Content className=" h-fit fixed bottom-0 left-0 right-0 outline-none">
+            <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
+            <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
               <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
                 <div className="flex justify-center pt-0.5">
                   <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
