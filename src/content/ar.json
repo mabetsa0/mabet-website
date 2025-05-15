@@ -138,7 +138,8 @@
     "mostly_viewed": "الأكتر مشاهدة",
     "default": "افتراضي",
     "highest_price": "الأعلى سعرا",
-    "lowest_price": "الأقل سعرا"
+    "lowest_price": "الأقل سعرا",
+    "region-search-placeholder": "ابحث عن اسم الحي"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

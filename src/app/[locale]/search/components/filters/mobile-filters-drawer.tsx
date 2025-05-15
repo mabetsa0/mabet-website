@@ -4,7 +4,12 @@ import "@/app/transition-css.css"
 import { RiyalIcon } from "@/components/icons"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
-import { getRegions } from "@/services/lists"
+import {
+  getDirections,
+  getFacilities,
+  getPools,
+  getRegions,
+} from "@/services/lists"
 import {
   ActionIcon,
   Burger,
@@ -15,6 +20,7 @@ import {
   Radio,
   RangeSlider,
   ScrollArea,
+  Select,
   SimpleGrid,
   Space,
   Stack,
@@ -34,6 +40,7 @@ const MobileFilterDrawer = () => {
   const t = useTranslations()
   const cities = useCities()
   const unitTypes = useUnitTypes()
+  const searchParams = useSearchParams()
 
   const form = useForm({
     mode: "uncontrolled",
@@ -43,10 +50,11 @@ const MobileFilterDrawer = () => {
       result_type: "default",
       toggle_filters: [],
       rating: "",
+      direction_id: "",
+      city_id: "",
+      region_id: "",
     },
   })
-
-  const searchParams = useSearchParams()
 
   // getting regions
   const cityId = searchParams.get("city_id")
@@ -57,6 +65,41 @@ const MobileFilterDrawer = () => {
     queryFn: async () => {
       const response = await getRegions(cityId!)
       return response.data.districts.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+
+  const poolsQuery = useQuery({
+    queryKey: ["pools"],
+    staleTime: Infinity,
+
+    queryFn: async () => {
+      const response = await getPools()
+      return response.data.amenities.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+  const facilitiesQuery = useQuery({
+    queryKey: ["facilities"],
+    staleTime: Infinity,
+    queryFn: async () => {
+      const response = await getFacilities()
+      return response.data.facilities.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+  const directionsQuery = useQuery({
+    queryKey: ["/location/directions"],
+    staleTime: Infinity,
+    queryFn: async () => {
+      const response = await getDirections()
+      return response.data.directions.map((ele) => ({
         label: ele.name,
         value: ele.id + "",
       }))
@@ -318,7 +361,7 @@ const MobileFilterDrawer = () => {
                 />
                 <SelectDropdownSearch
                   searchLabel={t("general.select-region")}
-                  searchPlaceholder={t("general.city-search-placeholder")}
+                  searchPlaceholder={t("general.region-search-placeholder")}
                   size="lg"
                   radius={"xl"}
                   classNames={{
@@ -330,8 +373,24 @@ const MobileFilterDrawer = () => {
                   key={form.key("region_id")}
                   {...form.getInputProps("region_id")}
                 />
+                <Select
+                  rightSection={<div></div>}
+                  size="lg"
+                  radius={"xl"}
+                  label={t("search.filter.direction-filter.title")}
+                  placeholder={t("search.filter.direction-filter.button")}
+                  data={directionsQuery.data || []}
+                  classNames={{
+                    label: "mb-0.5 font-normal",
+                  }}
+                  key={form.key("direction_id")}
+                  {...form.getInputProps("direction_id")}
+                />
 
                 {/* end region filter */}
+                <Divider />
+
+                {/*  */}
               </Stack>
             </ScrollArea>
           </div>
