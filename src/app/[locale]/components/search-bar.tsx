@@ -27,12 +27,12 @@ import DateRangePicker from "./date-range-picker"
 // Definition of form values is required
 type FormValues = {
   city_id: string
-  unit_type: string
+  unit_type_id: string
   dates: [Date | null, Date | null]
 }
 type TransformedValues = (values: FormValues) => {
   city_id: string
-  unit_type: string
+  unit_type_id: string
   from: string
   to: string
 }
@@ -52,7 +52,7 @@ const SearchBar = () => {
     mode: "controlled",
     initialValues: {
       city_id: searchparams.get("city_id") || "",
-      unit_type: searchparams.get("unit_type") || "",
+      unit_type_id: searchparams.get("unit_type_id") || "",
       dates: [
         searchparams.get("from")
           ? new Date(searchparams.get("from") as string)
@@ -66,7 +66,7 @@ const SearchBar = () => {
     transformValues(values) {
       return {
         city_id: values.city_id == "0" ? "" : values.city_id,
-        unit_type: values.unit_type,
+        unit_type_id: values.unit_type_id,
         from: values.dates[0]
           ? dayjs(values.dates[0]).format("YYYY-MM-DD")
           : dayjs().format("YYYY-MM-DD"),
@@ -152,13 +152,13 @@ const SearchBar = () => {
                           <Group
                             className={cn(
                               "h-[50px] items-center text-gray-600 text-lg !cursor-pointer",
-                              form.values.unit_type && "text-gray-700"
+                              form.values.unit_type_id && "text-gray-700"
                             )}
                           >
-                            {form.values.unit_type
+                            {form.values.unit_type_id
                               ? unitTypes.find(
                                   (element) =>
-                                    element.id + "" == form.values.unit_type
+                                    element.id + "" == form.values.unit_type_id
                                 )!.name
                               : t("select")}
                           </Group>
@@ -166,8 +166,8 @@ const SearchBar = () => {
                       </Popover.Target>
                       <Popover.Dropdown>
                         <Radio.Group
-                          key={form.key("unit_type")}
-                          {...form.getInputProps("unit_type")}
+                          key={form.key("unit_type_id")}
+                          {...form.getInputProps("unit_type_id")}
                         >
                           <SimpleGrid cols={2}>
                             {unitTypes.map((type) => {

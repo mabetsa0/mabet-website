@@ -40,13 +40,13 @@ dayjs.extend(relativeTime)
 // Definition of form values is required
 type FormValues = {
   city_id: string
-  unit_type: string
+  unit_type_id: string
   dates: [Date | null, Date | null]
   step: number
 }
 type TransformedValues = (values: FormValues) => {
   city_id: string
-  unit_type: string
+  unit_type_id: string
   from: string
   to: string
 }
@@ -129,8 +129,8 @@ const SelectUnitType = ({ unitTypes }: { unitTypes: UnitType[] }) => {
     <Stack>
       <div className="p-lg">
         <Radio.Group
-          key={form.key("unit_type")}
-          {...form.getInputProps("unit_type")}
+          key={form.key("unit_type_id")}
+          {...form.getInputProps("unit_type_id")}
         >
           <SimpleGrid cols={2}>
             {unitTypes.map((type) => {
@@ -191,7 +191,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
     props.cities.find((ele) => String(ele.id) == form.values.city_id)?.name ||
     t("general.all-cities")
   const selectedType =
-    props.unitTypes.find((ele) => String(ele.id) == form.values.unit_type)
+    props.unitTypes.find((ele) => String(ele.id) == form.values.unit_type_id)
       ?.name || ""
 
   const [from, to] = form.values.dates
@@ -275,7 +275,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
     mode: "controlled",
     initialValues: {
       city_id: searchparams.get("city_id") || "0",
-      unit_type: searchparams.get("unit_type") || "",
+      unit_type_id: searchparams.get("unit_type_id") || "",
       dates: [
         searchparams.get("from")
           ? new Date(searchparams.get("from") as string)
@@ -290,7 +290,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
     transformValues(values) {
       return {
         city_id: values.city_id == "0" ? "" : values.city_id,
-        unit_type: values.unit_type,
+        unit_type_id: values.unit_type_id,
         from: values.dates[0]
           ? dayjs(values.dates[0]).format("YYYY-MM-DD")
           : dayjs().format("YYYY-MM-DD"),
