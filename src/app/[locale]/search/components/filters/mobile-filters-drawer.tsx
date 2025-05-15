@@ -2,6 +2,7 @@
 "use client"
 import "@/app/transition-css.css"
 import { RiyalIcon } from "@/components/icons"
+import { CustomNumberInput } from "@/components/ui/number-input"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
 import {
@@ -54,6 +55,11 @@ const MobileFilterDrawer = () => {
       city_id: "",
       region_id: "",
       unit_type_id: "",
+      rooms_count: 0,
+      single_beds_count: 0,
+      master_beds_count: 0,
+      amenities: [],
+      facilities: [],
     },
   })
 
@@ -146,12 +152,12 @@ const MobileFilterDrawer = () => {
                 <Space />
                 {/* unit code filter */}
                 <TextInput
+                  size="lg"
                   classNames={{
                     label: "mb-sm text-lg font-bold",
                   }}
                   label={t("search.filter.unit-code-filter.title")}
                   radius={"xl"}
-                  size="md"
                   leftSection={
                     <Search className="text-primary" strokeWidth={1.25} />
                   }
@@ -390,7 +396,7 @@ const MobileFilterDrawer = () => {
 
                 {/* end region filter */}
                 <Divider />
-
+                {/* unit type filter */}
                 <Stack gap={"lg"} p={"xs"}>
                   <Text className="text-lg font-bold">
                     {t("search.filter.result_type-filter.button")}
@@ -413,8 +419,138 @@ const MobileFilterDrawer = () => {
                     </Stack>
                   </Radio.Group>
                 </Stack>
+                {/* end unit type filter */}
 
-                {/*  */}
+                <Divider />
+                {/* start pools filter */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.unit_for-filter.title")}
+                  </Text>
+                  <Checkbox.Group
+                    key={form.key("unit_for")}
+                    {...form.getInputProps("unit_for")}
+                  >
+                    <Stack>
+                      {[
+                        {
+                          label: t("general.for-families"),
+                          value: "family",
+                        },
+                        {
+                          label: t("general.for-singles"),
+                          value: "single",
+                        },
+                        {
+                          label: t("general.for-both"),
+                          value: "both",
+                        },
+                      ].map((element, index) => {
+                        return (
+                          <Checkbox
+                            radius={"sm"}
+                            size="lg"
+                            key={index}
+                            value={element.value}
+                            label={element.label}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Checkbox.Group>
+                </Stack>
+                {/* end unit for filter */}
+                <Divider />
+                {/* end pools filter */}
+                {/* rooms count filter */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.count-filter.title")}
+                  </Text>
+                  <Stack gap={"lg"}>
+                    <CustomNumberInput
+                      classNames={{
+                        input: "text-center",
+                        label: "mb-0.5 font-normal",
+                      }}
+                      label={t("search.filter.count-filter.room-count")}
+                      key={form.key("rooms_count")}
+                      {...form.getInputProps("rooms_count")}
+                    />
+                    <CustomNumberInput
+                      classNames={{
+                        input: "text-center",
+                        label: "mb-0.5 font-normal",
+                      }}
+                      key={form.key("master_beds_count")}
+                      {...form.getInputProps("master_beds_count")}
+                      label={t("search.filter.count-filter.beds-count")}
+                    />
+                    <CustomNumberInput
+                      classNames={{
+                        input: "text-center",
+                        label: "mb-0.5 font-normal",
+                      }}
+                      key={form.key("single_beds_count")}
+                      {...form.getInputProps("single_beds_count")}
+                      label={t("search.filter.count-filter.single-beds-count")}
+                    />
+                  </Stack>
+                </Stack>
+                {/*end rooms count filter  */}
+                <Divider />
+                {/* start pools filter */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.pools-filter.title")}
+                  </Text>
+                  <Checkbox.Group
+                    key={form.key("amenities")}
+                    {...form.getInputProps("amenities")}
+                  >
+                    <Stack>
+                      {poolsQuery.data?.map((element, index) => {
+                        return (
+                          <Checkbox
+                            radius={"sm"}
+                            size="lg"
+                            key={index}
+                            value={element.value}
+                            label={element.label}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Checkbox.Group>
+                </Stack>
+                {/* end pools filter */}
+                <Divider />
+
+                {/* facilities filter */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.facilities-filter.title")}
+                  </Text>
+                  <Checkbox.Group
+                    key={form.key("facilities")}
+                    {...form.getInputProps("facilities")}
+                  >
+                    <Stack>
+                      {facilitiesQuery.data?.map((element, index) => {
+                        return (
+                          <Checkbox
+                            radius={"sm"}
+                            size="lg"
+                            key={index}
+                            value={element.value}
+                            label={element.label}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Checkbox.Group>
+                </Stack>
+                {/* end facilities filter */}
               </Stack>
             </ScrollArea>
           </div>
