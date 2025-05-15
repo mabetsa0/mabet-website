@@ -5,7 +5,7 @@ import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core"
 import { logo } from "@/assets"
 import UserButton from "@/components/common/auth/user-button"
 import LanguageSwitcher from "@/components/common/lang-switch"
-import { useDisclosure } from "@mantine/hooks"
+import { useDisclosure, useMediaQuery } from "@mantine/hooks"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { Link } from "@/lib/i18n/navigation"
@@ -16,7 +16,10 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   const t = useTranslations("header")
   const pathname = usePathname()
-  if (pathname.includes("search")) return <>{children}</>
+  const matches = useMediaQuery("(max-width: 62em)", true, {
+    getInitialValueInEffect: false,
+  })
+  if (pathname.includes("search") && matches) return <>{children}</>
   return (
     <AppShell
       header={{ height: { base: 65, md: 74 } }}
