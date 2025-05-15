@@ -1,0 +1,344 @@
+/* eslint-disable @next/next/no-img-element */
+"use client"
+import "@/app/transition-css.css"
+import { RiyalIcon } from "@/components/icons"
+import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { getRegions } from "@/services/lists"
+import {
+  ActionIcon,
+  Burger,
+  Checkbox,
+  Divider,
+  Group,
+  NumberFormatter,
+  Radio,
+  RangeSlider,
+  ScrollArea,
+  SimpleGrid,
+  Space,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core"
+import { useForm } from "@mantine/form"
+import { useForceUpdate } from "@mantine/hooks"
+import { useQuery } from "@tanstack/react-query"
+import "dayjs/locale/ar"
+import { Search, SlidersHorizontal, Star } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
+import { Drawer } from "vaul"
+
+const MobileFilterDrawer = () => {
+  const t = useTranslations()
+  const cities = useCities()
+  const unitTypes = useUnitTypes()
+
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      unit_query: "",
+      price: [50, 6000],
+      result_type: "default",
+      toggle_filters: [],
+      rating: "",
+    },
+  })
+
+  const searchParams = useSearchParams()
+
+  // getting regions
+  const cityId = searchParams.get("city_id")
+  const regionsData = useQuery({
+    queryKey: ["region", cityId],
+    staleTime: Infinity,
+    enabled: !!cityId,
+    queryFn: async () => {
+      const response = await getRegions(cityId!)
+      return response.data.districts.map((ele) => ({
+        label: ele.name,
+        value: ele.id + "",
+      }))
+    },
+  })
+
+  const forceUpdate = useForceUpdate()
+  return (
+    <Drawer.Root>
+      <Drawer.Trigger>
+        {" "}
+        <ActionIcon
+          component="span"
+          size={"lg"}
+          className="border-[#F3F3F3]"
+          color="dark"
+          variant="outline"
+        >
+          <SlidersHorizontal size={24} strokeWidth={1.4} />
+        </ActionIcon>
+      </Drawer.Trigger>
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
+        <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
+          <div className="   overflow-hidden rounded-t-lg bg-white">
+            <div className="flex justify-center pt-0.5">
+              <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
+            </div>
+            <Drawer.Title className="font-bold text-xl px-1">
+              <Group wrap="nowrap" gap={"xs"} align="center">
+                <Drawer.Close>
+                  <Burger component={"span"} opened size={"sm"} />
+                </Drawer.Close>
+                <span className="w-full block text-center">
+                  {t("search.filter.mobile-title")}
+                </span>
+                <div className="w-2"></div>
+              </Group>
+            </Drawer.Title>
+            <Divider />
+            <ScrollArea h={"70vh"} className="px-1 pb-1">
+              <Stack gap={"lg"}>
+                <Space />
+                {/* unit code filter */}
+                <TextInput
+                  classNames={{
+                    label: "mb-sm text-lg font-bold",
+                  }}
+                  label={t("search.filter.unit-code-filter.title")}
+                  radius={"xl"}
+                  size="md"
+                  leftSection={
+                    <Search className="text-primary" strokeWidth={1.25} />
+                  }
+                  placeholder={t("search.filter.unit-code-filter.placeholder")}
+                  key={form.key("unit_query")}
+                  {...form.getInputProps("unit_query")}
+                />
+                <Divider />
+                {/* end unit code filter */}
+
+                {/* price filter */}
+                <Stack gap={"lg"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.price-filter.title")}
+                  </Text>
+                  <RangeSlider
+                    min={50}
+                    max={6000}
+                    step={10}
+                    onChangeEnd={() => forceUpdate()}
+                    key={form.key("price")}
+                    {...form.getInputProps("price")}
+                  />
+                  <Group wrap="nowrap" className="text-[#767676]">
+                    <div className="w-full rounded-4xl border-[1.5px] border-[#F3F3F3] p-1">
+                      {t("search.filter.price-filter.from")}{" "}
+                      <NumberFormatter
+                        value={form.getValues().price[0]}
+                        thousandSeparator
+                      />{" "}
+                      <RiyalIcon />
+                    </div>
+                    -
+                    <div className="w-full rounded-4xl border-[1.5px] border-[#F3F3F3] p-1">
+                      {t("search.filter.price-filter.to")}{" "}
+                      <NumberFormatter
+                        value={form.getValues().price[1]}
+                        thousandSeparator
+                      />{" "}
+                      <RiyalIcon />
+                    </div>
+                  </Group>
+                </Stack>
+                <Divider />
+                {/* end price filter */}
+                {/* result type filter */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.result_type-filter.button")}
+                  </Text>
+                  <Radio.Group
+                    key={form.key("result_type")}
+                    {...form.getInputProps("result_type")}
+                  >
+                    <Stack>
+                      {[
+                        {
+                          label: t("general.default"),
+                          value: "default",
+                        },
+                        {
+                          label: t("general.mostly_viewed"),
+                          value: "mostly_viewed",
+                        },
+                        {
+                          label: t("general.lowest_price"),
+                          value: "lowest_price",
+                        },
+                        {
+                          label: t("general.highest_price"),
+                          value: "highest_price",
+                        },
+                      ].map((element) => {
+                        return (
+                          <Radio
+                            key={element.value}
+                            classNames={{ label: "text-base" }}
+                            value={element.value}
+                            label={element.label}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Radio.Group>
+                </Stack>
+                {/* end result type filter */}
+                <Divider />
+                {/* toggle filters */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.toggle-filter.button")}
+                  </Text>
+                  <Checkbox.Group
+                    key={form.key("toggle_filters")}
+                    {...form.getInputProps("toggle_filters")}
+                  >
+                    <Stack>
+                      {[
+                        {
+                          label: t(
+                            "search.filter.show_only_available-filter.button"
+                          ),
+                          value: "show_only_available",
+                        },
+                        {
+                          label: t("search.filter.no_insurance.button"),
+                          value: "no_insurance",
+                        },
+                        {
+                          label: t("search.filter.load_offers.button"),
+                          value: "load_offers",
+                        },
+                        {
+                          label: t("search.filter.free_cancellation.button"),
+                          value: "free_cancellation",
+                        },
+                        {
+                          label: t(
+                            "search.filter.last_hours_offer-filter.button"
+                          ),
+                          value: "last_hours_offer",
+                        },
+                      ].map((element) => {
+                        return (
+                          <Checkbox
+                            radius={"sm"}
+                            key={element.value}
+                            classNames={{ label: "text-base" }}
+                            value={element.value}
+                            label={element.label}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Checkbox.Group>
+                </Stack>
+                {/* end toggle filters */}
+                <Divider />
+                {/* ratting filters */}
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.rating-filter.title")}
+                  </Text>
+                  <Checkbox.Group
+                    key={form.key("rating")}
+                    {...form.getInputProps("rating")}
+                  >
+                    <SimpleGrid cols={3}>
+                      {[3, 4, 5, 6, 7, 8, 9, 10].map((ele) => {
+                        return (
+                          <Checkbox.Card
+                            className="group data-checked:bg-primary duration-200"
+                            value={ele + ""}
+                            key={ele}
+                            radius="md"
+                          >
+                            <Group
+                              wrap="nowrap"
+                              align="center"
+                              justify="center"
+                              py={"xs"}
+                              gap={"4"}
+                              w={"100%"}
+                            >
+                              <Checkbox.Indicator className=" absolute inset-0 opacity-0" />
+                              <Star
+                                className="text-[#FFE234] duration-200 fill-[#FFE234] group-data-checked:text-white group-data-checked:fill-white"
+                                strokeWidth={1.25}
+                              />
+                              <Text
+                                fw={500}
+                                className="group-data-checked:text-white duration-200"
+                              >
+                                {ele === 3 ? "<" : ""} {ele}
+                              </Text>
+                            </Group>
+                          </Checkbox.Card>
+                        )
+                      })}
+                    </SimpleGrid>
+                  </Checkbox.Group>
+                </Stack>
+                {/* end ratting filter */}
+                <Divider />
+                {/* start region filter */}
+                <SelectDropdownSearch
+                  searchLabel={t("general.select-city")}
+                  searchPlaceholder={t("general.city-search-placeholder")}
+                  size="lg"
+                  radius={"xl"}
+                  classNames={{
+                    label: "mb-0.5 font-normal",
+                  }}
+                  label={t("general.select-city")}
+                  placeholder={t("general.select")}
+                  data={[
+                    {
+                      value: "0",
+                      label: t("general.all-cities"),
+                    },
+                    ...cities.map((city) => ({
+                      value: city.id + "",
+                      label: city.name,
+                    })),
+                  ]}
+                  key={form.key("city_id")}
+                  {...form.getInputProps("city_id")}
+                />
+                <SelectDropdownSearch
+                  searchLabel={t("general.select-region")}
+                  searchPlaceholder={t("general.city-search-placeholder")}
+                  size="lg"
+                  radius={"xl"}
+                  classNames={{
+                    label: "mb-0.5 font-normal",
+                  }}
+                  label={t("general.select-region")}
+                  placeholder={t("general.select")}
+                  data={regionsData.data || []}
+                  key={form.key("region_id")}
+                  {...form.getInputProps("region_id")}
+                />
+
+                {/* end region filter */}
+              </Stack>
+            </ScrollArea>
+          </div>
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
+  )
+}
+
+export default MobileFilterDrawer

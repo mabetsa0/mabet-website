@@ -75,13 +75,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             onClick={() => combobox.toggleDropdown()}
             {...props}
           >
-            {[
-              ...props.data,
-              {
-                value: "0",
-                label: t("all-cities"),
-              },
-            ].find((ele) => ele.value === value)?.label || (
+            {props.data.find((ele) => ele.value === value)?.label || (
               <Input.Placeholder className="text-gray-600 ">
                 {props.placeholder}
               </Input.Placeholder>
@@ -110,17 +104,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
           <Combobox.Options>
             <ScrollArea.Autosize pt={"xs"} mah={200} type="scroll">
               {options.length > 0 ? (
-                <>
-                  <Combobox.Option value={"0"} key={"0"}>
-                    <Group>
-                      {value == "0" ? (
-                        <Check size={18} color="#767676" />
-                      ) : null}
-                      {t("all-cities")}
-                    </Group>
-                  </Combobox.Option>
-                  {options}
-                </>
+                <>{options}</>
               ) : (
                 <Combobox.Empty>{t("empty")}</Combobox.Empty>
               )}

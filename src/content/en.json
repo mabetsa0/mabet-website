@@ -252,6 +252,13 @@
       },
       "result_type-filter": {
         "button": "Ordering by"
+      },
+      "mobile-title": "Filter results",
+      "toggle-filter": {
+        "button": "Filter by"
+      },
+      "load_offers": {
+        "button": "Offers"
       }
     },
     "filt": {

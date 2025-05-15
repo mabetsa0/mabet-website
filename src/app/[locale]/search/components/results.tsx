@@ -18,6 +18,7 @@ import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
 import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
 import ToggleFilterButton from "@/components/ui/toggle-filter-button"
 import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { useRouter } from "@/lib/i18n/navigation"
 import {
   getDirections,
   getFacilities,
@@ -34,7 +35,6 @@ import {
   Map,
   Shield,
   SignpostBig,
-  SlidersHorizontal,
   TicketPercent,
   WavesLadder,
 } from "lucide-react"
@@ -44,11 +44,11 @@ import { Suspense } from "react"
 import MobileSearch from "../../components/mobile-search"
 import { SearchResultsResponse } from "../@types/results"
 import CountFilter from "./filters/count-filter"
+import MobileFilterDrawer from "./filters/mobile-filters-drawer"
 import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
-import { useRouter } from "@/lib/i18n/navigation"
 
 const Results = () => {
   const t = useTranslations()
@@ -172,14 +172,7 @@ const Results = () => {
             </MobileSearch>
           </div>
         </Suspense>
-        <ActionIcon
-          size={"lg"}
-          className="border-[#F3F3F3]"
-          color="dark"
-          variant="outline"
-        >
-          <SlidersHorizontal size={24} strokeWidth={1.4} />
-        </ActionIcon>
+        <MobileFilterDrawer />
       </Group>
       <section>
         <div className="container">
@@ -221,7 +214,7 @@ const Results = () => {
                 filterKey="load_offers"
                 leftSection={<TicketPercent strokeWidth={1.25} />}
               >
-                {t("search.filt.load_offers.button")}
+                {t("search.filter.load_offers.button")}
               </ToggleFilterButton>
               <PriceFilter />
               <FilterButtonWithRadio

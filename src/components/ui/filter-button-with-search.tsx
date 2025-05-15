@@ -19,8 +19,12 @@ type Props = {
   buttonProps: ButtonProps
   searchPlaceholder?: string
   options?: UseQueryStateOptions<unknown>
+  withinPortal?: boolean
 }
-export function FilterButtonWithSearch(props: Props) {
+export function FilterButtonWithSearch({
+  withinPortal = true,
+  ...props
+}: Props) {
   const [search, setSearch] = useState("")
   const [selectedItem, setSelectedItem] = useQueryState(
     props.filterKey,
@@ -64,7 +68,7 @@ export function FilterButtonWithSearch(props: Props) {
         shadow="md"
         radius={16}
         position="bottom-start"
-        // withinPortal={false}
+        withinPortal={withinPortal}
         onOptionSubmit={(val) => {
           setSelectedItem(val)
           combobox.closeDropdown()

@@ -117,10 +117,16 @@ const SearchBar = () => {
                       </Group>
                     }
                     placeholder={t("select")}
-                    data={cities.map((city) => ({
-                      value: city.id + "",
-                      label: city.name,
-                    }))}
+                    data={[
+                      {
+                        value: "0",
+                        label: t("all-cities"),
+                      },
+                      ...cities.map((city) => ({
+                        value: city.id + "",
+                        label: city.name,
+                      })),
+                    ]}
                     key={form.key("city_id")}
                     {...form.getInputProps("city_id")}
                   />

@@ -251,6 +251,13 @@
       },
       "result_type-filter": {
         "button": "الترتيب حسب"
+      },
+      "mobile-title": "فلترة وتصفية النتائج",
+      "toggle-filter": {
+        "button": "تصفية حسب "
+      },
+      "load_offers": {
+        "button": "العروض "
       }
     },
     "filt": {
