@@ -53,6 +53,7 @@ const MobileFilterDrawer = () => {
       direction_id: "",
       city_id: "",
       region_id: "",
+      unit_type_id: "",
     },
   })
 
@@ -389,6 +390,29 @@ const MobileFilterDrawer = () => {
 
                 {/* end region filter */}
                 <Divider />
+
+                <Stack gap={"lg"} p={"xs"}>
+                  <Text className="text-lg font-bold">
+                    {t("search.filter.result_type-filter.button")}
+                  </Text>
+                  <Radio.Group
+                    key={form.key("unit_type_id")}
+                    {...form.getInputProps("unit_type_id")}
+                  >
+                    <Stack>
+                      {unitTypes.map((element) => {
+                        return (
+                          <Radio
+                            key={element.id}
+                            classNames={{ label: "text-base" }}
+                            value={element.id + ""}
+                            label={element.name}
+                          />
+                        )
+                      })}
+                    </Stack>
+                  </Radio.Group>
+                </Stack>
 
                 {/*  */}
               </Stack>
