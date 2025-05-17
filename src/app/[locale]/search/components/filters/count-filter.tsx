@@ -47,7 +47,13 @@ const CountFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={filter ? "border-primary" : ""}
+          className={
+            filter.rooms_count ||
+            filter.single_beds_count ||
+            filter.master_beds_count
+              ? "border-primary"
+              : ""
+          }
           color="dark"
           variant="outline"
           rightSection={<ChevronDown strokeWidth={1.25} />}

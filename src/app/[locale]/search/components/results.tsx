@@ -241,7 +241,7 @@ const Results = () => {
                 {t("search.filter.last_hours_offer-filter.button")}
               </ToggleFilterButton>
               <FilterButtonWithCheckbox
-                filterKey="amenities"
+                filterKey="amenities[]"
                 data={poolsQuery.data ? poolsQuery.data : []}
                 title={t("search.filter.pools-filter.title")}
                 buttonProps={{
@@ -250,7 +250,7 @@ const Results = () => {
                 }}
               />
               <FilterButtonWithCheckbox
-                filterKey="facilities"
+                filterKey="facilities[]"
                 data={facilitiesQuery.data ? facilitiesQuery.data : []}
                 title={t("search.filter.facilities-filter.title")}
                 buttonProps={{

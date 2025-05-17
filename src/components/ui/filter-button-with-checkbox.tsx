@@ -21,7 +21,7 @@ type Props = {
 const FilterButtonWithCheckbox = (props: Props) => {
   const [filter, set] = useQueryState(
     props.filterKey,
-    parseAsArrayOf(parseAsString)
+    parseAsArrayOf(parseAsString).withDefault([])
   )
 
   return (
@@ -33,7 +33,7 @@ const FilterButtonWithCheckbox = (props: Props) => {
     >
       <Popover.Target>
         <Button
-          className={filter ? "border-primary" : ""}
+          className={filter.length > 0 ? "border-primary" : ""}
           color="dark"
           variant="outline"
           rightSection={<ChevronDown strokeWidth={1.25} />}

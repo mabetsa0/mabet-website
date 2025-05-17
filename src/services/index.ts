@@ -40,6 +40,22 @@ Mabet.interceptors.request.use(
       }
     }
 
+    // turn URLSearchParams to object , and handle arrays
+    if (config.params && config.params instanceof URLSearchParams) {
+      const paramsObject: Record<string, unknown> = {}
+      for (const [key, value] of config.params.entries()) {
+        if (key.endsWith("[]")) {
+          //  for arrays
+          paramsObject[key.slice(0, -2)] = value.split(",").filter(Boolean)
+        } else {
+          // Otherwise, just assign the value
+          paramsObject[key] = value
+        }
+      }
+
+      config.params = paramsObject
+    }
+
     config.headers["User-Agent"] = "web"
 
     return config

@@ -16,7 +16,10 @@ import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs"
 
 const RatingFilter = () => {
   const t = useTranslations("search.filter.rating-filter")
-  const [filter, set] = useQueryState("rating", parseAsArrayOf(parseAsString))
+  const [filter, set] = useQueryState(
+    "rating[]",
+    parseAsArrayOf(parseAsString).withDefault([])
+  )
 
   return (
     <Popover
@@ -27,7 +30,7 @@ const RatingFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={filter ? "border-primary" : ""}
+          className={filter.length > 0 ? "border-primary" : ""}
           color="dark"
           variant="outline"
           leftSection={<Star strokeWidth={1.25} />}
