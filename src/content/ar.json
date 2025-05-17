@@ -139,7 +139,9 @@
     "default": "افتراضي",
     "highest_price": "الأعلى سعرا",
     "lowest_price": "الأقل سعرا",
-    "region-search-placeholder": "ابحث عن اسم الحي"
+    "region-search-placeholder": "ابحث عن اسم الحي",
+    "apply-filters": "تطبيق الفلترة",
+    "clear": "مسح"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

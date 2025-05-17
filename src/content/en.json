@@ -48,7 +48,9 @@
     "default": "Default",
     "highest_price": "Highest price",
     "lowest_price": "Lowest price",
-    "region-search-placeholder": "Search for region"
+    "region-search-placeholder": "Search for region",
+    "apply-filters": "Apply filters",
+    "clear": "Clear"
   },
   "home": {
     "special-units": {

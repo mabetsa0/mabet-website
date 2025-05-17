@@ -41,7 +41,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
 
     const options = props.data
       .filter((item) =>
-        item.label.toLowerCase().includes(search.toLowerCase().trim())
+        item.label.toLowerCase()?.includes(search.toLowerCase().trim())
       )
       .map((item) => (
         <Combobox.Option value={item.value} key={item.value}>

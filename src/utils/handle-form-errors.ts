@@ -7,9 +7,9 @@ export type ErrorResponse<T> = {
   }
 }
 
-export const handleFormError = <T>(
+export const handleFormError = <T, V>(
   error: unknown,
-  form: UseFormReturnType<T>
+  form: UseFormReturnType<T, (args: T) => V>
 ) => {
   if (axios.isAxiosError(error) && error.response?.status) {
     const responseError = error.response.data as ErrorResponse<{ "": "" }>
