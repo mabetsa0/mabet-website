@@ -267,6 +267,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
   )
 }
 const MobileSearch = ({ children }: { children: React.ReactNode }) => {
+  const [opened, setOpened] = useState(false)
   const cities = useCities()
   const unitTypes = useUnitTypes()
   const t = useTranslations("general")
@@ -312,16 +313,23 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
     })
     Router.push(`/search?${newSearchParams.toString()}`)
   })
+
   return (
     <>
-      <Drawer.Root onClose={() => form.reset()}>
+      <Drawer.Root
+        onOpenChange={setOpened}
+        open={opened}
+        onClose={() => {
+          form.reset()
+        }}
+      >
         <Drawer.Trigger className="w-full">{children}</Drawer.Trigger>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
           <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
             <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
               <div className="flex justify-center pt-0.5">
-                <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
+                <div className="w-[90px] h-[4px] rounded bg-gray-200"></div>
               </div>
               <Drawer.Title className="font-bold text-xl">
                 <Group gap={"xs"} align="center">
