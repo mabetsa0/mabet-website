@@ -14,7 +14,6 @@ import {
 import { handleFormError } from "@/utils/handle-form-errors"
 import {
   ActionIcon,
-  Burger,
   Button,
   Checkbox,
   Divider,
@@ -31,7 +30,7 @@ import {
   TextInput,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { useForceUpdate } from "@mantine/hooks"
+import { useDisclosure, useForceUpdate } from "@mantine/hooks"
 import { useQuery } from "@tanstack/react-query"
 import "dayjs/locale/ar"
 import { Search, SlidersHorizontal, Star } from "lucide-react"
@@ -47,6 +46,7 @@ import { useEffect } from "react"
 import { Drawer } from "vaul"
 
 const MobileFilterDrawer = () => {
+  const [opened, { close, open }] = useDisclosure()
   const t = useTranslations()
   const cities = useCities()
   const unitTypes = useUnitTypes()
@@ -61,9 +61,9 @@ const MobileFilterDrawer = () => {
     priceTo: parseAsInteger.withDefault(6000),
     load_offers: parseAsStringLiteral(["1"]),
     last_hour_offer: parseAsStringLiteral(["1"]),
-    "rating[]": parseAsArrayOf(parseAsString).withDefault([]),
-    "facilities[]": parseAsArrayOf(parseAsString).withDefault([]),
-    "amenities[]": parseAsArrayOf(parseAsString).withDefault([]),
+    "rating[]": parseAsArrayOf(parseAsString).withDefault([""]),
+    "facilities[]": parseAsArrayOf(parseAsString).withDefault([""]),
+    "amenities[]": parseAsArrayOf(parseAsString).withDefault([""]),
     show_only_available: parseAsStringLiteral(["1"]),
     single_beds_count: parseAsInteger.withDefault(0),
     master_beds_count: parseAsInteger.withDefault(0),
@@ -73,25 +73,26 @@ const MobileFilterDrawer = () => {
     result_type: parseAsString.withDefault("Default"),
   })
 
+  const initialValues = {
+    unit_query: "",
+    price: [50, 6000],
+    result_type: "Default",
+    toggle_filters: [""],
+    rating: [""],
+    direction_id: "",
+    city_id: "",
+    region_id: "",
+    unit_type_id: "",
+    rooms_count: 0,
+    single_beds_count: 0,
+    master_beds_count: 0,
+    amenities: [""],
+    facilities: [""],
+    unit_for: "",
+  }
   const form = useForm({
     mode: "uncontrolled",
-    initialValues: {
-      unit_query: "",
-      price: [50, 6000],
-      result_type: filters.result_type,
-      toggle_filters: [""],
-      rating: [""],
-      direction_id: "",
-      city_id: "",
-      region_id: "",
-      unit_type_id: "",
-      rooms_count: 0,
-      single_beds_count: 0,
-      master_beds_count: 0,
-      amenities: [""],
-      facilities: [""],
-      unit_for: "",
-    },
+    initialValues,
     transformValues({
       amenities,
       facilities,
@@ -143,7 +144,6 @@ const MobileFilterDrawer = () => {
       facilities: filters["facilities[]"],
       unit_for: filters.unit_for,
     }
-    console.log("🚀 ~ useEffect ~ initialValues:", initialValues)
     form.initialize(initialValues)
   }, [])
 
@@ -154,10 +154,19 @@ const MobileFilterDrawer = () => {
   const onSubmit = form.onSubmit(async (values) => {
     try {
       setFilters(values)
+      close()
     } catch (error) {
       handleFormError(error, form)
     }
   })
+
+  const clearFilters = () => {
+    form.setValues(initialValues)
+    form.resetDirty()
+    const oldCityId = filters.city_id
+    setFilters(null)
+    setFilters({ city_id: oldCityId })
+  }
   // getting regions
   const cityId = form.getValues().city_id
   const regionsData = useQuery({
@@ -211,10 +220,11 @@ const MobileFilterDrawer = () => {
   const forceUpdate = useForceUpdate()
 
   return (
-    <Drawer.Root>
+    <Drawer.Root open={opened} onClose={close}>
       <Drawer.Trigger>
         {" "}
         <ActionIcon
+          onClick={open}
           component="span"
           size={"lg"}
           className="border-[#F3F3F3]"
@@ -229,18 +239,18 @@ const MobileFilterDrawer = () => {
         <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
           <div className="   overflow-hidden rounded-t-lg bg-white">
             <div className="flex justify-center pt-0.5">
-              <div className="w-[120px] h-[8px] rounded bg-gray-200"></div>
+              <div className="w-[70px] h-[4px] rounded bg-gray-200"></div>
             </div>
-            <Drawer.Title className="font-bold text-xl px-1">
-              <Group wrap="nowrap" gap={"xs"} align="center">
-                <Drawer.Close>
+            <Drawer.Title className="font-bold text-xl text-center py-1 px-1">
+              {/* <Group wrap="nowrap" gap={"xs"} align="center"> */}
+              {/* <Drawer.Close>
                   <Burger component={"span"} opened size={"sm"} />
-                </Drawer.Close>
-                <span className="w-full block text-center">
-                  {t("search.filter.mobile-title")}
-                </span>
-                <div className="w-2"></div>
-              </Group>
+                </Drawer.Close> */}
+              <span className="w-full block text-center">
+                {t("search.filter.mobile-title")}
+              </span>
+              {/* <div className="w-2"></div> */}
+              {/* </Group> */}
             </Drawer.Title>
             <Divider />
             <form onSubmit={onSubmit}>
@@ -671,9 +681,7 @@ const MobileFilterDrawer = () => {
                   </span>
                 </Button>
                 <Button
-                  onClick={() => {
-                    form.reset()
-                  }}
+                  onClick={clearFilters}
                   variant="transparent"
                   color="red"
                 >
