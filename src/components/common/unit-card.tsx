@@ -29,6 +29,7 @@ import { RiyalIcon } from "../icons"
 import useFavorite from "@/hooks/use-favorite"
 import { fallingStar, sharpShape } from "@/assets"
 import { cn } from "@/lib/cn"
+import { Link } from "@/lib/i18n/navigation"
 
 const UnitCard = (props: Unit & { className?: string }) => {
   const t = useTranslations("unit-card")
@@ -43,6 +44,8 @@ const UnitCard = (props: Unit & { className?: string }) => {
       padding="xs"
       radius="md"
       withBorder
+      component={Link}
+      href={`/search/${props.slug}`}
       className={cn(
         "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
         props.className
@@ -79,6 +82,10 @@ const UnitCard = (props: Unit & { className?: string }) => {
           align="start"
           withControls={false}
           withIndicators
+          onClick={(e) => {
+            e.stopPropagation()
+            e.preventDefault()
+          }}
           classNames={{
             indicator:
               "!w-0.5 !h-0.5 rounded-full data-[active]:!w-1 data-[active]:!h-1 duration-250",
