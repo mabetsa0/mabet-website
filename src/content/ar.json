@@ -141,7 +141,8 @@
     "lowest_price": "الأقل سعرا",
     "region-search-placeholder": "ابحث عن اسم الحي",
     "apply-filters": "تطبيق الفلترة",
-    "clear": "مسح"
+    "clear": "مسح",
+    "arrange": "Order by"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

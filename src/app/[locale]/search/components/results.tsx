@@ -45,6 +45,7 @@ import MobileSearch from "../../components/mobile-search"
 import { SearchResultsResponse } from "../types/results"
 import CountFilter from "./filters/count-filter"
 import MobileFilterDrawer from "./filters/mobile-filters-drawer"
+import OrderFilter from "./filters/order-filter"
 import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
@@ -175,7 +176,7 @@ const Results = () => {
         <MobileFilterDrawer />
       </Group>
       <section>
-        <div className="container">
+        <div className="container relative">
           <Group mb={{ base: "md", md: "xl" }} className=" gap-y-[2px]">
             <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
               searchedUnitType
@@ -279,31 +280,6 @@ const Results = () => {
                   },
                 ]}
               />
-              <FilterButtonWithRadio
-                filterKey="result_type"
-                buttonProps={{
-                  children: t("search.filter.result_type-filter.button"),
-                }}
-                title={t("search.filter.result_type-filter.button")}
-                data={[
-                  {
-                    label: t("general.default"),
-                    value: "default",
-                  },
-                  {
-                    label: t("general.mostly_viewed"),
-                    value: "mostly_viewed",
-                  },
-                  {
-                    label: t("general.lowest_price"),
-                    value: "lowest_price",
-                  },
-                  {
-                    label: t("general.highest_price"),
-                    value: "highest_price",
-                  },
-                ]}
-              />
             </Group>
           </ScrollArea>
           {status === "pending" ? (
@@ -317,12 +293,15 @@ const Results = () => {
             </div>
           ) : null}
           {status === "success" ? (
-            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
-              {data.data.map((unit) => {
-                return <UnitCard key={unit.id} {...unit} />
-              })}
-            </SimpleGrid>
+            <>
+              <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+                {data.data.map((unit) => {
+                  return <UnitCard key={unit.id} {...unit} />
+                })}
+              </SimpleGrid>
+            </>
           ) : null}
+          <OrderFilter />
 
           <Pagination total={data?.last_page} />
         </div>
