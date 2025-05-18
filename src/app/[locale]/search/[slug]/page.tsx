@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import axios from "axios"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
+import ImageGallery from "./components/image-gallary"
 
 type Props = {
   params: Promise<{
@@ -17,7 +18,8 @@ const page = async (props: Props) => {
     const unit = await GetUnit({ slug: params.slug })
     return (
       <UnitContextProvider value={unit}>
-        {/* <ImageGallery />
+        <ImageGallery />
+        {/* 
         <ImageSlider /> */}
         <section className="relative z-10 bg-white max-lg:-mt-4 max-lg:rounded-large">
           <div className="container">

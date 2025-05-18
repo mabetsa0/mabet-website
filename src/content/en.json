@@ -25,7 +25,8 @@
       "failer": "The operation failed",
       "removed-from-favorite": "The property was removed from the favorite",
       "error-remove-unit": "The property has not been deleted from the favorite",
-      "error-add-unit": "The property has not been added to the favorite"
+      "error-add-unit": "The property has not been added to the favorite",
+      "button": "Add to favorite"
     },
     "empty": "No results",
     "search": "Search...",
@@ -51,7 +52,8 @@
     "region-search-placeholder": "Search for region",
     "apply-filters": "Apply filters",
     "clear": "Clear",
-    "arrange": "ترتيب حسب"
+    "arrange": "ترتيب حسب",
+    "share": "Share"
   },
   "home": {
     "special-units": {

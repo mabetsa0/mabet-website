@@ -116,7 +116,8 @@
       "failer": "فشلت العملية",
       "removed-from-favorite": "تم حذف العقار من المفضلة",
       "error-remove-unit": "لم يتم حذف العقار من المفضلة",
-      "error-add-unit": "لم يتم اضافة العقار للمفضلة"
+      "error-add-unit": "لم يتم اضافة العقار للمفضلة",
+      "button": "اضافة للمفضلة"
     },
     "empty": "لا نتائج",
     "search": "يبحث...",
@@ -142,7 +143,8 @@
     "region-search-placeholder": "ابحث عن اسم الحي",
     "apply-filters": "تطبيق الفلترة",
     "clear": "مسح",
-    "arrange": "Order by"
+    "arrange": "Order by",
+    "share": "مشاركة العقار"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
