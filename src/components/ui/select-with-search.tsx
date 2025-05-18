@@ -11,22 +11,30 @@ import {
 } from "@mantine/core"
 import { useTranslations } from "next-intl"
 import { Check, Search } from "lucide-react"
+import { useUncontrolled } from "@mantine/hooks"
 
 type Props = {
   data: { value: string; label: string }[]
   onChange?: (value: string) => void
 
   value?: string
+  defaultValue?: string
   placeholder: React.ReactNode
   searchPlaceholder?: string
   searchLabel?: React.ReactNode
 } & InputBaseProps
 const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
   function Component(
-    { value, onChange, searchLabel, searchPlaceholder, ...props },
+    { value, onChange, searchLabel, searchPlaceholder, defaultValue, ...props },
     ref
   ) {
     const [search, setSearch] = useState("")
+    const [_value, handleChange] = useUncontrolled({
+      value,
+      defaultValue,
+      finalValue: "",
+      onChange,
+    })
     const combobox = useCombobox({
       onDropdownClose: () => {
         combobox.resetSelectedOption()
@@ -46,7 +54,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
       .map((item) => (
         <Combobox.Option value={item.value} key={item.value}>
           <Group>
-            {value == item.value + "" ? (
+            {_value == item.value + "" ? (
               <Check size={18} color="#767676" />
             ) : null}
             {item.label}
@@ -62,7 +70,8 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
         store={combobox}
         withinPortal={false}
         onOptionSubmit={(val) => {
-          onChange?.(val)
+          handleChange?.(val)
+
           combobox.closeDropdown()
         }}
       >
@@ -75,7 +84,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             onClick={() => combobox.toggleDropdown()}
             {...props}
           >
-            {props.data.find((ele) => ele.value === value)?.label || (
+            {props.data.find((ele) => ele.value === _value)?.label || (
               <Input.Placeholder className="text-gray-600 ">
                 {props.placeholder}
               </Input.Placeholder>

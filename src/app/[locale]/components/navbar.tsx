@@ -16,9 +16,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   const t = useTranslations("header")
   const pathname = usePathname()
-  const matches = useMediaQuery("(max-width: 62em)", true, {
-    getInitialValueInEffect: false,
-  })
+  const matches = useMediaQuery("(max-width: 62em)")
   if (pathname.includes("search") && matches) return <>{children}</>
   return (
     <AppShell

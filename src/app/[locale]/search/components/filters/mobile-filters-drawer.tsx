@@ -43,6 +43,7 @@ import {
   parseAsStringLiteral,
   useQueryStates,
 } from "nuqs"
+import { useEffect } from "react"
 import { Drawer } from "vaul"
 
 const MobileFilterDrawer = () => {
@@ -72,33 +73,25 @@ const MobileFilterDrawer = () => {
     result_type: parseAsString.withDefault("Default"),
   })
 
-  const initialValues = {
-    unit_query: filters.unit_query,
-    price: [filters.priceFrom, filters.priceTo],
-    result_type: filters.result_type,
-    toggle_filters: (
-      [
-        "free_cancellation",
-        "no_insurance",
-        "last_hour_offer",
-        "load_offers",
-      ] as const
-    ).filter((e) => !!filters[e]),
-    rating: filters["rating[]"],
-    direction_id: filters.direction_id,
-    city_id: filters.city_id,
-    region_id: filters.region_id,
-    unit_type_id: filters.unit_type_id,
-    rooms_count: filters.rooms_count,
-    single_beds_count: filters.single_beds_count,
-    master_beds_count: filters.master_beds_count,
-    amenities: filters["amenities[]"],
-    facilities: filters["facilities[]"],
-    unit_for: filters.unit_for,
-  }
   const form = useForm({
     mode: "uncontrolled",
-    initialValues,
+    initialValues: {
+      unit_query: "",
+      price: [50, 6000],
+      result_type: filters.result_type,
+      toggle_filters: [""],
+      rating: [""],
+      direction_id: "",
+      city_id: "",
+      region_id: "",
+      unit_type_id: "",
+      rooms_count: 0,
+      single_beds_count: 0,
+      master_beds_count: 0,
+      amenities: [""],
+      facilities: [""],
+      unit_for: "",
+    },
     transformValues({
       amenities,
       facilities,
@@ -115,8 +108,8 @@ const MobileFilterDrawer = () => {
         priceFrom: price[0],
         priceTo: price[1],
         ...toggle_filters.reduce(
-          (acc, curr, index) => {
-            acc[curr] = index
+          (acc, curr) => {
+            acc[curr] = 1
             return acc
           },
           {} as Record<string, number>
@@ -124,6 +117,35 @@ const MobileFilterDrawer = () => {
       }
     },
   })
+
+  useEffect(() => {
+    const initialValues = {
+      unit_query: filters.unit_query,
+      price: [filters.priceFrom, filters.priceTo],
+      result_type: filters.result_type,
+      toggle_filters: (
+        [
+          "free_cancellation",
+          "no_insurance",
+          "last_hour_offer",
+          "load_offers",
+        ] as const
+      ).filter((e) => !!filters[e]),
+      rating: filters["rating[]"],
+      direction_id: filters.direction_id,
+      city_id: filters.city_id,
+      region_id: filters.region_id,
+      unit_type_id: filters.unit_type_id,
+      rooms_count: filters.rooms_count,
+      single_beds_count: filters.single_beds_count,
+      master_beds_count: filters.master_beds_count,
+      amenities: filters["amenities[]"],
+      facilities: filters["facilities[]"],
+      unit_for: filters.unit_for,
+    }
+    console.log("🚀 ~ useEffect ~ initialValues:", initialValues)
+    form.initialize(initialValues)
+  }, [])
 
   const dirtyInputs = Object.values(form.getDirty()).filter(Boolean).length
 
@@ -355,7 +377,7 @@ const MobileFilterDrawer = () => {
                             label: t(
                               "search.filter.last_hours_offer-filter.button"
                             ),
-                            value: "last_hours_offer",
+                            value: "last_hour_offer",
                           },
                         ].map((element) => {
                           return (
@@ -464,6 +486,9 @@ const MobileFilterDrawer = () => {
                     label={t("search.filter.direction-filter.title")}
                     placeholder={t("search.filter.direction-filter.button")}
                     data={directionsQuery.data || []}
+                    comboboxProps={{
+                      withinPortal: false,
+                    }}
                     classNames={{
                       label: "mb-0.5 font-normal",
                     }}
@@ -639,7 +664,7 @@ const MobileFilterDrawer = () => {
                 className=" [box-shadow:_0px_-16px_40px_0px_#0000001F]"
                 cols={2}
               >
-                <Button>
+                <Button type="submit">
                   {t("general.apply-filters")}
                   <span className="w-1.5 h-1.5 ms-1  inline-flex items-center justify-center shrink-0 aspect-square rounded-4xl bg-white text-primary">
                     {dirtyInputs}

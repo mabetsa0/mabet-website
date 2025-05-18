@@ -67,7 +67,7 @@ const Results = () => {
   const unitTypes = useUnitTypes()
   const cities = useCities()
   const searchedUnitType =
-    unitTypes.find((ele) => ele.id + "" == searchParams.get("unit_type"))
+    unitTypes.find((ele) => ele.id + "" == searchParams.get("unit_type_id"))
       ?.name || ""
   const searchedUnit =
     cities.find((ele) => ele.id + "" == searchParams.get("city_id"))?.name ||
