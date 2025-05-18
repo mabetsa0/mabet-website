@@ -19,11 +19,12 @@ const FavoriteButton = () => {
       <Button
         leftSection={
           <Heart
+            strokeWidth={1.25}
             fill={isFavorite ? "red" : "white"}
-            color={isFavorite ? "red" : "white"}
+            color={isFavorite ? "red" : "black"}
           />
         }
-        visibleFrom="lg"
+        visibleFrom="md"
         variant="outline"
         color="dark"
         className="border-[#F3F3F3]"
@@ -39,12 +40,14 @@ const FavoriteButton = () => {
         color="dark"
         className="border-[#F3F3F3]"
         size={"lg"}
+        hiddenFrom="md"
         loading={isPending}
         onClick={() => mutate()}
       >
         <Heart
+          strokeWidth={1.25}
           fill={isFavorite ? "red" : "white"}
-          color={isFavorite ? "red" : "white"}
+          color={isFavorite ? "red" : "black"}
         />
       </ActionIcon>
     </>

@@ -26,7 +26,7 @@ const ShareButton = () => {
     <>
       <Button
         leftSection={<Share strokeWidth={1.25} />}
-        visibleFrom="lg"
+        visibleFrom="md"
         variant="outline"
         color="dark"
         className="border-[#F3F3F3]"
@@ -35,7 +35,7 @@ const ShareButton = () => {
         {t("general.share")}
       </Button>
       <ActionIcon
-        hiddenFrom="lg"
+        hiddenFrom="md"
         variant="outline"
         color="dark"
         className="border-[#F3F3F3]"
