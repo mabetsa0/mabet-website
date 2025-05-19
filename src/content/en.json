@@ -279,6 +279,14 @@
     "details": "Unit description",
     "features": "Properties of the property",
     "show-more": "Show more",
-    "show-less": "Show less"
+    "show-less": "Show less",
+    "about-unit": "About unit",
+    "ratings": "Rating",
+    "ratings-message": "Rated {number} user, and with an evaluation rank {Value}.",
+    "location": "Location",
+    "area": "Area",
+    "area-message": "The area of ​​this unit was identified with approximately",
+    "unit-for": "Unit for",
+    "unit-for-message": "This property is dedicated to"
   }
 }

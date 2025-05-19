@@ -11,6 +11,7 @@ import { getTranslations } from "next-intl/server"
 import { Divider, Stack, Space } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import Features from "./components/features"
+import AboutUnit from "./components/about-unit"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -64,6 +65,9 @@ const page = async (props: Props) => {
                 <Space />
 
                 <Features />
+                <Divider />
+
+                <AboutUnit {...unit} />
               </Stack>
               <div className="md:w-1/3"></div>
             </div>

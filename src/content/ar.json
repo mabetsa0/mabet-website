@@ -278,6 +278,14 @@
     "details": "وصف العقار",
     "features": "مميزات العقار",
     "show-more": "مشاهدة المزيد",
-    "show-less": "عرض اقل"
+    "show-less": "عرض اقل",
+    "about-unit": "عن العقار",
+    "ratings": "التقييمات",
+    "ratings-message": "حاصيل على تقييم من قبل {number} مستخدم, وبمرتبة تقييم {value}.",
+    "location": "الموقع",
+    "area": "المساحة",
+    "area-message": "تم تحديد مساحة هذه الوحدة بما يقارب ال",
+    "unit-for": "مخصص لـ",
+    "unit-for-message": "مخصص هذا العقار  لـ  "
   }
 }
