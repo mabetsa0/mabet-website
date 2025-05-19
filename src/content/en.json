@@ -274,5 +274,8 @@
         "button": "Offers"
       }
     }
+  },
+  "unit": {
+    "details": "Unit description"
   }
 }

@@ -7,6 +7,9 @@ import ImageGallery from "./components/image-gallery"
 
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import { getTranslations } from "next-intl/server"
+import { Stack } from "@mantine/core"
+import { QrCode } from "lucide-react"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -25,6 +28,7 @@ const page = async (props: Props) => {
   const params = await props.params
   try {
     const unit = await GetUnit({ slug: params.slug })
+    const t = await getTranslations()
     return (
       <UnitContextProvider value={unit}>
         <ImageGallery />
@@ -36,9 +40,26 @@ const page = async (props: Props) => {
         </Suspense>
         <section className="relative z-10 bg-white  ">
           <div className="container">
-            <div className="flex gap-4 max-lg:flex-col">
-              <div className="lg:w-2/3">right</div>
-              <div className="lg:w-1/3">left</div>
+            <div className="flex gap-4 max-md:flex-col">
+              <div className="md:w-2/3">
+                <h1 className="text-h4 font-bold md:hidden py-1">
+                  {unit.name}
+                </h1>
+
+                <Stack>
+                  <h3 className="text-h4 md:text-h3 font-medium">
+                    {t("unit.details")}
+                  </h3>
+                  <Stack gap={"xs"} className="text-[#767676]">
+                    <p>{unit.details}</p>
+                    <p>{unit.licence.license_text}</p>
+                    <p className="flex gap-0.5">
+                      <QrCode strokeWidth={1.25} /> {unit.code}
+                    </p>
+                  </Stack>
+                </Stack>
+              </div>
+              <div className="md:w-1/3"></div>
             </div>
           </div>
         </section>
