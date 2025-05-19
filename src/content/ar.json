@@ -144,7 +144,9 @@
     "apply-filters": "تطبيق الفلترة",
     "clear": "مسح",
     "arrange": "Order by",
-    "share": "مشاركة العقار"
+    "share": "مشاركة العقار",
+    "show-all-images": "جميع الصور",
+    "show-video": "عرض الفيديو"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

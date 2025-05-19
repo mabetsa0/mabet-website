@@ -53,7 +53,9 @@
     "apply-filters": "Apply filters",
     "clear": "Clear",
     "arrange": "ترتيب حسب",
-    "share": "Share"
+    "share": "Share",
+    "show-all-images": "All images",
+    "show-video": "Show videos"
   },
   "home": {
     "special-units": {

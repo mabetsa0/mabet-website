@@ -3,8 +3,16 @@ import { notFound } from "next/navigation"
 import axios from "axios"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
-import ImageGallery from "./components/image-gallary"
-import ImageSlider from "./components/image-slider"
+import ImageGallery from "./components/image-gallery"
+
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+const VideoSlider = dynamic(async () => {
+  return import("./components/video")
+})
+const ImageSlider = dynamic(async () => {
+  return import("./components/image-slider")
+})
 
 type Props = {
   params: Promise<{
@@ -20,8 +28,13 @@ const page = async (props: Props) => {
     return (
       <UnitContextProvider value={unit}>
         <ImageGallery />
-        <ImageSlider />
-        <section className="relative z-10 bg-white max-lg:-mt-4 max-lg:rounded-large">
+        <Suspense>
+          <ImageSlider />
+        </Suspense>
+        <Suspense>
+          <VideoSlider />
+        </Suspense>
+        <section className="relative z-10 bg-white  ">
           <div className="container">
             <div className="flex gap-4 max-lg:flex-col">
               <div className="lg:w-2/3">right</div>
