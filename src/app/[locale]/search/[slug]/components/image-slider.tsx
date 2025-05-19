@@ -28,14 +28,14 @@ const ImageSlider = () => {
         transitionProps={{ transition: "fade", duration: 200 }}
         className="bg-transparent"
         classNames={{
-          inner: "rtl:-ms-1 ",
+          inner: "rtl:md:-ms-1 ",
           overlay: "backdrop-blur",
           content: "bg-transparent",
         }}
       >
         <div className="relative">
           <Group justify="space-between">
-            <ActionIcon onClick={close} color="dark" size={"lg"}>
+            <ActionIcon onClick={close} color="dark" size={"xl"}>
               <X strokeWidth={1.25} />
             </ActionIcon>
             <ShareButton variant="filled" />

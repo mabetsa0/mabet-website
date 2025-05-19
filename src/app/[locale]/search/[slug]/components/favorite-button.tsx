@@ -36,17 +36,19 @@ const FavoriteButton = () => {
         {t("general.favorite.button")}
       </Button>
       <ActionIcon
-        variant="outline"
-        color="dark"
-        className="border-[#F3F3F3]"
-        size={"lg"}
         hiddenFrom="md"
+        color="white"
+        c={"dark"}
+        size={"xl"}
+        radius={"xl"}
+        className="hover:bg-white/70"
         loading={isPending}
         onClick={() => mutate()}
       >
         <Heart
+          size={28}
           strokeWidth={1.25}
-          fill={isFavorite ? "red" : "white"}
+          fill={isFavorite ? "red" : "transparent"}
           color={isFavorite ? "red" : "black"}
         />
       </ActionIcon>

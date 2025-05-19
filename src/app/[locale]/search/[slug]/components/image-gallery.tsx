@@ -2,15 +2,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 "use client"
 
-import { Button, Group, Stack, Title } from "@mantine/core"
+import { ActionIcon, Box, Button, Group, Stack, Title } from "@mantine/core"
 /* eslint-disable @next/next/no-img-element */
 
 import { useUnitData } from "../context/unit-context"
 import ShareButton from "./share-button"
 import FavoriteButton from "./favorite-button"
 import { useTranslations } from "next-intl"
-import { Image, Video } from "lucide-react"
+import { ChevronRight, Image, Video } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
+import { Carousel } from "@mantine/carousel"
 
 const ImageGallery = () => {
   const unit = useUnitData()
@@ -27,17 +28,39 @@ const ImageGallery = () => {
   return (
     <>
       <main>
-        <div className="container py-2">
+        <div className="container max-md:p-0 py-2">
           <Stack gap={"xl"}>
-            <Group justify="space-between">
-              <Title order={2}>{unit.name}</Title>
+            <Group
+              wrap="nowrap"
+              justify="space-between"
+              className="absolute max-md:px-1 max-md:pt-1.5 md:relative z-[10] inset-x-0"
+            >
+              <Title visibleFrom="md" order={2}>
+                {unit.name}
+              </Title>
+              <ActionIcon
+                hiddenFrom="md"
+                size={"xl"}
+                radius={"xl"}
+                color="white"
+                c={"dark"}
+              >
+                <ChevronRight
+                  size={28}
+                  strokeWidth={1.25}
+                  className="ltr:rotate-180 hover:bg-white/70"
+                />
+              </ActionIcon>
               <Group>
                 <ShareButton />
                 <FavoriteButton />
               </Group>
             </Group>
             {/* image gallery */}
-            <div className="flex select-none gap-0.5 overflow-hidden rounded-2xl">
+            <Box
+              visibleFrom="md"
+              className="flex select-none gap-0.5 overflow-hidden rounded-2xl "
+            >
               <div className="group relative aspect-square w-[44%] cursor-pointer">
                 <img
                   loading="lazy"
@@ -61,7 +84,7 @@ const ImageGallery = () => {
                   >
                     {t("general.show-all-images")}
                   </Button>
-                  {true ? (
+                  {unit.has_videos ? (
                     <Button
                       onClick={() => {
                         setOpenVideo(true)
@@ -94,9 +117,58 @@ const ImageGallery = () => {
                   )
                 })}
               </div>
-            </div>
+            </Box>
           </Stack>
         </div>
+        <Box hiddenFrom="md" className="relative">
+          <Carousel
+            withControls={false}
+            loop
+            height="100%"
+            withIndicators={false}
+          >
+            {unit.images.map((image) => {
+              return (
+                <Carousel.Slide key={image.image_path}>
+                  <div className="relative w-full h-[400px]">
+                    <img
+                      src={image.image_path}
+                      alt={image.alt}
+                      loading="lazy"
+                      className="h-full w-full  object-cover"
+                    />
+                  </div>
+                </Carousel.Slide>
+              )
+            })}
+          </Carousel>
+          <Group wrap="nowrap" className=" absolute bottom-1 right-1 z-10">
+            <Button
+              onClick={() => {
+                setOpened(true)
+              }}
+              color="white"
+              c={"dark"}
+              className=" hover:bg-white/90 duration-300 "
+              leftSection={<Image strokeWidth={1.25} />}
+            >
+              {t("general.show-all-images")}
+            </Button>
+            {unit.has_videos ? (
+              <Button
+                onClick={() => {
+                  setOpenVideo(true)
+                }}
+                color="white"
+                c={"dark"}
+                className=" hover:bg-white/90 duration-300 "
+                leftSection={<Video strokeWidth={1.25} />}
+              >
+                {t("general.show-video")}
+              </Button>
+            ) : null}
+          </Group>
+        </Box>
       </main>
     </>
   )

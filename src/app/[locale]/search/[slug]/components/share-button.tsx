@@ -36,12 +36,14 @@ const ShareButton = ({ variant }: { variant?: ButtonVariant }) => {
       </Button>
       <ActionIcon
         hiddenFrom="md"
-        variant={variant || "outline"}
-        color="dark"
-        className="border-[#F3F3F3]"
+        color="white"
+        c={"dark"}
+        size={"xl"}
+        radius={"xl"}
+        className="hover:bg-white/70"
         onClick={share}
       >
-        <Share strokeWidth={1.25} />
+        <Share size={28} strokeWidth={1.25} />
       </ActionIcon>
     </>
   )
