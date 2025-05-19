@@ -8,8 +8,9 @@ import ImageGallery from "./components/image-gallery"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { getTranslations } from "next-intl/server"
-import { Stack } from "@mantine/core"
+import { Divider, Stack, Space } from "@mantine/core"
 import { QrCode } from "lucide-react"
+import Features from "./components/features"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -41,10 +42,9 @@ const page = async (props: Props) => {
         <section className="relative z-10 bg-white  ">
           <div className="container">
             <div className="flex gap-4 max-md:flex-col">
-              <div className="md:w-2/3">
-                <h1 className="text-h4 font-bold md:hidden py-1">
-                  {unit.name}
-                </h1>
+              <Stack className="md:w-2/3">
+                <Space hiddenFrom="md" />
+                <h1 className="text-h4 font-bold md:hidden">{unit.name}</h1>
 
                 <Stack>
                   <h3 className="text-h4 md:text-h3 font-medium">
@@ -58,7 +58,13 @@ const page = async (props: Props) => {
                     </p>
                   </Stack>
                 </Stack>
-              </div>
+                <Divider />
+
+                <Space />
+                <Space />
+
+                <Features />
+              </Stack>
               <div className="md:w-1/3"></div>
             </div>
           </div>

@@ -276,6 +276,9 @@
     }
   },
   "unit": {
-    "details": "Unit description"
+    "details": "Unit description",
+    "features": "Properties of the property",
+    "show-more": "Show more",
+    "show-less": "Show less"
   }
 }
