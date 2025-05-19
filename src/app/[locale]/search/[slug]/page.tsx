@@ -4,6 +4,7 @@ import axios from "axios"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 import ImageGallery from "./components/image-gallary"
+import ImageSlider from "./components/image-slider"
 
 type Props = {
   params: Promise<{
@@ -19,8 +20,7 @@ const page = async (props: Props) => {
     return (
       <UnitContextProvider value={unit}>
         <ImageGallery />
-        {/* 
-        <ImageSlider /> */}
+        <ImageSlider />
         <section className="relative z-10 bg-white max-lg:-mt-4 max-lg:rounded-large">
           <div className="container">
             <div className="flex gap-4 max-lg:flex-col">

@@ -1,11 +1,11 @@
 "use client"
 
-import { ActionIcon, Button } from "@mantine/core"
+import { ActionIcon, Button, ButtonVariant } from "@mantine/core"
 import { Share } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useUnitData } from "../context/unit-context"
 
-const ShareButton = () => {
+const ShareButton = ({ variant }: { variant?: ButtonVariant }) => {
   const unit = useUnitData()
   const t = useTranslations()
   const share = async () => {
@@ -27,7 +27,7 @@ const ShareButton = () => {
       <Button
         leftSection={<Share strokeWidth={1.25} />}
         visibleFrom="md"
-        variant="outline"
+        variant={variant || "outline"}
         color="dark"
         className="border-[#F3F3F3]"
         onClick={share}
@@ -36,7 +36,7 @@ const ShareButton = () => {
       </Button>
       <ActionIcon
         hiddenFrom="md"
-        variant="outline"
+        variant={variant || "outline"}
         color="dark"
         className="border-[#F3F3F3]"
         onClick={share}
