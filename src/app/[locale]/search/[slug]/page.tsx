@@ -13,6 +13,7 @@ import { Suspense } from "react"
 import AboutUnit from "./components/about-unit"
 import Features from "./components/features"
 import Reviews from "./components/reviews"
+import UnitConditions from "./components/unit-conditions"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -84,6 +85,11 @@ const page = async (props: Props) => {
                   lng={+atob(atob(unit.mlg))}
                 />
               </Suspense>
+              <Space />
+
+              <Space />
+
+              <UnitConditions {...unit} />
             </Stack>
           </div>
         </section>

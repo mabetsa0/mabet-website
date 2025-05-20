@@ -293,6 +293,9 @@
     },
     "unknown-review": "Unknown",
     "location-title": "The site where you will be resided in",
-    "location-description": "The approximate site of the place will now appear, not the exact site, knowing that the site's accurate information will appear immediately after confirming the reservation on the reservation page"
+    "location-description": "The approximate site of the place will now appear, not the exact site, knowing that the site's accurate information will appear immediately after confirming the reservation on the reservation page",
+    "reservation-policy": "Reservation policy and cancellation",
+    "reservation-conditions": "Reservation conditions",
+    "cancellation_policy": "Cancellation Policy"
   }
 }
