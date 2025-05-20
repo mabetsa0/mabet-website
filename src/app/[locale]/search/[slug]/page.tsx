@@ -5,7 +5,7 @@ import ImageGallery from "./components/image-gallery"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 
-import { Divider, Loader, Space, Stack, Text } from "@mantine/core"
+import { Divider, Loader, Space, Stack } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import dynamic from "next/dynamic"
@@ -42,7 +42,7 @@ const page = async (props: Props) => {
         <Suspense>
           <VideoSlider />
         </Suspense>
-        <section className="relative z-10 bg-white  ">
+        <section className="relative  bg-white  ">
           <div className="container">
             <div className="flex gap-4 max-md:flex-col">
               <Stack className="md:w-2/3">
@@ -78,26 +78,12 @@ const page = async (props: Props) => {
               <Divider />
               <Reviews />
               <Space />
-
-              <div className="container">
-                <Stack gap={"lg"}>
-                  <div>
-                    <h3 className="text-h4 md:text-h3 font-medium">
-                      {t("unit.location-title")}
-                    </h3>
-                    <Text maw={550} c={"#767676"}>
-                      {t("unit.location-description")}
-                    </Text>
-                  </div>
-
-                  <Suspense fallback={<Loader />}>
-                    <MyGoogleMap
-                      lat={+atob(atob(unit.mla))}
-                      lng={+atob(atob(unit.mlg))}
-                    />
-                  </Suspense>
-                </Stack>
-              </div>
+              <Suspense fallback={<Loader />}>
+                <MyGoogleMap
+                  lat={+atob(atob(unit.mla))}
+                  lng={+atob(atob(unit.mlg))}
+                />
+              </Suspense>
             </Stack>
           </div>
         </section>
