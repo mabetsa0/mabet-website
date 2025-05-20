@@ -291,6 +291,8 @@
     "reviews": {
       "description": "This property was evaluated, based on evaluation, reviews and reliability data"
     },
-    "unknown-review": "Unknown"
+    "unknown-review": "Unknown",
+    "location-title": "The site where you will be resided in",
+    "location-description": "The approximate site of the place will now appear, not the exact site, knowing that the site's accurate information will appear immediately after confirming the reservation on the reservation page"
   }
 }

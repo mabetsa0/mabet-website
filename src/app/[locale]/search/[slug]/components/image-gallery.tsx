@@ -127,9 +127,9 @@ const ImageGallery = () => {
             height="100%"
             withIndicators={false}
           >
-            {unit.images.map((image) => {
+            {unit.images.map((image, i) => {
               return (
-                <Carousel.Slide key={image.image_path}>
+                <Carousel.Slide key={i}>
                   <div className="relative w-full h-[400px]">
                     <img
                       src={image.image_path}

@@ -1,17 +1,17 @@
 import { notFound } from "next/navigation"
 
 import axios from "axios"
+import ImageGallery from "./components/image-gallery"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
-import ImageGallery from "./components/image-gallery"
 
+import { Divider, Loader, Space, Stack, Text } from "@mantine/core"
+import { QrCode } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
-import { getTranslations } from "next-intl/server"
-import { Divider, Stack, Space } from "@mantine/core"
-import { QrCode } from "lucide-react"
-import Features from "./components/features"
 import AboutUnit from "./components/about-unit"
+import Features from "./components/features"
 import Reviews from "./components/reviews"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
@@ -19,6 +19,7 @@ const VideoSlider = dynamic(async () => {
 const ImageSlider = dynamic(async () => {
   return import("./components/image-slider")
 })
+const MyGoogleMap = dynamic(async () => import("./components/google-map"))
 
 type Props = {
   params: Promise<{
@@ -73,9 +74,30 @@ const page = async (props: Props) => {
               </Stack>
               <div className="md:w-1/3"></div>
             </div>
-            <Stack>
+            <Stack gap={"lg"}>
               <Divider />
               <Reviews />
+              <Space />
+
+              <div className="container">
+                <Stack gap={"lg"}>
+                  <div>
+                    <h3 className="text-h4 md:text-h3 font-medium">
+                      {t("unit.location-title")}
+                    </h3>
+                    <Text maw={550} c={"#767676"}>
+                      {t("unit.location-description")}
+                    </Text>
+                  </div>
+
+                  <Suspense fallback={<Loader />}>
+                    <MyGoogleMap
+                      lat={+atob(atob(unit.mla))}
+                      lng={+atob(atob(unit.mlg))}
+                    />
+                  </Suspense>
+                </Stack>
+              </div>
             </Stack>
           </div>
         </section>

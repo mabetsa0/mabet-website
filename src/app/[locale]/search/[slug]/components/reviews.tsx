@@ -27,10 +27,12 @@ const Reviews = () => {
     },
   })
   const t = useTranslations()
-  if (status === "pending") return
-  ;<div className="container py-4 flex items-center justify-center">
-    <Loader />
-  </div>
+  if (status === "pending")
+    return (
+      <div className="container py-4 flex items-center justify-center">
+        <Loader />
+      </div>
+    )
   if (status === "success")
     return (
       <Stack>
