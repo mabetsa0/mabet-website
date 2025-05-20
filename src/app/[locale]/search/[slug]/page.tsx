@@ -12,6 +12,7 @@ import { Divider, Stack, Space } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import Features from "./components/features"
 import AboutUnit from "./components/about-unit"
+import Reviews from "./components/reviews"
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -68,9 +69,14 @@ const page = async (props: Props) => {
                 <Divider />
 
                 <AboutUnit {...unit} />
+                <Space />
               </Stack>
               <div className="md:w-1/3"></div>
             </div>
+            <Stack>
+              <Divider />
+              <Reviews />
+            </Stack>
           </div>
         </section>
       </UnitContextProvider>

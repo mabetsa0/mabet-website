@@ -287,6 +287,10 @@
     "area": "Area",
     "area-message": "The area of ​​this unit was identified with approximately",
     "unit-for": "Unit for",
-    "unit-for-message": "This property is dedicated to"
+    "unit-for-message": "This property is dedicated to",
+    "reviews": {
+      "description": "This property was evaluated, based on evaluation, reviews and reliability data"
+    },
+    "unknown-review": "Unknown"
   }
 }

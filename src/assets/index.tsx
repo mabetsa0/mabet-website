@@ -33,6 +33,7 @@ import whiteCurve from "./Curve-Section-Shape.svg"
 import sharpShape from "./Tag-Sharp-Shape.svg"
 import loginImage1 from "./login-1.jpeg"
 import loginImage2 from "./login-2.jpeg"
+import reviewBorder from "./review-border.svg"
 
 export {
   logo,
@@ -70,6 +71,7 @@ export {
   sharpShape,
   loginImage1,
   loginImage2,
+  reviewBorder,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

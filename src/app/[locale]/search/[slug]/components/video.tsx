@@ -37,6 +37,7 @@ const VideoSlider = () => {
 
   const { data, status } = useQuery({
     queryKey: ["video", unitData.id],
+    enabled: unitData.has_videos,
     queryFn: async () => {
       const response = await axios.get<UnitMediaResponse>(
         `/units/${unitData.id}/media?type=videos`
