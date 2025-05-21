@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import Mabet from "@/services"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Loader, Modal } from "@mantine/core"
+import { useQuery } from "@tanstack/react-query"
 import { X } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import ShareButton from "./share-button"
 import VideoPlayer from "./video-player"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
 export interface UnitMediaResponse {
   data: Data
   message: null
@@ -39,7 +39,7 @@ const VideoSlider = () => {
     queryKey: ["video", unitData.id],
     enabled: unitData.has_videos,
     queryFn: async () => {
-      const response = await axios.get<UnitMediaResponse>(
+      const response = await Mabet.get<UnitMediaResponse>(
         `/units/${unitData.id}/media?type=videos`
       )
       return response.data.data.media

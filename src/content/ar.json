@@ -146,7 +146,12 @@
     "arrange": "Order by",
     "share": "مشاركة العقار",
     "show-all-images": "جميع الصور",
-    "show-video": "عرض الفيديو"
+    "show-video": "عرض الفيديو",
+    "night": "ليلة",
+    "insurance": "مبلغ التامين",
+    "discount": "خصم بقيمة",
+    "customer-fees": "رسوم الخدمة",
+    "total-price": "الإجمالي"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -154,7 +159,8 @@
     "select-date": "حدد التاريخ",
     "daily": "يومي",
     "weekly": "اسبوعي",
-    "monthly": "شهري"
+    "monthly": "شهري",
+    "can-edit": "يمكنك تعديل التاريخ بحرية تامة"
   },
   "unit-card": {
     "features": "بعض المميزات",
@@ -298,6 +304,11 @@
     "cancellation_policy": "سياسة الإلغاء",
     "reservation-details": {
       "title": "تفاصيل الحجز"
-    }
+    },
+    "create-booking": "متابعة الحجز بـ {value} ",
+    "down-payment": "عربون الحجز "
+  },
+  "errors": {
+    "unknown-error": "خطأ غير معروف"
   }
 }

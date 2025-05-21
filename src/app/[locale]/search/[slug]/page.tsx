@@ -49,7 +49,7 @@ const page = async (props: Props) => {
         <section className="relative  bg-white  ">
           <div className="container">
             <div className="flex gap-4 max-md:flex-col">
-              <Stack className="md:w-2/3">
+              <Stack className="w-full">
                 <Space hiddenFrom="md" />
                 <h1 className="text-h4 font-bold md:hidden">{unit.name}</h1>
 
@@ -73,7 +73,7 @@ const page = async (props: Props) => {
                 <AboutUnit {...unit} />
                 <Space />
               </Stack>
-              <Box visibleFrom="md" className="md:w-1/3">
+              <Box visibleFrom="md" className="md:w-[500px] shrink-0">
                 <ReservationDetails />
               </Box>
             </div>

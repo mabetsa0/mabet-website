@@ -15,6 +15,7 @@ import { getSpecialUnits } from "./helpers/get-special-units"
 import { getTopRatedUnits } from "./helpers/get-top-rated-units"
 
 export const revalidate = 3600
+export const dynamic = "force-static"
 export default async function Page({
   params,
 }: {

@@ -184,3 +184,18 @@ export interface Prices {
   sub_price: string
   sub_price_text: string
 }
+
+export interface BusyDaysResponse {
+  data: {
+    closed_dates: ClosedDate[]
+  }
+  message: null
+  success: boolean
+}
+
+export interface ClosedDate {
+  date: string
+  type: string
+  min_stay: number
+  message: string
+}

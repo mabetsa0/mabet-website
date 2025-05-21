@@ -55,7 +55,12 @@
     "arrange": "ترتيب حسب",
     "share": "Share",
     "show-all-images": "All images",
-    "show-video": "Show videos"
+    "show-video": "Show videos",
+    "night": "Night",
+    "insurance": "Insurance",
+    "discount": "Discount by",
+    "customer-fees": "Customer fees",
+    "total-price": "Total"
   },
   "home": {
     "special-units": {
@@ -160,7 +165,8 @@
     "select-date": "Select Date",
     "daily": "Daily",
     "weekly": "weekly",
-    "monthly": "Monthly"
+    "monthly": "Monthly",
+    "can-edit": "You can modify dates completely freely"
   },
   "footer": {
     "desciption": "The platform for the best site for displaying apartments for rent in Saudi Arabia, self -entry apartments, chalets on the sea, villas, farms, and camps",
@@ -299,6 +305,11 @@
     "cancellation_policy": "Cancellation Policy",
     "reservation-details": {
       "title": "Reservation details"
-    }
+    },
+    "create-booking": "Continue reservation with {Value}",
+    "down-payment": "Down payment"
+  },
+  "errors": {
+    "unknown-error": "Unknown error"
   }
 }
