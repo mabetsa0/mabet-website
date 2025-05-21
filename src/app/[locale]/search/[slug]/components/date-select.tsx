@@ -149,7 +149,7 @@ const DateSelect = () => {
               </Group>
               <Group
                 className={cn(
-                  "h-[50px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center font-medium text-gray-600 text-lg",
                   value[0] && "text-dark"
                 )}
               >
@@ -169,7 +169,7 @@ const DateSelect = () => {
               </Group>
               <Group
                 className={cn(
-                  "h-[50px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center font-medium text-gray-600 text-lg",
                   value[1] && "text-dark"
                 )}
               >
@@ -199,6 +199,33 @@ const DateSelect = () => {
           />
         </Popover.Dropdown>
       </Popover>
+
+      <Group wrap="nowrap" className="w-full h-full cursor-pointer  p-xs ">
+        <Stack className="w-full " gap={0}>
+          <Group gap={4}>
+            <img alt="icon" src={calenderIn.src} />
+            <Text className="text-sm">{t("date-range-picker.check-in")}</Text>
+          </Group>
+          <Group
+            className={cn(" items-center font-medium text-lg", "text-dark")}
+          >
+            {unit.checkin}
+          </Group>
+        </Stack>
+        <Divider orientation="vertical" />
+        <Stack className="w-full " gap={0}>
+          <Group gap={4}>
+            <img alt="icon" src={calenderOut.src} />
+
+            <Text className="text-sm">{t("date-range-picker.check-out")}</Text>
+          </Group>
+          <Group
+            className={cn(" items-center font-medium  text-lg", "text-dark")}
+          >
+            {unit.checkout}
+          </Group>
+        </Stack>
+      </Group>
     </Stack>
   )
 }
