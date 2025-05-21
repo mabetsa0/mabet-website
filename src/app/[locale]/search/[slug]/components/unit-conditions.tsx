@@ -24,9 +24,15 @@ const UnitConditions = async (unit: FullUnitData) => {
           <h5 className="text-h4 md:text-h5 font-medium">
             {t("unit.reservation-conditions")}
           </h5>
-          <List type="ordered" className="text-[#767676] list-decimal">
-            {terms.map((ele, index) => {
-              return <ListItem key={index}>{ele}</ListItem>
+          <List className="text-[#767676] ">
+            {terms.map((ele) => {
+              return ele.split("\n").map((e, index) => {
+                return (
+                  <ListItem className="py-[2px]" key={index}>
+                    {e}
+                  </ListItem>
+                )
+              })
             })}
           </List>
         </Stack>

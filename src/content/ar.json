@@ -295,6 +295,9 @@
     "location-description": "سيظهر الان الموقع التقريبي للمكان وليس الموقع الدقيق علماً بأن معلومات الموقع الدقيقة ستظهر بعد تأكيد الحجز مباشرة في صفحة الحجوزات",
     "reservation-policy": "شروط الحجز و الالغاء",
     "reservation-conditions": "قوانين هذا المبيت",
-    "cancellation_policy": "سياسة الإلغاء"
+    "cancellation_policy": "سياسة الإلغاء",
+    "reservation-details": {
+      "title": "تفاصيل الحجز"
+    }
   }
 }

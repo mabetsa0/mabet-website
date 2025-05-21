@@ -1,6 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { Unit } from "@/@types"
+import { fallingStar, sharpShape } from "@/assets"
+import useFavorite from "@/hooks/use-favorite"
+import { cn } from "@/lib/cn"
+import { Link } from "@/lib/i18n/navigation"
 import { Carousel } from "@mantine/carousel"
 import {
   ActionIcon,
@@ -15,6 +19,7 @@ import {
   Text,
   Title,
 } from "@mantine/core"
+import dayjs from "dayjs"
 import {
   Bath,
   BedSingle,
@@ -25,11 +30,8 @@ import {
   Users,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { parseAsString, useQueryStates } from "nuqs"
 import { RiyalIcon } from "../icons"
-import useFavorite from "@/hooks/use-favorite"
-import { fallingStar, sharpShape } from "@/assets"
-import { cn } from "@/lib/cn"
-import { Link } from "@/lib/i18n/navigation"
 
 const UnitCard = (props: Unit & { className?: string }) => {
   const t = useTranslations("unit-card")
@@ -39,13 +41,17 @@ const UnitCard = (props: Unit & { className?: string }) => {
     id: props.id,
   })
 
+  const [dates] = useQueryStates({
+    from: parseAsString.withDefault(dayjs().format("YYYY-MM-DD")),
+    to: parseAsString.withDefault(dayjs().add(1, "days").format("YYYY-MM-DD")),
+  })
   return (
     <Card
       padding="xs"
       radius="md"
       withBorder
       component={Link}
-      href={`/search/${props.slug}`}
+      href={`/search/${props.slug}?from=${dates.from}&to=${dates.to}`}
       className={cn(
         "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
         props.className

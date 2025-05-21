@@ -5,7 +5,7 @@ import ImageGallery from "./components/image-gallery"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 
-import { Divider, Loader, Space, Stack } from "@mantine/core"
+import { Box, Divider, Loader, Space, Stack } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import dynamic from "next/dynamic"
@@ -14,6 +14,9 @@ import AboutUnit from "./components/about-unit"
 import Features from "./components/features"
 import Reviews from "./components/reviews"
 import UnitConditions from "./components/unit-conditions"
+const ReservationDetails = dynamic(
+  () => import("./components/reservation-details")
+)
 const VideoSlider = dynamic(async () => {
   return import("./components/video")
 })
@@ -63,17 +66,16 @@ const page = async (props: Props) => {
                   </Stack>
                 </Stack>
                 <Divider />
-
                 <Space />
                 <Space />
-
                 <Features />
                 <Divider />
-
                 <AboutUnit {...unit} />
                 <Space />
               </Stack>
-              <div className="md:w-1/3"></div>
+              <Box visibleFrom="md" className="md:w-1/3">
+                <ReservationDetails />
+              </Box>
             </div>
             <Stack gap={"lg"}>
               <Divider />
