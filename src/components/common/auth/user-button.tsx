@@ -8,14 +8,13 @@ import { useEffect, useState } from "react"
 
 const UserButton = () => {
   const t = useTranslations("header")
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, { onOpen }] = useAuthModal()
+  const [opened, { onOpen }] = useAuthModal()
   const pathname = usePathname()
   const [authStatus, setAuthStatus] = useState("pending")
 
   useEffect(() => {
     setAuthStatus(isAuthenticated() ? "authorized" : "unauthorized")
-  }, [pathname])
+  }, [pathname, opened])
 
   if (authStatus === "unauthorized" || authStatus === "pending")
     return (

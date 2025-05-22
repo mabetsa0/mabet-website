@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import { User } from "@/@types/user"
 import { LOCALSTORAGE_SESSION_KEY } from "@/config"
+import { useAuthModal } from "@/hooks/use-auth-modal"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
@@ -12,6 +14,8 @@ import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 
 const VerifyOtp = () => {
   const t = useTranslations("auth")
+  const [_, { onClose }] = useAuthModal()
+
   const [phoneNumber, setPhoneNumber] = useQueryStates({
     phonenumber: parseAsString.withDefault(""),
     country_code: parseAsString.withDefault(""),
@@ -37,6 +41,7 @@ const VerifyOtp = () => {
         JSON.stringify(user)
       )
       setPhoneNumber(null)
+      onClose()
     } catch (error) {
       handleFormError(error, form)
     }
