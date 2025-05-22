@@ -310,5 +310,8 @@
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
+  },
+  "generla": {
+    "failer": "فشلت العملية"
   }
 }

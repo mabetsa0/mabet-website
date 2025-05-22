@@ -311,5 +311,8 @@
   },
   "errors": {
     "unknown-error": "Unknown error"
+  },
+  "generla": {
+    "failer": "Failer"
   }
 }

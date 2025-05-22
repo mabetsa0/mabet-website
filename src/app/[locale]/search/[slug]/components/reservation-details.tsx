@@ -15,7 +15,7 @@ import {
   Text,
   Title,
 } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
@@ -26,6 +26,9 @@ import axios from "axios"
 import { ErrorResponse } from "@/@types/error"
 import DateSelect from "./date-select"
 import { X } from "lucide-react"
+import { createBooking } from "../create-booking"
+import { notifications } from "@mantine/notifications"
+import { useRouter } from "@/lib/i18n/navigation"
 
 const ReservationDetails = () => {
   const [dates] = useQueryStates({
@@ -61,6 +64,24 @@ const ReservationDetails = () => {
   })
 
   const t = useTranslations()
+
+  // handle create booking
+  const Router = useRouter()
+  const createBookingMutation = useMutation({
+    mutationFn: createBooking,
+    onError(error) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        notifications.show({
+          title: t("generla.failer"),
+          message: (error.response.data as ErrorResponse).errors?.[0] || "",
+          color: "red",
+        })
+      }
+    },
+    onSuccess(data) {
+      Router.push(data + "")
+    },
+  })
 
   if (status === "pending")
     return (
