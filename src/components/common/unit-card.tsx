@@ -173,7 +173,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                 <img
                   alt="sharp"
                   src={sharpShape.src}
-                  className=" absolute end-0 top-0 bottom-0"
+                  className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
                 />
               </Badge>
             ) : props.badge?.border_color ? (
@@ -198,7 +198,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                 <img
                   alt="sharp"
                   src={sharpShape.src}
-                  className=" absolute end-0 top-0 bottom-0"
+                  className=" ltr:scale-x-[-1] absolute end-0 top-0 bottom-0"
                 />
               </Badge>
             ) : null}
