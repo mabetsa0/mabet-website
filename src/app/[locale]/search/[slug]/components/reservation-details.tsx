@@ -252,7 +252,15 @@ const ReservationDetails = () => {
             </SimpleGrid>
             <Space />
             <Space />
-            <Button>
+            <Button
+              onClick={() =>
+                createBookingMutation.mutate({
+                  from: dayjs(dates.from).format("YYYY-MM-DD"),
+                  to: dayjs(dates.to).format("YYYY-MM-DD"),
+                  unitId: unit.id,
+                })
+              }
+            >
               {t("unit.create-booking", { value: prices.full_payment })}
               <RiyalIcon />
             </Button>

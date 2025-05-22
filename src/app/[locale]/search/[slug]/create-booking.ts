@@ -4,7 +4,7 @@ import Mabet from "@/services"
 export const createBooking = async (data: {
   from: string
   to: string
-  unitId: string
+  unitId: string | number
 }) => {
   const { from, to, unitId: unit } = data
   const response = await Mabet.post<CreateBookingResponse>(
