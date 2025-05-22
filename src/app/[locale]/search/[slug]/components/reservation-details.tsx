@@ -253,6 +253,7 @@ const ReservationDetails = () => {
             <Space />
             <Space />
             <Button
+              loading={createBookingMutation.isPending}
               onClick={() =>
                 createBookingMutation.mutate({
                   from: dayjs(dates.from).format("YYYY-MM-DD"),
@@ -268,6 +269,18 @@ const ReservationDetails = () => {
               {t("unit.down-payment")} {prices.down_payment} <RiyalIcon />{" "}
             </Text>
           </Stack>
+          {createBookingMutation.error ? (
+            axios.isAxiosError(createBookingMutation.error) ? (
+              <Text ta={"center"} c={"red"}>
+                {(error?.response as ErrorResponse).errors?.[0] ||
+                  error?.message}
+              </Text>
+            ) : (
+              <Text ta={"center"} c={"red"}>
+                {error?.message}
+              </Text>
+            )
+          ) : null}
         </Card.Section>
       ) : null}
     </Card>
