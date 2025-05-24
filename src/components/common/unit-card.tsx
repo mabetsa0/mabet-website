@@ -209,7 +209,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
         <Space />
         <Stack gap={"xs"}>
           <Text className="text-sm font-medium">{t("features")}</Text>
-          <Group wrap="nowrap" className="text-xs text-[#767676]">
+          <Group
+            justify="space-evenly"
+            wrap="nowrap"
+            className="text-xs text-[#767676]"
+          >
             <Group gap={"4"} wrap="nowrap">
               <Users width={16} strokeWidth={1.25} className="text-primary" />
               <span className=" whitespace-nowrap">
