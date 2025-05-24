@@ -48,9 +48,9 @@ const Reviews = () => {
         </Text>
         <Space />
         <SimpleGrid
-          spacing={0}
+          spacing={"lg"}
           className=" divide-x divide-[#F3F3F3]"
-          cols={data?.statics.length || 0}
+          cols={{ base: 2, md: 4 }}
         >
           {data?.statics.map((ele) => {
             return (
