@@ -34,7 +34,7 @@ const SpecialUnits = ({ data }: Props) => {
       <div className="container mx-auto">
         <Group justify="space-between" align="center" wrap="nowrap">
           <div className="mb-1.5 ">
-            <Text className="max-md:text-sm" c={"primary"} fw={500}>
+            <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
               {t("desciption")}
             </Text>
             <Title className=" text-h3 md:text-h2">{t("title")}</Title>

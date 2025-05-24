@@ -17,7 +17,7 @@ const WhyMabet = () => {
     <section>
       <div className="container pb-3">
         <div className="text-center mb-1">
-          <Text className="max-md:text-sm" c={"primary"} fw={500}>
+          <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}
           </Text>
           <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>

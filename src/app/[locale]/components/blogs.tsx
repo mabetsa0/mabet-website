@@ -14,7 +14,7 @@ const Blogs = async () => {
       <section>
         <div className="container py-4.5 mx-auto">
           <div className="text-center flex flex-col gap-[4px] mb-1.5">
-            <Text className="max-md:text-sm" c={"primary"} fw={500}>
+            <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
               {t("title")}
             </Text>
             <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>

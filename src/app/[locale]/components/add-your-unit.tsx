@@ -16,7 +16,7 @@ const AddYourUnit = async () => {
       <img alt="curve" src={whiteCurve.src} className="w-full" />
       <div className="container pt-3 pb-5 mx-auto">
         <div className="text-center flex flex-col gap-[4px]">
-          <Text className="max-md:text-sm" c={"primary"} fw={500}>
+          <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}
           </Text>
           <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
