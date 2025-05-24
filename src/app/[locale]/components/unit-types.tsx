@@ -17,7 +17,10 @@ const UnitTypes = async () => {
           </Text>
           <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
         </div>
-        <SimpleGrid cols={{ base: 2, md: 4 }} className=" mt-4 md:mt-1.5">
+        <SimpleGrid
+          cols={{ base: 2, md: 4 }}
+          className=" max-w-4xl mx-auto mt-4 md:mt-1.5"
+        >
           {unitTypes.map((type) => {
             return (
               <Link key={type.id} href={`/search?unit_type=${type.id}`}>
