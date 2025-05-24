@@ -84,7 +84,7 @@ const ReservationDetails = () => {
       }
     },
     onSuccess(data) {
-      Router.push(data + "")
+      Router.push(`search/${unit.slug}/${data}`)
     },
   })
   const handleCreateBooking = () => {
