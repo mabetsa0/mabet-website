@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation"
 
 import axios from "axios"
@@ -5,7 +6,8 @@ import ImageGallery from "./components/image-gallery"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 
-import { Box, Divider, Loader, Space, Stack } from "@mantine/core"
+import { torism } from "@/assets"
+import { Box, Divider, Group, Loader, Space, Stack } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import dynamic from "next/dynamic"
@@ -59,10 +61,14 @@ const page = async (props: Props) => {
                   </h3>
                   <Stack gap={"xs"} className="text-[#767676]">
                     <p>{unit.details}</p>
-                    <p>{unit.licence.license_text}</p>
+
                     <p className="flex gap-0.5">
                       <QrCode strokeWidth={1.25} /> {unit.code}
                     </p>
+                    <Group className="border w-fit rounded-md py-0.5 px-1.5 border-primary">
+                      <img className="w-3" src={torism.src} alt="licence" />
+                      <p>{unit.licence.license_text}</p>
+                    </Group>
                   </Stack>
                 </Stack>
                 <Divider />

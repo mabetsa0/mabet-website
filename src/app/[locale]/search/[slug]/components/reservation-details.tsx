@@ -29,6 +29,8 @@ import { X } from "lucide-react"
 import { createBooking } from "../create-booking"
 import { notifications } from "@mantine/notifications"
 import { useRouter } from "@/lib/i18n/navigation"
+import { isAuthenticated } from "@/utils/is-authenticated"
+import { useAuthModal } from "@/hooks/use-auth-modal"
 
 const ReservationDetails = () => {
   const [dates] = useQueryStates({
@@ -64,16 +66,19 @@ const ReservationDetails = () => {
   })
 
   const t = useTranslations()
+  const auth = useAuthModal()
 
   // handle create booking
   const Router = useRouter()
   const createBookingMutation = useMutation({
     mutationFn: createBooking,
+
     onError(error) {
       if (axios.isAxiosError(error) && error.response?.data) {
         notifications.show({
           title: t("generla.failer"),
-          message: (error.response.data as ErrorResponse).errors?.[0] || "",
+          message:
+            (error.response.data as ErrorResponse).errors?.[0] || error.message,
           color: "red",
         })
       }
@@ -82,6 +87,16 @@ const ReservationDetails = () => {
       Router.push(data + "")
     },
   })
+  const handleCreateBooking = () => {
+    if (!isAuthenticated()) {
+      return auth[1].onOpen()
+    }
+    createBookingMutation.mutate({
+      from: dayjs(dates.from).format("YYYY-MM-DD"),
+      to: dayjs(dates.to).format("YYYY-MM-DD"),
+      unitId: unit.id,
+    })
+  }
 
   if (status === "pending")
     return (
@@ -254,19 +269,14 @@ const ReservationDetails = () => {
             <Space />
             <Button
               loading={createBookingMutation.isPending}
-              onClick={() =>
-                createBookingMutation.mutate({
-                  from: dayjs(dates.from).format("YYYY-MM-DD"),
-                  to: dayjs(dates.to).format("YYYY-MM-DD"),
-                  unitId: unit.id,
-                })
-              }
+              onClick={handleCreateBooking}
             >
               {t("unit.create-booking", { value: prices.full_payment })}
               <RiyalIcon />
             </Button>
             <Text c={"#767676"} ta={"center"}>
-              {t("unit.down-payment")} {prices.down_payment} <RiyalIcon />{" "}
+              {t("unit.down-payment")} {prices.down_payment.toFixed(2)}{" "}
+              <RiyalIcon />{" "}
             </Text>
           </Stack>
           {createBookingMutation.error ? (
