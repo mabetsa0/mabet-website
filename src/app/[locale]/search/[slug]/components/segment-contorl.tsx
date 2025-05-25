@@ -19,7 +19,6 @@ const UnitSegmentedControl = () => {
         }}
         value={tab}
         onChange={setTab}
-        defaultValue="Default"
       >
         <Tabs.List>
           <Tabs.Tab size={"lg"} value="Default">

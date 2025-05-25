@@ -9,7 +9,9 @@ const AboutUnit = () => {
   const t = useTranslations()
   return (
     <Stack>
-      <h3 className="text-h4 md:text-h3 font-medium">{t("unit.about-unit")}</h3>
+      <h3 className="text-h4 md:text-h3 font-medium hidden md:block">
+        {t("unit.about-unit")}
+      </h3>
       <Stack gap={"md"}>
         {unit.stars ? (
           <Group align="start">

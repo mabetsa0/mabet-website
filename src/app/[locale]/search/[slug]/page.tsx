@@ -14,6 +14,7 @@ import UnitSegmentedControl from "./components/segment-contorl"
 import TabConditionRender from "./components/tab-condition-render"
 import UnitConditions from "./components/unit-conditions"
 import UnitDescription from "./components/unit-description"
+import MobileUnitDescription from "./components/mobile-unit-description"
 const ReservationDetails = dynamic(
   () => import("./components/reservation-details")
 )
@@ -48,13 +49,16 @@ const page = async (props: Props) => {
         <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white  ">
           <UnitSegmentedControl />
           <div className="container">
-            <div className="flex gap-4 max-md:flex-col lg:mb-4">
+            <div className="flex gap-4 max-md:flex-col md:mb-2">
               <UnitDescription />
               <Box visibleFrom="md" className="md:w-[500px] shrink-0">
                 <ReservationDetails />
               </Box>
             </div>
             <Stack gap={"lg"}>
+              <TabConditionRender tab="Default">
+                <MobileUnitDescription />
+              </TabConditionRender>
               <TabConditionRender tab="Reviews">
                 <Reviews />
               </TabConditionRender>

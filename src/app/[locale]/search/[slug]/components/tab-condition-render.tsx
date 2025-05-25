@@ -1,5 +1,5 @@
 "use client"
-import { useQueryState } from "nuqs"
+import { parseAsString, useQueryState } from "nuqs"
 import React from "react"
 import useMdScreen from "../hooks/use-md-screen"
 
@@ -9,9 +9,9 @@ type Props = {
 }
 
 const TabConditionRender = (props: Props) => {
-  const [tab] = useQueryState("tab")
+  const [tab] = useQueryState("tab", parseAsString.withDefault("Default"))
   const matches = useMdScreen()
-  if (matches && tab !== props.tab) return null
+  if (matches && tab != props.tab) return null
   return props.children
 }
 

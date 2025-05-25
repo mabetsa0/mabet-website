@@ -311,7 +311,9 @@
     "deatils-tab": "Specifications",
     "reviews-tab": "Reviews",
     "map-tab": "Map",
-    "conditions-tap": "Terms"
+    "conditions-tap": "Terms",
+    "mabet-garentee": "Mabet guarantee ",
+    "mabet-garentee-description": "We guarantee the validity of the information and the cleanliness of the place"
   },
   "errors": {
     "unknown-error": "Unknown error"

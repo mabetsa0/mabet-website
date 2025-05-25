@@ -310,7 +310,9 @@
     "deatils-tab": "المواصفات",
     "reviews-tab": "التقييمات",
     "map-tab": "الخريطة",
-    "conditions-tap": "الشروط"
+    "conditions-tap": "الشروط",
+    "mabet-garentee": "ضمان مبيت",
+    "mabet-garentee-description": "نضمن لك صحة المعلومات ونظافة المكان"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

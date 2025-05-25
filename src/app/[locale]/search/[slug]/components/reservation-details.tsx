@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { ErrorResponse } from "@/@types/error"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useRouter } from "@/lib/i18n/navigation"
+import { isAuthenticated } from "@/utils/is-authenticated"
 import {
   Badge,
   Button,
@@ -15,22 +19,19 @@ import {
   Text,
   Title,
 } from "@mantine/core"
+import { notifications } from "@mantine/notifications"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import axios from "axios"
 import dayjs from "dayjs"
+import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
-import { GetUnitAvailability } from "../get-unit-availability"
-import axios from "axios"
-import { ErrorResponse } from "@/@types/error"
-import DateSelect from "./date-select"
-import { X } from "lucide-react"
 import { createBooking } from "../create-booking"
-import { notifications } from "@mantine/notifications"
-import { useRouter } from "@/lib/i18n/navigation"
-import { isAuthenticated } from "@/utils/is-authenticated"
-import { useAuthModal } from "@/hooks/use-auth-modal"
+import { GetUnitAvailability } from "../get-unit-availability"
+import useMdScreen from "../hooks/use-md-screen"
+import DateSelect from "./date-select"
 
 const ReservationDetails = () => {
   const [dates] = useQueryStates({
@@ -98,7 +99,9 @@ const ReservationDetails = () => {
     })
   }
 
-  if (status === "pending")
+  const matches = useMdScreen()
+
+  if (status === "pending" && !matches)
     return (
       <Card className="border-[#F3F3F3]" padding="md" radius="md" withBorder>
         <Card.Section
@@ -118,27 +121,26 @@ const ReservationDetails = () => {
     )
   return (
     <Card
-      className="border-[#F3F3F3] [box-shadow:_0px_12px_20px_0px_#0000000A]"
-      padding="md"
-      radius="md"
-      withBorder
+      className={
+        "border-[#F3F3F3]  md:[box-shadow:_0px_12px_20px_0px_#0000000A] md:rounded-md  md:p-md"
+      }
+      withBorder={!matches}
     >
       <Card.Section
-        className="border-[#F3F3F3]"
-        px={24}
-        pt={24}
+        className={"md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"}
         pb={12}
-        withBorder
+        withBorder={!matches}
       >
-        <h3 className="text-h3 ">{t("unit.reservation-details.title")}</h3>
+        <h3 className="text-h4 md:text-h3  font-bold">
+          {t("unit.reservation-details.title")}
+        </h3>
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]"
-        px={24}
-        pt={24}
+        visibleFrom="md"
+        className="md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"
         pb={12}
-        withBorder
+        withBorder={!matches}
       >
         {status === "error" ? (
           <Stack py={"xs"} justify="center" align="center">
@@ -199,24 +201,21 @@ const ReservationDetails = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]"
-        px={24}
-        pt={24}
+        className="border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"
         pb={12}
-        withBorder
+        withBorder={!matches}
       >
         <DateSelect />
       </Card.Section>
 
       {prices ? (
         <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
+          className="border-[#F3F3F3] md:px-[24px]"
           pt={24}
           pb={12}
-          withBorder
+          withBorder={!matches}
         >
-          <Stack>
+          <Stack visibleFrom="md">
             <SimpleGrid cols={2}>
               <Group gap={"3"}>
                 {prices.duration_count}{" "}
@@ -267,6 +266,7 @@ const ReservationDetails = () => {
             </SimpleGrid>
             <Space />
             <Space />
+
             <Button
               loading={createBookingMutation.isPending}
               onClick={handleCreateBooking}
