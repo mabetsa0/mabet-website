@@ -24,7 +24,7 @@ import { Minus } from "lucide-react"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
-const DateSelect = () => {
+const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
   const unit = useUnitData()
   const t = useTranslations()
 
@@ -131,6 +131,7 @@ const DateSelect = () => {
         onClose={() => {
           if (value[0] && value[1]) setDates({ from: value[0], to: value[1] })
         }}
+        disabled={readOnly}
         transitionProps={{ duration: 200, transition: "pop" }}
         withArrow
         shadow="md"

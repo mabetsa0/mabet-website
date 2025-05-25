@@ -16,5 +16,5 @@ export const createBooking = async (data: {
     }
   )
   const booking = response.data.data.booking
-  return booking.id
+  return booking.code
 }
