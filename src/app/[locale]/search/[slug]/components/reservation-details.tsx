@@ -227,7 +227,7 @@ const ReservationDetails = () => {
           <Stack visibleFrom="md">
             <SimpleGrid cols={2}>
               <Group gap={"3"}>
-                {prices.duration_count}{" "}
+                {prices.duration_text}{" "}
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
                   {prices.price_plain} <RiyalIcon />
@@ -244,7 +244,7 @@ const ReservationDetails = () => {
                 <Group gap={3}>
                   <Text fw={500}>{t("general.discount")}</Text>
                   <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
-                    {prices.discount_percent}
+                    {prices.discount_percent_text}%
                   </div>
                 </Group>
 
