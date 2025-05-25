@@ -6,16 +6,14 @@ import ImageGallery from "./components/image-gallery"
 import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 
-import { torism } from "@/assets"
-import { Box, Divider, Group, Loader, Space, Stack } from "@mantine/core"
-import { QrCode } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { Box, Loader, Stack } from "@mantine/core"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
-import AboutUnit from "./components/about-unit"
-import Features from "./components/features"
 import Reviews from "./components/reviews"
+import UnitSegmentedControl from "./components/segment-contorl"
+import TabConditionRender from "./components/tab-condition-render"
 import UnitConditions from "./components/unit-conditions"
+import UnitDescription from "./components/unit-description"
 const ReservationDetails = dynamic(
   () => import("./components/reservation-details")
 )
@@ -38,7 +36,6 @@ const page = async (props: Props) => {
   const params = await props.params
   try {
     const unit = await GetUnit({ slug: params.slug })
-    const t = await getTranslations()
     return (
       <UnitContextProvider value={unit}>
         <ImageGallery />
@@ -48,56 +45,30 @@ const page = async (props: Props) => {
         <Suspense>
           <VideoSlider />
         </Suspense>
-        <section className="relative  bg-white  ">
+        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white  ">
+          <UnitSegmentedControl />
           <div className="container">
-            <div className="flex gap-4 max-md:flex-col">
-              <Stack className="w-full">
-                <Space hiddenFrom="md" />
-                <h1 className="text-h4 font-bold md:hidden">{unit.name}</h1>
-
-                <Stack>
-                  <h3 className="text-h4 md:text-h3 font-medium">
-                    {t("unit.details")}
-                  </h3>
-                  <Stack gap={"xs"} className="text-[#767676]">
-                    <p>{unit.details}</p>
-
-                    <p className="flex gap-0.5">
-                      <QrCode strokeWidth={1.25} /> {unit.code}
-                    </p>
-                    <Group className="border w-fit rounded-md py-0.5 px-1.5 border-primary">
-                      <img className="w-3" src={torism.src} alt="licence" />
-                      <p>{unit.licence.license_text}</p>
-                    </Group>
-                  </Stack>
-                </Stack>
-                <Divider />
-                <Space />
-                <Space />
-                <Features />
-                <Divider />
-                <AboutUnit {...unit} />
-                <Space />
-              </Stack>
+            <div className="flex gap-4 max-md:flex-col lg:mb-4">
+              <UnitDescription />
               <Box visibleFrom="md" className="md:w-[500px] shrink-0">
                 <ReservationDetails />
               </Box>
             </div>
             <Stack gap={"lg"}>
-              <Divider />
-              <Reviews />
-              <Space />
-              <Suspense fallback={<Loader />}>
-                <MyGoogleMap
-                  lat={+atob(atob(unit.mla))}
-                  lng={+atob(atob(unit.mlg))}
-                />
-              </Suspense>
-              <Space />
-
-              <Space />
-
-              <UnitConditions {...unit} />
+              <TabConditionRender tab="Reviews">
+                <Reviews />
+              </TabConditionRender>
+              <TabConditionRender tab="Map">
+                <Suspense fallback={<Loader />}>
+                  <MyGoogleMap
+                    lat={+atob(atob(unit.mla))}
+                    lng={+atob(atob(unit.mlg))}
+                  />
+                </Suspense>
+              </TabConditionRender>
+              <TabConditionRender tab="Terms">
+                <UnitConditions {...unit} />
+              </TabConditionRender>
             </Stack>
           </div>
         </section>

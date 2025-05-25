@@ -2,8 +2,8 @@
 
 import React, { useMemo } from "react"
 
-import { Circle, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 import { Loader, Stack, Text } from "@mantine/core"
+import { Circle, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 import { useTranslations } from "next-intl"
 
 const containerStyle = {
@@ -22,7 +22,7 @@ function MyGoogleMapComponent({ lat, lng }: { lat: number; lng: number }) {
     <div className="container">
       <Stack>
         <div>
-          <h3 className="text-h4 md:text-h3 font-medium">
+          <h3 className="text-h4 md:text-h3 font-medium mb-0.5">
             {t("unit.location-title")}
           </h3>
           <Text maw={550} c={"#767676"}>

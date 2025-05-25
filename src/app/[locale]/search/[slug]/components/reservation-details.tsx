@@ -275,8 +275,7 @@ const ReservationDetails = () => {
               <RiyalIcon />
             </Button>
             <Text c={"#767676"} ta={"center"}>
-              {t("unit.down-payment")} {prices.down_payment.toFixed(2)}{" "}
-              <RiyalIcon />{" "}
+              {t("unit.down-payment")} {prices.down_payment} <RiyalIcon />{" "}
             </Text>
           </Stack>
           {createBookingMutation.error ? (

@@ -306,7 +306,11 @@
       "title": "تفاصيل الحجز"
     },
     "create-booking": "متابعة الحجز بـ {value} ",
-    "down-payment": "عربون الحجز "
+    "down-payment": "عربون الحجز ",
+    "deatils-tab": "المواصفات",
+    "reviews-tab": "التقييمات",
+    "map-tab": "الخريطة",
+    "conditions-tap": "الشروط"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

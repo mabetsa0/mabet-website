@@ -307,7 +307,11 @@
       "title": "Reservation details"
     },
     "create-booking": "Continue reservation with {Value}",
-    "down-payment": "Down payment"
+    "down-payment": "Down payment",
+    "deatils-tab": "Specifications",
+    "reviews-tab": "Reviews",
+    "map-tab": "Map",
+    "conditions-tap": "Terms"
   },
   "errors": {
     "unknown-error": "Unknown error"

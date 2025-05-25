@@ -1,7 +1,7 @@
 import React from "react"
 import { FullUnitData } from "../@types"
 import Mabet from "@/services"
-import { List, ListItem, SimpleGrid, Stack } from "@mantine/core"
+import { List, ListItem, SimpleGrid, Space, Stack } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 
 const UnitConditions = async (unit: FullUnitData) => {
@@ -15,6 +15,7 @@ const UnitConditions = async (unit: FullUnitData) => {
   const t = await getTranslations()
   return (
     <Stack gap={"lg"}>
+      <Space />
       <h3 className="text-h4 md:text-h3 font-medium">
         {t("unit.reservation-policy")}
       </h3>

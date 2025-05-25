@@ -4,6 +4,7 @@ import { reviewBorder } from "@/assets"
 import Mabet from "@/services"
 import {
   Avatar,
+  Divider,
   Group,
   Loader,
   SimpleGrid,
@@ -26,6 +27,7 @@ const Reviews = () => {
         .data.data
     },
   })
+
   const t = useTranslations()
   if (status === "pending")
     return (
@@ -35,68 +37,76 @@ const Reviews = () => {
     )
   if (status === "success")
     return (
-      <Stack>
-        <Group justify="center">
-          <img src={reviewBorder.src} alt="reviews" />
-          <Text className="text-[74.42px]" fw={700}>
-            {unit.stars || "0.0"}
+      <>
+        <Divider />
+        <Stack>
+          <Group justify="center">
+            <img src={reviewBorder.src} alt="reviews" />
+            <Text className="text-[74.42px]" fw={700}>
+              {unit.stars || "0.0"}
+            </Text>
+            <img
+              className="scale-x-[-1]"
+              src={reviewBorder.src}
+              alt="reviews"
+            />
+          </Group>
+          <Text maw={360} mx={"auto"} ta={"center"} c={"#767676"}>
+            {t("unit.reviews.description")}
           </Text>
-          <img className="scale-x-[-1]" src={reviewBorder.src} alt="reviews" />
-        </Group>
-        <Text maw={360} mx={"auto"} ta={"center"} c={"#767676"}>
-          {t("unit.reviews.description")}
-        </Text>
-        <Space />
-        <SimpleGrid
-          spacing={"lg"}
-          className=" divide-x divide-[#F3F3F3]"
-          cols={{ base: 2, md: 4 }}
-        >
-          {data?.statics.map((ele) => {
-            return (
-              <Stack px={"md"} key={ele.name}>
-                <Stack gap={"4"}>
-                  <Text size="lg" fw={500}>
-                    {ele.name}
-                  </Text>
-                  <Text size="xl" fw={700}>
-                    {ele.stars}
-                  </Text>
-                </Stack>
-                <img className="w-2" src={ele.icon_svg} alt={ele.name} />
-              </Stack>
-            )
-          })}
-        </SimpleGrid>
-        <Space />
-        <Space />
-
-        <div className="container">
-          <Group gap={"lg"} align="flex-start">
-            {data?.reviews.map((review) => {
+          <Space />
+          <SimpleGrid
+            spacing={"lg"}
+            className=" divide-x divide-[#F3F3F3]"
+            cols={{ base: 2, md: 4 }}
+          >
+            {data?.statics.map((ele) => {
               return (
-                <Stack className="max-w-xs w-full" key={review.id}>
-                  <Group>
-                    <Avatar name={review.name} radius="xl" />
-                    <Stack gap={2}>
-                      <Text>{review.name || t("unit.unknown-review")}</Text>
-                      <Group>
-                        <Star size={22} className="text-primary" />
-                        <span className="text-primary font-bold">
-                          {review.stars}
-                        </span>
-                      </Group>
-                    </Stack>
-                  </Group>
-                  <Text size="sm" c={"#767676"}>
-                    {review.comment}
-                  </Text>
+                <Stack px={"md"} key={ele.name}>
+                  <Stack gap={"4"}>
+                    <Text size="lg" fw={500}>
+                      {ele.name}
+                    </Text>
+                    <Text size="xl" fw={700}>
+                      {ele.stars}
+                    </Text>
+                  </Stack>
+                  <img className="w-2" src={ele.icon_svg} alt={ele.name} />
                 </Stack>
               )
             })}
-          </Group>
-        </div>
-      </Stack>
+          </SimpleGrid>
+          <Space />
+          <Space />
+
+          <div className="container">
+            <Group gap={"lg"} align="flex-start">
+              {data?.reviews.map((review) => {
+                return (
+                  <Stack className="max-w-xs w-full" key={review.id}>
+                    <Group>
+                      <Avatar name={review.name} radius="xl" />
+                      <Stack gap={2}>
+                        <Text>{review.name || t("unit.unknown-review")}</Text>
+                        <Group>
+                          <Star size={22} className="text-primary" />
+                          <span className="text-primary font-bold">
+                            {review.stars}
+                          </span>
+                        </Group>
+                      </Stack>
+                    </Group>
+                    <Text size="sm" c={"#767676"}>
+                      {review.comment}
+                    </Text>
+                  </Stack>
+                )
+              })}
+            </Group>
+          </div>
+        </Stack>
+        <Space />
+      </>
     )
 
   return null

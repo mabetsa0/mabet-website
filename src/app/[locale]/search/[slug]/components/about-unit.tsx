@@ -2,9 +2,10 @@
 import { Group, Stack, Text } from "@mantine/core"
 import { Expand, MapPin, Star, Users } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { FullUnitData } from "../@types"
+import { useUnitData } from "../context/unit-context"
 
-const AboutUnit = (unit: FullUnitData) => {
+const AboutUnit = () => {
+  const unit = useUnitData()
   const t = useTranslations()
   return (
     <Stack>

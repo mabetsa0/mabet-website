@@ -125,7 +125,11 @@ const ImageGallery = () => {
             withControls={false}
             loop
             height="100%"
-            withIndicators={false}
+            withIndicators={true}
+            classNames={{
+              indicators: "justify-center mb-1",
+              indicator: "!w-0.5 !h-0.5",
+            }}
           >
             {unit.images.map((image, i) => {
               return (
@@ -142,7 +146,7 @@ const ImageGallery = () => {
               )
             })}
           </Carousel>
-          <Group wrap="nowrap" className=" absolute bottom-1 right-1 z-10">
+          <Group wrap="nowrap" className=" absolute bottom-3 right-1 z-10">
             <Button
               onClick={() => {
                 setOpened(true)
