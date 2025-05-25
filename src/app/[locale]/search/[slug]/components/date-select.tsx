@@ -208,7 +208,10 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
             <Text className="text-sm">{t("date-range-picker.check-in")}</Text>
           </Group>
           <Group
-            className={cn(" items-center font-medium text-lg", "text-dark")}
+            className={cn(
+              " items-center font-medium text-lg",
+              "text-[#767676]"
+            )}
           >
             {unit.checkin}
           </Group>
@@ -221,7 +224,10 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
             <Text className="text-sm">{t("date-range-picker.check-out")}</Text>
           </Group>
           <Group
-            className={cn(" items-center font-medium  text-lg", "text-dark")}
+            className={cn(
+              " items-center font-medium  text-lg",
+              "text-[#767676]"
+            )}
           >
             {unit.checkout}
           </Group>
