@@ -313,7 +313,9 @@
     "map-tab": "Map",
     "conditions-tap": "Terms",
     "mabet-garentee": "Mabet guarantee ",
-    "mabet-garentee-description": "We guarantee the validity of the information and the cleanliness of the place"
+    "mabet-garentee-description": "We guarantee the validity of the information and the cleanliness of the place",
+    "create-booking-mobile": "Continue reservation",
+    "total": "Total"
   },
   "errors": {
     "unknown-error": "Unknown error"

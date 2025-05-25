@@ -312,7 +312,9 @@
     "map-tab": "الخريطة",
     "conditions-tap": "الشروط",
     "mabet-garentee": "ضمان مبيت",
-    "mabet-garentee-description": "نضمن لك صحة المعلومات ونظافة المكان"
+    "mabet-garentee-description": "نضمن لك صحة المعلومات ونظافة المكان",
+    "create-booking-mobile": "متابعة الحجز",
+    "total": "اجمالي"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

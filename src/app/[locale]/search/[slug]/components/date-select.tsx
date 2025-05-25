@@ -21,6 +21,7 @@ import { useState } from "react"
 import useBusyDays from "../hooks/use-busy-days"
 import { useUnitData } from "../context/unit-context"
 import { Minus } from "lucide-react"
+import useMdScreen from "../hooks/use-md-screen"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
@@ -76,6 +77,7 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
       </div>
     )
   }
+  const matches = useMdScreen()
   return (
     <Stack>
       <div>
@@ -183,7 +185,7 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
         </Popover.Target>
         <Popover.Dropdown>
           <DatePicker
-            numberOfColumns={2}
+            numberOfColumns={matches ? 1 : 2}
             hideOutsideDates
             minDate={new Date()}
             type="range"
