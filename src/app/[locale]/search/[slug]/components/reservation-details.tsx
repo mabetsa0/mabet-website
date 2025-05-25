@@ -111,7 +111,9 @@ const ReservationDetails = () => {
           pb={12}
           withBorder
         >
-          <h3 className="text-h3 ">{t("unit.reservation-details.title")}</h3>
+          <h3 className="text-h3 font-bold">
+            {t("unit.reservation-details.title")}
+          </h3>
         </Card.Section>
 
         <Stack align="center" justify="center" h={320}>
@@ -138,7 +140,7 @@ const ReservationDetails = () => {
 
       <Card.Section
         visibleFrom="md"
-        className="md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"
+        className="md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[16px]"
         pb={12}
         withBorder={!matches}
       >
