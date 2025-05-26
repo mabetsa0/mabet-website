@@ -22,7 +22,7 @@ const UnitConditions = () => {
   const t = useTranslations()
   return (
     <Stack gap={"lg"}>
-      <Space />
+      <Space visibleFrom="md" />
       <h3 className="text-h4 md:text-h3 font-bold">
         {t("unit.reservation-policy")}
       </h3>

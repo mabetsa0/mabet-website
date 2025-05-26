@@ -16,6 +16,7 @@ import { GetPaymentSummary } from "./get-payment-summary"
 import PaymentForm from "./components/payment-form"
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { keepPreviousData } from "@tanstack/react-query"
+import ImageGallery from "../components/image-gallery"
 
 type Props = {
   params: Promise<{
@@ -66,11 +67,14 @@ const Page = (props: Props) => {
   const { unit } = data
   return (
     <UnitContextProvider value={unit}>
-      <section className="relative  bg-white pt-2 ">
+      <Box hiddenFrom="md">
+        <ImageGallery />
+      </Box>
+      <section className="relative  bg-white  max-md:rounded-3xl max-md:-mt-1 md:pt-2 ">
         <div className="container">
           <div className="flex gap-4 max-md:flex-col">
             <Stack className="w-full">
-              <Group align="center">
+              <Group visibleFrom="md" align="center">
                 <ActionIcon onClick={backToUnit} radius={"xl"} size={"xl"}>
                   <ChevronRight />
                 </ActionIcon>
@@ -80,9 +84,14 @@ const Page = (props: Props) => {
                 </h1>
               </Group>
               <Space />
+              <Box hiddenFrom="md">
+                <ReservationDetails prices={data.booking_details} />
+              </Box>
 
               <UnitConditions />
-              <PaymentForm {...data.booking_details} />
+              <Box visibleFrom="md">
+                <PaymentForm {...data.booking_details} />
+              </Box>
             </Stack>
             <Box visibleFrom="md" className="md:w-[500px] shrink-0">
               <ReservationDetails prices={data.booking_details} />

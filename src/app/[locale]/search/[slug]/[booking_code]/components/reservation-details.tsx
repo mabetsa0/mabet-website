@@ -5,6 +5,7 @@ import { RiyalIcon } from "@/components/icons"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
 import {
+  Box,
   Button,
   Card,
   Divider,
@@ -155,28 +156,28 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   return (
     <>
       <Card
-        className="border-[#F3F3F3] [box-shadow:_0px_12px_20px_0px_#0000000A]"
-        padding="md"
-        radius="md"
+        className="border-[#F3F3F3] md:p-md md:rounded-md max-md:border-transparent md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
         withBorder
       >
         <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
-          pt={24}
-          pb={12}
+          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
           withBorder
         >
           <Group align="start">
-            <div className="h-[120px] w-[120px] rounded-md overflow-hidden">
+            <Box
+              visibleFrom="md"
+              className="h-[120px] w-[120px] rounded-md overflow-hidden"
+            >
               <img
                 className="w-full h-full object-cover"
                 src={unit.images[0].image_path}
                 alt={unit.images[0].alt}
               />
-            </div>
+            </Box>
             <Stack>
-              <h3 className="text-h5 font-bold line-clamp-1">{unit.name}</h3>
+              <h3 className="text-h4 md:text-h5 font-bold line-clamp-1">
+                {unit.name}
+              </h3>
               <Stack gap={4}>
                 <Text c={"#767676"}>
                   <QrCode
@@ -210,9 +211,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
 
         <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
-          pt={24}
+          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
           pb={12}
           withBorder
         >
@@ -225,9 +224,8 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           />
         </Card.Section>
         <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
-          pt={24}
+          visibleFrom="md"
+          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
           pb={12}
           withBorder
         >
@@ -236,9 +234,8 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
 
         {prices ? (
           <Card.Section
-            className="border-[#F3F3F3]"
-            px={24}
-            pt={24}
+            visibleFrom="md"
+            className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
             pb={12}
             withBorder
           >
