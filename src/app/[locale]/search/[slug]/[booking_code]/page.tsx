@@ -27,9 +27,10 @@ type Props = {
 
 const Page = (props: Props) => {
   const params = use(props.params)
-  const [{ method, isPrivate }] = useQueryStates({
+  const [{ method, isPrivate, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
     isPrivate: parseAsStringLiteral(["1"]),
+    coupon: parseAsString.withDefault(""),
   })
   const { data, status } = useQuery({
     enabled: isAuthenticated(),
@@ -38,6 +39,7 @@ const Page = (props: Props) => {
       GetPaymentSummary(params.booking_code, {
         payment_method: method,
         private: isPrivate ?? undefined,
+        coupon: coupon ?? undefined,
       }),
     placeholderData: keepPreviousData,
   })
