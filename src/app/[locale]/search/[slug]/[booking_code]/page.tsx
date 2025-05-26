@@ -25,6 +25,7 @@ type Props = {
 const Page = (props: Props) => {
   const params = use(props.params)
   const { data, status } = useQuery({
+    enabled: isAuthenticated(),
     queryKey: [params.booking_code],
     queryFn: () => GetPaymentSummary(params.booking_code),
   })
@@ -35,9 +36,9 @@ const Page = (props: Props) => {
   const Router = useRouter()
   useEffect(() => {
     if (!isAuthenticated()) {
-      Router.back()
+      Router.replace(`/search/${params.slug}`)
     }
-  }, [Router])
+  }, [Router, params.slug])
   if (status == "pending")
     return (
       <div className="flex items-center justify-center min-h-[10vh]">

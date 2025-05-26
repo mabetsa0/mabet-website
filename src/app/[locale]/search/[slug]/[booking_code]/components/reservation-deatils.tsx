@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core"
-import { X } from "lucide-react"
+import { MapPin, QrCode, Star, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import DateSelect from "../../components/date-select"
 import { BookingDetails } from "../payment-summary"
@@ -42,7 +42,37 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
               alt={unit.images[0].alt}
             />
           </div>
-          <h3 className="text-h5 font-bold">{unit.name}</h3>
+          <Stack>
+            <h3 className="text-h5 font-bold line-clamp-1">{unit.name}</h3>
+            <Stack gap={4}>
+              <Text c={"#767676"}>
+                <QrCode
+                  className="inline-block me-0.5"
+                  size={22}
+                  strokeWidth={1.25}
+                />
+                {unit.code}
+              </Text>
+              {unit.stars ? (
+                <Text c={"#767676"}>
+                  <Star
+                    className="inline-block me-0.5"
+                    size={22}
+                    strokeWidth={1.25}
+                  />
+                  {unit.stars}
+                </Text>
+              ) : null}
+              <Text c={"#767676"}>
+                <MapPin
+                  className="inline-block me-0.5"
+                  size={22}
+                  strokeWidth={1.25}
+                />
+                {unit.location}
+              </Text>
+            </Stack>
+          </Stack>
         </Group>
       </Card.Section>
 
@@ -61,7 +91,13 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         pb={12}
         withBorder
       >
-        <DateSelect readOnly />
+        <DateSelect
+          initialValues={{
+            from: new Date(prices.from),
+            to: new Date(prices.to),
+          }}
+          readOnly
+        />
       </Card.Section>
 
       {prices ? (

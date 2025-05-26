@@ -25,7 +25,13 @@ import useMdScreen from "../hooks/use-md-screen"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
-const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
+const DateSelect = ({
+  readOnly,
+  initialValues,
+}: {
+  readOnly?: boolean
+  initialValues?: { from: Date; to: Date }
+}) => {
   const unit = useUnitData()
   const t = useTranslations()
 
@@ -40,7 +46,9 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
       history: "replace",
     }
   )
-  const [value, setValue] = useState<[Date | null, Date | null]>([from, to])
+  const [value, setValue] = useState<[Date | null, Date | null]>(
+    initialValues ? [initialValues?.from, initialValues?.to] : [from, to]
+  )
   const duration = dayjs(value[1]).diff(dayjs(value[0]), "days")
 
   const locale = useLocale()
