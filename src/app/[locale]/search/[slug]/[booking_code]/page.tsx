@@ -14,6 +14,8 @@ import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
 import PaymentForm from "./components/payment-form"
+import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import { keepPreviousData } from "@tanstack/react-query"
 
 type Props = {
   params: Promise<{
@@ -25,10 +27,19 @@ type Props = {
 
 const Page = (props: Props) => {
   const params = use(props.params)
+  const [{ method, isPrivate }] = useQueryStates({
+    method: parseAsString.withDefault("card"),
+    isPrivate: parseAsStringLiteral(["1"]),
+  })
   const { data, status } = useQuery({
     enabled: isAuthenticated(),
-    queryKey: [params.booking_code],
-    queryFn: () => GetPaymentSummary(params.booking_code),
+    queryKey: [params.booking_code, method],
+    queryFn: () =>
+      GetPaymentSummary(params.booking_code, {
+        payment_method: method,
+        private: isPrivate ?? undefined,
+      }),
+    placeholderData: keepPreviousData,
   })
   const t = useTranslations()
 
