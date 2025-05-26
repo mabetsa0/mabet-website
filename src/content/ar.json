@@ -314,12 +314,29 @@
     "mabet-garentee": "ضمان مبيت",
     "mabet-garentee-description": "نضمن لك صحة المعلومات ونظافة المكان",
     "create-booking-mobile": "متابعة الحجز",
-    "total": "اجمالي"
+    "total": "اجمالي",
+    "review-and-payment": "المراجعة والدفع",
+    "pay": "الدفع وتأكيد الحجز",
+    "madfu-modal": {
+      "title": "قم بسمح ال QR Code لاتمام عملية الدفع"
+    }
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
   },
   "generla": {
     "failer": "فشلت العملية"
+  },
+  "payment-form": {
+    "title": "طريقة الدفع",
+    "description": "إختر طريقة الدفع المناسبة لك من خلال الخيارات التي توفرها لك منصة مبيت.",
+    "use-wallet": "استخدم المحفظة",
+    "use-wallet-description": "تفعيل المتبقي من رصيدك المتواجد في المحفظة {value}",
+    "card": "الدفع بالبطاقة",
+    "tabby": "ادفع باستخدام تابي",
+    "madfu": "ادفع باستخدام مدفوع",
+    "madfu-description": "دفعات بلا فوائد بدون رسوم",
+    "partial-payment": "ادفع عربون تأكيد الحجز {value}",
+    "full-payment": "ادفع كامل المبلغ {value} "
   }
 }

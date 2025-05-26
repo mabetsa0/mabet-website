@@ -3,16 +3,17 @@
 
 import { UnitContextProvider } from "../context/unit-context"
 
-import { torism } from "@/assets"
-import { Box, Group, Loader, Space, Stack } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
-import { QrCode } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { use, useEffect } from "react"
-import { GetPaymentSummary } from "./get-payment-summary"
-import ReservationDetails from "./components/reservation-deatils"
 import { useRouter } from "@/lib/i18n/navigation"
 import { isAuthenticated } from "@/utils/is-authenticated"
+import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
+import { useQuery } from "@tanstack/react-query"
+import { ChevronRight } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { use, useCallback, useEffect } from "react"
+import ReservationDetails from "./components/reservation-details"
+import UnitConditions from "./components/unit-conditions"
+import { GetPaymentSummary } from "./get-payment-summary"
+import PaymentForm from "./components/payment-form"
 
 type Props = {
   params: Promise<{
@@ -29,16 +30,18 @@ const Page = (props: Props) => {
     queryKey: [params.booking_code],
     queryFn: () => GetPaymentSummary(params.booking_code),
   })
-
   const t = useTranslations()
 
   // handle unauthorized
   const Router = useRouter()
+  const backToUnit = useCallback(() => {
+    Router.replace(`/search/${params.slug}`)
+  }, [Router, params.slug])
   useEffect(() => {
     if (!isAuthenticated()) {
-      Router.replace(`/search/${params.slug}`)
+      backToUnit()
     }
-  }, [Router, params.slug])
+  }, [backToUnit])
   if (status == "pending")
     return (
       <div className="flex items-center justify-center min-h-[10vh]">
@@ -50,29 +53,23 @@ const Page = (props: Props) => {
   const { unit } = data
   return (
     <UnitContextProvider value={unit}>
-      <section className="relative  bg-white  ">
+      <section className="relative  bg-white pt-2 ">
         <div className="container">
           <div className="flex gap-4 max-md:flex-col">
             <Stack className="w-full">
-              <Space hiddenFrom="md" />
-              <h1 className="text-h4 font-bold md:hidden">{unit.name}</h1>
+              <Group align="center">
+                <ActionIcon onClick={backToUnit} radius={"xl"} size={"xl"}>
+                  <ChevronRight />
+                </ActionIcon>
 
-              <Stack>
-                <h3 className="text-h4 md:text-h3 font-medium">
-                  {t("unit.details")}
-                </h3>
-                <Stack gap={"xs"} className="text-[#767676]">
-                  <p>{unit.details}</p>
+                <h1 className="text-h2 font-bold ">
+                  {t("unit.review-and-payment")}
+                </h1>
+              </Group>
+              <Space />
 
-                  <p className="flex gap-0.5">
-                    <QrCode strokeWidth={1.25} /> {unit.code}
-                  </p>
-                  <Group className="border w-fit rounded-md py-0.5 px-1.5 border-primary">
-                    <img className="w-3" src={torism.src} alt="licence" />
-                    <p>{unit.licence.license_text}</p>
-                  </Group>
-                </Stack>
-              </Stack>
+              <UnitConditions />
+              <PaymentForm {...data.booking_details} />
             </Stack>
             <Box visibleFrom="md" className="md:w-[500px] shrink-0">
               <ReservationDetails prices={data.booking_details} />

@@ -47,6 +47,17 @@ export interface FullUnitData {
   reviews: Reviews
   images: Image[]
   cancellation_policy: CancellationPolicy
+  cancellation_summary: {
+    data: Record<
+      string,
+      {
+        title: string
+        icon: string
+        icon_svg: string
+      }
+    >
+  }
+
   licence: Licence
   insurance: number
 }

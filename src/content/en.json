@@ -315,12 +315,29 @@
     "mabet-garentee": "Mabet guarantee ",
     "mabet-garentee-description": "We guarantee the validity of the information and the cleanliness of the place",
     "create-booking-mobile": "Continue reservation",
-    "total": "Total"
+    "total": "Total",
+    "review-and-payment": "Review and payment",
+    "pay": "Payment and confirmation of reservation",
+    "madfu-modal": {
+      "title": "Scan the QR code to complete payment."
+    }
   },
   "errors": {
     "unknown-error": "Unknown error"
   },
   "generla": {
     "failer": "Failer"
+  },
+  "payment-form": {
+    "title": "Payment methods",
+    "description": "Choose the appropriate payment method for you with the options that Mabet platform provides to you.",
+    "use-wallet": "Use wallet",
+    "use-wallet-description": "Activate the remaining balance in wallet {value}",
+    "card": "Pay by card",
+    "tabby": "Pay by Tabby",
+    "madfu": "Pay with Madfu",
+    "madfu-description": "Pay by parts without interest without fees",
+    "partial-payment": "Pay a deposit {value}",
+    "full-payment": "Pay full {value} "
   }
 }
