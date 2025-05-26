@@ -14,25 +14,17 @@ const UnitSegmentedControl = () => {
       <Tabs
         py={"sm"}
         classNames={{
-          list: " before:border-transparent  justify-center",
-          tab: "data-[active]:text-primary text-lg",
+          list: " before:border-transparent  justify-center flex-nowrap",
+          tab: "data-[active]:text-primary text-[17px]",
         }}
         value={tab}
         onChange={setTab}
       >
         <Tabs.List>
-          <Tabs.Tab size={"lg"} value="Default">
-            {t("deatils-tab")}
-          </Tabs.Tab>
-          <Tabs.Tab size={"lg"} value="Reviews">
-            {t("reviews-tab")}
-          </Tabs.Tab>
-          <Tabs.Tab size={"lg"} value="Map">
-            {t("map-tab")}
-          </Tabs.Tab>
-          <Tabs.Tab size={"lg"} value="Terms">
-            {t("conditions-tap")}
-          </Tabs.Tab>
+          <Tabs.Tab value="Default">{t("deatils-tab")}</Tabs.Tab>
+          <Tabs.Tab value="Reviews">{t("reviews-tab")}</Tabs.Tab>
+          <Tabs.Tab value="Map">{t("map-tab")}</Tabs.Tab>
+          <Tabs.Tab value="Terms">{t("conditions-tap")}</Tabs.Tab>
         </Tabs.List>
       </Tabs>
     </Box>

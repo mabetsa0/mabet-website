@@ -15,10 +15,11 @@ import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import DateSelect from "../../components/date-select"
 import { BookingDetails } from "../payment-summary"
+import { useUnitData } from "../../context/unit-context"
 
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
-
+  const unit = useUnitData()
   return (
     <Card
       className="border-[#F3F3F3] [box-shadow:_0px_12px_20px_0px_#0000000A]"
@@ -33,7 +34,16 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         pb={12}
         withBorder
       >
-        <h3 className="text-h3 ">{t("unit.reservation-details.title")}</h3>
+        <Group align="start">
+          <div className="h-[120px] w-[120px] rounded-md overflow-hidden">
+            <img
+              className="w-full h-full object-cover"
+              src={unit.images[0].image_path}
+              alt={unit.images[0].alt}
+            />
+          </div>
+          <h3 className="text-h5 font-bold">{unit.name}</h3>
+        </Group>
       </Card.Section>
 
       <Card.Section
@@ -51,7 +61,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         pb={12}
         withBorder
       >
-        <DateSelect />
+        <DateSelect readOnly />
       </Card.Section>
 
       {prices ? (

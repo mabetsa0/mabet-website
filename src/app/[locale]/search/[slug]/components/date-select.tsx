@@ -81,9 +81,11 @@ const DateSelect = ({ readOnly }: { readOnly?: boolean }) => {
   return (
     <Stack>
       <div>
-        <Text mb={"xs"} c="#767676">
-          {t("date-range-picker.can-edit")}
-        </Text>
+        {readOnly ? null : (
+          <Text mb={"xs"} c="#767676">
+            {t("date-range-picker.can-edit")}
+          </Text>
+        )}
         <Group justify="space-between">
           <Text c={"#767676"}>
             {t("general.from")}{" "}

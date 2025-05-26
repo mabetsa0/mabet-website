@@ -8,9 +8,11 @@ import { Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { QrCode } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { use } from "react"
+import { use, useEffect } from "react"
 import { GetPaymentSummary } from "./get-payment-summary"
 import ReservationDetails from "./components/reservation-deatils"
+import { useRouter } from "@/lib/i18n/navigation"
+import { isAuthenticated } from "@/utils/is-authenticated"
 
 type Props = {
   params: Promise<{
@@ -26,7 +28,16 @@ const Page = (props: Props) => {
     queryKey: [params.booking_code],
     queryFn: () => GetPaymentSummary(params.booking_code),
   })
+
   const t = useTranslations()
+
+  // handle unauthorized
+  const Router = useRouter()
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      Router.back()
+    }
+  }, [Router])
   if (status == "pending")
     return (
       <div className="flex items-center justify-center min-h-[10vh]">
