@@ -46,14 +46,16 @@ interface MadfuResponse {
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
   const unit = useUnitData()
-  const [{ method, use_wallet, payment_option, coupon }] = useQueryStates({
-    method: parseAsString.withDefault("card"),
-    use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
-    payment_option: parseAsStringLiteral(["full", "partial"]).withDefault(
-      "partial"
-    ),
-    coupon: parseAsString.withDefault(""),
-  })
+  const [{ method, use_wallet, payment_option, coupon, isPrivate }] =
+    useQueryStates({
+      method: parseAsString.withDefault("card"),
+      use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
+      payment_option: parseAsStringLiteral(["full", "partial"]).withDefault(
+        "partial"
+      ),
+      coupon: parseAsString.withDefault(""),
+      isPrivate: parseAsStringLiteral(["1"]),
+    })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
   const params = useParams() as { booking_code: string }
@@ -64,11 +66,8 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
       payment_option: string
       use_wallet: string
       coupon: string
+      isPrivate?: string
     }) => {
-      const isPrivate = new URLSearchParams(window.location.search).get(
-        "private"
-      )
-
       await GetPaymentSummary(params.booking_code, {
         ...args,
         private: isPrivate ? 1 : undefined,
@@ -302,6 +301,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                     use_wallet: use_wallet,
                     payment_option,
                     coupon,
+                    isPrivate: isPrivate ? "1" : undefined,
                   })
                 }}
                 loading={isPending}
