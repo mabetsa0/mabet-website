@@ -321,7 +321,9 @@
       "title": "قم بسمح ال QR Code لاتمام عملية الدفع"
     },
     "coupon-code": "ادخل كوبون الخصم",
-    "apply-coupon-code": "تطبيق"
+    "apply-coupon-code": "تطبيق",
+    "mobile-payment-button": "متابعة الحجز",
+    "mobile-reservation-details": "ملخص الحجز"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

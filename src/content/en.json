@@ -322,7 +322,9 @@
       "title": "Scan the QR code to complete payment."
     },
     "coupon-code": "Enter the discount coupon",
-    "apply-coupon-code": "Apply"
+    "apply-coupon-code": "Apply",
+    "mobile-payment-button": "Contune reservation",
+    "mobile-reservation-details": "Reservation details"
   },
   "errors": {
     "unknown-error": "Unknown error"

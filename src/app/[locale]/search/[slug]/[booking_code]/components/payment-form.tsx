@@ -31,6 +31,8 @@ const PaymentForm = (booking: BookingDetails) => {
   const locale = useLocale()
 
   useEffect(() => {
+    console.log("first")
+    console.log(window.TabbyPromo)
     if (!window.TabbyPromo) return
     new window.TabbyPromo({
       selector: "#tabby",
@@ -42,7 +44,7 @@ const PaymentForm = (booking: BookingDetails) => {
     })
   }, [locale, booking.full_payment])
   return (
-    <Stack className="mt-5">
+    <Stack className="md:mt-5">
       <Stack gap={"xs"}>
         <h2 className="text-h4 md:text-h5 font-bold">{t("title")}</h2>
         <Text className="text-lg" c={"#767676"}>

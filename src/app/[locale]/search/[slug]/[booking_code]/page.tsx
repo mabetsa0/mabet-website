@@ -17,6 +17,7 @@ import PaymentForm from "./components/payment-form"
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { keepPreviousData } from "@tanstack/react-query"
 import ImageGallery from "../components/image-gallery"
+import MobilePaymentButton from "./components/mobile-payment-button"
 
 type Props = {
   params: Promise<{
@@ -97,6 +98,7 @@ const Page = (props: Props) => {
               <ReservationDetails prices={data.booking_details} />
             </Box>
           </div>
+          <MobilePaymentButton booking_details={data.booking_details} />
         </div>
       </section>
     </UnitContextProvider>
