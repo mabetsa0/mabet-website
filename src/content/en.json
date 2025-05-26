@@ -320,7 +320,9 @@
     "pay": "Payment and confirmation of reservation",
     "madfu-modal": {
       "title": "Scan the QR code to complete payment."
-    }
+    },
+    "coupon-code": "Enter the discount coupon",
+    "apply-coupon-code": "Apply"
   },
   "errors": {
     "unknown-error": "Unknown error"

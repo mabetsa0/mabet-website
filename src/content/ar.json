@@ -319,7 +319,9 @@
     "pay": "الدفع وتأكيد الحجز",
     "madfu-modal": {
       "title": "قم بسمح ال QR Code لاتمام عملية الدفع"
-    }
+    },
+    "coupon-code": "ادخل كوبون الخصم",
+    "apply-coupon-code": "تطبيق"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

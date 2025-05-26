@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { ErrorResponse } from "@/@types/error"
 import { RiyalIcon } from "@/components/icons"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
 import {
   Button,
   Card,
@@ -12,19 +15,17 @@ import {
   Stack,
   Text,
 } from "@mantine/core"
+import { useMutation } from "@tanstack/react-query"
 import { MapPin, QrCode, Star, X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import DateSelect from "../../components/date-select"
-import { BookingDetails } from "../payment-summary"
-import { useUnitData } from "../../context/unit-context"
-import { useState } from "react"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { useParams } from "next/navigation"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useMutation } from "@tanstack/react-query"
+import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import { useState } from "react"
+import DateSelect from "../../components/date-select"
+import { useUnitData } from "../../context/unit-context"
 import { GetPaymentSummary } from "../get-payment-summary"
-import Mabet from "@/services"
-import { ErrorResponse } from "@/@types/error"
+import { BookingDetails } from "../payment-summary"
+import Coupon from "./coupon"
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -223,6 +224,15 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             }}
             readOnly
           />
+        </Card.Section>
+        <Card.Section
+          className="border-[#F3F3F3]"
+          px={24}
+          pt={24}
+          pb={12}
+          withBorder
+        >
+          <Coupon />
         </Card.Section>
 
         {prices ? (
