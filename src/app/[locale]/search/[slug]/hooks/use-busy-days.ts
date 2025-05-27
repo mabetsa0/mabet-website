@@ -43,8 +43,6 @@ const useBusyDays = ({
 }) => {
   const [__startDate, setStartDate] = useState(startDate ?? new Date())
   const [firstDay, lastDay] = getDatesRange(__startDate)
-  console.log("🚀 ~ lastDay:", lastDay)
-  console.log("🚀 ~ firstDay:", firstDay)
 
   const query = useQuery({
     queryKey: ["busy-days", id, __startDate?.toISOString()],

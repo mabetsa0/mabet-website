@@ -31,8 +31,6 @@ const PaymentForm = (booking: BookingDetails) => {
   const locale = useLocale()
 
   useEffect(() => {
-    console.log("first")
-    console.log(window.TabbyPromo)
     if (!window.TabbyPromo) return
     new window.TabbyPromo({
       selector: "#tabby",

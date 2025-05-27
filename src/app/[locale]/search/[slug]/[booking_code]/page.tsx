@@ -6,18 +6,18 @@ import { UnitContextProvider } from "../context/unit-context"
 import { useRouter } from "@/lib/i18n/navigation"
 import { isAuthenticated } from "@/utils/is-authenticated"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { use, useCallback, useEffect } from "react"
+import ImageGallery from "../components/image-gallery"
+import MobilePaymentButton from "./components/mobile-payment-button"
+import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
-import PaymentForm from "./components/payment-form"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
-import { keepPreviousData } from "@tanstack/react-query"
-import ImageGallery from "../components/image-gallery"
-import MobilePaymentButton from "./components/mobile-payment-button"
+import useMdScreen from "../hooks/use-md-screen"
 
 type Props = {
   params: Promise<{
@@ -57,6 +57,7 @@ const Page = (props: Props) => {
       backToUnit()
     }
   }, [backToUnit])
+  const mathes = useMdScreen()
   if (status == "pending")
     return (
       <div className="flex items-center justify-center min-h-[10vh]">
@@ -90,9 +91,11 @@ const Page = (props: Props) => {
               </Box>
 
               <UnitConditions />
-              <Box visibleFrom="md">
-                <PaymentForm {...data.booking_details} />
-              </Box>
+              {mathes ? null : (
+                <Box visibleFrom="md">
+                  <PaymentForm {...data.booking_details} />
+                </Box>
+              )}
             </Stack>
             <Box visibleFrom="md" className="md:w-[500px] shrink-0">
               <ReservationDetails prices={data.booking_details} />
