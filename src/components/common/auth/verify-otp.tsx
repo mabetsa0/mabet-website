@@ -70,7 +70,7 @@ const VerifyOtp = () => {
   return (
     <form onSubmit={onSubmit}>
       <Stack className="h-full" justify="space-between" gap={"xl"}>
-        <Stack gap={"xs"}>
+        <Stack className="max-md:!text-center" gap={"xs"}>
           <Title order={4} c={"primary"}>
             {t("verify-otp.title")}
           </Title>
@@ -79,6 +79,7 @@ const VerifyOtp = () => {
           </Text>
         </Stack>
         <PinInput
+          size="lg"
           className="!justify-center"
           autoFocus
           oneTimeCode
