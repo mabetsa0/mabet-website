@@ -50,6 +50,7 @@ import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
+import UnitTypeFilter from "./filters/unit-type-filter"
 
 const Results = () => {
   const t = useTranslations()
@@ -196,6 +197,7 @@ const Results = () => {
               >
                 {t("search.filter.show_only_available-filter.button")}
               </ToggleFilterButton>
+              <UnitTypeFilter />
               <FilterButtonWithSearch
                 filterKey="region_id"
                 label={t("general.select-region")}
