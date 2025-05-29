@@ -212,6 +212,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           <Group
             justify="space-evenly"
             wrap="nowrap"
+            gap={"sm"}
             className="text-xs text-[#767676]"
           >
             <Group gap={"4"} wrap="nowrap">
