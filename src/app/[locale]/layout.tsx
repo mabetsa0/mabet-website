@@ -1,4 +1,3 @@
-import AuthModal from "@/components/common/auth/auth-modal"
 import GlobalDataContextProvider from "@/context/global-date-context"
 import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
@@ -11,8 +10,6 @@ import { notFound } from "next/navigation"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
-import Navbar from "./components/navbar"
-import Footer from "@/components/common/footer"
 
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -51,14 +48,7 @@ export default async function LocaleLayout({
           <MyReactQueryProvider>
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
-                <NextIntlClientProvider>
-                  <Navbar>
-                    {children}
-
-                    <Footer />
-                  </Navbar>
-                  <AuthModal />
-                </NextIntlClientProvider>
+                <NextIntlClientProvider>{children}</NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>
           </MyReactQueryProvider>

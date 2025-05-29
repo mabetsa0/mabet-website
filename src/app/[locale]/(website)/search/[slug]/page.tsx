@@ -16,6 +16,8 @@ import UnitConditions from "./components/unit-conditions"
 import UnitDescription from "./components/unit-description"
 import MobileUnitDescription from "./components/mobile-unit-description"
 import MobileCreateBookingButton from "./components/mobile-create-booking-button"
+import TrackBayut from "@/components/track-bayut"
+import DataLayer from "@/components/data-layer"
 const ReservationDetails = dynamic(
   () => import("./components/reservation-details")
 )
@@ -77,6 +79,12 @@ const page = async (props: Props) => {
             </Stack>
           </div>
         </section>
+        <Suspense>
+          <TrackBayut />
+        </Suspense>
+        <Suspense>
+          <DataLayer />
+        </Suspense>
         <MobileCreateBookingButton />
       </UnitContextProvider>
     )
