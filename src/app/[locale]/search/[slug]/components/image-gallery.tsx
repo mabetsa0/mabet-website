@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl"
 import { ChevronRight, Image, Video } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
 import { Carousel } from "@mantine/carousel"
+import { useRouter } from "@/lib/i18n/navigation"
 
 const ImageGallery = () => {
   const unit = useUnitData()
@@ -24,6 +25,11 @@ const ImageGallery = () => {
     "video",
     parseAsBoolean.withDefault(false)
   )
+
+  const Router = useRouter()
+  const goBack = () => {
+    Router.back()
+  }
 
   return (
     <>
@@ -39,6 +45,7 @@ const ImageGallery = () => {
                 {unit.name}
               </Title>
               <ActionIcon
+                onClick={goBack}
                 hiddenFrom="md"
                 size={"xl"}
                 radius={"xl"}
