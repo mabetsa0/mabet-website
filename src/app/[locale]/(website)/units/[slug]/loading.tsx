@@ -2,7 +2,7 @@ import { Loader } from "@mantine/core"
 
 const Loading = () => {
   return (
-    <div className="flex items-center justify-center min-h-[10vh]">
+    <div className="flex items-center justify-center h-[200vh]">
       <Loader />
     </div>
   )

@@ -22,10 +22,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   return (
-    <Navbar>
-      {children}
-
-      <Footer />
-    </Navbar>
+    <>
+      <Navbar>
+        {children}
+        <Footer />
+      </Navbar>
+    </>
   )
 }
