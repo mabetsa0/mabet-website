@@ -311,7 +311,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
       newSearchParams.delete(key)
       newSearchParams.append(key, value)
     })
-    Router.push(`/search?${newSearchParams.toString()}`)
+    Router.push(`/units?${newSearchParams.toString()}`)
   })
 
   return (

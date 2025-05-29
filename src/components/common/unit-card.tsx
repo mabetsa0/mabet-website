@@ -51,7 +51,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
       radius="md"
       withBorder
       component={Link}
-      href={`/search/${props.slug}?from=${dates.from}&to=${dates.to}`}
+      href={`/units/${props.slug}?from=${dates.from}&to=${dates.to}`}
       className={cn(
         "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
         props.className

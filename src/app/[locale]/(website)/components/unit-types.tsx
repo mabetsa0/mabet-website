@@ -23,7 +23,7 @@ const UnitTypes = async () => {
         >
           {unitTypes.map((type) => {
             return (
-              <Link key={type.id} href={`/search?unit_type=${type.id}`}>
+              <Link key={type.id} href={`/units?unit_type=${type.id}`}>
                 <Stack gap={"xs"} ta={"center"}>
                   <Image
                     h={40}

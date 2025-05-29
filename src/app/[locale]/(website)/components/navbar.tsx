@@ -19,7 +19,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   const t = useTranslations("header")
   const pathname = usePathname()
   const matches = useMediaQuery("(max-width: 62em)")
-  if (pathname.includes("search") && matches) return <>{children}</>
+  if (pathname.includes("units") && matches) return <>{children}</>
   return (
     <AppShell
       header={{ height: { base: 65, md: 74 } }}

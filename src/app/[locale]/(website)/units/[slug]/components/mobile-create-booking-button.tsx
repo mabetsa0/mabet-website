@@ -48,7 +48,7 @@ const MobileCreateBookingButton = () => {
       }
     },
     onSuccess(data) {
-      Router.push(`/search/${unit.slug}/${data}`)
+      Router.push(`/units/${unit.slug}/${data}`)
     },
   })
   const handleCreateBooking = () => {

@@ -50,7 +50,7 @@ const Page = (props: Props) => {
   // handle unauthorized
   const Router = useRouter()
   const backToUnit = useCallback(() => {
-    Router.replace(`/search/${params.slug}`)
+    Router.replace(`/units/${params.slug}`)
   }, [Router, params.slug])
   useEffect(() => {
     if (!isAuthenticated()) {
