@@ -4,6 +4,12 @@ import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import Navbar from "./components/navbar"
+import { Metadata } from "next"
+import { SEO } from "@/services/get-seo"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await SEO("/home")
+}
 
 export default async function LocaleLayout({
   children,

@@ -18,6 +18,7 @@ import MobileUnitDescription from "./components/mobile-unit-description"
 import MobileCreateBookingButton from "./components/mobile-create-booking-button"
 import TrackBayut from "@/components/track-bayut"
 import DataLayer from "@/components/data-layer"
+import { SEO } from "@/services/get-seo"
 const ReservationDetails = dynamic(
   () => import("./components/reservation-details")
 )
@@ -34,6 +35,24 @@ type Props = {
     slug: string
   }>
   searchParams: Promise<{ [key: string]: string }>
+}
+
+export async function generateMetadata(args: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | undefined }>
+}) {
+  const params = await args.params
+  const searchParams = await args.searchParams
+
+  try {
+    return await SEO("/units/" + params.slug, searchParams)
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return {
+        robots: "noindex",
+      }
+    }
+  }
 }
 
 const page = async (props: Props) => {

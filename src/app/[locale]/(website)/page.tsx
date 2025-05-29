@@ -13,9 +13,14 @@ import UnitTypes from "./components/unit-types"
 import WhyMabet from "./components/why-mabet"
 import { getSpecialUnits } from "./helpers/get-special-units"
 import { getTopRatedUnits } from "./helpers/get-top-rated-units"
+import { Metadata } from "next"
+import { SEO } from "@/services/get-seo"
 
 export const revalidate = 3600
 export const dynamic = "force-static"
+export async function generateMetadata(): Promise<Metadata> {
+  return await SEO("/home")
+}
 export default async function Page({
   params,
 }: {
