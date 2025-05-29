@@ -48,7 +48,7 @@ const UnitTypeFilter = () => {
                 >
                   <Group wrap="nowrap" align="flex-start">
                     <Radio.Indicator className="absolute opacity-0" />
-                    <Stack gap={"xs"} ta={"center"}>
+                    <Stack gap={"xs"} ta={"center"} className="w-full">
                       <Image
                         h={40}
                         w={40}

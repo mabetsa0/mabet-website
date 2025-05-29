@@ -117,7 +117,10 @@ const MobileUnitDescription = () => {
         <Stack gap={"xs"} className="text-[#767676]">
           <p>{unit.details}</p>
 
-          <Group className="border w-fit rounded-md py-0.5 px-1.5 border-primary">
+          <Group
+            wrap="nowrap"
+            className="border w-fit rounded-md py-0.5 px-1.5 border-primary"
+          >
             <img className="w-3" src={torism.src} alt="licence" />
             <p>{unit.licence.license_text}</p>
           </Group>

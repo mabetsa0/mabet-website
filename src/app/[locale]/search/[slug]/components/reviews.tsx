@@ -41,12 +41,16 @@ const Reviews = () => {
         <Divider />
         <Stack>
           <Group justify="center">
-            <img src={reviewBorder.src} alt="reviews" />
+            <img
+              src={reviewBorder.src}
+              alt="reviews"
+              className="ltr:scale-x-[-1]"
+            />
             <Text className="text-[74.42px]" fw={700}>
               {unit.stars || "0.0"}
             </Text>
             <img
-              className="scale-x-[-1]"
+              className="rtl:scale-x-[-1]"
               src={reviewBorder.src}
               alt="reviews"
             />

@@ -14,7 +14,7 @@ const AboutUnit = () => {
       </h3>
       <Stack gap={"md"}>
         {unit.stars ? (
-          <Group align="start">
+          <Group align="start" wrap="nowrap">
             <Star strokeWidth={1.25} />
             <div>
               <Text className="text-xl font-medium">{t("unit.ratings")}</Text>
@@ -27,14 +27,14 @@ const AboutUnit = () => {
             </div>
           </Group>
         ) : null}
-        <Group align="start">
+        <Group align="start" wrap="nowrap">
           <MapPin strokeWidth={1.25} />
           <div>
             <Text className="text-xl font-medium">{t("unit.location")}</Text>
             <Text className="text-[#767676]">{unit.location}</Text>
           </div>
         </Group>
-        <Group align="start">
+        <Group align="start" wrap="nowrap">
           <Expand strokeWidth={1.25} />
           <div>
             <Text className="text-xl font-medium">{t("unit.area")}</Text>
@@ -44,7 +44,7 @@ const AboutUnit = () => {
             </Text>
           </div>
         </Group>
-        <Group align="start">
+        <Group align="start" wrap="nowrap">
           <Users strokeWidth={1.25} />
           <div>
             <Text className="text-xl font-medium">{t("unit.unit-for")}</Text>

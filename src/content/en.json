@@ -288,7 +288,7 @@
     "show-less": "Show less",
     "about-unit": "About unit",
     "ratings": "Rating",
-    "ratings-message": "Rated {number} user, and with an evaluation rank {Value}.",
+    "ratings-message": "Rated {number} user, and with an evaluation rank {value}.",
     "location": "Location",
     "area": "Area",
     "area-message": "The area of ​​this unit was identified with approximately",
@@ -306,7 +306,7 @@
     "reservation-details": {
       "title": "Reservation details"
     },
-    "create-booking": "Continue reservation with {Value}",
+    "create-booking": "Continue reservation with {value}",
     "down-payment": "Down payment",
     "deatils-tab": "Specifications",
     "reviews-tab": "Reviews",

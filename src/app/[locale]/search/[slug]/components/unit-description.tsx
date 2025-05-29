@@ -21,7 +21,10 @@ const UnitDescription = () => {
           <p className="flex gap-0.5">
             <QrCode strokeWidth={1.25} /> {unit.code}
           </p>
-          <Group className="border w-fit rounded-md py-0.5 px-1.5 border-primary">
+          <Group
+            wrap="nowrap"
+            className="border w-fit rounded-md py-0.5 px-1.5 border-primary"
+          >
             <img className="w-3" src={torism.src} alt="licence" />
             <p>{unit.licence.license_text}</p>
           </Group>
