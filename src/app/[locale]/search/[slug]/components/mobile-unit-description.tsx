@@ -44,6 +44,7 @@ const MobileUnitDescription = () => {
   return (
     <Stack hiddenFrom="md" className="w-full">
       <Group
+        wrap="nowrap"
         p={"sm"}
         my={"xs"}
         className="rounded border-primary border"
