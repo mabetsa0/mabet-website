@@ -123,8 +123,8 @@ const Footer = async () => {
   const t = await getTranslations("footer")
   const unitTypes = await getUnitTypes()
   return (
-    <footer>
-      <div className="container mt-6 ">
+    <footer className="bg-[#fafafa]">
+      <div className="container pt-4 ">
         <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb={"xl"} spacing="40px">
           <Stack>
             <div>

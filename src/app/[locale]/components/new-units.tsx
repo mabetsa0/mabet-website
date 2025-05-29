@@ -30,7 +30,7 @@ const NewUnits = ({ data }: Props) => {
   const autoplay = useRef(Autoplay({ delay: 10000 }))
 
   return (
-    <section className="py-3">
+    <section className="py-3 bg-[#fafafa]">
       <div className="container mx-auto">
         <Group justify="space-between" align="center" wrap="nowrap">
           <div className="mb-1.5 ">
