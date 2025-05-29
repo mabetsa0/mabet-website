@@ -10,6 +10,8 @@ import { useTranslations } from "next-intl"
 import React from "react"
 import { Link } from "@/lib/i18n/navigation"
 import { usePathname } from "next/navigation"
+import { APP_LINK } from "@/config"
+import NextLink from "next/link"
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure()
@@ -53,6 +55,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   {t("about-us")}
                 </UnstyledButton>
                 <UnstyledButton
+                  component="a"
+                  target="_blank"
+                  href={APP_LINK}
                   className={"block px-xs py-md rounded-md  font-medium"}
                 >
                   {t("download-app")}
@@ -64,6 +69,8 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 </UnstyledButton>
                 <UnstyledButton
                   className={"block px-xs py-md rounded-md  font-medium"}
+                  component={NextLink}
+                  href={"/blog"}
                 >
                   {t("blog")}
                 </UnstyledButton>
@@ -86,13 +93,22 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
           {t("about-us")}
         </UnstyledButton>
-        <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
+        <UnstyledButton
+          component="a"
+          target="_blank"
+          href={APP_LINK}
+          className={"block px-xs py-md rounded-md  font-medium"}
+        >
           {t("download-app")}
         </UnstyledButton>
         <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
           {t("contact-us")}
         </UnstyledButton>
-        <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
+        <UnstyledButton
+          component={NextLink}
+          href={"/blog"}
+          className={"block px-xs py-md rounded-md  font-medium"}
+        >
           {t("blog")}
         </UnstyledButton>
         <LanguageSwitcher />
