@@ -1,6 +1,6 @@
 import { formateDate } from "@/utils/date-formatter"
 
-import { type Blog } from "@/types/blog-response"
+import { type Blog } from "@/@types/blog-response"
 
 import Avatar from "./avatar"
 import CoverImage from "./cover-image"

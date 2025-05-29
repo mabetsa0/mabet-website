@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next"
-import { getBlog } from "@/api/services/get-blog"
-import { getBlogs } from "@/api/services/get-blogs"
-import { getRelatedBlogs } from "@/api/services/get-related-blogs"
-import { getSEO } from "@/api/services/get-seo"
+import { getBlog } from "@/services/get-blog"
+import { getBlogs } from "@/services/get-blogs"
+import { getRelatedBlogs } from "@/services/get-related-blogs"
+import { SEO } from "@/services/get-seo"
 import axios from "axios"
 
 import Container from "@/components/blog/container"
@@ -27,7 +27,7 @@ export async function generateMetadata({
   // read route params
   const isANumber = Number(slug)
   if (isNaN(isANumber)) {
-    return await getSEO("ar", "/blog/" + slug)
+    return await SEO("/blog/" + slug)
   }
   return {
     title: "المقالات",

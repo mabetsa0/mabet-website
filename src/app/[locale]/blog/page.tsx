@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react"
-import { getBlogs } from "@/api/services/get-blogs"
+import { getBlogs } from "@/services/get-blogs"
 import axios from "axios"
 
 import Container from "@/components/blog/container"

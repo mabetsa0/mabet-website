@@ -1,5 +1,3 @@
-import { Metadata } from "next"
-
 export interface SEOResponse<T> {
   data: Data<T>
   message: null

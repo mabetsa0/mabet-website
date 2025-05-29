@@ -1,6 +1,6 @@
-import { Blog, BlogResponse } from "@/types/blog-response"
+import { Blog } from "@/@types/blog-response"
 
-import { BlogApi } from ".."
+import { BlogApi } from "../api"
 
 export const getBlog = async (slug: string) => {
   if (!slug) throw new Error("no url provided to getBlogs function")
