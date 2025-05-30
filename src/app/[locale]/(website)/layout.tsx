@@ -33,10 +33,7 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <Navbar>
-        {children}
-        <Footer />
-      </Navbar>
+      {children}
       <AuthModal />
     </>
   )

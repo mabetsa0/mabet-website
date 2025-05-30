@@ -19,6 +19,7 @@ import MobileCreateBookingButton from "./components/mobile-create-booking-button
 import TrackBayut from "@/components/track-bayut"
 import DataLayer from "@/components/data-layer"
 import { SEO } from "@/services/get-seo"
+import Footer from "@/components/common/footer"
 const ReservationDetails = dynamic(
   () => import("./components/reservation-details")
 )
@@ -105,6 +106,7 @@ const page = async (props: Props) => {
           <DataLayer />
         </Suspense>
         <MobileCreateBookingButton />
+        <Footer />
       </UnitContextProvider>
     )
   } catch (error) {

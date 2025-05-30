@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import SearchBar from "../components/search-bar"
 import Results from "./components/results"
 import { SEO } from "@/services/get-seo"
+import Footer from "@/components/common/footer"
 
 export async function generateMetadata(args: {
   searchParams: Promise<{ [key: string]: string | undefined }>
@@ -14,18 +15,21 @@ export async function generateMetadata(args: {
 }
 const Page = () => {
   return (
-    <Stack gap={"xl"}>
-      <Space />
-      <Box visibleFrom="md">
-        <Suspense>
-          <SearchBar />
-        </Suspense>
-      </Box>
+    <>
+      <Stack gap={"xl"}>
+        <Space />
+        <Box visibleFrom="md">
+          <Suspense>
+            <SearchBar />
+          </Suspense>
+        </Box>
 
-      <Suspense>
-        <Results />
-      </Suspense>
-    </Stack>
+        <Suspense>
+          <Results />
+        </Suspense>
+      </Stack>
+      <Footer />
+    </>
   )
 }
 

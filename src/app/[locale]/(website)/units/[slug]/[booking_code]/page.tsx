@@ -18,6 +18,7 @@ import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
 import useMdScreen from "../hooks/use-md-screen"
 import { useSession } from "@/app/session-provider"
+import Footer from "@/components/common/footer"
 
 type Props = {
   params: Promise<{
@@ -105,6 +106,7 @@ const Page = (props: Props) => {
           <MobilePaymentButton booking_details={data.booking_details} />
         </div>
       </section>
+      <Footer />
     </UnitContextProvider>
   )
 }

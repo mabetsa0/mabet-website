@@ -14,6 +14,10 @@ const nextConfig = withNextIntl({
       "@mantine/carousel",
       "lucide-react",
     ],
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
 })
 

@@ -16,10 +16,10 @@ import { useRouter } from "@/lib/i18n/navigation"
 import { useEffect } from "react"
 
 const ImageGallery = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    console.log("🚀 ~ useEffect ~ window.scrollTo:", "scroll to top")
-  }, [])
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  //   console.log("🚀 ~ useEffect ~ window.scrollTo:", "scroll to top")
+  // }, [])
   const unit = useUnitData()
   const t = useTranslations()
   const [_, setOpened] = useQueryState(

@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import "./reset-spacing.css"
+import Footer from "@/components/common/footer"
 export default async function LocaleLayout({
   children,
   params,
@@ -19,5 +20,10 @@ export default async function LocaleLayout({
   // for static rendering
   setRequestLocale(locale)
 
-  return <div className="old">{children}</div>
+  return (
+    <>
+      <div className="old">{children}</div>
+      <Footer />
+    </>
+  )
 }
