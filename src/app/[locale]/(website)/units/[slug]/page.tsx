@@ -68,7 +68,7 @@ const page = async (props: Props) => {
         <Suspense>
           <VideoSlider />
         </Suspense>
-        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white  ">
+        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white min-h-[100vh]  ">
           <UnitSegmentedControl />
           <div className="container">
             <div className="flex gap-4 max-md:flex-col md:mb-2">

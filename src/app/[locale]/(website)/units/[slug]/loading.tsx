@@ -1,5 +1,5 @@
 "use client"
-import { Loader2 } from "lucide-react"
+import { Loader } from "@mantine/core"
 import { useEffect } from "react"
 
 const Loading = () => {
@@ -10,7 +10,7 @@ const Loading = () => {
 
   return (
     <div className="flex items-center justify-center h-[100vh] md:h-[10vh]">
-      <Loader2 className="w-2.5 h-2.5 text-primary animate-spin" />
+      <Loader />
     </div>
   )
 }
