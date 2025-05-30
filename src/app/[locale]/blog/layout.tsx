@@ -2,7 +2,7 @@ import { Cairo } from "next/font/google"
 
 import Footer from "@/components/blog/footer"
 
-import { getSEO } from "@/api/services/get-seo"
+import { SEO } from "@/services/get-seo"
 
 export const dynamic = "force-dynamic"
 
@@ -12,7 +12,7 @@ const cairo = Cairo({
 })
 
 export const generateMetadata = async () => {
-  return await getSEO("ar", "/blog")
+  return await SEO("/blog")
 }
 
 export default function RootLayout({

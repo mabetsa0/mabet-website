@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import { SEOResponse } from "@/types/seo-response"
+import { SEOResponse } from "@/@types/seo-response"
 import { Seo } from "."
 
 export const SEO = async (
