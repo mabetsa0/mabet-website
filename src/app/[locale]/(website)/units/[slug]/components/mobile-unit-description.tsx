@@ -45,6 +45,7 @@ const MobileUnitDescription = () => {
     <Stack hiddenFrom="md" className="w-full">
       <Group
         wrap="nowrap"
+        align="start"
         p={"sm"}
         my={"xs"}
         className="rounded border-primary border"
@@ -52,7 +53,9 @@ const MobileUnitDescription = () => {
       >
         <img alt="mabet" src={mabetLogo.src} width={42} />
         <Stack gap={"4"}>
-          <Text className="text-h5 font-bold">{t("unit.mabet-garentee")}</Text>
+          <Text className="text-h5 font-bold">
+            {t("unit.mabet-garentee")} 💚
+          </Text>
           <Text className="text-primary">
             {t("unit.mabet-garentee-description")}
           </Text>
