@@ -287,7 +287,7 @@
     "show-less": "عرض اقل",
     "about-unit": "عن العقار",
     "ratings": "التقييمات",
-    "ratings-message": "حاصيل على تقييم من قبل {number} مستخدم, وبمرتبة تقييم {value}.",
+    "ratings-message": "تم تقييم العقار من قبل {number} ضيوف ({value}) ",
     "location": "الموقع",
     "area": "المساحة",
     "area-message": "تم تحديد مساحة هذه الوحدة بما يقارب ال",

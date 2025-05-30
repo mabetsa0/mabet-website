@@ -50,8 +50,6 @@ const UnitCard = (props: Unit & { className?: string }) => {
       padding="xs"
       radius="md"
       withBorder
-      component={Link}
-      href={`/units/${props.slug}?from=${dates.from}&to=${dates.to}`}
       className={cn(
         "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
         props.className
@@ -112,159 +110,169 @@ const UnitCard = (props: Unit & { className?: string }) => {
           ))}
         </Carousel>
       </div>
-      <Stack className="grow" gap={4}>
-        <Title className="truncate" order={5} mt={"8px"}>
-          {props.name}
-        </Title>
-        <Group className="text-[#767676] " align="center" gap={"4"}>
-          <QrCode size={18} strokeWidth={1.25} />
-          <Text className="text-sm">{props.code}</Text>
-        </Group>
-        <Group className="text-[#767676] " align="center" gap={"4"}>
-          <MapPin size={18} strokeWidth={1.25} />
-          <Text className="text-sm">{props.location}</Text>
-        </Group>
-        <Space />
-        <Group justify="space-between">
-          {props.prices ? (
+      <Link href={`/units/${props.slug}?from=${dates.from}&to=${dates.to}`}>
+        <Stack className="grow" gap={4}>
+          <Title className="truncate" order={5} mt={"8px"}>
+            {props.name}
+          </Title>
+          <Group className="text-[#767676] " align="center" gap={"4"}>
+            <QrCode size={18} strokeWidth={1.25} />
+            <Text className="text-sm">{props.code}</Text>
+          </Group>
+          <Group className="text-[#767676] " align="center" gap={"4"}>
+            <MapPin size={18} strokeWidth={1.25} />
+            <Text className="text-sm">{props.location}</Text>
+          </Group>
+          <Space />
+          <Group justify="space-between">
+            {props.prices ? (
+              <div>
+                <Group gap={"4"}>
+                  <Title order={5} c={"#188078"}>
+                    {props.prices?.price_plain}
+                    <RiyalIcon />
+                  </Title>
+                  <Text className="text-[#767676] text-sm">
+                    /{props.prices?.duration_text}
+                  </Text>
+                </Group>
+                {props.prices?.discount ? (
+                  <Text className="text-[#767676] text-[12px]  line-through">
+                    {" "}
+                    {Number(props.prices.sub_price)} <RiyalIcon />
+                    <span className="text-[10px]">
+                      /{props.prices.duration_text}
+                    </span>
+                  </Text>
+                ) : null}
+              </div>
+            ) : (
+              <div>{/* <Text c={"red"}>{t("not-avalibel")}</Text> */}</div>
+            )}
             <div>
-              <Group gap={"4"}>
-                <Title order={5} c={"#188078"}>
-                  {props.prices?.price_plain}
-                  <RiyalIcon />
-                </Title>
-                <Text className="text-[#767676] text-sm">
-                  /{props.prices?.duration_text}
-                </Text>
-              </Group>
               {props.prices?.discount ? (
-                <Text className="text-[#767676] text-[12px]  line-through">
-                  {" "}
-                  {Number(props.prices.sub_price)} <RiyalIcon />
-                  <span className="text-[10px]">
-                    /{props.prices.duration_text}
-                  </span>
-                </Text>
+                <Badge
+                  h={40}
+                  className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  classNames={{
+                    label: "text-start text-xs",
+                  }}
+                  size="xl"
+                  color={"#E8123D26"}
+                  style={{
+                    color: "#E8123D",
+                  }}
+                  leftSection={
+                    <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                      {props.prices.discount_percent_text}%
+                    </div>
+                  }
+                >
+                  {props.prices.discount_amount} <RiyalIcon />
+                  <img
+                    alt="sharp"
+                    src={sharpShape.src}
+                    className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
+                  />
+                </Badge>
+              ) : props.badge?.border_color ? (
+                <Badge
+                  h={40}
+                  className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  classNames={{
+                    label: "text-start",
+                  }}
+                  size="xl"
+                  color={lighten(props.badge.border_color, 0.25)}
+                  style={{
+                    color: "white",
+                  }}
+                  leftSection={
+                    <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                      <img
+                        className="w-full"
+                        src={props.badge.icon}
+                        alt="icon"
+                      />
+                    </div>
+                  }
+                >
+                  {props.badge.text}{" "}
+                  <img
+                    alt="sharp"
+                    src={sharpShape.src}
+                    className=" ltr:scale-x-[-1] absolute end-0 top-0 bottom-0"
+                  />
+                </Badge>
               ) : null}
             </div>
-          ) : (
-            <div>{/* <Text c={"red"}>{t("not-avalibel")}</Text> */}</div>
-          )}
-          <div>
-            {props.prices?.discount ? (
-              <Badge
-                h={40}
-                className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
-                classNames={{
-                  label: "text-start text-xs",
-                }}
-                size="xl"
-                color={"#E8123D26"}
-                style={{
-                  color: "#E8123D",
-                }}
-                leftSection={
-                  <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
-                    {props.prices.discount_percent_text}%
-                  </div>
-                }
-              >
-                {props.prices.discount_amount} <RiyalIcon />
-                <img
-                  alt="sharp"
-                  src={sharpShape.src}
-                  className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
-                />
-              </Badge>
-            ) : props.badge?.border_color ? (
-              <Badge
-                h={40}
-                className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
-                classNames={{
-                  label: "text-start",
-                }}
-                size="xl"
-                color={lighten(props.badge.border_color, 0.25)}
-                style={{
-                  color: "white",
-                }}
-                leftSection={
-                  <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
-                    <img className="w-full" src={props.badge.icon} alt="icon" />
-                  </div>
-                }
-              >
-                {props.badge.text}{" "}
-                <img
-                  alt="sharp"
-                  src={sharpShape.src}
-                  className=" ltr:scale-x-[-1] absolute end-0 top-0 bottom-0"
-                />
-              </Badge>
-            ) : null}
-          </div>
-        </Group>
-        <Space />
-        <Divider mt={"auto"} />
-        <Space />
-        <Stack gap={"xs"}>
-          <Text className="text-sm font-medium">{t("features")}</Text>
-          <Group
-            justify="space-evenly"
-            wrap="nowrap"
-            gap={"sm"}
-            className="text-xs text-[#767676]"
-          >
-            <Group gap={"4"} wrap="nowrap">
-              <Users width={16} strokeWidth={1.25} className="text-primary" />
-              <span className=" whitespace-nowrap">
-                {props.unit_for_sentence}
-              </span>
-            </Group>
-            <Divider orientation="vertical" />
-            <Group gap={"4"} wrap="nowrap">
-              <Expand width={16} strokeWidth={1.25} className="text-primary" />
-              <span className=" whitespace-nowrap">{props.area}</span>
-            </Group>
-            <Divider orientation="vertical" />
-            <Group gap={"4"} wrap="nowrap">
-              <BedSingle
-                width={16}
-                strokeWidth={1.25}
-                className="text-primary"
-              />
-              <span className=" whitespace-nowrap">
-                {props.unit_content.find((e) => e.key === "bedrooms")?.count ||
-                  0}{" "}
-                {t("bedrooms")}
-              </span>
-            </Group>
-            <Divider orientation="vertical" />
-            <Group gap={"4"} wrap="nowrap">
-              <Bath width={16} strokeWidth={1.25} className="text-primary" />
-              <span className=" whitespace-nowrap">
-                {props.unit_content.find((e) => e.key === "toilets")?.count ||
-                  0}{" "}
-                {t("toilets")}
-              </span>
-            </Group>
           </Group>
-        </Stack>
-        {props.label ? (
-          <>
-            <Divider />
-            <Text
-              fz={"xs"}
-              pt={"4"}
-              ta={"center"}
-              fw={"700"}
-              c={props.label.bg_color}
+          <Space />
+          <Divider mt={"auto"} />
+          <Space />
+          <Stack gap={"xs"}>
+            <Text className="text-sm font-medium">{t("features")}</Text>
+            <Group
+              justify="space-evenly"
+              wrap="nowrap"
+              gap={"sm"}
+              className="text-xs text-[#767676]"
             >
-              {props.label.text}
-            </Text>
-          </>
-        ) : null}
-      </Stack>
+              <Group gap={"4"} wrap="nowrap">
+                <Users width={16} strokeWidth={1.25} className="text-primary" />
+                <span className=" whitespace-nowrap">
+                  {props.unit_for_sentence}
+                </span>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group gap={"4"} wrap="nowrap">
+                <Expand
+                  width={16}
+                  strokeWidth={1.25}
+                  className="text-primary"
+                />
+                <span className=" whitespace-nowrap">{props.area}</span>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group gap={"4"} wrap="nowrap">
+                <BedSingle
+                  width={16}
+                  strokeWidth={1.25}
+                  className="text-primary"
+                />
+                <span className=" whitespace-nowrap">
+                  {props.unit_content.find((e) => e.key === "bedrooms")
+                    ?.count || 0}{" "}
+                  {t("bedrooms")}
+                </span>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group gap={"4"} wrap="nowrap">
+                <Bath width={16} strokeWidth={1.25} className="text-primary" />
+                <span className=" whitespace-nowrap">
+                  {props.unit_content.find((e) => e.key === "toilets")?.count ||
+                    0}{" "}
+                  {t("toilets")}
+                </span>
+              </Group>
+            </Group>
+          </Stack>
+          {props.label ? (
+            <>
+              <Divider />
+              <Text
+                fz={"xs"}
+                pt={"4"}
+                ta={"center"}
+                fw={"700"}
+                c={props.label.bg_color}
+              >
+                {props.label.text}
+              </Text>
+            </>
+          ) : null}
+        </Stack>
+      </Link>
     </Card>
   )
 }
