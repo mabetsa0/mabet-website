@@ -10,7 +10,7 @@ import { notFound } from "next/navigation"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
-
+import Scripts from "./components/scripts"
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],
@@ -42,8 +42,18 @@ export default async function LocaleLayout({
     >
       <head>
         <ColorSchemeScript />
+        <Scripts />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KNRTR8HX"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
           <MyReactQueryProvider>
             <NuqsAdapter>
