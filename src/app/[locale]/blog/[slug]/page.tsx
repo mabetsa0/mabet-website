@@ -18,13 +18,12 @@ import PostHeader from "@/components/blog/post-header"
 import SectionSeparator from "@/components/blog/section-separator"
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({
-  params: { slug },
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
+  const slug = (await params).slug
   const isANumber = Number(slug)
   if (isNaN(isANumber)) {
     return await SEO("/blog/" + slug)
@@ -35,11 +34,12 @@ export async function generateMetadata({
 }
 
 export default async function Post({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
   try {
+    const slug = (await params).slug
     const isANumber = Number(slug)
     if (isNaN(isANumber)) {
       const [blog, moreBlogs] = await Promise.all([

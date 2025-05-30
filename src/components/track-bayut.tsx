@@ -16,7 +16,7 @@ const TrackBayut = () => {
       }
       window.localStorage.setItem(BAYUT_KEY, JSON.stringify(value))
     }
-  }, [])
+  }, [searchParams])
   return null
 }
 
