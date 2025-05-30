@@ -21,8 +21,8 @@ const AboutUnit = () => {
               <Text className="text-[#767676]">
                 {t("unit.ratings-message", {
                   number: unit.reviews_count,
-                  value: unit.stars,
-                })}
+                })}{" "}
+                <span className="font-medium text-primary">({unit.stars})</span>
               </Text>
             </div>
           </Group>

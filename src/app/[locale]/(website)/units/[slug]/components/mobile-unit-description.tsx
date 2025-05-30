@@ -56,7 +56,7 @@ const MobileUnitDescription = () => {
           <Text className="text-h5 font-bold">
             {t("unit.mabet-garentee")} 💚
           </Text>
-          <Text className="text-primary">
+          <Text size={"sm"} className="text-primary">
             {t("unit.mabet-garentee-description")}
           </Text>
         </Stack>
