@@ -1,8 +1,8 @@
 import { BAYUT_KEY } from "@/config"
+import { getServerSession } from "@/lib/get-server-session"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getSession } from "@/utils/get-session"
 import axios from "axios"
-// import { getSession } from "next-auth/react"
 import { getLocale } from "next-intl/server"
 
 const baseURL = process.env.NEXT_PUBLIC_TEST
@@ -29,9 +29,8 @@ Mabeet.interceptors.request.use(
 
     if (typeof window === "undefined") {
       // Server-side
-      // const { getServerSession } = await import("next-auth")
-      // const { authOptions } = await import("@/lib/auth/auth")
-      // session = await getServerSession(authOptions)
+
+      session = await getServerSession()
       const locale = await getLocale()
       config.headers["Accept-Language"] = locale
     } else {

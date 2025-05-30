@@ -1,10 +1,10 @@
 export interface UserResponse {
-  data: User
+  data: Session
   message: null
   success: boolean
 }
 
-export interface User {
+export interface Session {
   access_token: string
   user: UserData
   token_type: string

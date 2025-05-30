@@ -1,7 +1,8 @@
 import { getLocaleFromUrl } from "@/utils/get-locale"
-import { getSession } from "@/utils/get-session"
+import { getServerSession } from "@/lib/get-server-session"
 import axios from "axios"
 import { getLocale } from "next-intl/server"
+import { getSession } from "@/utils/get-session"
 
 const baseURL = process.env.NEXT_PUBLIC_TEST
   ? "https://mabet.dev/api/v2"
@@ -23,6 +24,7 @@ Seo.interceptors.request.use(
   async (config) => {
     if (typeof window === "undefined") {
       const locale = await getLocale()
+      const session = await getServerSession()
       config.headers["Accept-Language"] = locale
     } else {
       // Client-side
@@ -58,10 +60,10 @@ Mabet.interceptors.request.use(
     console.log("🚀 ~ config:", config.url)
     let session: {
       access_token: string
-      id: string
     } | null
 
     if (typeof window === "undefined") {
+      session = await getServerSession()
       const locale = await getLocale()
       config.headers["Accept-Language"] = locale
     } else {

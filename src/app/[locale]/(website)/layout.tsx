@@ -6,6 +6,10 @@ import { notFound } from "next/navigation"
 import Navbar from "./components/navbar"
 import { Metadata } from "next"
 import { SEO } from "@/services/get-seo"
+import AuthModal from "@/components/common/auth/auth-modal"
+import { getServerSession } from "@/lib/get-server-session"
+import { Title } from "@mantine/core"
+import { cookies } from "next/headers"
 
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
@@ -33,6 +37,7 @@ export default async function LocaleLayout({
         {children}
         <Footer />
       </Navbar>
+      <AuthModal />
     </>
   )
 }

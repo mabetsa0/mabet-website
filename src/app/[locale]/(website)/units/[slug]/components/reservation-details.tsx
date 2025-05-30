@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { ErrorResponse } from "@/@types/error"
+import { useSession } from "@/app/session-provider"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useRouter } from "@/lib/i18n/navigation"
-import { isAuthenticated } from "@/utils/is-authenticated"
 import {
   Badge,
   Button,
@@ -32,8 +32,8 @@ import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
 import useMdScreen from "../hooks/use-md-screen"
 import DateSelect from "./date-select"
-
 const ReservationDetails = () => {
+  const { isAuthenticated } = useSession()
   const [dates] = useQueryStates({
     from: parseAsIsoDate.withDefault(dayjs().toDate()),
     to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
@@ -89,7 +89,7 @@ const ReservationDetails = () => {
     },
   })
   const handleCreateBooking = () => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated) {
       return auth[1].onOpen()
     }
     createBookingMutation.mutate({

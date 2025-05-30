@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
-import { User } from "@/@types/user"
+import { Session } from "@/@types/user"
 import { LOCALSTORAGE_SESSION_KEY } from "@/config"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import Mabet from "@/services"
@@ -9,6 +9,7 @@ import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
 import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 
@@ -34,7 +35,7 @@ const VerifyOtp = () => {
 
   const onSubmit = form.onSubmit(async (data) => {
     try {
-      const response = await Mabet.post<User>("/account/otp/check", data)
+      const response = await axios.post<Session>("/api/login", data)
       const user = response.data
       window.localStorage.setItem(
         LOCALSTORAGE_SESSION_KEY,

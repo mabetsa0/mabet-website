@@ -1,4 +1,5 @@
 import GlobalDataContextProvider from "@/context/global-date-context"
+import { getServerSession } from "@/lib/get-server-session"
 import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
 import { getCities, getUnitTypes } from "@/services/lists"
@@ -10,6 +11,7 @@ import { notFound } from "next/navigation"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
+import { SessionProvider } from "../session-provider"
 import Scripts from "./components/scripts"
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -34,6 +36,8 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
+  const session = await getServerSession()
+
   return (
     <html
       lang={locale}
@@ -58,7 +62,11 @@ export default async function LocaleLayout({
           <MyReactQueryProvider>
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
-                <NextIntlClientProvider>{children}</NextIntlClientProvider>
+                <NextIntlClientProvider>
+                  <SessionProvider session={session}>
+                    {children}
+                  </SessionProvider>
+                </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>
           </MyReactQueryProvider>

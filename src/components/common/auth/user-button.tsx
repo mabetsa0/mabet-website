@@ -1,6 +1,6 @@
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { usePathname } from "@/lib/i18n/navigation"
-import { isAuthenticated } from "@/utils/is-authenticated"
+import { useSession } from "@/app/session-provider"
 import { ActionIcon, Button, Menu } from "@mantine/core"
 import { UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -11,10 +11,11 @@ const UserButton = () => {
   const [opened, { onOpen }] = useAuthModal()
   const pathname = usePathname()
   const [authStatus, setAuthStatus] = useState("pending")
+  const { isAuthenticated } = useSession()
 
   useEffect(() => {
-    setAuthStatus(isAuthenticated() ? "authorized" : "unauthorized")
-  }, [pathname, opened])
+    setAuthStatus(isAuthenticated ? "authorized" : "unauthorized")
+  }, [pathname, opened, isAuthenticated])
 
   if (authStatus === "unauthorized" || authStatus === "pending")
     return (

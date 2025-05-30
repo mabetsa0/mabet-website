@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react"
-import { notifications } from "@mantine/notifications"
+import { useSession } from "@/app/session-provider"
 import Mabet from "@/services"
-import { parseAsBoolean, useQueryState } from "nuqs"
-import { isAuthenticated } from "@/utils/is-authenticated"
+import { notifications } from "@mantine/notifications"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 import { useAuthModal } from "./use-auth-modal"
 
 const addToFavorite = async (id: number) => {
@@ -24,6 +23,7 @@ type Props = {
 
 const useFavorite = ({ is_favourite, id }: Props) => {
   const t = useTranslations("general.favorite")
+  const { isAuthenticated } = useSession()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, { onOpen }] = useAuthModal()
 
@@ -68,7 +68,7 @@ const useFavorite = ({ is_favourite, id }: Props) => {
   })
 
   const mutate = () => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated) {
       onOpen()
       return
     }

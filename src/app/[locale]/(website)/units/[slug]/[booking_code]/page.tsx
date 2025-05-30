@@ -4,7 +4,6 @@
 import { UnitContextProvider } from "../context/unit-context"
 
 import { useRouter } from "@/lib/i18n/navigation"
-import { isAuthenticated } from "@/utils/is-authenticated"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
@@ -18,6 +17,7 @@ import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
 import useMdScreen from "../hooks/use-md-screen"
+import { useSession } from "@/app/session-provider"
 
 type Props = {
   params: Promise<{
@@ -29,13 +29,14 @@ type Props = {
 
 const Page = (props: Props) => {
   const params = use(props.params)
+  const { isAuthenticated } = useSession()
   const [{ method, isPrivate, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
     isPrivate: parseAsStringLiteral(["1"]),
     coupon: parseAsString.withDefault(""),
   })
   const { data, status } = useQuery({
-    enabled: isAuthenticated(),
+    enabled: isAuthenticated,
     queryKey: [params.booking_code, method],
     queryFn: () =>
       GetPaymentSummary(params.booking_code, {
@@ -53,10 +54,10 @@ const Page = (props: Props) => {
     Router.replace(`/units/${params.slug}`)
   }, [Router, params.slug])
   useEffect(() => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated) {
       backToUnit()
     }
-  }, [backToUnit])
+  }, [backToUnit, isAuthenticated])
   const mathes = useMdScreen()
   if (status == "pending")
     return (

@@ -1,16 +1,9 @@
 "use client"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useMutation, useQuery } from "@tanstack/react-query"
-import dayjs from "dayjs"
-import { createBooking } from "../create-booking"
-import axios from "axios"
-import { notifications } from "@mantine/notifications"
-import { useTranslations } from "next-intl"
 import { ErrorResponse } from "@/@types/error"
-import { useUnitData } from "../context/unit-context"
-import { isAuthenticated } from "@/utils/is-authenticated"
+import { useSession } from "@/app/session-provider"
+import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import { parseAsIsoDate, useQueryStates } from "nuqs"
+import { useRouter } from "@/lib/i18n/navigation"
 import {
   Box,
   Button,
@@ -21,10 +14,17 @@ import {
   Text,
   Title,
 } from "@mantine/core"
+import { notifications } from "@mantine/notifications"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import dayjs from "dayjs"
+import { useTranslations } from "next-intl"
+import { parseAsIsoDate, useQueryStates } from "nuqs"
+import { useUnitData } from "../context/unit-context"
+import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import { RiyalIcon } from "@/components/icons"
-
 const MobileCreateBookingButton = () => {
+  const { isAuthenticated } = useSession()
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
@@ -52,7 +52,7 @@ const MobileCreateBookingButton = () => {
     },
   })
   const handleCreateBooking = () => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated) {
       return auth[1].onOpen()
     }
     createBookingMutation.mutate({
