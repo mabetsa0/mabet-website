@@ -1,4 +1,4 @@
-import GlobalDataContextProvider from "@/context/global-date-context"
+import GlobalDataContextProvider from "@/context/global-data-context"
 import { getServerSession } from "@/lib/get-server-session"
 import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
