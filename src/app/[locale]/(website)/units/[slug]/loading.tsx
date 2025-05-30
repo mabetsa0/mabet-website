@@ -1,8 +1,13 @@
+"use client"
 import { Loader } from "@mantine/core"
+import { useEffect } from "react"
 
 const Loading = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
-    <div className="flex items-center justify-center h-[10vh]">
+    <div className="flex items-center justify-center h-[100vh] md:h-[10vh]">
       <Loader />
     </div>
   )
