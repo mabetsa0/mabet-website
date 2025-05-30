@@ -2,7 +2,7 @@ import { Button, Group, SimpleGrid, Text, Title } from "@mantine/core"
 import { getLocale, getTranslations } from "next-intl/server"
 import { getBlogs } from "../helpers/get-blogs"
 import BlogCard from "./blog-card"
-import Link from "next/link"
+import { Link } from "@/lib/i18n/navigation"
 
 const Blogs = async () => {
   try {
