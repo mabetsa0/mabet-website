@@ -1,3 +1,4 @@
+"use client"
 import { ActionIcon } from "@mantine/core"
 import { ChevronRight } from "lucide-react"
 import React from "react"
