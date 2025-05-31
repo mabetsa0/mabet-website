@@ -4,7 +4,6 @@ import { Session } from "@/@types/user"
 import { LOCALSTORAGE_SESSION_KEY } from "@/config"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import Mabet from "@/services"
-import { handleFormError } from "@/utils/handle-form-errors"
 import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
@@ -44,7 +43,16 @@ const VerifyOtp = () => {
       setPhoneNumber(null)
       onClose()
     } catch (error) {
-      handleFormError(error, form)
+      if (axios.isAxiosError(error)) {
+        form.setErrors({
+          root: t("invalid-otp"),
+        })
+        return
+      }
+
+      form.setErrors({
+        root: t("server-error"),
+      })
     }
   })
 

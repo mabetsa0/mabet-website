@@ -9,7 +9,8 @@
     "contact-us": "تواصل معنا",
     "about-us": "عن مبيت",
     "login": "تسجيل الدخول / تسجيل",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج"
   },
   "home": {
     "hero": {
@@ -198,7 +199,9 @@
       "resend-error-message": "فشلت عملية ارسال كود التحقق",
       "update-phonenumber": "تعديل رقم الهاتف"
     },
-    "title": "تسجيل الدخول أو سجل حساب جديد"
+    "title": "تسجيل الدخول أو سجل حساب جديد",
+    "invalid-otp": "كود غير صحيح",
+    "server-error": "خطا غير معروف"
   },
   "generl": {
     "search-results": "نتاج بحث"

@@ -2,10 +2,11 @@ import { useAuthModal } from "@/hooks/use-auth-modal"
 import { usePathname, Link } from "@/lib/i18n/navigation"
 import { useSession } from "@/app/session-provider"
 import { ActionIcon, Button, Menu } from "@mantine/core"
-import { ChevronDown, UserCircle } from "lucide-react"
+import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import useMdScreen from "@/hooks/use-md-screen"
+import { logout } from "@/services/logout"
 const UserButton = () => {
   const t = useTranslations("header")
   const [opened, { onOpen }] = useAuthModal()
@@ -98,6 +99,16 @@ const UserButton = () => {
               <UserCircle strokeWidth={1.25} />
               {t("profile")}
             </Link>
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              logout()
+            }}
+            color="red"
+            leftSection={<LogOut strokeWidth={1.25} />}
+            className="flex items-center gap-0.5"
+          >
+            {t("logout")}
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>

@@ -9,7 +9,8 @@
     "contact-us": "Contact us",
     "download-app": "Mabet App",
     "login": "Log in / register",
-    "profile": "Profile"
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "general": {
     "locales": {
@@ -199,7 +200,9 @@
       "resend-error-message": "Could not resend otp!",
       "update-phonenumber": "Update phone number"
     },
-    "title": "Log in or sign up"
+    "title": "Log in or sign up",
+    "invalid-otp": "Invalid OTP",
+    "server-error": "Server Error"
   },
   "generl": {
     "search-results": "Results for"
