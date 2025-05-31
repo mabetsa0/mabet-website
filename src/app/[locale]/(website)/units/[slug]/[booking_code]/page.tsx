@@ -76,14 +76,14 @@ const Page = (props: Props) => {
       </Box>
       <section className="relative  bg-white  max-md:rounded-3xl max-md:-mt-1 md:pt-2 ">
         <div className="container">
-          <div className="flex gap-4 max-md:flex-col">
+          <div className="flex gap-2 max-md:flex-col">
             <Stack className="w-full">
-              <Group visibleFrom="md" align="center">
+              <Group wrap="nowrap" visibleFrom="md" align="center">
                 <ActionIcon onClick={backToUnit} radius={"xl"} size={"xl"}>
-                  <ChevronRight />
+                  <ChevronRight className="ltr:rotate-180" />
                 </ActionIcon>
 
-                <h1 className="text-h2 font-bold ">
+                <h1 className="text-h3 md:text-h2 font-bold ">
                   {t("unit.review-and-payment")}
                 </h1>
               </Group>

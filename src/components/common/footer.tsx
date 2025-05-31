@@ -9,9 +9,10 @@ import {
   applePay,
   tabby,
 } from "@/assets"
+import { useUnitTypes } from "@/context/global-data-context"
 import { Link } from "@/lib/i18n/navigation"
-import { getUnitTypes } from "@/services/lists"
 import { Divider, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core"
+import { useTranslations } from "next-intl"
 import { getTranslations } from "next-intl/server"
 const paymentCards = [madfu, masterCard, mada, visa, applePay, tabby]
 const socialMedia = [
@@ -119,9 +120,9 @@ const socialMedia = [
     link: "https://www.snapchat.com/add/mabet_sa?sender_web_id=fd6f5855-df5c-4f34-83f3-657710753539&device_type=desktop&is_copy_url=true",
   },
 ]
-const Footer = async () => {
-  const t = await getTranslations("footer")
-  const unitTypes = await getUnitTypes()
+const Footer = () => {
+  const t = useTranslations("footer")
+  const unitTypes = useUnitTypes()
   return (
     <footer className="bg-[#fafafa]">
       <div className="container pt-4 ">

@@ -1,3 +1,4 @@
+"use client"
 import Mabet from "@/services"
 import { List, ListItem, Space, Stack } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
