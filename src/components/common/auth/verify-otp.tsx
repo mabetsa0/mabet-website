@@ -3,15 +3,12 @@
 import { Session } from "@/@types/user"
 import { LOCALSTORAGE_SESSION_KEY } from "@/config"
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import Mabet from "@/services"
 import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { notifications } from "@mantine/notifications"
-import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
-
+import ResendOtpButton from "./resend-otp-button"
 const VerifyOtp = () => {
   const t = useTranslations("auth")
   const [_, { onClose }] = useAuthModal()
@@ -56,22 +53,6 @@ const VerifyOtp = () => {
     }
   })
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: async () => {
-      return await Mabet.post("/account/otp/resend", {
-        phonenumber: phoneNumber.phonenumber,
-        country_code: phoneNumber.country_code,
-      })
-    },
-    onError() {
-      notifications.show({
-        color: "red",
-        title: t("verify-otp.resend-error-title"),
-        message: t("verify-otp.resend-error-message"),
-      })
-    },
-  })
-
   const updatePhoneNumber = () => {
     setPhoneNumber(null)
   }
@@ -107,15 +88,9 @@ const VerifyOtp = () => {
           </Text>
         </Stack>
         <Divider label={t("verify-otp.didnot-get-code")} />
+
         <Stack gap={"xs"}>
-          <Button
-            onClick={() => mutate()}
-            loading={isPending}
-            variant="outline"
-            color="dark"
-          >
-            {t("verify-otp.resend")}
-          </Button>
+          <ResendOtpButton />
           <Button onClick={updatePhoneNumber} variant="outline" color="dark">
             {t("verify-otp.update-phonenumber")}
           </Button>

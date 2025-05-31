@@ -14,6 +14,7 @@ import en from "react-phone-number-input/locale/en.json"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
+import dayjs from "dayjs"
 
 const PhoneNumberForm = () => {
   const t = useTranslations("auth")
@@ -46,7 +47,7 @@ const PhoneNumberForm = () => {
     try {
       console.log("🚀 ~ onSubmit ~ data:", data)
       await Mabet.post("/account/login", data)
-      setPhoneNumber({ ...data, time: Date.now() })
+      setPhoneNumber({ ...data, time: dayjs().add(1, "m").valueOf() })
     } catch (error) {
       handleFormError(error, form)
     }
