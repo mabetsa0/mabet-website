@@ -16,7 +16,7 @@ import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
-import useMdScreen from "../hooks/use-md-screen"
+import useMdScreen from "@/hooks/use-md-screen"
 import { useSession } from "@/app/session-provider"
 import Footer from "@/components/common/footer"
 

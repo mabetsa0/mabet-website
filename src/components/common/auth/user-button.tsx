@@ -1,18 +1,19 @@
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import { usePathname } from "@/lib/i18n/navigation"
+import { usePathname, Link } from "@/lib/i18n/navigation"
 import { useSession } from "@/app/session-provider"
 import { ActionIcon, Button, Menu } from "@mantine/core"
-import { UserCircle } from "lucide-react"
+import { ChevronDown, UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
-
+import useMdScreen from "@/hooks/use-md-screen"
 const UserButton = () => {
   const t = useTranslations("header")
   const [opened, { onOpen }] = useAuthModal()
   const pathname = usePathname()
   const [authStatus, setAuthStatus] = useState("pending")
-  const { isAuthenticated } = useSession()
+  const { isAuthenticated, session } = useSession()
 
+  const matches = useMdScreen()
   useEffect(() => {
     setAuthStatus(isAuthenticated ? "authorized" : "unauthorized")
   }, [pathname, opened, isAuthenticated])
@@ -81,11 +82,24 @@ const UserButton = () => {
     <>
       <Menu shadow="lg" position="bottom" withArrow>
         <Menu.Target>
-          <ActionIcon variant="transparent">
-            <UserCircle size={24} />
-          </ActionIcon>
+          {matches ? (
+            <ActionIcon variant="light">
+              <UserCircle size={24} />
+            </ActionIcon>
+          ) : (
+            <Button variant="light" rightSection={<ChevronDown />}>
+              {session?.user?.name || session?.user.phonenumber}
+            </Button>
+          )}
         </Menu.Target>
-        <Menu.Dropdown w={180}></Menu.Dropdown>
+        <Menu.Dropdown w={180}>
+          <Menu.Item>
+            <Link className="flex items-center gap-0.5" href="/user/profile">
+              <UserCircle strokeWidth={1.25} />
+              {t("profile")}
+            </Link>
+          </Menu.Item>
+        </Menu.Dropdown>
       </Menu>
     </>
   )

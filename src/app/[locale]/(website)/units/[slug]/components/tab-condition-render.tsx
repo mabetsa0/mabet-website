@@ -1,7 +1,7 @@
 "use client"
 import { parseAsString, useQueryState } from "nuqs"
 import React from "react"
-import useMdScreen from "../hooks/use-md-screen"
+import useMdScreen from "@/hooks/use-md-screen"
 
 type Props = {
   tab: "Reviews" | "Terms" | "Default" | "Map"

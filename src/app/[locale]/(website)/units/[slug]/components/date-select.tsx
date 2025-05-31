@@ -21,7 +21,7 @@ import { useState } from "react"
 import useBusyDays from "../hooks/use-busy-days"
 import { useUnitData } from "../context/unit-context"
 import { Minus } from "lucide-react"
-import useMdScreen from "../hooks/use-md-screen"
+import useMdScreen from "@/hooks/use-md-screen"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 

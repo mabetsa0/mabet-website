@@ -30,7 +30,7 @@ import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import useMdScreen from "../hooks/use-md-screen"
+import useMdScreen from "@/hooks/use-md-screen"
 import DateSelect from "./date-select"
 const ReservationDetails = () => {
   const { isAuthenticated } = useSession()
