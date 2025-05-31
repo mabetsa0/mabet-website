@@ -11,6 +11,7 @@ import {
 } from "@mantine/core"
 import { ChevronDown } from "lucide-react"
 import { parseAsString, useQueryState } from "nuqs"
+import { useTranslations } from "next-intl"
 type Props = {
   filterKey: string
   buttonProps: ButtonProps
@@ -19,6 +20,7 @@ type Props = {
 }
 const FilterButtonWithRadio = (props: Props) => {
   const [filter, set] = useQueryState(props.filterKey, parseAsString)
+  const t = useTranslations()
 
   return (
     <Popover
@@ -57,6 +59,9 @@ const FilterButtonWithRadio = (props: Props) => {
               </Stack>
             </ScrollArea.Autosize>
           </Radio.Group>
+          <Button variant="light" color="red" onClick={() => set(null)}>
+            {t("general.clear")}
+          </Button>
         </Stack>
       </Popover.Dropdown>
     </Popover>
