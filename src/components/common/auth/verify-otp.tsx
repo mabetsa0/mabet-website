@@ -9,6 +9,7 @@ import axios from "axios"
 import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import ResendOtpButton from "./resend-otp-button"
+import { useSession } from "@/app/session-provider"
 const VerifyOtp = () => {
   const t = useTranslations("auth")
   const [_, { onClose }] = useAuthModal()
@@ -29,6 +30,7 @@ const VerifyOtp = () => {
     },
   })
 
+  const { updateSession } = useSession()
   const onSubmit = form.onSubmit(async (data) => {
     try {
       const response = await axios.post<Session>("/api/login", data)
@@ -37,6 +39,7 @@ const VerifyOtp = () => {
         LOCALSTORAGE_SESSION_KEY,
         JSON.stringify(user)
       )
+      updateSession(user)
       setPhoneNumber(null)
       onClose()
     } catch (error) {

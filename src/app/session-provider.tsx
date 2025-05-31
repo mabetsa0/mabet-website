@@ -1,11 +1,12 @@
 "use client"
 
 import { Session } from "@/@types/user"
-import { createContext, ReactNode, useContext } from "react"
+import { createContext, ReactNode, useContext, useState } from "react"
 
 interface SessionContextType {
   isAuthenticated: boolean
   session: Session | null
+  updateSession: (session: Session) => void
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined)
@@ -24,9 +25,11 @@ interface SessionProviderProps {
 }
 
 export function SessionProvider({ children, session }: SessionProviderProps) {
+  const [__session, setSession] = useState<Session | null>(session)
   const value = {
-    isAuthenticated: !!session,
-    session,
+    isAuthenticated: !!__session?.access_token,
+    session: __session,
+    updateSession: setSession,
   }
 
   return (
