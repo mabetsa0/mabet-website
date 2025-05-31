@@ -40,7 +40,7 @@ import {
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
-import { Suspense } from "react"
+import { ElementRef, Suspense, useEffect, useRef } from "react"
 import MobileSearch from "../../components/mobile-search"
 import { SearchResultsResponse } from "../types/results"
 import CountFilter from "./filters/count-filter"
@@ -129,6 +129,12 @@ const Results = () => {
   const back = () => {
     Router.back()
   }
+  const scrollRef = useRef<ElementRef<"div">>(null)
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [status])
 
   return (
     <>
@@ -178,7 +184,11 @@ const Results = () => {
       </Group>
       <section>
         <div className="container relative">
-          <Group mb={{ base: "md", md: "xl" }} className=" gap-y-[2px]">
+          <Group
+            ref={scrollRef}
+            mb={{ base: "md", md: "xl" }}
+            className=" gap-y-[2px]"
+          >
             <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
               searchedUnitType
             } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
