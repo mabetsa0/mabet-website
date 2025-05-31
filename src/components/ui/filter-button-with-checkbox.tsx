@@ -11,7 +11,7 @@ import {
 } from "@mantine/core"
 import { ChevronDown } from "lucide-react"
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs"
-
+import { useTranslations } from "next-intl"
 type Props = {
   filterKey: string
   buttonProps: ButtonProps
@@ -19,6 +19,7 @@ type Props = {
   title: string
 }
 const FilterButtonWithCheckbox = (props: Props) => {
+  const t = useTranslations()
   const [filter, set] = useQueryState(
     props.filterKey,
     parseAsArrayOf(parseAsString).withDefault([])
@@ -64,6 +65,9 @@ const FilterButtonWithCheckbox = (props: Props) => {
               </Stack>
             </ScrollArea.Autosize>
           </Checkbox.Group>
+          <Button variant="light" color="red" onClick={() => set(null)}>
+            {t("general.clear")}
+          </Button>
         </Stack>
       </Popover.Dropdown>
     </Popover>
