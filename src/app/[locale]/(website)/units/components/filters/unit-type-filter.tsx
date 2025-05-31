@@ -27,7 +27,7 @@ const UnitTypeFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={filter ? "border-primary" : ""}
+          className={filter ? "border-primary bg-primary/10 text-primary" : ""}
           color="dark"
           variant="outline"
           rightSection={<ChevronDown strokeWidth={1.25} />}

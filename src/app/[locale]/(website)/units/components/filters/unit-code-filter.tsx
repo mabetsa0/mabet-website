@@ -15,15 +15,15 @@ import { parseAsString, useQueryState } from "nuqs"
 
 const UnitCodeFilter = () => {
   const t = useTranslations("search.filter.unit-code-filter")
-  const field = useField({
-    mode: "uncontrolled",
-    initialValue: "",
-  })
 
   const [unit_code, setUnitCode] = useQueryState(
     "unit_query",
     parseAsString.withDefault("")
   )
+  const field = useField({
+    mode: "uncontrolled",
+    initialValue: unit_code,
+  })
   const onSubmit = () => {
     setUnitCode(field.getValue())
   }

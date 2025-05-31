@@ -13,7 +13,11 @@ const ToggleFilterButton = ({
   )
   return (
     <Button
-      className={show_only_available ? "border-primary border" : ""}
+      className={
+        show_only_available
+          ? "border-primary bg-primary/10 text-primary border"
+          : ""
+      }
       color={show_only_available ? "primary" : "dark"}
       variant={show_only_available ? "light" : "outline"}
       onClick={() => {

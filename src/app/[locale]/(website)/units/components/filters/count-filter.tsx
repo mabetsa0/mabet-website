@@ -14,15 +14,15 @@ import { parseAsInteger, useQueryStates } from "nuqs"
 import { useState } from "react"
 
 const CountFilter = () => {
-  const [values, setValues] = useState({
-    rooms_count: 0,
-    single_beds_count: 0,
-    master_beds_count: 0,
-  })
   const [filter, set] = useQueryStates({
     rooms_count: parseAsInteger.withDefault(0),
     single_beds_count: parseAsInteger.withDefault(0),
     master_beds_count: parseAsInteger.withDefault(0),
+  })
+  const [values, setValues] = useState({
+    rooms_count: filter.rooms_count,
+    single_beds_count: filter.single_beds_count,
+    master_beds_count: filter.master_beds_count,
   })
   const t = useTranslations("search.filter.count-filter")
 
@@ -51,7 +51,7 @@ const CountFilter = () => {
             filter.rooms_count ||
             filter.single_beds_count ||
             filter.master_beds_count
-              ? "border-primary"
+              ? "border-primary bg-primary/10 text-primary"
               : ""
           }
           color="dark"

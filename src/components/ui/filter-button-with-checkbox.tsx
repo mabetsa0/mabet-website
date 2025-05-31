@@ -33,7 +33,9 @@ const FilterButtonWithCheckbox = (props: Props) => {
     >
       <Popover.Target>
         <Button
-          className={filter.length > 0 ? "border-primary" : ""}
+          className={
+            filter.length > 0 ? "border-primary bg-primary/10 text-primary" : ""
+          }
           color="dark"
           variant="outline"
           rightSection={<ChevronDown strokeWidth={1.25} />}

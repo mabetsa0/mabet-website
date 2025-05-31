@@ -18,11 +18,14 @@ import { useState } from "react"
 
 const PriceFilter = () => {
   const t = useTranslations("search.filter.price-filter")
-  const [value, setValue] = useState<[number, number]>([50, 6000])
   const [price, set] = useQueryStates({
     priceFrom: parseAsInteger,
     priceTo: parseAsInteger,
   })
+  const [value, setValue] = useState<[number, number]>([
+    price.priceFrom ?? 50,
+    price.priceTo ?? 6000,
+  ])
   const onSubmit = () => {
     set({
       priceFrom: value[0],
@@ -38,7 +41,11 @@ const PriceFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={price.priceFrom && price.priceTo ? "border-primary" : ""}
+          className={
+            price.priceFrom && price.priceTo
+              ? "border-primary bg-primary/10 text-primary"
+              : ""
+          }
           color="dark"
           variant="outline"
           leftSection={<Ticket strokeWidth={1.25} />}

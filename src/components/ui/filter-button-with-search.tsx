@@ -77,7 +77,9 @@ export function FilterButtonWithSearch({
         <Combobox.Target withAriaAttributes={false}>
           <Button
             onClick={() => combobox.toggleDropdown()}
-            className={selectedItem ? "border-primary" : ""}
+            className={
+              selectedItem ? "border-primary bg-primary/10 text-primary" : ""
+            }
             color="dark"
             variant="outline"
             rightSection={<ChevronDown strokeWidth={1.25} />}

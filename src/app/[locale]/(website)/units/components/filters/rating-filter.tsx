@@ -30,7 +30,9 @@ const RatingFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={filter.length > 0 ? "border-primary" : ""}
+          className={
+            filter.length > 0 ? "border-primary bg-primary/10 text-primary" : ""
+          }
           color="dark"
           variant="outline"
           leftSection={<Star strokeWidth={1.25} />}
