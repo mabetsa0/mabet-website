@@ -91,7 +91,7 @@ const Taps = () => {
   const pathName = usePathname()
 
   return (
-    <div className="flex gap-2 overflow-hidden rounded-xl border-2 border-gray-500 bg-gray-150 xs:flex-col md:gap-3">
+    <div className="flex gap-2 overflow-hidden rounded-xl border-2 border-gray-500 bg-gray-150 md:flex-col md:gap-3">
       {userTapsContent.map((e) => {
         if (e.href === "/user/logOut") {
           return (
