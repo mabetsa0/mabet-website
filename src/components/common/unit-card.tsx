@@ -153,7 +153,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               {props.prices?.discount ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-[110px] relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="p-[4px] min-w-[120px] relative !rounded-e-[0]   rounded-s-md !border-0 "
                   classNames={{
                     label: "text-start text-xs",
                   }}
@@ -178,7 +178,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               ) : props.badge?.border_color ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-[110px] relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="p-[4px] min-w-[120px] relative !rounded-e-[0]   rounded-s-md !border-0 "
                   classNames={{
                     label: "text-start",
                   }}
