@@ -54,7 +54,7 @@ const UserFavourite = () => {
                 }
               />
 
-              <div className="min-h-[50vh] gap-4 py-5 md:grid-cols-2 md:max-md:grid">
+              <div className="min-h-[50vh] gap-4 py-5 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 md:max-md:grid">
                 {data.data.favourites.map((e, i) => {
                   return <UnitCard key={i} {...(e as unknown as Unit)} />
                 })}
