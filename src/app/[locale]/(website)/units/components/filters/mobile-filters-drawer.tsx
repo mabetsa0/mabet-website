@@ -35,44 +35,16 @@ import { useQuery } from "@tanstack/react-query"
 import "dayjs/locale/ar"
 import { Search, SlidersHorizontal, Star } from "lucide-react"
 import { useTranslations } from "next-intl"
-import {
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-  parseAsStringLiteral,
-  useQueryStates,
-} from "nuqs"
+
 import { useEffect } from "react"
 import { Drawer } from "vaul"
-
+import useFilters from "../../hooks/use-filters"
 const MobileFilterDrawer = () => {
   const [opened, { close, open }] = useDisclosure()
   const t = useTranslations()
   const cities = useCities()
   const unitTypes = useUnitTypes()
-  const [filters, setFilters] = useQueryStates({
-    city_id: parseAsString.withDefault(""),
-    region_id: parseAsString.withDefault(""),
-    direction_id: parseAsString.withDefault(""),
-    unit_query: parseAsString.withDefault(""),
-    unit_type_id: parseAsString.withDefault(""),
-    unit_for: parseAsString.withDefault(""),
-    priceFrom: parseAsInteger.withDefault(50),
-    priceTo: parseAsInteger.withDefault(6000),
-    load_offers: parseAsStringLiteral(["1"]),
-    last_hour_offer: parseAsStringLiteral(["1"]),
-    "rating[]": parseAsArrayOf(parseAsString).withDefault([""]),
-    "facilities[]": parseAsArrayOf(parseAsString).withDefault([""]),
-    "amenities[]": parseAsArrayOf(parseAsString).withDefault([""]),
-    show_only_available: parseAsStringLiteral(["1"]),
-    single_beds_count: parseAsInteger.withDefault(0),
-    master_beds_count: parseAsInteger.withDefault(0),
-    no_insurance: parseAsStringLiteral(["1"]),
-    free_cancellation: parseAsStringLiteral(["1"]),
-    rooms_count: parseAsInteger.withDefault(0),
-    result_type: parseAsString.withDefault("Default"),
-  })
-
+  const [filters, setFilters] = useFilters()
   const initialValues = {
     unit_query: "",
     price: [50, 6000],

@@ -62,7 +62,10 @@
     "insurance": "Insurance",
     "discount": "Discount by",
     "customer-fees": "Customer fees",
-    "total-price": "Total"
+    "total-price": "Total",
+    "no-results-title": "We did not find results that match your research!",
+    "no-results-description": "Try to modify search options, such as the number of rooms, or expand the time or site.  \nWe are sure that you will find a place that suits you!",
+    "no-results-button": "Reset filters"
   },
   "home": {
     "special-units": {

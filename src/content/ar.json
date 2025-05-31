@@ -153,7 +153,10 @@
     "insurance": "مبلغ التامين",
     "discount": "خصم بقيمة",
     "customer-fees": "رسوم الخدمة",
-    "total-price": "الإجمالي"
+    "total-price": "الإجمالي",
+    "no-results-title": "لم نجد نتائج تطابق بحثك!",
+    "no-results-description": "جرّب تعديل خيارات البحث، كعدد الضيوف، أو توسيع النطاق الزمني أو الموقع.  نحن على يقين بأنك ستجد مكاناً يناسبك!",
+    "no-results-button": "إعادة ضبط البحث"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

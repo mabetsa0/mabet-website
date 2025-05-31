@@ -51,10 +51,13 @@ import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
 import Pagination from "./pagination"
 import UnitTypeFilter from "./filters/unit-type-filter"
-
+import Image from "next/image"
+import noResults from "@/assets/no-results.svg"
+import useFilters from "../hooks/use-filters"
 const Results = () => {
   const t = useTranslations()
   const searchParams = useSearchParams()
+  const [_, setFilters] = useFilters()
 
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],
@@ -311,6 +314,30 @@ const Results = () => {
                   return <UnitCard key={unit.id} {...unit} />
                 })}
               </SimpleGrid>
+              {data.data.length === 0 && (
+                <div className="flex items-center flex-col justify-center min-h-[30vh]">
+                  <Image src={noResults} alt="no results" />
+                  <Stack
+                    align={"center"}
+                    justify={"center"}
+                    gap={"lg"}
+                    maw={650}
+                  >
+                    <Text
+                      ta={"center"}
+                      className="text-h4 md:text-h3 font-bold"
+                    >
+                      {t("general.no-results-title")}
+                    </Text>
+                    <Text ta={"center"} c={"#767676"} className="md:text-lg  ">
+                      {t("general.no-results-description")}
+                    </Text>
+                    <Button onClick={() => setFilters(null)}>
+                      {t("general.no-results-button")}
+                    </Button>
+                  </Stack>
+                </div>
+              )}
             </>
           ) : null}
           <OrderFilter />
