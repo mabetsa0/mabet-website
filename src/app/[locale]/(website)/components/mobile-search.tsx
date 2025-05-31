@@ -5,7 +5,7 @@ import { UnitType } from "@/@types/unit-types"
 import "@/app/transition-css.css"
 import { UnitTypeIcons } from "@/assets"
 import AutoHeight from "@/components/ui/auto-height"
-import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
 import { useRouter } from "@/lib/i18n/navigation"
 import {
   ActionIcon,

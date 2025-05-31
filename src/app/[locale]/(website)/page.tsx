@@ -15,6 +15,7 @@ import UnitTypes from "./components/unit-types"
 import WhyMabet from "./components/why-mabet"
 import { getSpecialUnits } from "./helpers/get-special-units"
 import { getTopRatedUnits } from "./helpers/get-top-rated-units"
+import Footer from "@/components/common/footer"
 
 export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,6 +51,7 @@ export default async function Page({
       <TopRatedUnits />
       <DownLoadApp />
       <Blogs />
+      <Footer />
     </>
   )
 }

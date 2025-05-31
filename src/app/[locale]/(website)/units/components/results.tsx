@@ -17,7 +17,7 @@ import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbo
 import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
 import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
 import ToggleFilterButton from "@/components/ui/toggle-filter-button"
-import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
 import { useRouter } from "@/lib/i18n/navigation"
 import {
   getDirections,

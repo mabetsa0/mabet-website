@@ -56,10 +56,12 @@ export async function generateMetadata(args: {
   }
 }
 
+export const revalidate = 3600
 const page = async (props: Props) => {
   const params = await props.params
   try {
     const unit = await GetUnit({ slug: params.slug })
+
     return (
       <UnitContextProvider value={unit}>
         <ImageGallery />

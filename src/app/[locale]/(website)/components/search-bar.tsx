@@ -2,7 +2,7 @@
 
 import { UnitTypeIcons } from "@/assets"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
-import { useCities, useUnitTypes } from "@/context/global-date-context"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
 import { cn } from "@/lib/cn"
 import { useRouter } from "@/lib/i18n/navigation"
 import {

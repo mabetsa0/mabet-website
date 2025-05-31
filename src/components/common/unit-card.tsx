@@ -92,7 +92,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           }}
           classNames={{
             indicator:
-              "!w-0.5 !h-0.5 rounded-full data-[active]:!w-1 data-[active]:!h-1 duration-250",
+              "!w-[8px] !h-[8px] rounded-full data-[active]:!w-[16px] data-[active]:!h-[16px] duration-250",
             indicators: " flex items-center",
           }}
         >
@@ -153,7 +153,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               {props.prices?.discount ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="p-[4px] min-w-[110px] relative !rounded-e-[0]   rounded-s-md !border-0 "
                   classNames={{
                     label: "text-start text-xs",
                   }}
@@ -163,7 +163,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     color: "#E8123D",
                   }}
                   leftSection={
-                    <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                    <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-[32px] aspect-square flex items-center justify-center">
                       {props.prices.discount_percent_text}%
                     </div>
                   }
@@ -178,7 +178,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               ) : props.badge?.border_color ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="p-[4px] min-w-[110px] relative !rounded-e-[0]   rounded-s-md !border-0 "
                   classNames={{
                     label: "text-start",
                   }}
@@ -188,7 +188,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     color: "white",
                   }}
                   leftSection={
-                    <div className=" bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                    <div className=" bg-white p-[4px] rounded-[5px] w-[32px] aspect-square flex items-center justify-center">
                       <img
                         className="w-full"
                         src={props.badge.icon}

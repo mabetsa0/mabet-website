@@ -24,7 +24,6 @@ Seo.interceptors.request.use(
   async (config) => {
     if (typeof window === "undefined") {
       const locale = await getLocale()
-      const session = await getServerSession()
       config.headers["Accept-Language"] = locale
     } else {
       // Client-side
@@ -57,7 +56,6 @@ Seo.interceptors.request.use(
 // Add a request interceptor to include the authentication token
 Mabet.interceptors.request.use(
   async (config) => {
-    console.log("🚀 ~ config:", config.url)
     let session: {
       access_token: string
     } | null
