@@ -68,9 +68,9 @@ Mabet.interceptors.request.use(
       // Client-side
       session = getSession()
       config.headers["Accept-Language"] = getLocaleFromUrl()
-      if (session?.access_token) {
-        config.headers["Authorization"] = `Bearer ${session.access_token}`
-      }
+    }
+    if (session?.access_token) {
+      config.headers["Authorization"] = `Bearer ${session.access_token}`
     }
 
     // turn URLSearchParams to object , and handle arrays
