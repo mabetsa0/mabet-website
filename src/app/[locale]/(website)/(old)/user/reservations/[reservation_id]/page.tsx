@@ -1,20 +1,21 @@
-import Mabeet, { OldMabeet } from "@/api"
-import { ChevronRight, Eye } from "lucide-react"
+import { OldMabeet } from "@/api"
+import { Eye } from "lucide-react"
 
-import { SingleBookingResponse } from "@/types/single-booking-response"
-import { ActionIcon, Button } from "@mantine/core"
 import { RiyalIcon } from "@/components/icons"
 import BackButton from "@/components/ui/back-button"
+import { SingleBookingResponse } from "@/types/single-booking-response"
+import { Button } from "@mantine/core"
 
 const Page = async ({
   params,
 }: {
-  params: { locale: "ar" | "en"; reservation_id: string }
+  params: Promise<{ locale: "ar" | "en"; reservation_id: string }>
 }) => {
-  const isRtl = params.locale === "ar"
+  const { locale, reservation_id } = await params
+  const isRtl = locale === "ar"
   // const response = await Mabeet.get<SingleBookingResponse>(`/account/bookings/${params.reservation_id}`)
   const response = await OldMabeet.get<SingleBookingResponse>(
-    `/my/reservations/${params.reservation_id}`
+    `/my/reservations/${reservation_id}`
   )
   const data = response.data.data.bookings
 
