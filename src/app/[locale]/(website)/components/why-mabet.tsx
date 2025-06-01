@@ -15,7 +15,7 @@ const WhyMabet = () => {
   const t = useTranslations("home.why-mabet")
   return (
     <section>
-      <div className="container pb-3">
+      <div className="container py-3">
         <div className="text-center mb-1">
           <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}

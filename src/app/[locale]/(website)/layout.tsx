@@ -1,16 +1,16 @@
-import Footer from "@/components/common/footer"
 import { routing } from "@/lib/i18n/routing"
+import { SEO } from "@/services/get-seo"
+import { Metadata } from "next"
 import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import Navbar from "./components/navbar"
-import { Metadata } from "next"
-import { SEO } from "@/services/get-seo"
-import AuthModal from "@/components/common/auth/auth-modal"
-import { getServerSession } from "@/lib/get-server-session"
-import { Title } from "@mantine/core"
-import { cookies } from "next/headers"
-
+import dynamic from "next/dynamic"
+const AuthModal = dynamic(
+  () => import("@/components/common/auth/auth-modal"),
+  {}
+)
+const Nafath = dynamic(() => import("@/components/common/auth/nafath"), {})
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
 }
@@ -35,6 +35,7 @@ export default async function LocaleLayout({
     <>
       <Navbar>{children}</Navbar>
       <AuthModal />
+      <Nafath />
     </>
   )
 }

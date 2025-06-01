@@ -105,7 +105,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           {t("contact-us")}
         </UnstyledButton>
         <UnstyledButton
-          component={NextLink}
+          component={Link}
           href={"/blog"}
           className={"block px-xs py-md rounded-md  font-medium"}
         >

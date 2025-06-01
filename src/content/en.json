@@ -350,5 +350,17 @@
     "madfu-description": "Pay by parts without interest without fees",
     "partial-payment": "Pay a deposit {value}",
     "full-payment": "Pay full {value} "
+  },
+  "nafath": {
+    "title": "Verify you account with nafath",
+    "sub-title": "Verify your account for a trusted and secure booking",
+    "description": "To ensure your safety and the reliability of bookings, we need to verify your national identity through the 'Nafath' platform approved by the Saudi government.",
+    "id-label": "Please enter the national identity number",
+    "button": "Verify now",
+    "button-text": "🔒 Don't worry! \nYour information is 100 % secure and is compatible with the Ministry of Tourism systems.",
+    "list-title": "By verification, it guarantees:",
+    "list-item-1": "Protect your personal data.",
+    "list-item-2": "Trustees of your dealings inside the platform.",
+    "list-item-3": "Smooth and safe reservation experience."
   }
 }

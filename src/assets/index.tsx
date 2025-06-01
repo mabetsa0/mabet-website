@@ -37,6 +37,7 @@ import reviewBorder from "./review-border.svg"
 import torism from "./Tourism-Saudi-Arabia.png"
 import mabetLogo from "./mabet-logo.svg"
 import noResults from "./no-results.svg"
+import nafathIcon from "./nafath.svg"
 
 export {
   logo,
@@ -78,6 +79,7 @@ export {
   torism,
   mabetLogo,
   noResults,
+  nafathIcon,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,
