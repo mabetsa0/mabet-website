@@ -4,6 +4,7 @@ import { useNafath } from "@/hooks/use-nafath"
 import { useTranslations } from "next-intl"
 import ModalDrawer from "../modal-drawer"
 import {
+  Box,
   Button,
   Group,
   List,
@@ -124,9 +125,9 @@ const AuthModal = () => {
             </div>
           </Stack>
         </div>
-        <div className="py-2">
+        <Box visibleFrom="md" className="py-2">
           <img alt="nafath" src={nafathIcon.src} />
-        </div>
+        </Box>
       </Group>
     </ModalDrawer>
   )

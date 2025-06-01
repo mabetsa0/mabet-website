@@ -1,10 +1,10 @@
 import { Blog } from "@/@types/blogs"
+import { Link } from "@/lib/i18n/navigation"
 import { Button, Card, Image, Text, Title } from "@mantine/core"
 import dayjs from "dayjs"
 import "dayjs/locale/ar"
 import { ChevronLeft } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
-import Link from "next/link"
 
 export default async function BlogCard(props: Blog) {
   const locale = await getLocale()
