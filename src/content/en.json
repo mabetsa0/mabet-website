@@ -10,7 +10,8 @@
     "download-app": "Mabet App",
     "login": "Log in / register",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "search": "البحث"
   },
   "general": {
     "locales": {

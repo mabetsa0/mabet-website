@@ -90,8 +90,12 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
-          {t("about-us")}
+        <UnstyledButton
+          component={Link}
+          href={"/units"}
+          className={"block px-xs py-md rounded-md  font-medium"}
+        >
+          {t("search")}
         </UnstyledButton>
         <UnstyledButton
           component="a"
