@@ -110,7 +110,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           ))}
         </Carousel>
       </div>
-      <Link href={`/units/${props.slug}?from=${dates.from}&to=${dates.to}`}>
+      <Link href={`/units/${props.id}?from=${dates.from}&to=${dates.to}`}>
         <Stack className="grow" gap={4}>
           <Title className="truncate" order={5} mt={"8px"}>
             {props.name}
