@@ -50,9 +50,11 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             <Group>
               <Group me="md" gap={0} visibleFrom="md">
                 <UnstyledButton
+                  component={Link}
+                  href={"/units"}
                   className={"block px-xs py-md rounded-md  font-medium"}
                 >
-                  {t("about-us")}
+                  {t("search")}
                 </UnstyledButton>
                 <UnstyledButton
                   component="a"
@@ -69,7 +71,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 </UnstyledButton>
                 <UnstyledButton
                   className={"block px-xs py-md rounded-md  font-medium"}
-                  component={NextLink}
+                  component={Link}
                   href={"/blog"}
                 >
                   {t("blog")}

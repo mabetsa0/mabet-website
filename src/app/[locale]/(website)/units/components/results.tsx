@@ -54,10 +54,13 @@ import UnitTypeFilter from "./filters/unit-type-filter"
 import Image from "next/image"
 import noResults from "@/assets/no-results.svg"
 import useFilters from "../hooks/use-filters"
+import { countAppliedFilters } from "../types/search-params"
+import { parseAsString, useQueryState } from "nuqs"
 const Results = () => {
   const t = useTranslations()
   const searchParams = useSearchParams()
   const [_, setFilters] = useFilters()
+  const [page] = useQueryState("page", parseAsString.withDefault(""))
 
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],
@@ -135,9 +138,15 @@ const Results = () => {
   const scrollRef = useRef<ElementRef<"div">>(null)
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" })
+      setTimeout(() => {
+        scrollRef.current!.scrollIntoView({ behavior: "smooth" })
+      }, 200)
     }
-  }, [status])
+  }, [page])
+
+  const clearFilters = () => {
+    setFilters(null)
+  }
 
   return (
     <>
@@ -187,19 +196,24 @@ const Results = () => {
       </Group>
       <section>
         <div className="container relative">
-          <Group
-            ref={scrollRef}
-            mb={{ base: "md", md: "xl" }}
-            className=" gap-y-[2px]"
-          >
-            <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
-              searchedUnitType
-            } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
-            {data?.total ? (
-              <Text c={"gray"}>
-                ({data?.total} {t("general.unit")})
-              </Text>
-            ) : null}
+          <Group wrap="nowrap" justify="space-between">
+            <Group
+              ref={scrollRef}
+              mb={{ base: "md", md: "xl" }}
+              className=" gap-y-[2px]"
+            >
+              <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
+                searchedUnitType
+              } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
+              {data?.total ? (
+                <Text c={"gray"}>
+                  ({data?.total} {t("general.unit")})
+                </Text>
+              ) : null}
+            </Group>
+            <Button onClick={clearFilters} variant="transparent">
+              {t("general.clear")} ({countAppliedFilters(searchParams)})
+            </Button>
           </Group>
           <ScrollArea visibleFrom="md" w={"100%"}>
             <Group wrap="nowrap" px={"sm"} pb={"md"}>

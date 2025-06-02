@@ -30,6 +30,7 @@ const useFilters = () => {
     rooms_count: parseAsInteger.withDefault(0),
     result_type: parseAsString.withDefault("Default"),
     page: parseAsInteger.withDefault(1),
+    last_hours_offer: parseAsStringLiteral(["1"]),
   })
 }
 

@@ -9,7 +9,7 @@ const OrderFilter = () => {
   const [filter, set] = useQueryState("result_type", parseAsString)
 
   return (
-    <div className="fixed bottom-3 z-[1] right-1/2 translate-x-1/2 w-fit flex justify-center">
+    <div className="fixed bottom-3 z-10 right-1/2 translate-x-1/2 w-fit flex justify-center">
       <Popover width={200} position="bottom" withArrow shadow="md">
         <Popover.Target>
           <Button
