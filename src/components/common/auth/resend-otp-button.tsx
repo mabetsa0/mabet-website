@@ -9,12 +9,11 @@ import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { useEffect } from "react"
 import useCountDown from "react-countdown-hook"
-type Props = {}
 
-const ResendOtpButton = (props: Props) => {
+const ResendOtpButton = () => {
   const t = useTranslations("auth")
 
-  const [phoneNumber] = useQueryStates({
+  const [phoneNumber, set] = useQueryStates({
     phonenumber: parseAsString.withDefault(""),
     country_code: parseAsString.withDefault(""),
     time: parseAsInteger,
@@ -33,6 +32,9 @@ const ResendOtpButton = (props: Props) => {
         message: t("verify-otp.resend-error-message"),
       })
     },
+    onSuccess() {
+      set({ time: dayjs().add(1, "m").valueOf() })
+    },
   })
 
   const [timeLeft, actions] = useCountDown(
@@ -44,6 +46,7 @@ const ResendOtpButton = (props: Props) => {
   useEffect(() => {
     actions.start()
   }, [actions])
+
   return (
     <Button
       onClick={() => mutate()}
@@ -53,7 +56,7 @@ const ResendOtpButton = (props: Props) => {
       disabled={timeLeft > 0}
     >
       {t("verify-otp.resend")}{" "}
-      {timeLeft > 0 ? `${(timeLeft / 1000).toFixed(1)}s` : ""}
+      {timeLeft > 0 ? `${Math.floor(timeLeft / 1000).toFixed(0)}s` : ""}
     </Button>
   )
 }

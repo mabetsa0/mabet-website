@@ -93,7 +93,7 @@ const VerifyOtp = () => {
         <Divider label={t("verify-otp.didnot-get-code")} />
 
         <Stack gap={"xs"}>
-          <ResendOtpButton />
+          <ResendOtpButton key={phoneNumber.time} />
           <Button onClick={updatePhoneNumber} variant="outline" color="dark">
             {t("verify-otp.update-phonenumber")}
           </Button>
