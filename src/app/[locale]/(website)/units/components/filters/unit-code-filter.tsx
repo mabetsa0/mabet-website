@@ -36,7 +36,7 @@ const UnitCodeFilter = () => {
     >
       <Popover.Target>
         <Button
-          className={unit_code && "border-primary"}
+          className={unit_code && "border-primary bg-primary/10 text-primary"}
           color="dark"
           variant="outline"
           leftSection={<QrCode strokeWidth={1.25} />}

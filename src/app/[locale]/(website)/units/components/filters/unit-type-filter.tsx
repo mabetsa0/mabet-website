@@ -76,6 +76,9 @@ const UnitTypeFilter = () => {
               )
             })}
           </SimpleGrid>
+          <Button variant="light" color="red" onClick={() => set(null)}>
+            {t("general.clear")}
+          </Button>
         </Radio.Group>
       </Popover.Dropdown>
     </Popover>

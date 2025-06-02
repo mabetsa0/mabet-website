@@ -38,6 +38,7 @@ import torism from "./Tourism-Saudi-Arabia.png"
 import mabetLogo from "./mabet-logo.svg"
 import noResults from "./no-results.svg"
 import nafathIcon from "./nafath.svg"
+import phoneimageEn from "./Download-Mabet-App-EN.png"
 
 export {
   logo,
@@ -80,6 +81,7 @@ export {
   mabetLogo,
   noResults,
   nafathIcon,
+  phoneimageEn,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

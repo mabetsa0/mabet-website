@@ -1,5 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { appStore, dotImages, googlePlay, phoneImage } from "@/assets"
+import {
+  appStore,
+  dotImages,
+  googlePlay,
+  phoneImage,
+  phoneimageEn,
+} from "@/assets"
 import { APP_LINK } from "@/config"
 import {
   BackgroundImage,
@@ -55,7 +61,12 @@ const DownLoadApp = () => {
               <Image
                 src={phoneImage}
                 alt="download app"
-                className="md:-mt-[38%] max-w-[500px] mx-auto md:ms-auto w-full"
+                className="ltr:hidden md:-mt-[38%] max-w-[500px] mx-auto md:ms-auto w-full"
+              />
+              <Image
+                src={phoneimageEn}
+                alt="download app"
+                className="rtl:hidden md:-mt-[38%] max-w-[500px] mx-auto md:ms-auto w-full"
               />
             </div>
           </SimpleGrid>
