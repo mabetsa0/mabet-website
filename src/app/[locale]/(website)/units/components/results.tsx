@@ -196,7 +196,7 @@ const Results = () => {
       </Group>
       <section>
         <div className="container relative">
-          <Group wrap="nowrap" justify="space-between">
+          <Group wrap="nowrap" justify="space-between" align="start">
             <Group
               ref={scrollRef}
               mb={{ base: "md", md: "xl" }}
