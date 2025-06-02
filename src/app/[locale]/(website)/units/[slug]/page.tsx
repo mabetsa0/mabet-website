@@ -71,7 +71,7 @@ const page = async (props: Props) => {
         <Suspense>
           <VideoSlider />
         </Suspense>
-        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white min-h-[100vh]  ">
+        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white min-h-[50vh]  ">
           <UnitSegmentedControl />
           <div className="container">
             <div className="flex gap-4 max-md:flex-col md:mb-2">
@@ -80,7 +80,7 @@ const page = async (props: Props) => {
                 <ReservationDetails />
               </Box>
             </div>
-            <Stack gap={"lg"}>
+            <Stack gap={"lg"} mb={"xl"}>
               <TabConditionRender tab="Default">
                 <MobileUnitDescription />
               </TabConditionRender>
@@ -107,7 +107,9 @@ const page = async (props: Props) => {
         <Suspense>
           <DataLayer />
         </Suspense>
-        <MobileCreateBookingButton />
+        <Suspense>
+          <MobileCreateBookingButton />
+        </Suspense>
         <Footer />
       </UnitContextProvider>
     )

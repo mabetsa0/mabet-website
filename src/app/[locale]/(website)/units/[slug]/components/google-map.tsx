@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react"
 
-import { Loader, Stack, Text } from "@mantine/core"
+import { Divider, Loader, Stack, Text, Space } from "@mantine/core"
 import { Circle, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 import { useTranslations } from "next-intl"
 
@@ -21,6 +21,8 @@ function MyGoogleMapComponent({ lat, lng }: { lat: number; lng: number }) {
   return (
     <div className="container">
       <Stack>
+        <Divider />
+        <Space />
         <div>
           <h3 className="text-h4 md:text-h3 font-medium mb-0.5">
             {t("unit.location-title")}
