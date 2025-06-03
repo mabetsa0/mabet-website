@@ -364,5 +364,12 @@
     "list-item-1": "Protect your personal data.",
     "list-item-2": "Trustees of your dealings inside the platform.",
     "list-item-3": "Smooth and safe reservation experience."
+  },
+  "payment-redirect-page": {
+    "title": "🎉 Your payment has been successfull!",
+    "description": "Thank you for choosing Mabet, your reservation, and all the details have been sent to your email.",
+    "sub-description": "You can follow the reservation details, or communicate with the host through the \"reservations\" section.",
+    "home": "Back to the home page",
+    "reservations": "Moving to reservations"
   }
 }

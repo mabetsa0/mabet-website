@@ -21,7 +21,7 @@ const UnitCodeFilter = () => {
     parseAsString.withDefault("")
   )
   const field = useField({
-    mode: "uncontrolled",
+    mode: "controlled",
     initialValue: unit_code,
   })
   const onSubmit = () => {

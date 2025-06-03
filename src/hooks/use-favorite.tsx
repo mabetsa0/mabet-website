@@ -37,7 +37,7 @@ const useFavorite = ({ is_favourite, id }: Props) => {
     },
 
     onSuccess(data, vars) {
-      if (vars.is_favourite) {
+      if (!vars.is_favourite) {
         notifications.show({
           color: "green",
           title: t("success"),
