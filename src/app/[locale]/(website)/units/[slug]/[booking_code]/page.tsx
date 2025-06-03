@@ -38,7 +38,7 @@ const Page = (props: Props) => {
   })
   const { data, status } = useQuery({
     enabled: isAuthenticated,
-    queryKey: [params.booking_code, method],
+    queryKey: [params.booking_code, method, coupon],
     queryFn: () =>
       GetPaymentSummary(params.booking_code, {
         payment_method: method,

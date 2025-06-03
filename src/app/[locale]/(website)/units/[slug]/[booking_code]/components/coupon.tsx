@@ -41,9 +41,7 @@ const Coupon = ({ from, to }: { from: string; to: string }) => {
       console.log("🚀 ~ onSuccess ~ data:", data)
 
       setError(data ? "" : t("unit.invalid-coupon"))
-      if (data) {
-        setCoupon(coupon)
-      }
+      setCoupon(data ? coupon : "")
     },
   })
 
@@ -53,7 +51,13 @@ const Coupon = ({ from, to }: { from: string; to: string }) => {
         <Group align="end" wrap="nowrap">
           <TextInput
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value)
+              if (!e.target.value) {
+                setError("")
+                setCoupon("")
+              }
+            }}
             size="md"
             w={"100%"}
             classNames={{
