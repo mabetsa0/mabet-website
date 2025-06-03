@@ -46,6 +46,14 @@ const Page = () => {
       await axios.post("/api/update-email", {
         email: data.email,
       })
+
+      notifications.show({
+        color: "green",
+        title: isRtl ? "تم التحديث بنجاح" : "updated successfully",
+        message: isRtl
+          ? "تم تحديث الايميل الخاص بك"
+          : "your email has been updated",
+      })
     } catch (error: any) {
       notifications.show({
         color: "red",
