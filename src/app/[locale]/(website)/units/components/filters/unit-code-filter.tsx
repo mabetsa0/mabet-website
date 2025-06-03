@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   Popover,
+  SimpleGrid,
   Stack,
   TextInput,
   Title,
@@ -26,6 +27,10 @@ const UnitCodeFilter = () => {
   })
   const onSubmit = () => {
     setUnitCode(field.getValue())
+  }
+  const onClear = () => {
+    setUnitCode(null)
+    field.setValue("")
   }
   return (
     <Popover
@@ -57,9 +62,15 @@ const UnitCodeFilter = () => {
             placeholder={t("placeholder")}
             {...field.getInputProps()}
           />
-          <Button size="lg" onClick={onSubmit} variant="outline">
-            {t("search-now")}
-          </Button>
+
+          <SimpleGrid cols={2}>
+            <Button size="lg" onClick={onSubmit} variant="outline">
+              {t("search-now")}
+            </Button>
+            <Button onClick={onClear} color="red" variant="transparent">
+              {t("clear")}
+            </Button>
+          </SimpleGrid>
         </Stack>
       </Popover.Dropdown>
     </Popover>

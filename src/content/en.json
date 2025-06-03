@@ -217,7 +217,8 @@
         "button": "Unit code",
         "title": "Enter unit code",
         "search-now": "Search now",
-        "placeholder": "Exmple: JED-7502"
+        "placeholder": "Exmple: JED-7502",
+        "clear": "Clear"
       },
       "show_only_available-filter": {
         "button": "Available only"

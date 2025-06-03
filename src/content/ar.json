@@ -216,7 +216,8 @@
         "button": "كود الوحدة",
         "title": "ادخل كود الوحدة",
         "search-now": "ابحث الان",
-        "placeholder": "مثال: JED-7502"
+        "placeholder": "مثال: JED-7502",
+        "clear": "مسح"
       },
       "show_only_available-filter": {
         "button": "العقارات المتاحة فقط"
