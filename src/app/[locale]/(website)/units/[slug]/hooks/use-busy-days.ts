@@ -61,7 +61,8 @@ const useBusyDays = ({
         .filter((e: ClosedDate) => e.type === "closed")
         .map((e) => e.date)
     : []
-  const busyDays = filterDates(closedDates)
+  // const busyDays = filterDates(closedDates)
+  const busyDays = closedDates
   const featuredDates = query.data
     ? query.data.filter((e: ClosedDate) => e.type === "available")
     : []
