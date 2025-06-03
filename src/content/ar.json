@@ -331,7 +331,8 @@
     "coupon-code": "ادخل كوبون الخصم",
     "apply-coupon-code": "تطبيق",
     "mobile-payment-button": "متابعة الحجز",
-    "mobile-reservation-details": "ملخص الحجز"
+    "mobile-reservation-details": "ملخص الحجز",
+    "invalid-coupon": "كود خصم غير صالح"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

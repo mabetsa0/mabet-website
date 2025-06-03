@@ -332,7 +332,8 @@
     "coupon-code": "Enter the discount coupon",
     "apply-coupon-code": "Apply",
     "mobile-payment-button": "Contune reservation",
-    "mobile-reservation-details": "Reservation details"
+    "mobile-reservation-details": "Reservation details",
+    "invalid-coupon": "Invalid Coupon"
   },
   "errors": {
     "unknown-error": "Unknown error"

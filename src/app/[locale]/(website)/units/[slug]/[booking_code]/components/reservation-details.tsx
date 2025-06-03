@@ -229,7 +229,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           pb={12}
           withBorder
         >
-          <Coupon />
+          <Coupon from={prices.from} to={prices.to} />
         </Card.Section>
 
         {prices ? (

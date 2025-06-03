@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import Mabet from "@/services"
-import { Button, Group, TextInput } from "@mantine/core"
+import { Button, Group, Stack, Text, TextInput } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import { useQueryState } from "nuqs"
@@ -15,9 +15,10 @@ export interface CheckCouponResponse {
   success: boolean
 }
 
-const Coupon = () => {
+const Coupon = ({ from, to }: { from: string; to: string }) => {
   const t = useTranslations()
   const [_, setCoupon] = useQueryState("coupon")
+  const [error, setError] = useState("")
   const [value, setValue] = useState("")
   const unit = useUnitData()
   const { mutate, isPending } = useMutation({
@@ -26,12 +27,20 @@ const Coupon = () => {
         `/units/${unit.id}/check-coupon`,
         {
           coupon,
+          from: from,
+          to: to,
         }
       )
 
       return response.data.data.valid
     },
+    onMutate() {
+      setError("")
+    },
     onSuccess(data, { coupon }) {
+      console.log("🚀 ~ onSuccess ~ data:", data)
+
+      setError(data ? "" : t("unit.invalid-coupon"))
       if (data) {
         setCoupon(coupon)
       }
@@ -40,28 +49,35 @@ const Coupon = () => {
 
   return (
     <>
-      <Group align="end" wrap="nowrap">
-        <TextInput
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          size="md"
-          w={"100%"}
-          classNames={{
-            label: "text-xl font-bold mb-sm",
-          }}
-          label={t("unit.coupon-code")}
-        />
-        <Button
-          loading={isPending}
-          onClick={() => {
-            mutate({ coupon: value })
-          }}
-          className="shrink-0"
-          size="md"
-        >
-          {t("unit.apply-coupon-code")}
-        </Button>
-      </Group>
+      <Stack gap={"xs"}>
+        <Group align="end" wrap="nowrap">
+          <TextInput
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            size="md"
+            w={"100%"}
+            classNames={{
+              label: "text-xl font-bold mb-sm",
+            }}
+            label={t("unit.coupon-code")}
+          />
+          <Button
+            loading={isPending}
+            onClick={() => {
+              mutate({ coupon: value })
+            }}
+            className="shrink-0"
+            size="md"
+          >
+            {t("unit.apply-coupon-code")}
+          </Button>
+        </Group>
+        {error && (
+          <Text size="sm" c="red">
+            {error}
+          </Text>
+        )}
+      </Stack>
     </>
   )
 }

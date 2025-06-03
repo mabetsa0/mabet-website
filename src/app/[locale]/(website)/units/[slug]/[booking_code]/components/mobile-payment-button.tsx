@@ -164,7 +164,7 @@ const MobilePaymentButton = ({
         <Stack>
           <PaymentForm {...booking_details} />
           <Divider />
-          <Coupon />
+          <Coupon from={prices.from} to={prices.to} />
           <Divider />
           {prices ? (
             <Box>
