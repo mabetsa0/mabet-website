@@ -49,7 +49,7 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
-      {Number(booking.wallet.current_balance) ? (
+      {Number(booking.wallet.current_balance) && method === "card" ? (
         <Group>
           <Switch
             checked={!!use_wallet}
@@ -76,6 +76,7 @@ const PaymentForm = (booking: BookingDetails) => {
           set({
             method: value,
             payment_option: value === "card" ? "partial" : null,
+            use_wallet: value === "card" ? "1" : null,
           })
         }}
       >

@@ -75,6 +75,26 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
       })
       let paymentURL = ""
 
+      const canFullfilPartial =
+        args.payment_option === "partial" &&
+        Number(prices.wallet.current_balance) > Number(prices.full_payment)
+
+      const canFulfillFull =
+        args.payment_option === "full" &&
+        Number(prices.wallet.current_balance) > Number(prices.full_payment)
+
+      if (args.use_wallet === "1" && (canFullfilPartial || canFulfillFull)) {
+        const cardPayment = await Mabet.post<PaymentResponse>(
+          `/payment/${params.booking_code}/approve`,
+          {
+            ...args,
+            booking_code: params.booking_code,
+          }
+        )
+
+        return "/payment/success"
+      }
+
       if (args.payment_method === "card") {
         const cardPayment = await Mabet.post<PaymentResponse>(
           `/payment/pay-by-card`,
@@ -84,7 +104,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           }
         )
 
-        paymentURL = cardPayment.data.data.redirect_url
+        paymentURL = cardPayment.data.data.redirect_url || ""
       }
       if (args.payment_method === "tabby") {
         const tabbyPayment = await Mabet.get<PaymentResponse>(
@@ -97,7 +117,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             },
           }
         )
-        paymentURL = tabbyPayment.data.data.redirect_url
+        paymentURL = tabbyPayment.data.data.redirect_url || ""
       }
 
       if (args.payment_method === "madfu") {
@@ -112,7 +132,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           }
         )
 
-        paymentURL = madfuPayment.data.data.image
+        paymentURL = madfuPayment.data.data.image || ""
       }
 
       // if (args.payment_method === "wallet") {
@@ -148,8 +168,9 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         setMadfu(data)
         return
       }
-
-      Router.push(data)
+      if (data) {
+        Router.push(data)
+      }
     },
   })
 
