@@ -6,7 +6,7 @@ import axios from "axios"
 import { getLocale } from "next-intl/server"
 
 const baseURL =
-  process.env.NODE_ENV === "development"
+  process.env.NEXT_PUBLIC_TEST === "test"
     ? "https://mabet.dev/api/v2"
     : "https://app.mabet.com.sa/api/v2"
 // const baseURL = "http://mabeet.test/api/v2"
