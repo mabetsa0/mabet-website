@@ -6,7 +6,7 @@ import { createContext, ReactNode, useContext, useState } from "react"
 interface SessionContextType {
   isAuthenticated: boolean
   session: Session | null
-  updateSession: (session: Session) => void
+  updateSession: (session: Session | null) => void
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined)

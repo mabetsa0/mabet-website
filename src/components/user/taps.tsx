@@ -15,6 +15,7 @@ import {
 import { Link, usePathname } from "@/lib/i18n/navigation"
 import axios from "axios"
 import { LOCALSTORAGE_SESSION_KEY } from "@/config"
+import { useSession } from "@/app/session-provider"
 
 const userTapsContent = [
   {
@@ -81,10 +82,13 @@ const userTapsContent = [
 ]
 const Taps = () => {
   const Router = useRouter()
+  const { updateSession } = useSession()
+
   const handleLogout = async () => {
     await Mabeet.post("logout", {})
-    await axios.post("/api/auth/signout")
+    await axios.post("/api/logout")
     window.localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
+    updateSession(null)
     Router.push("/")
   }
 
@@ -99,7 +103,7 @@ const Taps = () => {
               type="button"
               onClick={handleLogout}
               key={e.href}
-              className={`grow items-center justify-center bg-white py-5 duration-300 max-md:flex md:p-5`}
+              className={`grow  cursor-pointer items-center justify-center bg-white py-5 duration-300 max-md:flex md:p-5`}
             >
               <div className="flex items-center gap-2">{e.label}</div>
             </button>

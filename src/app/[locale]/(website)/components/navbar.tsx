@@ -64,11 +64,11 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 >
                   {t("download-app")}
                 </UnstyledButton>
-                <UnstyledButton
+                {/* <UnstyledButton
                   className={"block px-xs py-md rounded-md  font-medium"}
                 >
                   {t("contact-us")}
-                </UnstyledButton>
+                </UnstyledButton> */}
                 <UnstyledButton
                   className={"block px-xs py-md rounded-md  font-medium"}
                   component={Link}
@@ -107,9 +107,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         >
           {t("download-app")}
         </UnstyledButton>
-        <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
+        {/* <UnstyledButton className={"block px-xs py-md rounded-md  font-medium"}>
           {t("contact-us")}
-        </UnstyledButton>
+        </UnstyledButton> */}
         <UnstyledButton
           component={Link}
           href={"/blog"}
