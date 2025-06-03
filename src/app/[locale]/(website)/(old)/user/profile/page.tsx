@@ -8,9 +8,9 @@ import { notifications } from "@mantine/notifications"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { useSession } from "@/app/session-provider"
 import axios from "axios"
 import { useLocale } from "next-intl"
+import { useSession } from "@/app/session-provider"
 const Page = () => {
   const isRtl = useLocale() === "ar"
   const user = useUser()
@@ -28,15 +28,24 @@ const Page = () => {
     mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues: {
-      email: user.user.email,
+      email: user.user.email || "",
     },
   })
-
-  const { session } = useSession()
+  const { session, updateSession } = useSession()
 
   const onSubmit: SubmitHandler<z.infer<typeof schema>> = async (data) => {
     try {
       const response = await Mabeet.post("/user/update", data)
+      updateSession({
+        ...session!,
+        user: {
+          ...session!.user,
+          email: data.email,
+        },
+      })
+      await axios.post("/api/update-email", {
+        email: data.email,
+      })
     } catch (error: any) {
       notifications.show({
         color: "red",
@@ -66,9 +75,11 @@ const Page = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 max-w-lg">
         <div className="mb-3">
           <TextInput
+            size="md"
+            disabled
             label={isRtl ? "الاسم:" : "Name:"}
             readOnly
-            defaultValue={user.user.name}
+            defaultValue={user.user.name || ""}
             radius={"40px"}
           />
         </div>
@@ -79,6 +90,7 @@ const Page = () => {
             render={({ field }) => (
               <TextInput
                 {...field}
+                size="md"
                 label={isRtl ? "الايميل:" : "Email"}
                 type="email"
                 required
@@ -91,8 +103,10 @@ const Page = () => {
 
         <div className="mb-3">
           <TextInput
+            disabled
+            size="md"
             label={isRtl ? "رقم الجوال:" : "Phone Number:"}
-            defaultValue={user.user.phonenumber}
+            defaultValue={user.user.phonenumber || ""}
             readOnly
             radius={"40px"}
           />

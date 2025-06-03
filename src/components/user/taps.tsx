@@ -21,8 +21,8 @@ const userTapsContent = [
     label: (
       <>
         <User className="w-5 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden">الملف الشخصي</span>
-        <span className="max-lg:hidden rtl:hidden">User Profile</span>
+        <span className="max-md:hidden ltr:hidden">الملف الشخصي</span>
+        <span className="max-md:hidden rtl:hidden">User Profile</span>
       </>
     ),
     href: "/user/profile",
@@ -31,8 +31,8 @@ const userTapsContent = [
     label: (
       <>
         <CalendarCheck className="w-5 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden"> حجوزاتي</span>
-        <span className="max-lg:hidden rtl:hidden">My Reservations</span>
+        <span className="max-md:hidden ltr:hidden"> حجوزاتي</span>
+        <span className="max-md:hidden rtl:hidden">My Reservations</span>
       </>
     ),
     href: "/user/reservations",
@@ -42,8 +42,8 @@ const userTapsContent = [
     label: (
       <>
         <Wallet className="w-5 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden"> محفظتي</span>
-        <span className="max-lg:hidden rtl:hidden"> My Wallet</span>
+        <span className="max-md:hidden ltr:hidden"> محفظتي</span>
+        <span className="max-md:hidden rtl:hidden"> My Wallet</span>
       </>
     ),
     href: "/user/wallet",
@@ -52,8 +52,8 @@ const userTapsContent = [
     label: (
       <>
         <Heart className="w-5 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden"> المفضلة</span>
-        <span className="max-lg:hidden rtl:hidden"> Favorite</span>
+        <span className="max-md:hidden ltr:hidden"> المفضلة</span>
+        <span className="max-md:hidden rtl:hidden"> Favorite</span>
       </>
     ),
     href: "/user/favourite",
@@ -62,8 +62,8 @@ const userTapsContent = [
     label: (
       <>
         <Headset className="w-5 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden">تواصل معنا</span>
-        <span className="max-lg:hidden rtl:hidden"> Contact us</span>
+        <span className="max-md:hidden ltr:hidden">تواصل معنا</span>
+        <span className="max-md:hidden rtl:hidden"> Contact us</span>
       </>
     ),
     href: "/user/contact",
@@ -72,8 +72,8 @@ const userTapsContent = [
     label: (
       <>
         <LogOut className="w-5 text-red-600 lg:w-6" />
-        <span className="max-lg:hidden ltr:hidden">تسجيل الخروج</span>
-        <span className="max-lg:hidden rtl:hidden"> Log out</span>
+        <span className="max-md:hidden ltr:hidden">تسجيل الخروج</span>
+        <span className="max-md:hidden rtl:hidden"> Log out</span>
       </>
     ),
     href: "/user/logOut",
