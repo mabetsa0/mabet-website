@@ -30,8 +30,12 @@ const Page = async ({
               {t("sub-description")}
             </Text>
             <Group gap={"lg"}>
-              <Button>{t("reservations")}</Button>
-              <Button variant="outline">{t("home")}</Button>
+              <Button>
+                <Link href={`/user/reservations`}>{t("reservations")}</Link>
+              </Button>
+              <Button variant="outline">
+                <Link href={`/`}>{t("home")}</Link>
+              </Button>
             </Group>
           </Stack>
         </div>
