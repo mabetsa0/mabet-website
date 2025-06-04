@@ -14,17 +14,18 @@ import {
   Tag,
 } from "lucide-react"
 
-import { Reservation } from "@/types/old-reservations-response"
 // import { Booking } from "@/types/reservations-response"
 
 import AddReview from "./add-review"
 import CompletePayment from "./complete-payment"
 import { useLocale } from "next-intl"
 import { logo } from "@/assets"
+import { Booking } from "@/app/[locale]/(website)/(old)/user/reservations/page"
+import { Link } from "@/lib/i18n/navigation"
 
-const ReservationCard = ({ ...props }: Reservation) => {
+const ReservationCard = ({ ...props }: Booking) => {
   const isRtl = useLocale() === "ar"
-  const url = `/user/reservations/${props.booking_id}`
+  const url = `/user/reservations/${props.id}`
 
   // show review module
   const [showAddReview, setShowAddReview] = useState(false)
@@ -72,20 +73,21 @@ const ReservationCard = ({ ...props }: Reservation) => {
             color: props.badge?.color,
           }}
         >
-          {props.badge?.text}
+          {props.badge.label}
         </div>
         <div className="relative block xl:w-[325px]">
-          <div className="relative aspect-[3/2.2] overflow-hidden rounded-2xl">
+          <div className="relative aspect-[3/2.5] overflow-hidden rounded-2xl">
             <img
               className="h-full w-full object-cover"
               loading="lazy"
-              src={props.image_path}
-              alt={props.unit_name}
+              src={props.unit.images[0].image_path}
+              alt={props.unit.name}
             />
           </div>
           {props.can_view_maps ? (
             <Button
               variant="light"
+              color="white"
               component="a"
               target="_blank"
               href={props.maps_link}
@@ -96,7 +98,8 @@ const ReservationCard = ({ ...props }: Reservation) => {
           ) : null}
           <Button
             variant="light"
-            component="a"
+            color="white"
+            component={Link}
             href={url}
             className="absolute bottom-3 ltr:left-3 rtl:right-3"
           >
@@ -107,9 +110,9 @@ const ReservationCard = ({ ...props }: Reservation) => {
         <div className="flex grow gap-2 p-4 max-md:flex-col max-md:gap-4">
           <div className={`text-textGray max-xl:text-sm md:w-2/3`}>
             <p className="mb-2 text-lg font-medium text-[#1f1f1f] md:text-2xl md:leading-relaxed">
-              {props.unit_name}
+              {props.unit.name}
               <span className="text-[11px] text-textGray">
-                ({props.unit_code})
+                ({props.unit.code})
               </span>
             </p>
             <p className="mb-2 flex items-center gap-1">
@@ -201,7 +204,7 @@ const ReservationCard = ({ ...props }: Reservation) => {
         centered
         opened={completePayment}
         onClose={handleCompletePaymentClose}
-        title={props.unit_name}
+        title={props.unit.name}
       >
         <CompletePayment bookingCode={props.code} />
       </Modal>
@@ -209,9 +212,9 @@ const ReservationCard = ({ ...props }: Reservation) => {
         centered
         opened={showAddReview}
         onClose={handleClose}
-        title={props.unit_name}
+        title={props.unit.name}
       >
-        <AddReview handleClose={handleClose} bookingId={props.booking_id} />
+        <AddReview handleClose={handleClose} bookingId={props.code} />
       </Modal>
       <Modal
         size="lg"
@@ -263,7 +266,7 @@ const ReservationCard = ({ ...props }: Reservation) => {
           {props.arrival_instructions?.map((e, i) => {
             if (e.content_type !== "image") return null
             return (
-              <div className="" key={e.label + i}>
+              <div className="" key={i}>
                 <p className="flex items-start gap-3 py-1">
                   <Circle className="mt-1 w-5 shrink-0 text-primary" />{" "}
                   <span>{e.label}</span>
