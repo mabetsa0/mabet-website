@@ -1,6 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { Box, Button, Divider, Modal, SimpleGrid, Stack } from "@mantine/core"
+import {
+  Box,
+  Button,
+  Divider,
+  Modal,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+} from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useTranslations } from "next-intl"
 import { BookingDetails } from "../payment-summary"
@@ -181,86 +189,90 @@ const MobilePaymentButton = ({
         </Button>
       </Box>
       <Modal fullScreen opened={opened} onClose={close}>
-        <Stack>
-          <PaymentForm {...booking_details} />
-          <Divider />
-          <Coupon from={prices.from} to={prices.to} />
-          <Divider />
-          {prices ? (
-            <Box>
-              <Stack>
-                <SimpleGrid cols={2}>
-                  <Group gap={"3"}>
-                    {prices.duration}{" "}
-                    <X className="text-primary" strokeWidth={4} size={20} />{" "}
-                    <Text fw={500}>
-                      {prices.night_price} <RiyalIcon />
-                    </Text>
-                  </Group>
-                  <Text ta="end" c="#767676">
-                    <span className="text-primary">{prices.total}</span>
-                    <RiyalIcon />
-                  </Text>
-                </SimpleGrid>
-
-                {prices.discount ? (
+        <ScrollArea h={"calc(100vh - 135px)"}>
+          <Stack className="relative">
+            <PaymentForm {...booking_details} />
+            <Divider />
+            <Coupon from={prices.from} to={prices.to} />
+            <Divider />
+            {prices ? (
+              <Box>
+                <Stack>
                   <SimpleGrid cols={2}>
-                    <Group gap={3}>
-                      <Text fw={500}>{t("general.discount")}</Text>
-                      <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
-                        {prices.discount_percent}
-                      </div>
+                    <Group gap={"3"}>
+                      {prices.duration}{" "}
+                      <X className="text-primary" strokeWidth={4} size={20} />{" "}
+                      <Text fw={500}>
+                        {prices.night_price} <RiyalIcon />
+                      </Text>
                     </Group>
-
-                    <Text ta="end" c="red">
-                      - {prices.discount_amount}
+                    <Text ta="end" c="#767676">
+                      <span className="text-primary">{prices.total}</span>
                       <RiyalIcon />
                     </Text>
                   </SimpleGrid>
-                ) : null}
-                <SimpleGrid cols={2}>
-                  <Text>{t("general.customer-fees")}</Text>
 
-                  <Text ta="end" c="#767676">
-                    {(
-                      parseFloat(prices.customer_fees) +
-                      Number(prices.customer_fees)
-                    ).toFixed(2)}
-                    <RiyalIcon />
-                  </Text>
-                </SimpleGrid>
-                <Divider />
-                <SimpleGrid cols={2}>
-                  <Text fw={700}>{t("general.total-price")}</Text>
+                  {Number(prices.discount) > 0 ? (
+                    <SimpleGrid cols={2}>
+                      <Group gap={3}>
+                        <Text fw={500}>{t("general.discount")}</Text>
+                        <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                          {prices.discount_percent}
+                        </div>
+                      </Group>
 
-                  <Text ta="end" fw={700}>
-                    {prices.full_payment}
-                    <RiyalIcon />
-                  </Text>
-                </SimpleGrid>
-                <Space />
-                <Space />
-                <Button
-                  onClick={() => {
-                    mutate({
-                      payment_method: method,
-                      use_wallet: use_wallet,
-                      payment_option,
-                      coupon,
-                      isPrivate: isPrivate ? "1" : undefined,
-                    })
-                  }}
-                  loading={isPending}
-                >
-                  {t("unit.pay", { value: prices.full_payment })}
-                </Button>
-                {error ? (
-                  <Text c={"red"} ta={"center"}>
-                    {error}
-                  </Text>
-                ) : null}
-              </Stack>
-            </Box>
+                      <Text ta="end" c="red">
+                        - {prices.discount_amount}
+                        <RiyalIcon />
+                      </Text>
+                    </SimpleGrid>
+                  ) : null}
+                  <SimpleGrid cols={2}>
+                    <Text>{t("general.customer-fees")}</Text>
+
+                    <Text ta="end" c="#767676">
+                      {(
+                        parseFloat(prices.customer_fees) +
+                        Number(prices.customer_fees)
+                      ).toFixed(2)}
+                      <RiyalIcon />
+                    </Text>
+                  </SimpleGrid>
+                  <Divider />
+                  <SimpleGrid cols={2}>
+                    <Text fw={700}>{t("general.total-price")}</Text>
+
+                    <Text ta="end" fw={700}>
+                      {prices.full_payment}
+                      <RiyalIcon />
+                    </Text>
+                  </SimpleGrid>
+                  <Space />
+                  <Space />
+                </Stack>
+              </Box>
+            ) : null}
+          </Stack>
+        </ScrollArea>
+        <Stack gap={"xs"} py={"sm"}>
+          <Button
+            onClick={() => {
+              mutate({
+                payment_method: method,
+                use_wallet: use_wallet,
+                payment_option,
+                coupon,
+                isPrivate: isPrivate ? "1" : undefined,
+              })
+            }}
+            loading={isPending}
+          >
+            {t("unit.pay", { value: prices.full_payment })}
+          </Button>
+          {error ? (
+            <Text c={"red"} ta={"center"}>
+              {error}
+            </Text>
           ) : null}
         </Stack>
       </Modal>

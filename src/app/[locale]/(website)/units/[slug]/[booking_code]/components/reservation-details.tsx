@@ -275,7 +275,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 </Text>
               </SimpleGrid>
 
-              {Number(prices.discount) > 0 ? (
+              {Number(prices.discount_amount) > 0 ? (
                 <SimpleGrid cols={2}>
                   <Group gap={3}>
                     <Text fw={500}>{t("general.discount")}</Text>

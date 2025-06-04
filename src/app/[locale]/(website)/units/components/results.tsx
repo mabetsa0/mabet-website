@@ -216,7 +216,7 @@ const Results = () => {
             </Button>
           </Group>
           <ScrollArea visibleFrom="md" w={"100%"}>
-            <Group wrap="nowrap" px={"sm"} pb={"md"}>
+            <Group className="w-fit" wrap="nowrap" px={"sm"} pb={"md"}>
               <UnitCodeFilter />
               <ToggleFilterButton
                 filterKey="show_only_available"
