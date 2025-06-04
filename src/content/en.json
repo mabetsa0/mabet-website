@@ -371,6 +371,10 @@
     "description": "Thank you for choosing Mabet, your reservation, and all the details have been sent to your email.",
     "sub-description": "You can follow the reservation details, or communicate with the host through the \"reservations\" section.",
     "home": "Back to the home page",
-    "reservations": "Moving to reservations"
+    "reservations": "Moving to reservations",
+    "fail-title": "An error occurred while trying to complete the reservation",
+    "fail-description": "The payment process appears to be not complete or a technical error event. \nDon't worry, no amount has been deducted.",
+    "fail-sub-description": "We advise you to re -try, or communicate with customer service if the problem persists.",
+    "retry": "Return to the real estate page"
   }
 }

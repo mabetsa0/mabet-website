@@ -74,7 +74,7 @@ const Page = (props: Props) => {
       <Box hiddenFrom="md">
         <ImageGallery />
       </Box>
-      <section className="relative  bg-white  max-md:rounded-3xl max-md:-mt-1 md:pt-2 ">
+      <section className="relative  bg-white  max-md:rounded-3xl max-md:-mt-1 md:pt-2  mb-2">
         <div className="container">
           <div className="flex gap-2 max-md:flex-col">
             <Stack className="w-full">
