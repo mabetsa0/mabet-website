@@ -4,6 +4,7 @@ import { calenderIn, calenderOut } from "@/assets"
 
 import { cn } from "@/lib/cn"
 import {
+  Button,
   Divider,
   Group,
   Popover,
@@ -15,8 +16,9 @@ import { DatePicker } from "@mantine/dates"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
 import { useSearchBarFormContext } from "./search-bar"
-
+import { useDisclosure } from "@mantine/hooks"
 const DateRangePicker = () => {
+  const [opened, { close, open }] = useDisclosure(false)
   const form = useSearchBarFormContext()
 
   const t = useTranslations("date-range-picker")
@@ -29,10 +31,18 @@ const DateRangePicker = () => {
     <Popover
       transitionProps={{ duration: 200, transition: "pop" }}
       withArrow
+      opened={opened}
+      onClose={close}
       shadow="md"
     >
       <Popover.Target>
-        <Group wrap="nowrap" className="w-full h-full cursor-pointer">
+        <Group
+          wrap="nowrap"
+          className="w-full h-full cursor-pointer"
+          onClick={() => {
+            open()
+          }}
+        >
           <Stack className="w-full " gap={2}>
             <Group gap={4}>
               <img alt="icon" src={calenderIn.src} />
@@ -103,6 +113,16 @@ const DateRangePicker = () => {
           key={form.key("dates")}
           {...form.getInputProps("dates")}
         />
+        <Group justify="end">
+          <Button
+            mt="md"
+            onClick={() => {
+              close()
+            }}
+          >
+            {t("apply")}
+          </Button>
+        </Group>
       </Popover.Dropdown>
     </Popover>
   )

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import {
+  Button,
   Divider,
   Group,
   Indicator,
@@ -22,6 +23,7 @@ import useBusyDays from "../hooks/use-busy-days"
 import { useUnitData } from "../context/unit-context"
 import { Minus } from "lucide-react"
 import useMdScreen from "@/hooks/use-md-screen"
+import { useDisclosure } from "@mantine/hooks"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
@@ -33,6 +35,7 @@ const DateSelect = ({
   initialValues?: { from: Date; to: Date }
 }) => {
   const unit = useUnitData()
+  const [opened, { close, open }] = useDisclosure(false)
   const t = useTranslations()
 
   const [{ from, to }, setDates] = useQueryStates(
@@ -140,8 +143,10 @@ const DateSelect = ({
         />
       </div>
       <Popover
+        opened={opened}
         onClose={() => {
           if (value[0] && value[1]) setDates({ from: value[0], to: value[1] })
+          close()
         }}
         disabled={readOnly}
         transitionProps={{ duration: 200, transition: "pop" }}
@@ -150,6 +155,9 @@ const DateSelect = ({
       >
         <Popover.Target>
           <Group
+            onClick={() => {
+              open()
+            }}
             wrap="nowrap"
             className="w-full h-full cursor-pointer rounded-md p-xs border-primary border-1"
           >
@@ -210,6 +218,15 @@ const DateSelect = ({
             }
             renderDay={renderDay}
           />
+          <Group justify="end">
+            <Button
+              onClick={() => {
+                close()
+              }}
+            >
+              {t("date-range-picker.apply")}
+            </Button>
+          </Group>
         </Popover.Dropdown>
       </Popover>
 
