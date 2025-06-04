@@ -444,14 +444,16 @@ const Page = async ({
                     </p>
                   </div>
 
-                  <div className="mb-4 flex justify-between">
-                    <p className="font-medium">
-                      {isRtl ? "المتبقي" : "Remainder"}
-                    </p>
-                    <p className="text-textGray">
-                      {data?.remaining} {isRtl ? <RiyalIcon /> : "SAR"}
-                    </p>
-                  </div>
+                  {data?.remaining ? (
+                    <div className="mb-4 flex justify-between">
+                      <p className="font-medium">
+                        {isRtl ? "المتبقي" : "Remainder"}
+                      </p>
+                      <p className="text-textGray">
+                        {data?.remaining} {isRtl ? <RiyalIcon /> : "SAR"}
+                      </p>
+                    </div>
+                  ) : null}
 
                   <div className=" mt-3 flex justify-between border-t">
                     <p className="font-bold">{isRtl ? "الإجمالي" : "Total"}</p>
