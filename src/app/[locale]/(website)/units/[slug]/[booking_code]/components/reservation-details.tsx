@@ -280,7 +280,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                   <Group gap={3}>
                     <Text fw={500}>{t("general.discount")}</Text>
                     <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
-                      {prices.discount_percent}
+                      {Number(prices.discount_percent)}%
                     </div>
                   </Group>
 
