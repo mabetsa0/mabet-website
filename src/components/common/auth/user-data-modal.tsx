@@ -30,6 +30,7 @@ const UserDataModal = () => {
     if (!session?.user.email) {
       window.localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
       axios.post("/api/logout")
+      updateSession(null)
     }
     onClose()
   }
@@ -58,6 +59,7 @@ const UserDataModal = () => {
       })
 
       close()
+      onClose()
     } catch (error) {
       handleFormError(error, form)
     }
