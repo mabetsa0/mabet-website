@@ -41,6 +41,7 @@ import nafathIcon from "./nafath.svg"
 import phoneimageEn from "./Download-Mabet-App-EN.png"
 import successPayment from "./success-payment.svg"
 import failPayment from "./fail-payment.svg"
+import emailIcon from "./email.svg"
 
 export {
   logo,
@@ -86,6 +87,7 @@ export {
   phoneimageEn,
   successPayment,
   failPayment,
+  emailIcon,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

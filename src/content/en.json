@@ -377,5 +377,13 @@
     "fail-description": "The payment process appears to be not complete or a technical error event. \nDon't worry, no amount has been deducted.",
     "fail-sub-description": "We advise you to re -try, or communicate with customer service if the problem persists.",
     "retry": "Return to the real estate page"
+  },
+  "user-data-modal": {
+    "title": "Complete your personal data",
+    "sub-title": "Complete your data for an integrated reservation experience",
+    "description": "We need your email to send important reservation details and notifications, and let us share the latest offers and updates.",
+    "id-label": "Enter your email",
+    "button": "Log in",
+    "agree-label": "I agree to the policy of conditions and conditions, and the reservation policy.\n\nThis is to ensure a safe and transparent reservation experience for all users."
   }
 }

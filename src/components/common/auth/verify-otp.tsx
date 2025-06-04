@@ -10,9 +10,11 @@ import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import ResendOtpButton from "./resend-otp-button"
 import { useSession } from "@/app/session-provider"
+import { useUserDataModal } from "@/hooks/use-user-data-modal"
 const VerifyOtp = () => {
   const t = useTranslations("auth")
   const [_, { onClose }] = useAuthModal()
+  const [userData, { onOpen: onOpenUserData }] = useUserDataModal()
 
   const [phoneNumber, setPhoneNumber] = useQueryStates({
     phonenumber: parseAsString.withDefault(""),
@@ -35,6 +37,9 @@ const VerifyOtp = () => {
     try {
       const response = await axios.post<Session>("/api/login", data)
       const user = response.data
+      if (!user.user.email) {
+        onOpenUserData()
+      }
       window.localStorage.setItem(
         LOCALSTORAGE_SESSION_KEY,
         JSON.stringify(user)

@@ -37,7 +37,7 @@ export interface Data {
   }
 }
 
-const AuthModal = () => {
+const NafathModal = () => {
   const [opened, { onClose }] = useNafath()
   const [value, setValue] = useState<number | string>()
   const {
@@ -133,4 +133,4 @@ const AuthModal = () => {
   )
 }
 
-export default AuthModal
+export default NafathModal
