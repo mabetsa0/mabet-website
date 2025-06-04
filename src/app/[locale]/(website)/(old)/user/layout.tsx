@@ -4,6 +4,14 @@ import ProfileHeader from "@/components/user/profile-header"
 import Taps from "@/components/user/taps"
 import { getServerSession } from "@/lib/get-server-session"
 import { redirect } from "@/lib/i18n/navigation"
+import { Session } from "@/@types/user"
+import Mabet from "@/services"
+
+export interface UserResponse {
+  data: Session
+  message: null
+  success: boolean
+}
 
 export const dynamic = "force-dynamic"
 export default async function Layout({
@@ -16,7 +24,11 @@ export default async function Layout({
   const { locale } = await params
   const isRtl = locale === "ar"
   const session = await getServerSession()
+
   if (!session) return redirect({ href: { pathname: "/" }, locale })
+
+  const response = await Mabet.get<UserResponse>(`/account/me`)
+  const user = response.data.data
 
   return (
     <>
@@ -32,7 +44,7 @@ export default async function Layout({
       </section>
       <section className="mt-6 bg-customWhite">
         <div className="container">
-          <ProfileHeader isRtl={isRtl} {...session} />
+          <ProfileHeader isRtl={isRtl} {...user} />
         </div>
       </section>
       <section className="py-10 md:py-16">
@@ -43,7 +55,7 @@ export default async function Layout({
               <Taps />{" "}
             </div>
             <div className="w-full lg:w-[90%]">
-              <UserProvider user={session}>{children}</UserProvider>
+              <UserProvider user={user}>{children}</UserProvider>
             </div>
           </div>
         </div>
