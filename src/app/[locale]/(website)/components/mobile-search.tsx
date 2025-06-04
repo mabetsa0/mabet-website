@@ -312,6 +312,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
       newSearchParams.append(key, value)
     })
     Router.push(`/units?${newSearchParams.toString()}`)
+    setOpened(false)
   })
 
   return (
