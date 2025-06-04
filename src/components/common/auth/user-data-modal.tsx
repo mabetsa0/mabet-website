@@ -47,9 +47,6 @@ const UserDataModal = () => {
       await Mabet.post("/account/update", {
         email: values.email,
       })
-      await axios.post("/api/update-email", {
-        email: values.email,
-      })
       updateSession({
         ...session!,
         user: {
@@ -57,9 +54,11 @@ const UserDataModal = () => {
           email: values.email,
         },
       })
+      await axios.post("/api/update-email", {
+        email: values.email,
+      })
 
       close()
-      onClose()
     } catch (error) {
       handleFormError(error, form)
     }

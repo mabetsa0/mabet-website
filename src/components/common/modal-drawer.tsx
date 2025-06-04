@@ -18,7 +18,7 @@ const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
   if (smallScreen)
     return (
       <Drawer.Root
-        repositionInputs={false}
+        // repositionInputs={false}
         open={state}
         onClose={onClose}
         shouldScaleBackground
