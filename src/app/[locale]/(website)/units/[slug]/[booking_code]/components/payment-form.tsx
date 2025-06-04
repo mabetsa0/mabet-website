@@ -87,6 +87,7 @@ const PaymentForm = (booking: BookingDetails) => {
             label={t("card")}
             classNames={{
               label: "font-bold",
+              description: "-ms-2.5 mt-1",
             }}
             description={
               <Group component={"span"}>
@@ -110,7 +111,7 @@ const PaymentForm = (booking: BookingDetails) => {
                 set({ payment_option: value as "full" | "partial" })
               }}
             >
-              <Stack ms={"xl"}>
+              <Stack ms={"lg"}>
                 <Space />
                 <Radio
                   size="sm"
@@ -141,6 +142,7 @@ const PaymentForm = (booking: BookingDetails) => {
             label={t("tabby")}
             classNames={{
               label: "font-bold",
+              description: "-ms-2.5 mt-1",
             }}
             description={<span className="block" id="tabby"></span>}
           />
@@ -151,6 +153,7 @@ const PaymentForm = (booking: BookingDetails) => {
             label={t("madfu")}
             classNames={{
               label: "font-bold",
+              description: "-ms-2.5 mt-1",
             }}
             description={
               <Group component={"span"}>

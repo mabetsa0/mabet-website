@@ -181,7 +181,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         withBorder
       >
         <Card.Section
-          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
+          className="border-[#F3F3F3] pb-xs md:pt-[24px] md:px-[24px] max-md:!border-none"
           withBorder
         >
           <Group align="start">
