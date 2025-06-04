@@ -13,7 +13,7 @@ const Page = async ({
   const t = await getTranslations("payment-redirect-page")
   const params = await searchParams
   const payment_status = params.payment_status
-  const id = params.id
+  const id = params.unit_id
   return (
     <>
       {payment_status === "success" ? (
