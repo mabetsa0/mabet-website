@@ -312,6 +312,8 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
       newSearchParams.append(key, value)
     })
     Router.push(`/units?${newSearchParams.toString()}`)
+    form.reset()
+    form.setFieldValue("step", 0)
     setOpened(false)
   })
 
