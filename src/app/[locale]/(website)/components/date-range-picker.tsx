@@ -32,7 +32,7 @@ const DateRangePicker = () => {
       transitionProps={{ duration: 200, transition: "pop" }}
       withArrow
       opened={opened}
-      onClose={close}
+      onDismiss={close}
       shadow="md"
     >
       <Popover.Target>

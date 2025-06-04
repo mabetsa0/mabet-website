@@ -210,13 +210,15 @@ const DateSelect = ({
             classNames={{
               day: " relative ",
             }}
-            onDateChange={handleStartDateChange}
+            onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
-            onChange={setValue}
+            onChange={(date) =>
+              setValue([new Date(date[0]), new Date(date[1])])
+            }
             excludeDate={(date) =>
               busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
             }
-            renderDay={renderDay}
+            renderDay={(date) => renderDay(new Date(date))}
           />
           <Group justify="end">
             <Button

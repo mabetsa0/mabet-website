@@ -32,7 +32,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { Check, ChevronRight, Search } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
-import { ElementRef, useRef, useState } from "react"
+import { ComponentRef, useRef, useState } from "react"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Drawer } from "vaul"
 dayjs.extend(durations)
@@ -302,7 +302,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
     },
   })
   const step = form.values.step
-  const nodeRef = useRef<ElementRef<"div">>(null)
+  const nodeRef = useRef<ComponentRef<"div">>(null)
 
   const Router = useRouter()
   const onSubmit = form.onSubmit((values) => {
