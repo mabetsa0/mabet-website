@@ -25,7 +25,7 @@ import { Link } from "@/lib/i18n/navigation"
 
 const ReservationCard = ({ ...props }: Booking) => {
   const isRtl = useLocale() === "ar"
-  const url = `/user/reservations/${props.id}`
+  const url = `/user/reservations/${props.code}`
 
   // show review module
   const [showAddReview, setShowAddReview] = useState(false)

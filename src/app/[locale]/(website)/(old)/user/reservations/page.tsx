@@ -249,7 +249,7 @@ const Page = () => {
   //     old: true,
   //   })
 
-  const { data, status, error } = useQuery({
+  const { data, status } = useQuery({
     queryKey: ["reservations", pageIndex],
     queryFn: () =>
       Mabet.get<ReservationsResponse>("/account/bookings", {
