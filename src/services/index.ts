@@ -4,11 +4,11 @@ import axios from "axios"
 import { getLocale } from "next-intl/server"
 import { getSession } from "@/utils/get-session"
 
-// const baseURL =
-//   process.env.NEXT_PUBLIC_TEST === "test"
-//     ? "https://mabet.dev/api/v2"
-//     : "https://app.mabet.com.sa/api/v2"
-const baseURL = "https://mabet.dev/api/v2"
+const baseURL =
+  process.env.NEXT_PUBLIC_TEST === "test"
+    ? "https://mabet.dev/api/v2"
+    : "https://app.mabet.com.sa/api/v2"
+// const baseURL = "https://mabet.dev/api/v2"
 
 const Mabet = axios.create({
   baseURL: baseURL,
