@@ -49,8 +49,8 @@ const Page = async ({
               {t("fail-sub-description")}
             </Text>
             <Group gap={"lg"}>
-              <Button component={Link} href={`/units/${id}`}>
-                {t("retry")}
+              <Button>
+                <Link href={`/units/${id}`}>{t("retry")}</Link>
               </Button>
             </Group>
           </Stack>
