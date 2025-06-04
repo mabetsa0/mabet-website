@@ -4,19 +4,20 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Unit } from "@/@types"
-import { Carousel, Embla } from "@mantine/carousel"
+import { Carousel } from "@mantine/carousel"
 import { useCallback, useState } from "react"
 import UnitCard from "@/components/common/unit-card"
 import { ActionIcon, Group, Text, Title } from "@mantine/core"
 import { useRef } from "react"
 import Autoplay from "embla-carousel-autoplay"
+import { EmblaCarouselType } from "embla-carousel"
 type Props = {
   data: Unit[]
 }
 
 const NewUnits = ({ data }: Props) => {
   const t = useTranslations("home.new-units")
-  const [embla, setEmbla] = useState<Embla | null>(null)
+  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null)
   const scrollPrev = useCallback(() => {
     if (!embla) return
     embla.scrollPrev()
@@ -75,10 +76,9 @@ const NewUnits = ({ data }: Props) => {
             type="media"
             slideSize={{ base: "100%", sm: "400" }}
             slideGap={{ base: "lg" }}
-            loop
-            align="start"
             withControls={false}
-            draggable={false}
+            // draggable={false}
+            emblaOptions={{ loop: true, align: "start" }}
           >
             {data.map((unit) => (
               <Carousel.Slide key={unit.id}>

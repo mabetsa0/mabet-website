@@ -82,8 +82,9 @@ const UnitCard = (props: Unit & { className?: string }) => {
           slideSize={"100%"}
           h={"100%"}
           slideGap={"lg"}
-          loop
-          align="start"
+          // loop
+          // align="start"
+          emblaOptions={{ loop: true }}
           withControls={false}
           withIndicators
           onClick={(e) => {

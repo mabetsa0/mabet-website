@@ -135,9 +135,10 @@ const ImageGallery = () => {
         <Box hiddenFrom="md" className="relative">
           <Carousel
             withControls={false}
-            loop
+            // loop
             height="100%"
             withIndicators={true}
+            emblaOptions={{ loop: true }}
             classNames={{
               indicators: "justify-center mb-1",
               indicator: "!w-0.5 !h-0.5",

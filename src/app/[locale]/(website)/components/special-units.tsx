@@ -4,19 +4,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Unit } from "@/@types"
-import { Carousel, Embla } from "@mantine/carousel"
-import { useCallback, useState } from "react"
 import UnitCard from "@/components/common/unit-card"
+import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Text, Title } from "@mantine/core"
-import { useRef } from "react"
-import Autoplay from "embla-carousel-autoplay"
+import { EmblaCarouselType } from "embla-carousel"
+import { useCallback, useState } from "react"
 type Props = {
   data: Unit[]
 }
 
 const SpecialUnits = ({ data }: Props) => {
   const t = useTranslations("home.special-units")
-  const [embla, setEmbla] = useState<Embla | null>(null)
+  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null)
   const scrollPrev = useCallback(() => {
     if (!embla) return
     embla.scrollPrev()
@@ -26,8 +25,6 @@ const SpecialUnits = ({ data }: Props) => {
     if (!embla) return
     embla.scrollNext()
   }, [embla])
-
-  const autoplay = useRef(Autoplay({ delay: 7000 }))
 
   return (
     <section className="py-3">
@@ -67,18 +64,15 @@ const SpecialUnits = ({ data }: Props) => {
           className="w-full "
         >
           <Carousel
-            getEmblaApi={setEmbla}
-            plugins={[autoplay.current]}
-            onMouseEnter={autoplay.current.stop}
-            onMouseLeave={autoplay.current.reset}
             // type="container"
             type="media"
             slideSize={{ base: "100%", sm: "400" }}
             slideGap={{ base: "lg" }}
-            loop
-            align="start"
+            //  loop
+            // align="start"
             withControls={false}
             draggable={false}
+            emblaOptions={{ loop: true, align: "start" }}
           >
             {data.map((unit) => (
               <Carousel.Slide key={unit.id}>

@@ -80,7 +80,11 @@ const VideoSlider = () => {
             </div>
           ) : null}
           {status === "success" ? (
-            <Carousel loop height="100%" withIndicators>
+            <Carousel
+              emblaOptions={{ loop: true }}
+              height="100%"
+              withIndicators
+            >
               {data.map((video) => {
                 return (
                   <Carousel.Slide key={video.url}>

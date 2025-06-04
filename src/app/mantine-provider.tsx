@@ -28,7 +28,6 @@ export default function MyMantineProvider({
             locale,
             firstDayOfWeek: 6,
             weekendDays: [5],
-            timezone: "UTC",
           }}
         >
           {children}

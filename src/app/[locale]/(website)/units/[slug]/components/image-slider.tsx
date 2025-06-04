@@ -40,7 +40,12 @@ const ImageSlider = () => {
             </ActionIcon>
             <ShareButton variant="filled" />
           </Group>
-          <Carousel loop height="100%" withIndicators>
+          <Carousel
+            // loop
+            height="100%"
+            withIndicators
+            emblaOptions={{ loop: true }}
+          >
             {unitData.images.map((image) => {
               return (
                 <Carousel.Slide key={image.image_path}>
