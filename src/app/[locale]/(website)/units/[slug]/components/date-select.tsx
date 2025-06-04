@@ -148,6 +148,9 @@ const DateSelect = ({
           if (value[0] && value[1]) setDates({ from: value[0], to: value[1] })
           close()
         }}
+        onDismiss={() => {
+          close()
+        }}
         disabled={readOnly}
         transitionProps={{ duration: 200, transition: "pop" }}
         withArrow
@@ -212,15 +215,18 @@ const DateSelect = ({
             }}
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
-            onChange={(date) =>
-              setValue([new Date(date[0]), new Date(date[1])])
-            }
+            onChange={(date) => {
+              setValue([
+                date[0] ? new Date(date[0]) : null,
+                date[1] ? new Date(date[1]) : null,
+              ])
+            }}
             excludeDate={(date) =>
               busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
             }
             renderDay={(date) => renderDay(new Date(date))}
           />
-          <Group justify="end">
+          <Group justify="end" mt={"sm"}>
             <Button
               onClick={() => {
                 close()
