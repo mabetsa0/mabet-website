@@ -84,7 +84,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         Number(prices.wallet.current_balance) > Number(prices.full_payment)
 
       if (args.use_wallet === "1" && (canFullfilPartial || canFulfillFull)) {
-        const cardPayment = await Mabet.post<PaymentResponse>(
+        await Mabet.post<PaymentResponse>(
           `/payment/${params.booking_code}/approve`,
           {
             ...args,
@@ -92,7 +92,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           }
         )
 
-        return "/payment/success"
+        return "/payment?payment_status=success&id=" + params.booking_code
       }
 
       if (args.payment_method === "card") {
