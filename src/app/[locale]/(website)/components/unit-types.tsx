@@ -28,7 +28,7 @@ const UnitTypes = async () => {
                 key={type.id}
                 href={`/units?unit_type=${type.id}`}
               >
-                <Stack gap={"xs"} ta={"center"}>
+                <Stack gap={"xs"} ta={"center"} py={"xl"}>
                   <Image
                     h={40}
                     w={40}

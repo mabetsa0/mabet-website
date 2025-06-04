@@ -32,6 +32,7 @@
   --breakpoint-md: 62em;
   --breakpoint-lg: 75em;
   --breakpoint-xl: 88em;
+  --spacing: var(--mantine-spacing-md);
 
   /* readd back tailwind's default containers vars to fix #24 */
   --size-3xs: 16rem;
