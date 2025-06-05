@@ -202,29 +202,31 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
 
   return (
     <Stack>
-      <Text py={"xs"} c={"#767676"}>
-        {selectedCite} {selectedType}
-      </Text>
-      <Group justify="space-between">
-        <Text c={"#767676"}>
-          {t("general.from")}{" "}
-          {from ? (
-            <span className=" font-bold text-primary">
-              {dayjs(from).format("DD")}
-            </span>
-          ) : null}{" "}
-          {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
-          <span className=" font-bold text-primary">
-            {to ? dayjs(to).format("DD") : null}
-          </span>{" "}
-          {to ? dayjs(to).format("/ MMMM") : null}
+      <Stack gap={"xs"}>
+        <Text py={"xs"} c={"#767676"}>
+          {selectedCite} {selectedType}
         </Text>
-        {from && to ? (
-          <Text c={"primary"}>
-            ({dayjs.duration(duration, "day").locale(locale).humanize()})
+        <Group justify="space-between">
+          <Text c={"#767676"}>
+            {t("general.from")}{" "}
+            {from ? (
+              <span className=" font-bold text-primary">
+                {dayjs(from).format("DD")}
+              </span>
+            ) : null}{" "}
+            {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
+            <span className=" font-bold text-primary">
+              {to ? dayjs(to).format("DD") : null}
+            </span>{" "}
+            {to ? dayjs(to).format("/ MMMM") : null}
           </Text>
-        ) : null}
-      </Group>
+          {from && to ? (
+            <Text c={"primary"}>
+              ({dayjs.duration(duration, "day").locale(locale).humanize()})
+            </Text>
+          ) : null}
+        </Group>
+      </Stack>
       <Divider />
       <div>
         <SegmentedControl
@@ -252,7 +254,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
       </div>
       <div className="w-full flex justify-center">
         <DatePicker
-          size="lg"
+          size="md"
           hideOutsideDates
           minDate={new Date()}
           type="range"
