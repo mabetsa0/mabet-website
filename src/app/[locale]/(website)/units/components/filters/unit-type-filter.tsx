@@ -44,14 +44,13 @@ const UnitTypeFilter = () => {
                   key={type.id}
                   radius="md"
                   value={type.id + ""}
-                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-2.5 py-2.5 relative"
+                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-1  md:px-2.5 py-1  md:py-2.5 relative"
                 >
                   <Group wrap="nowrap" align="flex-start">
                     <Radio.Indicator className="absolute opacity-0" />
-                    <Stack gap={"xs"} ta={"center"} className="w-full">
+                    <Stack ta={"center"} className="w-full gap-xs md:gap-sm">
                       <Image
-                        h={40}
-                        w={40}
+                        className="w-[30px] h-[30px] md:w-[40px] md:h-[40px]"
                         mx={"auto"}
                         src={
                           UnitTypeIcons[

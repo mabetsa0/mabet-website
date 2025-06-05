@@ -55,7 +55,7 @@ const PriceFilter = () => {
         </Button>
       </Popover.Target>
 
-      <Popover.Dropdown w={390}>
+      <Popover.Dropdown className="!w-[340px] md:!w-[390px]">
         <Stack gap={"lg"} p={"xs"}>
           <Title order={5}>{t("title")}</Title>
           <Divider />
