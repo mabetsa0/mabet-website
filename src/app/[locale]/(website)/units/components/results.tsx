@@ -312,6 +312,40 @@ const Results = () => {
               />
             </Group>
           </ScrollArea>
+          <ScrollArea hiddenFrom="md" w={"100%"}>
+            <Group className="w-fit" wrap="nowrap" px={"sm"} pb={"md"}>
+              <UnitCodeFilter />
+              <ToggleFilterButton
+                filterKey="show_only_available"
+                leftSection={<Building2 strokeWidth={1.25} />}
+              >
+                {t("search.filter.show_only_available-filter.button")}
+              </ToggleFilterButton>
+              <UnitTypeFilter />
+              <FilterButtonWithSearch
+                filterKey="region_id"
+                label={t("general.select-region")}
+                data={regionsData.data || []}
+                buttonProps={{
+                  leftSection: <Map strokeWidth={1.25} />,
+                  children: t("general.region"),
+                }}
+              />
+
+              <PriceFilter />
+              <FilterButtonWithRadio
+                filterKey="direction_id"
+                buttonProps={{
+                  leftSection: <SignpostBig strokeWidth={1.25} />,
+                  children: t("search.filter.direction-filter.button"),
+                }}
+                title={t("search.filter.direction-filter.title")}
+                data={directionsQuery.data || []}
+              />
+
+              <RatingFilter />
+            </Group>
+          </ScrollArea>
           {status === "pending" ? (
             <div className="flex items-center justify-center min-h-[50vh]">
               <Loader />
