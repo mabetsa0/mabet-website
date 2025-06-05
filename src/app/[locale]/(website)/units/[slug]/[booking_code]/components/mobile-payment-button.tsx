@@ -188,8 +188,8 @@ const MobilePaymentButton = ({
           {t("unit.mobile-payment-button")}
         </Button>
       </Box>
-      <Modal fullScreen opened={opened} onClose={close}>
-        <ScrollArea h={"calc(100vh - 135px)"}>
+      <Modal className="relative" fullScreen opened={opened} onClose={close}>
+        <ScrollArea h={"calc(100svh - 135px)"}>
           <Stack className="relative">
             <PaymentForm {...booking_details} />
             <Divider />
@@ -254,7 +254,7 @@ const MobilePaymentButton = ({
             ) : null}
           </Stack>
         </ScrollArea>
-        <Stack gap={"xs"} py={"sm"}>
+        <Stack className="absolute bottom-0 inset-x-0 px-1 py-1" gap={"xs"}>
           <Button
             onClick={() => {
               mutate({
