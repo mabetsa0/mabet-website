@@ -335,7 +335,9 @@
     "apply-coupon-code": "Apply",
     "mobile-payment-button": "Contune reservation",
     "mobile-reservation-details": "Reservation details",
-    "invalid-coupon": "Invalid Coupon"
+    "invalid-coupon": "Invalid Coupon",
+    "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
+    "payment-accept-conditions-description": "Click to see the requirements"
   },
   "errors": {
     "unknown-error": "Unknown error"

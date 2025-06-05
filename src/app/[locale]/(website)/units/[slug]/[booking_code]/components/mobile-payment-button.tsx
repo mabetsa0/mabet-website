@@ -26,6 +26,7 @@ import { useParams } from "next/navigation"
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { useState } from "react"
 import { GetPaymentSummary } from "../get-payment-summary"
+import useMdScreen from "@/hooks/use-md-screen"
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -50,7 +51,8 @@ const MobilePaymentButton = ({
   booking_details: BookingDetails
 }) => {
   const prices = booking_details
-  const [opened, { open, close }] = useDisclosure(false)
+  const matches = useMdScreen()
+  const [opened, { open, close }] = useDisclosure(true)
   const t = useTranslations()
   const [{ method, use_wallet, payment_option, coupon, isPrivate }] =
     useQueryStates({
@@ -178,6 +180,7 @@ const MobilePaymentButton = ({
     },
   })
 
+  if (!matches) return null
   return (
     <>
       <Box
@@ -190,6 +193,12 @@ const MobilePaymentButton = ({
       </Box>
       <Modal className="relative" fullScreen opened={opened} onClose={close}>
         <ScrollArea h={"calc(100svh - 135px)"}>
+          <Group pb={"sm"} wrap="nowrap" justify="space-between">
+            <Text size="sm">{t("unit.payment-accept-conditions")}</Text>
+            <Text onClick={close} size="sm" className="text-primary">
+              ({t("unit.payment-accept-conditions-description")})
+            </Text>
+          </Group>
           <Stack className="relative">
             <PaymentForm {...booking_details} />
             <Divider />

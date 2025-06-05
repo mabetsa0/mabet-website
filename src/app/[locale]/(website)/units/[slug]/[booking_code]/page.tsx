@@ -103,6 +103,7 @@ const Page = (props: Props) => {
               <ReservationDetails prices={data.booking_details} />
             </Box>
           </div>
+
           <MobilePaymentButton booking_details={data.booking_details} />
         </div>
       </section>

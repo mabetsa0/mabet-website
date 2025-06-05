@@ -334,7 +334,9 @@
     "apply-coupon-code": "تطبيق",
     "mobile-payment-button": "متابعة الحجز",
     "mobile-reservation-details": "ملخص الحجز",
-    "invalid-coupon": "كود خصم غير صالح"
+    "invalid-coupon": "كود خصم غير صالح",
+    "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
+    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  "
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
