@@ -136,13 +136,13 @@ const Results = () => {
     Router.back()
   }
   const scrollRef = useRef<ComponentRef<"div">>(null)
-  useEffect(() => {
-    if (scrollRef.current) {
-      setTimeout(() => {
-        scrollRef.current!.scrollIntoView({ behavior: "smooth" })
-      }, 200)
-    }
-  }, [page])
+  // useEffect(() => {
+  //   if (scrollRef.current) {
+  //     setTimeout(() => {
+  //       scrollRef.current!.scrollIntoView({ behavior: "smooth" })
+  //     }, 200)
+  //   }
+  // }, [page])
 
   const clearFilters = () => {
     setFilters(null)

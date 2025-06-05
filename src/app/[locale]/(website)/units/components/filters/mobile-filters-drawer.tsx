@@ -226,7 +226,7 @@ const MobileFilterDrawer = () => {
             </Drawer.Title>
             <Divider />
             <form onSubmit={onSubmit}>
-              <ScrollArea h={"70vh"} className="px-1 ">
+              <ScrollArea h={"70svh"} className="px-1 ">
                 <Stack gap={"lg"}>
                   <Space />
                   {/* unit code filter */}
