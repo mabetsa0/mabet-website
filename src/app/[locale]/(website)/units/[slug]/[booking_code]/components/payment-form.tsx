@@ -101,16 +101,16 @@ const PaymentForm = (booking: BookingDetails) => {
                     />
                   </span>
                 ))}
-                <span className="relative h-2 ">
+                <span className="relative h-2 w-3 ">
                   <img
                     alt={"payment option"}
                     src={applePay.src}
-                    className="  object-contain"
+                    className="absolute inset-0 h-full w-full object-contain"
                     loading="lazy"
                   />
-                  <span className="text-xs whitespace-nowrap text-black">
+                  {/* <span className="text-xs whitespace-nowrap text-black">
                     {t("apple-pay")}
-                  </span>
+                  </span> */}
                 </span>
               </Group>
             }

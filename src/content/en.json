@@ -350,7 +350,7 @@
     "description": "Choose the appropriate payment method for you with the options that Mabet platform provides to you.",
     "use-wallet": "Use wallet",
     "use-wallet-description": "Activate the remaining balance in wallet {value}",
-    "card": "Pay by card",
+    "card": "Online payment",
     "tabby": "Pay by Tabby",
     "madfu": "Pay with Madfu",
     "madfu-description": "Pay by parts without interest without fees",
