@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { mada, madfu, masterCard, visa } from "@/assets"
+import { applePay, mada, madfu, masterCard, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import {
   Divider,
@@ -50,7 +50,7 @@ const PaymentForm = (booking: BookingDetails) => {
         </Text>
       </Stack>
       {Number(booking.wallet.current_balance) && method === "card" ? (
-        <Group>
+        <Group wrap="nowrap" align="start" mt={"sm"}>
           <Switch
             checked={!!use_wallet}
             onChange={(e) => {
@@ -101,6 +101,17 @@ const PaymentForm = (booking: BookingDetails) => {
                     />
                   </span>
                 ))}
+                <span className="relative h-2 ">
+                  <img
+                    alt={"payment option"}
+                    src={applePay.src}
+                    className="  object-contain"
+                    loading="lazy"
+                  />
+                  <span className="text-xs whitespace-nowrap text-black">
+                    {t("apple-pay")}
+                  </span>
+                </span>
               </Group>
             }
           />

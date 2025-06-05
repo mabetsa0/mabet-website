@@ -354,7 +354,8 @@
     "madfu": "ادفع باستخدام مدفوع",
     "madfu-description": "دفعات بلا فوائد بدون رسوم",
     "partial-payment": "ادفع عربون تأكيد الحجز {value}",
-    "full-payment": "ادفع كامل المبلغ {value} "
+    "full-payment": "ادفع كامل المبلغ {value} ",
+    "apple-pay": "دفع الكتروني"
   },
   "nafath": {
     "title": "وثق حسابك عبر نفاذ",

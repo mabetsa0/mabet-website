@@ -355,7 +355,8 @@
     "madfu": "Pay with Madfu",
     "madfu-description": "Pay by parts without interest without fees",
     "partial-payment": "Pay a deposit {value}",
-    "full-payment": "Pay full {value} "
+    "full-payment": "Pay full {value} ",
+    "apple-pay": "Online payment"
   },
   "nafath": {
     "title": "Verify you account with nafath",
