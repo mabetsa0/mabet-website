@@ -40,7 +40,7 @@ import {
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
-import { ElementRef, Suspense, useEffect, useRef } from "react"
+import { ComponentRef, ElementRef, Suspense, useEffect, useRef } from "react"
 import MobileSearch from "../../components/mobile-search"
 import { SearchResultsResponse } from "../types/results"
 import CountFilter from "./filters/count-filter"
@@ -135,7 +135,7 @@ const Results = () => {
   const back = () => {
     Router.back()
   }
-  const scrollRef = useRef<ElementRef<"div">>(null)
+  const scrollRef = useRef<ComponentRef<"div">>(null)
   useEffect(() => {
     if (scrollRef.current) {
       setTimeout(() => {
@@ -195,13 +195,14 @@ const Results = () => {
         <MobileFilterDrawer />
       </Group>
       <section>
-        <div className="container relative">
-          <Group wrap="nowrap" justify="space-between" align="start">
-            <Group
-              ref={scrollRef}
-              mb={{ base: "md", md: "xl" }}
-              className=" gap-y-[2px]"
-            >
+        <div ref={scrollRef} className="container relative">
+          <Group
+            visibleFrom="md"
+            wrap="nowrap"
+            justify="space-between"
+            align="start"
+          >
+            <Group mb={{ base: "md", md: "xl" }} className=" gap-y-[2px]">
               <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
                 searchedUnitType
               } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
