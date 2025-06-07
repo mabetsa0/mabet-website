@@ -1,9 +1,10 @@
-import { BAYUT_KEY } from "@/config"
+import { BAYUT_KEY, LOCALSTORAGE_SESSION_KEY } from "@/config"
 import { getServerSession } from "@/lib/get-server-session"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getSession } from "@/utils/get-session"
 import axios from "axios"
 import { getLocale } from "next-intl/server"
+import { redirect } from "next/navigation"
 
 const baseURL =
   process.env.NEXT_PUBLIC_TEST === "test"
@@ -117,6 +118,28 @@ OldMabeet.interceptors.request.use(
   (error) => {
     console.log("🚀 ~ error:", error)
     // Do something with request error
+    return Promise.reject(error)
+  }
+)
+Mabeet.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  async (error) => {
+    if (error.response.status === 401) {
+      if (typeof window === "undefined") {
+        const { cookies } = await import("next/headers")
+        const cookieStore = await cookies()
+        cookieStore.delete("session")
+
+        redirect("/")
+      } else {
+        await axios.post("/api/logout")
+        localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
+        const locale = getLocaleFromUrl() as "en" | "ar"
+        window.location.href = `/${locale}`
+      }
+    }
     return Promise.reject(error)
   }
 )
