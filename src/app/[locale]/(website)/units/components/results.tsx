@@ -152,7 +152,7 @@ const Results = () => {
   return (
     <>
       <Stack
-        className=" z-[10] bg-white px-1 sticky top-0 py-0.5 shadow-sm"
+        className=" z-[5] bg-white px-1 sticky top-0 py-0.5 shadow-sm"
         hiddenFrom="md"
       >
         <Group wrap="nowrap">
