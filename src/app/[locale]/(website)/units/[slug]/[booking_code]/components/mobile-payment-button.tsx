@@ -54,7 +54,7 @@ const MobilePaymentButton = ({
   const matches = useMdScreen()
   const [opened, { open, close }] = useDisclosure(true)
   const t = useTranslations()
-  const [{ method, use_wallet, payment_option, coupon, isPrivate }] =
+  const [{ method, use_wallet, payment_option, coupon, private: isPrivate }] =
     useQueryStates({
       method: parseAsString.withDefault("card"),
       use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
@@ -62,7 +62,7 @@ const MobilePaymentButton = ({
         "partial"
       ),
       coupon: parseAsString.withDefault(""),
-      isPrivate: parseAsStringLiteral(["1"]),
+      private: parseAsStringLiteral(["1"]),
     })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
@@ -96,6 +96,7 @@ const MobilePaymentButton = ({
           {
             ...args,
             booking_code: params.booking_code,
+            private: isPrivate ? 1 : undefined,
           }
         )
 
@@ -108,6 +109,7 @@ const MobilePaymentButton = ({
           {
             ...args,
             booking_code: params.booking_code,
+            private: isPrivate ? 1 : undefined,
           }
         )
 

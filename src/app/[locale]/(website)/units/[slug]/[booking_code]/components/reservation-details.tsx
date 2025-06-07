@@ -47,7 +47,7 @@ interface MadfuResponse {
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
   const unit = useUnitData()
-  const [{ method, use_wallet, payment_option, coupon, isPrivate }] =
+  const [{ method, use_wallet, payment_option, coupon, private: isPrivate }] =
     useQueryStates({
       method: parseAsString.withDefault("card"),
       use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
@@ -55,7 +55,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         "partial"
       ),
       coupon: parseAsString.withDefault(""),
-      isPrivate: parseAsStringLiteral(["1"]),
+      private: parseAsStringLiteral(["1"]),
     })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
@@ -89,6 +89,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           {
             ...args,
             booking_code: params.booking_code,
+            private: isPrivate ? 1 : undefined,
           }
         )
 
@@ -101,6 +102,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
           {
             ...args,
             booking_code: params.booking_code,
+            private: isPrivate ? 1 : undefined,
           }
         )
 
