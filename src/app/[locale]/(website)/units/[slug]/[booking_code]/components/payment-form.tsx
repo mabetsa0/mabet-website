@@ -115,7 +115,8 @@ const PaymentForm = (booking: BookingDetails) => {
               </Group>
             }
           />
-          {method === "card" ? (
+          {method === "card" &&
+          booking.down_payment !== booking.full_payment ? (
             <Radio.Group
               value={payment_option}
               onChange={(value) => {
