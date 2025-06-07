@@ -47,7 +47,8 @@
     "tailwind-merge": "^3.3.0",
     "tailwind-preset-mantine": "^2.1.0",
     "vaul": "^1.1.2",
-    "zod": "^3.25.51"
+    "zod": "^3.25.51",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8",

@@ -10,7 +10,7 @@ import { z } from "zod"
 
 import axios from "axios"
 import { useLocale } from "next-intl"
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 const Page = () => {
   const isRtl = useLocale() === "ar"
   const user = useUser()

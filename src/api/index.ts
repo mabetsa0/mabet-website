@@ -1,5 +1,6 @@
-import { BAYUT_KEY, LOCALSTORAGE_SESSION_KEY } from "@/config"
+import { BAYUT_KEY } from "@/config"
 import { getServerSession } from "@/lib/get-server-session"
+import { useSession } from "@/lib/session-store"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getSession } from "@/utils/get-session"
 import axios from "axios"
@@ -135,7 +136,7 @@ Mabeet.interceptors.response.use(
         redirect("/")
       } else {
         await axios.post("/api/logout")
-        localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
+        useSession.getState().updateSession(null)
         const locale = getLocaleFromUrl() as "en" | "ar"
         window.location.href = `/${locale}`
       }

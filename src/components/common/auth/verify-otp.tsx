@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import { Session } from "@/@types/user"
-import { LOCALSTORAGE_SESSION_KEY } from "@/config"
 import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useUserDataModal } from "@/hooks/use-user-data-modal"
+import { useSession } from "@/lib/session-store"
 import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import axios from "axios"
 import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import ResendOtpButton from "./resend-otp-button"
-import { useSession } from "@/app/session-provider"
-import { useUserDataModal } from "@/hooks/use-user-data-modal"
 const VerifyOtp = () => {
   const t = useTranslations("auth")
   const [_, { onClose }] = useAuthModal()
@@ -40,10 +39,7 @@ const VerifyOtp = () => {
       if (!user.user.email) {
         onOpenUserData()
       }
-      window.localStorage.setItem(
-        LOCALSTORAGE_SESSION_KEY,
-        JSON.stringify(user)
-      )
+
       updateSession(user)
       setPhoneNumber(null)
       onClose()

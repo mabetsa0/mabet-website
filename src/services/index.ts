@@ -1,11 +1,11 @@
-import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getServerSession } from "@/lib/get-server-session"
+import { getLocaleFromUrl } from "@/utils/get-locale"
+import { getSession } from "@/utils/get-session"
 import axios from "axios"
 import { getLocale } from "next-intl/server"
-import { getSession } from "@/utils/get-session"
 
+import { useSession } from "@/lib/session-store"
 import { redirect } from "next/navigation"
-import { LOCALSTORAGE_SESSION_KEY } from "@/config"
 
 const baseURL =
   process.env.NEXT_PUBLIC_TEST === "test"
@@ -136,7 +136,8 @@ Mabet.interceptors.response.use(
         redirect("/")
       } else {
         axios.post("/api/logout")
-        localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
+        useSession.getState().updateSession(null)
+
         const locale = getLocaleFromUrl() as "en" | "ar"
         window.location.href = `/${locale}`
       }

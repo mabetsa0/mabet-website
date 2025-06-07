@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
 import { notifications } from "@mantine/notifications"
 import { useMutation } from "@tanstack/react-query"

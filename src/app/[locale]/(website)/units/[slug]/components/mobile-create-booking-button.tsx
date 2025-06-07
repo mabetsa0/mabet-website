@@ -1,6 +1,6 @@
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useRouter } from "@/lib/i18n/navigation"

@@ -1,6 +1,6 @@
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { usePathname, Link } from "@/lib/i18n/navigation"
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 import { ActionIcon, Button, Menu } from "@mantine/core"
 import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"

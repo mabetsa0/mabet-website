@@ -17,7 +17,7 @@ import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
 import useMdScreen from "@/hooks/use-md-screen"
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 import Footer from "@/components/common/footer"
 
 type Props = {

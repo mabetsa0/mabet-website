@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import Mabeet from "@/api"
 import {
   CalendarCheck,
@@ -8,14 +7,13 @@ import {
   Heart,
   LogOut,
   User,
-  User2,
   Wallet,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 import { Link, usePathname } from "@/lib/i18n/navigation"
+import { useSession } from "@/lib/session-store"
 import axios from "axios"
-import { LOCALSTORAGE_SESSION_KEY } from "@/config"
-import { useSession } from "@/app/session-provider"
 
 const userTapsContent = [
   {
@@ -87,7 +85,6 @@ const Taps = () => {
   const handleLogout = async () => {
     await Mabeet.post("logout", {})
     await axios.post("/api/logout")
-    window.localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
     updateSession(null)
     Router.push("/")
   }

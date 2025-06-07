@@ -2,6 +2,9 @@
 "use client"
 import { emailIcon } from "@/assets"
 import { useUserDataModal } from "@/hooks/use-user-data-modal"
+import { useSession } from "@/lib/session-store"
+import Mabet from "@/services"
+import { handleFormError } from "@/utils/handle-form-errors"
 import {
   Box,
   Button,
@@ -12,15 +15,11 @@ import {
   Text,
   TextInput,
 } from "@mantine/core"
-import { isNotEmpty, useForm } from "@mantine/form"
+import { useForm } from "@mantine/form"
+import axios from "axios"
 import { Mail } from "lucide-react"
 import { useTranslations } from "next-intl"
 import ModalDrawer from "../modal-drawer"
-import { LOCALSTORAGE_SESSION_KEY } from "@/config"
-import axios from "axios"
-import Mabet from "@/services"
-import { handleFormError } from "@/utils/handle-form-errors"
-import { useSession } from "@/app/session-provider"
 const UserDataModal = () => {
   const { session, updateSession } = useSession()
 
@@ -28,7 +27,6 @@ const UserDataModal = () => {
   const [opened, { onClose }] = useUserDataModal()
   const close = () => {
     if (!session?.user.email) {
-      window.localStorage.removeItem(LOCALSTORAGE_SESSION_KEY)
       axios.post("/api/logout")
       updateSession(null)
     }

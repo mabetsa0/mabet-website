@@ -11,7 +11,7 @@ import { notFound } from "next/navigation"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
-import { SessionProvider } from "../session-provider"
+import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -63,9 +63,8 @@ export default async function LocaleLayout({
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  <SessionProvider session={session}>
-                    {children}
-                  </SessionProvider>
+                  {children}
+                  <InitSession session={session} />
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

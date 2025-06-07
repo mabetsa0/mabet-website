@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import { useSession } from "@/app/session-provider"
+import { useSession } from "@/lib/session-store"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
