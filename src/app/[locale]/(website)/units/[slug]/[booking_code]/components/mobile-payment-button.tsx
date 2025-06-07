@@ -62,7 +62,7 @@ const MobilePaymentButton = ({
         "partial"
       ),
       coupon: parseAsString.withDefault(""),
-      private: parseAsStringLiteral(["1"]),
+      private: parseAsStringLiteral(["true"]),
     })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
