@@ -17,7 +17,7 @@ const Page = () => {
   return (
     <>
       <Stack gap={"xl"}>
-        <Space />
+        <Space visibleFrom="md" />
         <Box visibleFrom="md">
           <Suspense>
             <SearchBar />

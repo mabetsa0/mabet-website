@@ -3,6 +3,7 @@ import UnitCard from "@/components/common/unit-card"
 import Mabet from "@/services"
 import {
   ActionIcon,
+  Box,
   Button,
   Group,
   Loader,
@@ -150,50 +151,92 @@ const Results = () => {
 
   return (
     <>
-      <Group wrap="nowrap" className="relative px-1" hiddenFrom="md">
-        <ActionIcon onClick={back} size={"lg"} color="dark" variant="subtle">
-          <ChevronRight
-            size={28}
-            strokeWidth={1.4}
-            className="ltr:rotate-180"
-          />
-        </ActionIcon>
-        <Suspense>
-          <div className="w-full ">
-            <MobileSearch>
-              <Button
-                component="div"
-                size="lg"
-                w={"100%"}
-                color="'dark"
-                variant="outline"
-                className="text-[12px] w-full border-[1.5px] border-[#F3F3F3]  font-normal rounded-[50px] h-[64px] "
-                classNames={{
-                  inner: " justify-start",
-                }}
+      <Stack
+        className=" z-[10] bg-white px-1 sticky top-0 py-0.5 shadow-sm"
+        hiddenFrom="md"
+      >
+        <Group wrap="nowrap">
+          <ActionIcon onClick={back} size={"lg"} color="dark" variant="subtle">
+            <ChevronRight
+              size={28}
+              strokeWidth={1.4}
+              className="ltr:rotate-180"
+            />
+          </ActionIcon>
+          <Suspense>
+            <div className="w-full ">
+              <MobileSearch>
+                <Button
+                  component="div"
+                  size="lg"
+                  w={"100%"}
+                  color="'dark"
+                  variant="outline"
+                  className="text-[12px] w-full border-[1.5px] border-[#F3F3F3]  font-normal rounded-[50px] h-[64px] "
+                  classNames={{
+                    inner: " justify-start",
+                  }}
+                >
+                  <Stack justify="start" align="start" gap={"4"}>
+                    <Text c={"dark"} fw={700} fz={14}>
+                      {searchedUnit}
+                    </Text>
+                    <Group gap={"xs"}>
+                      <Text fz={"12"}>{searchedUnitType}</Text>
+                      {searchParams.get("from") && searchParams.get("to") ? (
+                        <Text fz={"12"}>
+                          {dayjs(searchParams.get("from")).format("DD MMMM")} -{" "}
+                          {dayjs(searchParams.get("to")).format("DD MMMM")}
+                        </Text>
+                      ) : (
+                        ""
+                      )}
+                    </Group>
+                  </Stack>
+                </Button>
+              </MobileSearch>
+            </div>
+          </Suspense>
+          <MobileFilterDrawer />
+        </Group>
+        <Box>
+          <ScrollArea w={"100%"}>
+            <Group className="w-fit" wrap="nowrap" px={"sm"} pb={"md"}>
+              <UnitCodeFilter />
+              <ToggleFilterButton
+                filterKey="show_only_available"
+                leftSection={<Building2 strokeWidth={1.25} />}
               >
-                <Stack justify="start" align="start" gap={"4"}>
-                  <Text c={"dark"} fw={700} fz={14}>
-                    {searchedUnit}
-                  </Text>
-                  <Group gap={"xs"}>
-                    <Text fz={"12"}>{searchedUnitType}</Text>
-                    {searchParams.get("from") && searchParams.get("to") ? (
-                      <Text fz={"12"}>
-                        {dayjs(searchParams.get("from")).format("DD MMMM")} -{" "}
-                        {dayjs(searchParams.get("to")).format("DD MMMM")}
-                      </Text>
-                    ) : (
-                      ""
-                    )}
-                  </Group>
-                </Stack>
-              </Button>
-            </MobileSearch>
-          </div>
-        </Suspense>
-        <MobileFilterDrawer />
-      </Group>
+                {t("search.filter.show_only_available-filter.button")}
+              </ToggleFilterButton>
+              <UnitTypeFilter />
+              <FilterButtonWithSearch
+                filterKey="region_id"
+                label={t("general.select-region")}
+                data={regionsData.data || []}
+                buttonProps={{
+                  leftSection: <Map strokeWidth={1.25} />,
+                  children: t("general.region"),
+                }}
+              />
+
+              <PriceFilter />
+              <FilterButtonWithRadio
+                filterKey="direction_id"
+                buttonProps={{
+                  leftSection: <SignpostBig strokeWidth={1.25} />,
+                  children: t("search.filter.direction-filter.button"),
+                }}
+                title={t("search.filter.direction-filter.title")}
+                data={directionsQuery.data || []}
+              />
+
+              <RatingFilter />
+            </Group>
+          </ScrollArea>
+        </Box>
+      </Stack>
+
       <section>
         <div ref={scrollRef} className="container relative">
           <Group
@@ -312,40 +355,7 @@ const Results = () => {
               />
             </Group>
           </ScrollArea>
-          <ScrollArea hiddenFrom="md" w={"100%"}>
-            <Group className="w-fit" wrap="nowrap" px={"sm"} pb={"md"}>
-              <UnitCodeFilter />
-              <ToggleFilterButton
-                filterKey="show_only_available"
-                leftSection={<Building2 strokeWidth={1.25} />}
-              >
-                {t("search.filter.show_only_available-filter.button")}
-              </ToggleFilterButton>
-              <UnitTypeFilter />
-              <FilterButtonWithSearch
-                filterKey="region_id"
-                label={t("general.select-region")}
-                data={regionsData.data || []}
-                buttonProps={{
-                  leftSection: <Map strokeWidth={1.25} />,
-                  children: t("general.region"),
-                }}
-              />
 
-              <PriceFilter />
-              <FilterButtonWithRadio
-                filterKey="direction_id"
-                buttonProps={{
-                  leftSection: <SignpostBig strokeWidth={1.25} />,
-                  children: t("search.filter.direction-filter.button"),
-                }}
-                title={t("search.filter.direction-filter.title")}
-                data={directionsQuery.data || []}
-              />
-
-              <RatingFilter />
-            </Group>
-          </ScrollArea>
           {status === "pending" ? (
             <div className="flex items-center justify-center min-h-[50vh]">
               <Loader />

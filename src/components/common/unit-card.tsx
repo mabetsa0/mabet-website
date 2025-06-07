@@ -57,7 +57,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
     >
       <div className=" aspect-[4/3] w-full overflow-hidden rounded relative">
         <ActionIcon
-          className="absolute top-0 left-0 z-10"
+          className="absolute top-0 left-0 z-[1]"
           variant="light"
           color="white"
           size={"lg"}
@@ -73,7 +73,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           leftSection={<img src={fallingStar.src} alt="stars" />}
           size="lg"
           radius={"0"}
-          className="border border-white absolute top-0 right-0 z-10 rounded-bl-md "
+          className="border border-white absolute top-0 right-0 z-[1] rounded-bl-md "
         >
           {props.stars || "00"}{" "}
           {props.reviews_count ? `${props.reviews_count_text}` : ""}
