@@ -70,6 +70,7 @@ const MobileCreateBookingButton = () => {
       from: dayjs(from).format("YYYY-MM-DD"),
       to: dayjs(to).format("YYYY-MM-DD"),
       unitId: unit.id,
+      private: isPrivate ? "1" : undefined,
     })
   }
 
