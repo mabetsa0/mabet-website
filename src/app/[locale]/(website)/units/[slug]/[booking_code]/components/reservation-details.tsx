@@ -20,7 +20,12 @@ import { useMutation } from "@tanstack/react-query"
 import { MapPin, QrCode, Star, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import {
+  parseAsBoolean,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryStates,
+} from "nuqs"
 import { useState } from "react"
 import DateSelect from "../../components/date-select"
 import { useUnitData } from "../../context/unit-context"
@@ -55,7 +60,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         "partial"
       ),
       coupon: parseAsString.withDefault(""),
-      private: parseAsStringLiteral(["true"]),
+      private: parseAsBoolean.withDefault(false),
     })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")

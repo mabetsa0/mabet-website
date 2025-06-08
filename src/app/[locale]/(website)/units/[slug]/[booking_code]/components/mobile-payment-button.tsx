@@ -23,7 +23,12 @@ import { Group, Space, Text } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
 import { X } from "lucide-react"
 import { useParams } from "next/navigation"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import {
+  parseAsBoolean,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryStates,
+} from "nuqs"
 import { useState } from "react"
 import { GetPaymentSummary } from "../get-payment-summary"
 import useMdScreen from "@/hooks/use-md-screen"
@@ -62,7 +67,7 @@ const MobilePaymentButton = ({
         "partial"
       ),
       coupon: parseAsString.withDefault(""),
-      private: parseAsStringLiteral(["true"]),
+      private: parseAsBoolean.withDefault(false),
     })
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
