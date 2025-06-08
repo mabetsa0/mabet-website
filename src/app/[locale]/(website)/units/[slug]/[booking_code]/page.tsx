@@ -3,22 +3,22 @@
 
 import { UnitContextProvider } from "../context/unit-context"
 
+import Footer from "@/components/common/footer"
+import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
+import { useSession } from "@/lib/session-store"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
-import { use, useCallback, useEffect } from "react"
+import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
+import { use, useEffect } from "react"
 import ImageGallery from "../components/image-gallery"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
-import useMdScreen from "@/hooks/use-md-screen"
-import { useSession } from "@/lib/session-store"
-import Footer from "@/components/common/footer"
 
 type Props = {
   params: Promise<{
@@ -33,7 +33,7 @@ const Page = (props: Props) => {
   const { isAuthenticated } = useSession()
   const [{ method, private: isPrivate, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
-    private: parseAsStringLiteral(["1"]),
+    private: parseAsBoolean.withDefault(false),
     coupon: parseAsString.withDefault(""),
   })
   const { data, status } = useQuery({
@@ -42,7 +42,7 @@ const Page = (props: Props) => {
     queryFn: () =>
       GetPaymentSummary(params.booking_code, {
         payment_method: method,
-        private: isPrivate ?? undefined,
+        private: isPrivate ? "1" : undefined,
         coupon: coupon ?? undefined,
       }),
     placeholderData: keepPreviousData,
