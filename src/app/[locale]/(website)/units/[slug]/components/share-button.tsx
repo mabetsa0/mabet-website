@@ -36,7 +36,7 @@ const ShareButton = ({ variant }: { variant?: ButtonVariant }) => {
       </Button>
       <ActionIcon
         hiddenFrom="md"
-        color="white"
+        variant="white"
         c={"dark"}
         size={"xl"}
         radius={"xl"}

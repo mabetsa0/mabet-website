@@ -54,13 +54,14 @@ const ImageGallery = () => {
                 hiddenFrom="md"
                 size={"xl"}
                 radius={"xl"}
-                color="white"
+                variant="white"
+                className="hover:bg-white/70"
                 c={"dark"}
               >
                 <ChevronRight
                   size={28}
                   strokeWidth={1.25}
-                  className="ltr:rotate-180 hover:bg-white/70"
+                  className="ltr:rotate-180 "
                 />
               </ActionIcon>
               <Group>
