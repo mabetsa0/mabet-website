@@ -26,7 +26,12 @@ import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
-import { parseAsIsoDate, useQueryStates } from "nuqs"
+import {
+  parseAsBoolean,
+  parseAsIsoDate,
+  useQueryState,
+  useQueryStates,
+} from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
@@ -34,10 +39,18 @@ import useMdScreen from "@/hooks/use-md-screen"
 import DateSelect from "./date-select"
 const ReservationDetails = () => {
   const { isAuthenticated } = useSession()
-  const [dates] = useQueryStates({
-    from: parseAsIsoDate.withDefault(dayjs().toDate()),
-    to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-  })
+  const [dates] = useQueryStates(
+    {
+      from: parseAsIsoDate.withDefault(dayjs().toDate()),
+      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
+    },
+    { history: "replace" }
+  )
+  const [isPrivate] = useQueryState(
+    "private",
+    parseAsBoolean.withDefault(false)
+  )
+
   const unit = useUnitData()
   const { slug } = useParams() as { slug: string }
 
@@ -85,7 +98,12 @@ const ReservationDetails = () => {
       }
     },
     onSuccess(data) {
-      Router.push(`/units/${unit.slug}/${data}`)
+      Router.push({
+        pathname: `/units/${unit.slug}/${data}`,
+        query: {
+          ...(isPrivate ? { private: true } : {}),
+        },
+      })
     },
   })
   const handleCreateBooking = () => {

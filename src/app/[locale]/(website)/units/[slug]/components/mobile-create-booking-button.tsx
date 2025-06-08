@@ -19,7 +19,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
-import { parseAsIsoDate, useQueryStates } from "nuqs"
+import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
@@ -28,10 +28,16 @@ const MobileCreateBookingButton = () => {
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
-  const [{ from, to }] = useQueryStates({
-    from: parseAsIsoDate.withDefault(dayjs().toDate()),
-    to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-  })
+  const [{ from, to, private: isPrivate }] = useQueryStates(
+    {
+      from: parseAsIsoDate.withDefault(dayjs().toDate()),
+      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
+      private: parseAsBoolean.withDefault(false),
+    },
+    {
+      history: "replace",
+    }
+  )
   // handle create booking
   const Router = useRouter()
   const createBookingMutation = useMutation({
@@ -48,7 +54,12 @@ const MobileCreateBookingButton = () => {
       }
     },
     onSuccess(data) {
-      Router.push(`/units/${unit.slug}/${data}`)
+      Router.push({
+        pathname: `/units/${unit.slug}/${data}`,
+        query: {
+          ...(isPrivate ? { private: true } : {}),
+        },
+      })
     },
   })
   const handleCreateBooking = () => {

@@ -31,9 +31,9 @@ type Props = {
 const Page = (props: Props) => {
   const params = use(props.params)
   const { isAuthenticated } = useSession()
-  const [{ method, isPrivate, coupon }] = useQueryStates({
+  const [{ method, private: isPrivate, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
-    isPrivate: parseAsStringLiteral(["1"]),
+    private: parseAsStringLiteral(["1"]),
     coupon: parseAsString.withDefault(""),
   })
   const { data, status } = useQuery({
@@ -51,14 +51,15 @@ const Page = (props: Props) => {
 
   // handle unauthorized
   const Router = useRouter()
-  const backToUnit = useCallback(() => {
-    Router.replace(`/units/${params.slug}`)
-  }, [Router, params.slug])
+
+  const goBack = () => {
+    Router.back()
+  }
   useEffect(() => {
     if (!isAuthenticated) {
-      backToUnit()
+      Router.replace(`/units/${params.slug}${isPrivate ? "?private=true" : ""}`)
     }
-  }, [backToUnit, isAuthenticated])
+  }, [isAuthenticated, isPrivate, params.slug])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
@@ -79,7 +80,7 @@ const Page = (props: Props) => {
           <div className="flex gap-2 max-md:flex-col">
             <Stack className="w-full">
               <Group wrap="nowrap" visibleFrom="md" align="center">
-                <ActionIcon onClick={backToUnit} radius={"xl"} size={"xl"}>
+                <ActionIcon onClick={goBack} radius={"xl"} size={"xl"}>
                   <ChevronRight className="ltr:rotate-180" />
                 </ActionIcon>
 

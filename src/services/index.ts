@@ -127,7 +127,7 @@ Mabet.interceptors.response.use(
     return response
   },
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       if (typeof window === "undefined") {
         const { cookies } = await import("next/headers")
 
