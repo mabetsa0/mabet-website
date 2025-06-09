@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import { useSession } from "@/lib/session-store"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
+import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
+import { useSession } from "@/lib/session-store"
 import {
   Badge,
   Button,
@@ -25,7 +26,6 @@ import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import {
   parseAsBoolean,
   parseAsIsoDate,
@@ -35,7 +35,6 @@ import {
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import useMdScreen from "@/hooks/use-md-screen"
 import DateSelect from "./date-select"
 const ReservationDetails = () => {
   const { isAuthenticated } = useSession()
@@ -52,7 +51,6 @@ const ReservationDetails = () => {
   )
 
   const unit = useUnitData()
-  const { slug } = useParams() as { slug: string }
 
   const {
     data: prices,
@@ -61,7 +59,7 @@ const ReservationDetails = () => {
   } = useQuery({
     queryKey: [
       "availability",
-      slug,
+      unit.slug,
       dates.from.toDateString(),
       dates.to.toDateString(),
     ],
