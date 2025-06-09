@@ -1,5 +1,4 @@
 import GlobalDataContextProvider from "@/context/global-data-context"
-import { getServerSession } from "@/lib/get-server-session"
 import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
 import { getCities, getUnitTypes } from "@/services/lists"
@@ -36,7 +35,6 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
-  const session = await getServerSession()
 
   return (
     <html
@@ -64,7 +62,7 @@ export default async function LocaleLayout({
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
                   {children}
-                  <InitSession session={session} />
+                  <InitSession />
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

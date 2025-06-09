@@ -7,7 +7,7 @@ import { UnitContextProvider } from "./context/unit-context"
 import { GetUnit } from "./get-unit"
 
 import { Box, Loader, Stack } from "@mantine/core"
-import dynamic from "next/dynamic"
+import dynamicImport from "next/dynamic"
 import { Suspense } from "react"
 import Reviews from "./components/reviews"
 import UnitSegmentedControl from "./components/segment-contorl"
@@ -20,16 +20,16 @@ import TrackBayut from "@/components/track-bayut"
 import DataLayer from "@/components/data-layer"
 import { SEO } from "@/services/get-seo"
 import Footer from "@/components/common/footer"
-const ReservationDetails = dynamic(
+const ReservationDetails = dynamicImport(
   () => import("./components/reservation-details")
 )
-const VideoSlider = dynamic(async () => {
+const VideoSlider = dynamicImport(async () => {
   return import("./components/video")
 })
-const ImageSlider = dynamic(async () => {
+const ImageSlider = dynamicImport(async () => {
   return import("./components/image-slider")
 })
-const MyGoogleMap = dynamic(async () => import("./components/google-map"))
+const MyGoogleMap = dynamicImport(async () => import("./components/google-map"))
 
 type Props = {
   params: Promise<{
@@ -57,6 +57,8 @@ export async function generateMetadata(args: {
 }
 
 export const revalidate = 3600
+export const dynamic = "force-static"
+
 const page = async (props: Props) => {
   const params = await props.params
   try {

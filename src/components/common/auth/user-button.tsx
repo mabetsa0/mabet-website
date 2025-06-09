@@ -1,30 +1,23 @@
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import { usePathname, Link } from "@/lib/i18n/navigation"
+import useMdScreen from "@/hooks/use-md-screen"
+import { Link } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
+import { logout } from "@/services/logout"
 import { ActionIcon, Button, Menu } from "@mantine/core"
 import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
-import useMdScreen from "@/hooks/use-md-screen"
-import { logout } from "@/services/logout"
 const UserButton = () => {
   const t = useTranslations("header")
+  const { session, isPending } = useSession()
   const [opened, { onOpen }] = useAuthModal()
-  const pathname = usePathname()
-  const [authStatus, setAuthStatus] = useState("pending")
-  const { isAuthenticated, session } = useSession()
-
   const matches = useMdScreen()
-  useEffect(() => {
-    setAuthStatus(isAuthenticated ? "authorized" : "unauthorized")
-  }, [pathname, opened, isAuthenticated])
 
-  if (authStatus === "unauthorized" || authStatus === "pending")
+  if (isPending)
     return (
       <>
         <Button
           onClick={onOpen}
-          loading={authStatus === "pending"}
+          loading={isPending}
           visibleFrom="md"
           leftSection={
             <svg
@@ -52,7 +45,7 @@ const UserButton = () => {
         </Button>
         <ActionIcon
           onClick={onOpen}
-          loading={authStatus === "pending"}
+          loading={isPending}
           hiddenFrom="md"
           size={"lg"}
         >

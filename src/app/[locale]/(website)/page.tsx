@@ -18,6 +18,7 @@ import { getTopRatedUnits } from "./helpers/get-top-rated-units"
 import Footer from "@/components/common/footer"
 
 export const revalidate = 3600
+export const dynamic = "force-static"
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
 }
