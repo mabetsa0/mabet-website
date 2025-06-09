@@ -30,12 +30,14 @@ type Props = {
 
 const Page = (props: Props) => {
   const params = use(props.params)
+  const { isAuthenticated } = useSession()
   const [{ method, private: isPrivate, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
     private: parseAsBoolean.withDefault(false),
     coupon: parseAsString.withDefault(""),
   })
   const { data, status } = useQuery({
+    enabled: isAuthenticated,
     queryKey: [params.booking_code, method, coupon],
     queryFn: () =>
       GetPaymentSummary(params.booking_code, {
@@ -53,7 +55,11 @@ const Page = (props: Props) => {
   const goBack = () => {
     Router.back()
   }
-
+  useEffect(() => {
+    if (!isAuthenticated) {
+      Router.replace(`/units/${params.slug}${isPrivate ? "?private=true" : ""}`)
+    }
+  }, [isAuthenticated, isPrivate, params.slug])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
