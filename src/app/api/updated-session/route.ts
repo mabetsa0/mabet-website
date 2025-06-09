@@ -7,7 +7,7 @@ export const GET = async () => {
   // get session from cookie
   const cookieStore = await cookies()
   const session = cookieStore.get("session")?.value
-  if (!session) return null
+  if (!session) return NextResponse.json({})
 
   // parse session
   const oldSession = JSON.parse(session) as Session

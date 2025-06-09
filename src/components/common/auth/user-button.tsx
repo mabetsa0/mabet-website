@@ -8,11 +8,11 @@ import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 const UserButton = () => {
   const t = useTranslations("header")
-  const { session, isPending } = useSession()
+  const { session, isPending, isAuthenticated } = useSession()
   const [opened, { onOpen }] = useAuthModal()
   const matches = useMdScreen()
 
-  if (isPending)
+  if (isPending || !isAuthenticated)
     return (
       <>
         <Button

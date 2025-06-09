@@ -17,7 +17,7 @@ export function InitSession() {
 
   useEffect(() => {
     if (data) {
-      updateSession(data.data)
+      updateSession(data.data?.access_token ? data.data : null)
     }
   }, [data])
 
