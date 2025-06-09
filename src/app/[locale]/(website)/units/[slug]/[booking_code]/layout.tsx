@@ -10,9 +10,9 @@ const layout = async ({
 }: {
   children: React.ReactNode
   params: Promise<{ slug: string; booking_code: string }>
-  searchParams: Promise<{ private: boolean }>
+  searchParams?: Promise<{ private: boolean }>
 }) => {
-  const { private: isPrivate } = await searchParams
+  const { private: isPrivate } = (await searchParams) ?? {}
   const { slug } = await params
   const session = await getServerSession()
   const locale = await getLocale()

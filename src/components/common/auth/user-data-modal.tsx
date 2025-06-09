@@ -20,8 +20,10 @@ import axios from "axios"
 import { Mail } from "lucide-react"
 import { useTranslations } from "next-intl"
 import ModalDrawer from "../modal-drawer"
+import { useNafath } from "@/hooks/use-nafath"
 const UserDataModal = () => {
   const { session, updateSession } = useSession()
+  const [nafath, { onOpen: onOpenNafath }] = useNafath()
 
   const t = useTranslations("user-data-modal")
   const [opened, { onClose }] = useUserDataModal()
@@ -55,7 +57,7 @@ const UserDataModal = () => {
       await axios.post("/api/update-email", {
         email: values.email,
       })
-
+      onOpenNafath()
       close()
     } catch (error) {
       handleFormError(error, form)

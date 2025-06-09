@@ -37,7 +37,7 @@ import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
 import DateSelect from "./date-select"
 const ReservationDetails = () => {
-  const { isAuthenticated } = useSession()
+  const { isAuthenticated, session } = useSession()
   const [dates] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(dayjs().toDate()),
@@ -100,6 +100,7 @@ const ReservationDetails = () => {
         pathname: `/units/${unit.slug}/${data}`,
         query: {
           ...(isPrivate ? { private: true } : {}),
+          ...(session?.user.nafath_validated ? {} : { nafath: true }),
         },
       })
     },

@@ -23,8 +23,9 @@ import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
+import { useNafath } from "@/hooks/use-nafath"
 const MobileCreateBookingButton = () => {
-  const { isAuthenticated } = useSession()
+  const { isAuthenticated, session } = useSession()
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
@@ -58,6 +59,7 @@ const MobileCreateBookingButton = () => {
         pathname: `/units/${unit.slug}/${data}`,
         query: {
           ...(isPrivate ? { private: true } : {}),
+          ...(session?.user.nafath_validated ? {} : { nafath: true }),
         },
       })
     },
