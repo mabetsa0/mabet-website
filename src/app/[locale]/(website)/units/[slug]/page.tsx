@@ -57,7 +57,6 @@ export async function generateMetadata(args: {
 }
 
 export const revalidate = 3600
-export const dynamic = "force-static"
 
 const page = async (props: Props) => {
   const params = await props.params
