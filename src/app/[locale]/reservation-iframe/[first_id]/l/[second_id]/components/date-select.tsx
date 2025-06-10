@@ -26,7 +26,7 @@ import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
 import { useDisclosure } from "@mantine/hooks"
 import { notifications } from "@mantine/notifications"
 import { Minus } from "lucide-react"
-import { useDate } from "../date-store/use-date"
+import { useDate } from "../stores/use-date"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 

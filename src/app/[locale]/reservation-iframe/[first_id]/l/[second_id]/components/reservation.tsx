@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import DateSelect from "./date-select"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import { createBooking } from "@/app/[locale]/(website)/units/[slug]/create-booking"
 import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
+import Mabet from "@/services"
 import {
   Badge,
   Button,
@@ -30,15 +29,16 @@ import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useDate } from "../date-store/use-date"
-import Mabet from "@/services"
 import { useParams } from "next/navigation"
+import { useDate } from "../stores/use-date"
+import DateSelect from "./date-select"
+import { useNafath } from "../stores/use-nafath"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }
   const { isAuthenticated } = useSession()
   const dates = useDate((state) => state.dates)
-
+  const { onOpen } = useNafath()
   const unit = useUnitData()
 
   const {
@@ -132,9 +132,7 @@ const Reservation = () => {
     })
   }
 
-  const matches = useMdScreen()
-
-  if (status === "pending" && !matches)
+  if (status === "pending")
     return (
       <Card padding="md" radius="md" withBorder={false}>
         <Card.Section
@@ -157,19 +155,30 @@ const Reservation = () => {
   return (
     <Card p={"md"} withBorder={false}>
       <Card.Section
-        className={"border-[#F3F3F3]  px-[24px] pt-[24px]"}
+        className={"border-[#F3F3F3]  px-1 md:px-[24px] pt-[24px]"}
         pb={12}
-        withBorder={!matches}
+        withBorder={true}
       >
-        <h3 className="text-h4 md:text-h3  font-bold">
-          {t("unit.reservation-details.title")}
-        </h3>
+        <Group justify="space-between" wrap="nowrap">
+          <h3 className="text-h4 md:text-h3  font-bold">
+            {t("unit.reservation-details.title")}
+          </h3>
+          <Button
+            size="xs"
+            variant="light"
+            onClick={() => {
+              onOpen()
+            }}
+          >
+            {t("verify-account-for-safe-reservation")}
+          </Button>
+        </Group>
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]  px-[24px] pt-[16px]"
+        className="border-[#F3F3F3]  px-1 md:px-[24px] pt-[16px]"
         pb={12}
-        withBorder={!matches}
+        withBorder={true}
       >
         {status === "error" ? (
           <Stack py={"xs"} justify="center" align="center">
@@ -230,12 +239,12 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]  px-[24px] pt-[24px]"
+        className="border-[#F3F3F3]  px-1 md:px-[24px] pt-[24px]"
         pb={12}
-        withBorder={!matches}
+        withBorder={true}
       >
         <DateSelect />
-        {status === "error" && matches ? (
+        {status === "error" ? (
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
@@ -248,10 +257,10 @@ const Reservation = () => {
 
       {prices ? (
         <Card.Section
-          className="border-[#F3F3F3]  px-[24px]"
+          className="border-[#F3F3F3]  px-1 md:px-[24px]"
           pt={24}
           pb={12}
-          withBorder={!matches}
+          withBorder={true}
         >
           <Stack>
             <SimpleGrid cols={2}>

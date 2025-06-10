@@ -8,6 +8,7 @@ import { GetUnit } from "@/app/[locale]/(website)/units/[slug]/get-unit"
 import { UnitContextProvider } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import Reservation from "./components/reservation"
 import Mabet from "@/services"
+import NafathModal from "./components/nafath"
 
 type Props = {
   params: Promise<{
@@ -34,6 +35,7 @@ const page = async (props: Props) => {
       <UnitContextProvider value={unit}>
         <Box className="max-w-[500px] mx-auto">
           <Reservation />
+          <NafathModal />
         </Box>
       </UnitContextProvider>
     )
