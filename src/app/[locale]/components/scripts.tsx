@@ -9,7 +9,7 @@ type Props = {}
 const Scripts = (props: Props) => {
   return (
     <>
-      <GoogleTagManager gtmId="G-NYRQMRL8FF" />
+      <GoogleTagManager gtmId="GTM-NZRRZ8G7" />
       <Script
         defer
         src=""
@@ -29,26 +29,6 @@ const Scripts = (props: Props) => {
           })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=")
         }
       />
-      {/* 
-      <Script
-        defer
-        src="https://www.googletagmanager.com/gtag/js?id=G-NYRQMRL8FF"
-        strategy="afterInteractive"
-        onLoad={() => {
-          var dataLayer = (dataLayer || []) as any
-          function gtag(...args: any) {
-            dataLayer!.push(args)
-          }
-          gtag("js", new Date())
-          gtag("config", "G-NYRQMRL8FF")
-
-          gtag("event", "conversion", { send_to: "AW-11240020953/kTjzCKj4o-wYENm31O8p" })
-
-          gtag("event", "first_open", {
-            // <event_parameters>
-          })
-        }}
-      /> */}
       <Script
         id="analysis2"
         dangerouslySetInnerHTML={{

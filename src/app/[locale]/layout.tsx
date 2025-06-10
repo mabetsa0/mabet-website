@@ -47,15 +47,6 @@ export default async function LocaleLayout({
         <Scripts />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KNRTR8HX"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
         <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
           <MyReactQueryProvider>
             <NuqsAdapter>
@@ -68,6 +59,15 @@ export default async function LocaleLayout({
             </NuqsAdapter>
           </MyReactQueryProvider>
         </GlobalDataContextProvider>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NZRRZ8G7"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
       </body>
     </html>
   )
