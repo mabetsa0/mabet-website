@@ -74,15 +74,11 @@ const DateSelect = ({
       )
 
     return (
-      <div className={cn(isBusyDay ? "!opacity-65" : "")}>
+      <div className={cn(isBusyDay ? "!opacity-85" : "")}>
         {date.getDate()}
         {isBusyDay ? (
           <div className="absolute inset-0 flex items-center justify-center">
-            <Minus
-              className="rotate-45 text-red-600"
-              size={32}
-              strokeWidth={1}
-            />
+            <Minus className=" text-red-600" size={32} strokeWidth={1} />
           </div>
         ) : null}
       </div>
@@ -221,9 +217,9 @@ const DateSelect = ({
                 date[1] ? new Date(date[1]) : null,
               ])
             }}
-            excludeDate={(date) =>
-              busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
-            }
+            // excludeDate={(date) =>
+            //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
+            // }
             renderDay={(date) => renderDay(new Date(date))}
           />
           <Group justify="end" mt={"sm"}>

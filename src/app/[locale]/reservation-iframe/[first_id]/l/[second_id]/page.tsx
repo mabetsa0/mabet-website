@@ -7,10 +7,12 @@ import { Box } from "@mantine/core"
 import { GetUnit } from "@/app/[locale]/(website)/units/[slug]/get-unit"
 import { UnitContextProvider } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import Reservation from "./components/reservation"
+import Mabet from "@/services"
 
 type Props = {
   params: Promise<{
-    slug: string
+    first_id: string
+    second_id: string
   }>
   searchParams: Promise<{ [key: string]: string }>
 }
@@ -18,7 +20,11 @@ type Props = {
 const page = async (props: Props) => {
   const params = await props.params
   try {
-    const unit = await GetUnit({ slug: params.slug })
+    const { data } = await Mabet.get<string>(
+      `/iframe-reservations/${params.first_id}/l/${params.second_id}`
+    )
+    console.log("🚀 ~ page ~ data:", data)
+    const unit = await GetUnit({ slug: 'luxurious-apartment-with-an-elegant-lounge-and-bedroom-RIY-2312' })
 
     return (
       <UnitContextProvider value={unit}>

@@ -57,7 +57,7 @@ const Page = (props: Props) => {
   }
   useEffect(() => {
     if (!isAuthenticated) {
-      Router.replace(`/units/${params.slug}${isPrivate ? "?private=true" : ""}`)
+      Router.replace(`/units/${unit.slug}${isPrivate ? "?private=true" : ""}`)
     }
   }, [isAuthenticated, isPrivate, params.slug])
   const mathes = useMdScreen()

@@ -97,7 +97,7 @@ const ReservationDetails = () => {
     },
     onSuccess(data) {
       Router.push({
-        pathname: `/units/${unit.slug}/${data}`,
+        pathname: `/units/${unit.id}/${data}`,
         query: {
           ...(isPrivate ? { private: true } : {}),
           ...(session?.user.nafath_validated ? {} : { nafath: true }),
