@@ -24,6 +24,8 @@ import { useUnitData } from "../context/unit-context"
 import { Minus } from "lucide-react"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useDisclosure } from "@mantine/hooks"
+import { notifications } from "@mantine/notifications"
+import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
@@ -85,6 +87,46 @@ const DateSelect = ({
     )
   }
   const matches = useMdScreen()
+
+  const handleDateChange = (values: [string | null, string | null]) => {
+    const days = getDaysBetweenDates(values[0], values[1])
+
+    const hasBusyDaysInRange = busyDays.find((busyDay, i) => {
+      return days.slice(0, -1).includes(busyDay)
+    })
+
+    if (hasBusyDaysInRange) {
+      notifications.show({
+        color: "red",
+        title: t("can-not-choose-date"),
+        message: t("can-not-choose-date-message"),
+      })
+
+      return
+    }
+
+    const hasFeatured = featuredDates.find(
+      (e) => e.date === dayjs(values[1]).format("YYYY-MM-DD")
+    )
+    if (values[1] && hasFeatured) {
+      notifications.show({
+        color: "orange",
+        title: t("general.warning"),
+        message: hasFeatured.message + ` (${hasFeatured.date})`,
+      })
+      setValue([
+        new Date(values[0]!),
+        dayjs(values[1]!).add(hasFeatured.min_stay, "day").toDate(),
+      ])
+
+      return
+    }
+
+    setValue([
+      values[0] ? new Date(values[0]) : null,
+      values[1] ? new Date(values[1]) : null,
+    ])
+  }
   return (
     <Stack>
       <div>
@@ -142,6 +184,12 @@ const DateSelect = ({
         opened={opened}
         onClose={() => {
           if (value[0] && value[1]) setDates({ from: value[0], to: value[1] })
+          else if (value[0] && !value[1]) {
+            setDates({
+              from: value[0],
+              to: dayjs(value[0]).add(1, "day").toDate(),
+            })
+          }
           close()
         }}
         onDismiss={() => {
@@ -211,12 +259,7 @@ const DateSelect = ({
             }}
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
-            onChange={(date) => {
-              setValue([
-                date[0] ? new Date(date[0]) : null,
-                date[1] ? new Date(date[1]) : null,
-              ])
-            }}
+            onChange={handleDateChange}
             // excludeDate={(date) =>
             //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
             // }

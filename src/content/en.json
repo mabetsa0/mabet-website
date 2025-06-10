@@ -66,7 +66,8 @@
     "total-price": "Total",
     "no-results-title": "We did not find results that match your research!",
     "no-results-description": "Try to modify search options, such as the number of rooms, or expand the time or site.  \nWe are sure that you will find a place that suits you!",
-    "no-results-button": "Reset filters"
+    "no-results-button": "Reset filters",
+    "warning": "Warrning"
   },
   "home": {
     "special-units": {
@@ -394,5 +395,7 @@
     "id-label": "Enter your email",
     "button": "Log in",
     "agree-label": "I agree to the policy of conditions and conditions, and the reservation policy.\n\nThis is to ensure a safe and transparent reservation experience for all users."
-  }
+  },
+  "can-not-choose-date": "Sorry, could not book",
+  "can-not-choose-date-message": "Unit is not available in the selected dates, try other dates."
 }
