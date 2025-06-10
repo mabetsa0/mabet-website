@@ -26,7 +26,6 @@ const page = async (props: Props) => {
       message: null
       success: true
     }>(`/iframe-reservations/${params.first_id}/l/${params.second_id}`)
-    console.log("🚀 ~ page ~ data:", data)
     const unit = await GetUnit({
       slug: data.data.unit_id + "",
     })

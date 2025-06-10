@@ -132,6 +132,18 @@ const Reservation = () => {
     })
   }
 
+  const { data: isNafathVerified } = useQuery({
+    queryKey: ["intial-nafath-check"],
+    queryFn: async () => {
+      const response = await Mabet.post<{
+        token: boolean
+      }>(
+        `/iframe-reservations/${params.first_id}/l/${params.second_id}/nafath/check-request`
+      )
+      return response.data.token
+    },
+  })
+
   if (status === "pending")
     return (
       <Card padding="md" radius="md" withBorder={false}>
@@ -163,15 +175,17 @@ const Reservation = () => {
           <h3 className="text-h4 md:text-h3  font-bold">
             {t("unit.reservation-details.title")}
           </h3>
-          <Button
-            size="xs"
-            variant="light"
-            onClick={() => {
-              onOpen()
-            }}
-          >
-            {t("verify-account-for-safe-reservation")}
-          </Button>
+          {!isNafathVerified ? (
+            <Button
+              size="xs"
+              variant="light"
+              onClick={() => {
+                onOpen()
+              }}
+            >
+              {t("verify-account-for-safe-reservation")}
+            </Button>
+          ) : null}
         </Group>
       </Card.Section>
 
