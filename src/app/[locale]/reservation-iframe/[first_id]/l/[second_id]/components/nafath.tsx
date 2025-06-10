@@ -42,8 +42,7 @@ const NafathModal = () => {
   const t = useTranslations("nafath")
 
   // modal state
-  const { opened, onClose, onOpen, national_id, number, time, update } =
-    useNafath()
+  const { opened, onClose, national_id, number, time, update } = useNafath()
 
   // input state
   const [value, setValue] = useState<number | string>()

@@ -15,7 +15,7 @@ type NafathStore = {
 }
 
 export const useNafath = create<NafathStore>((set) => ({
-  opened: true,
+  opened: false,
   onClose: () => set({ opened: false }),
   onOpen: () => set({ opened: true }),
   national_id: "",
