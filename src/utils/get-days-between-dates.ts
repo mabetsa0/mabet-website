@@ -10,7 +10,7 @@ export const getDaysBetweenDates = (
   const days = []
 
   const __startDate = new Date(startDate)
-  let currentDate = __startDate
+  const currentDate = __startDate
   const __endDate = new Date(endDate)
 
   while (__startDate <= __endDate) {

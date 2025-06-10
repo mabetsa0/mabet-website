@@ -111,7 +111,7 @@ const NafathModal = () => {
     if (nafathData?.data.token) {
       onClose()
     }
-  }, [nafathData])
+  }, [nafathData, onClose])
 
   // edit national id
   const editNationalId = () => {

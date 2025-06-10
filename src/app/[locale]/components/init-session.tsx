@@ -19,7 +19,7 @@ export function InitSession() {
     if (data) {
       updateSession(data.data?.access_token ? data.data : null)
     }
-  }, [data])
+  }, [data, updateSession])
 
   return null
 }
