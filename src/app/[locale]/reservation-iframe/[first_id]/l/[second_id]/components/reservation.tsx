@@ -31,6 +31,7 @@ import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useDate } from "../date-store/use-date"
+import Mabet from "@/services"
 
 const Reservation = () => {
   const { isAuthenticated } = useSession()
@@ -69,7 +70,37 @@ const Reservation = () => {
   // handle create booking
   const Router = useRouter()
   const createBookingMutation = useMutation({
-    mutationFn: createBooking,
+    mutationFn: async ({
+      from,
+      to,
+      unitId,
+    }: {
+      from: string
+      to: string
+      unitId: string
+    }) => {
+      const booking_code = await createBooking({
+        private: undefined,
+        from,
+        to,
+        unitId,
+      })
+
+      const cardPayment = await Mabet.post<{
+        data: {
+          redirect_url: string
+        }
+        message: null
+        success: boolean
+      }>(`/payment/pay-by-card`, {
+        booking_code,
+        private: undefined,
+        payment_option: "full",
+        use_wallet: "0",
+      })
+
+      return cardPayment.data.data.redirect_url
+    },
 
     onError(error) {
       if (axios.isAxiosError(error) && error.response?.data) {
@@ -82,9 +113,7 @@ const Reservation = () => {
       }
     },
     onSuccess(data) {
-      Router.push({
-        pathname: `/units/${unit.slug}/${data}`,
-      })
+      Router.push(data)
     },
   })
   const handleCreateBooking = () => {
@@ -94,8 +123,7 @@ const Reservation = () => {
     createBookingMutation.mutate({
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
-      unitId: unit.id,
-      private: undefined,
+      unitId: unit.id + "",
     })
   }
 
@@ -122,9 +150,9 @@ const Reservation = () => {
       </Card>
     )
   return (
-    <Card className={"p-md"} withBorder={false}>
+    <Card p={"md"} withBorder={false}>
       <Card.Section
-        className={"md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"}
+        className={"border-[#F3F3F3]  px-[24px] pt-[24px]"}
         pb={12}
         withBorder={!matches}
       >
@@ -134,8 +162,7 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        visibleFrom="md"
-        className="md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[16px]"
+        className="border-[#F3F3F3]  px-[24px] pt-[16px]"
         pb={12}
         withBorder={!matches}
       >
@@ -198,7 +225,7 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"
+        className="border-[#F3F3F3]  px-[24px] pt-[24px]"
         pb={12}
         withBorder={!matches}
       >
@@ -216,12 +243,12 @@ const Reservation = () => {
 
       {prices ? (
         <Card.Section
-          className="border-[#F3F3F3] md:px-[24px]"
+          className="border-[#F3F3F3]  px-[24px]"
           pt={24}
           pb={12}
           withBorder={!matches}
         >
-          <Stack visibleFrom="md">
+          <Stack>
             <SimpleGrid cols={2}>
               <Group gap={"3"}>
                 {prices.duration_text}{" "}
