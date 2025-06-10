@@ -32,8 +32,10 @@ import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useDate } from "../date-store/use-date"
 import Mabet from "@/services"
+import { useParams } from "next/navigation"
 
 const Reservation = () => {
+  const params = useParams() as { first_id: string; second_id: string }
   const { isAuthenticated } = useSession()
   const dates = useDate((state) => state.dates)
 
@@ -92,12 +94,15 @@ const Reservation = () => {
         }
         message: null
         success: boolean
-      }>(`/payment/pay-by-card`, {
-        booking_code,
-        private: undefined,
-        payment_option: "full",
-        use_wallet: "0",
-      })
+      }>(
+        `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/pay-by-card`,
+        {
+          booking_code,
+          private: undefined,
+          payment_option: "full",
+          use_wallet: "0",
+        }
+      )
 
       return cardPayment.data.data.redirect_url
     },
