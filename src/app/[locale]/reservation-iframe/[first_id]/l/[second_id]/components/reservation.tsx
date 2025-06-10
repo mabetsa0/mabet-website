@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import DateSelect from "@/app/[locale]/(website)/units/[slug]/components/date-select"
+import DateSelect from "./date-select"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import { createBooking } from "@/app/[locale]/(website)/units/[slug]/create-booking"
 import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
@@ -30,26 +30,11 @@ import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import {
-  parseAsBoolean,
-  parseAsIsoDate,
-  useQueryState,
-  useQueryStates,
-} from "nuqs"
+import { useDate } from "../date-store/use-date"
 
 const Reservation = () => {
   const { isAuthenticated } = useSession()
-  const [dates] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-    },
-    { history: "replace" }
-  )
-  const [isPrivate] = useQueryState(
-    "private",
-    parseAsBoolean.withDefault(false)
-  )
+  const dates = useDate((state) => state.dates)
 
   const unit = useUnitData()
 
@@ -61,8 +46,8 @@ const Reservation = () => {
     queryKey: [
       "availability",
       unit.slug,
-      dates.from.toDateString(),
-      dates.to.toDateString(),
+      dates.from?.toISOString() ?? dayjs().toDate().toISOString(),
+      dates.to?.toISOString() ?? dayjs().add(1, "days").toDate().toISOString(),
     ],
     queryFn: async () => {
       return await GetUnitAvailability({
@@ -99,9 +84,6 @@ const Reservation = () => {
     onSuccess(data) {
       Router.push({
         pathname: `/units/${unit.slug}/${data}`,
-        query: {
-          ...(isPrivate ? { private: true } : {}),
-        },
       })
     },
   })
@@ -113,7 +95,7 @@ const Reservation = () => {
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
       unitId: unit.id,
-      private: isPrivate ? "1" : undefined,
+      private: undefined,
     })
   }
 
@@ -121,7 +103,7 @@ const Reservation = () => {
 
   if (status === "pending" && !matches)
     return (
-      <Card className="border-[#F3F3F3]" padding="md" radius="md" withBorder>
+      <Card padding="md" radius="md" withBorder={false}>
         <Card.Section
           className="border-[#F3F3F3]"
           px={24}
@@ -140,12 +122,7 @@ const Reservation = () => {
       </Card>
     )
   return (
-    <Card
-      className={
-        "border-[#F3F3F3]  md:[box-shadow:_0px_12px_20px_0px_#0000000A] md:rounded-md  md:p-md"
-      }
-      withBorder={!matches}
-    >
+    <Card className={"p-md"} withBorder={false}>
       <Card.Section
         className={"md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"}
         pb={12}
@@ -303,10 +280,10 @@ const Reservation = () => {
               {t("unit.create-booking", { value: prices.full_payment })}
               <RiyalIcon />
             </Button>
-            <Text c={"#767676"} ta={"center"}>
+            {/* <Text c={"#767676"} ta={"center"}>
               {t("unit.down-payment")} {Number(prices.down_payment)?.toFixed(2)}{" "}
               <RiyalIcon />{" "}
-            </Text>
+            </Text> */}
           </Stack>
           {createBookingMutation.error ? (
             axios.isAxiosError(createBookingMutation.error) ? (

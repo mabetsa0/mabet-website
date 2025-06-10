@@ -20,11 +20,15 @@ type Props = {
 const page = async (props: Props) => {
   const params = await props.params
   try {
-    const { data } = await Mabet.get<string>(
-      `/iframe-reservations/${params.first_id}/l/${params.second_id}`
-    )
+    const { data } = await Mabet.get<{
+      data: { unit_id: number }
+      message: null
+      success: true
+    }>(`/iframe-reservations/${params.first_id}/l/${params.second_id}`)
     console.log("🚀 ~ page ~ data:", data)
-    const unit = await GetUnit({ slug: 'luxurious-apartment-with-an-elegant-lounge-and-bedroom-RIY-2312' })
+    const unit = await GetUnit({
+      slug: data.data.unit_id + "",
+    })
 
     return (
       <UnitContextProvider value={unit}>

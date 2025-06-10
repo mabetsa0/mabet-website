@@ -14,10 +14,14 @@ import ProfileDataCard from "./data-card"
 import { cn } from "@/lib/cn"
 
 import { RiyalIcon } from "../icons"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
+import { Button } from "@mantine/core"
+import { useNafath } from "@/hooks/use-nafath"
 
 const ProfileHeader = (props: User & { isRtl: boolean }) => {
   const isRtl = useLocale() === "ar"
+  const t = useTranslations("general")
+  const [_, { onOpen }] = useNafath()
   return (
     <div className="flex justify-between gap-10 py-8 max-md:flex-col max-md:items-center max-md:text-center">
       <div className="flex gap-2">
@@ -44,13 +48,15 @@ const ProfileHeader = (props: User & { isRtl: boolean }) => {
               <span className="text-sm font-semibold rtl:hidden">Verified</span>
             </p>
           ) : (
-            <p className="mt-1 cursor-pointer" title="verified">
-              <BadgeAlert className="inline-block h-5 w-5 text-red-500" />{" "}
-              <span className="text-sm font-semibold ltr:hidden">غير موثق</span>
-              <span className="text-sm font-semibold rtl:hidden">
-                Unverified
-              </span>
-            </p>
+            <Button
+              color="dark"
+              variant="outline"
+              size="sm"
+              className="gap-2"
+              onClick={onOpen}
+            >
+              {t("verify-account")}
+            </Button>
           )}
         </>
       </div>
