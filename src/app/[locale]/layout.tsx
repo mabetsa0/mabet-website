@@ -18,6 +18,7 @@ const arFont = IBM_Plex_Sans_Arabic({
   variable: "--font",
 })
 
+export const revalidate = 3600
 export default async function LocaleLayout({
   children,
   params,
@@ -52,8 +53,8 @@ export default async function LocaleLayout({
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  {children}
                   <InitSession />
+                  {children}
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>
