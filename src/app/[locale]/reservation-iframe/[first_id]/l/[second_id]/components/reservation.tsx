@@ -122,9 +122,6 @@ const Reservation = () => {
     },
   })
   const handleCreateBooking = () => {
-    if (!isAuthenticated) {
-      return auth[1].onOpen()
-    }
     createBookingMutation.mutate({
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
