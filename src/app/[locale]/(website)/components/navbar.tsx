@@ -5,13 +5,12 @@ import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core"
 import { logo } from "@/assets"
 import UserButton from "@/components/common/auth/user-button"
 import LanguageSwitcher from "@/components/common/lang-switch"
+import { APP_LINK } from "@/config"
+import { Link } from "@/lib/i18n/navigation"
 import { useDisclosure, useMediaQuery } from "@mantine/hooks"
 import { useTranslations } from "next-intl"
-import React from "react"
-import { Link } from "@/lib/i18n/navigation"
 import { usePathname } from "next/navigation"
-import { APP_LINK } from "@/config"
-import NextLink from "next/link"
+import React from "react"
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure()

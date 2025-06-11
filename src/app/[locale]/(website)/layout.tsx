@@ -6,6 +6,8 @@ import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import Navbar from "./components/navbar"
 import dynamic from "next/dynamic"
+import { userAgent } from "next/server"
+import { headers } from "next/headers"
 const AuthModal = dynamic(
   () => import("@/components/common/auth/auth-modal"),
   {}
