@@ -1,5 +1,5 @@
-import { CreateBookingResponse } from "@/@types/booking"
 import Mabet from "@/services"
+import { CreateBookingResponse } from "@/types/create-booking-response"
 
 export const createBooking = async (data: {
   from: string

@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { CreateBookingResponse } from "@/@types/booking"
 import { ErrorResponse } from "@/@types/error"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
@@ -8,7 +7,6 @@ import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
 import {
   Badge,
@@ -33,6 +31,7 @@ import { useParams } from "next/navigation"
 import { useDate } from "../stores/use-date"
 import { useNafath } from "../stores/use-nafath"
 import DateSelect from "./date-select"
+import { CreateBookingResponse } from "@/types/create-booking-response"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }
