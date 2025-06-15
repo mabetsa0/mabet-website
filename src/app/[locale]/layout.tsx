@@ -12,6 +12,7 @@ import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
+import { getServerSession } from "@/lib/get-server-session"
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],
@@ -37,6 +38,8 @@ export default async function LocaleLayout({
 
   const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
 
+  const session = await getServerSession()
+
   return (
     <html
       lang={locale}
@@ -53,7 +56,7 @@ export default async function LocaleLayout({
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  <InitSession />
+                  <InitSession initialValue={session} />
                   {children}
                 </NextIntlClientProvider>
               </MyMantineProvider>

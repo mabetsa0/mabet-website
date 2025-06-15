@@ -44,7 +44,7 @@ export default async function Layout({
       </section>
       <section className="mt-6 bg-customWhite">
         <div className="container">
-          <ProfileHeader isRtl={isRtl} {...user} />
+          <ProfileHeader />
         </div>
       </section>
       <section className="py-10 md:py-16">

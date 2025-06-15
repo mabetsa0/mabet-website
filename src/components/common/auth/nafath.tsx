@@ -14,17 +14,12 @@ import {
   Stack,
   Text,
 } from "@mantine/core"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { Check, IdCard } from "lucide-react"
 import { useTranslations } from "next-intl"
-import {
-  parseAsInteger,
-  parseAsString,
-  useQueryState,
-  useQueryStates,
-} from "nuqs"
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { useEffect, useState } from "react"
 import useCountDown from "react-countdown-hook"
 import ModalDrawer from "../modal-drawer"
@@ -106,10 +101,14 @@ const NafathModal = () => {
     },
     refetchInterval: 3500,
   })
+  const queryClient = useQueryClient()
   // close modal if request is successful
   useEffect(() => {
     if (nafathData?.data.token) {
       onClose()
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      })
     }
   }, [nafathData, onClose])
 

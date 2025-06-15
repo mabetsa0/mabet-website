@@ -6,8 +6,15 @@ import { useSession } from "@/lib/session-store"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-export function InitSession() {
+export function InitSession({
+  initialValue,
+}: {
+  initialValue: Session | null
+}) {
   const updateSession = useSession((s) => s.updateSession)
+  useEffect(() => {
+    updateSession(initialValue)
+  }, [])
 
   const { data } = useQuery({
     queryKey: ["session"],

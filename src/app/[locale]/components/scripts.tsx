@@ -29,7 +29,8 @@ const Scripts = (props: Props) => {
           })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=")
         }
       />
-      <Script
+      {/* <Script
+        defer
         id="analysis2"
         dangerouslySetInnerHTML={{
           __html: `
@@ -40,7 +41,7 @@ const Scripts = (props: Props) => {
                 })(window,document,'script','dataLayer','GTM-KNRTR8HX');
               `,
         }}
-      />
+      /> */}
     </>
   )
 }
