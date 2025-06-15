@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { CreateBookingResponse } from "@/@types/booking"
 import { ErrorResponse } from "@/@types/error"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
-import { createBooking } from "@/app/[locale]/(website)/units/[slug]/create-booking"
 import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
@@ -31,12 +31,11 @@ import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import { useDate } from "../stores/use-date"
-import DateSelect from "./date-select"
 import { useNafath } from "../stores/use-nafath"
+import DateSelect from "./date-select"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }
-  const { isAuthenticated } = useSession()
   const dates = useDate((state) => state.dates)
   const { onOpen } = useNafath()
   const unit = useUnitData()
@@ -81,7 +80,7 @@ const Reservation = () => {
       to: string
       unitId: string
     }) => {
-      const booking_code = await Mabet.post(
+      const response = await Mabet.post<CreateBookingResponse>(
         `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking `,
         {
           private: undefined,
@@ -90,6 +89,8 @@ const Reservation = () => {
           unitId,
         }
       )
+
+      const booking_code = response.data.data.booking
 
       const cardPayment = await Mabet.post<{
         data: {
