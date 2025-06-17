@@ -24,6 +24,7 @@ export async function POST(request: Request) {
           phonenumber: session.user.phonenumber,
           nafath_validated: session.user.nafath_validated,
           wallet_balance: session.user.wallet_balance,
+          avatar: session.user.avatar,
         },
       }),
       {

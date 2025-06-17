@@ -43,6 +43,7 @@ import successPayment from "./success-payment.svg"
 import failPayment from "./fail-payment.svg"
 import emailIcon from "./email.svg"
 import applepayIcon from "./apple-pay-icon.svg"
+import dotBg from "./dot-bg.png"
 
 export {
   logo,
@@ -90,6 +91,7 @@ export {
   failPayment,
   emailIcon,
   applepayIcon,
+  dotBg,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

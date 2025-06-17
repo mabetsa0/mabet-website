@@ -159,7 +159,14 @@
     "no-results-description": "جرّب تعديل خيارات البحث، كعدد الضيوف، أو توسيع النطاق الزمني أو الموقع.  نحن على يقين بأنك ستجد مكاناً يناسبك!",
     "no-results-button": "إعادة ضبط البحث",
     "warning": "تحذير",
-    "verify-account": "وثق حسابك"
+    "verify-account": "وثق حسابك",
+    "verified": "حساب موثق",
+    "profile": "الملف الشخصي",
+    "bookings": "حجوزاتي",
+    "wallet": "المحفظة",
+    "favourite": "المفضلة",
+    "support": "تواصل معنا",
+    "logout": "تسجيل الخروج"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -398,5 +405,10 @@
   },
   "can-not-choose-date": "عذرا لا يمكنك الحجز",
   "can-not-choose-date-message": "يوجد ايام محجوزة مسبقا في الايام المختارة, يمكن تجربة اختيار ايام اخرى",
-  "verify-account-for-safe-reservation": "وثق حسابك عبر نفاذ لحجز آمن"
+  "verify-account-for-safe-reservation": "وثق حسابك عبر نفاذ لحجز آمن",
+  "user": {
+    "bookings_count": "عدد الحجوزات",
+    "wallet-balance": "رصيد المحفظة",
+    "points": "نقاطك"
+  }
 }

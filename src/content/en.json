@@ -68,7 +68,14 @@
     "no-results-description": "Try to modify search options, such as the number of rooms, or expand the time or site.  \nWe are sure that you will find a place that suits you!",
     "no-results-button": "Reset filters",
     "warning": "Warrning",
-    "verify-account": "Verify your account"
+    "verify-account": "Verify your account",
+    "verified": "Verified",
+    "profile": "Profile",
+    "bookings": "Reservations",
+    "wallet": "Wallet",
+    "favourite": "Favorite",
+    "support": "Contact us",
+    "logout": "Logout"
   },
   "home": {
     "special-units": {
@@ -399,5 +406,10 @@
   },
   "can-not-choose-date": "Sorry, could not book",
   "can-not-choose-date-message": "Unit is not available in the selected dates, try other dates.",
-  "verify-account-for-safe-reservation": "Verify your account vy Nafath for a safe reservation"
+  "verify-account-for-safe-reservation": "Verify your account vy Nafath for a safe reservation",
+  "user": {
+    "bookings_count": "Number of reservations",
+    "wallet-balance": "Wallet balance",
+    "points": "Points"
+  }
 }

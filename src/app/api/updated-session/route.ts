@@ -31,6 +31,7 @@ export const GET = async () => {
         phonenumber: updatedSession.user.phonenumber,
         nafath_validated: updatedSession.user.nafath_validated,
         wallet_balance: updatedSession.user.wallet_balance,
+        avatar: updatedSession.user.avatar,
       },
     }),
     {
