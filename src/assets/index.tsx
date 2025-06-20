@@ -1,4 +1,5 @@
 import logo from "./main-logo.svg"
+import bayut from "./bayut.svg"
 import calenderIn from "./calendar-check-in-01.svg"
 import calenderOut from "./calendar-check-out-01.svg"
 import heroBackground from "./Hero-Image.png"
@@ -46,6 +47,7 @@ import applepayIcon from "./apple-pay-icon.svg"
 
 export {
   logo,
+  bayut,
   heroBackground,
   calenderIn,
   calenderOut,
