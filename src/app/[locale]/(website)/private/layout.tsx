@@ -39,14 +39,15 @@ export default async function Layout({
       </section>
       <section className="relative">
         <div className="container  ">
-          <Grid columns={4}>
-            <GridCol
-              span={{ base: 4, md: 1 }}
-              className="relative md:-translate-y-9"
-            >
+          <Grid columns={4} className="md:-translate-y-9">
+            <GridCol span={{ base: 4, md: "content" }} className="relative ">
               <SideBar session={session} />
             </GridCol>
-            <GridCol span={{ base: 4, md: 3 }} p={"xl"}>
+            <GridCol
+              className="md:mt-[9.5rem]"
+              span={{ base: 4, md: "auto" }}
+              p={{ base: "sm", md: "xl" }}
+            >
               {children}
             </GridCol>
           </Grid>

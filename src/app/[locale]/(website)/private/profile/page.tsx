@@ -2,23 +2,20 @@
 
 import Mabeet from "@/api"
 import { notifications } from "@mantine/notifications"
-import { z } from "zod"
 
 import { useSession } from "@/lib/session-store"
 import { handleFormError } from "@/utils/handle-form-errors"
+import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
 import { isEmail, useForm } from "@mantine/form"
+import { BadgeCheck, Mail, Phone, UserIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import useUser from "../hooks/use-user"
-import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
-import { Mail, Phone, UserIcon } from "lucide-react"
+import { useNafath } from "@/hooks/use-nafath"
 const Profile = () => {
   const t = useTranslations()
   const { session, updateSession } = useSession()
   const { user } = useUser()
-
-  const schema = z.object({
-    email: z.string().email({ message: t("general.invalid-email") }),
-  })
+  const [_, { onOpen }] = useNafath()
 
   const form = useForm({
     mode: "uncontrolled",
@@ -55,8 +52,41 @@ const Profile = () => {
       <Stack>
         <Space />
         <Stack>
-          <Text className="text-h2 font-bold">{t("user.profile.title")}</Text>
-          <Text className="text-lg">{t("user.profile.description")}</Text>
+          <Text className="text-h3 md:text-h2 font-bold">
+            {t("user.profile.title")}
+          </Text>
+          <Text className="md:text-lg">{t("user.profile.description")}</Text>
+        </Stack>
+        <Stack hiddenFrom="md">
+          <Space />
+          <Group
+            wrap="nowrap"
+            gap={"xs"}
+            className="bg-white rounded-2xl p-1  "
+          >
+            {/* <div className="w-[72px] flex items-center justify-center h-[72px] rounded-3xl bg-primary"> */}
+            <img
+              className="w-[62px] h-[62px]"
+              alt={"avatar"}
+              src={user.avatar}
+            />
+            {/* </div> */}
+            <Stack gap={"xs"}>
+              <Text size="lg" fw={"bold"}>
+                {user.name}
+              </Text>
+              <Button
+                onClick={user.nafath_validated ? undefined : onOpen}
+                variant={user.nafath_validated ? "white" : "outline"}
+                leftSection={user.nafath_validated ? <BadgeCheck /> : undefined}
+              >
+                {user.nafath_validated
+                  ? t("general.verified")
+                  : t("general.verify-account")}
+              </Button>
+            </Stack>
+            <Space />
+          </Group>
         </Stack>
         <Stack maw={550}>
           <div className="border border-[#F3F3F3] rounded-lg">
@@ -121,7 +151,7 @@ const Profile = () => {
               defaultValue={user.phonenumber}
             />
           </div>
-          <Text size="lg" c={"#767676"}>
+          <Text className="md:text-lg" c={"#767676"}>
             {t("user.profile.form.description")}
           </Text>
           <Space />

@@ -15,67 +15,83 @@ const UserStatus = (props: Props) => {
   const t = useTranslations("user")
   return (
     <Stack className="min-h-[350px] py-2" justify="flex-end">
-      <Grid columns={4}>
-        <Grid.Col visibleFrom="md" span={{ base: 0, md: 1 }} />
-        <Grid.Col span={{ base: 2, md: 1 }}>
-          <Group wrap="nowrap" gap={"xs"} className="bg-white rounded-2xl p-1">
-            <div className="w-[72px] shrink-0  flex items-center justify-center h-[72px] rounded-3xl bg-primary">
-              <CalendarRange
-                strokeWidth={1.6}
-                size={40}
-                className="text-white"
-              />
-            </div>
-            <Stack w={"100%"} gap={"xs"}>
-              <Text size="38px" className="max-md:text-end" fw={"bold"}>
-                {user.bookings_count}
-              </Text>
-              <Text fw={500} c={"primary"}>
-                {t("bookings_count")}
-              </Text>
-            </Stack>
-          </Group>
-        </Grid.Col>
-        <Grid.Col span={{ base: 2, md: 1 }}>
-          <Group wrap="nowrap" gap={"xs"} className="bg-white rounded-2xl p-1">
-            <div className="w-[72px] shrink-0  flex items-center justify-center h-[72px] rounded-3xl bg-primary">
-              <WalletMinimal
-                strokeWidth={1.6}
-                size={40}
-                className="text-white"
-              />
-            </div>
-            <Stack gap={"xs"} w="100%">
-              <Text
-                w={"100%"}
-                size="38px"
-                className="max-md:text-end"
-                fw={"bold"}
+      <Group wrap="nowrap">
+        <div className="w-[300px] shrink-0 hidden md:block"></div>
+        <div className="w-full">
+          <Grid columns={6}>
+            <Grid.Col span={{ base: 3, md: 2 }}>
+              <Group
+                wrap="nowrap"
+                gap={"xs"}
+                className="bg-white rounded-2xl p-1"
               >
-                {user.wallet_balance}
-              </Text>
-              <Text fw={500} c={"primary"}>
-                {t("wallet-balance")}
-              </Text>
-            </Stack>
-          </Group>
-        </Grid.Col>
-        <Grid.Col span={{ base: 4, md: 1 }}>
-          <Group wrap="nowrap" gap={"xs"} className="bg-white rounded-2xl p-1">
-            <div className="w-[72px] shrink-0  flex items-center justify-center h-[72px] rounded-3xl bg-primary">
-              <Gift strokeWidth={1.6} size={40} className="text-white" />
-            </div>
-            <Stack gap={"xs"} w={"100%"}>
-              <Text size="38px" className="max-md:text-end " fw={"bold"}>
-                {user.points || "00"}
-              </Text>
-              <Text fw={500} c={"primary"}>
-                {t("points")}
-              </Text>
-            </Stack>
-          </Group>
-        </Grid.Col>
-      </Grid>
+                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                  <CalendarRange
+                    strokeWidth={1.6}
+                    size={40}
+                    className="text-white"
+                  />
+                </div>
+                <Stack w={"100%"} gap={"xs"}>
+                  <Text size="38px" className="max-md:text-end" fw={"bold"}>
+                    {user.bookings_count || "00"}
+                  </Text>
+                  <Text fw={500} c={"primary"}>
+                    {t("bookings_count")}
+                  </Text>
+                </Stack>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={{ base: 3, md: 2 }}>
+              <Group
+                wrap="nowrap"
+                gap={"xs"}
+                className="bg-white rounded-2xl p-1"
+              >
+                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                  <WalletMinimal
+                    strokeWidth={1.6}
+                    size={40}
+                    className="text-white"
+                  />
+                </div>
+                <Stack gap={"xs"} w="100%">
+                  <Text
+                    w={"100%"}
+                    size="38px"
+                    className="max-md:text-end"
+                    fw={"bold"}
+                  >
+                    {user.wallet_balance || "00"}
+                  </Text>
+                  <Text fw={500} c={"primary"}>
+                    {t("wallet-balance")}
+                  </Text>
+                </Stack>
+              </Group>
+            </Grid.Col>
+            <Grid.Col span={{ base: 6, md: 2 }}>
+              <Group
+                wrap="nowrap"
+                gap={"xs"}
+                className="bg-white rounded-2xl p-1"
+              >
+                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                  <Gift strokeWidth={1.6} size={40} className="text-white" />
+                </div>
+                <Stack gap={"xs"} w={"100%"}>
+                  <Text size="38px" className="max-md:text-end " fw={"bold"}>
+                    {user.points || "00"}
+                  </Text>
+                  <Text fw={500} c={"primary"}>
+                    {t("points")}
+                  </Text>
+                </Stack>
+              </Group>
+            </Grid.Col>
+          </Grid>
+        </div>
+      </Group>
     </Stack>
   )
 }

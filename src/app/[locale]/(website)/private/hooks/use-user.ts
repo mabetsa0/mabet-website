@@ -12,7 +12,7 @@ const useUser = (initialData?: UserResponse["data"]["user"]) => {
       const response = await Mabet.get<UserResponse>(`/account/me`)
       return response.data.data.user
     },
-    initialData: (initialData || session.session?.user) as UserData,
+    initialData: (initialData || session.session?.user || {}) as UserData,
     staleTime: Infinity,
   })
 

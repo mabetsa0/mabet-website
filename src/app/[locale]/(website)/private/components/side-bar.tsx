@@ -39,7 +39,7 @@ const SideBar = (props: Props) => {
     {
       Icon: <UserRound />,
       label: t("profile"),
-      path: "/private",
+      path: "/private/profile",
     },
     {
       Icon: <CalendarRange />,
@@ -68,7 +68,7 @@ const SideBar = (props: Props) => {
     <>
       <Card
         visibleFrom="md"
-        className="bg-white sticky  top-18 "
+        className="bg-white sticky  top-16  "
         radius={"16px"}
         shadow="md"
       >
