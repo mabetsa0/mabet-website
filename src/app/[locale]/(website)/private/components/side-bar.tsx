@@ -1,9 +1,8 @@
 "use client"
-import { Session, UserResponse } from "@/@types/user"
+import { Session } from "@/@types/user"
 import { useNafath } from "@/hooks/use-nafath"
 import { cn } from "@/lib/cn"
 import { Link, usePathname, useRouter } from "@/lib/i18n/navigation"
-import Mabet from "@/services"
 import {
   Button,
   Card,
@@ -13,7 +12,6 @@ import {
   Tabs,
   Text,
 } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
 import {
   BadgeCheck,
   CalendarRange,
@@ -24,21 +22,14 @@ import {
   Wallet,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { parseAsString, useQueryState } from "nuqs"
+import useUser from "../hooks/use-user"
 
 type Props = {
   session: Session
 }
 
 const SideBar = (props: Props) => {
-  const { data: user } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const response = await Mabet.get<UserResponse>(`/account/me`)
-      return response.data.data.user
-    },
-    initialData: props.session.user,
-  })
+  const { user } = useUser()
 
   const pathname = usePathname()
   const t = useTranslations("general")

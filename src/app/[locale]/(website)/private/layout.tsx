@@ -1,16 +1,11 @@
-import { UserProvider } from "@/context/user-context"
-
-import ProfileHeader from "@/components/user/profile-header"
-import Taps from "@/components/user/taps"
+import { Session } from "@/@types/user"
+import { dotBg } from "@/assets"
+import Footer from "@/components/common/footer"
 import { getServerSession } from "@/lib/get-server-session"
 import { redirect } from "@/lib/i18n/navigation"
-import { Session } from "@/@types/user"
-import Mabet from "@/services"
-import Footer from "@/components/common/footer"
-import { Card, Grid, GridCol, Group, Stack, Text } from "@mantine/core"
-import UserStatus from "./components/user-status"
-import { dotBg } from "@/assets"
+import { Grid, GridCol } from "@mantine/core"
 import SideBar from "./components/side-bar"
+import UserStatus from "./components/user-status"
 
 export interface UserResponse {
   data: Session
@@ -51,8 +46,8 @@ export default async function Layout({
             >
               <SideBar session={session} />
             </GridCol>
-            <GridCol span={{ base: 4, md: 3 }}>
-              <div className="h-screen"></div>
+            <GridCol span={{ base: 4, md: 3 }} p={"xl"}>
+              {children}
             </GridCol>
           </Grid>
         </div>

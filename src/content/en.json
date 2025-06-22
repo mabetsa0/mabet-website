@@ -75,7 +75,8 @@
     "wallet": "Wallet",
     "favourite": "Favorite",
     "support": "Contact us",
-    "logout": "Logout"
+    "logout": "Logout",
+    "invalid-email": "Invalid email"
   },
   "home": {
     "special-units": {
@@ -410,6 +411,25 @@
   "user": {
     "bookings_count": "Number of reservations",
     "wallet-balance": "Wallet balance",
-    "points": "Points"
+    "points": "Points",
+    "update-email-success-title": "Updated successfully",
+    "update-email-success-description": "your email has been updated",
+    "profile": {
+      "description": "You can not modify profile information except for email.",
+      "title": "Profile information",
+      "form": {
+        "name": {
+          "label": "Name"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "phone": {
+          "label": "Phone number"
+        },
+        "description": "To receive: login code, initial reservation messages, reservation confirmation messages, reservation expiration messages.",
+        "save-button": "Save"
+      }
+    }
   }
 }

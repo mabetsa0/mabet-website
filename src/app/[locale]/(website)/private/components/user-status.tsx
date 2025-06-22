@@ -1,26 +1,17 @@
 "use client"
-import Mabet from "@/services"
-import { useQuery } from "@tanstack/react-query"
-import React from "react"
-import { UserResponse } from "../layout"
-import { Grid, Group, Stack, Text } from "@mantine/core"
 import { Session } from "@/@types/user"
-import { useTranslations } from "next-intl"
+import { Grid, Group, Stack, Text } from "@mantine/core"
 import { CalendarRange, Gift, WalletMinimal } from "lucide-react"
+import { useTranslations } from "next-intl"
+import useUser from "../hooks/use-user"
 
 type Props = {
   session: Session
 }
 
 const UserStatus = (props: Props) => {
-  const { data: user } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const response = await Mabet.get<UserResponse>(`/account/me`)
-      return response.data.data.user
-    },
-    initialData: props.session.user,
-  })
+  const { user } = useUser()
+
   const t = useTranslations("user")
   return (
     <Stack className="min-h-[350px] py-2" justify="flex-end">

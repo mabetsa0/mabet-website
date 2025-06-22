@@ -166,7 +166,8 @@
     "wallet": "المحفظة",
     "favourite": "المفضلة",
     "support": "تواصل معنا",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "invalid-email": "بريد الكتروني غير صالح"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -409,6 +410,25 @@
   "user": {
     "bookings_count": "عدد الحجوزات",
     "wallet-balance": "رصيد المحفظة",
-    "points": "نقاطك"
+    "points": "نقاطك",
+    "update-email-success-title": "تم التحديث بنجاح",
+    "update-email-success-description": "تم تحديث الايميل الخاص بك",
+    "profile": {
+      "description": "لايمكنك تعديل معلومات الملف الشخصي باستثناء البريد الالكتروني.",
+      "title": "معلومات الملف الشخصي",
+      "form": {
+        "name": {
+          "label": "الإسم"
+        },
+        "email": {
+          "label": "بريدك الالكتروني"
+        },
+        "phone": {
+          "label": "الهاتف"
+        },
+        "description": "لإستقبال : كود تسجيل الدخول، رسائل الحجز المبدئى، رسائل تأكيد الحجز، رسائل انتهاء صلاحية الحجز.",
+        "save-button": "حفظ البيانات"
+      }
+    }
   }
 }
