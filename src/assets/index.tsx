@@ -1,4 +1,5 @@
 import logo from "./main-logo.svg"
+import bayut from "./bayut.svg"
 import calenderIn from "./calendar-check-in-01.svg"
 import calenderOut from "./calendar-check-out-01.svg"
 import heroBackground from "./Hero-Image.png"
@@ -47,6 +48,7 @@ import dotBg from "./dot-bg.png"
 
 export {
   logo,
+  bayut,
   heroBackground,
   calenderIn,
   calenderOut,
