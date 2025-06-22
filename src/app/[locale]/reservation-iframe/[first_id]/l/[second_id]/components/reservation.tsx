@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import { ErrorResponse } from "@/@types/error";
-import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context";
-import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability";
-import { sharpShape, logo, bayut } from "@/assets";
-import Image from "next/image";
-import { RiyalIcon } from "@/components/icons";
-import { useAuthModal } from "@/hooks/use-auth-modal";
-import { useRouter } from "@/lib/i18n/navigation";
-import Mabet from "@/services";
+"use client"
+import { ErrorResponse } from "@/@types/error"
+import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
+import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
+import { sharpShape, logo, bayut } from "@/assets"
+import Image from "next/image"
+import { RiyalIcon } from "@/components/icons"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
 import {
   Badge,
   Button,
@@ -21,24 +21,24 @@ import {
   Stack,
   Text,
   Title,
-} from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import dayjs from "dayjs";
-import { X } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { useDate } from "../stores/use-date";
-import { useNafath } from "../stores/use-nafath";
-import DateSelect from "./date-select";
-import { CreateBookingResponse } from "@/types/create-booking-response";
+} from "@mantine/core"
+import { notifications } from "@mantine/notifications"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import dayjs from "dayjs"
+import { X } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
+import { useDate } from "../stores/use-date"
+import { useNafath } from "../stores/use-nafath"
+import DateSelect from "./date-select"
+import { CreateBookingResponse } from "@/types/create-booking-response"
 
 const Reservation = () => {
-  const params = useParams() as { first_id: string; second_id: string };
-  const dates = useDate((state) => state.dates);
-  const { onOpen } = useNafath();
-  const unit = useUnitData();
+  const params = useParams() as { first_id: string; second_id: string }
+  const dates = useDate((state) => state.dates)
+  const { onOpen } = useNafath()
+  const unit = useUnitData()
 
   const {
     data: prices,
@@ -58,27 +58,27 @@ const Reservation = () => {
           from: dayjs(dates.from).format("YYYY-MM-DD"),
           to: dayjs(dates.to).format("YYYY-MM-DD"),
         },
-      });
+      })
     },
     retry: false,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
 
-  const t = useTranslations();
-  const auth = useAuthModal();
+  const t = useTranslations()
+  const auth = useAuthModal()
 
   // handle create booking
-  const Router = useRouter();
+  const Router = useRouter()
   const createBookingMutation = useMutation({
     mutationFn: async ({
       from,
       to,
       unitId,
     }: {
-      from: string;
-      to: string;
-      unitId: string;
+      from: string
+      to: string
+      unitId: string
     }) => {
       const response = await Mabet.post<CreateBookingResponse>(
         `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking `,
@@ -88,16 +88,16 @@ const Reservation = () => {
           to,
           unitId,
         }
-      );
+      )
 
-      const booking_code = response.data.data.booking;
+      const booking_code = response.data.data.booking
 
       const cardPayment = await Mabet.post<{
         data: {
-          redirect_url: string;
-        };
-        message: null;
-        success: boolean;
+          redirect_url: string
+        }
+        message: null
+        success: boolean
       }>(
         `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/pay-by-card`,
         {
@@ -106,9 +106,9 @@ const Reservation = () => {
           payment_option: "full",
           use_wallet: "0",
         }
-      );
+      )
 
-      return cardPayment.data.data.redirect_url;
+      return cardPayment.data.data.redirect_url
     },
 
     onError(error) {
@@ -118,32 +118,32 @@ const Reservation = () => {
           message:
             (error.response.data as ErrorResponse).errors?.[0] || error.message,
           color: "red",
-        });
+        })
       }
     },
     onSuccess(data) {
-      Router.push(data);
+      Router.push(data)
     },
-  });
+  })
   const handleCreateBooking = () => {
     createBookingMutation.mutate({
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
       unitId: unit.id + "",
-    });
-  };
+    })
+  }
 
   const { data: isNafathVerified } = useQuery({
     queryKey: ["intial-nafath-check"],
     queryFn: async () => {
       const response = await Mabet.post<{
-        token: boolean;
+        token: boolean
       }>(
         `/iframe-reservations/${params.first_id}/l/${params.second_id}/nafath/check-request`
-      );
-      return response.data.token;
+      )
+      return response.data.token
     },
-  });
+  })
 
   if (status === "pending")
     return (
@@ -164,30 +164,29 @@ const Reservation = () => {
           <Loader />
         </Stack>
       </Card>
-    );
+    )
   return (
     <Card p={"md"} withBorder={false}>
-      <Card.Section>
-        <div className="flex items-center justify-center gap-8 w-full mt-2 p-1">
-          <div className="max-w-[150px] w-full flex justify-center">
-            <Image
-              src={logo} // Mabeet logo
-              alt="Mabeet Logo"
-              className="h-auto w-full object-contain"
-            />
-          </div>
-          <div className="max-w-[250px] w-full flex justify-center">
-            <Image
-              src={bayut} // Bayut logo
-              alt="Bayut Logo"
-              className="h-auto w-full object-contain"
-            />
-          </div>
+      <Card.Section
+        withBorder
+        className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px]"}
+      >
+        <div className="flex items-center justify-between gap-2 w-full pb-1">
+          <Image
+            src={logo} // Mabeet logo
+            alt="Mabeet Logo"
+            className="w-[135px]"
+          />
+          <Image
+            src={bayut} // Bayut logo
+            alt="Bayut Logo"
+            className="w-[135px]"
+          />
         </div>
       </Card.Section>
 
       <Card.Section
-        className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px] mt-1"}
+        className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px]"}
         pb={12}
         withBorder={true}
       >
@@ -200,7 +199,7 @@ const Reservation = () => {
               size="xs"
               variant="light"
               onClick={() => {
-                onOpen();
+                onOpen()
               }}
             >
               {t("verify-account-for-safe-reservation")}
@@ -375,7 +374,7 @@ const Reservation = () => {
         </Card.Section>
       ) : null}
     </Card>
-  );
-};
+  )
+}
 
-export default Reservation;
+export default Reservation
