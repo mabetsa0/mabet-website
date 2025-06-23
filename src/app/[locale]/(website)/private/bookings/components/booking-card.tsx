@@ -3,6 +3,7 @@ import { RiyalIcon } from "@/components/icons"
 import { cn } from "@/lib/cn"
 import { Link } from "@/lib/i18n/navigation"
 import {
+  Badge,
   Button,
   Card,
   Divider,
@@ -13,7 +14,15 @@ import {
   Text,
   Title,
 } from "@mantine/core"
-import { Clock, HandCoins, LogIn, LogOut, QrCode, Wallet } from "lucide-react"
+import {
+  Clock,
+  Gift,
+  HandCoins,
+  LogIn,
+  LogOut,
+  QrCode,
+  Wallet,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Booking } from "../@types"
 
@@ -29,7 +38,26 @@ const BookingCard = (booking: Props) => {
       withBorder
       className={cn("border-[#F3F3F3] w-full")}
     >
-      <div className=" aspect-[4/3] h-[230px] w-full overflow-hidden rounded relative">
+      <div className="  aspect-[4/3] h-[230px] w-full overflow-hidden rounded relative">
+        <Badge
+          radius={"sm"}
+          size="lg"
+          color={booking.status.bg_color}
+          className="absolute top-[4px] start-[4px] "
+        >
+          {booking.status.label}
+        </Badge>
+        <Badge
+          radius={"sm"}
+          size="lg"
+          color={"primary"}
+          className="absolute top-[4px] end-[4px] "
+        >
+          {t("points")}
+          {booking.points}
+
+          <Gift size={18} strokeWidth={1.8} className="inline" />
+        </Badge>
         <div className="w-full aspect-[4/3]  ">
           <Image
             loading="lazy"

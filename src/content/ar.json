@@ -456,6 +456,7 @@
     "checkout-time": "وقت الخروج ",
     "go-to-unit": "إعادة الحجز",
     "details": "تفاصيل الحجز",
-    "complete-payment": "إكمال الدفع {value}"
+    "complete-payment": "إكمال الدفع {value}",
+    "points": "النقاط "
   }
 }

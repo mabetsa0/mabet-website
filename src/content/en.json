@@ -457,6 +457,7 @@
     "checkout-time": "Leaving",
     "go-to-unit": "Reservation",
     "details": "Reservation details",
-    "complete-payment": "Complete payment {value}"
+    "complete-payment": "Complete payment {value}",
+    "points": "Points "
   }
 }
