@@ -71,16 +71,18 @@ const SideBar = (props: Props) => {
         className="bg-white sticky  top-16  "
         radius={"16px"}
         shadow="md"
+        w={"300px"}
       >
         <Group wrap="nowrap" gap={"xs"} className="bg-white rounded-2xl p-1  ">
           {/* <div className="w-[72px] flex items-center justify-center h-[72px] rounded-3xl bg-primary"> */}
           <img className="w-[62px] h-[62px]" alt={"avatar"} src={user.avatar} />
           {/* </div> */}
           <Stack gap={"xs"}>
-            <Text size="lg" fw={"bold"}>
+            <Text truncate maw={"170px"} size="lg" fw={"bold"}>
               {user.name}
             </Text>
             <Button
+              size="sm"
               onClick={user.nafath_validated ? undefined : onOpen}
               variant={user.nafath_validated ? "white" : "light"}
               leftSection={user.nafath_validated ? <BadgeCheck /> : undefined}
@@ -100,7 +102,7 @@ const SideBar = (props: Props) => {
                   justify="start"
                   variant={pathname === ele.path ? "light" : "white"}
                   color={pathname === ele.path ? "primary" : "dark"}
-                  size="lg"
+                  size="md"
                   className={cn(`hover:bg-primary/15  font-bold duration-300 `)}
                   leftSection={ele.Icon}
                 >
@@ -115,7 +117,7 @@ const SideBar = (props: Props) => {
               justify="start"
               variant={"white"}
               color={"red"}
-              size="lg"
+              size="md"
               className={cn(`hover:bg-red/15 font-bold duration-300 `)}
               leftSection={<LogOut />}
             >

@@ -430,6 +430,33 @@
         "description": "To receive: login code, initial reservation messages, reservation confirmation messages, reservation expiration messages.",
         "save-button": "Save"
       }
+    },
+    "bookings": {
+      "title": "Your reservations",
+      "description": "You can follow all your reservations from here",
+      "types": {
+        "all": "All reservations",
+        "past": "Previous reservations",
+        "upcoming": "Upcoming reservations",
+        "requires_approval": "Waiting for approval",
+        "expired": "Expired reservations",
+        "partial": "Partial reservations",
+        "completed": "Completed reservations"
+      },
+      "server-error": "An error occurred",
+      "no-bookings": "No reservation was found"
     }
+  },
+  "booking-card": {
+    "total": "Total",
+    "paied": "Paid ",
+    "login": "Arrival date",
+    "checkout": "Checkout ",
+    "checkin": "Checkin ",
+    "checkin-time": "Arrival ",
+    "checkout-time": "Leaving",
+    "go-to-unit": "Reservation",
+    "details": "Reservation details",
+    "complete-payment": "Complete payment {value}"
   }
 }
