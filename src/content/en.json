@@ -445,6 +445,12 @@
       },
       "server-error": "An error occurred",
       "no-bookings": "No reservation was found"
+    },
+    "favourites": {
+      "title": "Your favourite",
+      "description": "Here is you favorite units",
+      "server-error": "You did not add any unit to the favorite",
+      "empty": "You did not add any unit to the favorite"
     }
   },
   "booking-card": {

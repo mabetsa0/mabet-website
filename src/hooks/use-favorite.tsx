@@ -2,7 +2,7 @@
 import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
 import { notifications } from "@mantine/notifications"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useAuthModal } from "./use-auth-modal"
@@ -29,6 +29,8 @@ const useFavorite = ({ is_favourite, id }: Props) => {
 
   const [isFavorite, setIsFavorite] = useState(!!is_favourite)
 
+  const queryClient = useQueryClient()
+
   const mutation = useMutation({
     async mutationFn({ is_favourite }: { is_favourite: boolean }) {
       if (isFavorite) {
@@ -50,6 +52,9 @@ const useFavorite = ({ is_favourite, id }: Props) => {
           message: t("removed-from-favorite"),
         })
       setIsFavorite((pre) => !pre)
+      queryClient.invalidateQueries({
+        queryKey: ["favourites"],
+      })
     },
     onError(error, vars) {
       if (vars.is_favourite) {

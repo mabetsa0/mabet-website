@@ -16,8 +16,8 @@ import {
   BadgeCheck,
   CalendarRange,
   Headset,
+  Heart,
   LogOut,
-  MessageCircleMore,
   UserRound,
   Wallet,
 } from "lucide-react"
@@ -52,9 +52,9 @@ const SideBar = (props: Props) => {
       path: "/private/wallet",
     },
     {
-      Icon: <MessageCircleMore />,
+      Icon: <Heart />,
       label: t("favourite"),
-      path: "/private/favorite",
+      path: "/private/favourite",
     },
     {
       Icon: <Headset />,
