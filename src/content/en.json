@@ -451,6 +451,24 @@
       "description": "Here is you favorite units",
       "server-error": "You did not add any unit to the favorite",
       "empty": "You did not add any unit to the favorite"
+    },
+    "contact": {
+      "title": "Contact information",
+      "description": "To access the private customer service on Mabet platform, you can communicate via this form or communication information",
+      "customer-services": "Customer service"
+    },
+    "contact-form": {
+      "title": "Contact form",
+      "subject": {
+        "label": "Subject",
+        "placeholder": "The subject of the message"
+      },
+      "description": "Your message will be answered within a period not exceeding 24 hours, don't worry.",
+      "submit": "Send now",
+      "message": {
+        "placeholder": "Message",
+        "label": "Write the text of the message here"
+      }
     }
   },
   "booking-card": {
