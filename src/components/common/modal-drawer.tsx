@@ -46,7 +46,7 @@ const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
                 </Group>
               </Drawer.Title>
               <Divider />
-              <ScrollArea className="h-[calc(100vh-130px)]">
+              <ScrollArea className="h-[calc(100vh-145px)]">
                 {children}
               </ScrollArea>
             </div>

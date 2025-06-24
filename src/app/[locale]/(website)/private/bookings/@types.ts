@@ -81,7 +81,7 @@ export interface AdditionalReceiptParam {
 }
 
 export interface ArrivalInstruction {
-  label: null
+  label: string
   content_type: string
   content: string
 }

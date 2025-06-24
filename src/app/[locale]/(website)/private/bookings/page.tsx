@@ -90,7 +90,7 @@ const Page = (props: Props) => {
             <Text c={"#767676"}>{t("user.bookings.no-bookings")}</Text>
           </div>
         ) : (
-          <SimpleGrid cols={{ base: 1, md: 2 }}>
+          <SimpleGrid cols={{ base: 1, sm: 2 }}>
             {data.data.data.bookings.map((booking) => (
               <BookingCard {...booking} key={booking.id} />
             ))}
