@@ -458,6 +458,14 @@
     "go-to-unit": "Reservation",
     "details": "Reservation details",
     "complete-payment": "Complete payment {value}",
-    "points": "Points "
+    "points": "Points ",
+    "show-map": "View map",
+    "add-review": "Add Review",
+    "your-comment": "Your comment",
+    "your-comment-placeholder": "Your comment",
+    "cleanliness": "Cleanliness of place",
+    "conformity": "Matching the specifications",
+    "service": "Host service",
+    "place_condition": "Place condition"
   }
 }

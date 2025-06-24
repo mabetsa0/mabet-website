@@ -56,7 +56,7 @@ const Page = (props: Props) => {
         </Text>
         <Text className="md:text-lg">{t("user.bookings.description")}</Text>
       </Stack>
-      <ScrollArea py={"md"} w={"100%"}>
+      <ScrollArea pb={"md"} w={"100%"}>
         <SegmentedControl
           color="primary"
           size="md"

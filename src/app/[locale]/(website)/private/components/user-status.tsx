@@ -33,7 +33,10 @@ const UserStatus = (props: Props) => {
                   />
                 </div>
                 <Stack w={"100%"} gap={"xs"}>
-                  <Text size="38px" className="max-md:text-end" fw={"bold"}>
+                  <Text
+                    className="max-md:text-end text-xl md:text-4xl"
+                    fw={"bold"}
+                  >
                     {user.bookings_count || "00"}
                   </Text>
                   <Text fw={500} c={"primary"}>
@@ -57,9 +60,8 @@ const UserStatus = (props: Props) => {
                 </div>
                 <Stack gap={"xs"} w="100%">
                   <Text
-                    w={"100%"}
-                    size="38px"
-                    className="max-md:text-end"
+                    truncate
+                    className="max-md:text-end text-xl md:text-4xl w-3/4 "
                     fw={"bold"}
                   >
                     {user.wallet_balance || "00"}
@@ -80,7 +82,10 @@ const UserStatus = (props: Props) => {
                   <Gift strokeWidth={1.6} size={40} className="text-white" />
                 </div>
                 <Stack gap={"xs"} w={"100%"}>
-                  <Text size="38px" className="max-md:text-end " fw={"bold"}>
+                  <Text
+                    className="max-md:text-end text-xl md:text-4xl"
+                    fw={"bold"}
+                  >
                     {user.points || "00"}
                   </Text>
                   <Text fw={500} c={"primary"}>

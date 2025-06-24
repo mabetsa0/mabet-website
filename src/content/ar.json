@@ -457,6 +457,14 @@
     "go-to-unit": "إعادة الحجز",
     "details": "تفاصيل الحجز",
     "complete-payment": "إكمال الدفع {value}",
-    "points": "النقاط "
+    "points": "النقاط ",
+    "show-map": "عرض الخريطة",
+    "add-review": "أضافة تقييم",
+    "your-comment": "تعليقك",
+    "your-comment-placeholder": "تعليقك",
+    "cleanliness": "نظافة المكان",
+    "conformity": "المطابقة للمواصفات",
+    "service": "خدمة المضيف",
+    "place_condition": "حالة المبيت"
   }
 }

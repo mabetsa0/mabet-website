@@ -20,131 +20,181 @@ import {
   HandCoins,
   LogIn,
   LogOut,
+  MapPin,
   QrCode,
   Wallet,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Booking } from "../@types"
+import { useDisclosure } from "@mantine/hooks"
+import ModalDrawer from "@/components/common/modal-drawer"
+import AddReview from "./add-review"
 
 type Props = Booking
 
 const BookingCard = (booking: Props) => {
   const unit = booking.unit
   const t = useTranslations("booking-card")
+
+  const [showReviewModal, reviewModalHandlers] = useDisclosure()
   return (
-    <Card
-      padding="xs"
-      radius="md"
-      withBorder
-      className={cn("border-[#F3F3F3] w-full")}
-    >
-      <div className="  aspect-[4/3] h-[230px] w-full overflow-hidden rounded relative">
-        <Badge
-          radius={"sm"}
-          size="lg"
-          color={booking.status.bg_color}
-          className="absolute top-[4px] start-[4px] "
-        >
-          {booking.status.label}
-        </Badge>
-        <Badge
-          radius={"sm"}
-          size="lg"
-          color={"primary"}
-          className="absolute top-[4px] end-[4px] "
-        >
-          {t("points")}
-          {booking.points}
-
-          <Gift size={18} strokeWidth={1.8} className="inline" />
-        </Badge>
-        <div className="w-full aspect-[4/3]  ">
-          <Image
-            loading="lazy"
-            className="w-full h-full object-cover"
-            src={booking.unit.images[0].image_path}
-            alt={booking.unit.images[0].alt}
-          />
+    <>
+      <Card
+        padding="xs"
+        radius="md"
+        withBorder
+        className={cn("border-[#F3F3F3] w-full")}
+      >
+        <div className="  aspect-[4/3] h-[230px] w-full overflow-hidden rounded relative">
+          <Badge
+            autoContrast
+            color={booking.status.bg_color}
+            size="lg"
+            radius={"0"}
+            className="border border-white absolute top-0 right-0  rounded-bl-md "
+          >
+            {booking.status.label}
+          </Badge>
+          <Badge
+            color={"primary"}
+            size="lg"
+            radius={"0"}
+            rightSection={
+              <Gift size={18} strokeWidth={1.8} className="inline" />
+            }
+            className="border border-white absolute top-0 left-0  rounded-br-md "
+          >
+            {t("points")}
+            {booking.points}
+          </Badge>
+          {booking.can_add_review ? (
+            <Button
+              onClick={reviewModalHandlers.open}
+              color="yellow.4"
+              size="xs"
+              radius={"sm"}
+              type="button"
+              className={"absolute bottom-0 right-0"}
+            >
+              {t("add-review")}
+            </Button>
+          ) : null}
+          <div className="w-full aspect-[4/3]  ">
+            <Image
+              loading="lazy"
+              className="w-full h-full object-cover"
+              src={booking.unit.images[0].image_path}
+              alt={booking.unit.images[0].alt}
+            />
+          </div>
         </div>
-      </div>
 
-      <Stack className="grow" gap={"md"}>
-        <Title className="truncate" order={5} mt={"8px"}>
-          {unit.name}
-        </Title>
-
-        <Group className="text-[#767676] " align="center" gap={"4"}>
-          <QrCode size={18} strokeWidth={1.25} />
-          <Text className="text-sm">{unit.code}</Text>
-        </Group>
-
-        <SimpleGrid cols={2}>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
-            <Wallet size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("total")}
-              {booking.full_payment} <RiyalIcon />
-            </Text>
+        <Stack className="grow" gap={"md"}>
+          <Group py={"xs"} justify="space-between" align="center" wrap="nowrap">
+            <Title className="truncate" order={5} mt={"8px"}>
+              {unit.name}
+            </Title>
+            {booking.can_view_maps ? (
+              <Button
+                className="shrink-0"
+                size="sm"
+                variant="light"
+                color="dark"
+                component="a"
+                target="_blank"
+                leftSection={<MapPin size={20} strokeWidth={1.2} />}
+                href={booking.maps_link}
+              >
+                {t("show-map")}
+              </Button>
+            ) : null}
           </Group>
+
           <Group className="text-[#767676] " align="center" gap={"4"}>
-            <HandCoins size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("paied")}
-              {booking.paid}
+            <QrCode size={18} strokeWidth={1.25} />
+            <Text className="text-sm">{unit.code}</Text>
+          </Group>
+
+          <SimpleGrid cols={2}>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <Wallet size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("total")}
+                {booking.full_payment} <RiyalIcon />
+              </Text>
+            </Group>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <HandCoins size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("paied")}
+                {booking.paid}
+                <RiyalIcon />
+              </Text>
+            </Group>
+          </SimpleGrid>
+
+          <SimpleGrid cols={2}>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <LogIn size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("checkin")}
+                {booking.checkin}
+              </Text>
+            </Group>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <LogOut size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("checkout")}
+                {booking.checkout}
+              </Text>
+            </Group>
+          </SimpleGrid>
+
+          <SimpleGrid cols={2}>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <Clock size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("checkin-time")}
+                {booking.checkin_time}
+              </Text>
+            </Group>
+            <Group className="text-[#767676] " align="center" gap={"4"}>
+              <Clock size={18} strokeWidth={1.25} />
+              <Text className="text-sm">
+                {t("checkout-time")}
+                {booking.checkout_time}
+              </Text>
+            </Group>
+          </SimpleGrid>
+          <Divider />
+          {booking.remaining ? (
+            <Button fullWidth>
+              {t("complete-payment", { value: booking.remaining })}
               <RiyalIcon />
-            </Text>
-          </Group>
-        </SimpleGrid>
-
-        <SimpleGrid cols={2}>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
-            <LogIn size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("checkin")}
-              {booking.checkin}
-            </Text>
-          </Group>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
-            <LogOut size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("checkout")}
-              {booking.checkout}
-            </Text>
-          </Group>
-        </SimpleGrid>
-
-        <SimpleGrid cols={2}>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
-            <Clock size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("checkin-time")}
-              {booking.checkin_time}
-            </Text>
-          </Group>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
-            <Clock size={18} strokeWidth={1.25} />
-            <Text className="text-sm">
-              {t("checkout-time")}
-              {booking.checkout_time}
-            </Text>
-          </Group>
-        </SimpleGrid>
-        <Divider />
-        {booking.remaining ? (
-          <Button fullWidth>
-            {t("complete-payment", { value: booking.remaining })}
-            <RiyalIcon />
+            </Button>
+          ) : (
+            <Button fullWidth component={Link} href={`/units/${unit.id}`}>
+              {t("go-to-unit")}
+            </Button>
+          )}
+          <Button variant="outline" fullWidth component={Link} href={`/user/`}>
+            {t("details")}
           </Button>
-        ) : (
-          <Button fullWidth component={Link} href={`/units/${unit.id}`}>
-            {t("go-to-unit")}
-          </Button>
-        )}
-        <Button variant="outline" fullWidth component={Link} href={`/user/`}>
-          {t("details")}
-        </Button>
-      </Stack>
-    </Card>
+        </Stack>
+      </Card>
+
+      <ModalDrawer
+        size={"lg"}
+        state={showReviewModal}
+        onClose={reviewModalHandlers.close}
+        title={t("add-review")}
+      >
+        <AddReview
+          handleClose={reviewModalHandlers.close}
+          bookingCode={booking.code}
+        />
+      </ModalDrawer>
+    </>
   )
 }
 

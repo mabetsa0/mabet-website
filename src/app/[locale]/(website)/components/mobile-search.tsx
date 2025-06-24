@@ -334,7 +334,7 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
           <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
             <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
               <div className="flex justify-center pt-0.5">
-                <div className="w-[90px] h-[4px] rounded bg-gray-200"></div>
+                <div className="w-[90px] h-[4px] rounded bg-gray-300"></div>
               </div>
               <Drawer.Title className="font-bold text-xl">
                 <Group gap={"xs"} align="center">
