@@ -15,6 +15,7 @@ import {
   Title,
 } from "@mantine/core"
 import {
+  Circle,
   Clock,
   Gift,
   HandCoins,
@@ -29,6 +30,7 @@ import { Booking } from "../@types"
 import { useDisclosure } from "@mantine/hooks"
 import ModalDrawer from "@/components/common/modal-drawer"
 import AddReview from "./add-review"
+import { logo } from "@/assets"
 
 type Props = Booking
 
@@ -37,6 +39,14 @@ const BookingCard = (booking: Props) => {
   const t = useTranslations("booking-card")
 
   const [showReviewModal, reviewModalHandlers] = useDisclosure()
+  const [arrivalInstructionsModal, arrivalInstructionsModalHandlers] =
+    useDisclosure()
+
+  const contactNumber = booking.arrival_instructions
+    ? booking.arrival_instructions.filter((e) => {
+        return e.content_type === "phone"
+      })
+    : false
   return (
     <>
       <Card
@@ -79,6 +89,22 @@ const BookingCard = (booking: Props) => {
               {t("add-review")}
             </Button>
           ) : null}
+          {/* {booking.arrival_instructions?.length &&
+          booking.arrival_instructions.length > 0 ? ( */}
+          <div>
+            <Button
+              onClick={arrivalInstructionsModalHandlers.open}
+              color="green.4"
+              size="xs"
+              radius={"sm"}
+              type="button"
+              className={"absolute bottom-0 left-0"}
+            >
+              {t("arrival_instructions")}
+            </Button>
+          </div>
+          {/* ) : null} */}
+
           <div className="w-full aspect-[4/3]  ">
             <Image
               loading="lazy"
@@ -193,6 +219,65 @@ const BookingCard = (booking: Props) => {
           handleClose={reviewModalHandlers.close}
           bookingCode={booking.code}
         />
+      </ModalDrawer>
+
+      <ModalDrawer
+        size="lg"
+        state={arrivalInstructionsModal}
+        onClose={arrivalInstructionsModalHandlers.close}
+        title={t("arrival_instructions")}
+      >
+        <Stack className=" py-0.5">
+          <Text className="text-xl font-medium " c={"#767676"}>
+            {t("arrival_instructions-description")}
+          </Text>
+
+          {contactNumber
+            ? contactNumber.map((e, i) => {
+                return (
+                  <div
+                    className="flex items-center gap-[12px] rounded-md bg-gray-150/50 px-0.5 py-[12px] text-gray-500"
+                    key={e.content + e.label + i}
+                  >
+                    <Image src={logo} alt="mabet" className="w-3.5" />
+                    <div>
+                      <p>{e.label}</p>
+                      <p>{e.content}</p>
+                    </div>
+                  </div>
+                )
+              })
+            : null}
+
+          {booking.arrival_instructions?.map((e, i) => {
+            if (e.content_type === "phone" || e.content_type === "image")
+              return null
+            return (
+              <div
+                className="flex items-center gap-[12px] rounded-md bg-gray-150/50 px-0.5 py-[12px] text-gray-500"
+                key={e.content + e.label + i}
+              >
+                <Image src={logo} alt="mabet" className="w-3.5" />
+                <div>
+                  <p>{e.label}</p>
+                  <p>{e.content}</p>
+                </div>
+              </div>
+            )
+          })}
+          {booking.arrival_instructions?.map((e, i) => {
+            if (e.content_type !== "image") return null
+            return (
+              <div className="" key={i}>
+                <p className="flex items-start gap-[12px] py-1">
+                  <Circle className="mt-[4px] w-[20px] shrink-0 text-primary" />{" "}
+                  <span>{e.label}</span>
+                </p>
+                <img src={e.content} className="w-full" alt="image" />
+              </div>
+            )
+          })}
+        </Stack>
       </ModalDrawer>
     </>
   )

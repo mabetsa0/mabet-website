@@ -11,11 +11,11 @@ import {
   Text,
   SegmentedControl,
   SimpleGrid,
-  Pagination,
   ScrollArea,
 } from "@mantine/core"
 import { useTranslations } from "next-intl"
 import BookingCard from "./components/booking-card"
+import Pagination from "../../units/components/pagination"
 
 type Props = {}
 

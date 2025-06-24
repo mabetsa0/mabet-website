@@ -466,6 +466,8 @@
     "cleanliness": "Cleanliness of place",
     "conformity": "Matching the specifications",
     "service": "Host service",
-    "place_condition": "Place condition"
+    "place_condition": "Place condition",
+    "arrival_instructions": "Arrival Instructions",
+    "arrival_instructions-description": "Please follow the arrival instructions to ensure the highest quality reservation."
   }
 }
