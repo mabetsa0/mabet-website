@@ -16,7 +16,7 @@ const ArrivalInstructions = ({ instructions }: Props) => {
                 <img className="w-3 " src={mabetLogo.src} alt="logo" />
               </div>
               <Stack gap={"xs"}>
-                <Text className="text-h5 font-bold">{instruction.label}</Text>
+                <Text className="text-h6 font-bold">{instruction.label}</Text>
                 {instruction.content_type == "image" ? (
                   <Image
                     maw={350}

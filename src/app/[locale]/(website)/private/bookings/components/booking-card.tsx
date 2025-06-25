@@ -33,6 +33,7 @@ import ModalDrawer from "@/components/common/modal-drawer"
 import AddReview from "./add-review"
 import { arrivalInstructionsImage, logo } from "@/assets"
 import ArrivalInstructions from "./arival-instruction"
+import CompletePayment from "./complete-payment"
 
 type Props = Booking
 
@@ -41,6 +42,7 @@ const BookingCard = (booking: Props) => {
   const t = useTranslations("booking-card")
 
   const [showReviewModal, reviewModalHandlers] = useDisclosure()
+  const [completePayment, completePaymentHandlers] = useDisclosure()
   const [arrivalInstructionsModal, arrivalInstructionsModalHandlers] =
     useDisclosure()
 
@@ -191,7 +193,7 @@ const BookingCard = (booking: Props) => {
           </SimpleGrid>
           <Divider />
           {booking.remaining ? (
-            <Button fullWidth>
+            <Button fullWidth onClick={completePaymentHandlers.open}>
               {t("complete-payment", { value: booking.remaining })}
               <RiyalIcon />
             </Button>
@@ -200,7 +202,12 @@ const BookingCard = (booking: Props) => {
               {t("go-to-unit")}
             </Button>
           )}
-          <Button variant="outline" fullWidth component={Link} href={`/user/`}>
+          <Button
+            variant="outline"
+            fullWidth
+            component={Link}
+            href={`/private/bookings/${booking.code}`}
+          >
             {t("details")}
           </Button>
         </Stack>
@@ -243,6 +250,14 @@ const BookingCard = (booking: Props) => {
             </Box>
           </SimpleGrid>
         </Stack>
+      </ModalDrawer>
+      <ModalDrawer
+        size={"lg"}
+        state={completePayment}
+        onClose={completePaymentHandlers.close}
+        title={t("compelet-payment")}
+      >
+        <CompletePayment {...booking} />
       </ModalDrawer>
     </>
   )
