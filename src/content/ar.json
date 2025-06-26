@@ -156,7 +156,7 @@
     "customer-fees": "رسوم الخدمة",
     "total-price": "الإجمالي",
     "no-results-title": "لم نجد نتائج تطابق بحثك!",
-    "no-results-description": "جرّب تعديل خيارات البحث، كعدد الضيوف، أو توسيع النطاق الزمني أو الموقع.  نحن على يقين بأنك ستجد مكاناً يناسبك!",
+    "no-results-description": "جرّب تعديل خيارات البحث، كعدد الضيوف، أو توسيع النطاق الزمني أو الموقع. نحن على يقين بأنك ستجد مكاناً يناسبك!",
     "no-results-button": "إعادة ضبط البحث",
     "warning": "تحذير",
     "verify-account": "وثق حسابك",
@@ -492,5 +492,28 @@
     "place_condition": "حالة المبيت",
     "arrival_instructions": "تعليمات الوصول",
     "arrival_instructions-description": "يرجى اتباع تعلميات الوصول لضمان الحصول على اعلى جودة حجز           "
+  },
+  "booking-page": {
+    "title": "تفاصيل الحجز #{value}",
+    "description": "يمكنك مراجعة تفاصيل الحجز من هنا",
+    "view-unit": "عرض الوحدة",
+    "checkin": "وصول",
+    "checkout": "المغادرة",
+    "unit-location": "موقع الوحدة",
+    "view-map": "موقع الوحدة على الخريطة",
+    "arriavl-instructions": "تعليمات الوصول",
+    "show-more": "عرض المزيد",
+    "owner-information": "معلومات المالك",
+    "owner-name": "اسم المالك",
+    "owner-number": "رقم المالك",
+    "booking-details": "ملخص الحجز",
+    "night-price": "صافي السعر الإجمالي في الليلة",
+    "nights-count": "عدد الليالي",
+    "customer-fees": "رسوم الخدمة",
+    "total": "إجمالي السعر",
+    "invoice": "عرض الفاتورة",
+    "conditions": "شروط الحجز",
+    "cancel-policy": "سياسة الإلغاء والاسترجاع",
+    "support": "دعم وحماية حقوقك"
   }
 }

@@ -366,7 +366,10 @@
     "madfu-description": "Pay by parts without interest without fees",
     "partial-payment": "Pay a deposit {value}",
     "full-payment": "Pay full {value} ",
-    "apple-pay": "Online payment"
+    "apple-pay": "Online payment",
+    "unit": {
+      "pay": "Complete payment {value}"
+    }
   },
   "nafath": {
     "title": "Verify you account with nafath",
@@ -492,6 +495,31 @@
     "service": "Host service",
     "place_condition": "Place condition",
     "arrival_instructions": "Arrival Instructions",
-    "arrival_instructions-description": "Please follow the arrival instructions to ensure the highest quality reservation."
+    "arrival_instructions-description": "Please follow the arrival instructions to ensure the highest quality reservation.",
+    "compelet-payment": "Complete payment"
+  },
+  "booking-page": {
+    "title": "Reservation details #{value}",
+    "description": "You can review your reservation details from here",
+    "checkin": "Arrival",
+    "checkout": "Leaving",
+    "view-unit": "View unit",
+    "show-more": "View more",
+    "show-less": "View less",
+    "unit-location": "Unit location",
+    "view-map": "Unit location on map",
+    "arriavl-instructions": "Arrival instructions ",
+    "owner-information": "Owner information ",
+    "owner-name": "Owner name",
+    "owner-number": "Owner number",
+    "booking-details": "Summary of the reservation",
+    "night-price": "Net total price per night",
+    "nights-count": "Number of nights",
+    "customer-fees": "Service fees",
+    "total": "Total price",
+    "invoice": "View invoice",
+    "conditions": "Reservation Conditions ",
+    "cancel-policy": "Cancellation and retrieval policy",
+    "support": "Support and protect your rights"
   }
 }
