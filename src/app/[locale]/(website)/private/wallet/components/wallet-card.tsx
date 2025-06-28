@@ -27,8 +27,11 @@ const WalletCard = (props: Props) => {
           className=" aspect-auto size-2.5 md:size-4.5 shrink-0 flex items-center justify-center rounded-md md:rounded-lg"
           style={{ background: props.credit_color }}
         >
-          <BanknoteArrowDown className="size-1.5 md:size-2 text-white" />
-          {/* <BanknoteArrowUp /> */}
+          {Number(props.credit) < 0 ? (
+            <BanknoteArrowDown className="size-1.5 md:size-2 text-white" />
+          ) : (
+            <BanknoteArrowUp className="size-1.5 md:size-2 text-white" />
+          )}
         </div>
         <Group
           className="grow max-md:flex-col max-md:items-start md:justify-between "
@@ -59,7 +62,10 @@ const WalletCard = (props: Props) => {
             <Text c={props.credit_color} className="text-lg font-medium">
               {t("wallet.card.total")}
             </Text>
-            <Text c={props.credit_color} className="text-h4 font-bold">
+            <Text
+              c={props.credit_color}
+              className="text-h5 md:text-h4 font-bold"
+            >
               {props.credit} <RiyalIcon />
             </Text>
           </Stack>
