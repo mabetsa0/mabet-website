@@ -51,72 +51,70 @@ const page = async (props: Props) => {
         </Stack>
         <Stack gap={"lg"}>
           <Space />
+          <Group className="max-sm:flex-wrap flex-nowrap">
+            <Stack align="stretch">
+              <Box className=" w-full sm:max-w-xs aspect-square  rounded-md overflow-hidden">
+                <img
+                  className="w-full h-full object-cover"
+                  src={unit.images[0].image_path}
+                  alt={unit.images[0].alt}
+                />
+              </Box>
+            </Stack>
 
-          <Group align="stretch">
-            <Box className="h-[140px] w-[160px] rounded-md overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
-                src={unit.images[0].image_path}
-                alt={unit.images[0].alt}
-              />
-            </Box>
-            <Stack>
-              <h3 className="text-h4 md:text-h5 font-bold line-clamp-1">
-                {unit.name}{" "}
-                <span className="text-base font-light text-gray-500">
-                  ({unit.code})
-                </span>
-              </h3>
-              <div className="mt-auto">
+            <Stack gap={"lg"} className="max-sm:w-full">
+              <Stack>
+                <h3 className="text-h4 md:text-h5 font-bold line-clamp-1">
+                  {unit.name}{" "}
+                  <span className="text-base font-light text-gray-500">
+                    ({unit.code})
+                  </span>
+                </h3>
                 <Link
-                  className=" w-full block mt-auto"
+                  className=" w-full block max-w-xs "
                   href={`/unit/${unit.id}`}
                 >
                   <Button fullWidth variant="light" size="sm">
                     {t("view-unit")}
                   </Button>
                 </Link>
+              </Stack>
+              <SimpleGrid cols={2}>
+                <div className=" rounded bg-green-300/15 p-[12px]">
+                  <p className="text-sm font-medium text-default-600">
+                    {t("checkin")}
+                  </p>
+                  <p className="font-medium ">{booking.checkin_text}</p>
+                </div>
+                <div className=" rounded bg-red-300/15 p-[12px]">
+                  <p className="text-sm font-medium text-default-600">
+                    {t("checkout")}
+                  </p>
+                  <p className="font-medium ">{booking.checkout_text}</p>
+                </div>
+              </SimpleGrid>
+              <Divider />
+              <div className="space-y-0.5">
+                <p className="text-2xl">{t("unit-location")}</p>
+                <div className="flex items-center gap-2 text-sm">
+                  <MapPin className="size-1" />
+                  <p>{booking.unit.location}</p>
+                </div>
+                <Button
+                  fullWidth
+                  className="max-w-sm"
+                  component={"a"}
+                  href={booking.maps_link}
+                  target="_blank"
+                >
+                  {t("view-map")}
+                </Button>
               </div>
             </Stack>
           </Group>
 
           <Space />
-
-          <SimpleGrid cols={2}>
-            <div className=" rounded bg-green-300/15 p-[12px]">
-              <p className="text-sm font-medium text-default-600">
-                {t("checkin")}
-              </p>
-              <p className="font-medium ">{booking.checkin_text}</p>
-              <p>{booking.checkin_time}</p>
-            </div>
-            <div className=" rounded bg-red-300/15 p-[12px]">
-              <p className="text-sm font-medium text-default-600">
-                {t("checkout")}
-              </p>
-              <p className="font-medium ">{booking.checkout_text}</p>
-              <p>{booking.checkout_time}</p>
-            </div>
-          </SimpleGrid>
-          <Divider />
-          <div className="space-y-0.5">
-            <p className="text-2xl">{t("unit-location")}</p>
-            <div className="flex items-center gap-2 text-sm">
-              <MapPin className="size-1" />
-              <p>{booking.unit.location}</p>
-            </div>
-            <Button
-              fullWidth
-              className="max-w-sm"
-              component={"a"}
-              href={booking.maps_link}
-              target="_blank"
-            >
-              {t("view-map")}
-            </Button>
-          </div>
-
-          <Divider />
+          <Divider hiddenFrom="sm" />
 
           <div className="space-y-0.5">
             <p className="text-2xl">{t("arriavl-instructions")}</p>
