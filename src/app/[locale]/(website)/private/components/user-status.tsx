@@ -16,7 +16,7 @@ const UserStatus = (props: Props) => {
   return (
     <Stack className="min-h-[350px] py-2" justify="flex-end">
       <Group wrap="nowrap">
-        <div className="w-[300px] shrink-0 hidden md:block"></div>
+        <div className="w-[260px] shrink-0 hidden md:block"></div>
         <div className="w-full">
           <Grid columns={6}>
             <Grid.Col span={{ base: 3, md: 2 }}>

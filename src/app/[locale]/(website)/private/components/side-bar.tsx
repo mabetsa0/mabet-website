@@ -71,18 +71,22 @@ const SideBar = (props: Props) => {
         className="bg-white sticky  top-16  "
         radius={"16px"}
         shadow="md"
-        w={"300px"}
+        w={"260px"}
       >
-        <Group wrap="nowrap" gap={"xs"} className="bg-white rounded-2xl p-1  ">
+        <Group
+          wrap="nowrap"
+          gap={"xs"}
+          className="bg-white rounded-2xl p-0.5  "
+        >
           {/* <div className="w-[72px] flex items-center justify-center h-[72px] rounded-3xl bg-primary"> */}
-          <img className="w-[62px] h-[62px]" alt={"avatar"} src={user.avatar} />
+          <img className="w-[52px] h-[52px]" alt={"avatar"} src={user.avatar} />
           {/* </div> */}
           <Stack gap={"xs"}>
-            <Text truncate maw={"170px"} size="lg" fw={"bold"}>
+            <Text truncate maw={"170px"} fw={"bold"}>
               {user.name}
             </Text>
             <Button
-              size="sm"
+              size="xs"
               onClick={user.nafath_validated ? undefined : onOpen}
               variant={user.nafath_validated ? "white" : "light"}
               leftSection={user.nafath_validated ? <BadgeCheck /> : undefined}
