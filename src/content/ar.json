@@ -167,7 +167,8 @@
     "favourite": "المفضلة",
     "support": "تواصل معنا",
     "logout": "تسجيل الخروج",
-    "invalid-email": "بريد الكتروني غير صالح"
+    "invalid-email": "بريد الكتروني غير صالح",
+    "working-time": "من 09:30 صباحاً إلى 01:00 ليلاً"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

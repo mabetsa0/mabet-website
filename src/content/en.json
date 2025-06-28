@@ -76,7 +76,8 @@
     "favourite": "Favorite",
     "support": "Contact us",
     "logout": "Logout",
-    "invalid-email": "Invalid email"
+    "invalid-email": "Invalid email",
+    "working-time": "From 09:30 am to 01:00 night"
   },
   "home": {
     "special-units": {

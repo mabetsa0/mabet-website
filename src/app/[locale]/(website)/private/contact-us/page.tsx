@@ -19,7 +19,7 @@ const Page = () => {
     },
     {
       icon: Clock,
-      content: "من 09:30 صباحاً إلى 01:00 ليلاً",
+      content: t("general.working-time"),
     },
   ]
 
