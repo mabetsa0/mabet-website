@@ -38,12 +38,12 @@ const WalletCard = (props: Props) => {
           wrap="nowrap"
         >
           <Stack gap={"xs"}>
-            <Text className="text-h3 font-bold">{props.label}</Text>
+            <Text className="text-h4 md:text-h3 font-bold">{props.label}</Text>
             <Space />
             {props.description ? (
               <Text className="text-sm md:text-lg font-medium">
                 <File
-                  className="inline-block me-0.5 size-1 md:size-1.5"
+                  className="inline-block me-0.5 size-[20px] md:size-1.5"
                   strokeWidth={1.6}
                 />
                 {props.description}
@@ -51,7 +51,7 @@ const WalletCard = (props: Props) => {
             ) : null}
             <Text className="text-xs md:text-base">
               <Calendar
-                className="inline-block me-0.5 size-1 md:size-1.5"
+                className="inline-block me-0.5 size-[20px] md:size-1.5"
                 strokeWidth={1.6}
               />{" "}
               {props.creation_date.text}

@@ -8,6 +8,7 @@ import { parseAsInteger, useQueryState } from "nuqs"
 import Pagination from "../../units/components/pagination"
 import { WalletResponse } from "./@types"
 import WalletCard from "./components/wallet-card"
+import { RiyalIcon } from "@/components/icons"
 
 type Props = {}
 
@@ -33,8 +34,15 @@ const Page = (props: Props) => {
         <Text className="text-h3 md:text-h2 font-bold">
           {t("user.wallet.title")}
         </Text>
-        <Text className="md:text-lg">{t("user.wallet.description")}</Text>
+        <Text className="md:text-lg">
+          {t("user.wallet.description")}{" "}
+          <span className="text-primary ">
+            {data?.data.data.current_balance}
+            <RiyalIcon />
+          </span>
+        </Text>
       </Stack>
+      <Space />
 
       {status === "pending" && (
         <div className="flex items-center justify-center min-h-20">
