@@ -18,13 +18,15 @@ export function InitSession({
 
   const { data } = useQuery({
     queryKey: ["session"],
-    queryFn: () => axios.get<Session | null>("/api/updated-session"),
+    queryFn: async () =>
+      (await axios.get<Session | null>("/api/updated-session")).data,
+    initialData: initialValue,
     staleTime: Infinity,
   })
 
   useEffect(() => {
     if (data) {
-      updateSession(data.data?.access_token ? data.data : null)
+      updateSession(data?.access_token ? data : null)
     }
   }, [data, updateSession])
 

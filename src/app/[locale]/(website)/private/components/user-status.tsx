@@ -25,21 +25,20 @@ const UserStatus = (props: Props) => {
                 gap={"xs"}
                 className="bg-white rounded-2xl p-1"
               >
-                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
                   <CalendarRange
                     strokeWidth={1.6}
-                    size={40}
-                    className="text-white"
+                    className="text-white size-2 md:size-3"
                   />
                 </div>
                 <Stack w={"100%"} gap={"xs"}>
                   <Text
-                    className="max-md:text-end text-xl md:text-4xl"
+                    className="max-md:text-end text-lg md:text-4xl"
                     fw={"bold"}
                   >
                     {user.bookings_count || "00"}
                   </Text>
-                  <Text fw={500} c={"primary"}>
+                  <Text fw={500} c={"primary"} className="text-sm md:text-base">
                     {t("bookings_count")}
                   </Text>
                 </Stack>
@@ -51,22 +50,21 @@ const UserStatus = (props: Props) => {
                 gap={"xs"}
                 className="bg-white rounded-2xl p-1"
               >
-                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
                   <WalletMinimal
                     strokeWidth={1.6}
-                    size={40}
-                    className="text-white"
+                    className="text-white size-2 md:size-3"
                   />
                 </div>
                 <Stack gap={"xs"} w="100%">
                   <Text
                     truncate
-                    className="max-md:text-end text-xl md:text-4xl w-3/4 "
+                    className="max-md:text-end text-lg md:text-4xl w-3/4 "
                     fw={"bold"}
                   >
                     {user.wallet_balance || "00"}
                   </Text>
-                  <Text fw={500} c={"primary"}>
+                  <Text fw={500} c={"primary"} className="text-sm md:text-base">
                     {t("wallet-balance")}
                   </Text>
                 </Stack>
@@ -78,17 +76,20 @@ const UserStatus = (props: Props) => {
                 gap={"xs"}
                 className="bg-white rounded-2xl p-1"
               >
-                <div className="w-[62px] md:w-[72px] shrink-0  flex items-center justify-center h-[62px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
-                  <Gift strokeWidth={1.6} size={40} className="text-white" />
+                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                  <Gift
+                    strokeWidth={1.6}
+                    className="text-white size-2 md:size-3"
+                  />
                 </div>
                 <Stack gap={"xs"} w={"100%"}>
                   <Text
-                    className="max-md:text-end text-xl md:text-4xl"
+                    className="max-md:text-end text-lg md:text-4xl"
                     fw={"bold"}
                   >
                     {user.points || "00"}
                   </Text>
-                  <Text fw={500} c={"primary"}>
+                  <Text fw={500} c={"primary"} className="text-sm md:text-base">
                     {t("points")}
                   </Text>
                 </Stack>
