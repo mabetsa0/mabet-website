@@ -11,21 +11,28 @@ import { BadgeCheck, Mail, Phone, UserIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import useUser from "../hooks/use-user"
 import { useNafath } from "@/hooks/use-nafath"
+import { useEffect } from "react"
 const Profile = () => {
   const t = useTranslations()
   const { session, updateSession } = useSession()
-  const { user } = useUser()
+  const { user, status } = useUser()
   const [_, { onOpen }] = useNafath()
 
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      email: user?.email,
+      email: "",
     },
     validate: {
       email: isEmail(t("general.invalid-email")),
     },
   })
+
+  useEffect(() => {
+    if (status === "success") {
+      form.initialize({ email: user.email })
+    }
+  }, [status])
   const onSubmit = form.onSubmit(async (data) => {
     try {
       const response = await Mabeet.post("/user/update", data)
@@ -135,6 +142,7 @@ const Profile = () => {
           <div className="border border-[#F3F3F3] rounded-lg">
             <TextInput
               required
+              readOnly
               withAsterisk={false}
               variant="unstyled"
               classNames={{
