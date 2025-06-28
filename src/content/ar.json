@@ -526,6 +526,19 @@
   "wallet": {
     "card": {
       "total": "المبلغ الإجمالي"
+    },
+    "add": {
+      "button": "إضافة للمحفظة",
+      "title": "إضافة مال للمحفظة",
+      "subtitle": "أضف مالاً لمحفظتك",
+      "description": "أدخل المبلغ الذي تريد إضافته لرصيد محفظتك",
+      "amount-label": "المبلغ",
+      "amount-required": "المبلغ مطلوب",
+      "amount-invalid": "يرجى إدخال مبلغ صحيح",
+      "minimum-amount": "الحد الأدنى للمبلغ هو 10 ريال",
+      "submit-button": "إضافة للمحفظة",
+      "success-title": "تم بنجاح",
+      "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
   }
 }

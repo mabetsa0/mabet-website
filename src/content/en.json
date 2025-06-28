@@ -65,7 +65,7 @@
     "customer-fees": "Customer fees",
     "total-price": "Total",
     "no-results-title": "We did not find results that match your research!",
-    "no-results-description": "Try to modify search options, such as the number of rooms, or expand the time or site.  \nWe are sure that you will find a place that suits you!",
+    "no-results-description": "Try to modify search options, such as the number of rooms, or expand the time or site. \nWe are sure that you will find a place that suits you!",
     "no-results-button": "Reset filters",
     "warning": "Warrning",
     "verify-account": "Verify your account",
@@ -531,6 +531,19 @@
   "wallet": {
     "card": {
       "total": "The total amount"
+    },
+    "add": {
+      "button": "Add to wallet",
+      "title": "Add money to wallet",
+      "subtitle": "Add money to your wallet",
+      "description": "Enter the amount you want to add to your wallet balance",
+      "amount-label": "Amount",
+      "amount-required": "Amount is required",
+      "amount-invalid": "Please enter a valid amount",
+      "minimum-amount": "Minimum amount is 10 SAR",
+      "submit-button": "Add to wallet",
+      "success-title": "Success",
+      "success-message": "Amount has been added to your wallet successfully"
     }
   }
 }

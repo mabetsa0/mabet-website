@@ -1,13 +1,14 @@
 "use client"
 import UnitCard from "@/components/common/unit-card"
 import Mabet from "@/services"
-import { Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
+import { Group, Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import { parseAsInteger, useQueryState } from "nuqs"
 import Pagination from "../../units/components/pagination"
 import { WalletResponse } from "./@types"
 import WalletCard from "./components/wallet-card"
+import AddToWallet from "./components/add-to-wallet"
 import { RiyalIcon } from "@/components/icons"
 
 type Props = {}
@@ -30,18 +31,21 @@ const Page = (props: Props) => {
   return (
     <Stack>
       <Space />
-      <Stack>
-        <Text className="text-h3 md:text-h2 font-bold">
-          {t("user.wallet.title")}
-        </Text>
-        <Text className="md:text-lg">
-          {t("user.wallet.description")}{" "}
-          <span className="text-primary ">
-            {data?.data.data.current_balance}
-            <RiyalIcon />
-          </span>
-        </Text>
-      </Stack>
+      <Group wrap="nowrap">
+        <Stack className="grow">
+          <Text className="text-h3 md:text-h2 font-bold">
+            {t("user.wallet.title")}
+          </Text>
+          <Text className="md:text-lg">
+            {t("user.wallet.description")}{" "}
+            <span className="text-primary ">
+              {data?.data.data.current_balance}
+              <RiyalIcon />
+            </span>
+          </Text>
+        </Stack>
+        {/* <AddToWallet /> */}
+      </Group>
       <Space />
 
       {status === "pending" && (
