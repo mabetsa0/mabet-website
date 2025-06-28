@@ -473,6 +473,11 @@
         "placeholder": "Message",
         "label": "Write the text of the message here"
       }
+    },
+    "wallet": {
+      "title": "Your wallet information",
+      "description": "The balance available in your wallet",
+      "empty": "There are no operations on your wallet"
     }
   },
   "booking-card": {
@@ -522,5 +527,10 @@
     "conditions": "Reservation Conditions ",
     "cancel-policy": "Cancellation and retrieval policy",
     "support": "Support and protect your rights"
+  },
+  "wallet": {
+    "card": {
+      "total": "The total amount"
+    }
   }
 }
