@@ -302,8 +302,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
 
                 <Text ta="end" c="#767676">
                   {(
-                    parseFloat(prices.customer_fees) +
-                    Number(prices.customer_fees)
+                    parseFloat(prices.customer_fees)
                   ).toFixed(2)}
                   <RiyalIcon />
                 </Text>
