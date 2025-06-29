@@ -23,17 +23,17 @@ const UserStatus = (props: Props) => {
               <Group
                 wrap="nowrap"
                 gap={"xs"}
-                className="bg-white rounded-2xl p-1"
+                className="bg-white rounded-2xl py-1 ps-0.5 md:ps-1 pe-0.5"
               >
-                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                <div className="w-[42px] md:w-[72px] shrink-0  flex items-center justify-center h-[42px] md:h-[72px]  rounded-md md:rounded-3xl bg-primary">
                   <CalendarRange
                     strokeWidth={1.6}
-                    className="text-white size-2 md:size-3"
+                    className="text-white size-[24px] md:size-3"
                   />
                 </div>
                 <Stack w={"100%"} gap={"xs"}>
                   <Text
-                    className="max-md:text-end text-lg md:text-4xl"
+                    className="max-md:text-end text-base md:text-2xl"
                     fw={"bold"}
                   >
                     {user.bookings_count || "00"}
@@ -48,18 +48,18 @@ const UserStatus = (props: Props) => {
               <Group
                 wrap="nowrap"
                 gap={"xs"}
-                className="bg-white rounded-2xl p-1"
+                className="bg-white rounded-2xl py-1 ps-1 pe-0.5"
               >
-                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                <div className="w-[42px] md:w-[72px] shrink-0  flex items-center justify-center h-[42px] md:h-[72px]  rounded-md md:rounded-3xl bg-primary">
                   <WalletMinimal
                     strokeWidth={1.6}
-                    className="text-white size-2 md:size-3"
+                    className="text-white size-[24px] md:size-3"
                   />
                 </div>
                 <Stack gap={"xs"} w="100%">
                   <Text
                     truncate
-                    className="max-md:text-end text-lg md:text-4xl w-3/4 "
+                    className="max-md:text-end text-base md:text-2xl w-full "
                     fw={"bold"}
                   >
                     {user.wallet_balance || "00"}
@@ -74,17 +74,17 @@ const UserStatus = (props: Props) => {
               <Group
                 wrap="nowrap"
                 gap={"xs"}
-                className="bg-white rounded-2xl p-1"
+                className="bg-white rounded-2xl py-1 ps-0.5 md:ps-1 pe-0.5"
               >
-                <div className="w-[52px] md:w-[72px] shrink-0  flex items-center justify-center h-[52px] md:h-[72px]  rounded-2xl md:rounded-3xl bg-primary">
+                <div className="w-[42px] md:w-[72px] shrink-0  flex items-center justify-center h-[42px] md:h-[72px]  rounded-md md:rounded-3xl bg-primary">
                   <Gift
                     strokeWidth={1.6}
-                    className="text-white size-2 md:size-3"
+                    className="text-white size-[24px] md:size-3"
                   />
                 </div>
                 <Stack gap={"xs"} w={"100%"}>
                   <Text
-                    className="max-md:text-end text-lg md:text-4xl"
+                    className="max-md:text-end text-base md:text-2xl"
                     fw={"bold"}
                   >
                     {user.points || "00"}
