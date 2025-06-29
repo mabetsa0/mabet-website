@@ -25,10 +25,10 @@ const Page = (props: Props) => {
   const types = [
     "upcoming",
     "past",
-    "requires_approval",
-    "expired",
-    "partial",
-    "completed",
+    // "requires_approval",
+    // "expired",
+    // "partial",
+    // "completed",
   ] as const
   const [{ type, page }, set] = useQueryStates({
     type: parseAsString.withDefault("upcoming"),
