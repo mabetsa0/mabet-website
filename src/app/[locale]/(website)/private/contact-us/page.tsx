@@ -1,5 +1,5 @@
 import { Card, SimpleGrid, Space, Stack, Text } from "@mantine/core"
-import { Clock, Gift, Mail, Phone, Smartphone } from "lucide-react"
+import { Clock, Mail, Smartphone } from "lucide-react"
 import { useTranslations } from "next-intl"
 import ContactForm from "./components/contact-form"
 
