@@ -168,7 +168,10 @@
     "support": "تواصل معنا",
     "logout": "تسجيل الخروج",
     "invalid-email": "بريد الكتروني غير صالح",
-    "working-time": "من 09:30 صباحاً إلى 01:00 ليلاً"
+    "working-time": "من 09:30 صباحاً إلى 01:00 ليلاً",
+    "min_stay_warning": "تحذير الحد الادنى للاقامة",
+    "nights": "ليلة",
+    "date_extended_to": "تم تمديد الحجز حتى "
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

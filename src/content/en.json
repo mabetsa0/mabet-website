@@ -77,7 +77,10 @@
     "support": "Contact us",
     "logout": "Logout",
     "invalid-email": "Invalid email",
-    "working-time": "From 09:30 AM to 01:00 PM"
+    "working-time": "From 09:30 AM to 01:00 PM",
+    "min_stay_warning": "Warning the minimum residence",
+    "nights": "nights",
+    "date_extended_to": "the reservation has been extended to "
   },
   "home": {
     "special-units": {
