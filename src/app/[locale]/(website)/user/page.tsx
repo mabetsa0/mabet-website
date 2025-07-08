@@ -7,7 +7,7 @@ export default async function User({
 }) {
   const { locale } = await params
   return redirect({
-    href: { pathname: "/private/profile" },
+    href: { pathname: "/user/profile" },
     locale: locale as "en" | "ar",
   })
 }
