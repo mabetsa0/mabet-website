@@ -81,16 +81,16 @@ const Reservation = () => {
       unitId: string
     }) => {
       const response = await Mabet.post<CreateBookingResponse>(
-        `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking `,
+        `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking`,
         {
           private: undefined,
           from,
           to,
-          unitId,
+          unit: unitId,
         }
       )
 
-      const booking_code = response.data.data.booking
+      const booking_code = response.data.data.booking.code
 
       const cardPayment = await Mabet.post<{
         data: {
