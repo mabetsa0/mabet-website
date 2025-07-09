@@ -206,7 +206,7 @@ const BookingCard = (booking: Props) => {
             variant="outline"
             fullWidth
             component={Link}
-            href={`/private/bookings/${booking.code}`}
+            href={`/user/bookings/${booking.code}`}
           >
             {t("details")}
           </Button>

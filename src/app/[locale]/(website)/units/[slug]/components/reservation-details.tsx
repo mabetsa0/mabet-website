@@ -90,7 +90,7 @@ const ReservationDetails = () => {
         notifications.show({
           title: t("generla.failer"),
           message:
-            (error.response.data as ErrorResponse).errors?.[0] || error.message,
+            (error.response.data as ErrorResponse).message || error.message,
           color: "red",
         })
       }
@@ -166,7 +166,7 @@ const ReservationDetails = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors?.[0]
+                ? (error.response?.data as ErrorResponse).message
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -230,7 +230,7 @@ const ReservationDetails = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors?.[0]
+                ? (error.response?.data as ErrorResponse).message
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -311,8 +311,8 @@ const ReservationDetails = () => {
           {createBookingMutation.error ? (
             axios.isAxiosError(createBookingMutation.error) ? (
               <Text ta={"center"} c={"red"}>
-                {(error?.response as ErrorResponse).errors?.[0] ||
-                  error?.message}
+                {(createBookingMutation.error?.response?.data as ErrorResponse)
+                  .message || createBookingMutation.error?.message}
               </Text>
             ) : (
               <Text ta={"center"} c={"red"}>

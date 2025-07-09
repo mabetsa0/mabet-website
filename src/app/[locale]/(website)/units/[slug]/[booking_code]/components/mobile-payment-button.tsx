@@ -170,7 +170,7 @@ const MobilePaymentButton = ({
       setError(
         (error.response?.data as { error: { message: string } })?.error
           ?.message ||
-          (error.response?.data as ErrorResponse)?.errors?.[0] ||
+          (error.response?.data as ErrorResponse)?.message ||
           error.message
       )
     },

@@ -77,7 +77,10 @@
     "support": "Contact us",
     "logout": "Logout",
     "invalid-email": "Invalid email",
-    "working-time": "From 09:30 am to 01:00 night"
+    "working-time": "From 09:30 AM to 01:00 PM",
+    "min_stay_warning": "Warning the minimum residence",
+    "nights": "nights",
+    "date_extended_to": "the reservation has been extended to "
   },
   "home": {
     "special-units": {
@@ -472,7 +475,9 @@
       "message": {
         "placeholder": "Message",
         "label": "Write the text of the message here"
-      }
+      },
+      "success-title": "Your message was successfully sent",
+      "success-description": "Your inquiry will be answered as soon as possible"
     },
     "wallet": {
       "title": "Your wallet information",

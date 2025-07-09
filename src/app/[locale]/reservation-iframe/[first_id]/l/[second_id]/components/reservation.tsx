@@ -81,16 +81,16 @@ const Reservation = () => {
       unitId: string
     }) => {
       const response = await Mabet.post<CreateBookingResponse>(
-        `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking `,
+        `/iframe-reservations/${params.first_id}/l/${params.second_id}/payment/create-booking`,
         {
           private: undefined,
           from,
           to,
-          unitId,
+          unit: unitId,
         }
       )
 
-      const booking_code = response.data.data.booking
+      const booking_code = response.data.data.booking.code
 
       const cardPayment = await Mabet.post<{
         data: {
@@ -104,7 +104,6 @@ const Reservation = () => {
           booking_code,
           private: undefined,
           payment_option: "full",
-          use_wallet: "0",
         }
       )
 
@@ -116,7 +115,7 @@ const Reservation = () => {
         notifications.show({
           title: t("generla.failer"),
           message:
-            (error.response.data as ErrorResponse).errors?.[0] || error.message,
+            (error.response.data as ErrorResponse).message || error.message,
           color: "red",
         })
       }
@@ -217,7 +216,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors?.[0]
+                ? (error.response?.data as ErrorResponse).message
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -281,7 +280,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors?.[0]
+                ? (error.response?.data as ErrorResponse).message
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -362,8 +361,8 @@ const Reservation = () => {
           {createBookingMutation.error ? (
             axios.isAxiosError(createBookingMutation.error) ? (
               <Text ta={"center"} c={"red"}>
-                {(error?.response as ErrorResponse).errors?.[0] ||
-                  error?.message}
+                {(createBookingMutation.error?.response?.data as ErrorResponse)
+                  .message || createBookingMutation.error?.message}
               </Text>
             ) : (
               <Text ta={"center"} c={"red"}>

@@ -13,6 +13,7 @@ import {
   TextInput,
 } from "@mantine/core"
 import { isEmail, useForm } from "@mantine/form"
+import { notifications } from "@mantine/notifications"
 import { File, Mail, Phone, UserIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 const ContactForm = () => {
@@ -27,7 +28,13 @@ const ContactForm = () => {
   })
   const onSubmit = form.onSubmit(async (data) => {
     try {
-      const response = await Mabeet.post("/contact-us", data)
+      await Mabeet.post("/contact-us", data)
+      form.reset()
+      notifications.show({
+        color: "green",
+        title: t("user.contact-form.success-title"),
+        message: t("user.contact-form.success-description"),
+      })
     } catch (error) {
       handleFormError(error, form)
     }

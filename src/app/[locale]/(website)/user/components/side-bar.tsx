@@ -39,27 +39,27 @@ const SideBar = (props: Props) => {
     {
       Icon: <UserRound />,
       label: t("profile"),
-      path: "/private/profile",
+      path: "/user/profile",
     },
     {
       Icon: <CalendarRange />,
       label: t("bookings"),
-      path: "/private/bookings",
+      path: "/user/bookings",
     },
     {
       Icon: <Wallet />,
       label: t("wallet"),
-      path: "/private/wallet",
+      path: "/user/wallet",
     },
     {
       Icon: <Heart />,
       label: t("favourite"),
-      path: "/private/favourite",
+      path: "/user/favourite",
     },
     {
       Icon: <Headset />,
       label: t("support"),
-      path: "/private/contact-us",
+      path: "/user/contact-us",
     },
   ]
 
