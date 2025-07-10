@@ -14,6 +14,7 @@ export interface DetailedBooking {
   heading: string[]
   can_be_cancelled: boolean
   cancellation_text: string
+  cancellation_text_html: string
   can_be_edited: boolean
   can_add_review: boolean
   payment_method: PaymentMethod

@@ -205,7 +205,7 @@ const page = async (props: Props) => {
           <div className="space-y-0.5">
             <p className="text-2xl">{t("cancel-policy")}</p>
             <ul className="list-inside list-disc ps-1">
-              <li>{booking.cancellation_text}</li>
+              <li dangerouslySetInnerHTML={{ __html: booking.cancellation_text_html }} />
             </ul>
           </div>
 
