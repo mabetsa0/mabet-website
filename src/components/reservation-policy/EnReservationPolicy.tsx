@@ -45,10 +45,10 @@ const EnReservationPolicy = () => {
           </p>
 
           <p>
-            Bookings can only be changed or cancelled by contacting Mabets
-            customer service. Where change or cancellation is subject to the
-            approval of Mabet and the host (a cancellation fee may be charged in
-            case of approval of the cancellation of the reservation).
+          Booking changes or cancellations can only be made by contacting Mabeet customer service.
+          Any change or cancellation is subject to the approval of Mabeet and the host.
+          (Cancellation fees may apply if the cancellation is approved.)
+          Refunds will only cover the booking amount and will not include service fees.
           </p>
         </div>
 
