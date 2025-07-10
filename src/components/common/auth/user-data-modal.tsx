@@ -21,6 +21,7 @@ import { Mail } from "lucide-react"
 import { useTranslations } from "next-intl"
 import ModalDrawer from "../modal-drawer"
 import { useNafath } from "@/hooks/use-nafath"
+import { Link } from "@/lib/i18n/navigation"
 const UserDataModal = () => {
   const { session, updateSession } = useSession()
   const [nafath, { onOpen: onOpenNafath }] = useNafath()
@@ -102,7 +103,14 @@ const UserDataModal = () => {
               required
               key={form.key("agree")}
               {...form.getInputProps("agree")}
-              label={t("agree-label")}
+              label={t.rich("agree-label", {
+                link1: (chunks) => (
+                  <Link href="/terms-and-conditions">{chunks}</Link>
+                ),
+                link2: (chunks) => (
+                  <Link href="/reservation-policy">{chunks}</Link>
+                ),
+              })}
             />
             <Space />
 
