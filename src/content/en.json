@@ -410,7 +410,7 @@
     "description": "We need your email to send important reservation details and notifications, and let us share the latest offers and updates.",
     "id-label": "Enter your email",
     "button": "Log in",
-    "agree-label": "I agree to the policy of conditions and conditions, and the reservation policy.\n\nThis is to ensure a safe and transparent reservation experience for all users."
+    "agree-label": "I agree to the <link1>Terms and Conditions</link1>, and the <link2>Reservation Policy</link2>.\n\nThis is to ensure a safe and transparent reservation experience for all users."
   },
   "can-not-choose-date": "Sorry, could not book",
   "can-not-choose-date-message": "Unit is not available in the selected dates, try other dates.",
