@@ -402,7 +402,9 @@
     "fail-title": "An error occurred while trying to complete the reservation",
     "fail-description": "The payment process appears to be not complete or a technical error event. \nDon't worry, no amount has been deducted.",
     "fail-sub-description": "We advise you to re -try, or communicate with customer service if the problem persists.",
-    "retry": "Return to the real estate page"
+    "retry": "Return to the real estate page",
+    "nafath-description": "To check in faster, please verify your account",
+    "nafath-button": "Verify you account"
   },
   "user-data-modal": {
     "title": "Complete your personal data",

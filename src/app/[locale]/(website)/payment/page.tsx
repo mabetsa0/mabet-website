@@ -1,9 +1,9 @@
+import VerifyButton from "@/app/[locale]/(website)/payment/components/verify-button"
 import { failPayment, successPayment } from "@/assets"
 import { Link } from "@/lib/i18n/navigation"
 import { Button, Group, Stack, Text } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 import Image from "next/image"
-import React from "react"
 
 const Page = async ({
   searchParams,
@@ -17,7 +17,7 @@ const Page = async ({
   return (
     <>
       {payment_status === "success" ? (
-        <div className="flex items-center flex-col justify-center min-h-[80vh] py-2">
+        <div className="flex items-center flex-col justify-center min-h-[80vh] py-2 px-1">
           <Image src={successPayment} alt="success payment" />
           <Stack align={"center"} justify={"center"} gap={"md"} maw={650}>
             <Text ta={"center"} className="text-h3 md:text-h2 font-bold">
@@ -29,13 +29,19 @@ const Page = async ({
             <Text ta={"center"} c={"#767676"} className="">
               {t("sub-description")}
             </Text>
-            <Group gap={"lg"}>
+            <Group justify={"center"} gap={"lg"}>
               <Button>
-                <Link href={`/user/reservations`}>{t("reservations")}</Link>
+                <Link href={`/user/bookings`}>{t("reservations")}</Link>
               </Button>
-              <Button variant="outline">
+              {/* <Button variant="outline">
                 <Link href={`/`}>{t("home")}</Link>
-              </Button>
+              </Button> */}
+            </Group>
+            <Group justify={"center"} gap={"lg"}>
+              <Text className="text-h5 md:text-h4 font-medium  ">
+                {t("nafath-description")}
+              </Text>
+              <VerifyButton />
             </Group>
           </Stack>
         </div>
