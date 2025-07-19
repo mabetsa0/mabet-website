@@ -99,6 +99,7 @@ Mabet.interceptors.request.use(
   },
   (error) => {
     // Do something with request error
+    console.log('This is errrrorrrr')
     return Promise.reject(error);
   }
 );
@@ -143,6 +144,17 @@ Mabet.interceptors.response.use(
         window.location.href = `/${locale}`;
       }
     }
+
+    // Prepare fallback message with status code
+    const statusCode = error?.response?.status ?? 'Unknown';
+    const fallbackMessage = `Request failed with status code ${statusCode}`;
+
+    // Set custom message
+    error.message =
+      error?.response?.data?.errors?.[0] ??
+      error?.response?.data?.message ??
+      fallbackMessage;
+
     return Promise.reject(error);
   }
 );
