@@ -22,16 +22,3 @@ export const useSession = create<SessionStore>((set) => ({
       isPending: false,
     }),
 }))
-
-
-interface DatePopoverState {
-  opened: boolean;
-  openPopover: () => void;
-  closePopover: () => void;
-}
-
-export const useDatePopoverStore = create<DatePopoverState>((set) => ({
-  opened: false,
-  openPopover: () => set({ opened: true }),
-  closePopover: () => set({ opened: false }),
-}));

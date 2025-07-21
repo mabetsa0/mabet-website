@@ -17,11 +17,9 @@ import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
 import { useSearchBarFormContext } from "./search-bar"
 import { useDisclosure } from "@mantine/hooks"
-import { useDatePopoverStore } from "@/lib/session-store"
 
 const DateRangePicker = () => {
-  // const [opened, { close, open }] = useDisclosure(false)
-  const { opened, openPopover } = useDatePopoverStore();
+  const [opened, { close, open }] = useDisclosure(false)
   const form = useSearchBarFormContext()
 
   const t = useTranslations("date-range-picker")
@@ -44,7 +42,7 @@ const DateRangePicker = () => {
           wrap="nowrap"
           className="w-full h-full cursor-pointer"
           onClick={() => {
-            openPopover()
+            open()
           }}
         >
           <Stack className="w-full " gap={2}>

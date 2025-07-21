@@ -1,11 +1,9 @@
 "use client"
 import { ErrorResponse } from "@/@types/error"
-import { useSession } from "@/lib/session-store"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
-import { useDisclosure } from "@mantine/hooks"
 import { useRouter } from "@/lib/i18n/navigation"
-import { useDatePopoverStore } from '@/lib/session-store';
+import { useSession } from "@/lib/session-store"
 import {
   Box,
   Button,
@@ -25,20 +23,18 @@ import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import { useNafath } from "@/hooks/use-nafath"
 const MobileCreateBookingButton = () => {
   const { isAuthenticated, session } = useSession()
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
 
-  const { opened, openPopover } = useDatePopoverStore();
-
-  const [{ from, to, private: isPrivate }] = useQueryStates(
+  const [{ from, to, private: isPrivate }, set] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(dayjs().toDate()),
       to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
       private: parseAsBoolean.withDefault(false),
+      selectDate: parseAsBoolean.withDefault(false),
     },
     {
       history: "replace",
@@ -134,78 +130,67 @@ const MobileCreateBookingButton = () => {
       ) : null}
       {status === "success" ? (
         <div>
-        <SimpleGrid mb={"xs"} cols={2}>
-          <div>
-            {prices?.discount ? (
-              <Text className="text-[#767676] text-[12px]  line-through">
-                {" "}
-                {Number(prices.sub_price)} <RiyalIcon />
-                <span className="text-[10px]">/{prices.duration_text}</span>
-              </Text>
-            ) : null}
-            <Group gap={"4"}>
-              <Title order={5} c={"#188078"}>
-                {prices?.price_plain}
-                <RiyalIcon />
-              </Title>
-              <Text className="text-[#767676] text-sm">
-                /{t("general.night")}
-              </Text>
-            </Group>
-          </div>
-          <Stack gap={4}>
-            <Group wrap="nowrap" justify="space-between">
-              <Text c={"#767676"}>
-                {t("general.from")}{" "}
-                {from ? (
+          <SimpleGrid mb={"xs"} cols={2}>
+            <div>
+              {prices?.discount ? (
+                <Text className="text-[#767676] text-[12px]  line-through">
+                  {" "}
+                  {Number(prices.sub_price)} <RiyalIcon />
+                  <span className="text-[10px]">/{prices.duration_text}</span>
+                </Text>
+              ) : null}
+              <Group gap={"4"}>
+                <Title order={5} c={"#188078"}>
+                  {prices?.price_plain}
+                  <RiyalIcon />
+                </Title>
+                <Text className="text-[#767676] text-sm">
+                  /{t("general.night")}
+                </Text>
+              </Group>
+            </div>
+            <Stack gap={4}>
+              <Group wrap="nowrap" justify="space-between">
+                <Text c={"#767676"}>
+                  {t("general.from")}{" "}
+                  {from ? (
+                    <span className=" font-bold text-primary">
+                      {dayjs(from).format("DD")}
+                    </span>
+                  ) : null}{" "}
+                  {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
                   <span className=" font-bold text-primary">
-                    {dayjs(from).format("DD")}
-                  </span>
-                ) : null}{" "}
-                {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
-                <span className=" font-bold text-primary">
-                  {to ? dayjs(to).format("DD") : null}
-                </span>{" "}
-                {to ? dayjs(to).format("/ MMMM") : null}
+                    {to ? dayjs(to).format("DD") : null}
+                  </span>{" "}
+                  {to ? dayjs(to).format("/ MMMM") : null}
+                </Text>
+              </Group>
+              <Text size="sm" fw={500}>
+                {t("unit.total")} {prices?.duration_text} {prices?.full_payment}{" "}
+                <RiyalIcon />
               </Text>
-            </Group>
-            <Text size="sm" fw={500}>
-              {t("unit.total")} {prices?.duration_text} {prices?.full_payment}{" "}
-              <RiyalIcon />
-            </Text>
-          </Stack>
-        </SimpleGrid>
-
-      <Button
-        fullWidth
-        loading={createBookingMutation.isPending}
-        onClick={handleCreateBooking}
-      >
-        {t("unit.create-booking-mobile")}
-      </Button>
-
-      </div>
-
-      ) : (
-        
-        <div>
-
-          <p className="text-red-500 text-center mb-1">التواريخ غير متاحة، برجاء تحديد تواريخ أخرى</p>
+            </Stack>
+          </SimpleGrid>
 
           <Button
             fullWidth
             loading={createBookingMutation.isPending}
+            onClick={handleCreateBooking}
+          >
+            {t("unit.create-booking-mobile")}
+          </Button>
+        </div>
+      ) : (
+        <div>
+          <Button
+            fullWidth
             onClick={() => {
-              openPopover()
+              set({ selectDate: true })
             }}
           >
-
             اختيار تواريخ اخرى
-
           </Button>
-
         </div>
-
       )}
     </Box>
   )
