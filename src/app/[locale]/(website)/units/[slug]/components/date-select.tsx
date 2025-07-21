@@ -18,26 +18,66 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { calenderIn, calenderOut } from "@/assets"
 import { cn } from "@/lib/cn"
 import { DatePicker } from "@mantine/dates"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import useBusyDays from "../hooks/use-busy-days"
 import { useUnitData } from "../context/unit-context"
 import { Minus } from "lucide-react"
 import useMdScreen from "@/hooks/use-md-screen"
+import { useSmScreen } from "@/hooks/use-sm-screen"
 import { useDisclosure } from "@mantine/hooks"
 import { notifications } from "@mantine/notifications"
 import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
+import { useDatePopoverStore } from "@/lib/session-store"
+
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
 const DateSelect = ({
   readOnly,
   initialValues,
-}: {
+  mode
+}:
+{
   readOnly?: boolean
   initialValues?: { from: Date; to: Date }
+  mode: 'mobile' | 'desktop';
 }) => {
   const unit = useUnitData()
-  const [opened, { close, open }] = useDisclosure(false)
+  
+  const [opene, { close, open }] = useDisclosure(false)
+
+  const { opened, openPopover, closePopover } = useDatePopoverStore();
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      
+      // Check if click is inside the dropdown or DatePicker popup
+      if (mode === 'mobile' && !useSmScreen()) return;
+      if (mode === 'desktop' && useSmScreen()) return;
+
+      const isInsideDropdown = (e.target as HTMLElement)?.closest('.custom-Popover-dropdown');
+      const isInsideDatePicker = (e.target as HTMLElement)?.closest('.mantine-Popover-dropdown');
+
+      if ( isInsideDropdown || isInsideDatePicker) {
+        // Clicked inside, do nothing
+        console.log('outside')
+        return;
+      }
+
+      // Clicked outside both Popover.Dropdown and DatePicker
+      closePopover();
+    };
+
+    if (opened) {
+      document.addEventListener('mousedown', handleClick);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+
+  }, [opened, closePopover]);
+
   const t = useTranslations()
 
   const [{ from, to }, setDates] = useQueryStates(
@@ -203,19 +243,27 @@ const DateSelect = ({
       </div>
       <Popover
         opened={opened}
+        trapFocus={false}
+        closeOnClickOutside={false}
         onClose={() => {
-          if (value[0] && value[1]) setDates({ from: value[0], to: value[1] })
-          else if (value[0] && !value[1]) {
+          
+
+          if (value[0] && value[1]) {
+
+            setDates({ from: value[0], to: value[1] })
+            console.log({ from: value[0], to: value[1] });
+            console.log("Mode is: " + mode);
+
+          } else if (value[0] && !value[1]) {
             setDates({
               from: value[0],
               to: dayjs(value[0]).add(1, "day").toDate(),
             })
           }
-          close()
+          closePopover()
         }}
-        onDismiss={() => {
-          close()
-        }}
+
+        // onDismiss={close}
         disabled={readOnly}
         transitionProps={{ duration: 200, transition: "pop" }}
         withArrow
@@ -224,7 +272,7 @@ const DateSelect = ({
         <Popover.Target>
           <Group
             onClick={() => {
-              open()
+              openPopover()
             }}
             wrap="nowrap"
             className="w-full h-full cursor-pointer rounded-md p-xs border-primary border-1"
@@ -270,31 +318,34 @@ const DateSelect = ({
           </Group>
         </Popover.Target>
         <Popover.Dropdown>
-          <DatePicker
-            numberOfColumns={matches ? 1 : 2}
-            hideOutsideDates
-            minDate={new Date()}
-            type="range"
-            classNames={{
-              day: " relative ",
-            }}
-            onDateChange={(date) => handleStartDateChange(new Date(date))}
-            value={value}
-            onChange={handleDateChange}
-            // excludeDate={(date) =>
-            //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
-            // }
-            renderDay={(date) => renderDay(new Date(date))}
-          />
-          <Group justify="end" mt={"sm"}>
-            <Button
-              onClick={() => {
-                close()
+          {/* <div > */}
+            <DatePicker
+              numberOfColumns={matches ? 1 : 2}
+              hideOutsideDates
+              minDate={new Date()}
+              type="range"
+              classNames={{
+                day: " relative ",
               }}
-            >
-              {t("date-range-picker.apply")}
-            </Button>
-          </Group>
+              // ref={dropdownRef}
+              
+              onDateChange={(date) => handleStartDateChange(new Date(date))}
+              value={value}
+              onChange={handleDateChange}
+              // excludeDate={(date) =>
+              //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
+              // }
+              renderDay={(date) => renderDay(new Date(date))}
+            />
+            <Group justify="end" mt={"sm"}>
+              <Button
+                onClick={() => {
+                  closePopover()
+                }}
+              >
+                {t("date-range-picker.apply")}
+              </Button>
+            </Group>
         </Popover.Dropdown>
       </Popover>
 

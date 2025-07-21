@@ -3,7 +3,9 @@ import { ErrorResponse } from "@/@types/error"
 import { useSession } from "@/lib/session-store"
 import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useDisclosure } from "@mantine/hooks"
 import { useRouter } from "@/lib/i18n/navigation"
+import { useDatePopoverStore } from '@/lib/session-store';
 import {
   Box,
   Button,
@@ -29,6 +31,9 @@ const MobileCreateBookingButton = () => {
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
+
+  const { opened, openPopover } = useDatePopoverStore();
+
   const [{ from, to, private: isPrivate }] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(dayjs().toDate()),
@@ -128,6 +133,7 @@ const MobileCreateBookingButton = () => {
         </Stack>
       ) : null}
       {status === "success" ? (
+        <div>
         <SimpleGrid mb={"xs"} cols={2}>
           <div>
             {prices?.discount ? (
@@ -169,7 +175,7 @@ const MobileCreateBookingButton = () => {
             </Text>
           </Stack>
         </SimpleGrid>
-      ) : null}
+
       <Button
         fullWidth
         loading={createBookingMutation.isPending}
@@ -177,6 +183,30 @@ const MobileCreateBookingButton = () => {
       >
         {t("unit.create-booking-mobile")}
       </Button>
+
+      </div>
+
+      ) : (
+        
+        <div>
+
+          <p className="text-red-500 text-center mb-1">التواريخ غير متاحة، برجاء تحديد تواريخ أخرى</p>
+
+          <Button
+            fullWidth
+            loading={createBookingMutation.isPending}
+            onClick={() => {
+              openPopover()
+            }}
+          >
+
+            اختيار تواريخ اخرى
+
+          </Button>
+
+        </div>
+
+      )}
     </Box>
   )
 }

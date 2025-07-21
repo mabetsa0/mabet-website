@@ -64,6 +64,8 @@ const ReservationDetails = () => {
       dates.to.toDateString(),
     ],
     queryFn: async () => {
+      console.log("Fetching availability with:", unit.slug, dates);
+
       return await GetUnitAvailability({
         id: unit.id,
         params: {
@@ -74,7 +76,7 @@ const ReservationDetails = () => {
     },
     retry: false,
     staleTime: Infinity,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false
   })
 
   const t = useTranslations()
@@ -225,7 +227,8 @@ const ReservationDetails = () => {
         pb={12}
         withBorder={!matches}
       >
-        <DateSelect />
+        <DateSelect mode="desktop" />
+
         {status === "error" && matches ? (
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
