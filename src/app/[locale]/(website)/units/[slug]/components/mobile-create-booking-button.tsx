@@ -182,14 +182,18 @@ const MobileCreateBookingButton = () => {
         </div>
       ) : (
         <div>
+
+          <p className="text-red-500 text-center mb-1">{t("unit-card.not-avalibel")}</p>
+
           <Button
             fullWidth
             onClick={() => {
               set({ selectDate: true })
             }}
           >
-            اختيار تواريخ اخرى
+            {t("change-search-dates")}
           </Button>
+
         </div>
       )}
     </Box>

@@ -547,5 +547,7 @@
       "success-title": "تم بنجاح",
       "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
-  }
+  },
+
+  "change-search-dates": "اختيار تواريخ اخرى"
 }

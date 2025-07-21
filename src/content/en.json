@@ -552,5 +552,6 @@
       "success-title": "Success",
       "success-message": "Amount has been added to your wallet successfully"
     }
-  }
+  },
+  "change-search-dates": "Choose different dates"
 }
