@@ -511,7 +511,8 @@
     "checkout": "الخروج في ",
     "checkin": "الوصول في ",
     "checkin-time": "وقت الوصول ",
-    "checkout-time": "وقت الخروج "
+    "checkout-time": "وقت الخروج ",
+    "can-edit": "يرجى اختيار تواريخ الإقامة أدناه"
   },
   "booking-page": {
     "title": "تفاصيل الحجز #{value}",

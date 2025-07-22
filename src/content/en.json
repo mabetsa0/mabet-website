@@ -515,7 +515,8 @@
     "checkout": "Leaving Date ",
     "checkin": "Arriving Date ",
     "checkin-time": "Checking‑In ",
-    "checkout-time": "Checking‑Out "
+    "checkout-time": "Checking‑Out ",
+    "can-edit": "Please choose your stay dates below"
   },
   "booking-page": {
     "title": "Reservation details #{value}",

@@ -126,7 +126,7 @@ const DateSelect = ({
       <div>
         {readOnly ? null : (
           <Text mb={"xs"} c="#767676">
-            {t("date-range-picker.can-edit")}
+            {t("iframe-labels.can-edit")}
           </Text>
         )}
         <Group justify="space-between">

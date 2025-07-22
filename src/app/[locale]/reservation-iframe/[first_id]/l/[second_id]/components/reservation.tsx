@@ -271,7 +271,7 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]  px-1 md:px-[24px] pt-[24px]"
+        className="border-[#F3F3F3] px-1 md:px-[24px] pt-[2px]"
         pb={12}
         withBorder={true}
       >
