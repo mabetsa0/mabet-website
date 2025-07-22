@@ -184,7 +184,7 @@
     "check-in": "Check in",
     "select-date": "Select Date",
     "daily": "Daily",
-    "weekly": "weekly",
+    "weekly": "Weekly",
     "monthly": "Monthly",
     "can-edit": "You can modify dates completely freely",
     "apply": "Apply"
@@ -512,8 +512,8 @@
     "compelet-payment": "Complete payment"
   },
   "iframe-labels": {
-    "checkout": "Arriving Date ",
-    "checkin": "Leaving Date ",
+    "checkout": "Leaving Date ",
+    "checkin": "Arriving Date ",
     "checkin-time": "Checking‑In ",
     "checkout-time": "Checking‑Out "
   },
