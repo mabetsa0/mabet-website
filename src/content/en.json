@@ -416,7 +416,7 @@
   },
   "can-not-choose-date": "Sorry, could not book",
   "can-not-choose-date-message": "Unit is not available in the selected dates, try other dates.",
-  "verify-account-for-safe-reservation": "Verify your account vy Nafath for a safe reservation",
+  "verify-account-for-safe-reservation": "Verify your account by Nafath",
   "user": {
     "bookings_count": "Number of reservations",
     "wallet-balance": "Wallet balance",
@@ -510,6 +510,12 @@
     "arrival_instructions": "Arrival Instructions",
     "arrival_instructions-description": "Please follow the arrival instructions to ensure the highest quality reservation.",
     "compelet-payment": "Complete payment"
+  },
+  "iframe-labels": {
+    "checkout": "Arriving Date ",
+    "checkin": "Leaving Date ",
+    "checkin-time": "Checking‑In ",
+    "checkout-time": "Checking‑Out "
   },
   "booking-page": {
     "title": "Reservation details #{value}",

@@ -207,7 +207,7 @@ const DateSelect = ({
               <Group gap={4}>
                 <img alt="icon" src={calenderIn.src} />
                 <Text c="#767676" className="text-sm">
-                  {t("date-range-picker.check-in")}
+                  {t("iframe-labels.checkin")}
                 </Text>
               </Group>
               <Group
@@ -227,7 +227,7 @@ const DateSelect = ({
                 <img alt="icon" src={calenderOut.src} />
 
                 <Text c="#767676" className="text-sm">
-                  {t("date-range-picker.check-out")}
+                  {t("iframe-labels.checkout")}
                 </Text>
               </Group>
               <Group
@@ -276,7 +276,7 @@ const DateSelect = ({
         <Stack className="w-full " gap={0}>
           <Group gap={4}>
             <img alt="icon" src={calenderIn.src} />
-            <Text className="text-sm">{t("date-range-picker.check-in")}</Text>
+            <Text className="text-sm">{t("iframe-labels.checkin-time")}</Text>
           </Group>
           <Group
             className={cn(
@@ -292,7 +292,7 @@ const DateSelect = ({
           <Group gap={4}>
             <img alt="icon" src={calenderOut.src} />
 
-            <Text className="text-sm">{t("date-range-picker.check-out")}</Text>
+            <Text className="text-sm">{t("iframe-labels.checkout-time")}</Text>
           </Group>
           <Group
             className={cn(

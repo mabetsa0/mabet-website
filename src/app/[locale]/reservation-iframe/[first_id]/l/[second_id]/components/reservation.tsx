@@ -154,7 +154,7 @@ const Reservation = () => {
           pb={12}
           withBorder
         >
-          <h3 className="text-h3 font-bold">
+          <h3 className="text-h5 font-bold">
             {t("unit.reservation-details.title")}
           </h3>
         </Card.Section>
@@ -189,21 +189,21 @@ const Reservation = () => {
         pb={12}
         withBorder={true}
       >
-        <Group justify="space-between" wrap="nowrap">
-          <h3 className="text-h4 md:text-h3  font-bold">
+        <Group justify="space-between" align="center" wrap="nowrap">
+          <h4 className="text-h5 md:text-h5 font-bold m-0">
             {t("unit.reservation-details.title")}
-          </h3>
-          {!isNafathVerified ? (
+          </h4>
+          {!isNafathVerified && (
             <Button
               size="xs"
               variant="light"
-              onClick={() => {
-                onOpen()
-              }}
+              className="whitespace-nowrap"
+              style={{ flexShrink: 0 }}
+              onClick={onOpen}
             >
               {t("verify-account-for-safe-reservation")}
             </Button>
-          ) : null}
+          )}
         </Group>
       </Card.Section>
 

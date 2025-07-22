@@ -507,6 +507,12 @@
     "arrival_instructions": "تعليمات الوصول",
     "arrival_instructions-description": "يرجى اتباع تعلميات الوصول لضمان الحصول على اعلى جودة حجز           "
   },
+  "iframe-labels": {
+    "checkout": "الخروج في ",
+    "checkin": "الوصول في ",
+    "checkin-time": "وقت الوصول ",
+    "checkout-time": "وقت الخروج "
+  },
   "booking-page": {
     "title": "تفاصيل الحجز #{value}",
     "description": "يمكنك مراجعة تفاصيل الحجز من هنا",
