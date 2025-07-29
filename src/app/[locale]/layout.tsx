@@ -13,6 +13,7 @@ import MyMantineProvider from "../mantine-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
 import { getServerSession } from "@/lib/get-server-session"
+
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],

@@ -171,7 +171,8 @@
     "working-time": "من 09:30 صباحاً إلى 01:00 ليلاً",
     "min_stay_warning": "تحذير الحد الادنى للاقامة",
     "nights": "ليلة",
-    "date_extended_to": "تم تمديد الحجز حتى "
+    "date_extended_to": "تم تمديد الحجز حتى ",
+    "goToBookings": "عرض الحجوزات"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -555,6 +556,5 @@
       "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
   },
-
   "change-search-dates": "اختيار تواريخ اخرى"
 }
