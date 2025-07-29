@@ -3,6 +3,7 @@ import { FullUnitData } from "../@types"
 import Mabet from "@/services"
 import { List, ListItem, SimpleGrid, Space, Stack } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
+import parse from 'html-react-parser';
 
 const UnitConditions = async (unit: FullUnitData) => {
   const terms = (
@@ -41,10 +42,8 @@ const UnitConditions = async (unit: FullUnitData) => {
           <h5 className="text-h4 md:text-h5 font-medium">
             {t("unit.cancellation_policy")}
           </h5>
-          <List type="ordered" className="text-[#767676] list-decimal">
-            {Object.values(unit.cancellation_policy).map((ele, index) => {
-              return <ListItem key={index}>{ele}</ListItem>
-            })}
+          <List type="ordered" className="text-[#767676] list-none">
+            <ListItem key="unit.cancellation_policy.title">{parse(unit.cancellation_policy.title_html)}</ListItem>
           </List>
         </Stack>
       </SimpleGrid>

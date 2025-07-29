@@ -64,7 +64,9 @@ export interface FullUnitData {
 
 export interface CancellationPolicy {
   title: string
-  description: string
+  description: string,
+  title_html: string
+  description_html: string,
 }
 
 export interface Counts {
