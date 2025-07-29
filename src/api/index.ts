@@ -7,12 +7,11 @@ import axios from "axios"
 import { getLocale } from "next-intl/server"
 import { redirect } from "next/navigation"
 
-// const baseURL =
-//   process.env.NEXT_PUBLIC_TEST === "test"
-//     ? "https://mabet.dev/api/v2"
-//     : "https://app.mabet.com.sa/api/v2"
-
-const baseURL = "http://mabeet.test/api/v2"
+const baseURL =
+  process.env.NEXT_PUBLIC_TEST === "test"
+    ? "https://mabet.dev/api/v2"
+    : "https://app.mabet.com.sa/api/v2"
+// const baseURL = "https://mabet.dev/api/v2"
 
 const Mabeet = axios.create({
   baseURL: baseURL,
