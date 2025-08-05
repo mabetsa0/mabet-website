@@ -46,6 +46,7 @@ Mabeet.interceptors.request.use(
         const value = JSON.parse(bayut)
         if (new Date(value.date) < new Date()) {
           if (value.source) config.headers["source"] = value.source
+          if (value.source) config.headers["X-Source-App"] = value.source
           if (value.utm_phone_number)
             config.headers["utm_phone_number"] = value.utm_phone_number
         }
