@@ -32,7 +32,7 @@ import { useParams } from "next/navigation"
 import { useDate } from "../stores/use-date"
 import { useNafath } from "../stores/use-nafath"
 import DateSelect from "./date-select"
-import { CreateBookingResponse } from "@/types/create-booking-response"
+import { CreateBookingResponse } from "@/@types/create-booking-response"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }

@@ -1,4 +1,4 @@
 export type ErrorResponse = {
-  message: string
-  errors?: string[]
+  message: null | string
+  errors: string[]
 }
