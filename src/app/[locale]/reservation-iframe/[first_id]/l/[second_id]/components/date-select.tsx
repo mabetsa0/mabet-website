@@ -190,6 +190,7 @@ const DateSelect = ({
         onDismiss={() => {
           close()
         }}
+        position="bottom"
         disabled={readOnly}
         transitionProps={{ duration: 200, transition: "pop" }}
         withArrow
