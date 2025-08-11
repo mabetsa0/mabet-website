@@ -14,7 +14,7 @@ function MyGoogleMapComponent({ lat, lng }: { lat: number; lng: number }) {
   const center = useMemo(() => ({ lat, lng }), [lat, lng])
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBicgse6EO9mo2c-_rE4rW7_xe2FcgewhQ",
+    googleMapsApiKey: "AIzaSyBg-ick3BgA97MfR3EDax7psToQ8lK77Dg",
   })
   const t = useTranslations()
 
