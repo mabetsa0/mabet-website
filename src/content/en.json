@@ -517,7 +517,7 @@
     "checkin": "Arriving Date ",
     "checkin-time": "Checking‑In ",
     "checkout-time": "Checking‑Out ",
-    "can-edit": "Please choose the dates of the above"
+    "can-edit": "Please choose the accommodation dates below"
   },
   "booking-page": {
     "title": "Reservation details #{value}",

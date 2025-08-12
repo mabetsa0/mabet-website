@@ -165,7 +165,7 @@ const Reservation = () => {
       </Card>
     )
   return (
-    <Card className="!pb-5 " p={"md"} withBorder={false}>
+    <Card className="!pb-6 " p={"md"} withBorder={false}>
       <Card.Section
         withBorder
         className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px]"}
