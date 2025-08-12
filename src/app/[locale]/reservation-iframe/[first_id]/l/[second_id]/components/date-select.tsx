@@ -124,33 +124,6 @@ const DateSelect = ({
   return (
     <Stack>
       <div>
-        {readOnly ? null : (
-          <Text mb={"xs"} c="#767676">
-            {t("iframe-labels.can-edit")}
-          </Text>
-        )}
-        <Group justify="space-between">
-          <Text c={"#767676"}>
-            {t("general.from")}{" "}
-            {value[0] ? (
-              <span className=" font-bold text-primary">
-                {dayjs(value[0]).format("DD")}
-              </span>
-            ) : null}{" "}
-            {value[0] ? dayjs(value[0]).format("/ MMMM") : ""} -{" "}
-            <span className=" font-bold text-primary">
-              {value[1] ? dayjs(value[1]).format("DD") : null}
-            </span>{" "}
-            {value[1] ? dayjs(value[1]).format("/ MMMM") : null}
-          </Text>
-          {value[0] && value[1] ? (
-            <Text c={"primary"}>
-              ({dayjs.duration(duration, "day").locale(locale).humanize()})
-            </Text>
-          ) : null}
-        </Group>
-      </div>
-      <div>
         <SegmentedControl
           size="sm"
           value={
@@ -253,6 +226,7 @@ const DateSelect = ({
             classNames={{
               day: " relative ",
             }}
+            size="sm"
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
             onChange={handleDateChange}
@@ -272,6 +246,33 @@ const DateSelect = ({
           </Group>
         </Popover.Dropdown>
       </Popover>
+      <div>
+        {readOnly ? null : (
+          <Text mb={"xs"} c="#767676">
+            {t("iframe-labels.can-edit")}
+          </Text>
+        )}
+        <Group justify="space-between">
+          <Text c={"#767676"}>
+            {t("general.from")}{" "}
+            {value[0] ? (
+              <span className=" font-bold text-primary">
+                {dayjs(value[0]).format("DD")}
+              </span>
+            ) : null}{" "}
+            {value[0] ? dayjs(value[0]).format("/ MMMM") : ""} -{" "}
+            <span className=" font-bold text-primary">
+              {value[1] ? dayjs(value[1]).format("DD") : null}
+            </span>{" "}
+            {value[1] ? dayjs(value[1]).format("/ MMMM") : null}
+          </Text>
+          {value[0] && value[1] ? (
+            <Text c={"primary"}>
+              ({dayjs.duration(duration, "day").locale(locale).humanize()})
+            </Text>
+          ) : null}
+        </Group>
+      </div>
 
       <Group wrap="nowrap" className="w-full h-full cursor-pointer  p-xs ">
         <Stack className="w-full " gap={0}>
