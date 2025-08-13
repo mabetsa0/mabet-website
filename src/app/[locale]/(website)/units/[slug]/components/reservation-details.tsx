@@ -218,6 +218,7 @@ const ReservationDetails = () => {
                 />
               </Badge>
             ) : null}
+
           </Group>
         )}
       </Card.Section>
@@ -277,6 +278,24 @@ const ReservationDetails = () => {
                 </Text>
               </SimpleGrid>
             ) : null}
+
+          {Array.isArray(prices?.additionals) &&
+          (prices.additionals as { label: string; value: string; color?: string }[])
+            .filter(a => a?.value && String(a.value).trim() !== "")
+            .map((a, i) => {
+              const color = a.color || "#E8123D";
+              return (
+                <SimpleGrid key={i} cols={2}>
+                  <Group gap={3}>
+                    <Text fw={500}>{a.label}</Text>
+                  </Group>
+
+                  <Text ta="end" style={{ color }}>
+                    - {a.value} <RiyalIcon />
+                  </Text>
+                </SimpleGrid>
+              );
+            })}
             <SimpleGrid cols={2}>
               <Text>{t("general.customer-fees")}</Text>
 

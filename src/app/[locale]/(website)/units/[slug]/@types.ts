@@ -183,7 +183,7 @@ export interface Prices {
   additional_receipt_params: unknown[]
   saved_text: string
   additional_amount: string
-  additionals: unknown[]
+  // additionals: unknown[]
   discount_amount: null
   discount_amount_text: null
   discount_percent_text: null
@@ -195,7 +195,12 @@ export interface Prices {
   marketing_profit_percent: number
   show_down_payment: boolean
   sub_price: string
-  sub_price_text: string
+  sub_price_text: string,
+  additionals: {
+    label: string;
+    value: string;
+    color?: string;
+  }[];
 }
 
 export interface BusyDaysResponse {
