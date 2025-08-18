@@ -20,6 +20,8 @@ import TrackBayut from "@/components/track-bayut"
 import DataLayer from "@/components/data-layer"
 import { SEO } from "@/services/get-seo"
 import Footer from "@/components/common/footer"
+import MapWrapper from "@/components/map-wrapper"
+
 const ReservationDetails = dynamicImport(
   () => import("./components/reservation-details")
 )
@@ -29,7 +31,7 @@ const VideoSlider = dynamicImport(async () => {
 const ImageSlider = dynamicImport(async () => {
   return import("./components/image-slider")
 })
-const MyGoogleMap = dynamicImport(async () => import("./components/google-map"))
+// const MyGoogleMap = dynamicImport(async () => import("./components/google-map"))
 
 type Props = {
   params: Promise<{
@@ -87,12 +89,10 @@ const page = async (props: Props) => {
                 <Reviews />
               </TabConditionRender>
               <TabConditionRender tab="Map">
-                <Suspense fallback={<Loader />}>
-                  <MyGoogleMap
-                    lat={+atob(atob(unit.mla))}
-                    lng={+atob(atob(unit.mlg))}
-                  />
-                </Suspense>
+                <MapWrapper
+                  lat={+atob(atob(unit.mla))}
+                  lng={+atob(atob(unit.mlg))}
+                />
               </TabConditionRender>
               <TabConditionRender tab="Terms">
                 <UnitConditions {...unit} />
