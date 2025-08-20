@@ -11,22 +11,13 @@ const containerStyle = {
 }
 
 function MyGoogleMapComponent({ lat, lng }: { lat: number; lng: number }) {
-
-  const [isBrowser, setIsBrowser] = useState(false)
-
-  useEffect(() => {
-    setIsBrowser(typeof window !== "undefined")
-  }, [])
-
   const center = useMemo(() => ({ lat, lng }), [lat, lng])
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBg-ick3BgA97MfR3EDax7psToQ8lK77Dg",
-    libraries: ["places"], // explicitly set libraries
+    // libraries: ["places"], // explicitly set libraries
   })
   const t = useTranslations()
-
-  if (!isBrowser) return null // avoid SSR issues
 
   return (
     <div className="container">

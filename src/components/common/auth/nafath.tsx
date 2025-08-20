@@ -179,6 +179,7 @@ const NafathModal = () => {
                   hideControls
                   placeholder="1234567890"
                   variant="unstyled"
+                  inputMode="numeric"
                   error={
                     axios.isAxiosError(error)
                       ? (error.response?.data as any).message

@@ -146,23 +146,9 @@ const Reservation = () => {
 
   if (status === "pending")
     return (
-      <Card padding="md" radius="md" withBorder={false}>
-        <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
-          pt={24}
-          pb={12}
-          withBorder
-        >
-          <h3 className="text-h5 font-bold">
-            {t("unit.reservation-details.title")}
-          </h3>
-        </Card.Section>
-
-        <Stack align="center" justify="center" h={320}>
-          <Loader />
-        </Stack>
-      </Card>
+      <Stack align="center" justify="center" h="100%">
+        <Loader />
+      </Stack>
     )
   return (
     <Card className="!pb-6 " p={"md"} withBorder={false}>
