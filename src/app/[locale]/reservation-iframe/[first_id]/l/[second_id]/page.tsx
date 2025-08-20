@@ -40,7 +40,7 @@ const page = async (props: Props) => {
     )
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.status === 404) {
-      notFound()
+      return <div>INVALID REQUEST</div>
     }
     return <div>ERROR</div>
   }
