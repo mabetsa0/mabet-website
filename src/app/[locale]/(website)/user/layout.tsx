@@ -18,9 +18,9 @@ export default async function Layout({
   children,
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: "ar" | "en" }>
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params
+  const { locale } = (await params) as { locale: "ar" | "en" }
   const session = await getServerSession()
 
   if (!session) return redirect({ href: { pathname: "/" }, locale })
