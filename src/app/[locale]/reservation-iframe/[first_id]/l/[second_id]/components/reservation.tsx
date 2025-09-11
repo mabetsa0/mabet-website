@@ -115,7 +115,7 @@ const Reservation = () => {
         notifications.show({
           title: t("generla.failer"),
           message:
-            (error.response.data as ErrorResponse).message || error.message,
+            (error.response.data as ErrorResponse).errors[0] || error.message,
           color: "red",
         })
       }
@@ -146,23 +146,9 @@ const Reservation = () => {
 
   if (status === "pending")
     return (
-      <Card padding="md" radius="md" withBorder={false}>
-        <Card.Section
-          className="border-[#F3F3F3]"
-          px={24}
-          pt={24}
-          pb={12}
-          withBorder
-        >
-          <h3 className="text-h5 font-bold">
-            {t("unit.reservation-details.title")}
-          </h3>
-        </Card.Section>
-
-        <Stack align="center" justify="center" h={320}>
-          <Loader />
-        </Stack>
-      </Card>
+      <Stack align="center" justify="center" h="100%">
+        <Loader />
+      </Stack>
     )
   return (
     <Card className="!pb-6 " p={"md"} withBorder={false}>
@@ -216,7 +202,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).message
+                ? (error.response?.data as ErrorResponse).errors[0]
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -280,7 +266,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).message
+                ? (error.response?.data as ErrorResponse).errors[0]
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -362,7 +348,7 @@ const Reservation = () => {
             axios.isAxiosError(createBookingMutation.error) ? (
               <Text ta={"center"} c={"red"}>
                 {(createBookingMutation.error?.response?.data as ErrorResponse)
-                  .message || createBookingMutation.error?.message}
+                  .errors[0] || createBookingMutation.error?.message}
               </Text>
             ) : (
               <Text ta={"center"} c={"red"}>

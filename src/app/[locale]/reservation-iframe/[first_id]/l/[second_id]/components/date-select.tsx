@@ -27,6 +27,7 @@ import { useDisclosure } from "@mantine/hooks"
 import { notifications } from "@mantine/notifications"
 import { Minus } from "lucide-react"
 import { useDate } from "../stores/use-date"
+
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 
@@ -99,21 +100,39 @@ const DateSelect = ({
       return
     }
 
-    const hasFeatured = featuredDates.find(
-      (e) => e.date === dayjs(values[1]).format("YYYY-MM-DD")
-    )
-    if (values[1] && hasFeatured) {
-      notifications.show({
-        color: "orange",
-        title: t("general.warning"),
-        message: hasFeatured.message + ` (${hasFeatured.date})`,
-      })
-      setValue([
-        new Date(values[0]!),
-        dayjs(values[1]!).add(hasFeatured.min_stay, "day").toDate(),
-      ])
+    const start = dayjs(values[0])
+    const end = dayjs(values[1])
+    const duration = end.diff(start, "day")
 
-      return
+    // اجمع الأيام داخل الفترة
+    const daysInRange: string[] = []
+    for (let i = 0; i <= duration; i++) {
+      daysInRange.push(start.add(i, "day").format("YYYY-MM-DD"))
+    }
+
+    // تحقق من الأيام المميزة داخل الفترة
+    const matchedFeatured = featuredDates.filter((f) =>
+      daysInRange.includes(f.date)
+    )
+
+    if (matchedFeatured.length > 0) {
+      const maxMinStay = Math.max(...matchedFeatured.map((f) => f.min_stay))
+
+      if (duration < maxMinStay) {
+        const newEndDate = start.add(maxMinStay, "day").toDate()
+
+        notifications.show({
+          color: "orange",
+          title: t("general.warning"),
+          message:
+            `${t("general.min_stay_warning")}: ${maxMinStay} ${t("general.nights")}. ` +
+            t("general.date_extended_to") +
+            dayjs(newEndDate).format("YYYY-MM-DD"),
+        })
+
+        setValue([start.toDate(), newEndDate])
+        return
+      }
     }
 
     setValue([
