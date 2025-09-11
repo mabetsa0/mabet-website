@@ -199,7 +199,11 @@
     "terms-and-conditions": "Terms and Conditions",
     "privacy-policy": "Privacy Policy",
     "reservation-policy": "Reservation",
-    "rights": "All rights reserved to Mabet ©{value}"
+    "rights": "All rights reserved to Mabet ©{value}",
+    "license_info_title": "License Information",
+    "license_number": "License No.: 7310404",
+    "license_category": "Category: Hospitality Unit Booking Services",
+    "license_cr": "CR No.: 4030500549"
   },
   "brows-in-arabic": "تصفح بالعربية",
   "brows-in-english": "Brows in English",

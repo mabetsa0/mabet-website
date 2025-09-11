@@ -199,7 +199,11 @@
     "terms-and-conditions": "الشروط والأحكام",
     "privacy-policy": "سياسة الخصوصية",
     "reservation-policy": "سياسة الحجز",
-    "rights": "جميع الحقوق محفوظة لمبيت ©{value}"
+    "rights": "جميع الحقوق محفوظة لمبيت ©{value}",
+    "license_info_title": "معلومات الترخيص",
+    "license_number": "الترخيص رقم : 7310404",
+    "license_category": "الفئة : خدمات حجز وحدات الضيافة",
+    "license_cr": "سجل تجاري رقم : 4030500549 "
   },
   "brows-in-arabic": "تصفح بالعربية",
   "brows-in-english": "Brows in English",
