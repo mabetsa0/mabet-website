@@ -1,4 +1,5 @@
 import GlobalDataContextProvider from "@/context/global-data-context"
+import { getServerSession } from "@/lib/get-server-session"
 import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
 import { getCities, getUnitTypes } from "@/services/lists"
@@ -12,7 +13,7 @@ import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
-import { getServerSession } from "@/lib/get-server-session"
+import { TestTube2 } from "lucide-react"
 
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -59,6 +60,9 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider>
                   <InitSession initialValue={session} />
                   {children}
+                 {process.env.NEXT_PUBLIC_TEST == "true" && <div className="fixed bottom-4 right-1 p-0.5 bg-gray-200 rounded-full z-10">
+                      <TestTube2 className="text-primary"/>
+                  </div>}
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

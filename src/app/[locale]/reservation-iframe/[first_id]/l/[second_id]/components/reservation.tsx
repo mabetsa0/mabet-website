@@ -23,7 +23,7 @@ import {
   Title,
 } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
@@ -33,9 +33,12 @@ import { useDate } from "../stores/use-date"
 import { useNafath } from "../stores/use-nafath"
 import DateSelect from "./date-select"
 import { CreateBookingResponse } from "@/@types/create-booking-response"
+import { useState } from "react"
+import Coupon from "./coupon"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }
+  const [coupon, setCoupon] = useState("")
   const dates = useDate((state) => state.dates)
   const { onOpen } = useNafath()
   const unit = useUnitData()
@@ -43,6 +46,7 @@ const Reservation = () => {
   const {
     data: prices,
     status,
+    isFetching,
     error,
   } = useQuery({
     queryKey: [
@@ -50,6 +54,7 @@ const Reservation = () => {
       unit.slug,
       dates.from?.toISOString() ?? dayjs().toDate().toISOString(),
       dates.to?.toISOString() ?? dayjs().add(1, "days").toDate().toISOString(),
+      coupon,
     ],
     queryFn: async () => {
       return await GetUnitAvailability({
@@ -57,12 +62,14 @@ const Reservation = () => {
         params: {
           from: dayjs(dates.from).format("YYYY-MM-DD"),
           to: dayjs(dates.to).format("YYYY-MM-DD"),
+          coupon,
         },
       })
     },
     retry: false,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
+    placeholderData: keepPreviousData,
   })
 
   const t = useTranslations()
@@ -87,6 +94,7 @@ const Reservation = () => {
           from,
           to,
           unit: unitId,
+          coupon,
         }
       )
 
@@ -104,6 +112,7 @@ const Reservation = () => {
           booking_code,
           private: undefined,
           payment_option: "full",
+          coupon,
         }
       )
 
@@ -146,7 +155,7 @@ const Reservation = () => {
 
   if (status === "pending")
     return (
-      <Stack align="center" justify="center" h="100%">
+      <Stack align="center" justify="center" h="350px">
         <Loader />
       </Stack>
     )
@@ -333,16 +342,28 @@ const Reservation = () => {
             <Space />
 
             <Button
-              loading={createBookingMutation.isPending}
+              loading={createBookingMutation.isPending || isFetching}
               onClick={handleCreateBooking}
             >
-              {t("unit.create-booking", { value: prices.full_payment })}
+              {t("unit.create-booking", {
+                value: isFetching ? 0 : prices.full_payment,
+              })}
               <RiyalIcon />
             </Button>
             {/* <Text c={"#767676"} ta={"center"}>
               {t("unit.down-payment")} {Number(prices.down_payment)?.toFixed(2)}{" "}
               <RiyalIcon />{" "}
             </Text> */}
+            <Coupon
+              error={
+                prices.coupon
+                  ? Number(prices.discount_amount) > 0
+                    ? null
+                    : t("unit.invalid-coupon")
+                  : null
+              }
+              setCoupon={setCoupon}
+            />
           </Stack>
           {createBookingMutation.error ? (
             axios.isAxiosError(createBookingMutation.error) ? (

@@ -82,7 +82,7 @@ const UserButton = () => {
             </ActionIcon>
           ) : (
             <Button variant="light" rightSection={<ChevronDown />}>
-              {session?.user?.name || session?.user.phonenumber}
+              {session?.user?.name || session?.user?.phonenumber}
             </Button>
           )}
         </Menu.Target>
