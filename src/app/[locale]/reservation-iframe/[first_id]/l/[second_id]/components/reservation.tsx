@@ -138,6 +138,7 @@ const Reservation = () => {
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
       unitId: unit.id + "",
+
     })
   }
 
@@ -221,7 +222,7 @@ const Reservation = () => {
               {prices?.discount ? (
                 <Text className="text-[#767676] text-[12px]  line-through">
                   {" "}
-                  {Number(prices.sub_price)} <RiyalIcon />
+                  {Number(prices.price_before_plain)} <RiyalIcon />
                   <span className="text-[10px]">/{prices.duration_text}</span>
                 </Text>
               ) : null}
