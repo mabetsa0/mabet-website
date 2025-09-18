@@ -236,7 +236,7 @@ const Reservation = () => {
                 </Text>
               </Group>
             </div>
-            {prices?.discount ? (
+            {/* {prices?.discount ? (
               <Badge
                 h={40}
                 className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
@@ -261,7 +261,7 @@ const Reservation = () => {
                   className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
                 />
               </Badge>
-            ) : null}
+            ) : null} */}
           </Group>
         )}
       </Card.Section>
