@@ -138,7 +138,6 @@ const Reservation = () => {
       from: dayjs(dates.from).format("YYYY-MM-DD"),
       to: dayjs(dates.to).format("YYYY-MM-DD"),
       unitId: unit.id + "",
-
     })
   }
 
@@ -282,6 +281,16 @@ const Reservation = () => {
           </Stack>
         ) : null}
       </Card.Section>
+      <Coupon
+        error={
+          prices?.coupon
+            ? Number(prices?.discount_amount) > 0
+              ? null
+              : t("unit.invalid-coupon")
+            : null
+        }
+        setCoupon={setCoupon}
+      />
 
       {prices ? (
         <Card.Section
@@ -296,11 +305,11 @@ const Reservation = () => {
                 {prices.duration_text}{" "}
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
-                  {prices.price_plain} <RiyalIcon />
+                  {prices.discount ? prices.price_before_plain : prices.price_plain} <RiyalIcon />
                 </Text>
               </Group>
               <Text ta="end" c="#767676">
-                <span className="text-primary">{prices.total_plain}</span>
+                <span className="text-primary">{prices.total_before_plain}</span>
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -309,9 +318,9 @@ const Reservation = () => {
               <SimpleGrid cols={2}>
                 <Group gap={3}>
                   <Text fw={500}>{t("general.discount")}</Text>
-                  <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                  {/* <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
                     {prices.discount_percent_text}%
-                  </div>
+                  </div> */}
                 </Group>
 
                 <Text ta="end" c="red">
@@ -340,7 +349,6 @@ const Reservation = () => {
               </Text>
             </SimpleGrid>
             <Space />
-            <Space />
 
             <Button
               loading={createBookingMutation.isPending || isFetching}
@@ -355,16 +363,6 @@ const Reservation = () => {
               {t("unit.down-payment")} {Number(prices.down_payment)?.toFixed(2)}{" "}
               <RiyalIcon />{" "}
             </Text> */}
-            <Coupon
-              error={
-                prices.coupon
-                  ? Number(prices.discount_amount) > 0
-                    ? null
-                    : t("unit.invalid-coupon")
-                  : null
-              }
-              setCoupon={setCoupon}
-            />
           </Stack>
           {createBookingMutation.error ? (
             axios.isAxiosError(createBookingMutation.error) ? (
