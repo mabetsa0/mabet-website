@@ -21,7 +21,7 @@ import DataLayer from "@/components/data-layer"
 import { SEO } from "@/services/get-seo"
 import Footer from "@/components/common/footer"
 import MapWrapper from "@/components/map-wrapper"
-import TrackPrivate from "./components/private-links"
+import TrackPrivate from "./components/track-private-links"
 
 const ReservationDetails = dynamicImport(
   () => import("./components/reservation-details")
