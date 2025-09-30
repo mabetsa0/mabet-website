@@ -63,6 +63,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
     private: parseAsBoolean.withDefault(false),
   })
   const isPrivate = useIsPrivate()
+  console.log("🚀 ~ ReservationDetails ~ isPrivate:", isPrivate)
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
   const params = useParams() as { booking_code: string }

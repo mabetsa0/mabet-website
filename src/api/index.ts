@@ -8,7 +8,7 @@ import { getLocale } from "next-intl/server"
 import { redirect } from "next/navigation"
 
 const baseURL =
-    process.env.NEXT_PUBLIC_TEST == "true"
+  process.env.NEXT_PUBLIC_TEST == "true"
     ? "https://mabet.dev/api/v2"
     : "https://app.mabet.com.sa/api/v2"
 // const baseURL = "https://mabet.dev/api/v2"
@@ -44,7 +44,7 @@ Mabeet.interceptors.request.use(
       const bayut = window.localStorage.getItem(BAYUT_KEY)
       if (bayut) {
         const value = JSON.parse(bayut)
-        if (new Date(value.date) < new Date()) {
+        if (new Date(value.date) > new Date()) {
           if (value.source) config.headers["source"] = value.source
           if (value.source) config.headers["X-Source-App"] = value.source
           if (value.utm_phone_number)
