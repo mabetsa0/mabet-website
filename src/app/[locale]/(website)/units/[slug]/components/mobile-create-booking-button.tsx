@@ -23,23 +23,24 @@ import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
+import { useIsPrivate } from "../hooks/use-is-private"
 const MobileCreateBookingButton = () => {
   const { isAuthenticated, session } = useSession()
   const t = useTranslations()
   const unit = useUnitData()
   const auth = useAuthModal()
 
-  const [{ from, to, private: isPrivate }, set] = useQueryStates(
+  const [{ from, to }, set] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(dayjs().toDate()),
       to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-      private: parseAsBoolean.withDefault(false),
       selectDate: parseAsBoolean.withDefault(false),
     },
     {
       history: "replace",
     }
   )
+  const isPrivate = useIsPrivate()
   // handle create booking
   const Router = useRouter()
   const createBookingMutation = useMutation({
@@ -182,8 +183,9 @@ const MobileCreateBookingButton = () => {
         </div>
       ) : (
         <div>
-
-          <p className="text-red-500 text-center mb-1">{t("unit-card.not-avalibel")}</p>
+          <p className="text-red-500 text-center mb-1">
+            {t("unit-card.not-avalibel")}
+          </p>
 
           <Button
             fullWidth
@@ -193,7 +195,6 @@ const MobileCreateBookingButton = () => {
           >
             {t("change-search-dates")}
           </Button>
-
         </div>
       )}
     </Box>

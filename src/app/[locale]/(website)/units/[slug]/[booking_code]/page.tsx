@@ -11,9 +11,10 @@ import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
+import { parseAsString, useQueryStates } from "nuqs"
 import { use, useEffect } from "react"
 import ImageGallery from "../components/image-gallery"
+import { useIsPrivate } from "../hooks/use-is-private"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
@@ -31,11 +32,11 @@ type Props = {
 const Page = (props: Props) => {
   const params = use(props.params)
   const { isAuthenticated } = useSession()
-  const [{ method, private: isPrivate, coupon }] = useQueryStates({
+  const [{ method, coupon }] = useQueryStates({
     method: parseAsString.withDefault("card"),
-    private: parseAsBoolean.withDefault(false),
     coupon: parseAsString.withDefault(""),
   })
+  const isPrivate = useIsPrivate()
   const { data, status } = useQuery({
     enabled: isAuthenticated,
     queryKey: [params.booking_code, method, coupon],

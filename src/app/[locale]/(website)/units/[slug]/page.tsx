@@ -21,6 +21,7 @@ import DataLayer from "@/components/data-layer"
 import { SEO } from "@/services/get-seo"
 import Footer from "@/components/common/footer"
 import MapWrapper from "@/components/map-wrapper"
+import TrackPrivate from "./components/private-links"
 
 const ReservationDetails = dynamicImport(
   () => import("./components/reservation-details")
@@ -100,6 +101,7 @@ const page = async (props: Props) => {
             </Stack>
           </div>
         </section>
+        <TrackPrivate />
         <Suspense>
           <TrackBayut />
         </Suspense>

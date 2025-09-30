@@ -26,15 +26,11 @@ import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import {
-  parseAsBoolean,
-  parseAsIsoDate,
-  useQueryState,
-  useQueryStates,
-} from "nuqs"
+import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
+import { useIsPrivate } from "../hooks/use-is-private"
 import DateSelect from "./date-select"
 const ReservationDetails = () => {
   const { isAuthenticated, session } = useSession()
@@ -45,10 +41,8 @@ const ReservationDetails = () => {
     },
     { history: "replace" }
   )
-  const [isPrivate] = useQueryState(
-    "private",
-    parseAsBoolean.withDefault(false)
-  )
+
+  const isPrivate = useIsPrivate()
 
   const unit = useUnitData()
 
@@ -64,7 +58,7 @@ const ReservationDetails = () => {
       dates.to.toDateString(),
     ],
     queryFn: async () => {
-      console.log("Fetching availability with:", unit.slug, dates);
+      console.log("Fetching availability with:", unit.slug, dates)
 
       return await GetUnitAvailability({
         id: unit.id,
@@ -76,7 +70,7 @@ const ReservationDetails = () => {
     },
     retry: false,
     staleTime: Infinity,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   })
 
   const t = useTranslations()
@@ -218,7 +212,6 @@ const ReservationDetails = () => {
                 />
               </Badge>
             ) : null}
-
           </Group>
         )}
       </Card.Section>
@@ -279,23 +272,29 @@ const ReservationDetails = () => {
               </SimpleGrid>
             ) : null}
 
-          {Array.isArray(prices?.additionals) &&
-          (prices.additionals as { label: string; value: string; color?: string }[])
-            .filter(a => a?.value && String(a.value).trim() !== "")
-            .map((a, i) => {
-              const color = a.color || "#E8123D";
-              return (
-                <SimpleGrid key={i} cols={2}>
-                  <Group gap={3}>
-                    <Text fw={500}>{a.label}</Text>
-                  </Group>
+            {Array.isArray(prices?.additionals) &&
+              (
+                prices.additionals as {
+                  label: string
+                  value: string
+                  color?: string
+                }[]
+              )
+                .filter((a) => a?.value && String(a.value).trim() !== "")
+                .map((a, i) => {
+                  const color = a.color || "#E8123D"
+                  return (
+                    <SimpleGrid key={i} cols={2}>
+                      <Group gap={3}>
+                        <Text fw={500}>{a.label}</Text>
+                      </Group>
 
-                  <Text ta="end" style={{ color }}>
-                    - {a.value} <RiyalIcon />
-                  </Text>
-                </SimpleGrid>
-              );
-            })}
+                      <Text ta="end" style={{ color }}>
+                        - {a.value} <RiyalIcon />
+                      </Text>
+                    </SimpleGrid>
+                  )
+                })}
             <SimpleGrid cols={2}>
               <Text>{t("general.customer-fees")}</Text>
 

@@ -29,6 +29,7 @@ import {
 import { useState } from "react"
 import DateSelect from "../../components/date-select"
 import { useUnitData } from "../../context/unit-context"
+import { useIsPrivate } from "../../hooks/use-is-private"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
@@ -52,16 +53,16 @@ interface MadfuResponse {
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
   const unit = useUnitData()
-  const [{ method, use_wallet, payment_option, coupon, private: isPrivate }] =
-    useQueryStates({
-      method: parseAsString.withDefault("card"),
-      use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
-      payment_option: parseAsStringLiteral(["full", "partial"]).withDefault(
-        "partial"
-      ),
-      coupon: parseAsString.withDefault(""),
-      private: parseAsBoolean.withDefault(false),
-    })
+  const [{ method, use_wallet, payment_option, coupon }] = useQueryStates({
+    method: parseAsString.withDefault("card"),
+    use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
+    payment_option: parseAsStringLiteral(["full", "partial"]).withDefault(
+      "partial"
+    ),
+    coupon: parseAsString.withDefault(""),
+    private: parseAsBoolean.withDefault(false),
+  })
+  const isPrivate = useIsPrivate()
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
   const params = useParams() as { booking_code: string }
@@ -302,9 +303,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <Text>{t("general.customer-fees")}</Text>
 
                 <Text ta="end" c="#767676">
-                  {(
-                    parseFloat(prices.customer_fees)
-                  ).toFixed(2)}
+                  {parseFloat(prices.customer_fees).toFixed(2)}
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>
