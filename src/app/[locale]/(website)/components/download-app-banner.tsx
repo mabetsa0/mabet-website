@@ -1,40 +1,40 @@
-"use client"
-import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
-import { useEffect, useState } from "react"
-import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
-import { useTranslations } from "next-intl"
-import { mabetLogo } from "@/assets"
-import Image from "next/image"
+"use client";
+import { Button, CloseButton, Container, Group, Text } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config";
+import { useTranslations } from "next-intl";
+import { mabetLogo } from "@/assets";
+import Image from "next/image";
 
 export default function DownloadAppBanner({
   isVisible,
   setIsVisible,
 }: {
-  isVisible: boolean
-  setIsVisible: (isVisible: boolean) => void
+  isVisible: boolean;
+  setIsVisible: (isVisible: boolean) => void;
 }) {
-  const t = useTranslations("header")
+  const t = useTranslations("header");
 
   useEffect(() => {
     try {
       const stored =
         typeof window !== "undefined"
           ? localStorage.getItem(DOWNLOAD_APP_BANNER_KEY)
-          : "1"
-      setIsVisible(!stored)
+          : "1";
+      setIsVisible(!stored);
     } catch {
-      setIsVisible(true)
+      setIsVisible(true);
     }
-  }, [])
+  }, []);
 
   const handleClose = () => {
     try {
-      localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1")
+      localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1");
     } catch {}
-    setIsVisible(false)
-  }
+    setIsVisible(false);
+  };
 
-  if (!isVisible) return null
+  if (!isVisible) return null;
 
   return (
     <div
@@ -54,9 +54,14 @@ export default function DownloadAppBanner({
       >
         <Group gap="sm" wrap="nowrap" style={{ flex: 1 }}>
           <Image src={mabetLogo} alt="app" />
-          <Text fw={600} size="sm">
-            {t("download-app")}
-          </Text>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Text fw={600} size="sm">
+              {t("download-app")}
+            </Text>
+            <Text size="xs">
+              <b>{t("download-app-description")}</b>
+            </Text>
+          </div>
         </Group>
         <Group gap="xs" wrap="nowrap">
           <Button
@@ -79,5 +84,5 @@ export default function DownloadAppBanner({
         </Group>
       </Container>
     </div>
-  )
+  );
 }
