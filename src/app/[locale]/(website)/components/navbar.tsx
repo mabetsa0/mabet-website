@@ -1,44 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
-import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core"
+"use client";
+import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core";
 
-import { logo } from "@/assets"
-import UserButton from "@/components/common/auth/user-button"
-import LanguageSwitcher from "@/components/common/lang-switch"
-import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
-import { Link } from "@/lib/i18n/navigation"
-import { useDisclosure, useMediaQuery } from "@mantine/hooks"
-import { useTranslations } from "next-intl"
-import { usePathname } from "next/navigation"
-import React, { useEffect, useState } from "react"
-import DownloadAppBanner from "./download-app-banner"
+import { logo } from "@/assets";
+import UserButton from "@/components/common/auth/user-button";
+import LanguageSwitcher from "@/components/common/lang-switch";
+import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config";
+import { Link } from "@/lib/i18n/navigation";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import DownloadAppBanner from "./download-app-banner";
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
-  const [opened, { toggle }] = useDisclosure()
+  const [opened, { toggle }] = useDisclosure();
 
-  const t = useTranslations("header")
-  const pathname = usePathname()
-  const matches = useMediaQuery("(max-width: 62em)")
-  const [isVisible, setIsVisible] = useState(false)
+  const t = useTranslations("header");
+  const pathname = usePathname();
+  const matches = useMediaQuery("(max-width: 62em)");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     try {
       const stored =
         typeof window !== "undefined"
           ? localStorage.getItem(DOWNLOAD_APP_BANNER_KEY)
-          : "1"
-      setIsVisible(!stored)
+          : "1";
+      setIsVisible(!stored);
     } catch {
-      setIsVisible(true)
+      setIsVisible(true);
     }
-  }, [])
+  }, []);
   if (pathname.includes("units") && matches)
     return (
       <>
         <DownloadAppBanner isVisible={isVisible} setIsVisible={setIsVisible} />
         {children}
       </>
-    )
+    );
   return (
     <>
       <AppShell
@@ -60,8 +60,8 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
           <Group
             wrap="nowrap"
-            className="max-w-7xl h-[65px]  md:h-full mx-auto max-sm:justify-between"
-            py={"xs"}
+            className="max-w-7xl h-[65px] md:h-full mx-auto max-sm:justify-between max-sm:bg-white"
+            py="xs"
             px="md"
           >
             <Burger
@@ -154,5 +154,5 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         <AppShell.Main>{children}</AppShell.Main>
       </AppShell>
     </>
-  )
+  );
 }
