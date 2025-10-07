@@ -20,6 +20,7 @@ import { RiyalIcon } from "@/components/icons"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
+import { getIsPrivate } from "@/utils/get-is-private"
 import { Group, Space, Text } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
 import { X } from "lucide-react"
@@ -31,7 +32,6 @@ import {
   useQueryStates,
 } from "nuqs"
 import { useState } from "react"
-import { useIsPrivate } from "../../hooks/use-is-private"
 import { GetPaymentSummary } from "../get-payment-summary"
 interface PaymentResponse {
   data: {
@@ -69,10 +69,11 @@ const MobilePaymentButton = ({
     coupon: parseAsString.withDefault(""),
     private: parseAsBoolean.withDefault(false),
   })
-  const isPrivate = useIsPrivate()
+
+  const params = useParams() as { booking_code: string; slug: string }
+  const isPrivate = getIsPrivate(params.slug)
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
-  const params = useParams() as { booking_code: string }
   const Router = useRouter()
   const { mutate, isPending } = useMutation({
     mutationFn: async (args: {

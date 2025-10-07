@@ -68,7 +68,10 @@ const UserDataModal = () => {
   return (
     <ModalDrawer title={t("title")} size={"992"} state={opened} onClose={close}>
       <Group align="start" wrap="nowrap" gap={"xl"}>
-        <form onSubmit={handleSubmit} className="md:ps-1.5 py-2 max-w-[400px]">
+        <form
+          onSubmit={handleSubmit}
+          className="md:rtl:pr-1.5 md:ltr:pl-1.5  py-2 max-w-[400px]"
+        >
           <Stack>
             <Stack gap={"xs"}>
               <Text className="text-h4 font-bold text-primary">

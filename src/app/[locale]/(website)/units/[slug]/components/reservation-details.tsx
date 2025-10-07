@@ -7,6 +7,7 @@ import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
+import { getIsPrivate } from "@/utils/get-is-private"
 import {
   Badge,
   Button,
@@ -30,8 +31,8 @@ import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import { useIsPrivate } from "../hooks/use-is-private"
 import DateSelect from "./date-select"
+import { useParams } from "next/navigation"
 const ReservationDetails = () => {
   const { isAuthenticated, session } = useSession()
   const [dates] = useQueryStates(
@@ -41,8 +42,8 @@ const ReservationDetails = () => {
     },
     { history: "replace" }
   )
-
-  const isPrivate = useIsPrivate()
+  const params = useParams() as { slug: string }
+  const isPrivate = getIsPrivate(params.slug)
 
   const unit = useUnitData()
 

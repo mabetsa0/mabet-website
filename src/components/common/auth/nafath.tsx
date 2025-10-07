@@ -125,7 +125,7 @@ const NafathModal = () => {
       onClose={onClose}
     >
       <Group align="start" wrap="nowrap" gap={"xl"}>
-        <div className="md:ps-1.5 py-2 max-w-[400px]">
+        <div className="md:rtl:pr-1.5 md:ltr:pl-1.5  py-2 max-w-[400px]">
           {nafathRandom.number ? (
             <Stack>
               <Stack gap={"xs"}>

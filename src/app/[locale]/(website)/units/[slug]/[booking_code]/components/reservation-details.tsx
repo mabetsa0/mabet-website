@@ -4,6 +4,7 @@ import { ErrorResponse } from "@/@types/error"
 import { RiyalIcon } from "@/components/icons"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
+import { getIsPrivate } from "@/utils/get-is-private"
 import {
   Box,
   Button,
@@ -29,7 +30,6 @@ import {
 import { useState } from "react"
 import DateSelect from "../../components/date-select"
 import { useUnitData } from "../../context/unit-context"
-import { useIsPrivate } from "../../hooks/use-is-private"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
@@ -62,11 +62,11 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
     coupon: parseAsString.withDefault(""),
     private: parseAsBoolean.withDefault(false),
   })
-  const isPrivate = useIsPrivate()
+  const params = useParams() as { booking_code: string; slug: string }
+  const isPrivate = getIsPrivate(params.slug)
   console.log("🚀 ~ ReservationDetails ~ isPrivate:", isPrivate)
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
-  const params = useParams() as { booking_code: string }
   const Router = useRouter()
   const { mutate, isPending } = useMutation({
     mutationFn: async (args: {

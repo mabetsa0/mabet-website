@@ -4,6 +4,7 @@ import { RiyalIcon } from "@/components/icons"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
+import { getIsPrivate } from "@/utils/get-is-private"
 import {
   Box,
   Button,
@@ -19,11 +20,11 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
-import { useIsPrivate } from "../hooks/use-is-private"
 const MobileCreateBookingButton = () => {
   const { isAuthenticated, session } = useSession()
   const t = useTranslations()
@@ -40,7 +41,8 @@ const MobileCreateBookingButton = () => {
       history: "replace",
     }
   )
-  const isPrivate = useIsPrivate()
+  const params = useParams() as { slug: string }
+  const isPrivate = getIsPrivate(params.slug)
   // handle create booking
   const Router = useRouter()
   const createBookingMutation = useMutation({

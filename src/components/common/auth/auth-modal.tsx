@@ -28,7 +28,7 @@ const AuthModal = () => {
       onClose={onClose}
     >
       <SimpleGrid cols={{ base: 1, md: 2 }} spacing={"xl"}>
-        <div className="md:ps-1.5 py-2">
+        <div className="md:rtl:pr-1.5 md:ltr:pl-1.5 py-2">
           {!phoneNumber.phonenumber ? <PhoneNumberForm /> : null}
           {phoneNumber.phonenumber ? <VerifyOtp /> : null}
         </div>

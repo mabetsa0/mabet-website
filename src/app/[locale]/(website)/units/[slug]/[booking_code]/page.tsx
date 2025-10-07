@@ -7,6 +7,7 @@ import Footer from "@/components/common/footer"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
+import { getIsPrivate } from "@/utils/get-is-private"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
@@ -14,7 +15,6 @@ import { useTranslations } from "next-intl"
 import { parseAsString, useQueryStates } from "nuqs"
 import { use, useEffect } from "react"
 import ImageGallery from "../components/image-gallery"
-import { useIsPrivate } from "../hooks/use-is-private"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
@@ -36,7 +36,7 @@ const Page = (props: Props) => {
     method: parseAsString.withDefault("card"),
     coupon: parseAsString.withDefault(""),
   })
-  const isPrivate = useIsPrivate()
+  const isPrivate = getIsPrivate(params.slug)
   const { data, status } = useQuery({
     enabled: isAuthenticated,
     queryKey: [params.booking_code, method, coupon],
