@@ -54,8 +54,8 @@ export default function DownloadAppBanner({
       >
         <Group gap="sm" wrap="nowrap" style={{ flex: 1 }}>
           <Image src={mabetLogo} alt="app" />
-          <Text fw={600} size="sm">
-            {t("download-app")}
+          <Text size="xs" c={"white"}>
+            {t("download-mabet-app")}
           </Text>
         </Group>
         <Group gap="xs" wrap="nowrap">
@@ -74,7 +74,7 @@ export default function DownloadAppBanner({
             onClick={handleClose}
             variant="white"
             className="text-white"
-            size="sm"
+            size="xs"
           />
         </Group>
       </Container>
