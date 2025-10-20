@@ -3,16 +3,9 @@ import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
 import { useTranslations } from "next-intl"
-import { mabetLogo } from "@/assets"
-import Image from "next/image"
 
-export default function DownloadAppBanner({
-  isVisible,
-  setIsVisible,
-}: {
-  isVisible: boolean
-  setIsVisible: (isVisible: boolean) => void
-}) {
+export default function DownloadAppBanner() {
+  const [isVisible, setIsVisible] = useState(false)
   const t = useTranslations("header")
 
   useEffect(() => {
@@ -53,9 +46,8 @@ export default function DownloadAppBanner({
         }}
       >
         <Group gap="sm" wrap="nowrap" style={{ flex: 1 }}>
-          <Image src={mabetLogo} alt="app" />
-          <Text size="xs" c={"white"}>
-            {t("download-mabet-app")}
+          <Text fw={600} size="sm">
+            {t("download-app")}
           </Text>
         </Group>
         <Group gap="xs" wrap="nowrap">
@@ -73,8 +65,7 @@ export default function DownloadAppBanner({
             aria-label="Close banner"
             onClick={handleClose}
             variant="white"
-            className="text-white"
-            size="xs"
+            size="sm"
           />
         </Group>
       </Container>
