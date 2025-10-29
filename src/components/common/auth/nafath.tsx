@@ -23,6 +23,7 @@ import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { useEffect, useState } from "react"
 import useCountDown from "react-countdown-hook"
 import ModalDrawer from "../modal-drawer"
+import { ErrorResponse } from "@/@types/error"
 
 export interface NafathResponse {
   data: Data
@@ -182,7 +183,7 @@ const NafathModal = () => {
                   inputMode="numeric"
                   error={
                     axios.isAxiosError(error)
-                      ? (error.response?.data as any).message
+                      ? (error.response?.data as ErrorResponse).errors?.[0]
                       : null
                   }
                   classNames={{

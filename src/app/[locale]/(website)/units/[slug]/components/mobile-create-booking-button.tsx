@@ -126,7 +126,7 @@ const MobileCreateBookingButton = () => {
         <Stack py={"xs"} justify="center" align="center">
           <Text c={"red"}>
             {axios.isAxiosError(error)
-              ? (error.response?.data as ErrorResponse).message
+              ? (error.response?.data as ErrorResponse).errors?.[0]
               : t("errors.unknown-error")}
           </Text>
         </Stack>

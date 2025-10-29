@@ -9,6 +9,7 @@ import HeroPost from "@/components/blog/hero-post"
 import Intro from "@/components/blog/intro"
 import MoreStories from "@/components/blog/more-stories"
 import Pagination from "@/components/blog/pagination"
+import { ErrorResponse } from "@/@types/error"
 
 export const dynamic = "force-dynamic"
 
@@ -35,7 +36,12 @@ const page = async () => {
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       return (
-        <ErrorUi error={error.response?.data?.message || "حصلت مشكلة ما"} />
+        <ErrorUi
+          error={
+            (error.response?.data as ErrorResponse).errors?.[0] ||
+            "حصلت مشكلة ما"
+          }
+        />
       )
     }
     if ("message" in error) {

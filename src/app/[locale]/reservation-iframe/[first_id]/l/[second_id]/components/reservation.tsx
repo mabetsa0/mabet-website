@@ -124,7 +124,7 @@ const Reservation = () => {
         notifications.show({
           title: t("generla.failer"),
           message:
-            (error.response.data as ErrorResponse).errors[0] || error.message,
+            (error.response.data as ErrorResponse).errors?.[0] || error.message,
           color: "red",
         })
       }
@@ -211,7 +211,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors[0]
+                ? (error.response?.data as ErrorResponse).errors?.[0]
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -275,7 +275,7 @@ const Reservation = () => {
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
-                ? (error.response?.data as ErrorResponse).errors[0]
+                ? (error.response?.data as ErrorResponse).errors?.[0]
                 : t("errors.unknown-error")}
             </Text>
           </Stack>
@@ -305,11 +305,16 @@ const Reservation = () => {
                 {prices.duration_text}{" "}
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
-                  {prices.discount ? prices.price_before_plain : prices.price_plain} <RiyalIcon />
+                  {prices.discount
+                    ? prices.price_before_plain
+                    : prices.price_plain}{" "}
+                  <RiyalIcon />
                 </Text>
               </Group>
               <Text ta="end" c="#767676">
-                <span className="text-primary">{prices.total_before_plain}</span>
+                <span className="text-primary">
+                  {prices.total_before_plain}
+                </span>
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -317,8 +322,8 @@ const Reservation = () => {
             {prices.discount ? (
               <SimpleGrid cols={2}>
                 <Group gap={3}>
-                <Text fw={500}>{t("general.discount")}</Text>
-                                  {/* <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                  <Text fw={500}>{t("general.discount")}</Text>
+                  {/* <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
                     {prices.discount_percent_text}%
                   </div> */}
                 </Group>
