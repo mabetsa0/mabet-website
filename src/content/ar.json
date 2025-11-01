@@ -376,7 +376,8 @@
     "madfu-description": "دفعات بلا فوائد بدون رسوم",
     "partial-payment": "ادفع عربون تأكيد الحجز {value}",
     "full-payment": "ادفع كامل المبلغ {value} ",
-    "apple-pay": "دفع الكتروني"
+    "apple-pay": "دفع الكتروني",
+    "tamara": "ادفع باستخدام تمارا"
   },
   "nafath": {
     "title": "وثق حسابك عبر نفاذ",

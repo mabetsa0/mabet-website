@@ -64,7 +64,6 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   })
   const params = useParams() as { booking_code: string; slug: string }
   const isPrivate = getIsPrivate(params.slug)
-  console.log("🚀 ~ ReservationDetails ~ isPrivate:", isPrivate)
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
   const Router = useRouter()
@@ -142,6 +141,20 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         )
 
         paymentURL = madfuPayment.data.data.image || ""
+      }
+
+      if (args.payment_method === "tamara") {
+        const tamaraPayment = await Mabet.get<PaymentResponse>(
+          `/payment/${params.booking_code}/pay-by-tamara`,
+          {
+            params: {
+              use_wallet: args.use_wallet,
+              coupon: args.coupon,
+              private: isPrivate ? 1 : undefined,
+            },
+          }
+        )
+        paymentURL = tamaraPayment.data.data.redirect_url || ""
       }
 
       // if (args.payment_method === "wallet") {

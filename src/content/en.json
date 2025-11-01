@@ -380,7 +380,8 @@
     "apple-pay": "Online payment",
     "unit": {
       "pay": "Complete payment {value}"
-    }
+    },
+    "tamara": "Pay with Tamara"
   },
   "nafath": {
     "title": "Verify your account with nafath",
