@@ -73,7 +73,6 @@ const ReservationDetails = () => {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   })
-  console.log("🚀 ~ ReservationDetails ~ error:", error)
 
   const t = useTranslations()
   const auth = useAuthModal()
