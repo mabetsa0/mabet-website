@@ -124,7 +124,9 @@ const Reservation = () => {
         notifications.show({
           title: t("generla.failer"),
           message:
-            (error.response.data as ErrorResponse).errors?.[0] || error.message,
+            (error.response.data as ErrorResponse).message ||
+            (error.response.data as ErrorResponse).errors?.[0] ||
+            error.message,
           color: "red",
         })
       }

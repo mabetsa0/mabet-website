@@ -38,6 +38,7 @@ const page = async () => {
       return (
         <ErrorUi
           error={
+            (error.response?.data as ErrorResponse).message ||
             (error.response?.data as ErrorResponse).errors?.[0] ||
             "حصلت مشكلة ما"
           }

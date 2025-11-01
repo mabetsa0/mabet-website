@@ -168,7 +168,7 @@ const NafathModal = () => {
                 inputMode="numeric"
                 error={
                   axios.isAxiosError(error)
-                    ? (error.response?.data as ErrorResponse).errors?.[0]
+                    ? (error.response?.data as ErrorResponse).message
                     : null
                 }
                 classNames={{
