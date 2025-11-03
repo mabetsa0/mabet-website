@@ -367,6 +367,12 @@
       "button": "نقاط STC",
       "description": "استبدل نقاط STC الخاصة بك",
       "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC"
+    },
+    "stc-redeem-form": {
+      "you-have-points": "لديك {points} نقطة",
+      "points-to-redeem": "النقاط المراد استبدالها",
+      "you-will-get": "ستحصل على",
+      "confirm": "تأكيد"
     }
   },
   "errors": {

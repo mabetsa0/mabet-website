@@ -2,7 +2,7 @@ import { handleFormError } from "@/utils/handle-form-errors"
 import { Button, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useLocale, useTranslations } from "next-intl"
-import React from "react"
+import React, { useState } from "react"
 import PhoneInput, {
   getCountryCallingCode,
   isSupportedCountry,
@@ -10,9 +10,14 @@ import PhoneInput, {
 } from "react-phone-number-input"
 import ar from "react-phone-number-input/locale/ar.json"
 import en from "react-phone-number-input/locale/en.json"
+import RedeemForm from "./redeem-form"
 
 type Props = {
   title: string
+  onSubmit: (data: {
+    country_code: string
+    phonenumber: string
+  }) => Promise<void>
 }
 
 const PhoneNumberForm = (props: Props) => {
@@ -39,11 +44,12 @@ const PhoneNumberForm = (props: Props) => {
   })
   const onSubmit = form.onSubmit(async (data) => {
     try {
-      console.log("🚀 ~ onSubmit ~ data:", data)
+      await props.onSubmit(data)
     } catch (error) {
       handleFormError(error, form)
     }
   })
+
   return (
     <form onSubmit={onSubmit}>
       <Stack>

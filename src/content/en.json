@@ -368,6 +368,12 @@
       "button": "STC Points",
       "description": "Redeem your STC points",
       "enter-phone-number": "Enter your mobile number register with STC"
+    },
+    "stc-redeem-form": {
+      "you-have-points": "You have {points} points",
+      "points-to-redeem": "Points to redeem",
+      "you-will-get": "You will get",
+      "confirm": "Confirm"
     }
   },
   "errors": {

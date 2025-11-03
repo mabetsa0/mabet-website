@@ -42,7 +42,15 @@ export const STC = () => {
             </Stack>
           </Stack>
           <Stack>
-            <PhoneNumberForm title={t("enter-phone-number")} />
+            <PhoneNumberForm
+              onSubmit={async (data: {
+                country_code: string
+                phonenumber: string
+              }) => {
+                console.log("🚀 ~ onSubmit ~ data:", data)
+              }}
+              title={t("enter-phone-number")}
+            />
           </Stack>
         </Stack>
       </ModalDrawer>

@@ -1,14 +1,25 @@
 import { stc } from "@/assets"
 import ModalDrawer from "@/components/common/modal-drawer"
-import { Group, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
-import { useState } from "react"
+import { Group, Stack, Text, UnstyledButton } from "@mantine/core"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 import PhoneNumberForm from "./phone-number-form"
+import RedeemForm from "./redeem-form"
 
 export const STCRedeem = () => {
   const [state, setState] = useState(false)
 
   const t = useTranslations("unit.stc-redeem-modal")
+
+  const [redeemForm, setRedeemForm] = useState(false)
+  const onSubmit = async (data: {
+    country_code: string
+    phonenumber: string
+  }) => {
+    console.log("🚀 ~ onSubmit ~ data:", data)
+    setRedeemForm(true)
+  }
+
   return (
     <>
       <UnstyledButton
@@ -33,17 +44,24 @@ export const STCRedeem = () => {
         state={state}
         onClose={() => setState(false)}
       >
-        <Stack gap={"xl"} p={"xl"}>
-          <Stack gap={"xl"}>
-            <img className="h-2" src={stc.src} alt="STC" />
-            <Text size="md" fw={500} c="#767676" ta={"center"}>
-              {t("description")}
-            </Text>
+        {redeemForm ? (
+          <RedeemForm availablePoints={100} onConfirm={() => {}} />
+        ) : (
+          <Stack gap={"xl"} p={"xl"}>
+            <Stack gap={"xl"}>
+              <img className="h-2" src={stc.src} alt="STC" />
+              <Text size="md" fw={500} c="#767676" ta={"center"}>
+                {t("description")}
+              </Text>
+            </Stack>
+            <Stack>
+              <PhoneNumberForm
+                onSubmit={onSubmit}
+                title={t("enter-phone-number")}
+              />
+            </Stack>
           </Stack>
-          <Stack>
-            <PhoneNumberForm title={t("enter-phone-number")} />
-          </Stack>
-        </Stack>
+        )}
       </ModalDrawer>
     </>
   )
