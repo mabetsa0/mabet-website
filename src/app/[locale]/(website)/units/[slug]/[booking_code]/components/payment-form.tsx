@@ -17,6 +17,8 @@ import Script from "next/script"
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { useEffect } from "react"
 import { BookingDetails } from "../payment-summary"
+import { STCRedeem } from "./stc-redeem"
+import { STC } from "./stc"
 
 const paymentCards = [masterCard, mada, visa]
 const PaymentForm = (booking: BookingDetails) => {
@@ -49,6 +51,7 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
+      <STCRedeem />
       {Number(booking.wallet.current_balance) && method === "card" ? (
         <Group wrap="nowrap" align="start" mt={"sm"}>
           <Switch
@@ -195,6 +198,10 @@ const PaymentForm = (booking: BookingDetails) => {
               </Group>
             }
           />
+          <Stack hiddenFrom="md">
+            <Divider />
+            <STC />
+          </Stack>
         </Stack>
       </RadioGroup>
       {/* <PayByWallet opened={opened} toggleModel={toggleModel} /> */}

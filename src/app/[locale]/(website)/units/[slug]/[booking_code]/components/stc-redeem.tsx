@@ -5,10 +5,10 @@ import { useState } from "react"
 import { useTranslations } from "next-intl"
 import PhoneNumberForm from "./phone-number-form"
 
-export const STC = () => {
+export const STCRedeem = () => {
   const [state, setState] = useState(false)
 
-  const t = useTranslations("unit.stc-modal")
+  const t = useTranslations("unit.stc-redeem-modal")
   return (
     <>
       <UnstyledButton
@@ -35,11 +35,10 @@ export const STC = () => {
       >
         <Stack gap={"xl"} p={"xl"}>
           <Stack gap={"xl"}>
-            <img className="h-2.5" src={stc.src} alt="STC" />
-            <Stack gap={"4px"} className="text-center">
-              <Text fw={500}>{t("button")}</Text>
-              <Text c="#767676">{t("description")}</Text>
-            </Stack>
+            <img className="h-2" src={stc.src} alt="STC" />
+            <Text size="md" fw={500} c="#767676" ta={"center"}>
+              {t("description")}
+            </Text>
           </Stack>
           <Stack>
             <PhoneNumberForm title={t("enter-phone-number")} />

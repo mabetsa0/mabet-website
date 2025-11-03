@@ -363,6 +363,11 @@
       "button": "Get your rewards",
       "description": "Add STC rewards points to your account.",
       "enter-phone-number": "Enter your STC-registered phone number"
+    },
+    "stc-redeem-modal": {
+      "button": "STC Points",
+      "description": "Redeem your STC points",
+      "enter-phone-number": "Enter your mobile number register with STC"
     }
   },
   "errors": {

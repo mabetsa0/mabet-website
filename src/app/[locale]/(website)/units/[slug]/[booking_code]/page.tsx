@@ -20,6 +20,7 @@ import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
+import ErrorUI from "@/components/ui/error"
 
 type Props = {
   params: Promise<{
@@ -68,7 +69,12 @@ const Page = (props: Props) => {
         <Loader />
       </div>
     )
-  if (status === "error") return <>ERROR</>
+  if (status === "error")
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ErrorUI />
+      </div>
+    )
 
   const { unit } = data
   return (

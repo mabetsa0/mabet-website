@@ -362,6 +362,11 @@
       "button": "احصل على مكافآتك",
       "description": "أضف نقاط مكافآتك إلى حسابك.",
       "enter-phone-number": "أدخل رقم الجوال المسجّل لدى STC"
+    },
+    "stc-redeem-modal": {
+      "button": "نقاط STC",
+      "description": "استبدل نقاط STC الخاصة بك",
+      "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC"
     }
   },
   "errors": {
