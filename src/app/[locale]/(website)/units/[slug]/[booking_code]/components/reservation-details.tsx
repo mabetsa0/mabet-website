@@ -33,6 +33,7 @@ import { useUnitData } from "../../context/unit-context"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
+import { STC } from "./stc"
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -353,6 +354,14 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             </Stack>
           </Card.Section>
         ) : null}
+        <Card.Section
+          visibleFrom="md"
+          className="border-[#F3F3F3] md:px-[24px] max-md:!border-none"
+          pb={12}
+          withBorder
+        >
+          <STC />
+        </Card.Section>
       </Card>
       <Modal
         centered

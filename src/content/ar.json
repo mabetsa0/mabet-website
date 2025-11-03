@@ -357,7 +357,12 @@
     "mobile-reservation-details": "ملخص الحجز",
     "invalid-coupon": "كود خصم غير صالح",
     "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
-    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  "
+    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  ",
+    "stc-modal": {
+      "button": "احصل على مكافآتك",
+      "description": "أضف نقاط مكافآتك إلى حسابك.",
+      "enter-phone-number": "أدخل رقم الجوال المسجّل لدى STC"
+    }
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

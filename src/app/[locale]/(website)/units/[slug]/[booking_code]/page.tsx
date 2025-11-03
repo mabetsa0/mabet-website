@@ -64,7 +64,7 @@ const Page = (props: Props) => {
   const mathes = useMdScreen()
   if (status == "pending")
     return (
-      <div className="flex items-center justify-center min-h-[10vh]">
+      <div className="flex items-center justify-center h-screen">
         <Loader />
       </div>
     )

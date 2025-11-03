@@ -358,7 +358,12 @@
     "mobile-reservation-details": "Reservation details",
     "invalid-coupon": "Invalid Coupon",
     "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
-    "payment-accept-conditions-description": "Click to see the requirements"
+    "payment-accept-conditions-description": "Click to see the requirements",
+    "stc-modal": {
+      "button": "Get your rewards",
+      "description": "Add STC rewards points to your account.",
+      "enter-phone-number": "Enter your STC-registered phone number"
+    }
   },
   "errors": {
     "unknown-error": "Unknown error"
