@@ -12,7 +12,7 @@ import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { parseAsString, useQueryStates } from "nuqs"
+import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
 import { use, useEffect } from "react"
 import ImageGallery from "../components/image-gallery"
 import MobilePaymentButton from "./components/mobile-payment-button"
@@ -33,19 +33,21 @@ type Props = {
 const Page = (props: Props) => {
   const params = use(props.params)
   const { isAuthenticated } = useSession()
-  const [{ method, coupon }] = useQueryStates({
+  const [{ method, coupon, use_qitaf_points }] = useQueryStates({
     method: parseAsString.withDefault("card"),
     coupon: parseAsString.withDefault(""),
+    use_qitaf_points: parseAsBoolean.withDefault(false),
   })
   const isPrivate = getIsPrivate(params.slug)
   const { data, status } = useQuery({
     enabled: isAuthenticated,
-    queryKey: [params.booking_code, method, coupon],
+    queryKey: [params.booking_code, method, coupon, use_qitaf_points],
     queryFn: () =>
       GetPaymentSummary(params.booking_code, {
         payment_method: method,
         private: isPrivate ? "1" : undefined,
         coupon: coupon ?? undefined,
+        use_qitaf_points: use_qitaf_points ? "1" : undefined,
       }),
     placeholderData: keepPreviousData,
   })
