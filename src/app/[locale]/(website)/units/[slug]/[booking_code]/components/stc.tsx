@@ -1,18 +1,19 @@
 import { stc } from "@/assets"
-import ModalDrawer from "@/components/common/modal-drawer"
-import { Group, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
-import { useState } from "react"
+import { Checkbox, Group, Stack, Text, UnstyledButton } from "@mantine/core"
 import { useTranslations } from "next-intl"
-import PhoneNumberForm from "./phone-number-form"
+import { parseAsBoolean, useQueryState } from "nuqs"
+import { useState } from "react"
 
 export const STC = () => {
-  const [state, setState] = useState(false)
-
+  const [use_qitaf_points, setUseQitafPoints] = useQueryState(
+    "use_qitaf_points",
+    parseAsBoolean.withDefault(false)
+  )
   const t = useTranslations("unit.stc-modal")
   return (
     <>
       <UnstyledButton
-        onClick={() => setState(true)}
+        onClick={() => setUseQitafPoints(!use_qitaf_points)}
         className="border border-[#500e74] rounded-md w-full shadow-lg shadow-[#500e74] p-sm"
       >
         <Group align="center" gap="lg">
@@ -25,9 +26,15 @@ export const STC = () => {
               {t("description")}
             </Text>
           </Stack>
+          <Checkbox
+            className="ms-auto"
+            size="xl"
+            checked={Boolean(use_qitaf_points)}
+            onChange={(e) => setUseQitafPoints(e.currentTarget.checked)}
+          />
         </Group>
       </UnstyledButton>
-      <ModalDrawer
+      {/* <ModalDrawer
         title={t("button")}
         size={"md"}
         state={state}
@@ -53,7 +60,7 @@ export const STC = () => {
             />
           </Stack>
         </Stack>
-      </ModalDrawer>
+      </ModalDrawer> */}
     </>
   )
 }

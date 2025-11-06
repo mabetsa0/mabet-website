@@ -1,16 +1,16 @@
+import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 import { Button, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useLocale, useTranslations } from "next-intl"
-import React, { useState } from "react"
+import { useParams } from "next/navigation"
 import PhoneInput, {
   getCountryCallingCode,
-  isSupportedCountry,
   isPossiblePhoneNumber,
+  isSupportedCountry,
 } from "react-phone-number-input"
 import ar from "react-phone-number-input/locale/ar.json"
 import en from "react-phone-number-input/locale/en.json"
-import RedeemForm from "./redeem-form"
 
 type Props = {
   title: string
@@ -23,7 +23,7 @@ type Props = {
 const PhoneNumberForm = (props: Props) => {
   const t = useTranslations("auth")
   const locale = useLocale()
-
+  const { booking_code } = useParams()
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -44,6 +44,11 @@ const PhoneNumberForm = (props: Props) => {
   })
   const onSubmit = form.onSubmit(async (data) => {
     try {
+      if (data.country_code !== "+966")
+        throw new Error(t("invalid-country-code"))
+      await Mabet.post(`/qitaf-points-redeem/otp`, {
+        phone_number: data.phonenumber,
+      })
       await props.onSubmit(data)
     } catch (error) {
       handleFormError(error, form)
@@ -84,6 +89,11 @@ const PhoneNumberForm = (props: Props) => {
         <Button type="submit" loading={form.submitting}>
           {t("continue")}
         </Button>
+        {form.errors.root && (
+          <Text className="text-sm " c={"red"} ta={"center"}>
+            {form.errors.root}
+          </Text>
+        )}
       </Stack>
     </form>
   )

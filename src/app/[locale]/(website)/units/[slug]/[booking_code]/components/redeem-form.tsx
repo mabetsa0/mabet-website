@@ -2,13 +2,18 @@
 import { stc } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { CustomNumberInput } from "@/components/ui/number-input"
-import { Button, Group, Stack, Text } from "@mantine/core"
+import Mabet from "@/services"
+import { handleFormError } from "@/utils/handle-form-errors"
+import { Button, Group, PinInput, Stack, Text } from "@mantine/core"
+import { notifications } from "@mantine/notifications"
+import { useForm } from "@mantine/form"
 import { useTranslations } from "next-intl"
-import { useMemo, useState } from "react"
+import { useParams } from "next/navigation"
+import { useMemo } from "react"
 
 type RedeemFormProps = {
   availablePoints: number
-  onConfirm: (pointsToRedeem: number) => void
+  onConfirm: (data: { amount: number; otp: string }) => void
   conversionRate?: number // points to SAR, default 1:1
 }
 
@@ -18,63 +23,120 @@ const RedeemForm = ({
   conversionRate = 1,
 }: RedeemFormProps) => {
   const t = useTranslations("unit.stc-redeem-form")
-  const [pointsToRedeem, setPointsToRedeem] = useState<number | "">("")
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      amount: "" as number | "",
+      otp: "",
+    },
+    validate: {
+      otp: (value) => {
+        if (!value || value.length !== 6) {
+          return t("invalid-otp")
+        }
+        return null
+      },
+    },
+  })
 
-  const sanitizedValue = useMemo(() => {
-    const n = typeof pointsToRedeem === "number" ? pointsToRedeem : 0
+  const amount = form.values.amount
+
+  const sanitizedPoints = useMemo(() => {
+    const n = typeof amount === "number" ? amount : 0
     if (!Number.isFinite(n) || n < 0) return 0
     return Math.min(n, Math.max(0, availablePoints))
-  }, [pointsToRedeem, availablePoints])
+  }, [amount, availablePoints])
 
   const sarPreview = useMemo(
-    () => sanitizedValue * conversionRate,
-    [sanitizedValue, conversionRate]
+    () => sanitizedPoints * conversionRate,
+    [sanitizedPoints, conversionRate]
   )
-  const isDisabled = sanitizedValue <= 0
+  const isDisabled =
+    sanitizedPoints <= 0 || !form.values.otp || form.values.otp.length !== 6
+
+  const { booking_code } = useParams()
+  const handleSubmit = form.onSubmit(async (values) => {
+    try {
+      await Mabet.post(`/qitaf-points-redeem/redeem`, {
+        booking_code,
+        amount: sanitizedPoints,
+        otp: values.otp,
+      })
+      onConfirm({
+        amount: sanitizedPoints,
+        otp: values.otp,
+      })
+    } catch (error) {
+      handleFormError(error, form)
+    }
+  })
 
   return (
-    <Stack gap="md" p={"xl"}>
-      <img className="h-2.5" src={stc.src} alt="STC" />
-      <Text size="lg" fw={500} ta={"center"}>
-        {t("you-have-points", { points: availablePoints.toLocaleString() })}
-      </Text>
-
-      <Stack gap={4}>
-        <Text size="sm" c="#767676">
-          {t("points-to-redeem")}
+    <form onSubmit={handleSubmit}>
+      <Stack gap="md" p={"xl"}>
+        <img className="h-2.5" src={stc.src} alt="STC" />
+        <Text size="lg" fw={500} ta={"center"}>
+          {t("you-have-points", { points: availablePoints.toLocaleString() })}
         </Text>
-        <CustomNumberInput
-          value={pointsToRedeem}
-          onChange={(value) =>
-            setPointsToRedeem(
-              typeof value === "number"
-                ? value
-                : value === ""
-                  ? ""
-                  : Number(value)
-            )
-          }
-          min={0}
-          max={Math.max(0, availablePoints)}
-          thousandSeparator
-        />
+
+        <Stack gap={4}>
+          <Text size="sm" c="#767676">
+            {t("otp")}
+          </Text>
+          <PinInput
+            size="lg"
+            className="!justify-center"
+            oneTimeCode
+            aria-label="One time code"
+            type="number"
+            key={form.key("otp")}
+            {...form.getInputProps("otp")}
+          />
+        </Stack>
+        <Stack gap={4}>
+          <Text size="sm" c="#767676">
+            {t("points-to-redeem")}
+          </Text>
+          <CustomNumberInput
+            value={form.values.amount}
+            onChange={(value) =>
+              form.setFieldValue(
+                "amount",
+                typeof value === "number"
+                  ? value
+                  : value === ""
+                    ? ""
+                    : Number(value)
+              )
+            }
+            min={0}
+            max={Math.max(0, availablePoints)}
+            thousandSeparator
+          />
+        </Stack>
+
+        <Group justify="space-between">
+          <Text className="text-lg">{t("you-will-get")}</Text>
+          <Text className="text-xl font-bold">
+            {sarPreview.toLocaleString()} <RiyalIcon />
+          </Text>
+        </Group>
+
+        <Button
+          size="md"
+          type="submit"
+          disabled={isDisabled}
+          loading={form.submitting}
+        >
+          {t("confirm")}
+        </Button>
+        {form.errors.root && (
+          <Text className="text-sm" c={"red"} ta={"center"}>
+            {form.errors.root}
+          </Text>
+        )}
       </Stack>
-
-      <Group justify="space-between">
-        <Text className="text-lg">{t("you-will-get")}</Text>
-        <Text className="text-xl font-bold">
-          {sarPreview.toLocaleString()} <RiyalIcon />
-        </Text>
-      </Group>
-
-      <Button
-        size="md"
-        disabled={isDisabled}
-        onClick={() => onConfirm(sanitizedValue)}
-      >
-        {t("confirm")}
-      </Button>
-    </Stack>
+    </form>
   )
 }
 

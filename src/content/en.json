@@ -228,7 +228,8 @@
     },
     "title": "Log in or sign up",
     "invalid-otp": "Invalid OTP",
-    "server-error": "Server Error"
+    "server-error": "Server Error",
+    "invalid-country-code": "Please, use a Saudi number"
   },
   "generl": {
     "search-results": "Results for"
@@ -367,13 +368,19 @@
     "stc-redeem-modal": {
       "button": "STC Points",
       "description": "Redeem your STC points",
-      "enter-phone-number": "Enter your mobile number register with STC"
+      "enter-phone-number": "Enter your mobile number register with STC",
+      "success-title": "Redeemed successfully",
+      "success-message": "Your STC points were redeemed and applied."
     },
     "stc-redeem-form": {
       "you-have-points": "You have {points} points",
       "points-to-redeem": "Points to redeem",
       "you-will-get": "You will get",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "otp": "OTP",
+      "amount": "Amount",
+      "invalid-otp": "Invalid OTP",
+      "amount-required": "Amount is required"
     }
   },
   "errors": {

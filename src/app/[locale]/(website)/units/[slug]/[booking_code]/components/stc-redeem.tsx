@@ -5,8 +5,9 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import PhoneNumberForm from "./phone-number-form"
 import RedeemForm from "./redeem-form"
+import { notifications } from "@mantine/notifications"
 
-export const STCRedeem = () => {
+export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
   const [state, setState] = useState(false)
 
   const t = useTranslations("unit.stc-redeem-modal")
@@ -45,7 +46,20 @@ export const STCRedeem = () => {
         onClose={() => setState(false)}
       >
         {redeemForm ? (
-          <RedeemForm availablePoints={100} onConfirm={() => {}} />
+          <RedeemForm
+            availablePoints={availablePoints}
+            onConfirm={(data) => {
+              setRedeemForm(false)
+              setState(false)
+              notifications.show({
+                title: t("success-title"),
+                message: t("success-message"),
+                color: "green",
+                withBorder: true,
+                autoClose: 4000,
+              })
+            }}
+          />
         ) : (
           <Stack gap={"xl"} p={"xl"}>
             <Stack gap={"xl"}>

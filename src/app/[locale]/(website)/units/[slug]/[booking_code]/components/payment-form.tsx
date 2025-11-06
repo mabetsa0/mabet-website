@@ -51,7 +51,9 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
-      <STCRedeem />
+      <STCRedeem
+        availablePoints={Number(booking.qitaf_points.current_balance)}
+      />
       {Number(booking.wallet.current_balance) && method === "card" ? (
         <Group wrap="nowrap" align="start" mt={"sm"}>
           <Switch

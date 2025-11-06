@@ -227,7 +227,8 @@
     },
     "title": "تسجيل الدخول أو سجل حساب جديد",
     "invalid-otp": "كود غير صحيح",
-    "server-error": "خطا غير معروف"
+    "server-error": "خطا غير معروف",
+    "invalid-country-code": "من فضلك استخدم رقم سعودي"
   },
   "generl": {
     "search-results": "نتاج بحث"
@@ -366,13 +367,19 @@
     "stc-redeem-modal": {
       "button": "نقاط STC",
       "description": "استبدل نقاط STC الخاصة بك",
-      "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC"
+      "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC",
+      "success-title": "تم الاستبدال بنجاح",
+      "success-message": "تم استبدال نقاط STC وإضافتها بنجاح."
     },
     "stc-redeem-form": {
       "you-have-points": "لديك {points} نقطة",
       "points-to-redeem": "النقاط المراد استبدالها",
       "you-will-get": "ستحصل على",
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "otp": "رمز التحقق",
+      "amount": "المبلغ",
+      "invalid-otp": "رمز التحقق غير صحيح",
+      "amount-required": "المبلغ مطلوب"
     }
   },
   "errors": {

@@ -46,6 +46,9 @@ export interface BookingDetails {
   additional_receipt_params: unknown[]
   wallet: Wallet
   to_pay: ToPay
+  qitaf_points: {
+    current_balance: number
+  }
 }
 
 export interface PaymentMethods {

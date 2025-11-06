@@ -27,5 +27,8 @@ export const handleFormError = <T, V>(
 
     return
   }
-  form.setFieldError("root", "server error")
+  form.setFieldError(
+    "root",
+    error instanceof Error ? error.message : "server error"
+  )
 }
