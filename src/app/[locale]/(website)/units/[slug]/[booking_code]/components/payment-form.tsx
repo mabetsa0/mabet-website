@@ -52,7 +52,8 @@ const PaymentForm = (booking: BookingDetails) => {
         </Text>
       </Stack>
       <STCRedeem
-        availablePoints={Number(booking.qitaf_points.current_balance)}
+        // TODO: get available points from API
+        availablePoints={20}
       />
       {Number(booking.wallet.current_balance) && method === "card" ? (
         <Group wrap="nowrap" align="start" mt={"sm"}>

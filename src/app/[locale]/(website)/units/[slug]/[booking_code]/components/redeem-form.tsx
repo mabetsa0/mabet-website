@@ -20,7 +20,7 @@ type RedeemFormProps = {
 const RedeemForm = ({
   availablePoints,
   onConfirm,
-  conversionRate = 1,
+  conversionRate = 1 / 5,
 }: RedeemFormProps) => {
   const t = useTranslations("unit.stc-redeem-form")
   const form = useForm({
@@ -31,7 +31,7 @@ const RedeemForm = ({
     },
     validate: {
       otp: (value) => {
-        if (!value || value.length !== 6) {
+        if (!value || value.length !== 4) {
           return t("invalid-otp")
         }
         return null
@@ -52,12 +52,12 @@ const RedeemForm = ({
     [sanitizedPoints, conversionRate]
   )
   const isDisabled =
-    sanitizedPoints <= 0 || !form.values.otp || form.values.otp.length !== 6
+    sanitizedPoints <= 0 || !form.values.otp || form.values.otp.length !== 4
 
   const { booking_code } = useParams()
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      await Mabet.post(`/qitaf-points-redeem/redeem`, {
+      await Mabet.post(`/${booking_code}/qitaf-points-redeem`, {
         booking_code,
         amount: sanitizedPoints,
         otp: values.otp,

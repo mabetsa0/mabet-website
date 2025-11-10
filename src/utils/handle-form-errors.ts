@@ -1,5 +1,6 @@
 import { UseFormReturnType } from "@mantine/form"
 import axios from "axios"
+import { ErrorResponse as ErrorResponseType } from "@/@types/error"
 export type ErrorResponse<T> = {
   message: string
   errors?: {
@@ -14,7 +15,11 @@ export const handleFormError = <T, V>(
   if (axios.isAxiosError(error) && error.response?.status) {
     const responseError = error.response.data as ErrorResponse<{ "": "" }>
 
-    form.setFieldError("root", responseError.message)
+    form.setFieldError(
+      "root",
+      (responseError as unknown as ErrorResponseType).errors?.[0] ??
+        responseError.message
+    )
 
     if (responseError.errors) {
       for (const key in responseError.errors) {
