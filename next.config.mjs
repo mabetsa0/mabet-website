@@ -51,7 +51,7 @@ const nextConfig = withNextIntl({
       },
       {
         source: "/gathern",
-        destination: "/ar",
+        destination: "/ar/units",
         permanent: true,
       },
     ]
