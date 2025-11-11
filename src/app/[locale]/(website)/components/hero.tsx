@@ -17,6 +17,8 @@ export default async function Hero() {
           src={heroBackground}
           alt="background"
           className="w-full h-full object-cover  absolute inset-0"
+          fetchPriority="high"
+          loading="eager"
         />
         <div className="container relative text-white mx-auto">
           <Stack gap={"xl"} mt={{ md: "90" }}>

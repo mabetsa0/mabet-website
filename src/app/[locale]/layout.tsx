@@ -51,7 +51,7 @@ export default async function LocaleLayout({
     >
       <head>
         <ColorSchemeScript />
-        {/* <Scripts /> */}
+        <Scripts />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
         <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
