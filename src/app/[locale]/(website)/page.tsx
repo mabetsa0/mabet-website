@@ -16,9 +16,9 @@ import TopRatedUnits from "./components/top-rated-units"
 import UnitTypes from "./components/unit-types"
 import WhyMabet from "./components/why-mabet"
 import dynamic from "next/dynamic"
+import DebugClient from "@/components/common/debug-component"
 const Blogs = dynamic(async () => import("./components/blogs"))
 
-export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
 }
@@ -38,6 +38,8 @@ export default async function Page({
 
   return (
     <>
+      <DebugClient label="Page" />
+
       <Hero />
       <Suspense
         fallback={

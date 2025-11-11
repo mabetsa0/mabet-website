@@ -14,6 +14,7 @@ import MyMantineProvider from "../mantine-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
 import { TestTube2 } from "lucide-react"
+import DebugClient from "@/components/common/debug-component"
 
 const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -50,7 +51,7 @@ export default async function LocaleLayout({
     >
       <head>
         <ColorSchemeScript />
-        <Scripts />
+        {/* <Scripts /> */}
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
         <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
@@ -60,9 +61,12 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider>
                   <InitSession initialValue={session} />
                   {children}
-                 {process.env.NEXT_PUBLIC_TEST == "true" && <div className="fixed bottom-4 right-1 p-0.5 bg-gray-200 rounded-full z-10">
-                      <TestTube2 className="text-primary"/>
-                  </div>}
+                  {process.env.NEXT_PUBLIC_TEST == "true" && (
+                    <div className="fixed bottom-4 right-1 p-0.5 bg-gray-200 rounded-full z-10">
+                      <TestTube2 className="text-primary" />
+                    </div>
+                  )}
+                  <DebugClient label="Layout" />
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

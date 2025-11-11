@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 
 import { Unit } from "@/@types"
 import { Carousel } from "@mantine/carousel"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import UnitCard from "@/components/common/unit-card"
 import { ActionIcon, Group, Text, Title } from "@mantine/core"
 import { useRef } from "react"
