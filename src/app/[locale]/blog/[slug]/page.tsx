@@ -16,6 +16,7 @@ import Pagination from "@/components/blog/pagination"
 import PostBody from "@/components/blog/post-body"
 import PostHeader from "@/components/blog/post-header"
 import SectionSeparator from "@/components/blog/section-separator"
+import { ErrorResponse } from "@/@types/error"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -82,7 +83,13 @@ export default async function Post({
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       return (
-        <ErrorUi error={error.response?.data?.message || "حصلت مشكلة ما"} />
+        <ErrorUi
+          error={
+            (error.response?.data as ErrorResponse).message ||
+            (error.response?.data as ErrorResponse).errors?.[0] ||
+            "حصلت مشكلة ما"
+          }
+        />
       )
     }
     if ("message" in error) {

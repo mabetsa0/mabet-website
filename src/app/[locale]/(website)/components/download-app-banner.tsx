@@ -1,40 +1,40 @@
-"use client";
-import { Button, CloseButton, Container, Group, Text } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config";
-import { useTranslations } from "next-intl";
-import { mabetLogo } from "@/assets";
-import Image from "next/image";
+"use client"
+import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
+import { useEffect, useState } from "react"
+import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
+import { useTranslations } from "next-intl"
+import { mabetLogo } from "@/assets"
+import Image from "next/image"
 
 export default function DownloadAppBanner({
   isVisible,
   setIsVisible,
 }: {
-  isVisible: boolean;
-  setIsVisible: (isVisible: boolean) => void;
+  isVisible: boolean
+  setIsVisible: (isVisible: boolean) => void
 }) {
-  const t = useTranslations("header");
+  const t = useTranslations("header")
 
   useEffect(() => {
     try {
       const stored =
         typeof window !== "undefined"
           ? localStorage.getItem(DOWNLOAD_APP_BANNER_KEY)
-          : "1";
-      setIsVisible(!stored);
+          : "1"
+      setIsVisible(!stored)
     } catch {
-      setIsVisible(true);
+      setIsVisible(true)
     }
-  }, []);
+  }, [])
 
   const handleClose = () => {
     try {
-      localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1");
+      localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1")
     } catch {}
-    setIsVisible(false);
-  };
+    setIsVisible(false)
+  }
 
-  if (!isVisible) return null;
+  if (!isVisible) return null
 
   return (
     <div
@@ -78,11 +78,10 @@ export default function DownloadAppBanner({
             aria-label="Close banner"
             onClick={handleClose}
             variant="white"
-            className="text-white"
             size="sm"
           />
         </Group>
       </Container>
     </div>
-  );
+  )
 }

@@ -151,6 +151,20 @@ const MobilePaymentButton = ({
         paymentURL = madfuPayment.data.data.image
       }
 
+      if (args.payment_method === "tamara") {
+        const tamaraPayment = await Mabet.get<PaymentResponse>(
+          `/payment/${params.booking_code}/pay-by-tamara`,
+          {
+            params: {
+              use_wallet: args.use_wallet,
+              coupon: args.coupon,
+              private: isPrivate ? 1 : undefined,
+            },
+          }
+        )
+        paymentURL = tamaraPayment.data.data.redirect_url
+      }
+
       // if (args.payment_method === "wallet") {
       //   const walletPayment = await Mabeet.post<PaymentResponse>(
       //     `/payment/${params.booking_code}/approve`,
@@ -172,7 +186,7 @@ const MobilePaymentButton = ({
       setError(
         (error.response?.data as { error: { message: string } })?.error
           ?.message ||
-          (error.response?.data as ErrorResponse)?.message ||
+          (error.response?.data as ErrorResponse).message ||
           error.message
       )
     },

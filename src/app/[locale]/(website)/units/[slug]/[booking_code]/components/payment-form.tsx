@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { applePay, mada, madfu, masterCard, visa } from "@/assets"
+import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import {
   Divider,
@@ -170,6 +170,25 @@ const PaymentForm = (booking: BookingDetails) => {
             description={
               <Group component={"span"}>
                 <img alt="madfu" src={madfu.src} />
+                <Text c={"#767676"} component="span">
+                  {t("madfu-description")}
+                </Text>
+              </Group>
+            }
+          />
+          <Divider />
+
+          <Radio
+            size="lg"
+            value={"tamara"}
+            label={t("tamara")}
+            classNames={{
+              label: "font-bold",
+              description: "-ms-2.5 mt-1",
+            }}
+            description={
+              <Group component={"span"}>
+                <img alt="tamara" src={tamara.src} />
                 <Text c={"#767676"} component="span">
                   {t("madfu-description")}
                 </Text>

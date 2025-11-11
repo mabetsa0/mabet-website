@@ -126,69 +126,10 @@ const MobileCreateBookingButton = () => {
         <Stack py={"xs"} justify="center" align="center">
           <Text c={"red"}>
             {axios.isAxiosError(error)
-              ? (error.response?.data as ErrorResponse).message
+              ? (error.response?.data as ErrorResponse).message ||
+                (error.response?.data as ErrorResponse).errors?.[0]
               : t("errors.unknown-error")}
           </Text>
-        </Stack>
-      ) : null}
-      {status === "success" ? (
-        <div>
-          <SimpleGrid mb={"xs"} cols={2}>
-            <div>
-              {prices?.discount ? (
-                <Text className="text-[#767676] text-[12px]  line-through">
-                  {" "}
-                  {Number(prices.sub_price)} <RiyalIcon />
-                  <span className="text-[10px]">/{prices.duration_text}</span>
-                </Text>
-              ) : null}
-              <Group gap={"4"}>
-                <Title order={5} c={"#188078"}>
-                  {prices?.price_plain}
-                  <RiyalIcon />
-                </Title>
-                <Text className="text-[#767676] text-sm">
-                  /{t("general.night")}
-                </Text>
-              </Group>
-            </div>
-            <Stack gap={4}>
-              <Group wrap="nowrap" justify="space-between">
-                <Text c={"#767676"}>
-                  {t("general.from")}{" "}
-                  {from ? (
-                    <span className=" font-bold text-primary">
-                      {dayjs(from).format("DD")}
-                    </span>
-                  ) : null}{" "}
-                  {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
-                  <span className=" font-bold text-primary">
-                    {to ? dayjs(to).format("DD") : null}
-                  </span>{" "}
-                  {to ? dayjs(to).format("/ MMMM") : null}
-                </Text>
-              </Group>
-              <Text size="sm" fw={500}>
-                {t("unit.total")} {prices?.duration_text} {prices?.full_payment}{" "}
-                <RiyalIcon />
-              </Text>
-            </Stack>
-          </SimpleGrid>
-
-          <Button
-            fullWidth
-            loading={createBookingMutation.isPending}
-            onClick={handleCreateBooking}
-          >
-            {t("unit.create-booking-mobile")}
-          </Button>
-        </div>
-      ) : (
-        <div>
-          <p className="text-red-500 text-center mb-1">
-            {t("unit-card.not-avalibel")}
-          </p>
-
           <Button
             fullWidth
             onClick={() => {
@@ -197,8 +138,59 @@ const MobileCreateBookingButton = () => {
           >
             {t("change-search-dates")}
           </Button>
-        </div>
-      )}
+        </Stack>
+      ) : null}
+      {status === "success" ? (
+        <SimpleGrid mb={"xs"} cols={2}>
+          <div>
+            {prices?.discount ? (
+              <Text className="text-[#767676] text-[12px]  line-through">
+                {" "}
+                {Number(prices.sub_price)} <RiyalIcon />
+                <span className="text-[10px]">/{prices.duration_text}</span>
+              </Text>
+            ) : null}
+            <Group gap={"4"}>
+              <Title order={5} c={"#188078"}>
+                {prices?.price_plain}
+                <RiyalIcon />
+              </Title>
+              <Text className="text-[#767676] text-sm">
+                /{t("general.night")}
+              </Text>
+            </Group>
+          </div>
+          <Stack gap={4}>
+            <Group wrap="nowrap" justify="space-between">
+              <Text c={"#767676"}>
+                {t("general.from")}{" "}
+                {from ? (
+                  <span className=" font-bold text-primary">
+                    {dayjs(from).format("DD")}
+                  </span>
+                ) : null}{" "}
+                {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
+                <span className=" font-bold text-primary">
+                  {to ? dayjs(to).format("DD") : null}
+                </span>{" "}
+                {to ? dayjs(to).format("/ MMMM") : null}
+              </Text>
+            </Group>
+            <Text size="sm" fw={500}>
+              {t("unit.total")} {prices?.duration_text} {prices?.full_payment}{" "}
+              <RiyalIcon />
+            </Text>
+          </Stack>
+        </SimpleGrid>
+      ) : null}
+
+      <Button
+        fullWidth
+        loading={createBookingMutation.isPending}
+        onClick={handleCreateBooking}
+      >
+        {t("unit.create-booking-mobile")}
+      </Button>
     </Box>
   )
 }

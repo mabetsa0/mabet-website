@@ -57,7 +57,9 @@ import noResults from "@/assets/no-results.svg"
 import useFilters from "../hooks/use-filters"
 import { countAppliedFilters } from "../types/search-params"
 import { parseAsString, useQueryState } from "nuqs"
+import { useSession } from "@/lib/session-store"
 const Results = () => {
+  const session = useSession()
   const t = useTranslations()
   const searchParams = useSearchParams()
   const [_, setFilters] = useFilters()
@@ -181,7 +183,7 @@ const Results = () => {
                     <Text c={"dark"} fw={700} fz={14}>
                       {searchedUnit}
                     </Text>
-                    <Group gap={"xs"}>
+                    <Group gap={"xs"} wrap="nowrap">
                       <Text fz={"12"}>{searchedUnitType}</Text>
                       {searchParams.get("from") && searchParams.get("to") ? (
                         <Text fz={"12"}>

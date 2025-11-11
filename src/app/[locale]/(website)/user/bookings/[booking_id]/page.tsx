@@ -130,7 +130,7 @@ const page = async (props: Props) => {
               }}
             > */}
             <ul className="list-inside list-disc ps-1">
-              {booking.arrival_instructions.map((term, index) => (
+              {booking.arrival_instructions?.map((term, index) => (
                 <li key={index}>
                   {term.label}{" "}
                   {term.content_type === "phone" && (
@@ -205,7 +205,11 @@ const page = async (props: Props) => {
           <div className="space-y-0.5">
             <p className="text-2xl">{t("cancel-policy")}</p>
             <ul className="list-inside list-disc ps-1">
-              <li dangerouslySetInnerHTML={{ __html: booking.cancellation_text_html }} />
+              <li
+                dangerouslySetInnerHTML={{
+                  __html: booking.cancellation_text_html,
+                }}
+              />
             </ul>
           </div>
 
@@ -232,6 +236,7 @@ const page = async (props: Props) => {
       </Stack>
     )
   } catch (error) {
+    console.log("🚀 ~ page ~ error:", error)
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       console.log("🚀 ~ page ~ error:", error.response.data)
       notFound()

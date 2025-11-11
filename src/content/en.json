@@ -12,7 +12,8 @@
     "login": "Log in / register",
     "profile": "Profile",
     "logout": "Logout",
-    "search": "Search"
+    "search": "Search",
+    "download-mabet-app": "Downlaod Mabet app for better experience "
   },
   "general": {
     "locales": {
@@ -379,7 +380,8 @@
     "apple-pay": "Online payment",
     "unit": {
       "pay": "Complete payment {value}"
-    }
+    },
+    "tamara": "Pay with Tamara"
   },
   "nafath": {
     "title": "Verify your account with nafath",
