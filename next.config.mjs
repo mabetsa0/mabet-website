@@ -33,6 +33,18 @@ const nextConfig = withNextIntl({
         source: "/en/sitemap/:path*",
         destination: "https://app.mabet.com.sa/en/sitemap/:path*",
       },
+      {
+        source: "/en/gathern",
+        destination: "/en/units",
+      },
+      {
+        source: "/ar/gathern",
+        destination: "/ar/units",
+      },
+      {
+        source: "/gathern",
+        destination: "/ar/units",
+      },
     ]
   },
   async redirects() {
@@ -49,11 +61,11 @@ const nextConfig = withNextIntl({
           },
         ],
       },
-      {
-        source: "/gathern",
-        destination: "/ar",
-        permanent: true,
-      },
+      // {
+      //   source: "/gathern",
+      //   destination: "/ar",
+      //   permanent: true,
+      // },
     ]
   },
   experimental: {
