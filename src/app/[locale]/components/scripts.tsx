@@ -1,14 +1,12 @@
 "use client"
 
-import React from "react"
 import Script from "next/script"
 import { GoogleTagManager } from "@next/third-parties/google"
 
-type Props = {}
 const HOTJAR_ID = 3899176
 const HOTJAR_VERSION = 6
 
-const Scripts = (props: Props) => {
+const Scripts = () => {
   return (
     <>
       <GoogleTagManager gtmId="GTM-NZRRZ8G7" />

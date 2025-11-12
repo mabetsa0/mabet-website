@@ -117,6 +117,7 @@ const MobileFilterDrawer = () => {
       unit_for: filters.unit_for,
     }
     form.initialize(initialValues)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const dirtyInputs = Object.values(form.getDirty()).filter(Boolean).length

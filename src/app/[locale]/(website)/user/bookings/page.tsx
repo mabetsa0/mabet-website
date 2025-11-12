@@ -1,25 +1,22 @@
 "use client"
-import React from "react"
 import { useTranslations } from "next-intl"
 import {
   Loader,
-  Stack,
-  Space,
-  Text,
+  ScrollArea,
   SegmentedControl,
   SimpleGrid,
-  ScrollArea,
+  Space,
+  Stack,
+  Text,
 } from "@mantine/core"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { ReservationsResponse } from "./@types"
 import BookingCard from "./components/booking-card"
 
-type Props = {}
-
-const Page = (props: Props) => {
+const Page = () => {
   const t = useTranslations()
 
   const types = [

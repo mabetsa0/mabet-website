@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import {
-  Badge,
   Button,
   Card,
   Divider,
@@ -26,9 +25,8 @@ import { CreateBookingResponse } from "@/@types/create-booking-response"
 import { ErrorResponse } from "@/@types/error"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
-import { sharpShape, logo, bayut } from "@/assets"
+import { bayut, logo } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
 import { useDate } from "../stores/use-date"
@@ -73,7 +71,6 @@ const Reservation = () => {
   })
 
   const t = useTranslations()
-  const auth = useAuthModal()
 
   // handle create booking
   const Router = useRouter()

@@ -5,7 +5,6 @@ import { notFound } from "next/navigation"
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core"
 import { TestTube2 } from "lucide-react"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
-import DebugClient from "@/components/common/debug-component"
 import GlobalDataContextProvider from "@/context/global-data-context"
 import { getServerSession } from "@/lib/get-server-session"
 import { routing } from "@/lib/i18n/routing"
@@ -66,7 +65,6 @@ export default async function LocaleLayout({
                       <TestTube2 className="text-primary" />
                     </div>
                   )}
-                  <DebugClient label="Layout" />
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

@@ -111,7 +111,7 @@ const NafathModal = () => {
         queryKey: ["user"],
       })
     }
-  }, [nafathData, onClose])
+  }, [nafathData, onClose, queryClient])
 
   // edit national id
   const editNationalId = () => {

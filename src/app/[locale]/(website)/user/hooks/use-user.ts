@@ -1,5 +1,4 @@
 "use client"
-import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { UserData, UserResponse } from "@/@types/user"
 import { useSession } from "@/lib/session-store"

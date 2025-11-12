@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
@@ -30,7 +30,9 @@ export default function DownloadAppBanner({
   const handleClose = () => {
     try {
       localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1")
-    } catch {}
+    } catch {
+      // ignore
+    }
     setIsVisible(false)
   }
 

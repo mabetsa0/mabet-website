@@ -1,18 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
-import { getTranslations } from "next-intl/server"
 import { Divider, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core"
-import {
-  licience,
-  logo,
-  madfu,
-  masterCard,
-  mada,
-  visa,
-  applePay,
-  tabby,
-} from "@/assets"
+import { applePay, logo, mada, madfu, masterCard, tabby, visa } from "@/assets"
 import { useUnitTypes } from "@/context/global-data-context"
 import { Link } from "@/lib/i18n/navigation"
 

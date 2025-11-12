@@ -1,0 +1,57 @@
+import { FlatCompat } from "@eslint/eslintrc"
+import prettier from "eslint-config-prettier/flat"
+import { dirname } from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  resolvePluginsRelativeTo: __dirname,
+})
+
+// Use individual configs to avoid the 'name' property issue
+// Load them separately and combine
+let nextConfigs = []
+try {
+  // Try loading core-web-vitals and typescript separately
+  const coreWebVitals = compat.config({
+    extends: ["plugin:@next/next/core-web-vitals"],
+  })
+  const typescript = compat.config({
+    extends: ["plugin:@typescript-eslint/recommended"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-expressions": 1,
+    },
+  })
+  nextConfigs = [...coreWebVitals, ...typescript]
+} catch (error) {
+  // Fallback: use extends but catch the error
+  console.warn("Warning: Could not load Next.js configs:", error.message)
+  nextConfigs = []
+}
+
+const eslintConfig = [
+  ...nextConfigs,
+  prettier,
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
+  },
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-empty-object-type": "warn",
+    },
+  },
+]
+
+export default eslintConfig

@@ -10,7 +10,7 @@ import { logout } from "@/services/logout"
 const UserButton = () => {
   const t = useTranslations("header")
   const { session, isPending, isAuthenticated } = useSession()
-  const [opened, { onOpen }] = useAuthModal()
+  const [_, { onOpen }] = useAuthModal()
   const matches = useMdScreen()
 
   if (isPending || !isAuthenticated)

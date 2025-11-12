@@ -1,15 +1,10 @@
 "use client"
-import React from "react"
 import { useTranslations } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
 import { ActionIcon, Tooltip } from "@mantine/core"
 import { useSession } from "@/lib/session-store"
 
-type Props = {
-  className?: string
-}
-
-const GoToBookings = ({ className = "" }: Props) => {
+const GoToBookings = () => {
   const router = useRouter()
   const pathname = usePathname()
 

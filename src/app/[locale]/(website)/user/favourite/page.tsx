@@ -8,12 +8,10 @@ import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { FavouritesResponse } from "./@type"
 
-type Props = {}
-
-const Page = (props: Props) => {
+const Page = () => {
   const t = useTranslations()
 
-  const [page, set] = useQueryState("page", parseAsInteger.withDefault(1))
+  const [page, _] = useQueryState("page", parseAsInteger.withDefault(1))
 
   const { data, status } = useQuery({
     queryKey: ["favourites", page],

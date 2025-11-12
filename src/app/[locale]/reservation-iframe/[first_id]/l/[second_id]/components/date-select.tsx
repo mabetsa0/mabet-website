@@ -85,7 +85,7 @@ const DateSelect = ({
   const handleDateChange = (values: [string | null, string | null]) => {
     const days = getDaysBetweenDates(values[0], values[1])
 
-    const hasBusyDaysInRange = busyDays.find((busyDay, i) => {
+    const hasBusyDaysInRange = busyDays.find((busyDay) => {
       return days.slice(0, -1).includes(busyDay)
     })
 

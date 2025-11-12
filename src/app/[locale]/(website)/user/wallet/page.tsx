@@ -1,22 +1,18 @@
 "use client"
 import { useTranslations } from "next-intl"
-import { Group, Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
+import { Group, Loader, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { parseAsInteger, useQueryState } from "nuqs"
-import UnitCard from "@/components/common/unit-card"
 import { RiyalIcon } from "@/components/icons"
 import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { WalletResponse } from "./@types"
-import AddToWallet from "./components/add-to-wallet"
 import WalletCard from "./components/wallet-card"
 
-type Props = {}
-
-const Page = (props: Props) => {
+const Page = () => {
   const t = useTranslations()
 
-  const [page, set] = useQueryState("page", parseAsInteger.withDefault(1))
+  const [page, _] = useQueryState("page", parseAsInteger.withDefault(1))
 
   const { data, status } = useQuery({
     queryKey: ["wallet", page],

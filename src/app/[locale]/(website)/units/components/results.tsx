@@ -1,5 +1,5 @@
 "use client"
-import { ComponentRef, ElementRef, Suspense, useEffect, useRef } from "react"
+import { ComponentRef, Suspense, useRef } from "react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
@@ -28,7 +28,6 @@ import {
   TicketPercent,
   WavesLadder,
 } from "lucide-react"
-import { parseAsString, useQueryState } from "nuqs"
 import noResults from "@/assets/no-results.svg"
 import UnitCard from "@/components/common/unit-card"
 import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbox"
@@ -37,7 +36,6 @@ import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-searc
 import ToggleFilterButton from "@/components/ui/toggle-filter-button"
 import { useCities, useUnitTypes } from "@/context/global-data-context"
 import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
 import {
   getDirections,
@@ -59,11 +57,9 @@ import UnitTypeFilter from "./filters/unit-type-filter"
 import Pagination from "./pagination"
 
 const Results = () => {
-  const session = useSession()
   const t = useTranslations()
   const searchParams = useSearchParams()
   const [_, setFilters] = useFilters()
-  const [page] = useQueryState("page", parseAsString.withDefault(""))
 
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],

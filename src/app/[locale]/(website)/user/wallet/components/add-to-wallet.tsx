@@ -1,19 +1,16 @@
 "use client"
-import React from "react"
 import { useTranslations } from "next-intl"
-import { Button, Stack, Text, TextInput, Space, Group } from "@mantine/core"
+import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useDisclosure } from "@mantine/hooks"
 import { notifications } from "@mantine/notifications"
-import { Wallet, Plus } from "lucide-react"
+import { Plus, Wallet } from "lucide-react"
 import ModalDrawer from "@/components/common/modal-drawer"
 import { RiyalIcon } from "@/components/icons"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 
-type Props = {}
-
-const AddToWallet = (props: Props) => {
+const AddToWallet = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const t = useTranslations()
 

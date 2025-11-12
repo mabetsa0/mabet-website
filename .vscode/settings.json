@@ -1,6 +1,9 @@
 {
+  "eslint.enable": true,
+  "eslint.useFlatConfig": false,
+  "eslint.experimental.useFlatConfig": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,

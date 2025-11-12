@@ -10,9 +10,9 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core"
-import { isEmail, useForm } from "@mantine/form"
+import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
-import { File, Mail, Phone, UserIcon } from "lucide-react"
+import { File, Mail } from "lucide-react"
 import Mabeet from "@/api"
 import { handleFormError } from "@/utils/handle-form-errors"
 

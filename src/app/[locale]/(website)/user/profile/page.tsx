@@ -32,10 +32,11 @@ const Profile = () => {
     if (status === "success") {
       form.initialize({ email: user.email })
     }
-  }, [status])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, user.email])
   const onSubmit = form.onSubmit(async (data) => {
     try {
-      const response = await Mabeet.post("/user/update", data)
+      await Mabeet.post("/user/update", data)
       updateSession({
         ...session!,
         user: {

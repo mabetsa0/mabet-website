@@ -25,7 +25,7 @@ import ModalDrawer from "../modal-drawer"
 
 const UserDataModal = () => {
   const { session, updateSession } = useSession()
-  const [nafath, { onOpen: onOpenNafath }] = useNafath()
+  const [_, { onOpen: onOpenNafath }] = useNafath()
 
   const t = useTranslations("user-data-modal")
   const [opened, { onClose }] = useUserDataModal()

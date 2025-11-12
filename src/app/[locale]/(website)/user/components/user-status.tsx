@@ -2,14 +2,9 @@
 import { useTranslations } from "next-intl"
 import { Grid, Group, Stack, Text } from "@mantine/core"
 import { CalendarRange, Gift, WalletMinimal } from "lucide-react"
-import { Session } from "@/@types/user"
 import useUser from "../hooks/use-user"
 
-type Props = {
-  session: Session
-}
-
-const UserStatus = (props: Props) => {
+const UserStatus = () => {
   const { user } = useUser()
 
   const t = useTranslations("user")

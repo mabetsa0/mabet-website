@@ -5,7 +5,6 @@ import { setRequestLocale } from "next-intl/server"
 import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import { Loader } from "@mantine/core"
-import DebugClient from "@/components/common/debug-component"
 import Footer from "@/components/common/footer"
 import { routing } from "@/lib/i18n/routing"
 import { SEO } from "@/services/get-seo"
@@ -39,8 +38,6 @@ export default async function Page({
 
   return (
     <>
-      <DebugClient label="Page" />
-
       <Hero />
       <Suspense
         fallback={

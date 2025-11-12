@@ -7,7 +7,6 @@ import {
   Group,
   SimpleGrid,
   Space,
-  Spoiler,
   Stack,
   Text,
 } from "@mantine/core"

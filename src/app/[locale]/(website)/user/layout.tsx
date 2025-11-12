@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Grid, GridCol } from "@mantine/core"
 import { Session } from "@/@types/user"
 import { dotBg } from "@/assets"
@@ -32,16 +33,17 @@ export default async function Layout({
           alt="dots"
           className="absolute h-full w-full object-cover"
           src={dotBg.src}
+          loading="lazy"
         />
         <div className="relative container">
-          <UserStatus session={session} />
+          <UserStatus />
         </div>
       </section>
       <section className="relative">
         <div className="container">
           <Grid columns={4} className="md:-translate-y-9">
             <GridCol span={{ base: 4, md: "content" }} className="relative">
-              <SideBar session={session} />
+              <SideBar />
             </GridCol>
             <GridCol
               className="break md:mt-[9.5rem] md:max-w-[calc(62em-300px)] lg:max-w-[calc(75em-300px)] xl:max-w-[calc(88em-300px)]"

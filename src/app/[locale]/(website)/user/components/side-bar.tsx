@@ -18,17 +18,12 @@ import {
   UserRound,
   Wallet,
 } from "lucide-react"
-import { Session } from "@/@types/user"
 import { useNafath } from "@/hooks/use-nafath"
 import { cn } from "@/lib/cn"
 import { Link, usePathname, useRouter } from "@/lib/i18n/navigation"
 import useUser from "../hooks/use-user"
 
-type Props = {
-  session: Session
-}
-
-const SideBar = (props: Props) => {
+const SideBar = () => {
   const { user } = useUser()
 
   const pathname = usePathname()

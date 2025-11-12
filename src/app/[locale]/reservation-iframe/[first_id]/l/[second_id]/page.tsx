@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { notFound } from "next/navigation"
 import { Box } from "@mantine/core"
 import axios from "axios"
 import { UnitContextProvider } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"

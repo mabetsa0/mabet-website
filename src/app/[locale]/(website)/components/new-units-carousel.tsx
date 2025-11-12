@@ -1,7 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
-import { useRef } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Text, Title } from "@mantine/core"
