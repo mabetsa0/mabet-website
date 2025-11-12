@@ -357,7 +357,9 @@
     "mobile-reservation-details": "ملخص الحجز",
     "invalid-coupon": "كود خصم غير صالح",
     "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
-    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  "
+    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  ",
+    "partner-data": "عن المضيف",
+    "view-profile": "عرض صفحة المضيف"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"

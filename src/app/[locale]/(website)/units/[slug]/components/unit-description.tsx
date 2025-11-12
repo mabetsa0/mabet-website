@@ -7,6 +7,7 @@ import { torism } from "@/assets"
 import { useUnitData } from "../context/unit-context"
 import AboutUnit from "./about-unit"
 import Features from "./features"
+import UnitPartnerData from "./unit-partner-data"
 
 const UnitDescription = () => {
   const unit = useUnitData()
@@ -30,6 +31,11 @@ const UnitDescription = () => {
           </Group>
         </Stack>
       </Stack>
+      <Space />
+      <Divider />
+      <Space />
+      <UnitPartnerData />
+      <Space />
       <Divider />
       <Space />
       <Features />

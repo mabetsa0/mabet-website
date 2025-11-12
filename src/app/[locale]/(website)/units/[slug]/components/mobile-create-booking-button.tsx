@@ -185,13 +185,15 @@ const MobileCreateBookingButton = () => {
         </SimpleGrid>
       ) : null}
 
-      <Button
-        fullWidth
-        loading={createBookingMutation.isPending}
-        onClick={handleCreateBooking}
-      >
-        {t("unit.create-booking-mobile")}
-      </Button>
+      {status === "success" ? (
+        <Button
+          fullWidth
+          loading={createBookingMutation.isPending}
+          onClick={handleCreateBooking}
+        >
+          {t("unit.create-booking-mobile")}
+        </Button>
+      ) : null}
     </Box>
   )
 }

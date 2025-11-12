@@ -88,7 +88,7 @@ const nextConfig = withBundleAnalyzer(
       ],
 
       staleTimes: {
-        dynamic: 30,
+        dynamic: 60,
         static: 180,
       },
     },
