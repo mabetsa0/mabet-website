@@ -1,17 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import "@/app/transition-css.css"
-import { RiyalIcon } from "@/components/icons"
-import { CustomNumberInput } from "@/components/ui/number-input"
-import SelectDropdownSearch from "@/components/ui/select-with-search"
-import { useCities, useUnitTypes } from "@/context/global-data-context"
-import {
-  getDirections,
-  getFacilities,
-  getPools,
-  getRegions,
-} from "@/services/lists"
-import { handleFormError } from "@/utils/handle-form-errors"
+import { useEffect } from "react"
+import { useTranslations } from "next-intl"
 import {
   ActionIcon,
   Button,
@@ -34,11 +24,21 @@ import { useDisclosure, useForceUpdate } from "@mantine/hooks"
 import { useQuery } from "@tanstack/react-query"
 import "dayjs/locale/ar"
 import { Search, SlidersHorizontal, Star } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-import { useEffect } from "react"
 import { Drawer } from "vaul"
+import "@/app/transition-css.css"
+import { RiyalIcon } from "@/components/icons"
+import { CustomNumberInput } from "@/components/ui/number-input"
+import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
+import {
+  getDirections,
+  getFacilities,
+  getPools,
+  getRegions,
+} from "@/services/lists"
+import { handleFormError } from "@/utils/handle-form-errors"
 import useFilters from "../../hooks/use-filters"
+
 const MobileFilterDrawer = () => {
   const [opened, { close, open }] = useDisclosure()
   const t = useTranslations()
@@ -207,18 +207,18 @@ const MobileFilterDrawer = () => {
         </ActionIcon>
       </Drawer.Trigger>
       <Drawer.Portal>
-        <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
-        <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
-          <div className="   overflow-hidden rounded-t-lg bg-white">
+        <Drawer.Overlay className="fixed inset-0 z-[100] bg-black/40" />
+        <Drawer.Content className="fixed right-0 bottom-0 left-0 z-[101] h-fit outline-none">
+          <div className="overflow-hidden rounded-t-lg bg-white">
             <div className="flex justify-center pt-0.5">
-              <div className="w-[70px] h-[4px] rounded bg-gray-300"></div>
+              <div className="h-[4px] w-[70px] rounded bg-gray-300"></div>
             </div>
-            <Drawer.Title className="font-bold text-xl text-center py-1 px-1">
+            <Drawer.Title className="px-1 py-1 text-center text-xl font-bold">
               {/* <Group wrap="nowrap" gap={"xs"} align="center"> */}
               {/* <Drawer.Close>
                   <Burger component={"span"} opened size={"sm"} />
                 </Drawer.Close> */}
-              <span className="w-full block text-center">
+              <span className="block w-full text-center">
                 {t("search.filter.mobile-title")}
               </span>
               {/* <div className="w-2"></div> */}
@@ -226,7 +226,7 @@ const MobileFilterDrawer = () => {
             </Drawer.Title>
             <Divider />
             <form onSubmit={onSubmit}>
-              <ScrollArea h={"70svh"} className="px-1 ">
+              <ScrollArea h={"70svh"} className="px-1">
                 <Stack gap={"lg"}>
                   <Space />
                   {/* unit code filter */}
@@ -403,14 +403,14 @@ const MobileFilterDrawer = () => {
                                 gap={"4"}
                                 w={"100%"}
                               >
-                                <Checkbox.Indicator className=" absolute inset-0 opacity-0" />
+                                <Checkbox.Indicator className="absolute inset-0 opacity-0" />
                                 <Star
-                                  className="text-[#FFE234] duration-200 fill-[#FFE234] group-data-checked:text-white group-data-checked:fill-white"
+                                  className="fill-[#FFE234] text-[#FFE234] duration-200 group-data-checked:fill-white group-data-checked:text-white"
                                   strokeWidth={1.25}
                                 />
                                 <Text
                                   fw={500}
-                                  className="group-data-checked:text-white duration-200"
+                                  className="duration-200 group-data-checked:text-white"
                                 >
                                   {ele === 3 ? "<" : ""} {ele}
                                 </Text>
@@ -643,12 +643,12 @@ const MobileFilterDrawer = () => {
               <SimpleGrid
                 pb={"md"}
                 pt={"xs"}
-                className=" [box-shadow:_0px_-16px_40px_0px_#0000001F]"
+                className="[box-shadow:_0px_-16px_40px_0px_#0000001F]"
                 cols={2}
               >
                 <Button type="submit">
                   {t("general.apply-filters")}
-                  <span className="w-1.5 h-1.5 ms-1  inline-flex items-center justify-center shrink-0 aspect-square rounded-4xl bg-white text-primary">
+                  <span className="text-primary ms-1 inline-flex aspect-square h-1.5 w-1.5 shrink-0 items-center justify-center rounded-4xl bg-white">
                     {dirtyInputs}
                   </span>
                 </Button>

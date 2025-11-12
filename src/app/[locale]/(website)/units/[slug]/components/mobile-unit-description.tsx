@@ -1,18 +1,19 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
-import { mabetLogo, madfu, sharpShape, tabby, torism } from "@/assets"
-import { RiyalIcon } from "@/components/icons"
+import { useTranslations } from "next-intl"
 import { Badge, Divider, Group, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { QrCode } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsIsoDate, useQueryStates } from "nuqs"
+import { mabetLogo, madfu, sharpShape, tabby, torism } from "@/assets"
+import { RiyalIcon } from "@/components/icons"
 import { useUnitData } from "../context/unit-context"
 import { GetUnitAvailability } from "../get-unit-availability"
 import AboutUnit from "./about-unit"
 import Features from "./features"
 import ReservationDetails from "./reservation-details"
+
 const MobileUnitDescription = () => {
   const unit = useUnitData()
   const t = useTranslations()
@@ -48,7 +49,7 @@ const MobileUnitDescription = () => {
         align="start"
         p={"sm"}
         my={"xs"}
-        className="rounded border-primary border"
+        className="border-primary rounded border"
         bg={"#18807826"}
       >
         <img alt="mabet" src={mabetLogo.src} width={42} />
@@ -70,7 +71,7 @@ const MobileUnitDescription = () => {
         {prices?.discount ? (
           <Badge
             h={40}
-            className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+            className="relative min-w-7 rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
             classNames={{
               label: "text-start text-xs",
             }}
@@ -80,7 +81,7 @@ const MobileUnitDescription = () => {
               color: "#E8123D",
             }}
             leftSection={
-              <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+              <div className="flex aspect-square w-2 items-center justify-center rounded-[5px] bg-white p-[4px] text-xs font-bold">
                 {prices.discount_percent_text}%
               </div>
             }
@@ -89,7 +90,7 @@ const MobileUnitDescription = () => {
             <img
               alt="sharp"
               src={sharpShape.src}
-              className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
+              className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
             />
           </Badge>
         ) : null}
@@ -99,13 +100,13 @@ const MobileUnitDescription = () => {
       <Divider />
       <Space />
       {unit.tabby.enabled ? (
-        <Group p={"sm"} className="border border-[#F3F3F3] rounded">
+        <Group p={"sm"} className="rounded border border-[#F3F3F3]">
           <img src={tabby.src} alt="tabby" width={63} />
           <Text c={"#767676"}>{unit.tabby.tabby_text}</Text>
         </Group>
       ) : null}
       {unit.madfu.enabled ? (
-        <Group p={"sm"} className="border border-[#F3F3F3] rounded">
+        <Group p={"sm"} className="rounded border border-[#F3F3F3]">
           <img src={madfu.src} alt="madfu" width={63} />
           <Text c={"#767676"}>{unit.madfu.tabby_text}</Text>
         </Group>
@@ -123,7 +124,7 @@ const MobileUnitDescription = () => {
 
           <Group
             wrap="nowrap"
-            className="border w-fit rounded-md py-0.5 px-1.5 border-primary"
+            className="border-primary w-fit rounded-md border px-1.5 py-0.5"
           >
             <img className="w-3" src={torism.src} alt="licence" />
             <p>{unit.licence.license_text}</p>

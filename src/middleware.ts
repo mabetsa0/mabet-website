@@ -1,6 +1,6 @@
-import { routing } from "@/lib/i18n/routing"
 import createMiddleware from "next-intl/middleware"
 import { NextRequest, NextResponse, userAgent } from "next/server"
+import { routing } from "@/lib/i18n/routing"
 
 // export default async function middleware(request: NextRequest) {
 //   const handleI18nRouting = createMiddleware(routing)

@@ -1,8 +1,6 @@
 import Link from "next/link"
-import { formateDate } from "@/utils/date-formatter"
-
 import { type Blog } from "@/@types/blog-response"
-
+import { formateDate } from "@/utils/date-formatter"
 import Avatar from "./avatar"
 import CoverImage from "./cover-image"
 

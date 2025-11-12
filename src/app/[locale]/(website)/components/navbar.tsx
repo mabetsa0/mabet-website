@@ -1,44 +1,43 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core";
-
-import { logo } from "@/assets";
-import UserButton from "@/components/common/auth/user-button";
-import LanguageSwitcher from "@/components/common/lang-switch";
-import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config";
-import { Link } from "@/lib/i18n/navigation";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import DownloadAppBanner from "./download-app-banner";
+"use client"
+import React, { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
+import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core"
+import { useDisclosure, useMediaQuery } from "@mantine/hooks"
+import { logo } from "@/assets"
+import UserButton from "@/components/common/auth/user-button"
+import LanguageSwitcher from "@/components/common/lang-switch"
+import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
+import { Link } from "@/lib/i18n/navigation"
+import DownloadAppBanner from "./download-app-banner"
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle }] = useDisclosure()
 
-  const t = useTranslations("header");
-  const pathname = usePathname();
-  const matches = useMediaQuery("(max-width: 62em)");
-  const [isVisible, setIsVisible] = useState(false);
+  const t = useTranslations("header")
+  const pathname = usePathname()
+  const matches = useMediaQuery("(max-width: 62em)")
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     try {
       const stored =
         typeof window !== "undefined"
           ? localStorage.getItem(DOWNLOAD_APP_BANNER_KEY)
-          : "1";
-      setIsVisible(!stored);
+          : "1"
+      setIsVisible(!stored)
     } catch {
-      setIsVisible(true);
+      setIsVisible(true)
     }
-  }, []);
+  }, [])
   if (pathname.includes("units") && matches)
     return (
       <>
         <DownloadAppBanner isVisible={isVisible} setIsVisible={setIsVisible} />
         {children}
       </>
-    );
+    )
   return (
     <>
       <AppShell
@@ -60,7 +59,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
           <Group
             wrap="nowrap"
-            className="max-w-7xl h-[65px] md:h-full mx-auto max-sm:justify-between max-sm:bg-white"
+            className="mx-auto h-[65px] max-w-7xl max-sm:justify-between max-sm:bg-white md:h-full"
             py="xs"
             px="md"
           >
@@ -71,7 +70,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
               size="sm"
             />
             <Group
-              className="  justify-center md:justify-between"
+              className="justify-center md:justify-between"
               wrap="nowrap"
               style={{ flex: 1 }}
             >
@@ -83,7 +82,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   <UnstyledButton
                     component={Link}
                     href={"/units"}
-                    className={"block px-xs py-md rounded-md  font-medium"}
+                    className={"px-xs py-md block rounded-md font-medium"}
                   >
                     {t("search")}
                   </UnstyledButton>
@@ -91,7 +90,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                     component="a"
                     target="_blank"
                     href={APP_LINK}
-                    className={"block px-xs py-md rounded-md  font-medium"}
+                    className={"px-xs py-md block rounded-md font-medium"}
                   >
                     {t("download-app")}
                   </UnstyledButton>
@@ -101,7 +100,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   {t("contact-us")}
                 </UnstyledButton> */}
                   <UnstyledButton
-                    className={"block px-xs py-md rounded-md  font-medium"}
+                    className={"px-xs py-md block rounded-md font-medium"}
                     component={Link}
                     href={"/blog"}
                   >
@@ -126,7 +125,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           <UnstyledButton
             component={Link}
             href={"/units"}
-            className={"block px-xs py-md rounded-md  font-medium"}
+            className={"px-xs py-md block rounded-md font-medium"}
           >
             {t("search")}
           </UnstyledButton>
@@ -134,7 +133,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             component="a"
             target="_blank"
             href={APP_LINK}
-            className={"block px-xs py-md rounded-md  font-medium"}
+            className={"px-xs py-md block rounded-md font-medium"}
           >
             {t("download-app")}
           </UnstyledButton>
@@ -144,7 +143,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           <UnstyledButton
             component={Link}
             href={"/blog"}
-            className={"block px-xs py-md rounded-md  font-medium"}
+            className={"px-xs py-md block rounded-md font-medium"}
           >
             {t("blog")}
           </UnstyledButton>
@@ -154,5 +153,5 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         <AppShell.Main>{children}</AppShell.Main>
       </AppShell>
     </>
-  );
+  )
 }

@@ -3,9 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "@/assets"
-
-import "./globals.css"
 import { cn } from "@/lib/cn"
+import "./globals.css"
 
 export default function NotFound() {
   return (
@@ -30,7 +29,7 @@ export default function NotFound() {
                 <Link
                   href="/ar"
                   className={cn(
-                    ` block px-2 bg-[#35a89e] py-0.5 rounded-[50px] whitespace-nowrap text-white hover:bg-white hover:text-[#35a89e] duration-150 hover:shadow-md  border border-[#35a89e]  mx-auto w-fit   `
+                    `mx-auto block w-fit rounded-[50px] border border-[#35a89e] bg-[#35a89e] px-2 py-0.5 whitespace-nowrap text-white duration-150 hover:bg-white hover:text-[#35a89e] hover:shadow-md`
                   )}
                 >
                   Back to home page

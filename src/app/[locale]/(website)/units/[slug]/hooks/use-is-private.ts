@@ -1,6 +1,6 @@
-import { PRIVATE_LINK } from "@/config"
-import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useParams } from "next/navigation"
+import { PRIVATE_LINK } from "@/config"
 
 type PrivateItem = {
   unit_id: number

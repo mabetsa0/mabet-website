@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import { useTranslations } from "next-intl"
 import { Group, Stack, Text } from "@mantine/core"
 import { Expand, MapPin, Star, Users } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { useUnitData } from "../context/unit-context"
 
 const AboutUnit = () => {
@@ -9,7 +9,7 @@ const AboutUnit = () => {
   const t = useTranslations()
   return (
     <Stack>
-      <h3 className="text-h4 md:text-h3 font-medium hidden md:block">
+      <h3 className="text-h4 md:text-h3 hidden font-medium md:block">
         {t("unit.about-unit")}
       </h3>
       <Stack gap={"md"}>
@@ -22,7 +22,7 @@ const AboutUnit = () => {
                 {t("unit.ratings-message", {
                   number: unit.reviews_count,
                 })}{" "}
-                <span className="font-medium text-primary">({unit.stars})</span>
+                <span className="text-primary font-medium">({unit.stars})</span>
               </Text>
             </div>
           </Group>
@@ -40,7 +40,7 @@ const AboutUnit = () => {
             <Text className="text-xl font-medium">{t("unit.area")}</Text>
             <Text className="text-[#767676]">
               {t("unit.area-message")}{" "}
-              <span className="font-medium text-primary">{unit.area}</span>
+              <span className="text-primary font-medium">{unit.area}</span>
             </Text>
           </div>
         </Group>
@@ -50,7 +50,7 @@ const AboutUnit = () => {
             <Text className="text-xl font-medium">{t("unit.unit-for")}</Text>
             <Text className="text-[#767676]">
               {t("unit.unit-for-message")}{" "}
-              <span className="font-medium text-primary">
+              <span className="text-primary font-medium">
                 {unit.unit_for_sentence}
               </span>
             </Text>

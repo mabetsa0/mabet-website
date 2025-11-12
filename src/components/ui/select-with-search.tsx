@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   Combobox,
   Group,
@@ -9,9 +10,8 @@ import {
   Text,
   useCombobox,
 } from "@mantine/core"
-import { useTranslations } from "next-intl"
-import { Check, Search } from "lucide-react"
 import { useUncontrolled } from "@mantine/hooks"
+import { Check, Search } from "lucide-react"
 
 type Props = {
   data: { value: string; label: string }[]
@@ -85,7 +85,7 @@ const SelectDropdownSearch = React.forwardRef<HTMLButtonElement, Props>(
             {...props}
           >
             {props.data.find((ele) => ele.value === _value)?.label || (
-              <Input.Placeholder className="text-gray-600 ">
+              <Input.Placeholder className="text-gray-600">
                 {props.placeholder}
               </Input.Placeholder>
             )}

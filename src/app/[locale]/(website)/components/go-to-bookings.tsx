@@ -1,8 +1,8 @@
 "use client"
 import React from "react"
+import { useTranslations } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
 import { ActionIcon, Tooltip } from "@mantine/core"
-import { useTranslations } from "next-intl"
 import { useSession } from "@/lib/session-store"
 
 type Props = {
@@ -27,7 +27,7 @@ const GoToBookings = ({ className = "" }: Props) => {
       <div>
         <ActionIcon
           className={
-            "fixed bottom-2 end-2 p-1 hover:-translate-y-0.5 duration-200"
+            "fixed end-2 bottom-2 p-1 duration-200 hover:-translate-y-0.5"
           }
           visibleFrom="sm"
           onClick={handleClick}
@@ -36,7 +36,7 @@ const GoToBookings = ({ className = "" }: Props) => {
           radius={"90px"}
         >
           <svg
-            className="w-7 h-7 text-white transition-transform duration-300 group-hover:scale-110"
+            className="h-7 w-7 text-white transition-transform duration-300 group-hover:scale-110"
             viewBox="0 0 128 128"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -53,7 +53,7 @@ const GoToBookings = ({ className = "" }: Props) => {
         </ActionIcon>
         <ActionIcon
           className={
-            "fixed bottom-2 end-2 p-0.5 hover:-translate-y-0.5 duration-200"
+            "fixed end-2 bottom-2 p-0.5 duration-200 hover:-translate-y-0.5"
           }
           hiddenFrom="sm"
           onClick={handleClick}
@@ -62,7 +62,7 @@ const GoToBookings = ({ className = "" }: Props) => {
           radius={"90px"}
         >
           <svg
-            className="w-7 h-7 text-white transition-transform duration-300 group-hover:scale-110"
+            className="h-7 w-7 text-white transition-transform duration-300 group-hover:scale-110"
             viewBox="0 0 128 128"
             xmlns="http://www.w3.org/2000/svg"
           >

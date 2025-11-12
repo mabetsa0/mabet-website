@@ -1,12 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { City } from "@/@types/cities"
-import { UnitType } from "@/@types/unit-types"
-import "@/app/transition-css.css"
-import { UnitTypeIcons } from "@/assets"
-import AutoHeight from "@/components/ui/auto-height"
-import { useCities, useUnitTypes } from "@/context/global-data-context"
-import { useRouter } from "@/lib/i18n/navigation"
+import { ComponentRef, useRef, useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import {
   ActionIcon,
   Burger,
@@ -30,11 +26,16 @@ import "dayjs/locale/ar"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Check, ChevronRight, Search } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
-import { useSearchParams } from "next/navigation"
-import { ComponentRef, useRef, useState } from "react"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 import { Drawer } from "vaul"
+import { City } from "@/@types/cities"
+import { UnitType } from "@/@types/unit-types"
+import "@/app/transition-css.css"
+import { UnitTypeIcons } from "@/assets"
+import AutoHeight from "@/components/ui/auto-height"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
+import { useRouter } from "@/lib/i18n/navigation"
+
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
 // Definition of form values is required
@@ -77,7 +78,7 @@ const SelectCity = ({ cities }: { cities: City[] }) => {
       <ScrollArea.Autosize h="50vh">
         <Stack gap={"xs"}>
           <UnstyledButton
-            className="py-xs flex gap-xs"
+            className="py-xs gap-xs flex"
             onClick={() => {
               form.setFieldValue("city_id", "0")
             }}
@@ -95,7 +96,7 @@ const SelectCity = ({ cities }: { cities: City[] }) => {
             .map((city) => {
               return (
                 <UnstyledButton
-                  className="py-xs flex gap-xs"
+                  className="py-xs gap-xs flex"
                   onClick={() => {
                     form.setFieldValue("city_id", city.id + "")
                   }}
@@ -139,7 +140,7 @@ const SelectUnitType = ({ unitTypes }: { unitTypes: UnitType[] }) => {
                   key={type.id}
                   radius="md"
                   value={type.id + ""}
-                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-1.5 py-1.5 relative"
+                  className="group data-[checked]:border-primary relative px-1.5 py-1.5 duration-300 data-[checked]:bg-[#18807826]"
                 >
                   <Group wrap="nowrap" align="flex-start">
                     <Radio.Indicator className="absolute opacity-0" />
@@ -158,7 +159,7 @@ const SelectUnitType = ({ unitTypes }: { unitTypes: UnitType[] }) => {
                       <Text
                         fz={"sm"}
                         fw={700}
-                        className="duration-300 group-data-[checked]:text-primary"
+                        className="group-data-[checked]:text-primary duration-300"
                       >
                         {type.name}
                       </Text>
@@ -210,12 +211,12 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
           <Text c={"#767676"}>
             {t("general.from")}{" "}
             {from ? (
-              <span className=" font-bold text-primary">
+              <span className="text-primary font-bold">
                 {dayjs(from).format("DD")}
               </span>
             ) : null}{" "}
             {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
-            <span className=" font-bold text-primary">
+            <span className="text-primary font-bold">
               {to ? dayjs(to).format("DD") : null}
             </span>{" "}
             {to ? dayjs(to).format("/ MMMM") : null}
@@ -252,7 +253,7 @@ const SelectDate = (props: { cities: City[]; unitTypes: UnitType[] }) => {
           ]}
         />
       </div>
-      <div className="w-full flex justify-center">
+      <div className="flex w-full justify-center">
         <DatePicker
           size="md"
           hideOutsideDates
@@ -330,13 +331,13 @@ const MobileSearch = ({ children }: { children: React.ReactNode }) => {
       >
         <Drawer.Trigger className="w-full">{children}</Drawer.Trigger>
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed  z-[100] inset-0 bg-black/40" />
-          <Drawer.Content className="  z-[101]  h-fit fixed bottom-0 left-0 right-0 outline-none">
-            <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+          <Drawer.Overlay className="fixed inset-0 z-[100] bg-black/40" />
+          <Drawer.Content className="fixed right-0 bottom-0 left-0 z-[101] h-fit outline-none">
+            <div className="overflow-hidden rounded-t-lg bg-white px-1 pb-1">
               <div className="flex justify-center pt-0.5">
-                <div className="w-[90px] h-[4px] rounded bg-gray-300"></div>
+                <div className="h-[4px] w-[90px] rounded bg-gray-300"></div>
               </div>
-              <Drawer.Title className="font-bold text-xl">
+              <Drawer.Title className="text-xl font-bold">
                 <Group gap={"xs"} align="center">
                   {step == 0 ? (
                     <Drawer.Close>

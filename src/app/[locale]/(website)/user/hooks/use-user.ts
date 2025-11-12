@@ -1,9 +1,9 @@
 "use client"
+import { useEffect } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { UserData, UserResponse } from "@/@types/user"
 import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
-import { useQuery } from "@tanstack/react-query"
-import { useEffect } from "react"
 
 const useUser = (initialData?: UserResponse["data"]["user"]) => {
   const session = useSession()

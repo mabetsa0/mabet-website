@@ -1,13 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { ErrorResponse } from "@/@types/error"
-import { sharpShape } from "@/assets"
-import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
-import useMdScreen from "@/hooks/use-md-screen"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
-import { getIsPrivate } from "@/utils/get-is-private"
+import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import {
   Badge,
   Button,
@@ -26,13 +20,20 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsIsoDate, useQueryStates } from "nuqs"
+import { ErrorResponse } from "@/@types/error"
+import { sharpShape } from "@/assets"
+import { RiyalIcon } from "@/components/icons"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import useMdScreen from "@/hooks/use-md-screen"
+import { useRouter } from "@/lib/i18n/navigation"
+import { useSession } from "@/lib/session-store"
+import { getIsPrivate } from "@/utils/get-is-private"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
 import DateSelect from "./date-select"
-import { useParams } from "next/navigation"
+
 const ReservationDetails = () => {
   const { isAuthenticated, session } = useSession()
   const [dates] = useQueryStates(
@@ -141,23 +142,23 @@ const ReservationDetails = () => {
   return (
     <Card
       className={
-        "border-[#F3F3F3]  md:[box-shadow:_0px_12px_20px_0px_#0000000A] md:rounded-md  md:p-md"
+        "md:p-md border-[#F3F3F3] md:rounded-md md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
       }
       withBorder={!matches}
     >
       <Card.Section
-        className={"md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[24px]"}
+        className={"px-0 md:border-[#F3F3F3] md:px-[24px] md:pt-[24px]"}
         pb={12}
         withBorder={!matches}
       >
-        <h3 className="text-h4 md:text-h3  font-bold">
+        <h3 className="text-h4 md:text-h3 font-bold">
           {t("unit.reservation-details.title")}
         </h3>
       </Card.Section>
 
       <Card.Section
         visibleFrom="md"
-        className="md:border-[#F3F3F3] px-0 md:px-[24px] md:pt-[16px]"
+        className="px-0 md:border-[#F3F3F3] md:px-[24px] md:pt-[16px]"
         pb={12}
         withBorder={!matches}
       >
@@ -174,7 +175,7 @@ const ReservationDetails = () => {
           <Group justify="space-between">
             <div>
               {prices?.discount ? (
-                <Text className="text-[#767676] text-[12px]  line-through">
+                <Text className="text-[12px] text-[#767676] line-through">
                   {" "}
                   {Number(prices.sub_price)} <RiyalIcon />
                   <span className="text-[10px]">/{prices.duration_text}</span>
@@ -185,7 +186,7 @@ const ReservationDetails = () => {
                   {prices?.price_plain}
                   <RiyalIcon />
                 </Title>
-                <Text className="text-[#767676] text-sm">
+                <Text className="text-sm text-[#767676]">
                   /{t("general.night")}
                 </Text>
               </Group>
@@ -193,7 +194,7 @@ const ReservationDetails = () => {
             {prices?.discount ? (
               <Badge
                 h={40}
-                className="p-[4px] min-w-7 relative !rounded-e-[0]   rounded-s-md !border-0 "
+                className="relative min-w-7 rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
                 classNames={{
                   label: "text-start text-xs",
                 }}
@@ -203,7 +204,7 @@ const ReservationDetails = () => {
                   color: "#E8123D",
                 }}
                 leftSection={
-                  <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-2 aspect-square flex items-center justify-center">
+                  <div className="flex aspect-square w-2 items-center justify-center rounded-[5px] bg-white p-[4px] text-xs font-bold">
                     {prices.discount_percent_text}%
                   </div>
                 }
@@ -212,7 +213,7 @@ const ReservationDetails = () => {
                 <img
                   alt="sharp"
                   src={sharpShape.src}
-                  className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
+                  className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                 />
               </Badge>
             ) : null}
@@ -265,7 +266,7 @@ const ReservationDetails = () => {
               <SimpleGrid cols={2}>
                 <Group gap={3}>
                   <Text fw={500}>{t("general.discount")}</Text>
-                  <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                  <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
                     {prices.discount_percent_text}%
                   </div>
                 </Group>

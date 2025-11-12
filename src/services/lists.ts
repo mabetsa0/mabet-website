@@ -1,11 +1,11 @@
 import React from "react"
-import Mabet from "."
 import { CitiesResponse } from "@/@types/cities"
-import { UnitTypesResponse } from "@/@types/unit-types"
-import { RegionsResponse } from "@/@types/regrions"
-import { PoolsTypeResponse } from "@/@types/pools"
-import { FacilitiesResponse } from "@/@types/facilities"
 import { DirectionsResponse } from "@/@types/directions"
+import { FacilitiesResponse } from "@/@types/facilities"
+import { PoolsTypeResponse } from "@/@types/pools"
+import { RegionsResponse } from "@/@types/regrions"
+import { UnitTypesResponse } from "@/@types/unit-types"
+import Mabet from "."
 
 export const getCities = React.cache(async () => {
   const response = await Mabet.get<CitiesResponse>(

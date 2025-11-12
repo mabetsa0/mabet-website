@@ -1,10 +1,10 @@
-import { Box, Space, Stack } from "@mantine/core"
 import { Suspense } from "react"
+import { headers } from "next/headers"
+import { Box, Space, Stack } from "@mantine/core"
+import Footer from "@/components/common/footer"
+import { SEO } from "@/services/get-seo"
 import SearchBar from "../components/search-bar"
 import Results from "./components/results"
-import { SEO } from "@/services/get-seo"
-import Footer from "@/components/common/footer"
-import { headers } from "next/headers"
 
 export async function generateMetadata(args: {
   searchParams: Promise<{ [key: string]: string | undefined }>

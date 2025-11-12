@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import {
   Box,
   Button,
@@ -9,30 +12,27 @@ import {
   SimpleGrid,
   Stack,
 } from "@mantine/core"
-import { useDisclosure } from "@mantine/hooks"
-import { useTranslations } from "next-intl"
-import { BookingDetails } from "../payment-summary"
-import Coupon from "./coupon"
-import PaymentForm from "./payment-form"
-
-import { ErrorResponse } from "@/@types/error"
-import { RiyalIcon } from "@/components/icons"
-import useMdScreen from "@/hooks/use-md-screen"
-import { useRouter } from "@/lib/i18n/navigation"
-import Mabet from "@/services"
-import { getIsPrivate } from "@/utils/get-is-private"
 import { Group, Space, Text } from "@mantine/core"
+import { useDisclosure } from "@mantine/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { X } from "lucide-react"
-import { useParams } from "next/navigation"
 import {
   parseAsBoolean,
   parseAsString,
   parseAsStringLiteral,
   useQueryStates,
 } from "nuqs"
-import { useState } from "react"
+import { ErrorResponse } from "@/@types/error"
+import { RiyalIcon } from "@/components/icons"
+import useMdScreen from "@/hooks/use-md-screen"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
+import { getIsPrivate } from "@/utils/get-is-private"
 import { GetPaymentSummary } from "../get-payment-summary"
+import { BookingDetails } from "../payment-summary"
+import Coupon from "./coupon"
+import PaymentForm from "./payment-form"
+
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -208,7 +208,7 @@ const MobilePaymentButton = ({
     <>
       <Box
         hiddenFrom="md"
-        className="fixed bottom-0 inset-x-0 p-xs bg-white z-10  [box-shadow:_0px_-16px_40px_0px_#0000001F]"
+        className="p-xs fixed inset-x-0 bottom-0 z-10 bg-white [box-shadow:_0px_-16px_40px_0px_#0000001F]"
       >
         <Button onClick={open} fullWidth>
           {t("unit.mobile-payment-button")}
@@ -248,7 +248,7 @@ const MobilePaymentButton = ({
                     <SimpleGrid cols={2}>
                       <Group gap={3}>
                         <Text fw={500}>{t("general.discount")}</Text>
-                        <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                        <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
                           {prices.discount_percent}
                         </div>
                       </Group>
@@ -283,7 +283,7 @@ const MobilePaymentButton = ({
             ) : null}
           </Stack>
         </ScrollArea>
-        <Stack className="absolute bottom-0 inset-x-0 px-1 py-1" gap={"xs"}>
+        <Stack className="absolute inset-x-0 bottom-0 px-1 py-1" gap={"xs"}>
           <Button
             onClick={() => {
               mutate({

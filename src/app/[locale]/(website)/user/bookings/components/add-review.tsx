@@ -1,16 +1,15 @@
 "use client"
 
-import { Box, Button, Stack, Text, Textarea } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
 import React, { useState } from "react"
-
 import { useLocale, useTranslations } from "next-intl"
+import { Box, Button, Stack, Text, Textarea } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { handleFormError } from "@/utils/handle-form-errors"
-import { CustomNumberInput } from "@/components/ui/number-input"
-import Mabet from "@/services"
+import { notifications } from "@mantine/notifications"
 import { useQueryClient } from "@tanstack/react-query"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
+import { CustomNumberInput } from "@/components/ui/number-input"
+import Mabet from "@/services"
+import { handleFormError } from "@/utils/handle-form-errors"
 
 type Props = {
   bookingCode: string
@@ -82,7 +81,7 @@ const AddReview = ({ bookingCode, handleClose }: Props) => {
             {...form.getInputProps("comment")}
           />
 
-          <div className="pt-1 flex justify-center">
+          <div className="flex justify-center pt-1">
             <Button type="submit" loading={form.submitting}>
               {t("add-review")}
             </Button>

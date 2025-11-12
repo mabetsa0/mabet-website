@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react"
-import { getBlogs } from "@/services/get-blogs"
 import axios from "axios"
-
+import { ErrorResponse } from "@/@types/error"
 import Container from "@/components/blog/container"
 import ErrorUi from "@/components/blog/error-ui"
 import HeroPost from "@/components/blog/hero-post"
 import Intro from "@/components/blog/intro"
 import MoreStories from "@/components/blog/more-stories"
 import Pagination from "@/components/blog/pagination"
-import { ErrorResponse } from "@/@types/error"
+import { getBlogs } from "@/services/get-blogs"
 
 export const dynamic = "force-dynamic"
 

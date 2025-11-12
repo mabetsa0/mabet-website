@@ -6,8 +6,8 @@ type Props = {
 export default function Avatar({ src, name }: Props) {
   return (
     <div className="flex items-center">
-      <div className="w-4 h-4 rounded-full overflow-hidden relative ml-[12px] p-[4px]  ">
-        <img src={src} className=" w-full h-full object-cover" alt={name} />
+      <div className="relative ml-[12px] h-4 w-4 overflow-hidden rounded-full p-[4px]">
+        <img src={src} className="h-full w-full object-cover" alt={name} />
       </div>
       <div className="text-lg font-bold">{name}</div>
     </div>

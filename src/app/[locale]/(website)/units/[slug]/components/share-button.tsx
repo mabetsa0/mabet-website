@@ -1,8 +1,8 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { ActionIcon, Button, ButtonVariant } from "@mantine/core"
 import { Share } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { useUnitData } from "../context/unit-context"
 
 const ShareButton = ({ variant }: { variant?: ButtonVariant }) => {

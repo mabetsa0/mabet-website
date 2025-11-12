@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import { useTranslations } from "next-intl"
+import Image from "next/image"
+import { SimpleGrid, Space, Stack, Text, Title } from "@mantine/core"
 import {
   headset,
   imageIcon,
@@ -8,30 +11,28 @@ import {
   paymentSuccess,
   searchList,
 } from "@/assets"
-import { SimpleGrid, Space, Stack, Text, Title } from "@mantine/core"
-import { useTranslations } from "next-intl"
-import Image from "next/image"
+
 const WhyMabet = () => {
   const t = useTranslations("home.why-mabet")
   return (
     <section>
       <div className="container py-3">
-        <div className="text-center mb-1">
+        <div className="mb-1 text-center">
           <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}
           </Text>
-          <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
+          <Title className="text-h3 md:text-h2">{t("desciption")}</Title>
         </div>
-        <div className=" md:grid  grid-cols-[1fr_2fr_1fr]">
+        <div className="grid-cols-[1fr_2fr_1fr] md:grid">
           <Stack visibleFrom="md" gap={"xl"}>
             <Stack
               maw={290}
               gap={"3px"}
-              className=" md:rotate-12  md:-translate-x-2"
+              className="md:-translate-x-2 md:rotate-12"
             >
               <div className="size-[32px] md:size-[48px]">
                 <img
-                  className="w-full h-full object-contain"
+                  className="h-full w-full object-contain"
                   src={paymentSuccess.src}
                   alt="safe payment"
                 />
@@ -47,13 +48,13 @@ const WhyMabet = () => {
             <Space visibleFrom="md" />
 
             <Stack
-              className=" md:-rotate-12  md:-translate-x-1"
+              className="md:-translate-x-1 md:-rotate-12"
               maw={290}
               gap={"3px"}
             >
               <div className="size-[32px] md:size-[48px]">
                 <img
-                  className="w-full h-full object-contain"
+                  className="h-full w-full object-contain"
                   src={moneySecurity.src}
                   alt="money security"
                 />
@@ -67,13 +68,13 @@ const WhyMabet = () => {
             <Space visibleFrom="md" />
 
             <Stack
-              className=" md:rotate-12  md:-translate-x-1"
+              className="md:-translate-x-1 md:rotate-12"
               maw={290}
               gap={"3px"}
             >
               <div className="size-[32px] md:size-[48px]">
                 <img
-                  className="w-full h-full object-contain"
+                  className="h-full w-full object-contain"
                   src={searchList.src}
                   alt="easy search"
                 />
@@ -94,11 +95,11 @@ const WhyMabet = () => {
               <Stack
                 maw={290}
                 gap={"3px"}
-                className=" md:rotate-12  md:-translate-x-2"
+                className="md:-translate-x-2 md:rotate-12"
               >
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={paymentSuccess.src}
                     alt="safe payment"
                   />
@@ -114,13 +115,13 @@ const WhyMabet = () => {
               <Space visibleFrom="md" />
 
               <Stack
-                className=" md:-rotate-12  md:-translate-x-1"
+                className="md:-translate-x-1 md:-rotate-12"
                 maw={290}
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={moneySecurity.src}
                     alt="money security"
                   />
@@ -136,13 +137,13 @@ const WhyMabet = () => {
               <Space visibleFrom="md" />
 
               <Stack
-                className=" md:rotate-12  md:-translate-x-1"
+                className="md:-translate-x-1 md:rotate-12"
                 maw={290}
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={searchList.src}
                     alt="easy search"
                   />
@@ -158,13 +159,13 @@ const WhyMabet = () => {
 
             <Stack gap={"xl"}>
               <Stack
-                className=" md:-rotate-12  md:translate-x-2"
+                className="md:translate-x-2 md:-rotate-12"
                 maw={290}
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={newReleases.src}
                     alt="licensed"
                   />
@@ -179,13 +180,13 @@ const WhyMabet = () => {
               <Space />
               <Space visibleFrom="md" />
               <Stack
-                className=" md:rotate-12  md:translate-x-1"
+                className="md:translate-x-1 md:rotate-12"
                 maw={290}
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={headset.src}
                     alt="headset"
                   />
@@ -200,10 +201,10 @@ const WhyMabet = () => {
               <Space />
               <Space visibleFrom="md" />
 
-              <Stack className=" md:-rotate-12  " maw={290} gap={"3px"}>
+              <Stack className="md:-rotate-12" maw={290} gap={"3px"}>
                 <div className="size-[32px] md:size-[48px]">
                   <img
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     src={imageIcon.src}
                     alt="image icon"
                   />

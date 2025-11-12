@@ -1,9 +1,6 @@
 "use client"
-import Mabet from "@/services"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import React from "react"
-import { ReservationsResponse } from "./@types"
+import { useTranslations } from "next-intl"
 import {
   Loader,
   Stack,
@@ -13,9 +10,12 @@ import {
   SimpleGrid,
   ScrollArea,
 } from "@mantine/core"
-import { useTranslations } from "next-intl"
-import BookingCard from "./components/booking-card"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
+import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
+import { ReservationsResponse } from "./@types"
+import BookingCard from "./components/booking-card"
 
 type Props = {}
 
@@ -71,14 +71,14 @@ const Page = (props: Props) => {
         />
       </ScrollArea>
       {status === "pending" && (
-        <div className="flex items-center justify-center min-h-20">
+        <div className="flex min-h-20 items-center justify-center">
           <Loader />
         </div>
       )}
 
       {status === "error" && (
-        <div className="flex items-center justify-center min-h-20">
-          <p className="text-center text-red-500  text-sm">
+        <div className="flex min-h-20 items-center justify-center">
+          <p className="text-center text-sm text-red-500">
             {t("user.bookings.server-error")}
           </p>
         </div>
@@ -99,7 +99,7 @@ const Page = (props: Props) => {
       ) : null}
       <Space />
       <Space />
-      <div className="flex justify-center w-full ">
+      <div className="flex w-full justify-center">
         <Pagination total={data?.data.data.last_page || 0} />
       </div>
     </Stack>

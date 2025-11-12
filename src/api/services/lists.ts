@@ -1,5 +1,4 @@
 import { cache } from "react"
-
 import {
   CitiesResponse,
   FacilitiesResponse,
@@ -7,7 +6,6 @@ import {
   RegionsResponse,
   UnitTypesResponse,
 } from "@/@types/lists"
-
 import Mabeet from ".."
 
 export const getCities = cache(async () => {

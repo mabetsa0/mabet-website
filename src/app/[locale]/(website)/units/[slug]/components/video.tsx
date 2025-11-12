@@ -1,14 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import Mabet from "@/services"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Loader, Modal } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { X } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
+import Mabet from "@/services"
 import { useUnitData } from "../context/unit-context"
 import ShareButton from "./share-button"
 import VideoPlayer from "./video-player"
+
 export interface UnitMediaResponse {
   data: Data
   message: null

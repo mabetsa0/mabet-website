@@ -1,17 +1,17 @@
 "use client"
 
-import Mabeet from "@/api"
-import { notifications } from "@mantine/notifications"
-
-import { useSession } from "@/lib/session-store"
-import { handleFormError } from "@/utils/handle-form-errors"
+import { useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
 import { isEmail, useForm } from "@mantine/form"
+import { notifications } from "@mantine/notifications"
 import { BadgeCheck, Mail, Phone, UserIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-import useUser from "../hooks/use-user"
+import Mabeet from "@/api"
 import { useNafath } from "@/hooks/use-nafath"
-import { useEffect } from "react"
+import { useSession } from "@/lib/session-store"
+import { handleFormError } from "@/utils/handle-form-errors"
+import useUser from "../hooks/use-user"
+
 const Profile = () => {
   const t = useTranslations()
   const { session, updateSession } = useSession()
@@ -66,14 +66,10 @@ const Profile = () => {
         </Stack>
         <Stack hiddenFrom="md">
           <Space />
-          <Group
-            wrap="nowrap"
-            gap={"xs"}
-            className="bg-white rounded-2xl p-1  "
-          >
+          <Group wrap="nowrap" gap={"xs"} className="rounded-2xl bg-white p-1">
             {/* <div className="w-[72px] flex items-center justify-center h-[72px] rounded-3xl bg-primary"> */}
             <img
-              className="w-[62px] h-[62px]"
+              className="h-[62px] w-[62px]"
               alt={"avatar"}
               src={user.avatar}
             />
@@ -96,7 +92,7 @@ const Profile = () => {
           </Group>
         </Stack>
         <Stack maw={550}>
-          <div className="border border-[#F3F3F3] rounded-lg">
+          <div className="rounded-lg border border-[#F3F3F3]">
             <TextInput
               required
               withAsterisk={false}
@@ -117,7 +113,7 @@ const Profile = () => {
               defaultValue={user.name}
             />
           </div>
-          <div className="border border-[#F3F3F3] rounded-lg">
+          <div className="rounded-lg border border-[#F3F3F3]">
             <TextInput
               required
               withAsterisk={false}
@@ -139,7 +135,7 @@ const Profile = () => {
               {...form.getInputProps("email")}
             />
           </div>
-          <div className="border border-[#F3F3F3] rounded-lg">
+          <div className="rounded-lg border border-[#F3F3F3]">
             <TextInput
               required
               readOnly

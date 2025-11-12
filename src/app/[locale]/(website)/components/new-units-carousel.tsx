@@ -1,16 +1,16 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-import { Unit } from "@/@types"
-import { Carousel } from "@mantine/carousel"
 import { useCallback, useEffect, useState } from "react"
-import UnitCard from "@/components/common/unit-card"
-import { ActionIcon, Group, Text, Title } from "@mantine/core"
 import { useRef } from "react"
-import Autoplay from "embla-carousel-autoplay"
+import { useTranslations } from "next-intl"
+import { Carousel } from "@mantine/carousel"
+import { ActionIcon, Group, Text, Title } from "@mantine/core"
 import { EmblaCarouselType } from "embla-carousel"
+import Autoplay from "embla-carousel-autoplay"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Unit } from "@/@types"
+import UnitCard from "@/components/common/unit-card"
+
 type Props = {
   data: Unit[]
 }
@@ -31,14 +31,14 @@ const NewUnitsCarousel = ({ data }: Props) => {
   const autoplay = useRef(Autoplay({ delay: 10000 }))
 
   return (
-    <section className="py-3 bg-[#fafafa]">
+    <section className="bg-[#fafafa] py-3">
       <div className="container mx-auto">
         <Group justify="space-between" align="center" wrap="nowrap">
-          <div className="mb-1.5 ">
+          <div className="mb-1.5">
             <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
               {t("title")}
             </Text>
-            <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
+            <Title className="text-h3 md:text-h2">{t("desciption")}</Title>
           </div>
           <Group justify="center" wrap="nowrap">
             <ActionIcon
@@ -65,7 +65,7 @@ const NewUnitsCarousel = ({ data }: Props) => {
             maxWidth: "100%",
             minWidth: 250,
           }}
-          className="w-full "
+          className="w-full"
         >
           <Carousel
             getEmblaApi={setEmbla}

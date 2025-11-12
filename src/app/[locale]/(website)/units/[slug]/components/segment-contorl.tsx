@@ -1,6 +1,6 @@
 "use client"
-import { Box, Tabs } from "@mantine/core"
 import { useTranslations } from "next-intl"
+import { Box, Tabs } from "@mantine/core"
 import { parseAsString, useQueryState } from "nuqs"
 
 const UnitSegmentedControl = () => {

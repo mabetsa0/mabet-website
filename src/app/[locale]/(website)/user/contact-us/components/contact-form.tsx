@@ -1,8 +1,6 @@
 "use client"
 
-import Mabeet from "@/api"
-
-import { handleFormError } from "@/utils/handle-form-errors"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Group,
@@ -15,7 +13,9 @@ import {
 import { isEmail, useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { File, Mail, Phone, UserIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import Mabeet from "@/api"
+import { handleFormError } from "@/utils/handle-form-errors"
+
 const ContactForm = () => {
   const t = useTranslations()
 
@@ -44,10 +44,10 @@ const ContactForm = () => {
     <form onSubmit={onSubmit}>
       <Stack>
         <Stack maw={550}>
-          <Text className="text-h5  font-medium">
+          <Text className="text-h5 font-medium">
             {t("user.contact-form.title")}
           </Text>
-          <div className="border border-[#F3F3F3] rounded-lg">
+          <div className="rounded-lg border border-[#F3F3F3]">
             <TextInput
               required
               withAsterisk={false}
@@ -66,7 +66,7 @@ const ContactForm = () => {
               }
             />
           </div>
-          <div className="border border-[#F3F3F3] rounded-lg">
+          <div className="rounded-lg border border-[#F3F3F3]">
             <Textarea
               rows={3}
               required

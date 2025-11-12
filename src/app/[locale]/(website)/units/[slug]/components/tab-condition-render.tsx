@@ -1,6 +1,6 @@
 "use client"
-import { parseAsString, useQueryState } from "nuqs"
 import React from "react"
+import { parseAsString, useQueryState } from "nuqs"
 import useMdScreen from "@/hooks/use-md-screen"
 
 type Props = {

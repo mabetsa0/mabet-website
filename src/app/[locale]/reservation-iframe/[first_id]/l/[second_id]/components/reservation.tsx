@@ -1,14 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { ErrorResponse } from "@/@types/error"
-import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
-import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
-import { sharpShape, logo, bayut } from "@/assets"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
-import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
-import { useRouter } from "@/lib/i18n/navigation"
-import Mabet from "@/services"
+import { useParams } from "next/navigation"
 import {
   Badge,
   Button,
@@ -27,14 +22,19 @@ import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { X } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
+import { CreateBookingResponse } from "@/@types/create-booking-response"
+import { ErrorResponse } from "@/@types/error"
+import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
+import { GetUnitAvailability } from "@/app/[locale]/(website)/units/[slug]/get-unit-availability"
+import { sharpShape, logo, bayut } from "@/assets"
+import { RiyalIcon } from "@/components/icons"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
 import { useDate } from "../stores/use-date"
 import { useNafath } from "../stores/use-nafath"
-import DateSelect from "./date-select"
-import { CreateBookingResponse } from "@/@types/create-booking-response"
-import { useState } from "react"
 import Coupon from "./coupon"
+import DateSelect from "./date-select"
 
 const Reservation = () => {
   const params = useParams() as { first_id: string; second_id: string }
@@ -162,12 +162,12 @@ const Reservation = () => {
       </Stack>
     )
   return (
-    <Card className="!pb-6 " p={"md"} withBorder={false}>
+    <Card className="!pb-6" p={"md"} withBorder={false}>
       <Card.Section
         withBorder
-        className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px]"}
+        className={"border-[#F3F3F3] px-1 pt-[24px] md:px-[24px]"}
       >
-        <div className="flex items-center justify-between gap-2 w-full pb-1">
+        <div className="flex w-full items-center justify-between gap-2 pb-1">
           <Image
             src={logo} // Mabeet logo
             alt="Mabeet Logo"
@@ -182,12 +182,12 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className={"border-[#F3F3F3] px-1 md:px-[24px] pt-[24px]"}
+        className={"border-[#F3F3F3] px-1 pt-[24px] md:px-[24px]"}
         pb={10}
         withBorder={true}
       >
         <Group justify="space-between" align="center" wrap="nowrap">
-          <h4 className="text-h5 md:text-h5 font-bold m-0">
+          <h4 className="text-h5 md:text-h5 m-0 font-bold">
             {t("unit.reservation-details.title")}
           </h4>
           {!isNafathVerified && (
@@ -205,7 +205,7 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3]  px-1 md:px-[24px] pt-[16px]"
+        className="border-[#F3F3F3] px-1 pt-[16px] md:px-[24px]"
         pb={10}
         withBorder={true}
       >
@@ -221,7 +221,7 @@ const Reservation = () => {
           <Group justify="space-between">
             <div>
               {prices?.discount ? (
-                <Text className="text-[#767676] text-[12px]  line-through">
+                <Text className="text-[12px] text-[#767676] line-through">
                   {" "}
                   {Number(prices.price_before_plain)} <RiyalIcon />
                   <span className="text-[10px]">/{prices.duration_text}</span>
@@ -232,7 +232,7 @@ const Reservation = () => {
                   {prices?.price_plain}
                   <RiyalIcon />
                 </Title>
-                <Text className="text-[#767676] text-sm">
+                <Text className="text-sm text-[#767676]">
                   /{t("general.night")}
                 </Text>
               </Group>
@@ -268,7 +268,7 @@ const Reservation = () => {
       </Card.Section>
 
       <Card.Section
-        className="border-[#F3F3F3] px-1 md:px-[24px] pt-[2px]"
+        className="border-[#F3F3F3] px-1 pt-[2px] md:px-[24px]"
         pb={12}
         withBorder={true}
       >
@@ -296,7 +296,7 @@ const Reservation = () => {
 
       {prices ? (
         <Card.Section
-          className="border-[#F3F3F3]  px-1 md:px-[24px]"
+          className="border-[#F3F3F3] px-1 md:px-[24px]"
           pt={24}
           pb={12}
           withBorder={true}

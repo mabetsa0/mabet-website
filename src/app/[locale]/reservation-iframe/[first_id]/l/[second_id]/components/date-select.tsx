@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { calenderIn, calenderOut } from "@/assets"
-import { cn } from "@/lib/cn"
+import { useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -13,19 +13,18 @@ import {
   Text,
 } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
+import { useDisclosure } from "@mantine/hooks"
+import { notifications } from "@mantine/notifications"
 import dayjs from "dayjs"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { useLocale, useTranslations } from "next-intl"
-import { useState } from "react"
-
+import { Minus } from "lucide-react"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import useBusyDays from "@/app/[locale]/(website)/units/[slug]/hooks/use-busy-days"
+import { calenderIn, calenderOut } from "@/assets"
 import useMdScreen from "@/hooks/use-md-screen"
+import { cn } from "@/lib/cn"
 import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
-import { useDisclosure } from "@mantine/hooks"
-import { notifications } from "@mantine/notifications"
-import { Minus } from "lucide-react"
 import { useDate } from "../stores/use-date"
 
 dayjs.extend(durations)
@@ -75,7 +74,7 @@ const DateSelect = ({
         {date.getDate()}
         {isBusyDay ? (
           <div className="absolute inset-0 flex items-center justify-center">
-            <Minus className=" text-red-600" size={32} strokeWidth={1} />
+            <Minus className="text-red-600" size={32} strokeWidth={1} />
           </div>
         ) : null}
       </div>
@@ -152,12 +151,12 @@ const DateSelect = ({
           <Text c={"#767676"}>
             {t("general.from")}{" "}
             {value[0] ? (
-              <span className=" font-bold text-primary">
+              <span className="text-primary font-bold">
                 {dayjs(value[0]).format("DD")}
               </span>
             ) : null}{" "}
             {value[0] ? dayjs(value[0]).format("/ MMMM") : ""} -{" "}
-            <span className=" font-bold text-primary">
+            <span className="text-primary font-bold">
               {value[1] ? dayjs(value[1]).format("DD") : null}
             </span>{" "}
             {value[1] ? dayjs(value[1]).format("/ MMMM") : null}
@@ -222,9 +221,9 @@ const DateSelect = ({
               open()
             }}
             wrap="nowrap"
-            className="w-full h-full cursor-pointer rounded-md p-xs border-primary border-1"
+            className="p-xs border-primary h-full w-full cursor-pointer rounded-md border-1"
           >
-            <Stack className="w-full " gap={0}>
+            <Stack className="w-full" gap={0}>
               <Group gap={4}>
                 <img alt="icon" src={calenderIn.src} />
                 <Text c="#767676" className="text-sm">
@@ -233,7 +232,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center text-lg font-medium text-gray-600",
                   value[0] && "text-dark"
                 )}
               >
@@ -243,7 +242,7 @@ const DateSelect = ({
               </Group>
             </Stack>
             <Divider orientation="vertical" />
-            <Stack className="w-full " gap={0}>
+            <Stack className="w-full" gap={0}>
               <Group gap={4}>
                 <img alt="icon" src={calenderOut.src} />
 
@@ -253,7 +252,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center text-lg font-medium text-gray-600",
                   value[1] && "text-dark"
                 )}
               >
@@ -294,33 +293,27 @@ const DateSelect = ({
         </Popover.Dropdown>
       </Popover>
 
-      <Group wrap="nowrap" className="w-full h-full cursor-pointer  p-xs ">
-        <Stack className="w-full " gap={0}>
+      <Group wrap="nowrap" className="p-xs h-full w-full cursor-pointer">
+        <Stack className="w-full" gap={0}>
           <Group gap={4}>
             <img alt="icon" src={calenderIn.src} />
             <Text className="text-sm">{t("iframe-labels.checkin-time")}</Text>
           </Group>
           <Group
-            className={cn(
-              " items-center font-medium text-lg",
-              "text-[#767676]"
-            )}
+            className={cn("items-center text-lg font-medium", "text-[#767676]")}
           >
             {unit.checkin}
           </Group>
         </Stack>
         <Divider orientation="vertical" />
-        <Stack className="w-full " gap={0}>
+        <Stack className="w-full" gap={0}>
           <Group gap={4}>
             <img alt="icon" src={calenderOut.src} />
 
             <Text className="text-sm">{t("iframe-labels.checkout-time")}</Text>
           </Group>
           <Group
-            className={cn(
-              " items-center font-medium  text-lg",
-              "text-[#767676]"
-            )}
+            className={cn("items-center text-lg font-medium", "text-[#767676]")}
           >
             {unit.checkout}
           </Group>

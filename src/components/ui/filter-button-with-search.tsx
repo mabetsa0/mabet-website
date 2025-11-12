@@ -1,3 +1,5 @@
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   Button,
   ButtonProps,
@@ -8,9 +10,7 @@ import {
   useCombobox,
 } from "@mantine/core"
 import { Check, ChevronDown, Search } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsString, useQueryState, UseQueryStateOptions } from "nuqs"
-import { useState } from "react"
 
 type Props = {
   filterKey: string

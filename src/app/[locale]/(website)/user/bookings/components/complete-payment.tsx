@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { applePay, mada, masterCard, visa } from "@/assets"
-import { RiyalIcon } from "@/components/icons"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import {
   Button,
   Divider,
@@ -12,14 +13,14 @@ import {
   Switch,
   Text,
 } from "@mantine/core"
-import { useTranslations } from "next-intl"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
-import { Booking } from "../@types"
-import Mabet from "@/services"
 import { useMutation } from "@tanstack/react-query"
-import { useState } from "react"
+import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { ErrorResponse } from "@/@types/error"
-import { useRouter } from "next/navigation"
+import { applePay, mada, masterCard, visa } from "@/assets"
+import { RiyalIcon } from "@/components/icons"
+import Mabet from "@/services"
+import { Booking } from "../@types"
+
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -126,7 +127,7 @@ const CompletePayment = (booking: Booking) => {
                   />
                 </span>
               ))}
-              <span className="relative h-2 w-3 ">
+              <span className="relative h-2 w-3">
                 <img
                   alt={"payment option"}
                   src={applePay.src}
@@ -142,7 +143,7 @@ const CompletePayment = (booking: Booking) => {
         />
       </Stack>
 
-      <Stack className=" mt-2" gap={"xs"}>
+      <Stack className="mt-2" gap={"xs"}>
         <Button
           onClick={() => {
             mutate({

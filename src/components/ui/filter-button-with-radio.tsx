@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl"
 import {
   Button,
   ButtonProps,
@@ -11,7 +12,7 @@ import {
 } from "@mantine/core"
 import { ChevronDown } from "lucide-react"
 import { parseAsString, useQueryState } from "nuqs"
-import { useTranslations } from "next-intl"
+
 type Props = {
   filterKey: string
   buttonProps: ButtonProps

@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { nafathIcon } from "@/assets"
-import { useNafath } from "@/hooks/use-nafath"
-import Mabet from "@/services"
+import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   Box,
   Button,
@@ -18,12 +17,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
 import { Check, IdCard } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
-import { useEffect, useState } from "react"
 import useCountDown from "react-countdown-hook"
-import ModalDrawer from "../modal-drawer"
 import { ErrorResponse } from "@/@types/error"
+import { nafathIcon } from "@/assets"
+import { useNafath } from "@/hooks/use-nafath"
+import Mabet from "@/services"
+import ModalDrawer from "../modal-drawer"
 
 export interface NafathResponse {
   data: Data
@@ -126,18 +126,18 @@ const NafathModal = () => {
       onClose={onClose}
     >
       <Group align="start" wrap="nowrap" gap={"xl"}>
-        <div className="md:rtl:pr-1.5 md:ltr:pl-1.5  py-2 max-w-[400px]">
+        <div className="max-w-[400px] py-2 md:ltr:pl-1.5 md:rtl:pr-1.5">
           {nafathRandom.number ? (
             <Stack>
               <Stack gap={"xs"}>
-                <Text className="text-h4 font-bold text-primary">
+                <Text className="text-h4 text-primary font-bold">
                   {t("random.title")}
                 </Text>
                 <Text c={"#767676"}>{t("random.description")}</Text>
               </Stack>
               <Space />
               <Stack align="center" justify="center">
-                <Text className="text-h2 text-primary font-bold  mt-1 border border-primary rounded-md p-1 ">
+                <Text className="text-h2 text-primary border-primary mt-1 rounded-md border p-1 font-bold">
                   {nafathRandom.number}
                 </Text>
               </Stack>
@@ -168,12 +168,12 @@ const NafathModal = () => {
           ) : (
             <Stack>
               <Stack gap={"xs"}>
-                <Text className="text-h4 font-bold text-primary">
+                <Text className="text-h4 text-primary font-bold">
                   {t("sub-title")}
                 </Text>
                 <Text c={"#767676"}>{t("description")}</Text>
               </Stack>
-              <div className="border border-[#F3F3F3] rounded-lg">
+              <div className="rounded-lg border border-[#F3F3F3]">
                 <NumberInput
                   value={value}
                   onChange={(value) => setValue(value)}

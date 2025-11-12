@@ -1,7 +1,6 @@
 "use client"
 
-import { UnitTypeIcons } from "@/assets"
-import { useUnitTypes } from "@/context/global-data-context"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Group,
@@ -13,8 +12,10 @@ import {
   Text,
 } from "@mantine/core"
 import { ChevronDown } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsString, useQueryState } from "nuqs"
+import { UnitTypeIcons } from "@/assets"
+import { useUnitTypes } from "@/context/global-data-context"
+
 const UnitTypeFilter = () => {
   const [filter, set] = useQueryState("unit_type_id", parseAsString)
   const t = useTranslations()
@@ -44,13 +45,13 @@ const UnitTypeFilter = () => {
                   key={type.id}
                   radius="md"
                   value={type.id + ""}
-                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-1  md:px-2.5 py-1  md:py-2.5 relative"
+                  className="group data-[checked]:border-primary relative px-1 py-1 duration-300 data-[checked]:bg-[#18807826] md:px-2.5 md:py-2.5"
                 >
                   <Group wrap="nowrap" align="flex-start">
                     <Radio.Indicator className="absolute opacity-0" />
-                    <Stack ta={"center"} className="w-full gap-xs md:gap-sm">
+                    <Stack ta={"center"} className="gap-xs md:gap-sm w-full">
                       <Image
-                        className="w-[30px] h-[30px] md:w-[40px] md:h-[40px]"
+                        className="h-[30px] w-[30px] md:h-[40px] md:w-[40px]"
                         mx={"auto"}
                         src={
                           UnitTypeIcons[
@@ -62,7 +63,7 @@ const UnitTypeFilter = () => {
                       <Text
                         fz={"sm"}
                         fw={700}
-                        className="duration-300 group-data-[checked]:text-primary"
+                        className="group-data-[checked]:text-primary duration-300"
                       >
                         {type.name}
                       </Text>

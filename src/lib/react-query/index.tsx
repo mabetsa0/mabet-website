@@ -1,9 +1,8 @@
 "use client"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-
 //  setting error type to axios Error
 import "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { AxiosError } from "axios"
 
 declare module "@tanstack/react-query" {

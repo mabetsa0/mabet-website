@@ -1,5 +1,6 @@
 "use client"
-import { RiyalIcon } from "@/components/icons"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -12,9 +13,8 @@ import {
   Title,
 } from "@mantine/core"
 import { ChevronDown, Ticket } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, useQueryStates } from "nuqs"
-import { useState } from "react"
+import { RiyalIcon } from "@/components/icons"
 
 const PriceFilter = () => {
   const t = useTranslations("search.filter.price-filter")

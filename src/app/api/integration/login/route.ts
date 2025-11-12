@@ -1,10 +1,9 @@
-import { Session } from "@/@types/user"
-import { INTEGRATION_COOKIE_NAME } from "@/config"
-
-import integrationApi from "@/services/integration-api"
-import axios from "axios"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
+import axios from "axios"
+import { Session } from "@/@types/user"
+import { INTEGRATION_COOKIE_NAME } from "@/config"
+import integrationApi from "@/services/integration-api"
 
 export async function POST(request: Request) {
   try {

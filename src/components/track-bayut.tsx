@@ -1,8 +1,8 @@
 "use client"
-import { BAYUT_KEY } from "@/config"
-import dayjs from "dayjs"
-import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import dayjs from "dayjs"
+import { BAYUT_KEY } from "@/config"
 
 const TrackBayut = () => {
   const searchParams = useSearchParams()

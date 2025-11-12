@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
-import Mabet from "@/services"
+import { useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { Button } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { useMutation } from "@tanstack/react-query"
 import dayjs from "dayjs"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
-import { useEffect } from "react"
 import useCountDown from "react-countdown-hook"
+import Mabet from "@/services"
 
 const ResendOtpButton = () => {
   const t = useTranslations("auth")

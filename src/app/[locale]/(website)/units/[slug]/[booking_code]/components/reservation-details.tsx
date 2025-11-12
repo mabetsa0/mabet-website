@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { ErrorResponse } from "@/@types/error"
-import { RiyalIcon } from "@/components/icons"
-import { useRouter } from "@/lib/i18n/navigation"
-import Mabet from "@/services"
-import { getIsPrivate } from "@/utils/get-is-private"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import {
   Box,
   Button,
@@ -19,20 +17,23 @@ import {
 } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
 import { MapPin, QrCode, Star, X } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import {
   parseAsBoolean,
   parseAsString,
   parseAsStringLiteral,
   useQueryStates,
 } from "nuqs"
-import { useState } from "react"
+import { ErrorResponse } from "@/@types/error"
+import { RiyalIcon } from "@/components/icons"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
+import { getIsPrivate } from "@/utils/get-is-private"
 import DateSelect from "../../components/date-select"
 import { useUnitData } from "../../context/unit-context"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
+
 interface PaymentResponse {
   data: {
     redirect_url: string
@@ -198,32 +199,32 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   return (
     <>
       <Card
-        className="border-[#F3F3F3] md:p-md md:rounded-md max-md:border-transparent md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
+        className="md:p-md border-[#F3F3F3] max-md:border-transparent md:rounded-md md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
         withBorder
       >
         <Card.Section
-          className="border-[#F3F3F3] pb-xs md:pt-[24px] md:px-[24px] max-md:!border-none"
+          className="pb-xs border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
           withBorder
         >
           <Group align="start">
             <Box
               visibleFrom="md"
-              className="h-[120px] w-[120px] rounded-md overflow-hidden"
+              className="h-[120px] w-[120px] overflow-hidden rounded-md"
             >
               <img
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
                 src={unit.images[0].image_path}
                 alt={unit.images[0].alt}
               />
             </Box>
             <Stack>
-              <h3 className="text-h4 md:text-h5 font-bold line-clamp-1">
+              <h3 className="text-h4 md:text-h5 line-clamp-1 font-bold">
                 {unit.name}
               </h3>
               <Stack gap={4}>
                 <Text c={"#767676"}>
                   <QrCode
-                    className="inline-block me-0.5"
+                    className="me-0.5 inline-block"
                     size={22}
                     strokeWidth={1.25}
                   />
@@ -232,7 +233,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 {unit.stars ? (
                   <Text c={"#767676"}>
                     <Star
-                      className="inline-block me-0.5"
+                      className="me-0.5 inline-block"
                       size={22}
                       strokeWidth={1.25}
                     />
@@ -241,7 +242,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 ) : null}
                 <Text c={"#767676"}>
                   <MapPin
-                    className="inline-block me-0.5"
+                    className="me-0.5 inline-block"
                     size={22}
                     strokeWidth={1.25}
                   />
@@ -253,7 +254,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
 
         <Card.Section
-          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
+          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -268,7 +269,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
         <Card.Section
           visibleFrom="md"
-          className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
+          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -278,7 +279,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         {prices ? (
           <Card.Section
             visibleFrom="md"
-            className="border-[#F3F3F3] md:pt-[24px] md:px-[24px] max-md:!border-none"
+            className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
             pb={12}
             withBorder
           >
@@ -301,7 +302,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <SimpleGrid cols={2}>
                   <Group gap={3}>
                     <Text fw={500}>{t("general.discount")}</Text>
-                    <div className="w-[39px] rounded text-xs text-[#E8123D] font-bold h-[39px] flex items-center justify-center bg-[#E8123D26] shrink-0">
+                    <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
                       {Number(prices.discount_percent)}%
                     </div>
                   </Group>

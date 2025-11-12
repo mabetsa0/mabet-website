@@ -1,11 +1,9 @@
-import { formateDate } from "@/utils/date-formatter"
-
+import { getLocale } from "next-intl/server"
 import { type Blog } from "@/@types/blog-response"
-
+import { Link } from "@/lib/i18n/navigation"
+import { formateDate } from "@/utils/date-formatter"
 import Avatar from "./avatar"
 import CoverImage from "./cover-image"
-import { getLocale } from "next-intl/server"
-import { Link } from "@/lib/i18n/navigation"
 
 type Props = Blog
 export default async function PostPreview({
@@ -25,7 +23,7 @@ export default async function PostPreview({
       <h3 className="mb-[12px] text-3xl leading-snug">
         <Link
           href={`/blog/${slug}`}
-          className="duration-200 hover:text-primary hover:underline"
+          className="hover:text-primary duration-200 hover:underline"
           dangerouslySetInnerHTML={{ __html: title }}
         ></Link>
       </h3>

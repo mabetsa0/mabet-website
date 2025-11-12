@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+"use client"
+import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
+import { Divider, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import {
   licience,
   logo,
@@ -9,13 +12,11 @@ import {
   visa,
   applePay,
   tabby,
-} from "@/assets";
-import { useUnitTypes } from "@/context/global-data-context";
-import { Link } from "@/lib/i18n/navigation";
-import { Divider, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core";
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
-const paymentCards = [madfu, masterCard, mada, visa, applePay, tabby];
+} from "@/assets"
+import { useUnitTypes } from "@/context/global-data-context"
+import { Link } from "@/lib/i18n/navigation"
+
+const paymentCards = [madfu, masterCard, mada, visa, applePay, tabby]
 const socialMedia = [
   {
     icon: (
@@ -120,13 +121,13 @@ const socialMedia = [
     title: "Snapchat",
     link: "https://www.snapchat.com/add/mabet_sa?sender_web_id=fd6f5855-df5c-4f34-83f3-657710753539&device_type=desktop&is_copy_url=true",
   },
-];
+]
 const Footer = () => {
-  const t = useTranslations("footer");
-  const unitTypes = useUnitTypes();
+  const t = useTranslations("footer")
+  const unitTypes = useUnitTypes()
   return (
     <footer className="bg-[#fafafa]">
-      <div className="container pt-4 ">
+      <div className="container pt-4">
         <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb={"xl"} spacing="40px">
           <Stack>
             <div>
@@ -135,8 +136,8 @@ const Footer = () => {
             <Text c={"#767676"} fz={"sm"}>
               {t("desciption")}
             </Text>
-            <div className="text-sm shadow-sm max-w-md">
-              <ul className="space-y-1 text-gray-600 leading-relaxed">
+            <div className="max-w-md text-sm shadow-sm">
+              <ul className="space-y-1 leading-relaxed text-gray-600">
                 <li>{t("license_number")}</li>
                 <li>{t("license_category")}</li>
                 <li>{t("license_cr")}</li>
@@ -152,7 +153,7 @@ const Footer = () => {
                 <Link key={type.id} href={`/units?unit_type=${type.id}`}>
                   {type.name}
                 </Link>
-              );
+              )
             })}
           </Stack>
           <Stack>
@@ -162,7 +163,7 @@ const Footer = () => {
             <a href="mailto:help@mabet.com.sa" className="ltr rtl:text-right">
               help@mabet.com.sa
             </a>
-            <a href="tel:+966567570014" dir="ltr" className=" rtl:text-right">
+            <a href="tel:+966567570014" dir="ltr" className="rtl:text-right">
               +966-567570014
             </a>
             <Text>{t("time")}</Text>
@@ -185,14 +186,14 @@ const Footer = () => {
                       <Text>{element.title}</Text>
                     </Group>
                   </a>
-                );
+                )
               })}
             </SimpleGrid>
           </Stack>
         </SimpleGrid>
         <Divider />
         <SimpleGrid cols={{ base: 1, md: 3 }} py={"md"}>
-          <Group className="text-[#767676] text-sm max-md:justify-center">
+          <Group className="text-sm text-[#767676] max-md:justify-center">
             <Link href={"/terms-and-conditions"}>
               {" "}
               {t("terms-and-conditions")}{" "}
@@ -224,7 +225,7 @@ const Footer = () => {
         </SimpleGrid>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

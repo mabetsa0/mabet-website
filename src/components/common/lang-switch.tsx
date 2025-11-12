@@ -2,13 +2,13 @@
 
 "use client"
 
-import { LOCALES } from "@/config"
-import { usePathname } from "@/lib/i18n/navigation"
-import { Box, Button, Menu, UnstyledButton } from "@mantine/core"
+import { useCallback } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { useCallback } from "react"
+import { Box, Button, Menu, UnstyledButton } from "@mantine/core"
 import { Globe } from "lucide-react"
+import { LOCALES } from "@/config"
+import { usePathname } from "@/lib/i18n/navigation"
 
 const LanguageSwitcher = () => {
   const t = useTranslations()
@@ -60,7 +60,7 @@ const LanguageSwitcher = () => {
         <UnstyledButton
           onClick={() => changeLanguage("ar")}
           className={
-            "rtl:hidden  px-xs py-md rounded-md  font-medium flex items-center gap-xs"
+            "px-xs py-md gap-xs flex items-center rounded-md font-medium rtl:hidden"
           }
         >
           <Globe strokeWidth={1.3} />
@@ -69,7 +69,7 @@ const LanguageSwitcher = () => {
         <UnstyledButton
           onClick={() => changeLanguage("en")}
           className={
-            "ltr:hidden  px-xs py-md rounded-md  font-medium flex items-center gap-xs"
+            "px-xs py-md gap-xs flex items-center rounded-md font-medium ltr:hidden"
           }
         >
           <Globe strokeWidth={1.3} />

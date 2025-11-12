@@ -1,10 +1,7 @@
 "use client"
 
-import { UnitTypeIcons } from "@/assets"
-import SelectDropdownSearch from "@/components/ui/select-with-search"
-import { useCities, useUnitTypes } from "@/context/global-data-context"
-import { cn } from "@/lib/cn"
-import { useRouter } from "@/lib/i18n/navigation"
+import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import {
   ActionIcon,
   Divider,
@@ -20,8 +17,11 @@ import {
 import { createFormContext } from "@mantine/form"
 import dayjs from "dayjs"
 import { Building2, MapPin, Search } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { useSearchParams } from "next/navigation"
+import { UnitTypeIcons } from "@/assets"
+import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
+import { cn } from "@/lib/cn"
+import { useRouter } from "@/lib/i18n/navigation"
 import DateRangePicker from "./date-range-picker"
 
 // Definition of form values is required
@@ -95,10 +95,10 @@ const SearchBar = () => {
           <form onSubmit={onSubmit}>
             <Group
               wrap="nowrap"
-              className="bg-white rounded-[90px] border-[3px] border-[#F3F3F3] text-black"
+              className="rounded-[90px] border-[3px] border-[#F3F3F3] bg-white text-black"
               p={"8px"}
             >
-              <Grid className="grow " px={"lg"}>
+              <Grid className="grow" px={"lg"}>
                 <Grid.Col span={3}>
                   <SelectDropdownSearch
                     searchLabel={t("select-city")}
@@ -140,7 +140,7 @@ const SearchBar = () => {
                       shadow="md"
                     >
                       <Popover.Target>
-                        <Stack className="w-full   " gap={2}>
+                        <Stack className="w-full" gap={2}>
                           <Group gap={4}>
                             <Building2 size={17} strokeWidth={1.5} />
 
@@ -151,7 +151,7 @@ const SearchBar = () => {
                           </Group>
                           <Group
                             className={cn(
-                              "h-[50px] items-center text-gray-600 text-lg !cursor-pointer",
+                              "h-[50px] !cursor-pointer items-center text-lg text-gray-600",
                               form.values.unit_type_id && "text-gray-700"
                             )}
                           >
@@ -176,7 +176,7 @@ const SearchBar = () => {
                                   key={type.id}
                                   radius="md"
                                   value={type.id + ""}
-                                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-2.5 py-2.5 relative"
+                                  className="group data-[checked]:border-primary relative px-2.5 py-2.5 duration-300 data-[checked]:bg-[#18807826]"
                                 >
                                   <Group wrap="nowrap" align="flex-start">
                                     <Radio.Indicator className="absolute opacity-0" />
@@ -200,7 +200,7 @@ const SearchBar = () => {
                                       <Text
                                         fz={"sm"}
                                         fw={700}
-                                        className="duration-300 group-data-[checked]:text-primary"
+                                        className="group-data-[checked]:text-primary duration-300"
                                       >
                                         {type.name}
                                       </Text>

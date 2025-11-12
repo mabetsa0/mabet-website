@@ -1,9 +1,10 @@
-import { routing } from "@/lib/i18n/routing"
 import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
-import "./reset-spacing.css"
 import Footer from "@/components/common/footer"
+import { routing } from "@/lib/i18n/routing"
+import "./reset-spacing.css"
+
 export default async function LocaleLayout({
   children,
   params,

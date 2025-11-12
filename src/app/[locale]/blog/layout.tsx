@@ -1,7 +1,5 @@
 import { Cairo } from "next/font/google"
-
 import Footer from "@/components/blog/footer"
-
 import { SEO } from "@/services/get-seo"
 
 export const dynamic = "force-dynamic"

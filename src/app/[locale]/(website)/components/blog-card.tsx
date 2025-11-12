@@ -1,10 +1,10 @@
-import { Blog } from "@/@types/blogs"
-import { Link } from "@/lib/i18n/navigation"
+import { getLocale, getTranslations } from "next-intl/server"
 import { Button, Card, Image, Text, Title } from "@mantine/core"
 import dayjs from "dayjs"
 import "dayjs/locale/ar"
 import { ChevronLeft } from "lucide-react"
-import { getLocale, getTranslations } from "next-intl/server"
+import { Blog } from "@/@types/blogs"
+import { Link } from "@/lib/i18n/navigation"
 
 export default async function BlogCard(props: Blog) {
   const locale = await getLocale()
@@ -15,13 +15,13 @@ export default async function BlogCard(props: Blog) {
       padding="xs"
       radius="md"
       withBorder
-      className={"border-[#F3F3F3] w-full sm:max-w-[400px]"}
+      className={"w-full border-[#F3F3F3] sm:max-w-[400px]"}
     >
       <div className="h-[290px]">
         <Image
           radius={"md"}
           src={props.coverImage}
-          className="w-full h-full  object-cover"
+          className="h-full w-full object-cover"
           alt={props.title}
         />
       </div>

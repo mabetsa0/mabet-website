@@ -64,9 +64,9 @@ export interface FullUnitData {
 
 export interface CancellationPolicy {
   title: string
-  description: string,
+  description: string
   title_html: string
-  description_html: string,
+  description_html: string
 }
 
 export interface Counts {
@@ -195,12 +195,12 @@ export interface Prices {
   marketing_profit_percent: number
   show_down_payment: boolean
   sub_price: string
-  sub_price_text: string,
+  sub_price_text: string
   additionals: {
-    label: string;
-    value: string;
-    color?: string;
-  }[];
+    label: string
+    value: string
+    color?: string
+  }[]
 }
 
 export interface BusyDaysResponse {

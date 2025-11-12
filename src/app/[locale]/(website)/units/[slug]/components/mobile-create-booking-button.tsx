@@ -1,10 +1,6 @@
 "use client"
-import { ErrorResponse } from "@/@types/error"
-import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
-import { getIsPrivate } from "@/utils/get-is-private"
+import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import {
   Box,
   Button,
@@ -19,12 +15,17 @@ import { notifications } from "@mantine/notifications"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
-import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
+import { ErrorResponse } from "@/@types/error"
+import { RiyalIcon } from "@/components/icons"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useRouter } from "@/lib/i18n/navigation"
+import { useSession } from "@/lib/session-store"
+import { getIsPrivate } from "@/utils/get-is-private"
 import { useUnitData } from "../context/unit-context"
 import { createBooking } from "../create-booking"
 import { GetUnitAvailability } from "../get-unit-availability"
+
 const MobileCreateBookingButton = () => {
   const { isAuthenticated, session } = useSession()
   const t = useTranslations()
@@ -108,7 +109,7 @@ const MobileCreateBookingButton = () => {
   return (
     <Box
       hiddenFrom="md"
-      className="fixed bottom-0 inset-x-0 p-xs bg-white z-10  [box-shadow:_0px_-16px_40px_0px_#0000001F]"
+      className="p-xs fixed inset-x-0 bottom-0 z-10 bg-white [box-shadow:_0px_-16px_40px_0px_#0000001F]"
     >
       {status === "pending" ? (
         <SimpleGrid mb={"xs"} cols={2}>
@@ -144,7 +145,7 @@ const MobileCreateBookingButton = () => {
         <SimpleGrid mb={"xs"} cols={2}>
           <div>
             {prices?.discount ? (
-              <Text className="text-[#767676] text-[12px]  line-through">
+              <Text className="text-[12px] text-[#767676] line-through">
                 {" "}
                 {Number(prices.sub_price)} <RiyalIcon />
                 <span className="text-[10px]">/{prices.duration_text}</span>
@@ -155,7 +156,7 @@ const MobileCreateBookingButton = () => {
                 {prices?.price_plain}
                 <RiyalIcon />
               </Title>
-              <Text className="text-[#767676] text-sm">
+              <Text className="text-sm text-[#767676]">
                 /{t("general.night")}
               </Text>
             </Group>
@@ -165,12 +166,12 @@ const MobileCreateBookingButton = () => {
               <Text c={"#767676"}>
                 {t("general.from")}{" "}
                 {from ? (
-                  <span className=" font-bold text-primary">
+                  <span className="text-primary font-bold">
                     {dayjs(from).format("DD")}
                   </span>
                 ) : null}{" "}
                 {from ? dayjs(from).format("/ MMMM") : ""} -{" "}
-                <span className=" font-bold text-primary">
+                <span className="text-primary font-bold">
                   {to ? dayjs(to).format("DD") : null}
                 </span>{" "}
                 {to ? dayjs(to).format("/ MMMM") : null}

@@ -1,12 +1,12 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
-import { torism } from "@/assets"
+import { useTranslations } from "next-intl"
 import { Divider, Group, Space, Stack } from "@mantine/core"
 import { QrCode } from "lucide-react"
+import { torism } from "@/assets"
 import { useUnitData } from "../context/unit-context"
-import { useTranslations } from "next-intl"
-import Features from "./features"
 import AboutUnit from "./about-unit"
+import Features from "./features"
 
 const UnitDescription = () => {
   const unit = useUnitData()
@@ -23,7 +23,7 @@ const UnitDescription = () => {
           </p>
           <Group
             wrap="nowrap"
-            className="border w-fit rounded-md py-0.5 px-1.5 border-primary"
+            className="border-primary w-fit rounded-md border px-1.5 py-0.5"
           >
             <img className="w-3" src={torism.src} alt="licence" />
             <p>{unit.licence.license_text}</p>

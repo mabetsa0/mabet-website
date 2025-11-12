@@ -1,8 +1,8 @@
-import { Button, Group, SimpleGrid, Text, Title } from "@mantine/core"
 import { getLocale, getTranslations } from "next-intl/server"
+import { Button, Group, SimpleGrid, Text, Title } from "@mantine/core"
+import { Link } from "@/lib/i18n/navigation"
 import { getBlogs } from "../helpers/get-blogs"
 import BlogCard from "./blog-card"
-import { Link } from "@/lib/i18n/navigation"
 
 const Blogs = async () => {
   try {
@@ -12,12 +12,12 @@ const Blogs = async () => {
     const blogs = (await getBlogs()).data.posts
     return (
       <section>
-        <div className="container py-4.5 mx-auto">
-          <div className="text-center flex flex-col gap-[4px] mb-1.5">
+        <div className="container mx-auto py-4.5">
+          <div className="mb-1.5 flex flex-col gap-[4px] text-center">
             <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
               {t("title")}
             </Text>
-            <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
+            <Title className="text-h3 md:text-h2">{t("desciption")}</Title>
             <Text c={"#767676"} mx={"auto"} maw={425}>
               {t("sub-description")}
             </Text>

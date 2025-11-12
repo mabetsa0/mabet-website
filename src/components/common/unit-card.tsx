@@ -1,10 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { Unit } from "@/@types"
-import { fallingStar, sharpShape } from "@/assets"
-import useFavorite from "@/hooks/use-favorite"
-import { cn } from "@/lib/cn"
-import { Link } from "@/lib/i18n/navigation"
+import { useTranslations } from "next-intl"
 import { Carousel } from "@mantine/carousel"
 import {
   ActionIcon,
@@ -29,8 +25,12 @@ import {
   QrCode,
   Users,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsString, useQueryStates } from "nuqs"
+import { Unit } from "@/@types"
+import { fallingStar, sharpShape } from "@/assets"
+import useFavorite from "@/hooks/use-favorite"
+import { cn } from "@/lib/cn"
+import { Link } from "@/lib/i18n/navigation"
 import { RiyalIcon } from "../icons"
 
 const UnitCard = (props: Unit & { className?: string }) => {
@@ -51,11 +51,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
       radius="md"
       withBorder
       className={cn(
-        "border-[#F3F3F3] w-full max-w-[95vw] sm:max-w-[400px]",
+        "w-full max-w-[95vw] border-[#F3F3F3] sm:max-w-[400px]",
         props.className
       )}
     >
-      <div className=" aspect-[4/3] w-full overflow-hidden rounded relative">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded">
         <ActionIcon
           className="absolute top-0 left-0 z-[1]"
           variant="light"
@@ -73,7 +73,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           leftSection={<img src={fallingStar.src} alt="stars" />}
           size="lg"
           radius={"0"}
-          className="border border-white absolute top-0 right-0 z-[1] rounded-bl-md "
+          className="absolute top-0 right-0 z-[1] rounded-bl-md border border-white"
         >
           {props.stars || "00"}{" "}
           {props.reviews_count ? `${props.reviews_count_text}` : ""}
@@ -98,11 +98,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
           }}
         >
           {props.images.map((image, index) => (
-            <Carousel.Slide className="w-full aspect-[4/3] " key={index}>
-              <div className="w-full aspect-[4/3]  ">
+            <Carousel.Slide className="aspect-[4/3] w-full" key={index}>
+              <div className="aspect-[4/3] w-full">
                 <Image
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                   src={image.image_path}
                   alt={image.alt}
                 />
@@ -116,11 +116,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
           <Title className="truncate" order={5} mt={"8px"}>
             {props.name}
           </Title>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
+          <Group className="text-[#767676]" align="center" gap={"4"}>
             <QrCode size={18} strokeWidth={1.25} />
             <Text className="text-sm">{props.code}</Text>
           </Group>
-          <Group className="text-[#767676] " align="center" gap={"4"}>
+          <Group className="text-[#767676]" align="center" gap={"4"}>
             <MapPin size={18} strokeWidth={1.25} />
             <Text className="text-sm">{props.location}</Text>
           </Group>
@@ -133,12 +133,12 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     {props.prices?.price_plain}
                     <RiyalIcon />
                   </Title>
-                  <Text className="text-[#767676] text-sm">
+                  <Text className="text-sm text-[#767676]">
                     /{props.prices?.duration_text}
                   </Text>
                 </Group>
                 {props.prices?.discount ? (
-                  <Text className="text-[#767676] text-[12px]  line-through">
+                  <Text className="text-[12px] text-[#767676] line-through">
                     {" "}
                     {Number(props.prices.sub_price)} <RiyalIcon />
                     <span className="text-[10px]">
@@ -154,7 +154,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               {props.prices?.discount ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-[120px] relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="relative min-w-[120px] rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
                   classNames={{
                     label: "text-start text-xs",
                   }}
@@ -164,7 +164,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     color: "#E8123D",
                   }}
                   leftSection={
-                    <div className=" font-bold text-xs bg-white p-[4px] rounded-[5px] w-[32px] aspect-square flex items-center justify-center">
+                    <div className="flex aspect-square w-[32px] items-center justify-center rounded-[5px] bg-white p-[4px] text-xs font-bold">
                       {props.prices.discount_percent_text}%
                     </div>
                   }
@@ -173,13 +173,13 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   <img
                     alt="sharp"
                     src={sharpShape.src}
-                    className=" ltr:scale-x-[-1]  absolute end-0 top-0 bottom-0"
+                    className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                   />
                 </Badge>
               ) : props.badge?.border_color ? (
                 <Badge
                   h={40}
-                  className="p-[4px] min-w-[120px] relative !rounded-e-[0]   rounded-s-md !border-0 "
+                  className="relative min-w-[120px] rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
                   classNames={{
                     label: "text-start",
                   }}
@@ -189,7 +189,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     color: "white",
                   }}
                   leftSection={
-                    <div className=" bg-white p-[4px] rounded-[5px] w-[32px] aspect-square flex items-center justify-center">
+                    <div className="flex aspect-square w-[32px] items-center justify-center rounded-[5px] bg-white p-[4px]">
                       <img
                         className="w-full"
                         src={props.badge.icon}
@@ -202,7 +202,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   <img
                     alt="sharp"
                     src={sharpShape.src}
-                    className=" ltr:scale-x-[-1] absolute end-0 top-0 bottom-0"
+                    className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                   />
                 </Badge>
               ) : null}
@@ -221,7 +221,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
             >
               <Group gap={"4"} wrap="nowrap">
                 <Users width={16} strokeWidth={1.25} className="text-primary" />
-                <span className=" whitespace-nowrap">
+                <span className="whitespace-nowrap">
                   {props.unit_for_sentence}
                 </span>
               </Group>
@@ -232,7 +232,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   strokeWidth={1.25}
                   className="text-primary"
                 />
-                <span className=" whitespace-nowrap">{props.area}</span>
+                <span className="whitespace-nowrap">{props.area}</span>
               </Group>
               <Divider orientation="vertical" />
               <Group gap={"4"} wrap="nowrap">
@@ -241,7 +241,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   strokeWidth={1.25}
                   className="text-primary"
                 />
-                <span className=" whitespace-nowrap">
+                <span className="whitespace-nowrap">
                   {props.unit_content.find((e) => e.key === "bedrooms")
                     ?.count || 0}{" "}
                   {t("bedrooms")}
@@ -250,7 +250,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               <Divider orientation="vertical" />
               <Group gap={"4"} wrap="nowrap">
                 <Bath width={16} strokeWidth={1.25} className="text-primary" />
-                <span className=" whitespace-nowrap">
+                <span className="whitespace-nowrap">
                   {props.unit_content.find((e) => e.key === "toilets")?.count ||
                     0}{" "}
                   {t("toilets")}

@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation"
-
-import axios from "axios"
-
 import { Box } from "@mantine/core"
-import { GetUnit } from "@/app/[locale]/(website)/units/[slug]/get-unit"
+import axios from "axios"
 import { UnitContextProvider } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
-import Reservation from "./components/reservation"
+import { GetUnit } from "@/app/[locale]/(website)/units/[slug]/get-unit"
 import Mabet from "@/services"
 import NafathModal from "./components/nafath"
+import Reservation from "./components/reservation"
 
 type Props = {
   params: Promise<{
@@ -32,7 +30,7 @@ const page = async (props: Props) => {
 
     return (
       <UnitContextProvider value={unit}>
-        <Box className="max-w-[500px] mx-auto">
+        <Box className="mx-auto max-w-[500px]">
           <Reservation />
           <NafathModal />
         </Box>

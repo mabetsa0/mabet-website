@@ -1,15 +1,15 @@
 "use client"
-import UnitCard from "@/components/common/unit-card"
-import Mabet from "@/services"
+import { useTranslations } from "next-intl"
 import { Group, Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, useQueryState } from "nuqs"
+import UnitCard from "@/components/common/unit-card"
+import { RiyalIcon } from "@/components/icons"
+import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { WalletResponse } from "./@types"
-import WalletCard from "./components/wallet-card"
 import AddToWallet from "./components/add-to-wallet"
-import { RiyalIcon } from "@/components/icons"
+import WalletCard from "./components/wallet-card"
 
 type Props = {}
 
@@ -38,7 +38,7 @@ const Page = (props: Props) => {
           </Text>
           <Text className="md:text-lg">
             {t("user.wallet.description")}{" "}
-            <span className="text-primary ">
+            <span className="text-primary">
               {data?.data.data.current_balance}
               <RiyalIcon />
             </span>
@@ -49,14 +49,14 @@ const Page = (props: Props) => {
       <Space />
 
       {status === "pending" && (
-        <div className="flex items-center justify-center min-h-20">
+        <div className="flex min-h-20 items-center justify-center">
           <Loader />
         </div>
       )}
 
       {status === "error" && (
-        <div className="flex items-center justify-center min-h-20">
-          <p className="text-center text-red-500  text-sm">
+        <div className="flex min-h-20 items-center justify-center">
+          <p className="text-center text-sm text-red-500">
             {t("user.bookings.server-error")}
           </p>
         </div>
@@ -77,7 +77,7 @@ const Page = (props: Props) => {
       ) : null}
       <Space />
       <Space />
-      <div className="flex justify-center w-full ">
+      <div className="flex w-full justify-center">
         <Pagination total={data?.data.data.last_page || 0} />
       </div>
     </Stack>

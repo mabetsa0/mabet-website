@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-
 import { SEOResponse } from "@/@types/seo-response"
 import { Seo } from "."
 

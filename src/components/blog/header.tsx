@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Header() {
   return (
-    <h1 className="mb-2.5 mt-0.5 text-5xl font-bold leading-tight tracking-tight text-primary md:text-4xl md:text-[3rem] md:tracking-tighter">
+    <h1 className="text-primary mt-0.5 mb-2.5 text-5xl leading-tight font-bold tracking-tight md:text-4xl md:text-[3rem] md:tracking-tighter">
       <Link
         href="/blog"
         className="flex items-center gap-[12px] hover:underline"
@@ -32,7 +32,7 @@ export default function Header() {
             />
           </defs>
         </svg>
-        <span className="mb-0.5 text-secondary">مدونة مبيت</span>
+        <span className="text-secondary mb-0.5">مدونة مبيت</span>
       </Link>
     </h1>
   )
