@@ -1,6 +1,6 @@
 "use client"
 import { useTranslations } from "next-intl"
-import { Avatar, Button, Group, Stack, Text, Title } from "@mantine/core"
+import { Avatar, Button, Group, Stack, Text } from "@mantine/core"
 import { ArrowLeft, Star } from "lucide-react"
 import { Link } from "@/lib/i18n/navigation"
 import { useUnitData } from "../context/unit-context"
