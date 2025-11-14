@@ -18,17 +18,20 @@ import { notifications } from "@mantine/notifications"
 import dayjs from "dayjs"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
 import { Minus } from "lucide-react"
-import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
+import { parseAsBoolean, useQueryStates } from "nuqs"
 import { calenderIn, calenderOut } from "@/assets"
 import useMdScreen from "@/hooks/use-md-screen"
 import { cn } from "@/lib/cn"
 import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
 import { useUnitData } from "../context/unit-context"
 import useBusyDays from "../hooks/use-busy-days"
+import { useQueryDates } from "../hooks/use-query-dates"
 
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
+dayjs.extend(utc)
 
 const DateSelect = ({
   readOnly,
@@ -46,17 +49,12 @@ const DateSelect = ({
 
   const t = useTranslations()
 
-  const [{ from, to, selectDate }, setDates] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-      selectDate: parseAsBoolean.withDefault(false),
-    },
-    {
-      scroll: false,
-      history: "replace",
-    }
-  )
+  const [{ from, to }, setDates] = useQueryDates()
+
+  const [{ selectDate }] = useQueryStates({
+    selectDate: parseAsBoolean.withDefault(false),
+  })
+
   useEffect(() => {
     if (selectDate) {
       open()
@@ -102,6 +100,7 @@ const DateSelect = ({
   const matches = useMdScreen()
 
   const handleDateChange = (values: [string | null, string | null]) => {
+    console.log("🚀 ~ handleDateChange ~ values:", values)
     const days = getDaysBetweenDates(values[0], values[1])
 
     const hasBusyDaysInRange = busyDays.find((busyDay, i) => {
@@ -118,8 +117,8 @@ const DateSelect = ({
       return
     }
 
-    const start = dayjs(values[0])
-    const end = dayjs(values[1])
+    const start = dayjs.utc(values[0])
+    const end = dayjs.utc(values[1])
     const duration = end.diff(start, "day")
 
     // check if the start date is a featured date
@@ -131,7 +130,7 @@ const DateSelect = ({
       const minStay = matchedFeatured.min_stay
       if (duration < minStay) {
         const newEndDate = start.add(minStay, "day").toDate()
-        setValue([start.toDate(), newEndDate])
+        setValue([new Date(values[0]!), newEndDate])
         return
       }
     }
