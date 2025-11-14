@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Group,
+  NumberFormatter,
   SimpleGrid,
   Skeleton,
   Stack,
@@ -153,7 +154,12 @@ const MobileCreateBookingButton = () => {
             ) : null}
             <Group gap={"4"}>
               <Title order={5} c={"#188078"}>
-                {prices?.price_plain}
+                <NumberFormatter
+                  value={prices?.price_plain}
+                  thousandSeparator
+                  decimalScale={2}
+                />
+
                 <RiyalIcon />
               </Title>
               <Text className="text-sm text-[#767676]">
@@ -178,7 +184,12 @@ const MobileCreateBookingButton = () => {
               </Text>
             </Group>
             <Text size="sm" fw={500}>
-              {t("unit.total")} {prices?.duration_text} {prices?.full_payment}{" "}
+              {t("unit.total")} {prices?.duration_text}{" "}
+              <NumberFormatter
+                value={prices?.full_payment}
+                thousandSeparator
+                decimalScale={2}
+              />{" "}
               <RiyalIcon />
             </Text>
           </Stack>

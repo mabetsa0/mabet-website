@@ -62,7 +62,8 @@ const DateSelect = ({
       open()
       ref.current?.scrollIntoView({ behavior: "smooth" })
     }
-  }, [selectDate])
+  }, [selectDate, open])
+
   const [value, setValue] = useState<[Date | null, Date | null]>(
     initialValues ? [initialValues?.from, initialValues?.to] : [from, to]
   )
@@ -121,35 +122,15 @@ const DateSelect = ({
     const end = dayjs(values[1])
     const duration = end.diff(start, "day")
 
-    // اجمع الأيام داخل الفترة
-    const daysInRange: string[] = []
-    for (let i = 0; i <= duration; i++) {
-      daysInRange.push(start.add(i, "day").format("YYYY-MM-DD"))
-    }
-
-    // تحقق من الأيام المميزة داخل الفترة
-    const matchedFeatured = featuredDates.filter((f) =>
-      daysInRange.includes(f.date)
+    // check if the start date is a featured date
+    const matchedFeatured = featuredDates.find(
+      (f) => f.date === start.format("YYYY-MM-DD")
     )
 
-    if (matchedFeatured.length > 0) {
-      // احصل على أعلى min_stay
-      const maxMinStay = Math.max(...matchedFeatured.map((f) => f.min_stay))
-      console.log("🚀 ~ handleDateChange ~ maxMinStay:", maxMinStay)
-
-      // لو المدة أقل من المطلوب، عدّل النهاية
-      if (duration < maxMinStay) {
-        const newEndDate = start.add(maxMinStay, "day").toDate()
-
-        notifications.show({
-          color: "orange",
-          title: t("general.warning"),
-          message:
-            `${t("general.min_stay_warning")}: ${maxMinStay} ${t("general.nights")}. ` +
-            t("general.date_extended_to") +
-            dayjs(newEndDate).format("YYYY-MM-DD"),
-        })
-
+    if (matchedFeatured) {
+      const minStay = matchedFeatured.min_stay
+      if (duration < minStay) {
+        const newEndDate = start.add(minStay, "day").toDate()
         setValue([start.toDate(), newEndDate])
         return
       }
@@ -287,7 +268,6 @@ const DateSelect = ({
           </Group>
         </Popover.Target>
         <Popover.Dropdown>
-          {/* <div > */}
           <DatePicker
             numberOfColumns={matches ? 1 : 2}
             hideOutsideDates
@@ -296,14 +276,9 @@ const DateSelect = ({
             classNames={{
               day: " relative ",
             }}
-            // ref={dropdownRef}
-
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
             onChange={handleDateChange}
-            // excludeDate={(date) =>
-            //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
-            // }
             renderDay={(date) => renderDay(new Date(date))}
           />
           <Group justify="end" mt={"sm"}>

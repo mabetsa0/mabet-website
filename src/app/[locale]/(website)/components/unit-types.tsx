@@ -43,9 +43,6 @@ const UnitTypes = async () => {
                   <Text fz={"sm"} fw={700} className="">
                     {type.name}
                   </Text>
-                  <Text ta={"center"} size="sm" c={"gray"}>
-                    {type.units_count_text}
-                  </Text>
                 </Stack>
               </Link>
             )
