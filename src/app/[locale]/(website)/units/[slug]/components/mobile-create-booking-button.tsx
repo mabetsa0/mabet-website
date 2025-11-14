@@ -1,6 +1,5 @@
 "use client"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import {
   Box,
   Button,
@@ -12,100 +11,28 @@ import {
   Text,
   Title,
 } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
-import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import dayjs from "dayjs"
-import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
+import { parseAsBoolean, useQueryStates } from "nuqs"
 import { ErrorResponse } from "@/@types/error"
 import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
-import { getIsPrivate } from "@/utils/get-is-private"
 import { useUnitData } from "../context/unit-context"
-import { createBooking } from "../create-booking"
-import { GetUnitAvailability } from "../get-unit-availability"
+import useCheckAvailability from "../hooks/use-check-availability"
+import useCreateBookingMutation from "../hooks/use-create-booking-mutation"
+import { useQueryDates } from "../hooks/use-query-dates"
 
 const MobileCreateBookingButton = () => {
-  const { isAuthenticated, session } = useSession()
   const t = useTranslations()
   const unit = useUnitData()
-  const auth = useAuthModal()
-
-  const [{ from, to }, set] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-      selectDate: parseAsBoolean.withDefault(false),
-    },
-    {
-      history: "replace",
-    }
-  )
-  const params = useParams() as { slug: string }
-  const isPrivate = getIsPrivate(params.slug)
-  // handle create booking
-  const Router = useRouter()
-  const createBookingMutation = useMutation({
-    mutationFn: createBooking,
-
-    onError(error) {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        notifications.show({
-          title: t("generla.failer"),
-          message:
-            (error.response.data as ErrorResponse).message || error.message,
-          color: "red",
-        })
-      }
-    },
-    onSuccess(data) {
-      Router.push({
-        pathname: `/units/${unit.id}/${data}`,
-        query: {
-          ...(isPrivate ? { private: true } : {}),
-          ...(session?.user.nafath_validated ? {} : { nafath: true }),
-        },
-      })
-    },
+  const [{ from, to }] = useQueryDates()
+  const [_, set] = useQueryStates({
+    selectDate: parseAsBoolean.withDefault(false),
   })
-  const handleCreateBooking = () => {
-    if (!isAuthenticated) {
-      return auth[1].onOpen()
-    }
-    createBookingMutation.mutate({
-      from: dayjs(from).format("YYYY-MM-DD"),
-      to: dayjs(to).format("YYYY-MM-DD"),
-      unitId: unit.id,
-      private: isPrivate ? "1" : undefined,
-    })
-  }
 
-  const {
-    data: prices,
-    status,
-    error,
-  } = useQuery({
-    queryKey: [
-      "availability",
-      unit.slug,
-      from.toDateString(),
-      to.toDateString(),
-    ],
-    queryFn: async () => {
-      return await GetUnitAvailability({
-        id: unit.id,
-        params: {
-          from: dayjs(from).format("YYYY-MM-DD"),
-          to: dayjs(to).format("YYYY-MM-DD"),
-        },
-      })
-    },
-    retry: false,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  })
+  const { handleCreateBooking, ...createBookingMutation } =
+    useCreateBookingMutation()
+
+  const { data: prices, status, error } = useCheckAvailability(unit)
 
   return (
     <Box
@@ -196,13 +123,15 @@ const MobileCreateBookingButton = () => {
         </SimpleGrid>
       ) : null}
 
-      <Button
-        fullWidth
-        loading={createBookingMutation.isPending}
-        onClick={handleCreateBooking}
-      >
-        {t("unit.create-booking-mobile")}
-      </Button>
+      {status === "success" ? (
+        <Button
+          fullWidth
+          loading={createBookingMutation.isPending}
+          onClick={handleCreateBooking}
+        >
+          {t("unit.create-booking-mobile")}
+        </Button>
+      ) : null}
     </Box>
   )
 }

@@ -10,6 +10,7 @@ import {
   Divider,
   Group,
   Modal,
+  NumberFormatter,
   SimpleGrid,
   Space,
   Stack,
@@ -158,21 +159,6 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         paymentURL = tamaraPayment.data.data.redirect_url || ""
       }
 
-      // if (args.payment_method === "wallet") {
-      //   const walletPayment = await Mabeet.post<PaymentResponse>(
-      //     `/payment/${params.booking_code}/approve`,
-      //     {
-      //       payment_option: data.payment_option,
-      //       use_wallet: data.use_wallet ? 1 : 0,
-      //       private: isPrivate ? 1 : undefined,
-      //       coupon: reservationState.coupon,
-      //     }
-      //   )
-
-      //   Router.push("/user/reservations?payment_status=success")
-      //   return
-      // }
-
       return paymentURL
     },
     onError(error) {
@@ -289,11 +275,20 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                   {prices.duration}{" "}
                   <X className="text-primary" strokeWidth={4} size={20} />{" "}
                   <Text fw={500}>
-                    {prices.night_price} <RiyalIcon />
+                    <NumberFormatter
+                      value={prices.night_price}
+                      thousandSeparator
+                      decimalScale={2}
+                    />
+                    <RiyalIcon />
                   </Text>
                 </Group>
-                <Text ta="end" c="#767676">
-                  <span className="text-primary">{prices.total}</span>
+                <Text ta="end" c="primary">
+                  <NumberFormatter
+                    value={prices.total}
+                    thousandSeparator
+                    decimalScale={2}
+                  />
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>
@@ -326,7 +321,11 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <Text fw={700}>{t("general.total-price")}</Text>
 
                 <Text ta="end" fw={700}>
-                  {prices.full_payment}
+                  <NumberFormatter
+                    value={prices.full_payment}
+                    thousandSeparator
+                    decimalScale={2}
+                  />
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>

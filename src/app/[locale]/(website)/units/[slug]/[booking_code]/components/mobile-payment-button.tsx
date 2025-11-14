@@ -8,6 +8,7 @@ import {
   Button,
   Divider,
   Modal,
+  NumberFormatter,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -235,11 +236,20 @@ const MobilePaymentButton = ({
                       {prices.duration}{" "}
                       <X className="text-primary" strokeWidth={4} size={20} />{" "}
                       <Text fw={500}>
-                        {prices.night_price} <RiyalIcon />
+                        <NumberFormatter
+                          value={prices.night_price}
+                          thousandSeparator
+                          decimalScale={2}
+                        />
+                        <RiyalIcon />
                       </Text>
                     </Group>
-                    <Text ta="end" c="#767676">
-                      <span className="text-primary">{prices.total}</span>
+                    <Text ta="end" c="primary">
+                      <NumberFormatter
+                        value={prices.total}
+                        thousandSeparator
+                        decimalScale={2}
+                      />
                       <RiyalIcon />
                     </Text>
                   </SimpleGrid>
@@ -272,7 +282,11 @@ const MobilePaymentButton = ({
                     <Text fw={700}>{t("general.total-price")}</Text>
 
                     <Text ta="end" fw={700}>
-                      {prices.full_payment}
+                      <NumberFormatter
+                        value={prices.full_payment}
+                        thousandSeparator
+                        decimalScale={2}
+                      />
                       <RiyalIcon />
                     </Text>
                   </SimpleGrid>
