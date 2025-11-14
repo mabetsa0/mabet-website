@@ -100,7 +100,6 @@ const DateSelect = ({
   const matches = useMdScreen()
 
   const handleDateChange = (values: [string | null, string | null]) => {
-    console.log("🚀 ~ handleDateChange ~ values:", values)
     const days = getDaysBetweenDates(values[0], values[1])
 
     const hasBusyDaysInRange = busyDays.find((busyDay, i) => {

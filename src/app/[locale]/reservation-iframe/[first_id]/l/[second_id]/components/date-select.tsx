@@ -18,6 +18,7 @@ import { notifications } from "@mantine/notifications"
 import dayjs from "dayjs"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
 import { Minus } from "lucide-react"
 import { useUnitData } from "@/app/[locale]/(website)/units/[slug]/context/unit-context"
 import useBusyDays from "@/app/[locale]/(website)/units/[slug]/hooks/use-busy-days"
@@ -29,6 +30,7 @@ import { useDate } from "../stores/use-date"
 
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
+dayjs.extend(utc)
 
 const DateSelect = ({
   readOnly,
@@ -85,7 +87,7 @@ const DateSelect = ({
   const handleDateChange = (values: [string | null, string | null]) => {
     const days = getDaysBetweenDates(values[0], values[1])
 
-    const hasBusyDaysInRange = busyDays.find((busyDay) => {
+    const hasBusyDaysInRange = busyDays.find((busyDay, i) => {
       return days.slice(0, -1).includes(busyDay)
     })
 
@@ -99,37 +101,20 @@ const DateSelect = ({
       return
     }
 
-    const start = dayjs(values[0])
-    const end = dayjs(values[1])
+    const start = dayjs.utc(values[0])
+    const end = dayjs.utc(values[1])
     const duration = end.diff(start, "day")
 
-    // اجمع الأيام داخل الفترة
-    const daysInRange: string[] = []
-    for (let i = 0; i <= duration; i++) {
-      daysInRange.push(start.add(i, "day").format("YYYY-MM-DD"))
-    }
-
-    // تحقق من الأيام المميزة داخل الفترة
-    const matchedFeatured = featuredDates.filter((f) =>
-      daysInRange.includes(f.date)
+    // check if the start date is a featured date
+    const matchedFeatured = featuredDates.find(
+      (f) => f.date === start.format("YYYY-MM-DD")
     )
 
-    if (matchedFeatured.length > 0) {
-      const maxMinStay = Math.max(...matchedFeatured.map((f) => f.min_stay))
-
-      if (duration < maxMinStay) {
-        const newEndDate = start.add(maxMinStay, "day").toDate()
-
-        notifications.show({
-          color: "orange",
-          title: t("general.warning"),
-          message:
-            `${t("general.min_stay_warning")}: ${maxMinStay} ${t("general.nights")}. ` +
-            t("general.date_extended_to") +
-            dayjs(newEndDate).format("YYYY-MM-DD"),
-        })
-
-        setValue([start.toDate(), newEndDate])
+    if (matchedFeatured) {
+      const minStay = matchedFeatured.min_stay
+      if (duration < minStay) {
+        const newEndDate = start.add(minStay, "day").toDate()
+        setValue([new Date(values[0]!), newEndDate])
         return
       }
     }
