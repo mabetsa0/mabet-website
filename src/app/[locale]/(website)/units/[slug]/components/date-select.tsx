@@ -78,6 +78,16 @@ const DateSelect = ({
     const __date = dayjs(date).format("YYYY-MM-DD")
     const isBusyDay = busyDays.includes(__date)
 
+    if (isBusyDay) {
+      return (
+        <div className={cn("!opacity-85")}>
+          {date.getDate()}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Minus className="text-red-600" size={32} strokeWidth={1} />
+          </div>
+        </div>
+      )
+    }
     const isFeaturedDate = featuredDates.filter((day) => day.date === __date)[0]
     if (isFeaturedDate)
       return (
@@ -86,16 +96,7 @@ const DateSelect = ({
         </Indicator>
       )
 
-    return (
-      <div className={cn(isBusyDay ? "!opacity-85" : "")}>
-        {date.getDate()}
-        {isBusyDay ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Minus className="text-red-600" size={32} strokeWidth={1} />
-          </div>
-        ) : null}
-      </div>
-    )
+    return <div>{date.getDate()}</div>
   }
   const matches = useMdScreen()
 
