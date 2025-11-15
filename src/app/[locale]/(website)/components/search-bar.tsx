@@ -15,7 +15,6 @@ import {
   Text,
 } from "@mantine/core"
 import { createFormContext } from "@mantine/form"
-import dayjs from "dayjs"
 import { Building2, MapPin, Search } from "lucide-react"
 import { UnitTypeIcons } from "@/assets"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
@@ -23,69 +22,41 @@ import { useCities, useUnitTypes } from "@/context/global-data-context"
 import { cn } from "@/lib/cn"
 import { useRouter } from "@/lib/i18n/navigation"
 import DateRangePicker from "./date-range-picker"
+import {
+  type SearchFormValues,
+  type TransformedSearchValues,
+  getInitialSearchFormValues,
+  transformSearchFormValues,
+  buildSearchUrl,
+  DEFAULT_CITY_ID,
+} from "./shared/search-utils"
 
 // Definition of form values is required
-type FormValues = {
-  city_id: string
-  unit_type_id: string
-  dates: [Date | null, Date | null]
-}
-type TransformedValues = (values: FormValues) => {
-  city_id: string
-  unit_type_id: string
-  from: string
-  to: string
-}
+type TransformedValues = (values: SearchFormValues) => TransformedSearchValues
 
 // createFormContext returns a tuple with 3 items:
 // FormProvider is a component that sets form context
 // useFormContext hook return form object that was previously set in FormProvider
 // useForm hook works the same way as useForm exported from the package but has predefined type
 export const [FormProvider, useSearchBarFormContext, useForm] =
-  createFormContext<FormValues, TransformedValues>()
+  createFormContext<SearchFormValues, TransformedValues>()
+
 const SearchBar = () => {
   const cities = useCities()
   const unitTypes = useUnitTypes()
   const searchparams = useSearchParams()
   const t = useTranslations("general")
+  const router = useRouter()
+
   const form = useForm({
     mode: "controlled",
-    initialValues: {
-      city_id: searchparams.get("city_id") || "",
-      unit_type_id: searchparams.get("unit_type_id") || "",
-      dates: [
-        searchparams.get("from")
-          ? new Date(searchparams.get("from") as string)
-          : dayjs().toDate(),
-
-        searchparams.get("to")
-          ? new Date(searchparams.get("to") as string)
-          : dayjs().add(1, "day").toDate(),
-      ],
-    },
-    transformValues(values) {
-      return {
-        city_id: values.city_id == "0" ? "" : values.city_id,
-        unit_type_id: values.unit_type_id,
-        from: values.dates[0]
-          ? dayjs(values.dates[0]).format("YYYY-MM-DD")
-          : dayjs().format("YYYY-MM-DD"),
-        to: values.dates[1]
-          ? dayjs(values.dates[1]).format("YYYY-MM-DD")
-          : dayjs().add(1, "day").format("YYYY-MM-DD"),
-      }
-    },
+    initialValues: getInitialSearchFormValues(searchparams),
+    transformValues: transformSearchFormValues,
   })
 
-  const Router = useRouter()
-
   const onSubmit = form.onSubmit((values) => {
-    const newSearchParams = new URLSearchParams(searchparams)
-    Object.entries(values).map(([key, value]) => {
-      newSearchParams.delete(key)
-      newSearchParams.append(key, value)
-    })
-    Router.push(`/units?${newSearchParams.toString()}`)
+    const url = buildSearchUrl(searchparams, values)
+    router.push(url)
   })
   return (
     <section>
@@ -119,7 +90,7 @@ const SearchBar = () => {
                     placeholder={t("select")}
                     data={[
                       {
-                        value: "0",
+                        value: DEFAULT_CITY_ID,
                         label: t("all-cities"),
                       },
                       ...cities.map((city) => ({
@@ -204,9 +175,9 @@ const SearchBar = () => {
                                       >
                                         {type.name}
                                       </Text>
-                                      <Text ta={"center"} size="sm" c={"gray"}>
+                                      {/* <Text ta={"center"} size="sm" c={"gray"}>
                                         {type.units_count_text}
-                                      </Text>
+                                      </Text> */}
                                     </Stack>
                                   </Group>
                                 </Radio.Card>

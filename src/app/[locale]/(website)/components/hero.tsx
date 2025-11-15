@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Button, Space, Stack, Text, Title } from "@mantine/core"
 import { Search } from "lucide-react"
 import { heroBackground } from "@/assets"
-import MobileSearch from "./mobile-search"
+import MobileSearch from "./mobile-primary-search/mobile-search"
 import SearchBar from "./search-bar"
 
 export default async function Hero() {

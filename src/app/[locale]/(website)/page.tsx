@@ -78,6 +78,7 @@ export default async function Page({
       >
         <TopRatedUnits />
       </Suspense>
+
       <DownLoadApp />
       <Blogs />
       <Footer />
