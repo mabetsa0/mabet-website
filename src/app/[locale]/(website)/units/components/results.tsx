@@ -27,6 +27,7 @@ import {
   TicketPercent,
   WavesLadder,
 } from "lucide-react"
+import MobileSearch from "@/app/[locale]/(website)/components/mobile-primary-search/mobile-search"
 import noResults from "@/assets/no-results.svg"
 import UnitCard from "@/components/common/unit-card"
 import UnitCardSkeleton from "@/components/common/unit-card-skeleton"
@@ -41,7 +42,6 @@ import { usePools } from "@/hooks/use-pools"
 import { useRegions } from "@/hooks/use-regions"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
-import MobileSearch from "../../components/mobile-search"
 import useFilters from "../hooks/use-filters"
 import { SearchResultsResponse } from "../types/results"
 import { countAppliedFilters } from "../types/search-params"
