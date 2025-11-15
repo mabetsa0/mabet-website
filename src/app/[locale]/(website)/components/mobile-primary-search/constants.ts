@@ -17,6 +17,5 @@ export const DRAWER_STYLES = {
   HANDLE_HEIGHT: 4,
 } as const
 
-export const DEFAULT_CITY_ID = "0"
-
-export const DATE_FORMAT = "YYYY-MM-DD"
+// Re-export shared constants for backward compatibility
+export { DEFAULT_CITY_ID, DATE_FORMAT } from "../shared/search-utils"

@@ -1,18 +1,21 @@
 import { createFormContext } from "@mantine/form"
+import type {
+  SearchFormValues,
+  TransformedSearchValues,
+} from "../shared/search-utils"
 
-export type FormValues = {
-  city_id: string
-  unit_type_id: string
-  dates: [Date | null, Date | null]
+/**
+ * Mobile search form values - extends shared form values with step for navigation
+ */
+export type FormValues = SearchFormValues & {
   step: number
 }
 
-export type TransformedValuesObject = {
-  city_id: string
-  unit_type_id: string
-  from: string
-  to: string
-}
+/**
+ * Transformed values for URL search params
+ * Re-export shared type for consistency
+ */
+export type TransformedValuesObject = TransformedSearchValues
 
 export type TransformedValues = (values: FormValues) => TransformedValuesObject
 

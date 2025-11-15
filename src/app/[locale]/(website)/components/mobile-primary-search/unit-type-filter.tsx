@@ -2,7 +2,15 @@
 "use client"
 import { memo, useCallback, useMemo } from "react"
 import { useTranslations } from "next-intl"
-import { Button, Group, Radio, SimpleGrid, Stack, Text } from "@mantine/core"
+import {
+  Button,
+  Group,
+  Image,
+  Radio,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@mantine/core"
 import "dayjs/locale/ar"
 import { UnitType } from "@/@types/unit-types"
 import { UnitTypeIcons } from "@/assets"
@@ -12,10 +20,6 @@ import { useFormContext } from "./search-contexts"
 interface UnitTypeCardProps {
   type: UnitType
 }
-
-// Constants
-const GRID_COLS = 2
-const ICON_SIZE = 35
 
 // Helper function to safely get unit type icon
 const getUnitTypeIcon = (typeId: number): string | undefined => {
@@ -34,14 +38,14 @@ const UnitTypeCard = memo(({ type }: UnitTypeCardProps) => {
       className="group data-[checked]:border-primary relative px-1.5 py-1.5 duration-300 data-[checked]:bg-[#18807826]"
       aria-label={type.name}
     >
-      <Group wrap="nowrap" align="flex-start">
+      <Group wrap="nowrap" align="center" justify="center">
         <Radio.Indicator className="absolute opacity-0" />
-        <Stack gap="xs" ta="center">
+        <Stack gap="xs" ta="center" justify="center" align="center">
           {iconSrc && (
-            <img
-              height={ICON_SIZE}
-              width={ICON_SIZE}
-              className="mx-auto"
+            <Image
+              h={40}
+              w={40}
+              mx="auto"
               src={iconSrc}
               alt={type.name}
               loading="lazy"
@@ -85,7 +89,7 @@ const UnitTypeFilter = () => {
           key={form.key("unit_type_id")}
           {...form.getInputProps("unit_type_id")}
         >
-          <SimpleGrid cols={GRID_COLS}>{unitTypeCards}</SimpleGrid>
+          <SimpleGrid cols={2}>{unitTypeCards}</SimpleGrid>
         </Radio.Group>
       </div>
       <Button onClick={handleContinue}>{t("continue")}</Button>
