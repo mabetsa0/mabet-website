@@ -1,10 +1,20 @@
 import React from "react"
+import { getTranslations } from "next-intl/server"
 import { getSpecialUnits } from "../helpers/get-special-units"
-import SpecialUnitsCarousel from "./special-units-carousel"
+import UnitsCarousel from "./units-carousel"
 
 const SpecialUnits = async () => {
   const specialUnits = await getSpecialUnits()
-  return <SpecialUnitsCarousel data={specialUnits} />
+  const t = await getTranslations("home.special-units")
+
+  await new Promise((resolve) => setTimeout(resolve, 10000))
+  return (
+    <UnitsCarousel
+      title={t("title")}
+      description={t("desciption")}
+      data={specialUnits}
+    />
+  )
 }
 
 export default SpecialUnits
