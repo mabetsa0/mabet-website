@@ -21,7 +21,6 @@ import {
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useDisclosure, useForceUpdate } from "@mantine/hooks"
-import { useQuery } from "@tanstack/react-query"
 import "dayjs/locale/ar"
 import { Search, SlidersHorizontal, Star } from "lucide-react"
 import { Drawer } from "vaul"
@@ -30,12 +29,10 @@ import { RiyalIcon } from "@/components/icons"
 import { CustomNumberInput } from "@/components/ui/number-input"
 import SelectDropdownSearch from "@/components/ui/select-with-search"
 import { useCities, useUnitTypes } from "@/context/global-data-context"
-import {
-  getDirections,
-  getFacilities,
-  getPools,
-  getRegions,
-} from "@/services/lists"
+import { useDirections } from "@/hooks/use-directions"
+import { useFacilities } from "@/hooks/use-facilities"
+import { usePools } from "@/hooks/use-pools"
+import { useRegions } from "@/hooks/use-regions"
 import { handleFormError } from "@/utils/handle-form-errors"
 import useFilters from "../../hooks/use-filters"
 
@@ -142,53 +139,11 @@ const MobileFilterDrawer = () => {
   }
   // getting regions
   const cityId = form.getValues().city_id
-  const regionsData = useQuery({
-    queryKey: ["region", cityId],
-    staleTime: Infinity,
-    enabled: !!cityId,
-    queryFn: async () => {
-      const response = await getRegions(cityId!)
-      return response.data.districts.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const regionsData = useRegions(cityId || "")
 
-  const poolsQuery = useQuery({
-    queryKey: ["pools"],
-    staleTime: Infinity,
-
-    queryFn: async () => {
-      const response = await getPools()
-      return response.data.amenities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const facilitiesQuery = useQuery({
-    queryKey: ["facilities"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getFacilities()
-      return response.data.facilities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const directionsQuery = useQuery({
-    queryKey: ["/location/directions"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getDirections()
-      return response.data.directions.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const poolsQuery = usePools()
+  const facilitiesQuery = useFacilities()
+  const directionsQuery = useDirections()
 
   const forceUpdate = useForceUpdate()
 

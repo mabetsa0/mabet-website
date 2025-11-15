@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   Group,
-  Loader,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -30,19 +29,18 @@ import {
 } from "lucide-react"
 import noResults from "@/assets/no-results.svg"
 import UnitCard from "@/components/common/unit-card"
+import UnitCardSkeleton from "@/components/common/unit-card-skeleton"
 import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbox"
 import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
 import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
 import ToggleFilterButton from "@/components/ui/toggle-filter-button"
 import { useCities, useUnitTypes } from "@/context/global-data-context"
+import { useDirections } from "@/hooks/use-directions"
+import { useFacilities } from "@/hooks/use-facilities"
+import { usePools } from "@/hooks/use-pools"
+import { useRegions } from "@/hooks/use-regions"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
-import {
-  getDirections,
-  getFacilities,
-  getPools,
-  getRegions,
-} from "@/services/lists"
 import MobileSearch from "../../components/mobile-search"
 import useFilters from "../hooks/use-filters"
 import { SearchResultsResponse } from "../types/results"
@@ -82,66 +80,17 @@ const Results = () => {
 
   // getting regions
   const cityId = searchParams.get("city_id")
-  const regionsData = useQuery({
-    queryKey: ["region", cityId],
-    staleTime: Infinity,
-    enabled: !!cityId,
-    queryFn: async () => {
-      const response = await getRegions(cityId!)
-      return response.data.districts.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const regionsData = useRegions(cityId || "")
   //
-  const poolsQuery = useQuery({
-    queryKey: ["pools"],
-    staleTime: Infinity,
-
-    queryFn: async () => {
-      const response = await getPools()
-      return response.data.amenities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const facilitiesQuery = useQuery({
-    queryKey: ["facilities"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getFacilities()
-      return response.data.facilities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const directionsQuery = useQuery({
-    queryKey: ["/location/directions"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getDirections()
-      return response.data.directions.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const poolsQuery = usePools()
+  const facilitiesQuery = useFacilities()
+  const directionsQuery = useDirections()
 
   const Router = useRouter()
   const back = () => {
     Router.back()
   }
   const scrollRef = useRef<ComponentRef<"div">>(null)
-  // useEffect(() => {
-  //   if (scrollRef.current) {
-  //     setTimeout(() => {
-  //       scrollRef.current!.scrollIntoView({ behavior: "smooth" })
-  //     }, 200)
-  //   }
-  // }, [page])
 
   const clearFilters = () => {
     setFilters(null)
@@ -355,9 +304,14 @@ const Results = () => {
           </ScrollArea>
 
           {status === "pending" ? (
-            <div className="flex min-h-[50vh] items-center justify-center">
-              <Loader />
-            </div>
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <UnitCardSkeleton
+                  className="w-full lg:max-w-[unset]"
+                  key={index}
+                />
+              ))}
+            </SimpleGrid>
           ) : null}
           {status === "error" ? (
             <div>
@@ -368,7 +322,13 @@ const Results = () => {
             <>
               <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
                 {data.data.map((unit) => {
-                  return <UnitCard key={unit.id} {...unit} />
+                  return (
+                    <UnitCard
+                      className="w-full lg:max-w-[unset]"
+                      key={unit.id}
+                      {...unit}
+                    />
+                  )
                 })}
               </SimpleGrid>
               {data.data.length === 0 && (
