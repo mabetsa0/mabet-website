@@ -132,8 +132,8 @@ const Results = () => {
                       <Text fz={"12"}>{searchedUnitType}</Text>
                       {searchParams.get("from") && searchParams.get("to") ? (
                         <Text fz={"12"}>
-                          {dayjs(searchParams.get("from")).format("DD MMMM")} -{" "}
-                          {dayjs(searchParams.get("to")).format("DD MMMM")}
+                          {dayjs(searchParams.get("from")).format("DD MMM")} -{" "}
+                          {dayjs(searchParams.get("to")).format("DD MMM")}
                         </Text>
                       ) : (
                         ""

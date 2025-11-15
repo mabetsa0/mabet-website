@@ -163,9 +163,9 @@ const SelectUnitType = ({ unitTypes }: { unitTypes: UnitType[] }) => {
                       >
                         {type.name}
                       </Text>
-                      <Text ta={"center"} size="sm" c={"gray"}>
+                      {/* <Text ta={"center"} size="sm" c={"gray"}>
                         {type.units_count_text}
-                      </Text>
+                      </Text> */}
                     </Stack>
                   </Group>
                 </Radio.Card>
