@@ -1,7 +1,7 @@
 "use client"
+import { useEffect } from "react"
 import { Pagination as MantinePagination } from "@mantine/core"
 import { parseAsInteger, useQueryState } from "nuqs"
-import { useEffect } from "react"
 
 type Props = {
   total?: number
@@ -14,7 +14,7 @@ const Pagination = (props: Props) => {
   }, [page, props.total, setPage])
   if (!props.total || props.total <= 1) return null
   return (
-    <div className=" flex justify-center py-4">
+    <div className="flex justify-center py-4">
       <MantinePagination value={page} onChange={setPage} total={props.total} />
     </div>
   )

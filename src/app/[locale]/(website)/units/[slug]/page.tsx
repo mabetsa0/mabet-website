@@ -1,27 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import { notFound } from "next/navigation"
-
-import axios from "axios"
-import ImageGallery from "./components/image-gallery"
-import { UnitContextProvider } from "./context/unit-context"
-import { GetUnit } from "./get-unit"
-
-import { Box, Loader, Stack } from "@mantine/core"
-import dynamicImport from "next/dynamic"
 import { Suspense } from "react"
+import dynamicImport from "next/dynamic"
+import { notFound } from "next/navigation"
+import { Box, Loader, Stack } from "@mantine/core"
+import axios from "axios"
+import Footer from "@/components/common/footer"
+import DataLayer from "@/components/data-layer"
+import MapWrapper from "@/components/map-wrapper"
+import TrackBayut from "@/components/track-bayut"
+import { SEO } from "@/services/get-seo"
+import ImageGallery from "./components/image-gallery"
+import MobileCreateBookingButton from "./components/mobile-create-booking-button"
+import MobileUnitDescription from "./components/mobile-unit-description"
 import Reviews from "./components/reviews"
 import UnitSegmentedControl from "./components/segment-contorl"
 import TabConditionRender from "./components/tab-condition-render"
+import TrackPrivate from "./components/track-private-links"
 import UnitConditions from "./components/unit-conditions"
 import UnitDescription from "./components/unit-description"
-import MobileUnitDescription from "./components/mobile-unit-description"
-import MobileCreateBookingButton from "./components/mobile-create-booking-button"
-import TrackBayut from "@/components/track-bayut"
-import DataLayer from "@/components/data-layer"
-import { SEO } from "@/services/get-seo"
-import Footer from "@/components/common/footer"
-import MapWrapper from "@/components/map-wrapper"
-import TrackPrivate from "./components/track-private-links"
+import { UnitContextProvider } from "./context/unit-context"
+import { GetUnit } from "./get-unit"
 
 const ReservationDetails = dynamicImport(
   () => import("./components/reservation-details")
@@ -73,12 +71,12 @@ const page = async (props: Props) => {
         <Suspense>
           <VideoSlider />
         </Suspense>
-        <section className="relative max-md:rounded-t-4xl max-md:-mt-1  bg-white min-h-[50vh]  ">
+        <section className="relative min-h-[50vh] bg-white max-md:-mt-1 max-md:rounded-t-4xl">
           <UnitSegmentedControl />
           <div className="container">
             <div className="flex gap-4 max-md:flex-col md:mb-2">
               <UnitDescription />
-              <Box visibleFrom="md" className="md:w-[500px] shrink-0">
+              <Box visibleFrom="md" className="shrink-0 md:w-[500px]">
                 <ReservationDetails />
               </Box>
             </div>

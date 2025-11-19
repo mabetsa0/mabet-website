@@ -1,9 +1,9 @@
 import React from "react"
-import { FullUnitData } from "../@types"
-import Mabet from "@/services"
-import { List, ListItem, SimpleGrid, Space, Stack } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
-import parse from 'html-react-parser';
+import { List, ListItem, SimpleGrid, Space, Stack } from "@mantine/core"
+import parse from "html-react-parser"
+import Mabet from "@/services"
+import { FullUnitData } from "../@types"
 
 const UnitConditions = async (unit: FullUnitData) => {
   const terms = (
@@ -26,7 +26,7 @@ const UnitConditions = async (unit: FullUnitData) => {
           <h5 className="text-h4 md:text-h5 font-medium">
             {t("unit.reservation-conditions")}
           </h5>
-          <List className="text-[#767676] ">
+          <List className="text-[#767676]">
             {terms.map((ele) => {
               return ele.split("\n").map((e, index) => {
                 return (
@@ -42,8 +42,10 @@ const UnitConditions = async (unit: FullUnitData) => {
           <h5 className="text-h4 md:text-h5 font-medium">
             {t("unit.cancellation_policy")}
           </h5>
-          <List type="ordered" className="text-[#767676] list-none">
-            <ListItem key="unit.cancellation_policy.title">{parse(unit.cancellation_policy.title_html)}</ListItem>
+          <List type="ordered" className="list-none text-[#767676]">
+            <ListItem key="unit.cancellation_policy.title">
+              {parse(unit.cancellation_policy.title_html)}
+            </ListItem>
           </List>
         </Stack>
       </SimpleGrid>

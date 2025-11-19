@@ -1,7 +1,7 @@
+import { cookies } from "next/headers"
+import { NextResponse } from "next/server"
 import { Session } from "@/@types/user"
 import Mabet from "@/services"
-import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 
 export const GET = async () => {
   // get session from cookie

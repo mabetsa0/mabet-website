@@ -1,20 +1,21 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-import { Unit } from "@/@types"
-import UnitCard from "@/components/common/unit-card"
+import { useCallback, useRef, useState } from "react"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Text, Title } from "@mantine/core"
 import { EmblaCarouselType } from "embla-carousel"
-import { useCallback, useState } from "react"
+import Autoplay from "embla-carousel-autoplay"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Unit } from "@/@types"
+import UnitCard from "@/components/common/unit-card"
+
 type Props = {
   data: Unit[]
+  title: string
+  description: string
 }
 
-const SpecialUnitsCarousel = ({ data }: Props) => {
-  const t = useTranslations("home.special-units")
+const UnitsCarousel = ({ data, title, description }: Props) => {
   const [embla, setEmbla] = useState<EmblaCarouselType | null>(null)
   const scrollPrev = useCallback(() => {
     if (!embla) return
@@ -26,15 +27,17 @@ const SpecialUnitsCarousel = ({ data }: Props) => {
     embla.scrollNext()
   }, [embla])
 
+  const autoplay = useRef(Autoplay({ delay: 10000 }))
+
   return (
     <section className="py-3">
       <div className="container mx-auto">
         <Group justify="space-between" align="center" wrap="nowrap">
-          <div className="mb-1.5 ">
+          <div className="mb-1.5">
             <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
-              {t("desciption")}
+              {description}
             </Text>
-            <Title className=" text-h3 md:text-h2">{t("title")}</Title>
+            <Title className="text-h3 md:text-h2">{title}</Title>
           </div>
           <Group justify="center" wrap="nowrap">
             <ActionIcon
@@ -61,15 +64,16 @@ const SpecialUnitsCarousel = ({ data }: Props) => {
             maxWidth: "100%",
             minWidth: 250,
           }}
-          className="w-full "
+          className="w-full"
         >
           <Carousel
-            // type="container"
+            getEmblaApi={setEmbla}
+            plugins={[autoplay.current]}
+            onMouseEnter={autoplay.current.stop}
+            onMouseLeave={autoplay.current.reset}
             type="media"
             slideSize={{ base: "100%", sm: "400" }}
             slideGap={{ base: "lg" }}
-            //  loop
-            // align="start"
             withControls={false}
             draggable={false}
             emblaOptions={{ loop: true, align: "start" }}
@@ -86,4 +90,4 @@ const SpecialUnitsCarousel = ({ data }: Props) => {
   )
 }
 
-export default SpecialUnitsCarousel
+export default UnitsCarousel

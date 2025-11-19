@@ -1,14 +1,14 @@
-import { Card, Group, lighten, Space, Stack, Text } from "@mantine/core"
 import React from "react"
-import { WalletRecord } from "../@types"
+import { useTranslations } from "next-intl"
+import { Card, Group, lighten, Space, Stack, Text } from "@mantine/core"
 import {
   BanknoteArrowDown,
   BanknoteArrowUp,
   Calendar,
   File,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { RiyalIcon } from "@/components/icons"
+import { WalletRecord } from "../@types"
 
 type Props = WalletRecord
 
@@ -24,26 +24,26 @@ const WalletCard = (props: Props) => {
     >
       <Group align="start" wrap="nowrap">
         <div
-          className=" aspect-auto size-2.5 md:size-4.5 shrink-0 flex items-center justify-center rounded-md md:rounded-lg"
+          className="flex aspect-auto size-2.5 shrink-0 items-center justify-center rounded-md md:size-4.5 md:rounded-lg"
           style={{ background: props.credit_color }}
         >
           {Number(props.credit) < 0 ? (
-            <BanknoteArrowDown className="size-1.5 md:size-2 text-white" />
+            <BanknoteArrowDown className="size-1.5 text-white md:size-2" />
           ) : (
-            <BanknoteArrowUp className="size-1.5 md:size-2 text-white" />
+            <BanknoteArrowUp className="size-1.5 text-white md:size-2" />
           )}
         </div>
         <Group
-          className="grow max-md:flex-col max-md:items-start md:justify-between "
+          className="grow max-md:flex-col max-md:items-start md:justify-between"
           wrap="nowrap"
         >
           <Stack gap={"xs"}>
             <Text className="text-h4 md:text-h3 font-bold">{props.label}</Text>
             <Space />
             {props.description ? (
-              <Text className="text-sm md:text-lg font-medium">
+              <Text className="text-sm font-medium md:text-lg">
                 <File
-                  className="inline-block me-0.5 size-[20px] md:size-1.5"
+                  className="me-0.5 inline-block size-[20px] md:size-1.5"
                   strokeWidth={1.6}
                 />
                 {props.description}
@@ -51,7 +51,7 @@ const WalletCard = (props: Props) => {
             ) : null}
             <Text className="text-xs md:text-base">
               <Calendar
-                className="inline-block me-0.5 size-[20px] md:size-1.5"
+                className="me-0.5 inline-block size-[20px] md:size-1.5"
                 strokeWidth={1.6}
               />{" "}
               {props.creation_date.text}

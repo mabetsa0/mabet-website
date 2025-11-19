@@ -1,30 +1,30 @@
+import React from "react"
+import { getTranslations } from "next-intl/server"
+import { Image, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import { UnitTypeIcons } from "@/assets"
 import { Link } from "@/lib/i18n/navigation"
 import { getUnitTypes } from "@/services/lists"
-import { Image, SimpleGrid, Stack, Text, Title } from "@mantine/core"
-import { getTranslations } from "next-intl/server"
-import React from "react"
 
 const UnitTypes = async () => {
   const unitTypes = await getUnitTypes()
   const t = await getTranslations("home.unit-types")
   return (
     <section>
-      <div className="container py-4 mx-auto">
+      <div className="container mx-auto py-4">
         <div className="text-center">
           <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
             {t("title")}
           </Text>
-          <Title className=" text-h3 md:text-h2">{t("desciption")}</Title>
+          <Title className="text-h3 md:text-h2">{t("desciption")}</Title>
         </div>
         <SimpleGrid
           cols={{ base: 2, md: 4 }}
-          className=" max-w-4xl mx-auto mt-4 md:mt-1.5"
+          className="mx-auto mt-4 max-w-4xl md:mt-1.5"
         >
           {unitTypes.map((type) => {
             return (
               <Link
-                className="border border-[#F3F3F3] rounded-md "
+                className="rounded-md border border-[#F3F3F3]"
                 key={type.id}
                 href={`/units?unit_type=${type.id}`}
               >
@@ -40,11 +40,8 @@ const UnitTypes = async () => {
                     }
                     alt={type.name}
                   />
-                  <Text fz={"sm"} fw={700} className="">
+                  <Text fz={"sm"} fw={700} className="whitespace-break-spaces">
                     {type.name}
-                  </Text>
-                  <Text ta={"center"} size="sm" c={"gray"}>
-                    {type.units_count_text}
                   </Text>
                 </Stack>
               </Link>

@@ -1,12 +1,17 @@
+import { getTranslations } from "next-intl/server"
 import { getTopRatedUnits } from "../helpers/get-top-rated-units"
-import NewUnitsCarousel from "./new-units-carousel"
-import SpecialUnitsCarousel from "./special-units-carousel"
+import UnitsCarousel from "./units-carousel"
 
-type Props = {}
-
-const NewUnits = async (props: Props) => {
+const NewUnits = async () => {
   const data = await getTopRatedUnits()
-  return <NewUnitsCarousel data={data} />
+  const t = await getTranslations("home.new-units")
+  return (
+    <UnitsCarousel
+      data={data}
+      title={t("title")}
+      description={t("desciption")}
+    />
+  )
 }
 
 export default NewUnits

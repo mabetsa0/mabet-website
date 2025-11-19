@@ -1,7 +1,7 @@
 "use client"
+import { createContext, useContext } from "react"
 import { City } from "@/@types/cities"
 import { UnitType } from "@/@types/unit-types"
-import { createContext, useContext } from "react"
 
 const GlobalDataContext = createContext<null | {
   cities: City[]

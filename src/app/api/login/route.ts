@@ -1,9 +1,8 @@
-import { Session } from "@/@types/user"
-
-import Mabet from "@/services"
-import axios from "axios"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
+import axios from "axios"
+import { Session } from "@/@types/user"
+import Mabet from "@/services"
 
 export async function POST(request: Request) {
   try {

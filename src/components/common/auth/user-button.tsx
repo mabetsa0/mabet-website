@@ -1,15 +1,16 @@
+import { useTranslations } from "next-intl"
+import { ActionIcon, Button, Menu } from "@mantine/core"
+import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { Link } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
 import { logout } from "@/services/logout"
-import { ActionIcon, Button, Menu } from "@mantine/core"
-import { ChevronDown, LogOut, UserCircle } from "lucide-react"
-import { useTranslations } from "next-intl"
+
 const UserButton = () => {
   const t = useTranslations("header")
   const { session, isPending, isAuthenticated } = useSession()
-  const [opened, { onOpen }] = useAuthModal()
+  const [_, { onOpen }] = useAuthModal()
   const matches = useMdScreen()
 
   if (isPending || !isAuthenticated)

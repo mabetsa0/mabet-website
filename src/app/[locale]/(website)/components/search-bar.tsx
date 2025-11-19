@@ -1,10 +1,7 @@
 "use client"
 
-import { UnitTypeIcons } from "@/assets"
-import SelectDropdownSearch from "@/components/ui/select-with-search"
-import { useCities, useUnitTypes } from "@/context/global-data-context"
-import { cn } from "@/lib/cn"
-import { useRouter } from "@/lib/i18n/navigation"
+import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import {
   ActionIcon,
   Divider,
@@ -18,74 +15,48 @@ import {
   Text,
 } from "@mantine/core"
 import { createFormContext } from "@mantine/form"
-import dayjs from "dayjs"
 import { Building2, MapPin, Search } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { useSearchParams } from "next/navigation"
+import { UnitTypeIcons } from "@/assets"
+import SelectDropdownSearch from "@/components/ui/select-with-search"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
+import { cn } from "@/lib/cn"
+import { useRouter } from "@/lib/i18n/navigation"
 import DateRangePicker from "./date-range-picker"
+import {
+  type SearchFormValues,
+  type TransformedSearchValues,
+  getInitialSearchFormValues,
+  transformSearchFormValues,
+  buildSearchUrl,
+  DEFAULT_CITY_ID,
+} from "./shared/search-utils"
 
 // Definition of form values is required
-type FormValues = {
-  city_id: string
-  unit_type_id: string
-  dates: [Date | null, Date | null]
-}
-type TransformedValues = (values: FormValues) => {
-  city_id: string
-  unit_type_id: string
-  from: string
-  to: string
-}
+type TransformedValues = (values: SearchFormValues) => TransformedSearchValues
 
 // createFormContext returns a tuple with 3 items:
 // FormProvider is a component that sets form context
 // useFormContext hook return form object that was previously set in FormProvider
 // useForm hook works the same way as useForm exported from the package but has predefined type
 export const [FormProvider, useSearchBarFormContext, useForm] =
-  createFormContext<FormValues, TransformedValues>()
+  createFormContext<SearchFormValues, TransformedValues>()
+
 const SearchBar = () => {
   const cities = useCities()
   const unitTypes = useUnitTypes()
   const searchparams = useSearchParams()
   const t = useTranslations("general")
+  const router = useRouter()
+
   const form = useForm({
     mode: "controlled",
-    initialValues: {
-      city_id: searchparams.get("city_id") || "",
-      unit_type_id: searchparams.get("unit_type_id") || "",
-      dates: [
-        searchparams.get("from")
-          ? new Date(searchparams.get("from") as string)
-          : dayjs().toDate(),
-
-        searchparams.get("to")
-          ? new Date(searchparams.get("to") as string)
-          : dayjs().add(1, "day").toDate(),
-      ],
-    },
-    transformValues(values) {
-      return {
-        city_id: values.city_id == "0" ? "" : values.city_id,
-        unit_type_id: values.unit_type_id,
-        from: values.dates[0]
-          ? dayjs(values.dates[0]).format("YYYY-MM-DD")
-          : dayjs().format("YYYY-MM-DD"),
-        to: values.dates[1]
-          ? dayjs(values.dates[1]).format("YYYY-MM-DD")
-          : dayjs().add(1, "day").format("YYYY-MM-DD"),
-      }
-    },
+    initialValues: getInitialSearchFormValues(searchparams),
+    transformValues: transformSearchFormValues,
   })
 
-  const Router = useRouter()
-
   const onSubmit = form.onSubmit((values) => {
-    const newSearchParams = new URLSearchParams(searchparams)
-    Object.entries(values).map(([key, value]) => {
-      newSearchParams.delete(key)
-      newSearchParams.append(key, value)
-    })
-    Router.push(`/units?${newSearchParams.toString()}`)
+    const url = buildSearchUrl(searchparams, values)
+    router.push(url)
   })
   return (
     <section>
@@ -95,10 +66,10 @@ const SearchBar = () => {
           <form onSubmit={onSubmit}>
             <Group
               wrap="nowrap"
-              className="bg-white rounded-[90px] border-[3px] border-[#F3F3F3] text-black"
+              className="rounded-[90px] border-[3px] border-[#F3F3F3] bg-white text-black"
               p={"8px"}
             >
-              <Grid className="grow " px={"lg"}>
+              <Grid className="grow" px={"lg"}>
                 <Grid.Col span={3}>
                   <SelectDropdownSearch
                     searchLabel={t("select-city")}
@@ -119,7 +90,7 @@ const SearchBar = () => {
                     placeholder={t("select")}
                     data={[
                       {
-                        value: "0",
+                        value: DEFAULT_CITY_ID,
                         label: t("all-cities"),
                       },
                       ...cities.map((city) => ({
@@ -140,7 +111,7 @@ const SearchBar = () => {
                       shadow="md"
                     >
                       <Popover.Target>
-                        <Stack className="w-full   " gap={2}>
+                        <Stack className="w-full" gap={2}>
                           <Group gap={4}>
                             <Building2 size={17} strokeWidth={1.5} />
 
@@ -151,7 +122,7 @@ const SearchBar = () => {
                           </Group>
                           <Group
                             className={cn(
-                              "h-[50px] items-center text-gray-600 text-lg !cursor-pointer",
+                              "h-[50px] !cursor-pointer items-center text-lg text-gray-600",
                               form.values.unit_type_id && "text-gray-700"
                             )}
                           >
@@ -176,7 +147,7 @@ const SearchBar = () => {
                                   key={type.id}
                                   radius="md"
                                   value={type.id + ""}
-                                  className="group duration-300 data-[checked]:border-primary data-[checked]:bg-[#18807826] px-2.5 py-2.5 relative"
+                                  className="group data-[checked]:border-primary relative px-2.5 py-2.5 duration-300 data-[checked]:bg-[#18807826]"
                                 >
                                   <Group wrap="nowrap" align="flex-start">
                                     <Radio.Indicator className="absolute opacity-0" />
@@ -200,13 +171,13 @@ const SearchBar = () => {
                                       <Text
                                         fz={"sm"}
                                         fw={700}
-                                        className="duration-300 group-data-[checked]:text-primary"
+                                        className="group-data-[checked]:text-primary duration-300"
                                       >
                                         {type.name}
                                       </Text>
-                                      <Text ta={"center"} size="sm" c={"gray"}>
+                                      {/* <Text ta={"center"} size="sm" c={"gray"}>
                                         {type.units_count_text}
-                                      </Text>
+                                      </Text> */}
                                     </Stack>
                                   </Group>
                                 </Radio.Card>

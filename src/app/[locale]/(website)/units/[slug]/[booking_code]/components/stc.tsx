@@ -1,8 +1,8 @@
-import { stc } from "@/assets"
-import { Checkbox, Group, Stack, Text, UnstyledButton } from "@mantine/core"
+/* eslint-disable @next/next/no-img-element */
 import { useTranslations } from "next-intl"
+import { Checkbox, Group, Stack, Text, UnstyledButton } from "@mantine/core"
 import { parseAsBoolean, useQueryState } from "nuqs"
-import { useState } from "react"
+import { stc } from "@/assets"
 
 export const STC = () => {
   const [use_qitaf_points, setUseQitafPoints] = useQueryState(
@@ -14,7 +14,7 @@ export const STC = () => {
     <>
       <UnstyledButton
         onClick={() => setUseQitafPoints(!use_qitaf_points)}
-        className="border border-[#500e74] rounded-md w-full shadow-lg shadow-[#500e74] p-sm"
+        className="p-sm w-full rounded-md border border-[#500e74] shadow-lg shadow-[#500e74]"
       >
         <Group align="center" gap="lg">
           <img className="h-[20px]" src={stc.src} alt="STC" />
@@ -34,33 +34,6 @@ export const STC = () => {
           />
         </Group>
       </UnstyledButton>
-      {/* <ModalDrawer
-        title={t("button")}
-        size={"md"}
-        state={state}
-        onClose={() => setState(false)}
-      >
-        <Stack gap={"xl"} p={"xl"}>
-          <Stack gap={"xl"}>
-            <img className="h-2.5" src={stc.src} alt="STC" />
-            <Stack gap={"4px"} className="text-center">
-              <Text fw={500}>{t("button")}</Text>
-              <Text c="#767676">{t("description")}</Text>
-            </Stack>
-          </Stack>
-          <Stack>
-            <PhoneNumberForm
-              onSubmit={async (data: {
-                country_code: string
-                phonenumber: string
-              }) => {
-                console.log("🚀 ~ onSubmit ~ data:", data)
-              }}
-              title={t("enter-phone-number")}
-            />
-          </Stack>
-        </Stack>
-      </ModalDrawer> */}
     </>
   )
 }

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useTranslations } from "next-intl"
 import { Group, List, Space, Spoiler, Stack, Text } from "@mantine/core"
 import { Dot } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { useUnitData } from "../context/unit-context"
 
 const Features = () => {
@@ -11,7 +11,7 @@ const Features = () => {
   return (
     <Stack>
       <h3 className="text-h4 md:text-h3 font-medium">{t("unit.features")}</h3>
-      <Stack gap={"xs"} className="text-[#767676] mb-1">
+      <Stack gap={"xs"} className="mb-1 text-[#767676]">
         <Spoiler
           maxHeight={130}
           showLabel={t("unit.show-more")}
@@ -24,7 +24,7 @@ const Features = () => {
           }}
         >
           <Stack>
-            <Stack className=" divide-y divide-[#F3F3F3]" gap={"md"}>
+            <Stack className="divide-y divide-[#F3F3F3]" gap={"md"}>
               {unit.features.map((value, index) => {
                 return (
                   <Stack key={index} className="pb-0.5">

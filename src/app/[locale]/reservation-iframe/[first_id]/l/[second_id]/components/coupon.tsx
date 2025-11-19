@@ -1,14 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
-import { Button, Group, Stack, Text, TextInput } from "@mantine/core"
-import { useTranslations } from "next-intl"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { Button, Group, Stack, Text, TextInput } from "@mantine/core"
 
-
-const Coupon = ({  setCoupon,error }: { setCoupon: (coupon: string) => void,error: string | null }) => {
+const Coupon = ({
+  setCoupon,
+  error,
+}: {
+  setCoupon: (coupon: string) => void
+  error: string | null
+}) => {
   const t = useTranslations()
   const [value, setValue] = useState("")
- 
+
   return (
     <>
       <Stack gap={"xs"}>
@@ -23,7 +28,6 @@ const Coupon = ({  setCoupon,error }: { setCoupon: (coupon: string) => void,erro
             }}
             size="md"
             w={"100%"}
-           
             label={t("unit.coupon-code")}
           />
           <Button

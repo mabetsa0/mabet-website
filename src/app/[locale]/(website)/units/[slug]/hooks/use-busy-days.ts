@@ -1,8 +1,8 @@
-import Mabet from "@/services"
+import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
+import Mabet from "@/services"
 import { BusyDaysResponse, ClosedDate } from "../@types"
-import { useState } from "react"
 
 // get 2 month range
 export const getDatesRange = (from: Date) => {

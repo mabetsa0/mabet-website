@@ -1,7 +1,7 @@
 "use server"
-import { Session } from "@/@types/user"
-import { cookies } from "next/headers"
 import React from "react"
+import { cookies } from "next/headers"
+import { Session } from "@/@types/user"
 
 export const getServerSession = React.cache(async () => {
   // get session from cookie

@@ -2,8 +2,8 @@ import { Link } from "@/lib/i18n/navigation"
 
 export default function Intro() {
   return (
-    <section className="mb-2 mt-1.5 flex flex-col items-center md:mb-3 md:flex-row md:justify-between">
-      <h1 className="text-primary text-5xl font-bold leading-tight tracking-tighter md:pr-2 md:text-[3rem]">
+    <section className="mt-1.5 mb-2 flex flex-col items-center md:mb-3 md:flex-row md:justify-between">
+      <h1 className="text-primary text-5xl leading-tight font-bold tracking-tighter md:pr-2 md:text-[3rem]">
         <Link href="/blog" className="flex items-center gap-[12px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"

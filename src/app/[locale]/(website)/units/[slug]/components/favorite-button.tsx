@@ -1,10 +1,10 @@
 "use client"
-import { ActionIcon, Button } from "@mantine/core"
 import React from "react"
-import { useUnitData } from "../context/unit-context"
-import useFavorite from "@/hooks/use-favorite"
-import { Heart } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { ActionIcon, Button } from "@mantine/core"
+import { Heart } from "lucide-react"
+import useFavorite from "@/hooks/use-favorite"
+import { useUnitData } from "../context/unit-context"
 
 const FavoriteButton = () => {
   const unit = useUnitData()

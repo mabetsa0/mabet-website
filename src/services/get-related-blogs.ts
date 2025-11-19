@@ -1,5 +1,4 @@
 import { Blog } from "@/@types/blog-response"
-
 import { BlogApi } from "../api"
 
 export const getRelatedBlogs = async (slug: string) => {

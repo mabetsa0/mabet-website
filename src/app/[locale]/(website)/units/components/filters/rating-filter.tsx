@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Checkbox,
@@ -11,7 +12,6 @@ import {
   Title,
 } from "@mantine/core"
 import { ChevronDown, Star } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs"
 
 const RatingFilter = () => {
@@ -64,14 +64,14 @@ const RatingFilter = () => {
                       gap={"4"}
                       w={"100%"}
                     >
-                      <Checkbox.Indicator className=" absolute inset-0 opacity-0" />
+                      <Checkbox.Indicator className="absolute inset-0 opacity-0" />
                       <Star
-                        className="text-[#FFE234] duration-200 fill-[#FFE234] group-data-checked:text-white group-data-checked:fill-white"
+                        className="fill-[#FFE234] text-[#FFE234] duration-200 group-data-checked:fill-white group-data-checked:text-white"
                         strokeWidth={1.25}
                       />
                       <Text
                         fw={500}
-                        className="group-data-checked:text-white duration-200"
+                        className="duration-200 group-data-checked:text-white"
                       >
                         {ele === 3 ? "<" : ""} {ele}
                       </Text>

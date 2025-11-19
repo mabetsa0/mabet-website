@@ -1,10 +1,10 @@
 "use client"
-import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
-import { useEffect, useState } from "react"
-import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
+import { useEffect } from "react"
 import { useTranslations } from "next-intl"
-import { mabetLogo } from "@/assets"
 import Image from "next/image"
+import { Button, CloseButton, Container, Group, Text } from "@mantine/core"
+import { mabetLogo } from "@/assets"
+import { APP_LINK, DOWNLOAD_APP_BANNER_KEY } from "@/config"
 
 export default function DownloadAppBanner({
   isVisible,
@@ -30,7 +30,9 @@ export default function DownloadAppBanner({
   const handleClose = () => {
     try {
       localStorage.setItem(DOWNLOAD_APP_BANNER_KEY, "1")
-    } catch {}
+    } catch {
+      // ignore
+    }
     setIsVisible(false)
   }
 

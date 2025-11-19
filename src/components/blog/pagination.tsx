@@ -1,8 +1,8 @@
 "use client"
 
-import { useRouter } from "@/lib/i18n/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import ReactPaginate from "react-paginate"
+import { useRouter } from "@/lib/i18n/navigation"
 
 type Props = {
   page: number
@@ -20,7 +20,7 @@ const Pagination = ({ page, url = `/blog/`, pageCount }: Props) => {
       {pageCount === 1 ? null : (
         <ReactPaginate
           forcePage={page - 1}
-          className="flex select-none items-center justify-center gap-[12px]"
+          className="flex items-center justify-center gap-[12px] select-none"
           pageLinkClassName="block size-2 rounded border border-gray-100 bg-white text-center  text-gray-900 select-none "
           activeLinkClassName="block size-2 rounded border-primary !bg-primary text-center  !text-white"
           breakLabel="..."

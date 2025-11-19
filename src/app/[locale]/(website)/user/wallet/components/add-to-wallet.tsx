@@ -1,19 +1,16 @@
 "use client"
-import React from "react"
-import { Button, Stack, Text, TextInput, Space, Group } from "@mantine/core"
-import { useDisclosure } from "@mantine/hooks"
-import ModalDrawer from "@/components/common/modal-drawer"
 import { useTranslations } from "next-intl"
+import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { Wallet, Plus } from "lucide-react"
+import { useDisclosure } from "@mantine/hooks"
+import { notifications } from "@mantine/notifications"
+import { Plus, Wallet } from "lucide-react"
+import ModalDrawer from "@/components/common/modal-drawer"
 import { RiyalIcon } from "@/components/icons"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
-import { notifications } from "@mantine/notifications"
 
-type Props = {}
-
-const AddToWallet = (props: Props) => {
+const AddToWallet = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const t = useTranslations()
 
@@ -76,7 +73,7 @@ const AddToWallet = (props: Props) => {
         <form onSubmit={handleSubmit}>
           <Stack p="md" gap="lg">
             <Stack gap="xs">
-              <Text className="text-h4 font-bold text-primary">
+              <Text className="text-h4 text-primary font-bold">
                 {t("wallet.add.subtitle")}
               </Text>
               <Text c="#767676" size="sm">
@@ -85,7 +82,7 @@ const AddToWallet = (props: Props) => {
             </Stack>
 
             <Space />
-            <div className="border border-[#F3F3F3] rounded-lg">
+            <div className="rounded-lg border border-[#F3F3F3]">
               <TextInput
                 required
                 withAsterisk={false}

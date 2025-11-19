@@ -1,15 +1,15 @@
 "use client"
-import { Button, Popover, Radio, Stack } from "@mantine/core"
-
-import { ArrowUpDown } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { Button, Popover, Radio, Stack } from "@mantine/core"
+import { ArrowUpDown } from "lucide-react"
 import { parseAsString, useQueryState } from "nuqs"
+
 const OrderFilter = () => {
   const t = useTranslations()
   const [filter, set] = useQueryState("result_type", parseAsString)
 
   return (
-    <div className="fixed bottom-3 z-10 right-1/2 translate-x-1/2 w-fit flex justify-center">
+    <div className="fixed right-1/2 bottom-3 z-10 flex w-fit translate-x-1/2 justify-center">
       <Popover width={200} position="bottom" withArrow shadow="md">
         <Popover.Target>
           <Button

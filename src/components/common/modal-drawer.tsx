@@ -1,4 +1,5 @@
 "use client"
+import React from "react"
 import {
   Burger,
   Divider,
@@ -8,7 +9,6 @@ import {
   ScrollArea,
 } from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks"
-import React from "react"
 import { Drawer } from "vaul"
 
 type Props = {
@@ -31,13 +31,13 @@ const ModalDrawer = ({ state, children, onClose, size, title }: Props) => {
         shouldScaleBackground
       >
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed z-overlay inset-0 bg-black/40" />
-          <Drawer.Content className=" z-max  max-h-[90vh] h-fit fixed bottom-0 left-0 right-0 outline-none">
-            <div className="px-1 pb-1  overflow-hidden rounded-t-lg bg-white">
+          <Drawer.Overlay className="z-overlay fixed inset-0 bg-black/40" />
+          <Drawer.Content className="z-max fixed right-0 bottom-0 left-0 h-fit max-h-[90vh] outline-none">
+            <div className="overflow-hidden rounded-t-lg bg-white px-1 pb-1">
               <div className="flex justify-center pt-0.5">
-                <div className="w-[90px] h-[4px] rounded bg-gray-300"></div>
+                <div className="h-[4px] w-[90px] rounded bg-gray-300"></div>
               </div>
-              <Drawer.Title className=" text-h5 font-bold">
+              <Drawer.Title className="text-h5 font-bold">
                 <Group align="center" gap={"sm"}>
                   <Drawer.Close>
                     <Burger component={"span"} opened size={"md"} />

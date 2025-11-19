@@ -1,11 +1,11 @@
+import { getLocale } from "next-intl/server"
+import { redirect } from "next/navigation"
+import axios from "axios"
 import { BAYUT_KEY } from "@/config"
 import { getServerSession } from "@/lib/get-server-session"
 import { useSession } from "@/lib/session-store"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getSession } from "@/utils/get-session"
-import axios from "axios"
-import { getLocale } from "next-intl/server"
-import { redirect } from "next/navigation"
 
 const baseURL =
   process.env.NEXT_PUBLIC_TEST == "true"

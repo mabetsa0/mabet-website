@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next"
-import { getBlog } from "@/services/get-blog"
-import { getBlogs } from "@/services/get-blogs"
-import { getRelatedBlogs } from "@/services/get-related-blogs"
-import { SEO } from "@/services/get-seo"
 import axios from "axios"
-
+import { ErrorResponse } from "@/@types/error"
 import Container from "@/components/blog/container"
 import ErrorUi from "@/components/blog/error-ui"
 import Header from "@/components/blog/header"
@@ -16,12 +12,16 @@ import Pagination from "@/components/blog/pagination"
 import PostBody from "@/components/blog/post-body"
 import PostHeader from "@/components/blog/post-header"
 import SectionSeparator from "@/components/blog/section-separator"
-import { ErrorResponse } from "@/@types/error"
+import { getBlog } from "@/services/get-blog"
+import { getBlogs } from "@/services/get-blogs"
+import { getRelatedBlogs } from "@/services/get-related-blogs"
+import { SEO } from "@/services/get-seo"
 
 type Props = {
   params: Promise<{ slug: string }>
 }
-
+export const dynamic = "force-static"
+export const revalidate = 1000
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const slug = (await params).slug

@@ -1,12 +1,13 @@
-import Footer from "@/components/common/footer"
-import { routing } from "@/lib/i18n/routing"
-import { SEO } from "@/services/get-seo"
-import { Loader } from "@mantine/core"
+import { Suspense } from "react"
 import { Metadata } from "next"
 import { hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
+import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
-import { Suspense } from "react"
+import { Loader } from "@mantine/core"
+import Footer from "@/components/common/footer"
+import { routing } from "@/lib/i18n/routing"
+import { SEO } from "@/services/get-seo"
 import AddYourUnit from "./components/add-your-unit"
 import DownLoadApp from "./components/download-app"
 import Hero from "./components/hero"
@@ -15,10 +16,9 @@ import SpecialUnits from "./components/special-units"
 import TopRatedUnits from "./components/top-rated-units"
 import UnitTypes from "./components/unit-types"
 import WhyMabet from "./components/why-mabet"
-import dynamic from "next/dynamic"
+
 const Blogs = dynamic(async () => import("./components/blogs"))
 
-export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
 }
@@ -41,7 +41,7 @@ export default async function Page({
       <Hero />
       <Suspense
         fallback={
-          <div className="min-h-svh flex items-center justify-center">
+          <div className="flex min-h-svh items-center justify-center">
             <Loader />
           </div>
         }
@@ -50,7 +50,7 @@ export default async function Page({
       </Suspense>
       <Suspense
         fallback={
-          <div className="min-h-svh flex items-center justify-center">
+          <div className="flex min-h-svh items-center justify-center">
             <Loader />
           </div>
         }
@@ -59,7 +59,7 @@ export default async function Page({
       </Suspense>
       <Suspense
         fallback={
-          <div className="min-h-svh flex items-center justify-center">
+          <div className="flex min-h-svh items-center justify-center">
             <Loader />
           </div>
         }
@@ -71,13 +71,14 @@ export default async function Page({
       <AddYourUnit />
       <Suspense
         fallback={
-          <div className="min-h-svh flex items-center justify-center">
+          <div className="flex min-h-svh items-center justify-center">
             <Loader />
           </div>
         }
       >
         <TopRatedUnits />
       </Suspense>
+
       <DownLoadApp />
       <Blogs />
       <Footer />

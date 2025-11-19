@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
-import { RiyalIcon } from "@/components/icons"
+import { useEffect } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import Script from "next/script"
 import {
   Divider,
   Group,
@@ -12,10 +13,9 @@ import {
   Switch,
   Text,
 } from "@mantine/core"
-import { useLocale, useTranslations } from "next-intl"
-import Script from "next/script"
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
-import { useEffect } from "react"
+import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
+import { RiyalIcon } from "@/components/icons"
 import { BookingDetails } from "../payment-summary"
 import { STCRedeem } from "./stc-redeem"
 import { STC } from "./stc"
@@ -107,7 +107,7 @@ const PaymentForm = (booking: BookingDetails) => {
                     />
                   </span>
                 ))}
-                <span className="relative h-2 w-3 ">
+                <span className="relative h-2 w-3">
                   <img
                     alt={"payment option"}
                     src={applePay.src}

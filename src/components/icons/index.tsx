@@ -2,7 +2,7 @@ type Props = React.SVGProps<SVGSVGElement>
 export const RiyalIcon = (props: Props) => {
   return (
     <>
-      <span className="ltr:hidden ">
+      <span className="ltr:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           style={{ display: "inline-block", marginInlineStart: "0.05em" }}
@@ -21,7 +21,7 @@ export const RiyalIcon = (props: Props) => {
           />
         </svg>
       </span>
-      <span className="rtl:hidden inline-block ps-[2px]">SAR</span>
+      <span className="inline-block ps-[2px] rtl:hidden">SAR</span>
     </>
   )
 }

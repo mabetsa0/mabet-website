@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { reviewBorder } from "@/assets"
-import Mabet from "@/services"
+import { useTranslations } from "next-intl"
 import {
   Avatar,
   Divider,
@@ -14,7 +13,8 @@ import {
 } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { Star } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { reviewBorder } from "@/assets"
+import Mabet from "@/services"
 import { ReviewsResponse } from "../../types/reviews"
 import { useUnitData } from "../context/unit-context"
 
@@ -31,7 +31,7 @@ const Reviews = () => {
   const t = useTranslations()
   if (status === "pending")
     return (
-      <div className="container py-4 flex items-center justify-center">
+      <div className="container flex items-center justify-center py-4">
         <Loader />
       </div>
     )
@@ -61,7 +61,7 @@ const Reviews = () => {
           <Space />
           <SimpleGrid
             spacing={"lg"}
-            className=" divide-x divide-[#F3F3F3]"
+            className="divide-x divide-[#F3F3F3]"
             cols={{ base: 2, md: 4 }}
           >
             {data?.statics.map((ele) => {
@@ -87,7 +87,7 @@ const Reviews = () => {
             <Group gap={"lg"} align="flex-start">
               {data?.reviews.map((review) => {
                 return (
-                  <Stack className="max-w-xs w-full" key={review.id}>
+                  <Stack className="w-full max-w-xs" key={review.id}>
                     <Group>
                       <Avatar name={review.name} radius="xl" />
                       <Stack gap={2}>

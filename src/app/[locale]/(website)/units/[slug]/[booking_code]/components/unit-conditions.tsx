@@ -1,10 +1,10 @@
 "use client"
-import Mabet from "@/services"
+import { useTranslations } from "next-intl"
 import { List, ListItem, Space, Stack } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
-import { useTranslations } from "next-intl"
-import { useUnitData } from "../../context/unit-context"
 import { FileSpreadsheet, MessageSquareX } from "lucide-react"
+import Mabet from "@/services"
+import { useUnitData } from "../../context/unit-context"
 
 const UnitConditions = () => {
   const unit = useUnitData()
@@ -32,12 +32,12 @@ const UnitConditions = () => {
         <Stack gap={"xs"}>
           <h5 className="text-h4 md:text-h5 font-medium">
             <FileSpreadsheet
-              className="inline-block me-0.5"
+              className="me-0.5 inline-block"
               strokeWidth={1.25}
             />
             {t("unit.reservation-conditions")}
           </h5>
-          <List className="text-[#767676] ">
+          <List className="text-[#767676]">
             {terms?.map((ele) => {
               return ele.split("\n").map((e, index) => {
                 return (
@@ -52,12 +52,12 @@ const UnitConditions = () => {
         <Stack gap={"xs"}>
           <h5 className="text-h4 md:text-h5 font-medium">
             <MessageSquareX
-              className="inline-block me-0.5"
+              className="me-0.5 inline-block"
               strokeWidth={1.25}
             />
             {t("unit.cancellation_policy")}
           </h5>
-          <List type="ordered" className="text-[#767676] list-decimal">
+          <List type="ordered" className="list-decimal text-[#767676]">
             {Object.values(unit.cancellation_summary.data).map((ele, index) => {
               return <ListItem key={index}>{ele.title}</ListItem>
             })}

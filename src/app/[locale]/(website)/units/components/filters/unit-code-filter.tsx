@@ -1,5 +1,6 @@
 "use client"
 import React from "react"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -9,9 +10,8 @@ import {
   TextInput,
   Title,
 } from "@mantine/core"
-import { useTranslations } from "next-intl"
-import { ChevronDown, QrCode, Search } from "lucide-react"
 import { useField } from "@mantine/form"
+import { ChevronDown, QrCode, Search } from "lucide-react"
 import { parseAsString, useQueryState } from "nuqs"
 
 const UnitCodeFilter = () => {

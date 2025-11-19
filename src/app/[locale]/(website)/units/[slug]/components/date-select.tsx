@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { calenderIn, calenderOut } from "@/assets"
-import useMdScreen from "@/hooks/use-md-screen"
-import { cn } from "@/lib/cn"
-import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
+import { ComponentRef, useEffect, useRef, useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -20,15 +18,20 @@ import { notifications } from "@mantine/notifications"
 import dayjs from "dayjs"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
 import { Minus } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
-import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
-import { ComponentRef, useEffect, useRef, useState } from "react"
+import { parseAsBoolean, useQueryStates } from "nuqs"
+import { calenderIn, calenderOut } from "@/assets"
+import useMdScreen from "@/hooks/use-md-screen"
+import { cn } from "@/lib/cn"
+import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
 import { useUnitData } from "../context/unit-context"
 import useBusyDays from "../hooks/use-busy-days"
+import { useQueryDates } from "../hooks/use-query-dates"
 
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
+dayjs.extend(utc)
 
 const DateSelect = ({
   readOnly,
@@ -46,23 +49,19 @@ const DateSelect = ({
 
   const t = useTranslations()
 
-  const [{ from, to, selectDate }, setDates] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-      selectDate: parseAsBoolean.withDefault(false),
-    },
-    {
-      scroll: false,
-      history: "replace",
-    }
-  )
+  const [{ from, to }, setDates] = useQueryDates()
+
+  const [{ selectDate }] = useQueryStates({
+    selectDate: parseAsBoolean.withDefault(false),
+  })
+
   useEffect(() => {
     if (selectDate) {
       open()
       ref.current?.scrollIntoView({ behavior: "smooth" })
     }
-  }, [selectDate])
+  }, [selectDate, open])
+
   const [value, setValue] = useState<[Date | null, Date | null]>(
     initialValues ? [initialValues?.from, initialValues?.to] : [from, to]
   )
@@ -79,6 +78,16 @@ const DateSelect = ({
     const __date = dayjs(date).format("YYYY-MM-DD")
     const isBusyDay = busyDays.includes(__date)
 
+    if (isBusyDay) {
+      return (
+        <div className={cn("!opacity-85")}>
+          {date.getDate()}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Minus className="text-red-600" size={32} strokeWidth={1} />
+          </div>
+        </div>
+      )
+    }
     const isFeaturedDate = featuredDates.filter((day) => day.date === __date)[0]
     if (isFeaturedDate)
       return (
@@ -87,16 +96,7 @@ const DateSelect = ({
         </Indicator>
       )
 
-    return (
-      <div className={cn(isBusyDay ? "!opacity-85" : "")}>
-        {date.getDate()}
-        {isBusyDay ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Minus className=" text-red-600" size={32} strokeWidth={1} />
-          </div>
-        ) : null}
-      </div>
-    )
+    return <div>{date.getDate()}</div>
   }
   const matches = useMdScreen()
 
@@ -117,40 +117,20 @@ const DateSelect = ({
       return
     }
 
-    const start = dayjs(values[0])
-    const end = dayjs(values[1])
+    const start = dayjs.utc(values[0])
+    const end = dayjs.utc(values[1])
     const duration = end.diff(start, "day")
 
-    // اجمع الأيام داخل الفترة
-    const daysInRange: string[] = []
-    for (let i = 0; i <= duration; i++) {
-      daysInRange.push(start.add(i, "day").format("YYYY-MM-DD"))
-    }
-
-    // تحقق من الأيام المميزة داخل الفترة
-    const matchedFeatured = featuredDates.filter((f) =>
-      daysInRange.includes(f.date)
+    // check if the start date is a featured date
+    const matchedFeatured = featuredDates.find(
+      (f) => f.date === start.format("YYYY-MM-DD")
     )
 
-    if (matchedFeatured.length > 0) {
-      // احصل على أعلى min_stay
-      const maxMinStay = Math.max(...matchedFeatured.map((f) => f.min_stay))
-      console.log("🚀 ~ handleDateChange ~ maxMinStay:", maxMinStay)
-
-      // لو المدة أقل من المطلوب، عدّل النهاية
-      if (duration < maxMinStay) {
-        const newEndDate = start.add(maxMinStay, "day").toDate()
-
-        notifications.show({
-          color: "orange",
-          title: t("general.warning"),
-          message:
-            `${t("general.min_stay_warning")}: ${maxMinStay} ${t("general.nights")}. ` +
-            t("general.date_extended_to") +
-            dayjs(newEndDate).format("YYYY-MM-DD"),
-        })
-
-        setValue([start.toDate(), newEndDate])
+    if (matchedFeatured) {
+      const minStay = matchedFeatured.min_stay
+      if (duration < minStay) {
+        const newEndDate = start.add(minStay, "day").toDate()
+        setValue([new Date(values[0]!), newEndDate])
         return
       }
     }
@@ -172,12 +152,12 @@ const DateSelect = ({
           <Text c={"#767676"}>
             {t("general.from")}{" "}
             {value[0] ? (
-              <span className=" font-bold text-primary">
+              <span className="text-primary font-bold">
                 {dayjs(value[0]).format("DD")}
               </span>
             ) : null}{" "}
             {value[0] ? dayjs(value[0]).format("/ MMMM") : ""} -{" "}
-            <span className=" font-bold text-primary">
+            <span className="text-primary font-bold">
               {value[1] ? dayjs(value[1]).format("DD") : null}
             </span>{" "}
             {value[1] ? dayjs(value[1]).format("/ MMMM") : null}
@@ -244,9 +224,9 @@ const DateSelect = ({
               open()
             }}
             wrap="nowrap"
-            className="w-full h-full cursor-pointer rounded-md p-xs border-primary border-1"
+            className="p-xs border-primary h-full w-full cursor-pointer rounded-md border-1"
           >
-            <Stack className="w-full " gap={0}>
+            <Stack className="w-full" gap={0}>
               <Group gap={4}>
                 <img alt="icon" src={calenderIn.src} />
                 <Text c="#767676" className="text-sm">
@@ -255,7 +235,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center text-lg font-medium text-gray-600",
                   value[0] && "text-dark"
                 )}
               >
@@ -265,7 +245,7 @@ const DateSelect = ({
               </Group>
             </Stack>
             <Divider orientation="vertical" />
-            <Stack className="w-full " gap={0}>
+            <Stack className="w-full" gap={0}>
               <Group gap={4}>
                 <img alt="icon" src={calenderOut.src} />
 
@@ -275,7 +255,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center font-medium text-gray-600 text-lg",
+                  "h-[44px] items-center text-lg font-medium text-gray-600",
                   value[1] && "text-dark"
                 )}
               >
@@ -287,7 +267,6 @@ const DateSelect = ({
           </Group>
         </Popover.Target>
         <Popover.Dropdown>
-          {/* <div > */}
           <DatePicker
             numberOfColumns={matches ? 1 : 2}
             hideOutsideDates
@@ -296,14 +275,9 @@ const DateSelect = ({
             classNames={{
               day: " relative ",
             }}
-            // ref={dropdownRef}
-
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
             onChange={handleDateChange}
-            // excludeDate={(date) =>
-            //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
-            // }
             renderDay={(date) => renderDay(new Date(date))}
           />
           <Group justify="end" mt={"sm"}>
@@ -318,33 +292,27 @@ const DateSelect = ({
         </Popover.Dropdown>
       </Popover>
 
-      <Group wrap="nowrap" className="w-full h-full cursor-pointer  p-xs ">
-        <Stack className="w-full " gap={0}>
+      <Group wrap="nowrap" className="p-xs h-full w-full cursor-pointer">
+        <Stack className="w-full" gap={0}>
           <Group gap={4}>
             <img alt="icon" src={calenderIn.src} />
             <Text className="text-sm">{t("date-range-picker.check-in")}</Text>
           </Group>
           <Group
-            className={cn(
-              " items-center font-medium text-lg",
-              "text-[#767676]"
-            )}
+            className={cn("items-center text-lg font-medium", "text-[#767676]")}
           >
             {unit.checkin}
           </Group>
         </Stack>
         <Divider orientation="vertical" />
-        <Stack className="w-full " gap={0}>
+        <Stack className="w-full" gap={0}>
           <Group gap={4}>
             <img alt="icon" src={calenderOut.src} />
 
             <Text className="text-sm">{t("date-range-picker.check-out")}</Text>
           </Group>
           <Group
-            className={cn(
-              " items-center font-medium  text-lg",
-              "text-[#767676]"
-            )}
+            className={cn("items-center text-lg font-medium", "text-[#767676]")}
           >
             {unit.checkout}
           </Group>

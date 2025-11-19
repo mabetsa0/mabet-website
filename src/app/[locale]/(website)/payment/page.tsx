@@ -1,9 +1,9 @@
+import { getTranslations } from "next-intl/server"
+import Image from "next/image"
+import { Button, Group, Stack, Text } from "@mantine/core"
 import VerifyButton from "@/app/[locale]/(website)/payment/components/verify-button"
 import { failPayment, successPayment } from "@/assets"
 import { Link } from "@/lib/i18n/navigation"
-import { Button, Group, Stack, Text } from "@mantine/core"
-import { getTranslations } from "next-intl/server"
-import Image from "next/image"
 
 const Page = async ({
   searchParams,
@@ -17,13 +17,13 @@ const Page = async ({
   return (
     <>
       {payment_status === "success" ? (
-        <div className="flex items-center flex-col justify-center min-h-[80vh] py-2 px-1">
+        <div className="flex min-h-[80vh] flex-col items-center justify-center px-1 py-2">
           <Image src={successPayment} alt="success payment" />
           <Stack align={"center"} justify={"center"} gap={"md"} maw={650}>
             <Text ta={"center"} className="text-h3 md:text-h2 font-bold">
               {t("title")}
             </Text>
-            <Text ta={"center"} className="text-h5 md:text-h4 font-medium  ">
+            <Text ta={"center"} className="text-h5 md:text-h4 font-medium">
               {t("description")}
             </Text>
             <Text ta={"center"} c={"#767676"} className="">
@@ -38,7 +38,7 @@ const Page = async ({
               </Button> */}
             </Group>
             <Group justify={"center"} gap={"lg"}>
-              <Text className="text-h5 md:text-h4 font-medium  ">
+              <Text className="text-h5 md:text-h4 font-medium">
                 {t("nafath-description")}
               </Text>
               <VerifyButton />
@@ -46,13 +46,13 @@ const Page = async ({
           </Stack>
         </div>
       ) : (
-        <div className="flex items-center flex-col justify-center min-h-[80vh] py-2">
+        <div className="flex min-h-[80vh] flex-col items-center justify-center py-2">
           <Image src={failPayment} alt="success payment" />
           <Stack align={"center"} justify={"center"} gap={"md"} maw={650}>
             <Text ta={"center"} className="text-h3 md:text-h2 font-bold">
               {t("fail-title")}
             </Text>
-            <Text ta={"center"} className="text-h5 md:text-h4 font-medium  ">
+            <Text ta={"center"} className="text-h5 md:text-h4 font-medium">
               {t("fail-description")}
             </Text>
             <Text ta={"center"} c={"#767676"} className="">

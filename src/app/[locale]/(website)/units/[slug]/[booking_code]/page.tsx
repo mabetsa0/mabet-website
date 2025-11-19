@@ -1,26 +1,24 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
-
-import { UnitContextProvider } from "../context/unit-context"
-
+import { use, useEffect } from "react"
+import { useTranslations } from "next-intl"
+import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { ChevronRight } from "lucide-react"
+import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
 import Footer from "@/components/common/footer"
+import ErrorUI from "@/components/ui/error"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
 import { getIsPrivate } from "@/utils/get-is-private"
-import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { ChevronRight } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
-import { use, useEffect } from "react"
 import ImageGallery from "../components/image-gallery"
+import { UnitContextProvider } from "../context/unit-context"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
 import { GetPaymentSummary } from "./get-payment-summary"
-import ErrorUI from "@/components/ui/error"
 
 type Props = {
   params: Promise<{
@@ -67,13 +65,13 @@ const Page = (props: Props) => {
   const mathes = useMdScreen()
   if (status == "pending")
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex min-h-[10vh] items-center justify-center">
         <Loader />
       </div>
     )
   if (status === "error")
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex h-screen items-center justify-center">
         <ErrorUI />
       </div>
     )
@@ -84,7 +82,7 @@ const Page = (props: Props) => {
       <Box hiddenFrom="md">
         <ImageGallery />
       </Box>
-      <section className="relative  bg-white  max-md:rounded-3xl max-md:-mt-1 md:pt-2  mb-4">
+      <section className="relative mb-4 bg-white max-md:-mt-1 max-md:rounded-3xl md:pt-2">
         <div className="container">
           <div className="flex gap-2 max-md:flex-col">
             <Stack className="w-full">
@@ -93,7 +91,7 @@ const Page = (props: Props) => {
                   <ChevronRight className="ltr:rotate-180" />
                 </ActionIcon>
 
-                <h1 className="text-h3 md:text-h2 font-bold ">
+                <h1 className="text-h3 md:text-h2 font-bold">
                   {t("unit.review-and-payment")}
                 </h1>
               </Group>
@@ -109,7 +107,7 @@ const Page = (props: Props) => {
                 </Box>
               )}
             </Stack>
-            <Box visibleFrom="md" className="md:w-[500px] shrink-0">
+            <Box visibleFrom="md" className="shrink-0 md:w-[500px]">
               <ReservationDetails prices={data.booking_details} />
             </Box>
           </div>

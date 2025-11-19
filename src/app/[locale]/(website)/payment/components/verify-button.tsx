@@ -1,8 +1,8 @@
 "use client"
-import { useNafath } from "@/hooks/use-nafath"
+import { useTranslations } from "next-intl"
 import { Button } from "@mantine/core"
 import { Verified } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useNafath } from "@/hooks/use-nafath"
 
 const VerifyButton = () => {
   const [_, { onOpen }] = useNafath()

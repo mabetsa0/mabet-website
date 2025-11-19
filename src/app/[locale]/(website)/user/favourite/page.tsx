@@ -1,19 +1,17 @@
 "use client"
-import UnitCard from "@/components/common/unit-card"
-import Mabet from "@/services"
+import { useTranslations } from "next-intl"
 import { Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, useQueryState } from "nuqs"
+import UnitCard from "@/components/common/unit-card"
+import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { FavouritesResponse } from "./@type"
 
-type Props = {}
-
-const Page = (props: Props) => {
+const Page = () => {
   const t = useTranslations()
 
-  const [page, set] = useQueryState("page", parseAsInteger.withDefault(1))
+  const [page, _] = useQueryState("page", parseAsInteger.withDefault(1))
 
   const { data, status } = useQuery({
     queryKey: ["favourites", page],
@@ -36,14 +34,14 @@ const Page = (props: Props) => {
       </Stack>
 
       {status === "pending" && (
-        <div className="flex items-center justify-center min-h-20">
+        <div className="flex min-h-20 items-center justify-center">
           <Loader />
         </div>
       )}
 
       {status === "error" && (
-        <div className="flex items-center justify-center min-h-20">
-          <p className="text-center text-red-500  text-sm">
+        <div className="flex min-h-20 items-center justify-center">
+          <p className="text-center text-sm text-red-500">
             {t("user.bookings.server-error")}
           </p>
         </div>
@@ -64,7 +62,7 @@ const Page = (props: Props) => {
       ) : null}
       <Space />
       <Space />
-      <div className="flex justify-center w-full ">
+      <div className="flex w-full justify-center">
         <Pagination total={data?.data.data.last_page || 0} />
       </div>
     </Stack>

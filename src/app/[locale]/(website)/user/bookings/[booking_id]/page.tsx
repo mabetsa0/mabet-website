@@ -1,8 +1,5 @@
+import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
-
-import { RiyalIcon } from "@/components/icons"
-import BackButton from "@/components/ui/back-button"
-import { Link } from "@/lib/i18n/navigation"
 import {
   Box,
   Button,
@@ -10,14 +7,15 @@ import {
   Group,
   SimpleGrid,
   Space,
-  Spoiler,
   Stack,
   Text,
 } from "@mantine/core"
 import axios from "axios"
 import dayjs from "dayjs"
 import { MapPin, Tag } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { RiyalIcon } from "@/components/icons"
+import BackButton from "@/components/ui/back-button"
+import { Link } from "@/lib/i18n/navigation"
 import { GetBooking } from "./helpers/get-booking"
 
 type Props = {
@@ -51,11 +49,11 @@ const page = async (props: Props) => {
         </Stack>
         <Stack gap={"lg"}>
           <Space />
-          <Group className="max-sm:flex-wrap flex-nowrap">
+          <Group className="flex-nowrap max-sm:flex-wrap">
             <Stack align="stretch">
-              <Box className=" w-full sm:max-w-xs aspect-square  rounded-md overflow-hidden">
+              <Box className="aspect-square w-full overflow-hidden rounded-md sm:max-w-xs">
                 <img
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                   src={unit.images[0].image_path}
                   alt={unit.images[0].alt}
                 />
@@ -64,14 +62,14 @@ const page = async (props: Props) => {
 
             <Stack gap={"lg"} className="max-sm:w-full">
               <Stack>
-                <h3 className="text-h4 md:text-h5 font-bold line-clamp-1">
+                <h3 className="text-h4 md:text-h5 line-clamp-1 font-bold">
                   {unit.name}{" "}
                   <span className="text-base font-light text-gray-500">
                     ({unit.code})
                   </span>
                 </h3>
                 <Link
-                  className=" w-full block max-w-xs "
+                  className="block w-full max-w-xs"
                   href={`/unit/${unit.id}`}
                 >
                   <Button fullWidth variant="light" size="sm">
@@ -80,17 +78,17 @@ const page = async (props: Props) => {
                 </Link>
               </Stack>
               <SimpleGrid cols={2}>
-                <div className=" rounded bg-green-300/15 p-[12px]">
-                  <p className="text-sm font-medium text-default-600">
+                <div className="rounded bg-green-300/15 p-[12px]">
+                  <p className="text-default-600 text-sm font-medium">
                     {t("checkin")}
                   </p>
-                  <p className="font-medium ">{booking.checkin_text}</p>
+                  <p className="font-medium">{booking.checkin_text}</p>
                 </div>
-                <div className=" rounded bg-red-300/15 p-[12px]">
-                  <p className="text-sm font-medium text-default-600">
+                <div className="rounded bg-red-300/15 p-[12px]">
+                  <p className="text-default-600 text-sm font-medium">
                     {t("checkout")}
                   </p>
-                  <p className="font-medium ">{booking.checkout_text}</p>
+                  <p className="font-medium">{booking.checkout_text}</p>
                 </div>
               </SimpleGrid>
               <Divider />
@@ -141,7 +139,7 @@ const page = async (props: Props) => {
             </ul>
             {/* </Spoiler> */}
           </div>
-          <div className="space-y-0.5 bg-gray-50 p-0.5 rounded">
+          <div className="space-y-0.5 rounded bg-gray-50 p-0.5">
             <p className="text-2xl">{t("owner-information")}</p>
             <p className="ms-1">
               {t("owner-name")}: {booking.partner.name}
@@ -168,11 +166,11 @@ const page = async (props: Props) => {
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-1 text-sm text-foreground-500">
+            <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
               <p>{t("nights-count")}</p>
               <span>{booking.duration}</span>
             </div>
-            <div className="flex items-center justify-between gap-1 text-sm text-foreground-500">
+            <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
               <p>{t("customer-fees")}</p>
               <span>{booking.customer_fees_text}</span>
             </div>

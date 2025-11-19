@@ -1,7 +1,5 @@
 "use client"
-import { RiyalIcon } from "@/components/icons"
-import { cn } from "@/lib/cn"
-import { Link } from "@/lib/i18n/navigation"
+import { useTranslations } from "next-intl"
 import {
   Badge,
   Box,
@@ -15,6 +13,7 @@ import {
   Text,
   Title,
 } from "@mantine/core"
+import { useDisclosure } from "@mantine/hooks"
 import {
   Circle,
   Clock,
@@ -26,12 +25,13 @@ import {
   QrCode,
   Wallet,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { Booking } from "../@types"
-import { useDisclosure } from "@mantine/hooks"
-import ModalDrawer from "@/components/common/modal-drawer"
-import AddReview from "./add-review"
 import { arrivalInstructionsImage, logo } from "@/assets"
+import ModalDrawer from "@/components/common/modal-drawer"
+import { RiyalIcon } from "@/components/icons"
+import { cn } from "@/lib/cn"
+import { Link } from "@/lib/i18n/navigation"
+import { Booking } from "../@types"
+import AddReview from "./add-review"
 import ArrivalInstructions from "./arival-instruction"
 import CompletePayment from "./complete-payment"
 
@@ -52,15 +52,15 @@ const BookingCard = (booking: Props) => {
         padding="xs"
         radius="md"
         withBorder
-        className={cn("border-[#F3F3F3] w-full")}
+        className={cn("w-full border-[#F3F3F3]")}
       >
-        <div className="  aspect-[4/3] h-[230px] w-full overflow-hidden rounded relative">
+        <div className="relative aspect-[4/3] h-[230px] w-full overflow-hidden rounded">
           <Badge
             autoContrast
             color={booking.status.bg_color}
             size="lg"
             radius={"0"}
-            className="border border-white absolute top-0 right-0  rounded-bl-md "
+            className="absolute top-0 right-0 rounded-bl-md border border-white"
           >
             {booking.status.label}
           </Badge>
@@ -71,7 +71,7 @@ const BookingCard = (booking: Props) => {
             rightSection={
               <Gift size={18} strokeWidth={1.8} className="inline" />
             }
-            className="border border-white absolute top-0 left-0  rounded-br-md "
+            className="absolute top-0 left-0 rounded-br-md border border-white"
           >
             {t("points")}
             {booking.points}
@@ -83,7 +83,7 @@ const BookingCard = (booking: Props) => {
               size="xs"
               radius={"sm"}
               type="button"
-              className={"absolute bottom-0 right-0"}
+              className={"absolute right-0 bottom-0"}
             >
               {t("add-review")}
             </Button>
@@ -104,10 +104,10 @@ const BookingCard = (booking: Props) => {
             </div>
           ) : null}
 
-          <div className="w-full aspect-[4/3]  ">
+          <div className="aspect-[4/3] w-full">
             <Image
               loading="lazy"
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               src={booking.unit.images[0].image_path}
               alt={booking.unit.images[0].alt}
             />
@@ -135,20 +135,20 @@ const BookingCard = (booking: Props) => {
             ) : null}
           </Group>
 
-          <Group className="text-[#767676] " align="center" gap={"4"}>
+          <Group className="text-[#767676]" align="center" gap={"4"}>
             <QrCode size={18} strokeWidth={1.25} />
             <Text className="text-sm">{unit.code}</Text>
           </Group>
 
           <SimpleGrid cols={2}>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <Wallet size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("total")}
                 {booking.full_payment} <RiyalIcon />
               </Text>
             </Group>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <HandCoins size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("paied")}
@@ -159,14 +159,14 @@ const BookingCard = (booking: Props) => {
           </SimpleGrid>
 
           <SimpleGrid cols={2}>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <LogIn size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("checkin")}
                 {booking.checkin}
               </Text>
             </Group>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <LogOut size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("checkout")}
@@ -176,14 +176,14 @@ const BookingCard = (booking: Props) => {
           </SimpleGrid>
 
           <SimpleGrid cols={2}>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <Clock size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("checkin-time")}
                 {booking.checkin_time}
               </Text>
             </Group>
-            <Group className="text-[#767676] " align="center" gap={"4"}>
+            <Group className="text-[#767676]" align="center" gap={"4"}>
               <Clock size={18} strokeWidth={1.25} />
               <Text className="text-sm">
                 {t("checkout-time")}
@@ -231,7 +231,7 @@ const BookingCard = (booking: Props) => {
         onClose={arrivalInstructionsModalHandlers.close}
         title={t("arrival_instructions")}
       >
-        <Stack className=" p-1">
+        <Stack className="p-1">
           <Text className="font-medium" c={"#767676"}>
             {t("arrival_instructions-description")}
           </Text>

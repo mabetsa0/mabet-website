@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import {
   ActionIcon,
   NumberInput,
@@ -5,7 +6,6 @@ import {
   NumberInputProps,
 } from "@mantine/core"
 import { Minus, Plus } from "lucide-react"
-import { useRef } from "react"
 
 export function CustomNumberInput(props: NumberInputProps) {
   const handlersRef = useRef<NumberInputHandlers>(null)

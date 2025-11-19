@@ -1,10 +1,9 @@
 "use client"
 
 import React, { useMemo, useEffect, useState } from "react"
-
+import { useTranslations } from "next-intl"
 import { Divider, Loader, Stack, Text, Space } from "@mantine/core"
 import { Circle, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
-import { useTranslations } from "next-intl"
 
 const containerStyle = {
   height: "450px",
@@ -25,7 +24,7 @@ function MyGoogleMapComponent({ lat, lng }: { lat: number; lng: number }) {
         <Divider />
         <Space />
         <div>
-          <h3 className="text-h4 md:text-h3 font-medium mb-0.5">
+          <h3 className="text-h4 md:text-h3 mb-0.5 font-medium">
             {t("unit.location-title")}
           </h3>
           <Text maw={550} c={"#767676"}>

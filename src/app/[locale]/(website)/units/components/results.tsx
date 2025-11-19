@@ -1,31 +1,19 @@
 "use client"
-import UnitCard from "@/components/common/unit-card"
-import Mabet from "@/services"
+import { ComponentRef, Suspense, useRef } from "react"
+import { useTranslations } from "next-intl"
+import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 import {
   ActionIcon,
   Box,
   Button,
   Group,
-  Loader,
   ScrollArea,
   SimpleGrid,
   Stack,
   Text,
   Title,
 } from "@mantine/core"
-
-import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbox"
-import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
-import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
-import ToggleFilterButton from "@/components/ui/toggle-filter-button"
-import { useCities, useUnitTypes } from "@/context/global-data-context"
-import { useRouter } from "@/lib/i18n/navigation"
-import {
-  getDirections,
-  getFacilities,
-  getPools,
-  getRegions,
-} from "@/services/lists"
 import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import {
@@ -39,31 +27,37 @@ import {
   TicketPercent,
   WavesLadder,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { useSearchParams } from "next/navigation"
-import { ComponentRef, ElementRef, Suspense, useEffect, useRef } from "react"
-import MobileSearch from "../../components/mobile-search"
+import MobileSearch from "@/app/[locale]/(website)/components/mobile-primary-search/mobile-search"
+import noResults from "@/assets/no-results.svg"
+import UnitCard from "@/components/common/unit-card"
+import UnitCardSkeleton from "@/components/common/unit-card-skeleton"
+import FilterButtonWithCheckbox from "@/components/ui/filter-button-with-checkbox"
+import FilterButtonWithRadio from "@/components/ui/filter-button-with-radio"
+import { FilterButtonWithSearch } from "@/components/ui/filter-button-with-search"
+import ToggleFilterButton from "@/components/ui/toggle-filter-button"
+import { useCities, useUnitTypes } from "@/context/global-data-context"
+import { useDirections } from "@/hooks/use-directions"
+import { useFacilities } from "@/hooks/use-facilities"
+import { usePools } from "@/hooks/use-pools"
+import { useRegions } from "@/hooks/use-regions"
+import { useRouter } from "@/lib/i18n/navigation"
+import Mabet from "@/services"
+import useFilters from "../hooks/use-filters"
 import { SearchResultsResponse } from "../types/results"
+import { countAppliedFilters } from "../types/search-params"
 import CountFilter from "./filters/count-filter"
 import MobileFilterDrawer from "./filters/mobile-filters-drawer"
 import OrderFilter from "./filters/order-filter"
 import PriceFilter from "./filters/price-filter"
 import RatingFilter from "./filters/rating-filter"
 import UnitCodeFilter from "./filters/unit-code-filter"
-import Pagination from "./pagination"
 import UnitTypeFilter from "./filters/unit-type-filter"
-import Image from "next/image"
-import noResults from "@/assets/no-results.svg"
-import useFilters from "../hooks/use-filters"
-import { countAppliedFilters } from "../types/search-params"
-import { parseAsString, useQueryState } from "nuqs"
-import { useSession } from "@/lib/session-store"
+import Pagination from "./pagination"
+
 const Results = () => {
-  const session = useSession()
   const t = useTranslations()
   const searchParams = useSearchParams()
   const [_, setFilters] = useFilters()
-  const [page] = useQueryState("page", parseAsString.withDefault(""))
 
   const { data, status } = useQuery({
     queryKey: ["search", searchParams.toString()],
@@ -86,66 +80,17 @@ const Results = () => {
 
   // getting regions
   const cityId = searchParams.get("city_id")
-  const regionsData = useQuery({
-    queryKey: ["region", cityId],
-    staleTime: Infinity,
-    enabled: !!cityId,
-    queryFn: async () => {
-      const response = await getRegions(cityId!)
-      return response.data.districts.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const regionsData = useRegions(cityId || "")
   //
-  const poolsQuery = useQuery({
-    queryKey: ["pools"],
-    staleTime: Infinity,
-
-    queryFn: async () => {
-      const response = await getPools()
-      return response.data.amenities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const facilitiesQuery = useQuery({
-    queryKey: ["facilities"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getFacilities()
-      return response.data.facilities.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
-  const directionsQuery = useQuery({
-    queryKey: ["/location/directions"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const response = await getDirections()
-      return response.data.directions.map((ele) => ({
-        label: ele.name,
-        value: ele.id + "",
-      }))
-    },
-  })
+  const poolsQuery = usePools()
+  const facilitiesQuery = useFacilities()
+  const directionsQuery = useDirections()
 
   const Router = useRouter()
   const back = () => {
     Router.back()
   }
   const scrollRef = useRef<ComponentRef<"div">>(null)
-  // useEffect(() => {
-  //   if (scrollRef.current) {
-  //     setTimeout(() => {
-  //       scrollRef.current!.scrollIntoView({ behavior: "smooth" })
-  //     }, 200)
-  //   }
-  // }, [page])
 
   const clearFilters = () => {
     setFilters(null)
@@ -154,7 +99,7 @@ const Results = () => {
   return (
     <>
       <Stack
-        className=" z-[5] bg-white px-1 sticky top-0 py-0.5 shadow-sm"
+        className="sticky top-0 z-[5] bg-white px-1 py-0.5 shadow-sm"
         hiddenFrom="md"
       >
         <Group wrap="nowrap">
@@ -166,7 +111,7 @@ const Results = () => {
             />
           </ActionIcon>
           <Suspense>
-            <div className="w-full ">
+            <div className="w-full">
               <MobileSearch>
                 <Button
                   component="div"
@@ -174,7 +119,7 @@ const Results = () => {
                   w={"100%"}
                   color="'dark"
                   variant="outline"
-                  className="text-[12px] w-full border-[1.5px] border-[#F3F3F3]  font-normal rounded-[50px] h-[64px] "
+                  className="h-[64px] w-full rounded-[50px] border-[1.5px] border-[#F3F3F3] text-[12px] font-normal"
                   classNames={{
                     inner: " justify-start",
                   }}
@@ -187,8 +132,8 @@ const Results = () => {
                       <Text fz={"12"}>{searchedUnitType}</Text>
                       {searchParams.get("from") && searchParams.get("to") ? (
                         <Text fz={"12"}>
-                          {dayjs(searchParams.get("from")).format("DD MMMM")} -{" "}
-                          {dayjs(searchParams.get("to")).format("DD MMMM")}
+                          {dayjs(searchParams.get("from")).format("DD MMM")} -{" "}
+                          {dayjs(searchParams.get("to")).format("DD MMM")}
                         </Text>
                       ) : (
                         ""
@@ -240,14 +185,14 @@ const Results = () => {
       </Stack>
 
       <section>
-        <div ref={scrollRef} className="container relative">
+        <div ref={scrollRef} className="relative container">
           <Group
             visibleFrom="md"
             wrap="nowrap"
             justify="space-between"
             align="start"
           >
-            <Group mb={{ base: "md", md: "xl" }} className=" gap-y-[2px]">
+            <Group mb={{ base: "md", md: "xl" }} className="gap-y-[2px]">
               <Title className="text-h4 md:text-h2">{`${t("generl.search-results")} ${
                 searchedUnitType
               } ${t("general.in")} ${searchedUnit}`}</Title>{" "}
@@ -359,9 +304,14 @@ const Results = () => {
           </ScrollArea>
 
           {status === "pending" ? (
-            <div className="flex items-center justify-center min-h-[50vh]">
-              <Loader />
-            </div>
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <UnitCardSkeleton
+                  className="w-full lg:max-w-[unset]"
+                  key={index}
+                />
+              ))}
+            </SimpleGrid>
           ) : null}
           {status === "error" ? (
             <div>
@@ -372,11 +322,17 @@ const Results = () => {
             <>
               <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
                 {data.data.map((unit) => {
-                  return <UnitCard key={unit.id} {...unit} />
+                  return (
+                    <UnitCard
+                      className="w-full lg:max-w-[unset]"
+                      key={unit.id}
+                      {...unit}
+                    />
+                  )
                 })}
               </SimpleGrid>
               {data.data.length === 0 && (
-                <div className="flex items-center flex-col justify-center min-h-[30vh]">
+                <div className="flex min-h-[30vh] flex-col items-center justify-center">
                   <Image src={noResults} alt="no results" />
                   <Stack
                     align={"center"}
@@ -390,7 +346,7 @@ const Results = () => {
                     >
                       {t("general.no-results-title")}
                     </Text>
-                    <Text ta={"center"} c={"#767676"} className="md:text-lg  ">
+                    <Text ta={"center"} c={"#767676"} className="md:text-lg">
                       {t("general.no-results-description")}
                     </Text>
                     <Button onClick={() => setFilters(null)}>

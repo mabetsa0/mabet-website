@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { calenderIn, calenderOut } from "@/assets"
-
-import { cn } from "@/lib/cn"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -13,10 +11,11 @@ import {
   Text,
 } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
-import dayjs from "dayjs"
-import { useTranslations } from "next-intl"
-import { useSearchBarFormContext } from "./search-bar"
 import { useDisclosure } from "@mantine/hooks"
+import dayjs from "dayjs"
+import { calenderIn, calenderOut } from "@/assets"
+import { cn } from "@/lib/cn"
+import { useSearchBarFormContext } from "./search-bar"
 
 const DateRangePicker = () => {
   const [opened, { close, open }] = useDisclosure(false)
@@ -40,19 +39,19 @@ const DateRangePicker = () => {
       <Popover.Target>
         <Group
           wrap="nowrap"
-          className="w-full h-full cursor-pointer"
+          className="h-full w-full cursor-pointer"
           onClick={() => {
             open()
           }}
         >
-          <Stack className="w-full " gap={2}>
+          <Stack className="w-full" gap={2}>
             <Group gap={4}>
               <img alt="icon" src={calenderIn.src} />
               <Text className="text-sm">{t("check-in")}</Text>
             </Group>
             <Group
               className={cn(
-                "h-[50px] items-center text-gray-600 text-lg",
+                "h-[50px] items-center text-lg text-gray-600",
                 form.values.dates[0] && "text-gray-700"
               )}
             >
@@ -62,7 +61,7 @@ const DateRangePicker = () => {
             </Group>
           </Stack>
           <Divider orientation="vertical" />
-          <Stack className="w-full " gap={2}>
+          <Stack className="w-full" gap={2}>
             <Group gap={4}>
               <img alt="icon" src={calenderOut.src} />
 
@@ -70,7 +69,7 @@ const DateRangePicker = () => {
             </Group>
             <Group
               className={cn(
-                "h-[50px] items-center text-gray-600 text-lg",
+                "h-[50px] items-center text-lg text-gray-600",
                 form.values.dates[1] && "text-gray-700"
               )}
             >

@@ -1,20 +1,20 @@
 "use client"
-import { Button, Space, Stack, Text, TextInput, Title } from "@mantine/core"
 import React from "react"
-import "react-phone-number-input/style.css"
+import { useLocale, useTranslations } from "next-intl"
+import { Button, Space, Stack, Text, TextInput, Title } from "@mantine/core"
+import { useForm } from "@mantine/form"
+import dayjs from "dayjs"
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import PhoneInput, {
   getCountryCallingCode,
   isSupportedCountry,
   isPossiblePhoneNumber,
 } from "react-phone-number-input"
-import { useForm } from "@mantine/form"
-import { useLocale, useTranslations } from "next-intl"
 import ar from "react-phone-number-input/locale/ar.json"
 import en from "react-phone-number-input/locale/en.json"
+import "react-phone-number-input/style.css"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
-import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
-import dayjs from "dayjs"
 
 const PhoneNumberForm = () => {
   const t = useTranslations("auth")
@@ -98,7 +98,7 @@ const PhoneNumberForm = () => {
           <Button loading={form.submitting} type="submit">
             {t("continue")}
           </Button>
-          <Text className="text-sm " c={"red"} ta={"center"}>
+          <Text className="text-sm" c={"red"} ta={"center"}>
             {form.errors.root}
           </Text>
         </Stack>

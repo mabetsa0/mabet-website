@@ -1,13 +1,13 @@
 "use client"
+import "@mantine/carousel/styles.css"
 import { DirectionProvider, MantineProvider } from "@mantine/core"
 import { DatesProvider } from "@mantine/dates"
+import "@mantine/dates/styles.css"
+import { Notifications } from "@mantine/notifications"
+import "@mantine/notifications/styles.css"
 import dayjs from "dayjs"
 import "dayjs/locale/ar"
 import theme from "./theme"
-import { Notifications } from "@mantine/notifications"
-import "@mantine/notifications/styles.css"
-import "@mantine/dates/styles.css"
-import "@mantine/carousel/styles.css"
 
 export default function MyMantineProvider({
   children,

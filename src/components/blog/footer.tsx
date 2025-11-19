@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-white">
       <div className="mx-auto max-w-screen-xl space-y-2 px-1 py-4 sm:px-1.5 lg:space-y-4 lg:px-2">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="flex items-center gap-[12px] text-5xl font-bold leading-tight tracking-tighter text-primary md:pr-2 md:text-[3rem]">
+          <div className="text-primary flex items-center gap-[12px] text-5xl leading-tight font-bold tracking-tighter md:pr-2 md:text-[3rem]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -31,7 +31,7 @@ const Footer = () => {
                 />
               </defs>
             </svg>
-            <span className="mb-0.5 text-secondary">مدونة مبيت</span>
+            <span className="text-secondary mb-0.5">مدونة مبيت</span>
           </div>
 
           {/* <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">

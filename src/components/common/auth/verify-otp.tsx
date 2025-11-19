@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
+import { useTranslations } from "next-intl"
+import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
+import { useForm } from "@mantine/form"
+import axios from "axios"
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { Session } from "@/@types/user"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useUserDataModal } from "@/hooks/use-user-data-modal"
 import { useSession } from "@/lib/session-store"
-import { Button, Divider, PinInput, Stack, Text, Title } from "@mantine/core"
-import { useForm } from "@mantine/form"
-import axios from "axios"
-import { useTranslations } from "next-intl"
-import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import ResendOtpButton from "./resend-otp-button"
+
 const VerifyOtp = () => {
   const t = useTranslations("auth")
   const [_, { onClose }] = useAuthModal()
@@ -87,7 +88,7 @@ const VerifyOtp = () => {
           <Button loading={form.submitting} type="submit">
             {t("verify-otp.continue")}
           </Button>
-          <Text className="text-sm " c={"red"} ta={"center"}>
+          <Text className="text-sm" c={"red"} ta={"center"}>
             {form.errors.root}
           </Text>
         </Stack>

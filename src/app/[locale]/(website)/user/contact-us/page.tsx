@@ -1,6 +1,6 @@
+import { useTranslations } from "next-intl"
 import { Card, SimpleGrid, Space, Stack, Text } from "@mantine/core"
 import { Clock, Mail, Smartphone } from "lucide-react"
-import { useTranslations } from "next-intl"
 import ContactForm from "./components/contact-form"
 
 const Page = () => {
@@ -47,7 +47,7 @@ const Page = () => {
                 withBorder
                 className="border-[#F3F3F3]"
               >
-                <div className="flex mb-0.5 rounded-lg text-primary bg-primary/15 items-center justify-center shrink-0 w-3.5  aspect-square">
+                <div className="text-primary bg-primary/15 mb-0.5 flex aspect-square w-3.5 shrink-0 items-center justify-center rounded-lg">
                   <ele.icon size={28} strokeWidth={1.2} />
                 </div>
 
@@ -56,7 +56,7 @@ const Page = () => {
                     component="a"
                     href={`tel:${ele.content}`}
                     dir="ltr"
-                    className="text-h5 font-medium rtl:text-right "
+                    className="text-h5 font-medium rtl:text-right"
                   >
                     {ele.content}
                   </Text>
@@ -65,14 +65,14 @@ const Page = () => {
                     component="a"
                     href={`mail:${ele.content}`}
                     dir="ltr"
-                    className="text-h5 font-medium rtl:text-right "
+                    className="text-h5 font-medium rtl:text-right"
                   >
                     {ele.content}
                   </Text>
                 ) : (
                   <Text
                     dir="ltr"
-                    className="text-h5 font-medium rtl:text-right "
+                    className="text-h5 font-medium rtl:text-right"
                   >
                     {ele.content}
                   </Text>

@@ -1,6 +1,7 @@
 import { UseFormReturnType } from "@mantine/form"
 import axios from "axios"
 import { ErrorResponse as ErrorResponseType } from "@/@types/error"
+
 export type ErrorResponse<T> = {
   message: string
   errors?: {

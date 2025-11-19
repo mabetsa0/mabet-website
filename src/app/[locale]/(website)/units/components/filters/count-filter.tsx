@@ -1,5 +1,6 @@
 "use client"
-import { CustomNumberInput } from "@/components/ui/number-input"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   Button,
   Divider,
@@ -9,9 +10,8 @@ import {
   Title,
 } from "@mantine/core"
 import { ChevronDown } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { parseAsInteger, useQueryStates } from "nuqs"
-import { useState } from "react"
+import { CustomNumberInput } from "@/components/ui/number-input"
 
 const CountFilter = () => {
   const [filter, set] = useQueryStates({

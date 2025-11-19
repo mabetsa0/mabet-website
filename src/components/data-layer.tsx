@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { sendGTMEvent } from "@next/third-parties/google"
 import { useEffect } from "react"
+import { sendGTMEvent } from "@next/third-parties/google"
 
 type Props = any
 

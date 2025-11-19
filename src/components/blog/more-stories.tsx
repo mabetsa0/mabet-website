@@ -1,11 +1,10 @@
 import { type Blog } from "@/@types/blog-response"
-
 import PostPreview from "./post-preview"
 
 export default function MoreStories({ posts }: { posts: Blog[] }) {
   return (
     <section>
-      <h2 className="mb-2 text-5xl font-bold leading-tight tracking-tighter text-primary md:text-6xl">
+      <h2 className="text-primary mb-2 text-5xl leading-tight font-bold tracking-tighter md:text-6xl">
         مقالات اخرى
       </h2>
 
