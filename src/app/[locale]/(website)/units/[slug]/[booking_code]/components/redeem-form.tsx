@@ -1,15 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
-import { stc } from "@/assets"
+import { useMemo } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
+import { Button, Group, PinInput, Stack, Text } from "@mantine/core"
+import { useForm } from "@mantine/form"
+import { stcAr, stcEn } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { CustomNumberInput } from "@/components/ui/number-input"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
-import { Button, Group, PinInput, Stack, Text } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
-import { useForm } from "@mantine/form"
-import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
-import { useMemo } from "react"
 
 type RedeemFormProps = {
   availablePoints: number
@@ -23,6 +23,8 @@ const RedeemForm = ({
   conversionRate = 1 / 5,
 }: RedeemFormProps) => {
   const t = useTranslations("unit.stc-redeem-form")
+  const locale = useLocale()
+  const stc = locale === "ar" ? stcAr : stcEn
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -74,7 +76,10 @@ const RedeemForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <Stack gap="md" p={"xl"}>
-        <img className="h-2.5" src={stc.src} alt="STC" />
+        <div className="shrink-0">
+          <img className="h-4" src={stc.src} alt="STC" />
+        </div>
+
         <Text size="lg" fw={500} ta={"center"}>
           {t("you-have-points", { points: availablePoints.toLocaleString() })}
         </Text>

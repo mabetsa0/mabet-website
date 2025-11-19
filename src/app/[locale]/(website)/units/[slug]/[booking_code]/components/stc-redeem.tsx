@@ -1,13 +1,16 @@
-import { stc } from "@/assets"
-import ModalDrawer from "@/components/common/modal-drawer"
-import { Group, Stack, Text, UnstyledButton } from "@mantine/core"
-import { useTranslations } from "next-intl"
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import { Group, Image, Stack, Text, UnstyledButton } from "@mantine/core"
+import { notifications } from "@mantine/notifications"
+import { stcAr, stcEn } from "@/assets"
+import ModalDrawer from "@/components/common/modal-drawer"
 import PhoneNumberForm from "./phone-number-form"
 import RedeemForm from "./redeem-form"
-import { notifications } from "@mantine/notifications"
 
 export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
+  const locale = useLocale()
+  const stc = locale === "ar" ? stcAr : stcEn
   const [state, setState] = useState(false)
 
   const t = useTranslations("unit.stc-redeem-modal")
@@ -25,10 +28,11 @@ export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
     <>
       <UnstyledButton
         onClick={() => setState(true)}
-        className="border border-[#500e74] rounded-md w-full shadow-lg shadow-[#500e74] p-sm"
+        className="w-full rounded-md border border-[#500e74] p-0.5 shadow-lg shadow-[#500e74]"
       >
         <Group align="center" gap="lg">
-          <img className="h-[20px]" src={stc.src} alt="STC" />
+          <img className="h-4" src={stc.src} alt="STC" />
+
           <Stack gap={"3px"}>
             <Text fw={500} size="sm">
               {t("button")}
@@ -62,8 +66,8 @@ export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
           />
         ) : (
           <Stack gap={"xl"} p={"xl"}>
-            <Stack gap={"xl"}>
-              <img className="h-2" src={stc.src} alt="STC" />
+            <Stack gap={"sm"}>
+              <img className="h-7" src={stc.src} alt="STC" />
               <Text size="md" fw={500} c="#767676" ta={"center"}>
                 {t("description")}
               </Text>

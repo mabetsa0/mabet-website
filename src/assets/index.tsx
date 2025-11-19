@@ -16,12 +16,14 @@ import torism from "./Tourism-Saudi-Arabia.png"
 import applePay from "./apple-pay-icon.svg"
 import applepayIcon from "./apple-pay-icon.svg"
 import appStore from "./appstore.svg"
+import stcAr from "./arabic-stc.svg"
 import arrivalInstructionsImage from "./arrival-instructions-image.svg"
 import bayut from "./bayut.svg"
 import calenderIn from "./calendar-check-in-01.svg"
 import calenderOut from "./calendar-check-out-01.svg"
 import dotBg from "./dot-bg.png"
 import emailIcon from "./email.svg"
+import stcEn from "./english-stc.svg"
 import failPayment from "./fail-payment.svg"
 import fallingStar from "./falling-star.svg"
 import googlePlay from "./googleplay.svg"
@@ -100,7 +102,8 @@ export {
   arrivalInstructionsImage,
   notFound,
   tamara,
-  stc,
+  stcAr,
+  stcEn,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,
