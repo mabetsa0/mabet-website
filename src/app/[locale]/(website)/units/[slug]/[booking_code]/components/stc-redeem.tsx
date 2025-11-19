@@ -47,7 +47,10 @@ export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
         title={t("button")}
         size={"md"}
         state={state}
-        onClose={() => setState(false)}
+        onClose={() => {
+          setState(false)
+          setRedeemForm(false)
+        }}
       >
         {redeemForm ? (
           <RedeemForm

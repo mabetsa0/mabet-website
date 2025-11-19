@@ -76,9 +76,7 @@ const RedeemForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <Stack gap="md" p={"xl"}>
-        <div className="shrink-0">
-          <img className="h-4" src={stc.src} alt="STC" />
-        </div>
+        <img className="h-6" src={stc.src} alt="STC" />
 
         <Text size="lg" fw={500} ta={"center"}>
           {t("you-have-points", { points: availablePoints.toLocaleString() })}

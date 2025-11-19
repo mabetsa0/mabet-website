@@ -1,9 +1,6 @@
-import Mabet from "@/services"
-import { handleFormError } from "@/utils/handle-form-errors"
+import { useLocale, useTranslations } from "next-intl"
 import { Button, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { useLocale, useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import PhoneInput, {
   getCountryCallingCode,
   isPossiblePhoneNumber,
@@ -11,6 +8,8 @@ import PhoneInput, {
 } from "react-phone-number-input"
 import ar from "react-phone-number-input/locale/ar.json"
 import en from "react-phone-number-input/locale/en.json"
+import Mabet from "@/services"
+import { handleFormError } from "@/utils/handle-form-errors"
 
 type Props = {
   title: string
@@ -23,18 +22,17 @@ type Props = {
 const PhoneNumberForm = (props: Props) => {
   const t = useTranslations("auth")
   const locale = useLocale()
-  const { booking_code } = useParams()
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
       phonenumber: "",
       country_code: "966",
     },
-    validate: {
-      phonenumber: (value) => {
-        return isPossiblePhoneNumber(value) ? null : t("invalid-phone-number")
-      },
-    },
+    // validate: {
+    //   phonenumber: (value) => {
+    //     return isPossiblePhoneNumber(value) ? null : t("invalid-phone-number")
+    //   },
+    // },
     transformValues(values) {
       return {
         country_code: "+" + values.country_code,
@@ -90,7 +88,7 @@ const PhoneNumberForm = (props: Props) => {
           {t("continue")}
         </Button>
         {form.errors.root && (
-          <Text className="text-sm " c={"red"} ta={"center"}>
+          <Text className="text-sm" c={"red"} ta={"center"}>
             {form.errors.root}
           </Text>
         )}
