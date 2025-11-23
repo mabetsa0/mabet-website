@@ -17,8 +17,8 @@ import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { BookingDetails } from "../payment-summary"
-import { STCRedeem } from "./stc-redeem"
 import { STC } from "./stc"
+import { STCRedeem } from "./stc-redeem"
 
 const paymentCards = [masterCard, mada, visa]
 const PaymentForm = (booking: BookingDetails) => {
@@ -51,10 +51,7 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
-      <STCRedeem
-        // TODO: get available points from API
-        availablePoints={20}
-      />
+      <STCRedeem />
       {Number(booking.wallet.current_balance) && method === "card" ? (
         <Group wrap="nowrap" align="start" mt={"sm"}>
           <Switch

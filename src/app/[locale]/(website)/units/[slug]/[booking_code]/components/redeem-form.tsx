@@ -3,7 +3,14 @@
 import { useMemo } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
-import { Button, Group, PinInput, Stack, Text } from "@mantine/core"
+import {
+  Button,
+  Group,
+  NumberFormatter,
+  PinInput,
+  Stack,
+  Text,
+} from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { stcAr, stcEn } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
@@ -12,16 +19,11 @@ import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 
 type RedeemFormProps = {
-  availablePoints: number
   onConfirm: (data: { amount: number; otp: string }) => void
-  conversionRate?: number // points to SAR, default 1:1
+  msisdn: string
 }
 
-const RedeemForm = ({
-  availablePoints,
-  onConfirm,
-  conversionRate = 1 / 5,
-}: RedeemFormProps) => {
+const RedeemForm = ({ onConfirm, msisdn }: RedeemFormProps) => {
   const t = useTranslations("unit.stc-redeem-form")
   const locale = useLocale()
   const stc = locale === "ar" ? stcAr : stcEn
@@ -46,13 +48,9 @@ const RedeemForm = ({
   const sanitizedPoints = useMemo(() => {
     const n = typeof amount === "number" ? amount : 0
     if (!Number.isFinite(n) || n < 0) return 0
-    return Math.min(n, Math.max(0, availablePoints))
-  }, [amount, availablePoints])
+    return n
+  }, [amount])
 
-  const sarPreview = useMemo(
-    () => sanitizedPoints * conversionRate,
-    [sanitizedPoints, conversionRate]
-  )
   const isDisabled =
     sanitizedPoints <= 0 || !form.values.otp || form.values.otp.length !== 4
 
@@ -63,6 +61,7 @@ const RedeemForm = ({
         booking_code,
         amount: sanitizedPoints,
         otp: values.otp,
+        msisdn,
       })
       onConfirm({
         amount: sanitizedPoints,
@@ -77,10 +76,6 @@ const RedeemForm = ({
     <form onSubmit={handleSubmit}>
       <Stack gap="md" p={"xl"}>
         <img className="h-6" src={stc.src} alt="STC" />
-
-        <Text size="lg" fw={500} ta={"center"}>
-          {t("you-have-points", { points: availablePoints.toLocaleString() })}
-        </Text>
 
         <Stack gap={4}>
           <Text size="sm" c="#767676">
@@ -101,6 +96,7 @@ const RedeemForm = ({
             {t("points-to-redeem")}
           </Text>
           <CustomNumberInput
+            step={1}
             value={form.values.amount}
             onChange={(value) =>
               form.setFieldValue(
@@ -113,7 +109,6 @@ const RedeemForm = ({
               )
             }
             min={0}
-            max={Math.max(0, availablePoints)}
             thousandSeparator
           />
         </Stack>
@@ -121,7 +116,13 @@ const RedeemForm = ({
         <Group justify="space-between">
           <Text className="text-lg">{t("you-will-get")}</Text>
           <Text className="text-xl font-bold">
-            {sarPreview.toLocaleString()} <RiyalIcon />
+            <NumberFormatter
+              value={sanitizedPoints}
+              thousandSeparator
+              decimalScale={2}
+            />
+
+            <RiyalIcon />
           </Text>
         </Group>
 

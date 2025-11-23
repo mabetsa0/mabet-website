@@ -1,26 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
-import { Group, Image, Stack, Text, UnstyledButton } from "@mantine/core"
+import { Group, Stack, Text, UnstyledButton } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { stcAr, stcEn } from "@/assets"
 import ModalDrawer from "@/components/common/modal-drawer"
 import PhoneNumberForm from "./phone-number-form"
 import RedeemForm from "./redeem-form"
 
-export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
+export const STCRedeem = () => {
   const locale = useLocale()
   const stc = locale === "ar" ? stcAr : stcEn
   const [state, setState] = useState(false)
 
   const t = useTranslations("unit.stc-redeem-modal")
-
+  const [phoneNumber, setPhoneNumber] = useState<string>("")
   const [redeemForm, setRedeemForm] = useState(false)
   const onSubmit = async (data: {
     country_code: string
     phonenumber: string
   }) => {
     console.log("🚀 ~ onSubmit ~ data:", data)
+    setPhoneNumber(data.phonenumber)
     setRedeemForm(true)
   }
 
@@ -54,7 +55,7 @@ export const STCRedeem = ({ availablePoints }: { availablePoints: number }) => {
       >
         {redeemForm ? (
           <RedeemForm
-            availablePoints={availablePoints}
+            msisdn={phoneNumber}
             onConfirm={(data) => {
               setRedeemForm(false)
               setState(false)
