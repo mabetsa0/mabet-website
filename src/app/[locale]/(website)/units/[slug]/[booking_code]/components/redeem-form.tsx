@@ -35,7 +35,6 @@ const RedeemForm = () => {
   const locale = useLocale()
   const stc = locale === "ar" ? stcAr : stcEn
   const form = useForm({
-    mode: "uncontrolled",
     initialValues: {
       amount: "" as number | "",
       otp: "",
@@ -122,6 +121,7 @@ const RedeemForm = () => {
             }
             min={0}
             thousandSeparator
+            decimalScale={0}
           />
         </Stack>
 

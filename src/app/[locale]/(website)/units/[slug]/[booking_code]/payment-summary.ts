@@ -42,6 +42,7 @@ export interface BookingDetails {
   discount_text: string
   discount_percent: string
   discount_percent_text: number
+  qitaf_amount: number
   saved_text: string
   additional_receipt_params: unknown[]
   wallet: Wallet

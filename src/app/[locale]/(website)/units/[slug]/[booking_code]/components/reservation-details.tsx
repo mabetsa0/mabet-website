@@ -309,6 +309,16 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                   </Text>
                 </SimpleGrid>
               ) : null}
+              {prices.qitaf_amount > 0 ? (
+                <SimpleGrid cols={2}>
+                  <Text>{t("general.qitaf-amount")}</Text>
+
+                  <Text ta="end" c="red">
+                    - {prices.qitaf_amount}
+                    <RiyalIcon />
+                  </Text>
+                </SimpleGrid>
+              ) : null}
               <SimpleGrid cols={2}>
                 <Text>{t("general.customer-fees")}</Text>
 

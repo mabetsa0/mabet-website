@@ -83,7 +83,8 @@
     "min_stay_warning": "Warning the minimum residence",
     "nights": "nights",
     "date_extended_to": "the reservation has been extended to ",
-    "goToBookings": "Go to bookings"
+    "goToBookings": "Go to bookings",
+    "qitaf-amount": "Amount paied via Qitaf"
   },
   "home": {
     "special-units": {
@@ -374,7 +375,7 @@
     },
     "stc-redeem-form": {
       "you-have-points": "You have {points} points",
-      "points-to-redeem": "Points to redeem",
+      "points-to-redeem": "Amount",
       "you-will-get": "You will get",
       "confirm": "Confirm",
       "otp": "OTP",
