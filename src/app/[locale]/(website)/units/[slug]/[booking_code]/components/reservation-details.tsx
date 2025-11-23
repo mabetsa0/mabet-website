@@ -250,7 +250,6 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
               to: new Date(prices.to),
             }}
             readOnly
-            mode="mobile"
           />
         </Card.Section>
         <Card.Section

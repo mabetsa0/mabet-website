@@ -36,11 +36,9 @@ dayjs.extend(utc)
 const DateSelect = ({
   readOnly,
   initialValues,
-  mode,
 }: {
   readOnly?: boolean
   initialValues?: { from: Date; to: Date }
-  mode: "mobile" | "desktop"
 }) => {
   const unit = useUnitData()
   const ref = useRef<ComponentRef<"div">>(null)

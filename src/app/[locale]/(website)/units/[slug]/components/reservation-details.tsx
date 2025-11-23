@@ -153,7 +153,7 @@ const ReservationDetails = () => {
         pb={12}
         withBorder={!matches}
       >
-        <DateSelect mode="desktop" />
+        <DateSelect />
 
         {status === "error" ? (
           <Stack py={"xs"} justify="center" align="center">
