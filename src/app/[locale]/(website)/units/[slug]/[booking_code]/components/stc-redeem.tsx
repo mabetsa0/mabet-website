@@ -2,9 +2,9 @@
 import { useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { Group, Stack, Text, UnstyledButton } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
 import { stcAr, stcEn } from "@/assets"
 import ModalDrawer from "@/components/common/modal-drawer"
+import { useQitafPhoneNumber } from "../hooks/use-qitaf-phone-number"
 import PhoneNumberForm from "./phone-number-form"
 import RedeemForm from "./redeem-form"
 
@@ -14,15 +14,13 @@ export const STCRedeem = () => {
   const [state, setState] = useState(false)
 
   const t = useTranslations("unit.stc-redeem-modal")
-  const [phoneNumber, setPhoneNumber] = useState<string>("")
-  const [redeemForm, setRedeemForm] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useQitafPhoneNumber()
+
   const onSubmit = async (data: {
     country_code: string
     phonenumber: string
   }) => {
-    console.log("🚀 ~ onSubmit ~ data:", data)
     setPhoneNumber(data.phonenumber)
-    setRedeemForm(true)
   }
 
   return (
@@ -50,24 +48,10 @@ export const STCRedeem = () => {
         state={state}
         onClose={() => {
           setState(false)
-          setRedeemForm(false)
         }}
       >
-        {redeemForm ? (
-          <RedeemForm
-            msisdn={phoneNumber}
-            onConfirm={(data) => {
-              setRedeemForm(false)
-              setState(false)
-              notifications.show({
-                title: t("success-title"),
-                message: t("success-message"),
-                color: "green",
-                withBorder: true,
-                autoClose: 4000,
-              })
-            }}
-          />
+        {phoneNumber ? (
+          <RedeemForm />
         ) : (
           <Stack gap={"xl"} p={"xl"}>
             <Stack gap={"sm"}>

@@ -12,19 +12,26 @@ import {
   Text,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { notifications } from "@mantine/notifications"
+import { parseAsBoolean, useQueryState } from "nuqs"
 import { stcAr, stcEn } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { CustomNumberInput } from "@/components/ui/number-input"
 import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
+import { useQitafPhoneNumber } from "../hooks/use-qitaf-phone-number"
 
-type RedeemFormProps = {
-  onConfirm: (data: { amount: number; otp: string }) => void
-  msisdn: string
-}
-
-const RedeemForm = ({ onConfirm, msisdn }: RedeemFormProps) => {
+const RedeemForm = () => {
   const t = useTranslations("unit.stc-redeem-form")
+  const [phoneNumber, setPhoneNumber] = useQitafPhoneNumber()
+  const [_, setUseQitafPoints] = useQueryState(
+    "use_qitaf_points",
+    parseAsBoolean.withDefault(false)
+  )
+  const changePhoneNumber = () => {
+    setPhoneNumber(null)
+  }
+
   const locale = useLocale()
   const stc = locale === "ar" ? stcAr : stcEn
   const form = useForm({
@@ -51,8 +58,7 @@ const RedeemForm = ({ onConfirm, msisdn }: RedeemFormProps) => {
     return n
   }, [amount])
 
-  const isDisabled =
-    sanitizedPoints <= 0 || !form.values.otp || form.values.otp.length !== 4
+  const isDisabled = sanitizedPoints <= 0 || form.values.otp.length !== 4
 
   const { booking_code } = useParams()
   const handleSubmit = form.onSubmit(async (values) => {
@@ -61,11 +67,17 @@ const RedeemForm = ({ onConfirm, msisdn }: RedeemFormProps) => {
         booking_code,
         amount: sanitizedPoints,
         otp: values.otp,
-        msisdn,
+        msisdn: phoneNumber,
       })
-      onConfirm({
-        amount: sanitizedPoints,
-        otp: values.otp,
+
+      setUseQitafPoints(true)
+
+      notifications.show({
+        title: t("success-title"),
+        message: t("success-message"),
+        color: "green",
+        withBorder: true,
+        autoClose: 4000,
       })
     } catch (error) {
       handleFormError(error, form)
@@ -133,6 +145,9 @@ const RedeemForm = ({ onConfirm, msisdn }: RedeemFormProps) => {
           loading={form.submitting}
         >
           {t("confirm")}
+        </Button>
+        <Button onClick={changePhoneNumber} size="md" variant="white">
+          {t("change-phone-number")}
         </Button>
         {form.errors.root && (
           <Text className="text-sm" c={"red"} ta={"center"}>

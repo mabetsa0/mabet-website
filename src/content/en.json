@@ -380,7 +380,11 @@
       "otp": "OTP",
       "amount": "Amount",
       "invalid-otp": "Invalid OTP",
-      "amount-required": "Amount is required"
+      "amount-required": "Amount is required",
+      "success-title": "Redeemed successfully\t",
+      "success-message": "Your STC points were redeemed and applie…\t",
+      "change-pohne-number": "Change phone number",
+      "change-phone-number": "Change phone number"
     }
   },
   "errors": {

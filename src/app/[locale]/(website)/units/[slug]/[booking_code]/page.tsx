@@ -3,22 +3,19 @@
 import { use, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
-import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs"
 import Footer from "@/components/common/footer"
 import ErrorUI from "@/components/ui/error"
 import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
-import { getIsPrivate } from "@/utils/get-is-private"
 import ImageGallery from "../components/image-gallery"
 import { UnitContextProvider } from "../context/unit-context"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
 import UnitConditions from "./components/unit-conditions"
-import { GetPaymentSummary } from "./get-payment-summary"
+import { usePaymentSummary } from "./hooks/use-payment-summary"
 
 type Props = {
   params: Promise<{
@@ -31,24 +28,8 @@ type Props = {
 const Page = (props: Props) => {
   const params = use(props.params)
   const { isAuthenticated } = useSession()
-  const [{ method, coupon, use_qitaf_points }] = useQueryStates({
-    method: parseAsString.withDefault("card"),
-    coupon: parseAsString.withDefault(""),
-    use_qitaf_points: parseAsBoolean.withDefault(false),
-  })
-  const isPrivate = getIsPrivate(params.slug)
-  const { data, status } = useQuery({
-    enabled: isAuthenticated,
-    queryKey: [params.booking_code, method, coupon, use_qitaf_points],
-    queryFn: () =>
-      GetPaymentSummary(params.booking_code, {
-        payment_method: method,
-        private: isPrivate ? "1" : undefined,
-        coupon: coupon ?? undefined,
-        use_qitaf_points: use_qitaf_points ? "1" : undefined,
-      }),
-    placeholderData: keepPreviousData,
-  })
+
+  const { data, status } = usePaymentSummary(params.booking_code)
   const t = useTranslations()
 
   // handle unauthorized
@@ -59,13 +40,13 @@ const Page = (props: Props) => {
   }
   useEffect(() => {
     if (!isAuthenticated) {
-      Router.replace(`/units/${params.slug}${isPrivate ? "?private=true" : ""}`)
+      Router.replace(`/units/${params.slug}`)
     }
-  }, [isAuthenticated, isPrivate, params.slug])
+  }, [isAuthenticated, params.slug, Router])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
-      <div className="flex min-h-[10vh] items-center justify-center">
+      <div className="flex min-h-[70vh] items-center justify-center">
         <Loader />
       </div>
     )
