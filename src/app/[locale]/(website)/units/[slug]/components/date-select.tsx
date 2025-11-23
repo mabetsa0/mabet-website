@@ -51,7 +51,7 @@ const DateSelect = ({
 
   const [{ from, to }, setDates] = useQueryDates()
 
-  const [{ selectDate }] = useQueryStates({
+  const [{ selectDate }, setSelectDate] = useQueryStates({
     selectDate: parseAsBoolean.withDefault(false),
   })
 
@@ -201,13 +201,13 @@ const DateSelect = ({
           if (value[0] && value[1]) {
             setDates({ from: value[0], to: value[1] })
             console.log({ from: value[0], to: value[1] })
-            console.log("Mode is: " + mode)
           } else if (value[0] && !value[1]) {
             setDates({
               from: value[0],
               to: dayjs(value[0]).add(1, "day").toDate(),
             })
           }
+          setSelectDate({ selectDate: false })
           close()
         }}
         onDismiss={() => {
