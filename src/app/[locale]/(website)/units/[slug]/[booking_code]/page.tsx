@@ -3,7 +3,10 @@
 import { use, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
+import { notifications } from "@mantine/notifications"
+import { useMutation } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
+import { ErrorResponse } from "@/@types/error"
 import Footer from "@/components/common/footer"
 import ErrorUI from "@/components/ui/error"
 import useMdScreen from "@/hooks/use-md-screen"
@@ -11,6 +14,7 @@ import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
 import ImageGallery from "../components/image-gallery"
 import { UnitContextProvider } from "../context/unit-context"
+import { ApproveBooking } from "./approve-booking"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
@@ -43,6 +47,40 @@ const Page = (props: Props) => {
       Router.replace(`/units/${params.slug}`)
     }
   }, [isAuthenticated, params.slug, Router])
+
+  const approvePaymentMutation = useMutation({
+    mutationFn: ApproveBooking,
+    onSuccess(data) {
+      Router.replace(data)
+    },
+    onError(error) {
+      notifications.show({
+        title: t("generla.failer"),
+        message:
+          (error.response?.data as ErrorResponse).errors?.[0] ||
+          (error.response?.data as ErrorResponse).message ||
+          error.message,
+        color: "red",
+      })
+    },
+  })
+  useEffect(() => {
+    if (data?.booking_details.to_pay.can_be_approved) {
+      Router.replace(`/units/${params.slug}`)
+    }
+  }, [data?.booking_details.to_pay.can_be_approved, params.slug, Router])
+
+  useEffect(() => {
+    if (data?.booking_details.to_pay.can_be_approved) {
+      approvePaymentMutation.mutate({
+        bookingCode: params.booking_code,
+      })
+    }
+  }, [
+    data?.booking_details.to_pay.can_be_approved,
+    params.booking_code,
+    approvePaymentMutation,
+  ])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
