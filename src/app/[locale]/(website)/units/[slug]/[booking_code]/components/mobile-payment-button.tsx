@@ -29,6 +29,7 @@ import useMdScreen from "@/hooks/use-md-screen"
 import { useRouter } from "@/lib/i18n/navigation"
 import Mabet from "@/services"
 import { getIsPrivate } from "@/utils/get-is-private"
+import { ApproveBooking } from "../approve-booking"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
@@ -98,6 +99,12 @@ const MobilePaymentButton = ({
         args.payment_option === "full" &&
         Number(prices.wallet.current_balance) > Number(prices.full_payment)
 
+      if (prices.to_pay.can_be_approved) {
+        await ApproveBooking({
+          bookingCode: params.booking_code,
+        })
+        return "/payment?payment_status=success&id=" + params.booking_code
+      }
       if (args.use_wallet === "1" && (canFullfilPartial || canFulfillFull)) {
         await Mabet.post<PaymentResponse>(
           `/payment/${params.booking_code}/approve`,

@@ -31,6 +31,7 @@ import Mabet from "@/services"
 import { getIsPrivate } from "@/utils/get-is-private"
 import DateSelect from "../../components/date-select"
 import { useUnitData } from "../../context/unit-context"
+import { ApproveBooking } from "../approve-booking"
 import { GetPaymentSummary } from "../get-payment-summary"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
@@ -70,6 +71,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const [error, setError] = useState("")
   const [madfu, setMadfu] = useState("")
   const Router = useRouter()
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (args: {
       payment_method: string
@@ -92,6 +94,12 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         args.payment_option === "full" &&
         Number(prices.wallet.current_balance) > Number(prices.full_payment)
 
+      if (prices.to_pay.can_be_approved) {
+        await ApproveBooking({
+          bookingCode: params.booking_code,
+        })
+        return "/payment?payment_status=success&id=" + params.booking_code
+      }
       if (args.use_wallet === "1" && (canFullfilPartial || canFulfillFull)) {
         await Mabet.post<PaymentResponse>(
           `/payment/${params.booking_code}/approve`,

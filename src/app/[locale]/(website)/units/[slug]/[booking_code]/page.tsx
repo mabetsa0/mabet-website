@@ -48,36 +48,12 @@ const Page = (props: Props) => {
     }
   }, [isAuthenticated, params.slug, Router])
 
-  const approvePaymentMutation = useMutation({
-    mutationFn: ApproveBooking,
-    onSuccess(data) {
-      Router.replace(data)
-    },
-    onError(error) {
-      notifications.show({
-        title: t("generla.failer"),
-        message:
-          (error.response?.data as ErrorResponse).errors?.[0] ||
-          (error.response?.data as ErrorResponse).message ||
-          error.message,
-        color: "red",
-      })
-    },
-  })
   useEffect(() => {
     if (data?.booking_details.to_pay.can_be_approved) {
       Router.replace(`/units/${params.slug}`)
     }
   }, [data?.booking_details.to_pay.can_be_approved, params.slug, Router])
 
-  useEffect(() => {
-    if (data?.booking_details.to_pay.can_be_approved) {
-      approvePaymentMutation.mutate({
-        bookingCode: params.booking_code,
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.booking_details.to_pay.can_be_approved, params.booking_code])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
