@@ -51,7 +51,7 @@ export const STCRedeem = () => {
         }}
       >
         {phoneNumber ? (
-          <RedeemForm />
+          <RedeemForm onSuccess={() => setState(false)} />
         ) : (
           <Stack gap={"xl"} p={"xl"}>
             <Stack gap={"sm"}>

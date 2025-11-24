@@ -21,7 +21,7 @@ import Mabet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 import { useQitafPhoneNumber } from "../hooks/use-qitaf-phone-number"
 
-const RedeemForm = () => {
+const RedeemForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const t = useTranslations("unit.stc-redeem-form")
   const [phoneNumber, setPhoneNumber] = useQitafPhoneNumber()
   const [_, setUseQitafPoints] = useQueryState(
@@ -78,6 +78,7 @@ const RedeemForm = () => {
         withBorder: true,
         autoClose: 4000,
       })
+      onSuccess?.()
     } catch (error) {
       handleFormError(error, form)
     }
