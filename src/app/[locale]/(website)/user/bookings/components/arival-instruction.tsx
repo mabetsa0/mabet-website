@@ -1,6 +1,6 @@
-import React from "react"
+/* eslint-disable @next/next/no-img-element */
 import { Card, Group, Image, Stack, Text } from "@mantine/core"
-import { heroBackground, logoWithoutWindows, mabetLogo } from "@/assets"
+import { heroBackground, mabetLogo } from "@/assets"
 import { Booking } from "../@types"
 
 type Props = { instructions: Booking["arrival_instructions"] }

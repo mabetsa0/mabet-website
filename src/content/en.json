@@ -576,7 +576,8 @@
     "invoice": "View invoice",
     "conditions": "Reservation Conditions ",
     "cancel-policy": "Cancellation and retrieval policy",
-    "support": "Support and protect your rights"
+    "support": "Support and protect your rights",
+    "qitaf-amount": "Paied via Qitaf"
   },
   "wallet": {
     "card": {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import {
@@ -170,6 +171,14 @@ const page = async (props: Props) => {
               <p>{t("nights-count")}</p>
               <span>{booking.duration}</span>
             </div>
+            {booking.qitaf_amount > 0 && (
+              <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
+                <p>{t("qitaf-amount")}</p>
+                <span>
+                  {booking.qitaf_amount} <RiyalIcon />
+                </span>
+              </div>
+            )}
             <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
               <p>{t("customer-fees")}</p>
               <span>{booking.customer_fees_text}</span>

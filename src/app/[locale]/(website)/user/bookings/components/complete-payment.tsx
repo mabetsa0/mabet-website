@@ -8,13 +8,12 @@ import {
   Divider,
   Group,
   Radio,
-  RadioGroup,
   Stack,
   Switch,
   Text,
 } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import { parseAsStringLiteral, useQueryStates } from "nuqs"
 import { ErrorResponse } from "@/@types/error"
 import { applePay, mada, masterCard, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
