@@ -72,9 +72,9 @@ const Page = (props: Props) => {
 
   useEffect(() => {
     if (data?.booking_details.to_pay.can_be_approved) {
-      approvePaymentMutation.mutate({
-        bookingCode: params.booking_code,
-      })
+      // approvePaymentMutation.mutate({
+      //   bookingCode: params.booking_code,
+      // })
     }
   }, [
     data?.booking_details.to_pay.can_be_approved,
