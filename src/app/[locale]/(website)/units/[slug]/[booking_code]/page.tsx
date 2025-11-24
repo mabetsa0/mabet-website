@@ -72,15 +72,12 @@ const Page = (props: Props) => {
 
   useEffect(() => {
     if (data?.booking_details.to_pay.can_be_approved) {
-      // approvePaymentMutation.mutate({
-      //   bookingCode: params.booking_code,
-      // })
+      approvePaymentMutation.mutate({
+        bookingCode: params.booking_code,
+      })
     }
-  }, [
-    data?.booking_details.to_pay.can_be_approved,
-    params.booking_code,
-    approvePaymentMutation,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.booking_details.to_pay.can_be_approved, params.booking_code])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
