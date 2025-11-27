@@ -9,7 +9,7 @@ const Page = () => {
   const contactInfo = [
     {
       icon: Smartphone,
-      content: "+966-567570014",
+      content: "+966-555781781",
       type: "phone",
     },
     {

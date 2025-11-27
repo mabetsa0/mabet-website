@@ -153,8 +153,8 @@ const Footer = () => {
             <a href="mailto:help@mabet.com.sa" className="ltr rtl:text-right">
               help@mabet.com.sa
             </a>
-            <a href="tel:+966567570014" dir="ltr" className="rtl:text-right">
-              +966-567570014
+            <a href="tel:+966555781781" dir="ltr" className="rtl:text-right">
+              +966-555781781
             </a>
             <Text>{t("time")}</Text>
           </Stack>
