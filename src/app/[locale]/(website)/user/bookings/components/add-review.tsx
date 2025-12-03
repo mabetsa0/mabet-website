@@ -1,10 +1,8 @@
 "use client"
 
-import React, { useState } from "react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { Box, Button, Stack, Text, Textarea } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { notifications } from "@mantine/notifications"
 import { useQueryClient } from "@tanstack/react-query"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { CustomNumberInput } from "@/components/ui/number-input"

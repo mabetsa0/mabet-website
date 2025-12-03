@@ -15,7 +15,6 @@ import {
 } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import {
-  Circle,
   Clock,
   Gift,
   HandCoins,
@@ -25,7 +24,7 @@ import {
   QrCode,
   Wallet,
 } from "lucide-react"
-import { arrivalInstructionsImage, logo } from "@/assets"
+import { arrivalInstructionsImage } from "@/assets"
 import ModalDrawer from "@/components/common/modal-drawer"
 import { RiyalIcon } from "@/components/icons"
 import { cn } from "@/lib/cn"

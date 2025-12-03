@@ -358,7 +358,9 @@
     "mobile-reservation-details": "Reservation details",
     "invalid-coupon": "Invalid Coupon",
     "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
-    "payment-accept-conditions-description": "Click to see the requirements"
+    "payment-accept-conditions-description": "Click to see the requirements",
+    "partner-data": "About the Host",
+    "view-profile": "View profile"
   },
   "errors": {
     "unknown-error": "Unknown error"
@@ -568,5 +570,17 @@
       "success-message": "Amount has been added to your wallet successfully"
     }
   },
-  "change-search-dates": "Choose different dates"
+  "change-search-dates": "Choose different dates",
+  "host-page": {
+    "title": "About the host",
+    "share-text": "Check out {hostName}'s properties on Mabet!",
+    "rating": "rating",
+    "average-response-speed": "Average response speed",
+    "host-since": "Host since",
+    "number-of-units": "Number of units",
+    "units-title": "Host properties",
+    "units-description": "Explore all properties from this host",
+    "reviews-title": "Ratings",
+    "reviews-description": "Host Ratings"
+  }
 }

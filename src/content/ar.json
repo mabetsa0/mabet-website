@@ -149,7 +149,7 @@
     "apply-filters": "تطبيق الفلترة",
     "clear": "مسح",
     "arrange": "ترتيب حسب",
-    "share": "مشاركة العقار",
+    "share": "مشاركة ",
     "show-all-images": "جميع الصور",
     "show-video": "عرض الفيديو",
     "night": "ليلة",
@@ -357,7 +357,9 @@
     "mobile-reservation-details": "ملخص الحجز",
     "invalid-coupon": "كود خصم غير صالح",
     "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
-    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  "
+    "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  ",
+    "partner-data": "عن المضيف",
+    "view-profile": "عرض صفحة المضيف"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
@@ -563,5 +565,17 @@
       "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
   },
-  "change-search-dates": "اختيار تواريخ اخرى"
+  "change-search-dates": "اختيار تواريخ اخرى",
+  "host-page": {
+    "title": "عن المضيف",
+    "share-text": "اكتشف عقارات {hostName} على مبيت!",
+    "rating": "تقييم",
+    "average-response-speed": "متوسط سرعة الرد",
+    "host-since": "منذ",
+    "number-of-units": "عدد الوحدات",
+    "units-title": "عقارات المضيف",
+    "units-description": "استكشف جميع العقارات من هذا المضيف",
+    "reviews-title": "التقييمات",
+    "reviews-description": "تقييمات المضيف "
+  }
 }

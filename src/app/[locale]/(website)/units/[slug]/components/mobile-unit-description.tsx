@@ -10,6 +10,7 @@ import useCheckAvailability from "../hooks/use-check-availability"
 import AboutUnit from "./about-unit"
 import Features from "./features"
 import ReservationDetails from "./reservation-details"
+import UnitPartnerData from "./unit-partner-data"
 
 const MobileUnitDescription = () => {
   const unit = useUnitData()
@@ -104,6 +105,9 @@ const MobileUnitDescription = () => {
           </Group>
         </Stack>
       </Stack>
+      <Space />
+      <Divider />
+      <UnitPartnerData />
       <Divider />
       <Space />
       <Features />
