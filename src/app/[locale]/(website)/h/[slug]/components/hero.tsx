@@ -1,5 +1,5 @@
-import { getLocale, getTranslations } from "next-intl/server"
-import { Group, Stack, Text, Image, Avatar } from "@mantine/core"
+import { getTranslations } from "next-intl/server"
+import { Avatar, Group, Image, Stack, Text } from "@mantine/core"
 import { Building2, Calendar, MessageCircle, Star } from "lucide-react"
 import { Host } from "@/@types/hot-response"
 import ShareButton from "./share-button"
@@ -10,7 +10,6 @@ type Props = {
 
 export default async function Hero({ host }: Props) {
   const t = await getTranslations("host-page")
-  const locale = await getLocale()
 
   return (
     <section>
