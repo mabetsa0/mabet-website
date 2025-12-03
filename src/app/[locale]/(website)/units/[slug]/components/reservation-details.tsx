@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import {
   Badge,
   Button,
@@ -9,113 +8,33 @@ import {
   Divider,
   Group,
   Loader,
+  NumberFormatter,
   SimpleGrid,
   Space,
   Stack,
   Text,
   Title,
 } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
-import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import dayjs from "dayjs"
 import { X } from "lucide-react"
-import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { ErrorResponse } from "@/@types/error"
 import { sharpShape } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
-import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
-import { useRouter } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
-import { getIsPrivate } from "@/utils/get-is-private"
 import { useUnitData } from "../context/unit-context"
-import { createBooking } from "../create-booking"
-import { GetUnitAvailability } from "../get-unit-availability"
+import useCheckAvailability from "../hooks/use-check-availability"
+import useCreateBookingMutation from "../hooks/use-create-booking-mutation"
 import DateSelect from "./date-select"
 
 const ReservationDetails = () => {
-  const { isAuthenticated, session } = useSession()
-  const [dates] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-    },
-    { history: "replace" }
-  )
-  const params = useParams() as { slug: string }
-  const isPrivate = getIsPrivate(params.slug)
-
   const unit = useUnitData()
 
-  const {
-    data: prices,
-    status,
-    error,
-  } = useQuery({
-    queryKey: [
-      "availability",
-      unit.slug,
-      dates.from.toDateString(),
-      dates.to.toDateString(),
-    ],
-    queryFn: async () => {
-      console.log("Fetching availability with:", unit.slug, dates)
-
-      return await GetUnitAvailability({
-        id: unit.id,
-        params: {
-          from: dayjs(dates.from).format("YYYY-MM-DD"),
-          to: dayjs(dates.to).format("YYYY-MM-DD"),
-        },
-      })
-    },
-    retry: false,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  })
+  const { data: prices, status, error } = useCheckAvailability(unit)
 
   const t = useTranslations()
-  const auth = useAuthModal()
 
-  // handle create booking
-  const Router = useRouter()
-  const createBookingMutation = useMutation({
-    mutationFn: createBooking,
-
-    onError(error) {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        notifications.show({
-          title: t("generla.failer"),
-          message:
-            (error.response.data as ErrorResponse).message ||
-            (error.response.data as ErrorResponse).errors?.[0] ||
-            error.message,
-          color: "red",
-        })
-      }
-    },
-    onSuccess(data) {
-      Router.push({
-        pathname: `/units/${unit.id}/${data}`,
-        query: {
-          ...(isPrivate ? { private: true } : {}),
-          ...(session?.user.nafath_validated ? {} : { nafath: true }),
-        },
-      })
-    },
-  })
-  const handleCreateBooking = () => {
-    if (!isAuthenticated) {
-      return auth[1].onOpen()
-    }
-    createBookingMutation.mutate({
-      from: dayjs(dates.from).format("YYYY-MM-DD"),
-      to: dayjs(dates.to).format("YYYY-MM-DD"),
-      unitId: unit.id,
-      private: isPrivate ? "1" : undefined,
-    })
-  }
+  const { handleCreateBooking, ...createBookingMutation } =
+    useCreateBookingMutation()
 
   const matches = useMdScreen()
 
@@ -176,14 +95,22 @@ const ReservationDetails = () => {
             <div>
               {prices?.discount ? (
                 <Text className="text-[12px] text-[#767676] line-through">
-                  {" "}
-                  {Number(prices.sub_price)} <RiyalIcon />
+                  <NumberFormatter
+                    value={prices.sub_price}
+                    thousandSeparator
+                    decimalScale={2}
+                  />{" "}
+                  <RiyalIcon />
                   <span className="text-[10px]">/{prices.duration_text}</span>
                 </Text>
               ) : null}
               <Group gap={"4"}>
                 <Title order={5} c={"#188078"}>
-                  {prices?.price_plain}
+                  <NumberFormatter
+                    value={prices?.price_plain}
+                    thousandSeparator
+                    decimalScale={2}
+                  />
                   <RiyalIcon />
                 </Title>
                 <Text className="text-sm text-[#767676]">
@@ -226,9 +153,9 @@ const ReservationDetails = () => {
         pb={12}
         withBorder={!matches}
       >
-        <DateSelect mode="desktop" />
+        <DateSelect />
 
-        {status === "error" && matches ? (
+        {status === "error" ? (
           <Stack py={"xs"} justify="center" align="center">
             <Text c={"red"}>
               {axios.isAxiosError(error)
@@ -253,11 +180,16 @@ const ReservationDetails = () => {
                 {prices.duration_text}{" "}
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
-                  {prices.price_plain} <RiyalIcon />
+                  <NumberFormatter
+                    value={prices.price_plain}
+                    thousandSeparator
+                    decimalScale={2}
+                  />
+                  <RiyalIcon />
                 </Text>
               </Group>
-              <Text ta="end" c="#767676">
-                <span className="text-primary">{prices.total_plain}</span>
+              <Text ta="end" c="primary">
+                <NumberFormatter thousandSeparator value={prices.total_plain} />
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -279,24 +211,24 @@ const ReservationDetails = () => {
             ) : null}
 
             {Array.isArray(prices?.additionals) &&
-              (
-                prices.additionals as {
-                  label: string
-                  value: string
-                  color?: string
-                }[]
-              )
+              prices.additionals
                 .filter((a) => a?.value && String(a.value).trim() !== "")
                 .map((a, i) => {
                   const color = a.color || "#E8123D"
                   return (
                     <SimpleGrid key={i} cols={2}>
                       <Group gap={3}>
-                        <Text fw={500}>{a.label}</Text>
+                        <Text fw={500} c={color}>
+                          {a.label}
+                        </Text>
                       </Group>
 
-                      <Text ta="end" style={{ color }}>
-                        - {a.value} <RiyalIcon />
+                      <Text ta="end" c={color}>
+                        -{" "}
+                        {typeof a.value === "string"
+                          ? a.value.replace("SAR", "")
+                          : a.value}{" "}
+                        <RiyalIcon />
                       </Text>
                     </SimpleGrid>
                   )
@@ -305,9 +237,13 @@ const ReservationDetails = () => {
               <Text>{t("general.customer-fees")}</Text>
 
               <Text ta="end" c="#767676">
-                {(
-                  parseFloat(prices.customer_fees) + prices.customer_taxes
-                ).toFixed(2)}
+                <NumberFormatter
+                  thousandSeparator
+                  value={
+                    parseFloat(prices.customer_fees) + prices.customer_taxes
+                  }
+                  decimalScale={2}
+                />{" "}
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -316,7 +252,11 @@ const ReservationDetails = () => {
               <Text fw={700}>{t("general.total-price")}</Text>
 
               <Text ta="end" fw={700}>
-                {prices.full_payment}
+                <NumberFormatter
+                  thousandSeparator
+                  value={prices.full_payment}
+                  decimalScale={2}
+                />{" "}
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -327,12 +267,21 @@ const ReservationDetails = () => {
               loading={createBookingMutation.isPending}
               onClick={handleCreateBooking}
             >
-              {t("unit.create-booking", { value: prices.full_payment })}
+              {t("unit.create-booking", {
+                value: prices.full_payment_text
+                  .replace("SAR", "")
+                  .replace("ر.س", ""),
+              })}{" "}
               <RiyalIcon />
             </Button>
             <Text c={"#767676"} ta={"center"}>
-              {t("unit.down-payment")} {Number(prices.down_payment)?.toFixed(2)}{" "}
-              <RiyalIcon />{" "}
+              {t("unit.down-payment")}{" "}
+              <NumberFormatter
+                thousandSeparator
+                value={prices.down_payment}
+                decimalScale={2}
+              />{" "}
+              <RiyalIcon />
             </Text>
           </Stack>
           {createBookingMutation.error ? (

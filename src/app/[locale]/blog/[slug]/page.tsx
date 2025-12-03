@@ -20,7 +20,8 @@ import { SEO } from "@/services/get-seo"
 type Props = {
   params: Promise<{ slug: string }>
 }
-
+export const dynamic = "force-static"
+export const revalidate = 1000
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const slug = (await params).slug

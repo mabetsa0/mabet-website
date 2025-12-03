@@ -18,26 +18,27 @@ import { notifications } from "@mantine/notifications"
 import dayjs from "dayjs"
 import durations from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
 import { Minus } from "lucide-react"
-import { parseAsBoolean, parseAsIsoDate, useQueryStates } from "nuqs"
+import { parseAsBoolean, useQueryStates } from "nuqs"
 import { calenderIn, calenderOut } from "@/assets"
 import useMdScreen from "@/hooks/use-md-screen"
 import { cn } from "@/lib/cn"
 import { getDaysBetweenDates } from "@/utils/get-days-between-dates"
 import { useUnitData } from "../context/unit-context"
 import useBusyDays from "../hooks/use-busy-days"
+import { useQueryDates } from "../hooks/use-query-dates"
 
 dayjs.extend(durations)
 dayjs.extend(relativeTime)
+dayjs.extend(utc)
 
 const DateSelect = ({
   readOnly,
   initialValues,
-  mode,
 }: {
   readOnly?: boolean
   initialValues?: { from: Date; to: Date }
-  mode: "mobile" | "desktop"
 }) => {
   const unit = useUnitData()
   const ref = useRef<ComponentRef<"div">>(null)
@@ -46,23 +47,19 @@ const DateSelect = ({
 
   const t = useTranslations()
 
-  const [{ from, to, selectDate }, setDates] = useQueryStates(
-    {
-      from: parseAsIsoDate.withDefault(dayjs().toDate()),
-      to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-      selectDate: parseAsBoolean.withDefault(false),
-    },
-    {
-      scroll: false,
-      history: "replace",
-    }
-  )
+  const [{ from, to }, setDates] = useQueryDates()
+
+  const [{ selectDate }, setSelectDate] = useQueryStates({
+    selectDate: parseAsBoolean.withDefault(false),
+  })
+
   useEffect(() => {
     if (selectDate) {
       open()
       ref.current?.scrollIntoView({ behavior: "smooth" })
     }
-  }, [selectDate])
+  }, [selectDate, open])
+
   const [value, setValue] = useState<[Date | null, Date | null]>(
     initialValues ? [initialValues?.from, initialValues?.to] : [from, to]
   )
@@ -79,6 +76,16 @@ const DateSelect = ({
     const __date = dayjs(date).format("YYYY-MM-DD")
     const isBusyDay = busyDays.includes(__date)
 
+    if (isBusyDay) {
+      return (
+        <div className={cn("!opacity-85")}>
+          {date.getDate()}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Minus className="text-red-600" size={32} strokeWidth={1} />
+          </div>
+        </div>
+      )
+    }
     const isFeaturedDate = featuredDates.filter((day) => day.date === __date)[0]
     if (isFeaturedDate)
       return (
@@ -87,16 +94,7 @@ const DateSelect = ({
         </Indicator>
       )
 
-    return (
-      <div className={cn(isBusyDay ? "!opacity-85" : "")}>
-        {date.getDate()}
-        {isBusyDay ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Minus className="text-red-600" size={32} strokeWidth={1} />
-          </div>
-        ) : null}
-      </div>
-    )
+    return <div>{date.getDate()}</div>
   }
   const matches = useMdScreen()
 
@@ -117,40 +115,20 @@ const DateSelect = ({
       return
     }
 
-    const start = dayjs(values[0])
-    const end = dayjs(values[1])
+    const start = dayjs.utc(values[0])
+    const end = dayjs.utc(values[1])
     const duration = end.diff(start, "day")
 
-    // اجمع الأيام داخل الفترة
-    const daysInRange: string[] = []
-    for (let i = 0; i <= duration; i++) {
-      daysInRange.push(start.add(i, "day").format("YYYY-MM-DD"))
-    }
-
-    // تحقق من الأيام المميزة داخل الفترة
-    const matchedFeatured = featuredDates.filter((f) =>
-      daysInRange.includes(f.date)
+    // check if the start date is a featured date
+    const matchedFeatured = featuredDates.find(
+      (f) => f.date === start.format("YYYY-MM-DD")
     )
 
-    if (matchedFeatured.length > 0) {
-      // احصل على أعلى min_stay
-      const maxMinStay = Math.max(...matchedFeatured.map((f) => f.min_stay))
-      console.log("🚀 ~ handleDateChange ~ maxMinStay:", maxMinStay)
-
-      // لو المدة أقل من المطلوب، عدّل النهاية
-      if (duration < maxMinStay) {
-        const newEndDate = start.add(maxMinStay, "day").toDate()
-
-        notifications.show({
-          color: "orange",
-          title: t("general.warning"),
-          message:
-            `${t("general.min_stay_warning")}: ${maxMinStay} ${t("general.nights")}. ` +
-            t("general.date_extended_to") +
-            dayjs(newEndDate).format("YYYY-MM-DD"),
-        })
-
-        setValue([start.toDate(), newEndDate])
+    if (matchedFeatured) {
+      const minStay = matchedFeatured.min_stay
+      if (duration < minStay) {
+        const newEndDate = start.add(minStay, "day").toDate()
+        setValue([new Date(values[0]!), newEndDate])
         return
       }
     }
@@ -221,13 +199,13 @@ const DateSelect = ({
           if (value[0] && value[1]) {
             setDates({ from: value[0], to: value[1] })
             console.log({ from: value[0], to: value[1] })
-            console.log("Mode is: " + mode)
           } else if (value[0] && !value[1]) {
             setDates({
               from: value[0],
               to: dayjs(value[0]).add(1, "day").toDate(),
             })
           }
+          setSelectDate({ selectDate: false })
           close()
         }}
         onDismiss={() => {
@@ -287,7 +265,6 @@ const DateSelect = ({
           </Group>
         </Popover.Target>
         <Popover.Dropdown>
-          {/* <div > */}
           <DatePicker
             numberOfColumns={matches ? 1 : 2}
             hideOutsideDates
@@ -296,14 +273,9 @@ const DateSelect = ({
             classNames={{
               day: " relative ",
             }}
-            // ref={dropdownRef}
-
             onDateChange={(date) => handleStartDateChange(new Date(date))}
             value={value}
             onChange={handleDateChange}
-            // excludeDate={(date) =>
-            //   busyDays.includes(dayjs(date).format("YYYY-MM-DD"))
-            // }
             renderDay={(date) => renderDay(new Date(date))}
           />
           <Group justify="end" mt={"sm"}>

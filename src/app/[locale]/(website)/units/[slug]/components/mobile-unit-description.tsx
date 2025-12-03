@@ -2,14 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { useTranslations } from "next-intl"
 import { Badge, Divider, Group, Space, Stack, Text } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
-import dayjs from "dayjs"
 import { QrCode } from "lucide-react"
-import { parseAsIsoDate, useQueryStates } from "nuqs"
 import { mabetLogo, madfu, sharpShape, tabby, torism } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useUnitData } from "../context/unit-context"
-import { GetUnitAvailability } from "../get-unit-availability"
+import useCheckAvailability from "../hooks/use-check-availability"
 import AboutUnit from "./about-unit"
 import Features from "./features"
 import ReservationDetails from "./reservation-details"
@@ -18,31 +15,7 @@ import UnitPartnerData from "./unit-partner-data"
 const MobileUnitDescription = () => {
   const unit = useUnitData()
   const t = useTranslations()
-  const [dates] = useQueryStates({
-    from: parseAsIsoDate.withDefault(dayjs().toDate()),
-    to: parseAsIsoDate.withDefault(dayjs().add(1, "days").toDate()),
-  })
-
-  const { data: prices } = useQuery({
-    queryKey: [
-      "availability",
-      unit.slug,
-      dates.from.toDateString(),
-      dates.to.toDateString(),
-    ],
-    queryFn: async () => {
-      return await GetUnitAvailability({
-        id: unit.id,
-        params: {
-          from: dayjs(dates.from).format("YYYY-MM-DD"),
-          to: dayjs(dates.to).format("YYYY-MM-DD"),
-        },
-      })
-    },
-    retry: false,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  })
+  const { data: prices } = useCheckAvailability(unit)
   return (
     <Stack hiddenFrom="md" className="w-full">
       <Group

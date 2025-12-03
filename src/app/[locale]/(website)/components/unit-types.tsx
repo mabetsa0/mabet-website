@@ -40,11 +40,8 @@ const UnitTypes = async () => {
                     }
                     alt={type.name}
                   />
-                  <Text fz={"sm"} fw={700} className="">
+                  <Text fz={"sm"} fw={700} className="whitespace-break-spaces">
                     {type.name}
-                  </Text>
-                  <Text ta={"center"} size="sm" c={"gray"}>
-                    {type.units_count_text}
                   </Text>
                 </Stack>
               </Link>

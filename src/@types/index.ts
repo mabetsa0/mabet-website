@@ -99,7 +99,11 @@ export interface Prices {
   profit: number
   profit_taxes: number
   profit_percentage: number
-  additionals: unknown[]
+  additionals: {
+    label: string
+    value: string
+    color?: string
+  }[]
   timer: number | null
 }
 
