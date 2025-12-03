@@ -570,5 +570,13 @@
       "success-message": "Amount has been added to your wallet successfully"
     }
   },
-  "change-search-dates": "Choose different dates"
+  "change-search-dates": "Choose different dates",
+  "host-page": {
+    "title": "About the host",
+    "share-text": "Check out {hostName}'s properties on Mabet!",
+    "rating": "rating",
+    "average-response-speed": "Average response speed",
+    "host-since": "Host since",
+    "number-of-units": "Number of units"
+  }
 }

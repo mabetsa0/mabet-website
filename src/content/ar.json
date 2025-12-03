@@ -149,7 +149,7 @@
     "apply-filters": "تطبيق الفلترة",
     "clear": "مسح",
     "arrange": "ترتيب حسب",
-    "share": "مشاركة العقار",
+    "share": "مشاركة ",
     "show-all-images": "جميع الصور",
     "show-video": "عرض الفيديو",
     "night": "ليلة",
@@ -565,5 +565,13 @@
       "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
   },
-  "change-search-dates": "اختيار تواريخ اخرى"
+  "change-search-dates": "اختيار تواريخ اخرى",
+  "host-page": {
+    "title": "عن المضيف",
+    "share-text": "اكتشف عقارات {hostName} على مبيت!",
+    "rating": "تقييم",
+    "average-response-speed": "متوسط سرعة الرد",
+    "host-since": "منذ",
+    "number-of-units": "عدد الوحدات"
+  }
 }
