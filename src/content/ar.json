@@ -574,6 +574,8 @@
     "host-since": "منذ",
     "number-of-units": "عدد الوحدات",
     "units-title": "عقارات المضيف",
-    "units-description": "استكشف جميع العقارات من هذا المضيف"
+    "units-description": "استكشف جميع العقارات من هذا المضيف",
+    "reviews-title": "التقييمات",
+    "reviews-description": "تقييمات المضيف "
   }
 }

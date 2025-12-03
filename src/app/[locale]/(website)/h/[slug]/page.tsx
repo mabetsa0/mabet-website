@@ -1,7 +1,9 @@
 import React from "react"
 import { HostResponse } from "@/@types/hot-response"
 import Mabeet from "@/api"
+import Footer from "@/components/common/footer"
 import Hero from "./components/hero"
+import Reviews from "./components/reviews"
 import Units from "./components/units"
 
 type Props = {
@@ -20,6 +22,8 @@ const Page = async (props: Props) => {
     <>
       <Hero host={host} />
       <Units units={host.units} />
+      <Reviews unitId={slug} />
+      <Footer />
     </>
   )
 }
