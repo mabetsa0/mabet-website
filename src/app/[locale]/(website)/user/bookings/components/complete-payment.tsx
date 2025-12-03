@@ -8,13 +8,12 @@ import {
   Divider,
   Group,
   Radio,
-  RadioGroup,
   Stack,
   Switch,
   Text,
 } from "@mantine/core"
 import { useMutation } from "@tanstack/react-query"
-import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
+import { parseAsStringLiteral, useQueryStates } from "nuqs"
 import { ErrorResponse } from "@/@types/error"
 import { applePay, mada, masterCard, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
@@ -31,7 +30,7 @@ interface PaymentResponse {
 const paymentCards = [masterCard, mada, visa]
 const CompletePayment = (booking: Booking) => {
   const [{ use_wallet }, set] = useQueryStates({
-    use_wallet: parseAsStringLiteral(["0"]),
+    use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
   })
   const t = useTranslations("payment-form")
   const [error, setError] = useState("")

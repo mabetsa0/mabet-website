@@ -2,7 +2,7 @@
 import { Suspense } from "react"
 import dynamicImport from "next/dynamic"
 import { notFound } from "next/navigation"
-import { Box, Loader, Stack } from "@mantine/core"
+import { Box, Stack } from "@mantine/core"
 import axios from "axios"
 import Footer from "@/components/common/footer"
 import DataLayer from "@/components/data-layer"

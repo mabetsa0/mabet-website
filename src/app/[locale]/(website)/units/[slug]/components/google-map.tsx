@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useMemo, useEffect, useState } from "react"
+import React, { useMemo } from "react"
 import { useTranslations } from "next-intl"
-import { Divider, Loader, Stack, Text, Space } from "@mantine/core"
+import { Divider, Loader, Space, Stack, Text } from "@mantine/core"
 import { Circle, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 
 const containerStyle = {
