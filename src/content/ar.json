@@ -572,6 +572,8 @@
     "rating": "تقييم",
     "average-response-speed": "متوسط سرعة الرد",
     "host-since": "منذ",
-    "number-of-units": "عدد الوحدات"
+    "number-of-units": "عدد الوحدات",
+    "units-title": "عقارات المضيف",
+    "units-description": "استكشف جميع العقارات من هذا المضيف"
   }
 }

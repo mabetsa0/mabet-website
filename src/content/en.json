@@ -577,6 +577,8 @@
     "rating": "rating",
     "average-response-speed": "Average response speed",
     "host-since": "Host since",
-    "number-of-units": "Number of units"
+    "number-of-units": "Number of units",
+    "units-title": "Host properties",
+    "units-description": "Explore all properties from this host"
   }
 }
