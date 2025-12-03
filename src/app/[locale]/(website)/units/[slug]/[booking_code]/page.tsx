@@ -55,10 +55,11 @@ const Page = (props: Props) => {
     Router.back()
   }
   useEffect(() => {
+    console.log("🚀 ~ useEffect ~ isAuthenticated:", isAuthenticated)
     if (!isAuthenticated) {
       Router.replace(`/units/${params.slug}${isPrivate ? "?private=true" : ""}`)
     }
-  }, [isAuthenticated, isPrivate, params.slug])
+  }, [isAuthenticated, isPrivate, params.slug, Router])
   const mathes = useMdScreen()
   if (status == "pending")
     return (

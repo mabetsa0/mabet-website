@@ -50,12 +50,14 @@ export interface BookingDetails {
 
 export interface PaymentMethods {
   track_id: string
-  apple_pay: ApplePay
-  cards: ApplePay
-  tabby: ApplePay
+  apple_pay: PaymentMethodStatus
+  cards: PaymentMethodStatus
+  tabby: PaymentMethodStatus
+  madfu: PaymentMethodStatus
+  tamara: PaymentMethodStatus
 }
 
-export interface ApplePay {
+export interface PaymentMethodStatus {
   status: boolean
 }
 
