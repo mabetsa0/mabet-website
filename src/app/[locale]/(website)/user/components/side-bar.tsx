@@ -17,6 +17,7 @@ import {
   LogOut,
   UserRound,
   Wallet,
+  MessageCircle,
 } from "lucide-react"
 import { useNafath } from "@/hooks/use-nafath"
 import { cn } from "@/lib/cn"
@@ -45,6 +46,11 @@ const SideBar = () => {
       Icon: <Wallet />,
       label: t("wallet"),
       path: "/user/wallet",
+    },
+    {
+      Icon: <MessageCircle />,
+      label: t("chat"),
+      path: "/user/chat",
     },
     {
       Icon: <Heart />,

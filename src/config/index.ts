@@ -4,3 +4,6 @@ export const BAYUT_KEY = "mabet-bayut"
 export const PRIVATE_LINK = "mabet_private_unit"
 export const DOWNLOAD_APP_BANNER_KEY = "mabet-hide-download-banner"
 export const INTEGRATION_COOKIE_NAME = "integration-session"
+export const ACCESS_TOKEN_COOKIE = "chat_access_token"
+export const ACCESS_TOKEN_ISSUED_AT_COOKIE = "chat_access_token_issued_at"
+export const SIX_HOURS_MS = 6 * 60 * 60 * 1000

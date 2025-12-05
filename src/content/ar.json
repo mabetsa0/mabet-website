@@ -174,7 +174,8 @@
     "min_stay_warning": "تحذير الحد الادنى للاقامة",
     "nights": "ليلة",
     "date_extended_to": "تم تمديد الحجز حتى ",
-    "goToBookings": "عرض الحجوزات"
+    "goToBookings": "عرض الحجوزات",
+    "chat": "المحادثات"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
