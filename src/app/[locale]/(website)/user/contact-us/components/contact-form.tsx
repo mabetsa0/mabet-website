@@ -13,7 +13,7 @@ import {
 import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { File, Mail } from "lucide-react"
-import Mabeet from "@/api"
+import Mabeet from "@/services"
 import { handleFormError } from "@/utils/handle-form-errors"
 
 const ContactForm = () => {

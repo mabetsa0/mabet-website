@@ -1,7 +1,7 @@
 import React from "react"
 import { HostResponse } from "@/@types/hot-response"
-import Mabeet from "@/api"
 import Footer from "@/components/common/footer"
+import Mabeet from "@/services"
 import Hero from "./components/hero"
 import Reviews from "./components/reviews"
 import Units from "./components/units"
