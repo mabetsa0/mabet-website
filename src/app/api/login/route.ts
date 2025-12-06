@@ -2,6 +2,7 @@ import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 import axios from "axios"
 import { Session } from "@/@types/user"
+import { SESSION_COOKIE } from "@/config"
 import Mabet from "@/services"
 
 export async function POST(request: Request) {
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
     const expiresAt = new Date(Date.now() + 360 * 24 * 60 * 60 * 1000)
 
     cookieStore.set(
-      "session",
+      SESSION_COOKIE,
       JSON.stringify({
         ...session,
         user: {

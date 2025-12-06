@@ -2,11 +2,12 @@ import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 import axios from "axios"
 import { Session } from "@/@types/user"
+import { SESSION_COOKIE } from "@/config"
 
 export async function POST(request: Request) {
   try {
     const cookieStore = await cookies()
-    const rawSession = cookieStore.get("session")?.value
+    const rawSession = cookieStore.get(SESSION_COOKIE)?.value
     const body = await request.json()
 
     if (!rawSession) {
@@ -16,7 +17,7 @@ export async function POST(request: Request) {
 
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     cookieStore.set(
-      "session",
+      SESSION_COOKIE,
       JSON.stringify({
         ...session,
         user: {

@@ -1,12 +1,13 @@
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 import { Session } from "@/@types/user"
+import { SESSION_COOKIE } from "@/config"
 import Mabet from "@/services"
 
 export const GET = async () => {
   // get session from cookie
   const cookieStore = await cookies()
-  const session = cookieStore.get("session")?.value
+  const session = cookieStore.get(SESSION_COOKIE)?.value
   if (!session) return NextResponse.json({})
 
   // parse session
@@ -21,7 +22,7 @@ export const GET = async () => {
   })
   const expiresAt = new Date(Date.now() + 360 * 24 * 60 * 60 * 1000)
   cookieStore.set(
-    "session",
+    SESSION_COOKIE,
     JSON.stringify({
       ...updatedSession,
       user: {

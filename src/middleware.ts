@@ -1,11 +1,14 @@
 import createMiddleware from "next-intl/middleware"
+import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
 import { routing } from "@/lib/i18n/routing"
+import { CHAT_ACCESS_TOKEN_COOKIE } from "./config"
 
 const handleI18nRouting = createMiddleware(routing)
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const res = handleI18nRouting(req)
+  const cookiesStore = await cookies()
 
   if (req.nextUrl.pathname.includes("/gathern")) {
     res.headers.set(
@@ -16,6 +19,10 @@ export default function middleware(req: NextRequest) {
           : "Gathern apartments"
       )
     )
+  }
+
+  if (req.nextUrl.pathname.includes("/chat")) {
+    const accessToken = cookiesStore.get(ACCESS_TOKEN_COOKIE)
   }
 
   return res
