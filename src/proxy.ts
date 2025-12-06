@@ -4,7 +4,7 @@ import { routing } from "@/lib/i18n/routing"
 
 const handleI18nRouting = createMiddleware(routing)
 
-export default function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const res = handleI18nRouting(req)
 
   if (req.nextUrl.pathname.includes("/gathern")) {
