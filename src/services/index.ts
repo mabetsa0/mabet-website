@@ -2,10 +2,10 @@ import { getLocale } from "next-intl/server"
 import { redirect } from "next/navigation"
 import axios from "axios"
 import { SESSION_COOKIE } from "@/config"
-import { getServerSession } from "@/lib/get-server-session"
-import { useSession } from "@/lib/session-store"
+import { getServerSession } from "@/services/get-server-session"
+import { useSession } from "@/stores/session-store"
+import { getClientSession } from "@/utils/get-client-session"
 import { getLocaleFromUrl } from "@/utils/get-locale"
-import { getSession } from "@/utils/get-session"
 
 const baseURL =
   process.env.NEXT_PUBLIC_TEST == "true"
@@ -70,7 +70,7 @@ Mabet.interceptors.request.use(
       config.headers["Accept-Language"] = locale
     } else {
       // Client-side
-      session = getSession()
+      session = getClientSession()
       config.headers["Accept-Language"] = getLocaleFromUrl()
     }
     if (session?.access_token) {

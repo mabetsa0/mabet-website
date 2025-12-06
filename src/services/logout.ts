@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useSession } from "@/lib/session-store"
+import { useSession } from "@/stores/session-store"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 
 export const logout = async () => {

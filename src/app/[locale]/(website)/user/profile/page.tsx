@@ -8,7 +8,7 @@ import { notifications } from "@mantine/notifications"
 import { BadgeCheck, Mail, Phone, UserIcon } from "lucide-react"
 import Mabeet from "@/api"
 import { useNafath } from "@/hooks/use-nafath"
-import { useSession } from "@/lib/session-store"
+import { useSession } from "@/stores/session-store"
 import { handleFormError } from "@/utils/handle-form-errors"
 import useUser from "../hooks/use-user"
 

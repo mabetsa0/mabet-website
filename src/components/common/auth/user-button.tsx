@@ -4,8 +4,8 @@ import { ChevronDown, LogOut, UserCircle } from "lucide-react"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { Link } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
 import { logout } from "@/services/logout"
+import { useSession } from "@/stores/session-store"
 
 const UserButton = () => {
   const t = useTranslations("header")

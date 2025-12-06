@@ -8,7 +8,7 @@ import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { Session } from "@/@types/user"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useUserDataModal } from "@/hooks/use-user-data-modal"
-import { useSession } from "@/lib/session-store"
+import { useSession } from "@/stores/session-store"
 import ResendOtpButton from "./resend-otp-button"
 
 const VerifyOtp = () => {
