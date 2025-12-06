@@ -364,6 +364,14 @@
   "errors": {
     "unknown-error": "خطأ غير معروف"
   },
+  "video": {
+    "load-error-title": "فشل تحميل الفيديوهات",
+    "load-error-message": "حدث خطأ غير متوقع",
+    "no-videos-title": "لا توجد فيديوهات متاحة",
+    "no-videos-message": "لا توجد عناوين فيديو صالحة للعرض",
+    "invalid-url-title": "عنوان الفيديو غير متاح",
+    "invalid-url-message": "مصدر الفيديو مفقود أو غير صالح"
+  },
   "generla": {
     "failer": "فشلت العملية"
   },
