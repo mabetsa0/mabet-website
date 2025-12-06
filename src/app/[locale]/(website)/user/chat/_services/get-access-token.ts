@@ -1,6 +1,6 @@
-import { mainApi } from './axios'
+import { mainApi } from "./axios"
 
-export const fetchAccessToken = async (token: string) => {
+export const getChatAccessToken = async (token: string) => {
   const response = await mainApi.post<{ token: string; type: string }>(
     `/chat/api/v2/chat-token`,
     {},
