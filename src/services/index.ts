@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server"
 import { redirect } from "next/navigation"
 import axios from "axios"
+import { SESSION_COOKIE } from "@/config"
 import { getServerSession } from "@/lib/get-server-session"
 import { useSession } from "@/lib/session-store"
 import { getLocaleFromUrl } from "@/utils/get-locale"
@@ -132,7 +133,7 @@ Mabet.interceptors.response.use(
         const { cookies } = await import("next/headers")
 
         const cookieStore = await cookies()
-        cookieStore.delete("session")
+        cookieStore.delete(SESSION_COOKIE)
         redirect("/")
       } else {
         axios.post("/api/logout")
