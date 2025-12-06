@@ -28,7 +28,7 @@ export default async function Layout({
 
   return (
     <>
-      <section className="relative bg-[linear-gradient(100.06deg,_#188078_42.47%,_#051A18_88.92%)]">
+      <section className="relative bg-[linear-gradient(100.06deg,#188078_42.47%,#051A18_88.92%)]">
         <img
           alt="dots"
           className="absolute h-full w-full object-cover"
