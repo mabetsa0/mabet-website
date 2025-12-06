@@ -366,6 +366,14 @@
   "errors": {
     "unknown-error": "Unknown error"
   },
+  "video": {
+    "load-error-title": "Failed to load videos",
+    "load-error-message": "An unexpected error occurred",
+    "no-videos-title": "No videos available",
+    "no-videos-message": "There are no valid video URLs to display",
+    "invalid-url-title": "Video URL is not available",
+    "invalid-url-message": "The video source is missing or invalid"
+  },
   "generla": {
     "failer": "Failer"
   },
