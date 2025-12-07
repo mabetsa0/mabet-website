@@ -41,7 +41,7 @@ export default async function Layout({
       </section>
       <section className="relative">
         <div className="container">
-          <Grid columns={4} className="md:-translate-y-9">
+          <Grid columns={4} className="md:-mt-9">
             <GridCol span={{ base: 4, md: "content" }} className="relative">
               <SideBar />
             </GridCol>
