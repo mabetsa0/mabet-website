@@ -591,5 +591,9 @@
     "units-description": "Explore all properties from this host",
     "reviews-title": "Ratings",
     "reviews-description": "Host Ratings"
+  },
+  "chat": {
+    "title": "Conversations",
+    "host": "Host"
   }
 }

@@ -48,7 +48,7 @@ export default async function Layout({
             <GridCol
               className="break md:mt-[9.5rem] md:max-w-[calc(62em-300px)] lg:max-w-[calc(75em-300px)] xl:max-w-[calc(88em-300px)]"
               span={{ base: 4, md: "auto" }}
-              p={{ base: "sm", md: "xl" }}
+              p={{ base: "sm", md: "lg" }}
             >
               {children}
             </GridCol>

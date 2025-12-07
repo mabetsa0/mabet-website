@@ -1,5 +1,8 @@
 import { cookies } from "next/headers"
+import { redirect } from "@/lib/i18n/navigation"
+import ChatList from "./_components/chat-list"
 import { getCachedTokenFromCookie } from "./_lib/get-cached-access-token"
+import { SessionStoreProvider } from "./_stores/session-store-provider"
 import { UserStoreProvider } from "./_stores/user-store-provider"
 
 export default async function Layout({
@@ -8,9 +11,21 @@ export default async function Layout({
   children: React.ReactNode
 }) {
   const accessToken = await getCachedTokenFromCookie()
+  if (!accessToken) {
+    return redirect({ href: "/", locale: "ar" })
+  }
   return (
-    <>
-      <UserStoreProvider user={null}>{children}</UserStoreProvider>
-    </>
+    <UserStoreProvider user={null}>
+      <SessionStoreProvider accessToken={accessToken}>
+        <main className="h-screen">
+          <div className="flex h-screen gap-2">
+            <div className="border-e border-e-gray-100 md:min-w-[390px]">
+              <ChatList accessToken={accessToken} />
+            </div>
+            <div className="w-full">{children}</div>
+          </div>
+        </main>
+      </SessionStoreProvider>
+    </UserStoreProvider>
   )
 }

@@ -586,5 +586,9 @@
     "units-description": "استكشف جميع العقارات من هذا المضيف",
     "reviews-title": "التقييمات",
     "reviews-description": "تقييمات المضيف "
+  },
+  "chat": {
+    "title": "محادثاتي",
+    "host": "المضيف"
   }
 }
