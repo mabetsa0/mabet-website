@@ -610,7 +610,8 @@
     },
     "unit-card": {
       "inquiry-about-booking": "Inquiry about booking {name}",
-      "view-unit": "View unit"
+      "view-unit": "View unit",
+      "book-now": "Book now"
     },
     "important-note": {
       "title": "Important note!",

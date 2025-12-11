@@ -605,7 +605,8 @@
     },
     "unit-card": {
       "inquiry-about-booking": "استفسار عن حجز {name}",
-      "view-unit": "عرض الوحدة"
+      "view-unit": "عرض الوحدة",
+      "book-now": "احجز الان"
     },
     "important-note": {
       "title": "ملاحظة مهمة !",

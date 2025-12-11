@@ -6,15 +6,19 @@ import { useParams } from "next/navigation"
 import { Group, Loader, ScrollArea, Stack, Text } from "@mantine/core"
 import dayjs from "dayjs"
 import { mabetLogo } from "@/assets"
+import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
 import { useUserStore } from "../_stores/user-store-provider"
 import ChatHeader from "./chat-header"
 import ChatInput from "./chat-input"
 import DateIndicator from "./date-indicator"
 import Message from "./message"
+import UnitCard from "./unit-card"
 
 const ChatBody = () => {
   const t = useTranslations("chat")
+  const chatData = useChatData()
+  console.log("🚀 ~ ChatBody ~ chatData:", chatData)
   const { uuid } = useParams<{ uuid: string }>()!
   const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
@@ -83,12 +87,15 @@ const ChatBody = () => {
       <ChatHeader />
       <ScrollArea ref={scrollAreaRef} className="h-full">
         <div className="h-6"></div>
-        {/* Infinite scroll trigger at the top */}
-        {hasNextPage && (
-          <div ref={triggerRef} className="flex justify-center py-1">
-            {isFetchingNextPage ? <Loader /> : <div className="h-1" />}
-          </div>
-        )}
+        {chatData.topic_id ? (
+          <UnitCard
+            unit={{
+              name: chatData.topic_name || "unknown",
+              id: chatData.topic_id.toString() || "unknown",
+              image: chatData.image || "",
+            }}
+          />
+        ) : null}
 
         <div className="px-[4px]">
           <Stack gap={"6"} className="px-1">
@@ -149,6 +156,12 @@ const ChatBody = () => {
             )
           })}
         </div>
+        {/* Infinite scroll trigger at the top */}
+        {hasNextPage && (
+          <div ref={triggerRef} className="flex justify-center py-1">
+            {isFetchingNextPage ? <Loader /> : <div className="h-1" />}
+          </div>
+        )}
       </ScrollArea>
       <ChatInput />
     </div>

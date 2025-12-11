@@ -50,7 +50,7 @@ const DateIndicator = ({ date }: Props) => {
   }
 
   return (
-    <div className="sticky top-0 flex justify-center">
+    <div className="sticky top-6 flex justify-center">
       <div className="text-foreground/80 w-[144px] rounded-md border border-[#EEEEEE] bg-white py-0.5 text-center text-xs font-semibold">
         {formatDate(date)}
       </div>
