@@ -15,7 +15,10 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
       <p className="text-h2 pb-1.5 font-bold">{t("title")}</p>
       <ScrollArea className="h-[calc(100vh-40px)]">
         {isLoading ? (
-          <div className="flex h-[calc(100vh-40px)] items-center justify-center">
+          <div
+            key="loader"
+            className="flex h-[calc(100vh-40px)] items-center justify-center"
+          >
             <Loader />
           </div>
         ) : error ? (
@@ -28,7 +31,7 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
           </div>
         ) : data && data.length > 0 ? (
           data.map((conversation) => (
-            <div className="divide-y-[#F3F3F3]">
+            <div key={conversation.uuid} className="divide-y-[#F3F3F3]">
               <ChatItem key={conversation.uuid} conversation={conversation} />
             </div>
           ))

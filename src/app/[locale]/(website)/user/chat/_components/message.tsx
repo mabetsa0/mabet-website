@@ -1,6 +1,6 @@
-import { Loader2 } from "lucide-react"
+import dayjs from "dayjs"
+import { AlertTriangle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/cn"
-import { useDeleteMessage } from "../_hooks/use-delete-message"
 import { useUserStore } from "../_stores/user-store-provider"
 import { Message as MessageType } from "../_types/chat-response"
 
@@ -10,12 +10,109 @@ type MessageProps = MessageType & {
   className?: string
 }
 
+type MessageVariant = "admin" | "user" | "other" | "error"
+
+// Constants
+const MESSAGE_BASE_STYLES = "rounded-md px-[12px] py-[8px] transition-colors"
+const TIME_FORMAT = "hh:mm A"
+
+// Helper functions
+const getMessageVariant = (
+  senderType: string,
+  senderId: number,
+  userId: string | undefined,
+  hasError: boolean
+): MessageVariant => {
+  if (hasError) return "error"
+  if (senderType === "admin") return "admin"
+  if (userId === senderId.toString()) return "user"
+  return "other"
+}
+
+const getAlignmentClass = (variant: MessageVariant): string => {
+  switch (variant) {
+    case "admin":
+      return "justify-center"
+    case "user":
+      return "justify-start"
+    case "other":
+    case "error":
+      return "justify-end"
+  }
+}
+
+const getMessageStyles = (variant: MessageVariant): string => {
+  switch (variant) {
+    case "error":
+      return cn(
+        MESSAGE_BASE_STYLES,
+        "bg-red-500 text-white border-2 border-red-600"
+      )
+    case "admin":
+      return cn(
+        MESSAGE_BASE_STYLES,
+        "text-primary border-2 border-primary rounded-md"
+      )
+    case "user":
+      return cn(
+        MESSAGE_BASE_STYLES,
+        "bg-[#F6F4F8] text-black",
+        "rounded-t-md rounded-e-md rtl:rounded-br-none ltr:rounded-bl-none"
+      )
+    case "other":
+      return cn(
+        MESSAGE_BASE_STYLES,
+        "bg-primary text-white",
+        "rounded-tr-md ltr:rounded-br-none rtl:rounded-bl-none rounded-bl-md rounded-br-md"
+      )
+  }
+}
+
+const getContentStyles = (variant: MessageVariant): string => {
+  switch (variant) {
+    case "error":
+      return "text-white"
+    case "admin":
+      return "text-primary font-semibold"
+    case "user":
+      return "text-primary-foreground"
+    case "other":
+      return "text-foreground"
+  }
+}
+
+// Sub-components
+const MessageTime = ({ timestamp }: { timestamp: Date }) => (
+  <span className="text-[10px]">{dayjs(timestamp).format(TIME_FORMAT)}</span>
+)
+
+const MessageContent = ({
+  content,
+  variant,
+}: {
+  content: string
+  variant: MessageVariant
+}) => <p className={cn(getContentStyles(variant), "text-sm")}>{content}</p>
+
+const MessageStatus = ({
+  isLoading,
+  hasError,
+}: {
+  isLoading: boolean
+  hasError: boolean
+}) => {
+  if (isLoading) {
+    return <Loader2 className="size-1 animate-spin" />
+  }
+  if (hasError) {
+    return <AlertTriangle className="size-5" />
+  }
+  return null
+}
+
 const Message = ({
-  id,
   sender_id,
   sender_type,
-  sender_name,
-  conversation_uuid,
   content,
   created_at,
   errorMessage,
@@ -23,97 +120,31 @@ const Message = ({
   className,
 }: MessageProps) => {
   const user = useUserStore((s) => s.user)
-  const { mutate: deleteMessage, isPending } = useDeleteMessage()
-
-  // Determine message type
-  const isAdminMessage = sender_type === "admin"
-  const isUserMessage = user?.id === sender_id.toString()
-  const isOtherMessage = !isUserMessage && !isAdminMessage
-
-  // Determine alignment based on message type
-  const getAlignment = () => {
-    if (isAdminMessage) return "justify-center"
-    if (isUserMessage) return "justify-start"
-    return "justify-end"
-  }
-
-  // Get message style classes based on type
-  const getMessageStyles = () => {
-    const baseStyles = "rounded-md px-[12px] py-[8px] transition-colors"
-
-    if (errorMessage) {
-      return cn(baseStyles, "bg-red-500 text-white border-2 border-red-600")
-    }
-
-    if (isAdminMessage) {
-      return cn(
-        baseStyles,
-        "text-primary border-2 border-primary",
-        "rounded-md"
-      )
-    }
-
-    if (isUserMessage) {
-      return cn(
-        baseStyles,
-        "bg-[#F6F4F8] text-black",
-        "rounded-t-md rounded-e-md rtl:rounded-br-none ltr:rounded-bl-none"
-      )
-    }
-    // Other message (other side)
-    return cn(
-      baseStyles,
-      "bg-gray-200 text-foreground",
-      "rounded-tr-md ltr:rounded-br-none rtl:rounded-bl-none rounded-bl-md rounded-br-md"
-    )
-  }
-
-  // Get content styles based on message type
-  const getContentStyles = () => {
-    if (errorMessage) {
-      return "text-white"
-    }
-    if (isAdminMessage) {
-      return "text-primary font-semibold"
-    }
-    if (isUserMessage) {
-      return "text-primary-foreground"
-    }
-    return "text-foreground"
-  }
-
-  const alignment = getAlignment()
+  const variant = getMessageVariant(
+    sender_type,
+    sender_id,
+    user?.id,
+    !!errorMessage
+  )
+  const isAdmin = variant === "admin"
 
   return (
-    <div className={cn("my-0.5 flex px-1 select-none", alignment, className)}>
-      <div className={getMessageStyles()}>
-        {/* Message Content */}
-        <div className="mt-0.5 flex items-center gap-[4px]">
-          {isLoading || isPending ? (
-            <Loader2 className="size-1 animate-spin" />
-          ) : null}
-          {errorMessage ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-triangle-alert"
-            >
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
-              <path d="M12 9v4" />
-              <path d="M12 17h.01" />
-            </svg>
-          ) : null}
-          <p className={getContentStyles()}>{content}</p>
+    <div
+      className={cn(
+        "my-0.5 flex px-1 select-none",
+        getAlignmentClass(variant),
+        className
+      )}
+    >
+      <div className={getMessageStyles(variant)}>
+        <div
+          className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
+        >
+          <MessageContent content={content} variant={variant} />
+          <MessageTime timestamp={created_at} />
+          <MessageStatus isLoading={!!isLoading} hasError={!!errorMessage} />
         </div>
 
-        {/* Error Message */}
         {errorMessage && (
           <span className="mt-1 block text-[10px] text-red-200">
             {errorMessage}

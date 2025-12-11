@@ -23,7 +23,11 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
 
   return (
     <div className="relative">
-      <Link prefetch={false} href={`/user/chat/${conversation.uuid}`}>
+      <Link
+        prefetch={false}
+        scroll={false}
+        href={`/user/chat/${conversation.uuid}`}
+      >
         <div
           className={cn(
             "relative flex gap-0.5 bg-white px-1 py-0.5 duration-100 hover:bg-[#FAFAFA]",

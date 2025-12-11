@@ -32,9 +32,7 @@ const ChatBody = () => {
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
     // Try to find the ScrollArea viewport
-    const viewport = scrollAreaRef.current?.querySelector(
-      '[data-slot="scroll-area-viewport"]'
-    ) as HTMLElement
+    const viewport = scrollAreaRef.current
 
     if (viewport) {
       viewport.scrollTo({
@@ -85,7 +83,7 @@ const ChatBody = () => {
   return (
     <div className="relative flex h-full flex-col">
       <ChatHeader />
-      <ScrollArea ref={scrollAreaRef} className="h-full">
+      <ScrollArea viewportRef={scrollAreaRef} className="h-full">
         <div className="h-6"></div>
         {chatData.topic_id ? (
           <UnitCard
@@ -159,7 +157,11 @@ const ChatBody = () => {
         {/* Infinite scroll trigger at the top */}
         {hasNextPage && (
           <div ref={triggerRef} className="flex justify-center py-1">
-            {isFetchingNextPage ? <Loader /> : <div className="h-1" />}
+            {isFetchingNextPage ? (
+              <Loader size={"xs"} />
+            ) : (
+              <div className="h-1" />
+            )}
           </div>
         )}
       </ScrollArea>
