@@ -69,7 +69,7 @@ const SideBar = () => {
     <>
       <Card
         visibleFrom="md"
-        className="sticky top-16 bg-white"
+        className="sticky top-7 bg-white"
         radius={"16px"}
         shadow="md"
         w={"260px"}

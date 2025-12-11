@@ -594,6 +594,31 @@
   },
   "chat": {
     "title": "Conversations",
-    "host": "Host"
+    "host": "Host",
+    "empty-state": {
+      "title": "Choose a conversation to display",
+      "description": "Choose a conversation from the sidebar to start chatting or view previous messages"
+    },
+    "input": {
+      "placeholder": "Write what you want to inquire about.....",
+      "send": "Send",
+      "sending": "Sending..."
+    },
+    "date": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "unit-card": {
+      "inquiry-about-booking": "Inquiry about booking {name}",
+      "view-unit": "View unit"
+    },
+    "important-note": {
+      "title": "Important note!",
+      "description": "Host contact information will appear directly after booking. Please do not contact the host outside the platform, as this will lead to suspension of your account and loss of your rights."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "description": "The platform disclaims responsibility for any financial transfers made outside the platform. Any insurance or remaining balance must also be paid before entering the unit."
+    }
   }
 }

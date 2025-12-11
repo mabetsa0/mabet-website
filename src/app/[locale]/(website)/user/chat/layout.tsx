@@ -18,8 +18,8 @@ export default async function Layout({
     <UserStoreProvider user={null}>
       <SessionStoreProvider accessToken={accessToken}>
         <main className="h-screen">
-          <div className="flex h-screen gap-2">
-            <div className="border-e border-e-gray-100 md:min-w-[390px]">
+          <div className="flex h-screen">
+            <div className="min-w-[360px] border-e border-e-gray-100 lg:min-w-[390px]">
               <ChatList accessToken={accessToken} />
             </div>
             <div className="w-full">{children}</div>

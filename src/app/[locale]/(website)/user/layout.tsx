@@ -41,14 +41,13 @@ export default async function Layout({
       </section>
       <section className="relative">
         <div className="container">
-          <Grid columns={4} className="md:-mt-9">
+          <Grid columns={4} className="pb-lg md:-mt-9">
             <GridCol span={{ base: 4, md: "content" }} className="relative">
               <SideBar />
             </GridCol>
             <GridCol
-              className="break md:mt-[9.5rem] md:max-w-[calc(62em-300px)] lg:max-w-[calc(75em-300px)] xl:max-w-[calc(88em-300px)]"
+              className="break pt-lg ps-md md:mt-[9.5rem] md:max-w-[calc(62rem-230px)] lg:max-w-[calc(75rem-230px)] xl:max-w-[calc(88rem-230px)]"
               span={{ base: 4, md: "auto" }}
-              p={{ base: "sm", md: "lg" }}
             >
               {children}
             </GridCol>
