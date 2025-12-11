@@ -30,7 +30,6 @@ export default async function proxy(req: NextRequest) {
 
     // Check if chat access token is cached in cookies
     const cachedToken = req.cookies.get(CHAT_SESSION_COOKIE)?.value
-    console.log("🚀 ~ proxy ~ cachedToken:", cachedToken)
     let chatAccessToken = cachedToken
 
     // If no cached token, generate one from user access token
