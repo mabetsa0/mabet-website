@@ -1,9 +1,8 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { Button, Loader } from "@mantine/core"
-import { ScrollArea } from "@mantine/core"
-import { Loader2, MessageSquare, RefreshCcw } from "lucide-react"
+import { Button, Loader, ScrollArea } from "@mantine/core"
+import { MessageSquare, RefreshCcw } from "lucide-react"
 import { useWsChatsList } from "../_hooks/use-ws-chats-list"
 import ChatItem from "./chat-item"
 
