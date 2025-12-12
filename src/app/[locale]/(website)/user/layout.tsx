@@ -46,7 +46,7 @@ export default async function Layout({
               <SideBar />
             </GridCol>
             <GridCol
-              className="break pt-lg ps-md md:mt-[9.5rem] md:max-w-[calc(62rem-230px)] lg:max-w-[calc(75rem-230px)] xl:max-w-[calc(88rem-230px)]"
+              className="break ps-md pt-0 md:mt-[9rem] md:max-w-[calc(62rem-230px)] lg:max-w-[calc(75rem-230px)] xl:max-w-[calc(88rem-230px)]"
               span={{ base: 4, md: "auto" }}
             >
               {children}

@@ -17,8 +17,8 @@ export default async function Layout({
   return (
     <UserStoreProvider user={null}>
       <SessionStoreProvider accessToken={accessToken}>
-        <main className="h-screen">
-          <div className="flex h-screen">
+        <main className="h-[calc(100vh-73px)]">
+          <div className="flex h-full">
             <div className="min-w-[360px] border-e border-e-gray-100 lg:min-w-[390px]">
               <ChatList accessToken={accessToken} />
             </div>

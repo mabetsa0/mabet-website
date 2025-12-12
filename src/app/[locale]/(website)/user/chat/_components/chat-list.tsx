@@ -10,18 +10,20 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
   const { data, isLoading, error, refetch } = useWsChatsList(accessToken)
   const t = useTranslations("chat")
   return (
-    <div className="h-screen">
-      <p className="text-h2 pb-1.5 font-bold">{t("title")}</p>
-      <ScrollArea className="h-[calc(100vh-40px)]">
+    <div className="h-[calc(100vh-73px)]">
+      <p className="text-h2 border-b border-b-gray-100 py-1.5 font-bold">
+        {t("title")}
+      </p>
+      <ScrollArea className="h-[calc(100vh-165px)]">
         {isLoading ? (
           <div
             key="loader"
-            className="flex h-[calc(100vh-40px)] items-center justify-center"
+            className="flex h-[calc(100vh-165px)] items-center justify-center"
           >
             <Loader />
           </div>
         ) : error ? (
-          <div className="flex h-[calc(100vh-40px)] flex-col items-center justify-center gap-2 text-red-500">
+          <div className="flex h-[calc(100vh-165px)] flex-col items-center justify-center gap-2 text-red-500">
             {error}
             <Button onClick={refetch}>
               <RefreshCcw className="size-4" />
@@ -35,7 +37,7 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
             </div>
           ))
         ) : (
-          <div className="flex h-[calc(100vh-40px)] flex-col items-center justify-center gap-4 text-center">
+          <div className="flex h-[calc(100vh-65px)] flex-col items-center justify-center gap-4 text-center">
             <MessageSquare className="text-muted-foreground size-12" />
             <div className="space-y-2">
               <p className="text-muted-foreground text-lg font-medium">

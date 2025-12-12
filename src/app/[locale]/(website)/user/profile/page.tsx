@@ -56,7 +56,7 @@ const Profile = () => {
   })
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="pt-lg">
       <Stack>
         <Space />
         <Stack>

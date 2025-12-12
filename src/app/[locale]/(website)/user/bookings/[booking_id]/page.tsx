@@ -33,7 +33,7 @@ const page = async (props: Props) => {
     const unit = booking.unit
     const t = await getTranslations("booking-page")
     return (
-      <Stack>
+      <Stack className="pt-lg">
         <Space />
         <Stack>
           <Text className="text-h3 md:text-h2 font-bold">
