@@ -30,7 +30,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
       >
         <div
           className={cn(
-            "relative flex gap-0.5 bg-white px-1 py-0.5 duration-100 hover:bg-[#FAFAFA]",
+            "relative flex gap-0.5 bg-white py-0.5 duration-100 hover:bg-[#FAFAFA] sm:px-1",
             pathName.includes(conversation.uuid) && "bg-[#FAFAFA]"
           )}
         >

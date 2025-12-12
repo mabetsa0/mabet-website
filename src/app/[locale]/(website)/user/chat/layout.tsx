@@ -16,12 +16,13 @@ export default async function Layout({
   return (
     <UserStoreProvider user={null}>
       <SessionStoreProvider accessToken={accessToken}>
-        <main className="h-[calc(100vh-73px)]">
+        <main className="relative h-[calc(100vh-73px)]">
           <div className="flex h-full">
-            <div className="min-w-[320px] border-e border-e-gray-100 lg:min-w-[390px] xl:min-w-[360px]">
-              <ChatList accessToken={accessToken} />
+            <div className="shrink-0 border-r-gray-100 border-l-gray-100 max-sm:w-full sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] sm:ltr:border-r sm:rtl:border-l">
+              <ChatList />
             </div>
-            <div className="w-full">{children}</div>
+
+            {children}
           </div>
         </main>
       </SessionStoreProvider>

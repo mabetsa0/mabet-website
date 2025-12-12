@@ -5,7 +5,7 @@ export default async function Page() {
   const t = await getTranslations("chat.empty-state")
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div className="hidden h-full w-full items-center justify-center sm:flex">
       <div className="flex flex-col items-center justify-center gap-1.5 text-center">
         <div className="relative">
           <div className="bg-primary/20 absolute inset-0 animate-pulse rounded-full blur-2xl" />

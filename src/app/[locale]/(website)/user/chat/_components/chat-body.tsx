@@ -82,13 +82,13 @@ const ChatBody = () => {
 
   if (isLoading || !user?.id)
     return (
-      <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+      <div className="relative inset-0 z-1 flex w-full items-center justify-center bg-white max-sm:absolute sm:h-[calc(100vh-100px)]">
         <Loader />
       </div>
     )
 
   return (
-    <div className="relative flex h-full flex-col">
+    <div className="relative inset-0 z-1 flex h-full w-full flex-col bg-white max-sm:absolute">
       <ChatHeader />
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
         <div className="h-6"></div>

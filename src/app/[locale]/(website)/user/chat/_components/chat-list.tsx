@@ -4,21 +4,23 @@ import { useTranslations } from "next-intl"
 import { Button, Loader, ScrollArea } from "@mantine/core"
 import { MessageSquare, RefreshCcw } from "lucide-react"
 import { useWsChatsList } from "../_hooks/use-ws-chats-list"
+import { useSessionStore } from "../_stores/session-store-provider"
 import ChatItem from "./chat-item"
 
-const ChatList = ({ accessToken }: { accessToken: string }) => {
+const ChatList = () => {
+  const accessToken = useSessionStore((state) => state.accessToken)
   const { data, isLoading, error, refetch } = useWsChatsList(accessToken)
   const t = useTranslations("chat")
   return (
     <div className="h-[calc(100vh-73px)]">
-      <p className="text-h2 border-b border-b-gray-100 py-1.5 font-bold">
+      <p className="text-h3 sm:text-h2 border-b border-b-gray-100 py-1.5 font-bold">
         {t("title")}
       </p>
       <ScrollArea className="h-[calc(100vh-165px)]">
         {isLoading ? (
           <div
             key="loader"
-            className="flex h-[calc(100vh-165px)] items-center justify-center"
+            className="flex h-[calc(100vh-165px)] w-full items-center justify-center"
           >
             <Loader />
           </div>
