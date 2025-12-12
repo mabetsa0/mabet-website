@@ -1,4 +1,3 @@
-import { cookies } from "next/headers"
 import { redirect } from "@/lib/i18n/navigation"
 import ChatList from "./_components/chat-list"
 import { getCachedTokenFromCookie } from "./_lib/get-cached-access-token"
@@ -19,7 +18,7 @@ export default async function Layout({
       <SessionStoreProvider accessToken={accessToken}>
         <main className="h-[calc(100vh-73px)]">
           <div className="flex h-full">
-            <div className="min-w-[360px] border-e border-e-gray-100 lg:min-w-[390px]">
+            <div className="min-w-[320px] border-e border-e-gray-100 lg:min-w-[390px] xl:min-w-[360px]">
               <ChatList accessToken={accessToken} />
             </div>
             <div className="w-full">{children}</div>

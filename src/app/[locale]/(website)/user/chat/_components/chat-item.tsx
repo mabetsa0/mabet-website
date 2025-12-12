@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Avatar } from "@mantine/core"
+import { Avatar, Indicator } from "@mantine/core"
 import { Badge } from "@mantine/core"
 import dayjs from "dayjs"
 import "dayjs/locale/ar"
@@ -34,23 +34,24 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
             pathName.includes(conversation.uuid) && "bg-[#FAFAFA]"
           )}
         >
-          <div className="flex gap-0.5">
-            <div className="relative">
-              <Avatar
-                src={conversation.image}
-                className="relative aspect-square size-4"
-              >
-                <User />
-              </Avatar>
-              {conversation.online_participants.length > 0 ? (
-                <span className="absolute bottom-0 left-[4px] block h-1 w-1 rounded-full bg-green-500"></span>
-              ) : null}
-            </div>
-          </div>
-
+          <Indicator
+            inline
+            position="top-start"
+            size={12}
+            color="green"
+            offset={10}
+            disabled={conversation.online_participants.length == 0}
+          >
+            <Avatar
+              src={conversation.image}
+              className="relative aspect-square size-4"
+            >
+              <User />
+            </Avatar>
+          </Indicator>
           <div className="grow leading-normal">
             <div className="mb-0.5">
-              <p className="w-full max-w-[180px] truncate font-bold">
+              <p className="line-clamp-1 w-full font-bold">
                 {conversation.topic_name || "unknown"}
               </p>
               <p className="text-xs font-semibold">
@@ -62,14 +63,14 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
 
             <span
               className={cn(
-                "max-[200px] block truncate text-sm text-gray-500",
+                "block truncate text-sm text-gray-500",
                 conversation.unread_messages_count > 0 && "font-bold text-black"
               )}
             >
               {conversation.last_message?.content}
             </span>
           </div>
-          <div className="ms-auto flex flex-col items-end justify-between">
+          <div className="ms-auto flex shrink-0 flex-col items-end justify-between">
             <span className="block text-[10px] leading-loose text-gray-500">
               {(() => {
                 const date = dayjs(

@@ -23,7 +23,10 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
             <Loader />
           </div>
         ) : error ? (
-          <div className="flex h-[calc(100vh-165px)] flex-col items-center justify-center gap-2 text-red-500">
+          <div
+            key="error"
+            className="flex h-[calc(100vh-165px)] flex-col items-center justify-center gap-2 text-red-500"
+          >
             {error}
             <Button onClick={refetch}>
               <RefreshCcw className="size-4" />
@@ -31,11 +34,13 @@ const ChatList = ({ accessToken }: { accessToken: string }) => {
             </Button>
           </div>
         ) : data && data.length > 0 ? (
-          data.map((conversation) => (
-            <div key={conversation.uuid} className="divide-y-[#F3F3F3]">
-              <ChatItem key={conversation.uuid} conversation={conversation} />
-            </div>
-          ))
+          <div key="data" className="divide-y divide-gray-100">
+            {data.map((conversation) => (
+              <div key={conversation.uuid}>
+                <ChatItem key={conversation.uuid} conversation={conversation} />
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="flex h-[calc(100vh-65px)] flex-col items-center justify-center gap-4 text-center">
             <MessageSquare className="text-muted-foreground size-12" />
