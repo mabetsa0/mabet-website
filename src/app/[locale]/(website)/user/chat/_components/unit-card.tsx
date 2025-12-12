@@ -12,15 +12,15 @@ type Props = {
 
     image: string
   }
+  scrollIntoView: () => void
 }
 
-const UnitCard = ({ unit: { name, image, id } }: Props) => {
-  const ref = useRef<React.ComponentRef<"div">>(null)
+const UnitCard = ({ unit: { name, image, id }, scrollIntoView }: Props) => {
   const t = useTranslations("chat")
 
   return (
     <>
-      <div className="mb-0.5 border-b border-b-gray-100 px-1" ref={ref}>
+      <div className="mb-0.5 border-b border-b-gray-100 px-1">
         <Group wrap="nowrap" align="start" gap="xs">
           <div className="size-5 overflow-hidden rounded-md">
             <img
@@ -38,11 +38,7 @@ const UnitCard = ({ unit: { name, image, id } }: Props) => {
         </Group>
       </div>
       <div
-        onClick={() => {
-          if (ref.current) {
-            ref.current.scrollIntoView({ behavior: "smooth" })
-          }
-        }}
+        onClick={scrollIntoView}
         className="sticky top-9 z-10 mb-0.5 flex cursor-pointer justify-center"
       >
         <div className="text-foreground/80 w-fit max-w-xs rounded-md border border-[#EEEEEE] bg-white px-0.5 py-0.5 text-center text-xs font-semibold">

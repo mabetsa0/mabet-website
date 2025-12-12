@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { ComponentRef, useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import { Group, Loader, ScrollArea, Stack, Text } from "@mantine/core"
@@ -18,8 +18,7 @@ import UnitCard from "./unit-card"
 const ChatBody = () => {
   const t = useTranslations("chat")
   const chatData = useChatData()
-  console.log("🚀 ~ ChatBody ~ chatData:", chatData)
-  const { uuid } = useParams<{ uuid: string }>()!
+  const { uuid } = useParams<{ uuid: string }>()
   const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
     useInfiniteChat({ uuid })
@@ -28,6 +27,7 @@ const ChatBody = () => {
   const lastMessageRef = useRef<HTMLDivElement>(null)
   const hasScrolledToBottomRef = useRef(false)
   const lastMessageIdRef = useRef<string | null>(null)
+  const unitCardRef = useRef<ComponentRef<"div">>(null)
 
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
@@ -43,6 +43,13 @@ const ChatBody = () => {
       // Fallback to scrollIntoView
       lastMessageRef.current.scrollIntoView({ behavior })
     }
+  }
+  // scroll to top
+  const scrollToTop = () => {
+    scrollAreaRef.current?.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
   }
 
   // Scroll to bottom on initial load
@@ -85,6 +92,16 @@ const ChatBody = () => {
       <ChatHeader />
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
         <div className="h-6"></div>
+        {/* Infinite scroll trigger at the top */}
+        {hasNextPage && (
+          <div ref={triggerRef} className="flex justify-center py-1">
+            {isFetchingNextPage ? (
+              <Loader size={"xs"} />
+            ) : (
+              <div className="h-1" />
+            )}
+          </div>
+        )}
         {chatData.topic_id ? (
           <UnitCard
             unit={{
@@ -92,6 +109,7 @@ const ChatBody = () => {
               id: chatData.topic_id.toString() || "unknown",
               image: chatData.image || "",
             }}
+            scrollIntoView={scrollToTop}
           />
         ) : null}
 
@@ -154,16 +172,6 @@ const ChatBody = () => {
             )
           })}
         </div>
-        {/* Infinite scroll trigger at the top */}
-        {hasNextPage && (
-          <div ref={triggerRef} className="flex justify-center py-1">
-            {isFetchingNextPage ? (
-              <Loader size={"xs"} />
-            ) : (
-              <div className="h-1" />
-            )}
-          </div>
-        )}
       </ScrollArea>
       <ChatInput />
     </div>
