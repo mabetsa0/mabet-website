@@ -125,7 +125,7 @@ const ChatBody = () => {
               <img alt="mabet" src={mabetLogo.src} width={42} />
               <Stack gap={"4"}>
                 <Text className="text-h5 font-bold">
-                  {t("important-note.title")} 💚
+                  {t("important-note.title")}
                 </Text>
                 <Text size={"sm"} className="text-primary">
                   {t("important-note.description")}
