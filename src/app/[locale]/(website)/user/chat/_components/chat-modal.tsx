@@ -1,9 +1,10 @@
 "use client"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { Button, Drawer } from "@mantine/core"
+import { ActionIcon, Button, Drawer } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useMutation } from "@tanstack/react-query"
+import { MessageCircle } from "lucide-react"
 import { ChatProvider } from "../_contexts/chat-context"
 import { initChat } from "../_services/init-chat"
 import { SessionStoreProvider } from "../_stores/session-store-provider"
@@ -51,9 +52,9 @@ function ChatModal({
         radius={14}
         opened={opened}
         onClose={close}
-        title={t("title")}
+        title={chatInfo?.title ?? t("title")}
         classNames={{
-          body: "h-[calc(100%-60px)]",
+          body: "h-[calc(100%-60px)] p-0",
         }}
       >
         <UserStoreProvider
@@ -71,13 +72,16 @@ function ChatModal({
         </UserStoreProvider>
       </Drawer>
 
-      <Button
+      <ActionIcon
+        size={50}
         loading={mutation.isPending}
-        className="fixed right-4 bottom-4 z-50"
+        className="fixed right-3 bottom-3 z-50"
         onClick={handleInitChat}
+        variant="filled"
+        radius="xl"
       >
-        Open Drawer
-      </Button>
+        <MessageCircle size={20} />
+      </ActionIcon>
     </>
   )
 }

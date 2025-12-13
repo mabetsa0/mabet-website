@@ -98,9 +98,9 @@ const ChatBody = ({
         !isModal ? "max-sm:absolute" : ""
       )}
     >
-      <ChatHeader isModal={isModal} />
+      {isModal ? null : <ChatHeader />}
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
-        <div className="h-6"></div>
+        {!isModal && <div className="h-6"></div>}
         {/* Infinite scroll trigger at the top */}
 
         {!isModal && chatData.topic_id ? (

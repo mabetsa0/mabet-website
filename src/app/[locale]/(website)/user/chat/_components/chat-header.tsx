@@ -3,21 +3,19 @@ import { ActionIcon, Avatar } from "@mantine/core"
 import { ChevronRight, User } from "lucide-react"
 import { useChatData } from "../_contexts/chat-context"
 
-const ChatHeader = ({ isModal = false }: { isModal?: boolean }) => {
+const ChatHeader = () => {
   const chatData = useChatData()
   const router = useRouter()
   return (
     <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-1 border-b border-b-gray-100 bg-[#FAFAFA] p-1">
       <div className="flex grow items-center gap-0.5">
-        {!isModal && (
-          <ActionIcon
-            variant="transparent"
-            size="lg"
-            onClick={() => router.back()}
-          >
-            <ChevronRight className="ltr:rotate-180" />
-          </ActionIcon>
-        )}
+        <ActionIcon
+          variant="transparent"
+          size="lg"
+          onClick={() => router.back()}
+        >
+          <ChevronRight className="ltr:rotate-180" />
+        </ActionIcon>
         <Avatar
           src={chatData.image}
           className="border-primary size-3 border-[3px]"
