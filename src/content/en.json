@@ -600,7 +600,7 @@
       "description": "Choose a conversation from the sidebar to start chatting or view previous messages"
     },
     "input": {
-      "placeholder": "Write what you want to inquire about.....",
+      "placeholder": "Ask host whatever you want.....",
       "send": "Send",
       "sending": "Sending..."
     },
@@ -620,6 +620,9 @@
     "disclaimer": {
       "title": "Disclaimer",
       "description": "The platform disclaims responsibility for any financial transfers made outside the platform. Any insurance or remaining balance must also be paid before entering the unit."
+    },
+    "errors": {
+      "send-message": "Error"
     }
   }
 }

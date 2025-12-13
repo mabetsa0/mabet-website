@@ -1,7 +1,9 @@
 "use client"
 
 import { useCallback, useRef, useState } from "react"
+import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
+import { notifications } from "@mantine/notifications"
 import { useQueryClient } from "@tanstack/react-query"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useWsEvent } from "../_hooks/use-ws-event"
@@ -17,6 +19,7 @@ type SendMessageParams = {
 }
 
 export const useSendMessage = () => {
+  const t = useTranslations("chat")
   const user = useUserStore((state) => state.user)
   const { uuid } = useParams<{ uuid: string }>()!
   const queryClient = useQueryClient()
@@ -70,6 +73,13 @@ export const useSendMessage = () => {
 
       setIsLoading(false)
       setError(data.message)
+      notifications.show({
+        title: t("errors.send-message"),
+        message: data.message,
+        color: "red",
+        autoClose: 5000,
+        position: "top-right",
+      })
 
       // Remove the optimistic message from cache on error
       queryClient.setQueryData<{

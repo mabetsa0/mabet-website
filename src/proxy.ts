@@ -22,10 +22,13 @@ export default async function proxy(req: NextRequest) {
     )
   }
 
-  if (req.nextUrl.pathname.includes("/chat")) {
+  if (
+    req.nextUrl.pathname.includes("/chat") ||
+    req.nextUrl.pathname.includes("/units/")
+  ) {
     const session = await getServerSession()
     if (!session) {
-      return NextResponse.redirect(new URL("/", req.url))
+      return res
     }
 
     // Check if chat access token is cached in cookies

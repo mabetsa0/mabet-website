@@ -27,7 +27,7 @@ export default async function Page({
 
     return (
       <ChatProvider chatData={chatData}>
-        <ChatBody />
+        <ChatBody uuid={uuid} />
       </ChatProvider>
     )
   } catch (error) {

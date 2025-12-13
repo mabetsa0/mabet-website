@@ -4,6 +4,8 @@ import dynamicImport from "next/dynamic"
 import { notFound } from "next/navigation"
 import { Box, Stack } from "@mantine/core"
 import axios from "axios"
+import ChatModal from "@/app/[locale]/(website)/user/chat/_components/chat-modal"
+import { getCachedTokenFromCookie } from "@/app/[locale]/(website)/user/chat/_lib/get-cached-access-token"
 import Footer from "@/components/common/footer"
 import DataLayer from "@/components/data-layer"
 import MapWrapper from "@/components/map-wrapper"
@@ -61,6 +63,7 @@ const page = async (props: Props) => {
   const params = await props.params
   try {
     const unit = await GetUnit({ slug: params.slug })
+    const accessToken = await getCachedTokenFromCookie()
 
     return (
       <UnitContextProvider value={unit}>
@@ -110,6 +113,13 @@ const page = async (props: Props) => {
           <MobileCreateBookingButton />
         </Suspense>
         <Footer />
+        {accessToken ? (
+          <ChatModal
+            accessToken={accessToken}
+            topicId={unit.id.toString()}
+            partnerId={unit.partner.id.toString()}
+          />
+        ) : null}
       </UnitContextProvider>
     )
   } catch (error) {

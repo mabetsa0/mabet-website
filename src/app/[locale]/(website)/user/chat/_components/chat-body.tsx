@@ -1,11 +1,11 @@
 "use client"
 
-import React, { ComponentRef, useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import { Group, Loader, ScrollArea, Stack, Text } from "@mantine/core"
 import dayjs from "dayjs"
 import { mabetLogo } from "@/assets"
+import { cn } from "@/lib/cn"
 import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
 import { useUserStore } from "../_stores/user-store-provider"
@@ -15,10 +15,15 @@ import DateIndicator from "./date-indicator"
 import Message from "./message"
 import UnitCard from "./unit-card"
 
-const ChatBody = () => {
+const ChatBody = ({
+  uuid,
+  isModal = false,
+}: {
+  uuid: string
+  isModal?: boolean
+}) => {
   const t = useTranslations("chat")
   const chatData = useChatData()
-  const { uuid } = useParams<{ uuid: string }>()
   const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
     useInfiniteChat({ uuid })
@@ -27,7 +32,6 @@ const ChatBody = () => {
   const lastMessageRef = useRef<HTMLDivElement>(null)
   const hasScrolledToBottomRef = useRef(false)
   const lastMessageIdRef = useRef<string | null>(null)
-  const unitCardRef = useRef<ComponentRef<"div">>(null)
 
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
@@ -88,13 +92,18 @@ const ChatBody = () => {
     )
 
   return (
-    <div className="relative inset-0 z-1 flex h-full w-full flex-col bg-white max-sm:absolute">
-      <ChatHeader />
+    <div
+      className={cn(
+        "relative inset-0 z-1 flex h-full w-full flex-col bg-white",
+        !isModal ? "max-sm:absolute" : ""
+      )}
+    >
+      <ChatHeader isModal={isModal} />
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
         <div className="h-6"></div>
         {/* Infinite scroll trigger at the top */}
 
-        {chatData.topic_id ? (
+        {!isModal && chatData.topic_id ? (
           <UnitCard
             unit={{
               name: chatData.topic_name || "unknown",
