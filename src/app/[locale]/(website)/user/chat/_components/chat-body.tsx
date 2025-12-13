@@ -93,15 +93,7 @@ const ChatBody = () => {
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
         <div className="h-6"></div>
         {/* Infinite scroll trigger at the top */}
-        {hasNextPage && (
-          <div ref={triggerRef} className="flex justify-center py-1">
-            {isFetchingNextPage ? (
-              <Loader size={"xs"} />
-            ) : (
-              <div className="h-1" />
-            )}
-          </div>
-        )}
+
         {chatData.topic_id ? (
           <UnitCard
             unit={{
@@ -112,6 +104,15 @@ const ChatBody = () => {
             scrollIntoView={scrollToTop}
           />
         ) : null}
+        {hasNextPage && (
+          <div ref={triggerRef} className="flex justify-center py-1">
+            {isFetchingNextPage ? (
+              <Loader size={"xs"} />
+            ) : (
+              <div className="h-1" />
+            )}
+          </div>
+        )}
 
         <div className="px-[4px]">
           <Stack gap={"6"} className="px-1">
