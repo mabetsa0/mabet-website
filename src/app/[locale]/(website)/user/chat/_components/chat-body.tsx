@@ -8,6 +8,8 @@ import { mabetLogo } from "@/assets"
 import { cn } from "@/lib/cn"
 import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
+import { useWsChatsList } from "../_hooks/use-ws-chats-list"
+import { useSessionStore } from "../_stores/session-store-provider"
 import { useUserStore } from "../_stores/user-store-provider"
 import ChatHeader from "./chat-header"
 import ChatInput from "./chat-input"
@@ -23,6 +25,8 @@ const ChatBody = ({
   isModal?: boolean
 }) => {
   const t = useTranslations("chat")
+  const accessToken = useSessionStore((state) => state.accessToken)
+  const { refetch: refetchChatsList } = useWsChatsList(accessToken)
   const chatData = useChatData()
   const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =

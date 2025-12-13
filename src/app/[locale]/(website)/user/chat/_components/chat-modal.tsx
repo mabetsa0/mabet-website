@@ -75,7 +75,7 @@ function ChatModal({
       <ActionIcon
         size={50}
         loading={mutation.isPending}
-        className="fixed right-3 bottom-3 z-50"
+        className="fixed start-1.5 bottom-9 z-50 md:start-3 md:bottom-3"
         onClick={handleInitChat}
         variant="filled"
         radius="xl"

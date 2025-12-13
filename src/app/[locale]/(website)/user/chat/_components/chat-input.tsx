@@ -6,11 +6,13 @@ import { useParams } from "next/navigation"
 import { ActionIcon, Button } from "@mantine/core"
 import { Textarea } from "@mantine/core"
 import { Send } from "lucide-react"
+import { useChatData } from "../_contexts/chat-context"
 import { useSendMessage } from "../_hooks/use-send-message"
 
 const ChatInput = () => {
   const textAreRef = useRef<HTMLTextAreaElement>(null)
-  const { uuid } = useParams<{ uuid: string }>()!
+  const chatData = useChatData()
+  const uuid = chatData.uuid
   const { sendMessage, isLoading, error } = useSendMessage()
   const t = useTranslations("chat")
 

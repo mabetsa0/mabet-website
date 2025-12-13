@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import { notifications } from "@mantine/notifications"
 import { useQueryClient } from "@tanstack/react-query"
+import { useChatData } from "../_contexts/chat-context"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useWsEvent } from "../_hooks/use-ws-event"
 import { useUserStore } from "../_stores/user-store-provider"
@@ -21,7 +22,8 @@ type SendMessageParams = {
 export const useSendMessage = () => {
   const t = useTranslations("chat")
   const user = useUserStore((state) => state.user)
-  const { uuid } = useParams<{ uuid: string }>()!
+  const chatData = useChatData()
+  const uuid = chatData?.uuid
   const queryClient = useQueryClient()
   const { sendEvent } = useSendEvent()
   const [isLoading, setIsLoading] = useState(false)
