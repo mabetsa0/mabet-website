@@ -9,7 +9,15 @@ import ChatItem from "./chat-item"
 
 const ChatList = () => {
   const accessToken = useSessionStore((state) => state.accessToken)
-  const { data, isLoading, error, refetch } = useWsChatsList(accessToken)
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasMore,
+    error,
+    refetch,
+    triggerRef,
+  } = useWsChatsList(accessToken)
   const t = useTranslations("chat")
   return (
     <div className="h-[calc(100vh-73px)]">
@@ -42,6 +50,14 @@ const ChatList = () => {
                 <ChatItem key={conversation.uuid} conversation={conversation} />
               </div>
             ))}
+            {/* Trigger element for infinite scroll */}
+            <div ref={triggerRef} className="h-4" />
+            {/* Loading indicator for next page */}
+            {isFetchingNextPage && (
+              <div className="flex w-full items-center justify-center py-4">
+                <Loader size="sm" />
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex h-[calc(100vh-65px)] flex-col items-center justify-center gap-4 text-center">
