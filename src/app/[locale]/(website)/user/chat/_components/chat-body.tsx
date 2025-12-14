@@ -26,7 +26,7 @@ const ChatBody = ({
 }) => {
   const t = useTranslations("chat")
   const accessToken = useSessionStore((state) => state.accessToken)
-  const { refetch: refetchChatsList } = useWsChatsList(accessToken)
+  useWsChatsList(accessToken)
   const chatData = useChatData()
   const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
@@ -117,15 +117,6 @@ const ChatBody = ({
             scrollIntoView={scrollToTop}
           />
         ) : null}
-        {hasNextPage && (
-          <div ref={triggerRef} className="flex justify-center py-1">
-            {isFetchingNextPage ? (
-              <Loader size={"xs"} />
-            ) : (
-              <div className="h-1" />
-            )}
-          </div>
-        )}
 
         <div className="px-[4px]">
           <Stack gap={"6"} className="px-1">
@@ -165,6 +156,16 @@ const ChatBody = ({
               </Stack>
             </Group>
           </Stack>
+
+          {hasNextPage && (
+            <div ref={triggerRef} className="flex justify-center py-1">
+              {isFetchingNextPage ? (
+                <Loader size={"xs"} />
+              ) : (
+                <div className="h-1" />
+              )}
+            </div>
+          )}
 
           {/* Messages */}
           {messages.map((message, index) => {

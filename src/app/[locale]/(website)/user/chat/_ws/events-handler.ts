@@ -1,10 +1,10 @@
 import { WSOnEvents } from "./events"
 
-type EventHandler<T, ID> = (data: T, id: ID) => void
+export type WsEventHandler<T> = (data: T, id: string) => void
 
-const handlers: Partial<Record<WSOnEvents, EventHandler<any, string>[]>> = {}
+const handlers: Partial<Record<WSOnEvents, WsEventHandler<any>[]>> = {}
 
-export function onEvent<T>(event: WSOnEvents, cb: EventHandler<T, string>) {
+export function onEvent<T>(event: WSOnEvents, cb: WsEventHandler<T>) {
   if (!handlers[event]) handlers[event] = []
   handlers[event].push(cb)
 

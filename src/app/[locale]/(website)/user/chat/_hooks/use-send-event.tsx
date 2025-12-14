@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { getOrInitWebSocket, wsSendEvent } from "../_ws"
 import { WSSendEventPayloadByEvent, WSSendEvents } from "../_ws/events"
@@ -10,9 +10,10 @@ type PendingEvent<T extends WSSendEvents> = {
 }
 
 export function useSendEvent() {
+  const [lastEventId, setLastEventId] = useState<string>()
   const queueRef = useRef<PendingEvent<WSSendEvents>[]>([])
 
-  const flushQueue = useCallback(() => {
+  const flushQueue = () => {
     const socket = getOrInitWebSocket()
     if (!socket || socket.readyState !== WebSocket.OPEN) return
 
@@ -22,7 +23,7 @@ export function useSendEvent() {
 
       wsSendEvent(next.event, next.payload, next.id)
     }
-  }, [])
+  }
 
   useEffect(() => {
     // Initialize socket when hook mounts to ensure it's ready
@@ -58,24 +59,22 @@ export function useSendEvent() {
     }
   }, [flushQueue])
 
-  const sendEvent = useCallback(
-    <E extends WSSendEvents>(
-      event: E,
-      payload: WSSendEventPayloadByEvent[E]
-    ) => {
-      const id = uuidv4()
-      const socket = getOrInitWebSocket()
+  const sendEvent = <E extends WSSendEvents>(
+    event: E,
+    payload: WSSendEventPayloadByEvent[E]
+  ) => {
+    const id = uuidv4()
+    const socket = getOrInitWebSocket()
 
-      if (!socket || socket.readyState !== WebSocket.OPEN) {
-        queueRef.current.push({ id, event, payload })
-        return id
-      }
-
-      wsSendEvent(event, payload, id)
+    if (!socket || socket.readyState !== WebSocket.OPEN) {
+      queueRef.current.push({ id, event, payload })
       return id
-    },
-    []
-  )
+    }
 
-  return { sendEvent }
+    wsSendEvent(event, payload, id)
+    setLastEventId(id)
+    return id
+  }
+
+  return { sendEvent, lastEventId }
 }
