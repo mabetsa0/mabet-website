@@ -6,19 +6,7 @@ import { useWsEvent } from "../_hooks/use-ws-event"
 import { useUserStore } from "../_stores/user-store-provider"
 import { Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS, WS_SEND_EVENTS } from "../_ws/events"
-
-type AuthenticatedEventPayload = {
-  user_id: number
-  user_type: string
-  user_name: string
-  unread_conversations_count: number
-  first_conversations_page: Conversation[]
-}
-
-type ConversationsPageEventPayload = {
-  conversations: Conversation[]
-  has_more?: boolean
-}
+import { WsEventHandler } from "../_ws/events-handler"
 
 export const useWsChatsList = (accessToken: string) => {
   const setUser = useUserStore((state) => state.setUser)
@@ -33,7 +21,9 @@ export const useWsChatsList = (accessToken: string) => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const conversationsPageSize = 10
 
-  const handleAuthenticated = (data: AuthenticatedEventPayload) => {
+  const handleAuthenticated: WsEventHandler<
+    typeof WS_ON_EVENTS.AUTHENTICATED
+  > = (data) => {
     setIsLoading(false)
     setError(null)
     setConversations(data.first_conversations_page)
@@ -45,38 +35,31 @@ export const useWsChatsList = (accessToken: string) => {
     })
   }
   // Register the event listener
-  useWsEvent<AuthenticatedEventPayload>(
-    WS_ON_EVENTS.AUTHENTICATED,
-    handleAuthenticated
-  )
+  useWsEvent(WS_ON_EVENTS.AUTHENTICATED, handleAuthenticated)
 
-  const handleConversationsPage = (
-    data: ConversationsPageEventPayload,
-    id: string
-  ) => {
+  const handleConversationsPage: WsEventHandler<
+    typeof WS_ON_EVENTS.CONVERSATIONS_PAGE
+  > = (data, id) => {
     // Only handle responses related to the latest GET_CONVERSATION_PAGE event we sent
     if (id !== lastGetPageEventIdRef.current) return
 
     setIsFetchingNextPage(false)
-    if (data.conversations.length > 0) {
-      setConversations((prev) => [...prev, ...data.conversations])
+    if (data.conversations_page.length > 0) {
+      setConversations((prev) => [...prev, ...data.conversations_page])
       // If we got fewer conversations than requested, there are no more pages
       setHasMore(
         data.has_more !== undefined
           ? data.has_more
-          : data.conversations.length >= conversationsPageSize
+          : data.conversations_page.length >= conversationsPageSize
       )
     } else {
       setHasMore(false)
     }
   }
 
-  useWsEvent<ConversationsPageEventPayload>(
-    WS_ON_EVENTS.CONVERSATIONS_PAGE,
-    handleConversationsPage
-  )
+  useWsEvent(WS_ON_EVENTS.CONVERSATIONS_PAGE, handleConversationsPage)
 
-  const handleError = (data: { code: string; message: string }, id: string) => {
+  const handleError: WsEventHandler<typeof WS_ON_EVENTS.ERROR> = (data, id) => {
     // Handle errors related to AUTHENTICATE event
     if (id === lastAuthenticateEventIdRef.current) {
       setIsLoading(false)
