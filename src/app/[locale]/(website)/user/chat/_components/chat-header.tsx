@@ -12,7 +12,7 @@ const ChatHeader = () => {
         <ActionIcon
           variant="transparent"
           size="lg"
-          onClick={() => router.back()}
+          onClick={() => router.push("/user/chat")}
         >
           <ChevronRight className="ltr:rotate-180" />
         </ActionIcon>
