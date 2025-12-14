@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useLayoutEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import { Group, Loader, ScrollArea, Stack, Text } from "@mantine/core"
 import dayjs from "dayjs"
@@ -28,7 +28,6 @@ const ChatBody = ({
   const accessToken = useSessionStore((state) => state.accessToken)
   useWsChatsList(accessToken)
   const chatData = useChatData()
-  const user = useUserStore((s) => s.user)
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
     useInfiniteChat({ uuid })
 
@@ -39,15 +38,11 @@ const ChatBody = ({
 
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
-    // Try to find the ScrollArea viewport
     const viewport = scrollAreaRef.current
-
-    setTimeout(() => {
-      viewport?.scrollTo({
-        top: viewport!.scrollHeight,
-        behavior,
-      })
-    }, 0)
+    viewport?.scrollTo({
+      top: viewport!.scrollHeight,
+      behavior,
+    })
   }
   // scroll to top
   const scrollToTop = () => {
@@ -84,13 +79,6 @@ const ChatBody = ({
       scrollToBottom("smooth")
     }
   }, [messages])
-
-  if (isLoading || !user?.id)
-    return (
-      <div className="relative inset-0 z-1 flex w-full items-center justify-center bg-white max-sm:absolute sm:h-[calc(100vh-100px)]">
-        <Loader />
-      </div>
-    )
 
   return (
     <div
