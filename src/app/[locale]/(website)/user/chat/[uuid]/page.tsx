@@ -30,8 +30,12 @@ export default async function Page({
         <ChatBody uuid={uuid} />
       </ChatProvider>
     )
-  } catch (error) {
+  } catch (error: any) {
     console.error(error)
-    return <div>{JSON.stringify(error)}</div>
+    return (
+      <div className="py-2 text-center text-red-500">
+        {JSON.stringify(error.message)}
+      </div>
+    )
   }
 }

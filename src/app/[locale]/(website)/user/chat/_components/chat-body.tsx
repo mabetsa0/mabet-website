@@ -10,7 +10,6 @@ import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
 import { useWsChatsList } from "../_hooks/use-ws-chats-list"
 import { useSessionStore } from "../_stores/session-store-provider"
-import { useUserStore } from "../_stores/user-store-provider"
 import ChatHeader from "./chat-header"
 import ChatInput from "./chat-input"
 import DateIndicator from "./date-indicator"
@@ -89,58 +88,63 @@ const ChatBody = ({
     >
       {isModal ? null : <ChatHeader />}
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
-        {!isModal && <div className="h-6"></div>}
-        {/* Infinite scroll trigger at the top */}
+        {(!hasNextPage || !isModal || isLoading) && <div className="h-6"></div>}
 
-        {!isModal && chatData.topic_id ? (
-          <UnitCard
-            unit={{
-              name: chatData.topic_name || "unknown",
-              id: chatData.topic_id.toString() || "unknown",
-              image: chatData.image || "",
-            }}
-            scrollIntoView={scrollToTop}
-          />
-        ) : null}
+        {hasNextPage || isLoading ? null : (
+          <>
+            {!isModal && chatData.topic_id ? (
+              <UnitCard
+                unit={{
+                  name: chatData.topic_name || "unknown",
+                  id: chatData.topic_id.toString() || "unknown",
+                  image: chatData.image || "",
+                }}
+                scrollIntoView={scrollToTop}
+              />
+            ) : null}
+          </>
+        )}
 
         <div className="px-[4px]">
-          <Stack gap={"6"} className="px-1">
-            <Group
-              wrap="nowrap"
-              align="start"
-              p={"sm"}
-              className="border-primary rounded border"
-              bg={"#18807826"}
-            >
-              <img alt="mabet" src={mabetLogo.src} width={42} />
-              <Stack gap={"4"}>
-                <Text className="text-h5 font-bold">
-                  {t("important-note.title")}
-                </Text>
-                <Text size={"sm"} className="text-primary">
-                  {t("important-note.description")}
-                </Text>
-              </Stack>
-            </Group>
-            <Group
-              wrap="nowrap"
-              align="start"
-              p={"sm"}
-              my={"xs"}
-              className="border-primary rounded border"
-              bg={"#18807826"}
-            >
-              <img alt="mabet" src={mabetLogo.src} width={42} />
-              <Stack gap={"4"}>
-                <Text className="text-h5 font-bold">
-                  {t("disclaimer.title")}
-                </Text>
-                <Text size={"sm"} className="text-primary">
-                  {t("disclaimer.description")}
-                </Text>
-              </Stack>
-            </Group>
-          </Stack>
+          {hasNextPage || isLoading ? null : (
+            <Stack gap={"6"} className="px-1">
+              <Group
+                wrap="nowrap"
+                align="start"
+                p={"sm"}
+                className="border-primary rounded border"
+                bg={"#18807826"}
+              >
+                <img alt="mabet" src={mabetLogo.src} width={42} />
+                <Stack gap={"4"}>
+                  <Text className="text-h5 font-bold">
+                    {t("important-note.title")}
+                  </Text>
+                  <Text size={"sm"} className="text-primary">
+                    {t("important-note.description")}
+                  </Text>
+                </Stack>
+              </Group>
+              <Group
+                wrap="nowrap"
+                align="start"
+                p={"sm"}
+                my={"xs"}
+                className="border-primary rounded border"
+                bg={"#18807826"}
+              >
+                <img alt="mabet" src={mabetLogo.src} width={42} />
+                <Stack gap={"4"}>
+                  <Text className="text-h5 font-bold">
+                    {t("disclaimer.title")}
+                  </Text>
+                  <Text size={"sm"} className="text-primary">
+                    {t("disclaimer.description")}
+                  </Text>
+                </Stack>
+              </Group>
+            </Stack>
+          )}
 
           {hasNextPage && (
             <div ref={triggerRef} className="flex justify-center py-1">
