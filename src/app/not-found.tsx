@@ -11,7 +11,7 @@ export default function NotFound() {
     <html lang="en">
       <body className="bg-white">
         <main>
-          <div className="container flex h-[100vh] items-center justify-center py-10">
+          <div className="container flex h-screen items-center justify-center py-10">
             <div>
               <Image
                 src={notFound}

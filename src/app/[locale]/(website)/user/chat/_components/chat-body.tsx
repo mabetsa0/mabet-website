@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useLayoutEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import { Group, Loader, ScrollArea, Stack, Text } from "@mantine/core"
 import dayjs from "dayjs"
@@ -42,15 +42,12 @@ const ChatBody = ({
     // Try to find the ScrollArea viewport
     const viewport = scrollAreaRef.current
 
-    if (viewport) {
-      viewport.scrollTo({
-        top: viewport.scrollHeight,
+    setTimeout(() => {
+      viewport?.scrollTo({
+        top: viewport!.scrollHeight,
         behavior,
       })
-    } else if (lastMessageRef.current) {
-      // Fallback to scrollIntoView
-      lastMessageRef.current.scrollIntoView({ behavior })
-    }
+    }, 0)
   }
   // scroll to top
   const scrollToTop = () => {
@@ -62,7 +59,7 @@ const ChatBody = ({
 
   // Scroll to bottom on initial load
   useEffect(() => {
-    if (!isLoading && messages.length > 0 && !hasScrolledToBottomRef.current) {
+    if (!isLoading && !hasScrolledToBottomRef.current) {
       // Use instant scroll for initial load
       scrollToBottom("instant")
       hasScrolledToBottomRef.current = true
