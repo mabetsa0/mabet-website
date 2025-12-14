@@ -3,13 +3,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useWsEvent } from "../_hooks/use-ws-event"
-import { useUserStore } from "../_stores/user-store-provider"
 import { Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS, WS_SEND_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 
 export const useWsChatsList = (accessToken: string) => {
-  const setUser = useUserStore((state) => state.setUser)
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false)
@@ -23,16 +21,13 @@ export const useWsChatsList = (accessToken: string) => {
 
   const handleAuthenticated: WsEventHandler<
     typeof WS_ON_EVENTS.AUTHENTICATED
-  > = (data) => {
+  > = (data, id) => {
+    if (id !== lastAuthenticateEventIdRef.current) return
+
     setIsLoading(false)
     setError(null)
     setConversations(data.first_conversations_page)
     setHasMore(data.first_conversations_page.length >= conversationsPageSize)
-    setUser({
-      id: data.user_id.toString(),
-      name: data.user_name,
-      type: data.user_type as "user" | "guest",
-    })
   }
   // Register the event listener
   useWsEvent(WS_ON_EVENTS.AUTHENTICATED, handleAuthenticated)

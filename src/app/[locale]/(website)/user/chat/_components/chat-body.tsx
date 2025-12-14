@@ -8,8 +8,7 @@ import { mabetLogo } from "@/assets"
 import { cn } from "@/lib/cn"
 import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
-import { useWsChatsList } from "../_hooks/use-ws-chats-list"
-import { useSessionStore } from "../_stores/session-store-provider"
+import { useUserStore } from "../_stores/user-store-provider"
 import ChatHeader from "./chat-header"
 import ChatInput from "./chat-input"
 import DateIndicator from "./date-indicator"
@@ -23,9 +22,8 @@ const ChatBody = ({
   uuid: string
   isModal?: boolean
 }) => {
+  const user = useUserStore((state) => state.user)
   const t = useTranslations("chat")
-  const accessToken = useSessionStore((state) => state.accessToken)
-  useWsChatsList(accessToken)
   const chatData = useChatData()
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
     useInfiniteChat({ uuid })
@@ -53,13 +51,13 @@ const ChatBody = ({
 
   // Scroll to bottom on initial load
   useEffect(() => {
-    if (!isLoading && !hasScrolledToBottomRef.current) {
+    if (user?.id && !isLoading && !hasScrolledToBottomRef.current) {
       // Use instant scroll for initial load
       scrollToBottom("instant")
       hasScrolledToBottomRef.current = true
       lastMessageIdRef.current = messages[messages.length - 1]?.id || null
     }
-  }, [isLoading])
+  }, [isLoading, user?.id])
 
   // Scroll to bottom when new messages are added at the end (after sending)
   useEffect(() => {
@@ -88,7 +86,7 @@ const ChatBody = ({
     >
       {isModal ? null : <ChatHeader />}
       <ScrollArea viewportRef={scrollAreaRef} className="h-full">
-        {(!hasNextPage || !isModal || isLoading) && <div className="h-6"></div>}
+        {isModal || isLoading ? null : <div className="h-6"></div>}
 
         {hasNextPage || isLoading ? null : (
           <>
@@ -157,24 +155,28 @@ const ChatBody = ({
           )}
 
           {/* Messages */}
-          {messages.map((message, index) => {
-            return (
-              <React.Fragment key={`message_${message.id}`}>
-                {index === 0 ||
-                dayjs(message.created_at).format("DD/MM/YYYY") !==
-                  dayjs(messages[index - 1]?.created_at).format(
-                    "DD/MM/YYYY"
-                  ) ? (
-                  <DateIndicator date={message.created_at} />
-                ) : null}
-                <div
-                  ref={index === messages.length - 1 ? lastMessageRef : null}
-                >
-                  <Message {...message} />
-                </div>
-              </React.Fragment>
-            )
-          })}
+          {messages.length > 0 && user?.id
+            ? messages.map((message, index) => {
+                return (
+                  <React.Fragment key={`message_${message.id}`}>
+                    {index === 0 ||
+                    dayjs(message.created_at).format("DD/MM/YYYY") !==
+                      dayjs(messages[index - 1]?.created_at).format(
+                        "DD/MM/YYYY"
+                      ) ? (
+                      <DateIndicator date={message.created_at} />
+                    ) : null}
+                    <div
+                      ref={
+                        index === messages.length - 1 ? lastMessageRef : null
+                      }
+                    >
+                      <Message {...message} />
+                    </div>
+                  </React.Fragment>
+                )
+              })
+            : null}
         </div>
       </ScrollArea>
       <ChatInput />

@@ -7,6 +7,9 @@ import { type UserStore, createUserStore } from "../_stores/user-store"
 
 export type UserStoreApi = ReturnType<typeof createUserStore>
 
+// Store instance that can be accessed outside React
+let storeInstance: UserStoreApi | null = null
+
 export const UserStoreContext = createContext<UserStoreApi | undefined>(
   undefined
 )
@@ -22,6 +25,8 @@ export const UserStoreProvider = ({
   const storeRef = useRef<UserStoreApi | null>(null)
   if (storeRef.current === null) {
     storeRef.current = createUserStore({ user })
+    // Store the instance globally so it can be accessed outside React
+    storeInstance = storeRef.current
   }
 
   return (
@@ -39,4 +44,22 @@ export const useUserStore = <T,>(selector: (store: UserStore) => T): T => {
   }
 
   return useStore(userStoreContext, selector)
+}
+
+/**
+ * Get the user store instance for use outside React components.
+ * Returns null if the store hasn't been initialized yet.
+ *
+ * @example
+ * ```ts
+ * // In a utility function
+ * const store = getUserStore()
+ * if (store) {
+ *   const user = store.getState().user
+ *   store.getState().setUser({ id: '1', name: 'John', type: 'user' })
+ * }
+ * ```
+ */
+export const getUserStore = (): UserStoreApi | null => {
+  return storeInstance
 }

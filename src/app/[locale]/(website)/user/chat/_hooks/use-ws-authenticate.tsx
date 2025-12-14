@@ -15,7 +15,8 @@ export const useWsAuthenticate = (accessToken: string) => {
 
   const handleAuthenticated: WsEventHandler<
     typeof WS_ON_EVENTS.AUTHENTICATED
-  > = (data) => {
+  > = (data, id) => {
+    if (id !== lastAuthenticateEventIdRef.current) return
     setError(null)
     setUser({
       id: data.user_id.toString(),
@@ -42,7 +43,7 @@ export const useWsAuthenticate = (accessToken: string) => {
       WS_SEND_EVENTS.AUTHENTICATE,
       {
         token: accessToken,
-        first_conversations_page_size: 0,
+        first_conversations_page_size: 1,
       }
     )!
   }, [accessToken])

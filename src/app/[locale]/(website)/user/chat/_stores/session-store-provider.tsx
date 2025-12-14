@@ -7,6 +7,9 @@ import { type SessionStore, createSessionStore } from "../_stores/session-store"
 
 export type SessionStoreApi = ReturnType<typeof createSessionStore>
 
+// Store instance that can be accessed outside React
+let storeInstance: SessionStoreApi | null = null
+
 export const SessionStoreContext = createContext<SessionStoreApi | undefined>(
   undefined
 )
@@ -22,6 +25,8 @@ export const SessionStoreProvider = ({
   const storeRef = useRef<SessionStoreApi | null>(null)
   if (storeRef.current === null) {
     storeRef.current = createSessionStore({ accessToken })
+    // Store the instance globally so it can be accessed outside React
+    storeInstance = storeRef.current
   }
 
   return (
@@ -41,4 +46,22 @@ export const useSessionStore = <T,>(
   }
 
   return useStore(sessionStoreContext, selector)
+}
+
+/**
+ * Get the session store instance for use outside React components.
+ * Returns null if the store hasn't been initialized yet.
+ *
+ * @example
+ * ```ts
+ * // In a utility function
+ * const store = getSessionStore()
+ * if (store) {
+ *   const accessToken = store.getState().accessToken
+ *   store.setState({ accessToken: 'new-token' })
+ * }
+ * ```
+ */
+export const getSessionStore = (): SessionStoreApi | null => {
+  return storeInstance
 }
