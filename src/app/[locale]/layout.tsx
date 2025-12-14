@@ -1,15 +1,11 @@
-import { hasLocale, NextIntlClientProvider } from "next-intl"
-import { setRequestLocale } from "next-intl/server"
+import { Suspense } from "react"
+import { NextIntlClientProvider } from "next-intl"
 import { IBM_Plex_Sans_Arabic } from "next/font/google"
-import { notFound } from "next/navigation"
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core"
 import { TestTube2 } from "lucide-react"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import GlobalDataContextProvider from "@/context/global-data-context"
-import { getServerSession } from "@/lib/get-server-session"
-import { routing } from "@/lib/i18n/routing"
 import MyReactQueryProvider from "@/lib/react-query"
-import { getCities, getUnitTypes } from "@/services/lists"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import { InitSession } from "./components/init-session"
@@ -21,7 +17,6 @@ const arFont = IBM_Plex_Sans_Arabic({
   variable: "--font",
 })
 
-export const revalidate = 3600
 export default async function LocaleLayout({
   children,
   params,
@@ -31,16 +26,6 @@ export default async function LocaleLayout({
 }) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
-
-  // for static rendering
-  setRequestLocale(locale)
-
-  const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
-
-  const session = await getServerSession()
 
   return (
     <html
@@ -53,23 +38,25 @@ export default async function LocaleLayout({
         <Scripts />
       </head>
       <body className={`${arFont.className} ${arFont.variable}`}>
-        <GlobalDataContextProvider cities={cities} unitTypes={unitTypes}>
-          <MyReactQueryProvider>
+        <MyReactQueryProvider>
+          <GlobalDataContextProvider>
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  <InitSession initialValue={session} />
                   {children}
                   {process.env.NEXT_PUBLIC_TEST == "true" && (
                     <div className="fixed right-1 bottom-4 z-10 rounded-full bg-gray-200 p-0.5">
                       <TestTube2 className="text-primary" />
                     </div>
                   )}
+                  <Suspense>
+                    <InitSession />
+                  </Suspense>
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>
-          </MyReactQueryProvider>
-        </GlobalDataContextProvider>
+          </GlobalDataContextProvider>
+        </MyReactQueryProvider>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

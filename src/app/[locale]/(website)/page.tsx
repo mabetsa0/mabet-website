@@ -1,12 +1,8 @@
 import { Suspense } from "react"
 import { Metadata } from "next"
-import { hasLocale } from "next-intl"
-import { setRequestLocale } from "next-intl/server"
 import dynamic from "next/dynamic"
-import { notFound } from "next/navigation"
 import { Loader } from "@mantine/core"
 import Footer from "@/components/common/footer"
-import { routing } from "@/lib/i18n/routing"
 import { SEO } from "@/services/get-seo"
 import AddYourUnit from "./components/add-your-unit"
 import DownLoadApp from "./components/download-app"
@@ -22,32 +18,12 @@ const Blogs = dynamic(async () => import("./components/blogs"))
 export async function generateMetadata(): Promise<Metadata> {
   return await SEO("/home")
 }
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  // Ensure that the incoming `locale` is valid
-  const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
 
-  // for static rendering
-  setRequestLocale(locale)
-
+export default async function Page() {
   return (
     <>
       <Hero />
-      <Suspense
-        fallback={
-          <div className="flex min-h-svh items-center justify-center">
-            <Loader />
-          </div>
-        }
-      >
-        <UnitTypes />
-      </Suspense>
+      <UnitTypes />
       <Suspense
         fallback={
           <div className="flex min-h-svh items-center justify-center">

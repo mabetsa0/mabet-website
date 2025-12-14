@@ -1,18 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { Grid, GridCol } from "@mantine/core"
-import { Session } from "@/@types/user"
 import { dotBg } from "@/assets"
 import Footer from "@/components/common/footer"
 import { getServerSession } from "@/lib/get-server-session"
 import { redirect } from "@/lib/i18n/navigation"
 import SideBar from "./components/side-bar"
 import UserStatus from "./components/user-status"
-
-export interface UserResponse {
-  data: Session
-  message: null
-  success: boolean
-}
 
 export default async function Layout({
   params,
@@ -22,13 +15,14 @@ export default async function Layout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = (await params) as { locale: "ar" | "en" }
+
   const session = await getServerSession()
 
   if (!session) return redirect({ href: { pathname: "/" }, locale })
 
   return (
     <>
-      <section className="relative bg-[linear-gradient(100.06deg,_#188078_42.47%,_#051A18_88.92%)]">
+      <section className="relative bg-[linear-gradient(100.06deg,#188078_42.47%,#051A18_88.92%)]">
         <img
           alt="dots"
           className="absolute h-full w-full object-cover"
