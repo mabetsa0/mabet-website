@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 import { notifications } from "@mantine/notifications"
 import { useQueryClient } from "@tanstack/react-query"
@@ -20,20 +20,20 @@ type SendMessageParams = {
 }
 
 export const useSendMessage = () => {
-  const queryClient = useQueryClient()
   const t = useTranslations("chat")
   const user = useUserStore((state) => state.user)
-  const { uuid } = useChatData()
-  const { sendEvent, lastEventId } = useSendEvent()
-
-  // internal state
+  const chatData = useChatData()
+  const uuid = chatData?.uuid
+  const queryClient = useQueryClient()
+  const { sendEvent } = useSendEvent()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const lastSendMessageEventIdRef = useRef<string | null>(null)
   const optimisticMessageIdRef = useRef<string | null>(null)
 
   const handleMessageSent = (data: MessageSentEventPayload, id: string) => {
     // Only handle responses related to the latest SEND_MESSAGE event we sent
-    if (id !== lastEventId) return
+    if (id !== lastSendMessageEventIdRef.current) return
 
     setIsLoading(false)
     setError(null)
@@ -66,7 +66,6 @@ export const useSendMessage = () => {
   )
 
   const handleError = (data: { code: string; message: string }) => {
-    // Only handle errors related to the latest SEND_MESSAGE event we sent
     setIsLoading(false)
     setError(data.message)
     notifications.show({
@@ -98,7 +97,7 @@ export const useSendMessage = () => {
     optimisticMessageIdRef.current = null
   }
 
-  useWsError(lastEventId, handleError)
+  useWsError(lastSendMessageEventIdRef.current ?? undefined, handleError)
 
   const sendMessage = ({ conversation_uuid, content }: SendMessageParams) => {
     if (!user) {
@@ -170,7 +169,7 @@ export const useSendMessage = () => {
     })
 
     // Send the message via WebSocket
-    sendEvent(WS_SEND_EVENTS.SEND_MESSAGE, {
+    lastSendMessageEventIdRef.current = sendEvent(WS_SEND_EVENTS.SEND_MESSAGE, {
       conversation_uuid,
       type: "text",
       content: content.trim(),

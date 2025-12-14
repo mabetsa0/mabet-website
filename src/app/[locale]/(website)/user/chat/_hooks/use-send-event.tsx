@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { getOrInitWebSocket, wsSendEvent } from "../_ws"
 import { WSSendEventPayloadByEvent, WSSendEvents } from "../_ws/events"

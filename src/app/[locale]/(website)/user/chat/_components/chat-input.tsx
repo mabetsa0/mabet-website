@@ -11,7 +11,7 @@ const ChatInput = () => {
   const textAreRef = useRef<HTMLTextAreaElement>(null)
   const chatData = useChatData()
   const uuid = chatData.uuid
-  const { sendMessage, isLoading, error } = useSendMessage()
+  const { sendMessage, error } = useSendMessage()
   const t = useTranslations("chat")
 
   // dynamic resizing text area
@@ -28,7 +28,7 @@ const ChatInput = () => {
   }
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim() || isLoading) return
+    if (!inputMessage.trim()) return
 
     sendMessage({
       conversation_uuid: uuid,
@@ -67,7 +67,7 @@ const ChatInput = () => {
               size={"xl"}
               radius={"xl"}
               onClick={handleSendMessage}
-              disabled={isLoading || !inputMessage.trim()}
+              disabled={!inputMessage.trim()}
             >
               <Send className="rtl:-rotate-90" />
             </ActionIcon>
