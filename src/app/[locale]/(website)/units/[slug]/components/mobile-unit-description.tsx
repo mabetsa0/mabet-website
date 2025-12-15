@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 import { Badge, Divider, Group, Space, Stack, Text } from "@mantine/core"
 import { QrCode } from "lucide-react"
-import { mabetLogo, madfu, sharpShape, tabby, torism } from "@/assets"
+import { mabetLogo, madfu, sharpShape, tabby, tamara, torism } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useUnitData } from "../context/unit-context"
 import useCheckAvailability from "../hooks/use-check-availability"
@@ -79,10 +79,11 @@ const MobileUnitDescription = () => {
           <Text c={"#767676"}>{unit.tabby.tabby_text}</Text>
         </Group>
       ) : null}
-      {unit.madfu.enabled ? (
+
+      {unit.tamara.enabled ? (
         <Group p={"sm"} className="rounded border border-[#F3F3F3]">
-          <img src={madfu.src} alt="madfu" width={63} />
-          <Text c={"#767676"}>{unit.madfu.tabby_text}</Text>
+          <img src={tamara.src} alt="tamara" width={63} />
+          <Text c={"#767676"}>{unit.tamara.tabby_text}</Text>
         </Group>
       ) : null}
       <Space />

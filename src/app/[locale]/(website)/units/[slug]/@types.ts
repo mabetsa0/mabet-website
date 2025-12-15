@@ -44,6 +44,7 @@ export interface FullUnitData {
   response_rate: string
   tabby: Madfu
   madfu: Madfu
+  tamara: Madfu
   reviews: Reviews
   images: Image[]
   cancellation_policy: CancellationPolicy
