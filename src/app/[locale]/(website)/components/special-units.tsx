@@ -7,7 +7,6 @@ const SpecialUnits = async () => {
   const specialUnits = await getSpecialUnits()
   const t = await getTranslations("home.special-units")
 
-  await new Promise((resolve) => setTimeout(resolve, 10000))
   return (
     <UnitsCarousel
       title={t("title")}

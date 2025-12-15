@@ -85,12 +85,22 @@ const nextConfig = withBundleAnalyzer(
         "@mantine/notifications",
         "@mantine/carousel",
         "lucide-react",
+        "@tanstack/react-query",
       ],
 
       staleTimes: {
         dynamic: 60,
         static: 180,
       },
+    },
+    // Optimize production builds
+    compiler: {
+      removeConsole:
+        process.env.NODE_ENV === "production"
+          ? {
+              exclude: ["error", "warn"],
+            }
+          : false,
     },
   })
 )
