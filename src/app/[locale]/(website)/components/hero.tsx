@@ -12,7 +12,7 @@ export default async function Hero() {
 
   return (
     <>
-      <section className="relative flex h-[30svh] items-center md:h-[calc(100svh_-_74px)]">
+      <section className="relative flex h-[30svh] items-center md:h-[calc(100svh-74px)]">
         <Image
           src={heroBackground}
           alt="background"

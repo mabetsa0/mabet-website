@@ -15,6 +15,8 @@ const arFont = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font",
+  display: "swap",
+  preload: true,
 })
 
 export default async function LocaleLayout({
@@ -34,6 +36,17 @@ export default async function LocaleLayout({
       {...mantineHtmlProps}
     >
       <head>
+        {/* Preconnect hints for external origins to reduce connection time */}
+        <link rel="preconnect" href="https://app.mabet.com.sa" />
+        <link rel="dns-prefetch" href="https://app.mabet.com.sa" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://static.hotjar.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <ColorSchemeScript />
         <Scripts />
       </head>

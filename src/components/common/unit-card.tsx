@@ -55,9 +55,9 @@ const UnitCard = (props: Unit & { className?: string }) => {
         props.className
       )}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded">
+      <div className="relative aspect-4/3 w-full overflow-hidden rounded">
         <ActionIcon
-          className="absolute top-0 left-0 z-[1]"
+          className="absolute top-0 left-0 z-1"
           variant="light"
           color="white"
           size={"lg"}
@@ -73,7 +73,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           leftSection={<img src={fallingStar.src} alt="stars" />}
           size="lg"
           radius={"0"}
-          className="absolute top-0 right-0 z-[1] rounded-bl-md border border-white"
+          className="absolute top-0 right-0 z-1 rounded-bl-md border border-white"
         >
           {props.stars || "00"}{" "}
           {props.reviews_count ? `${props.reviews_count_text}` : ""}
@@ -98,8 +98,8 @@ const UnitCard = (props: Unit & { className?: string }) => {
           }}
         >
           {props.images.map((image, index) => (
-            <Carousel.Slide className="aspect-[4/3] w-full" key={index}>
-              <div className="aspect-[4/3] w-full">
+            <Carousel.Slide className="aspect-4/3 w-full" key={index}>
+              <div className="aspect-4/3 w-full">
                 <Image
                   loading="lazy"
                   className="h-full w-full object-cover"
