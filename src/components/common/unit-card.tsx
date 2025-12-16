@@ -50,6 +50,19 @@ const UnitCard = (props: Unit & { className?: string }) => {
     to: parseAsString.withDefault(dayjs().add(1, "days").format("YYYY-MM-DD")),
   })
 
+  // Load initial images on mount (fallback for when embla isn't ready yet)
+  useEffect(() => {
+    // Load first 3 images immediately to ensure they're ready on page reload
+    setLoadedImages((prev) => {
+      const newSet = new Set(prev)
+      const imagesToLoad = Math.min(3, props.images.length)
+      for (let i = 0; i < imagesToLoad; i++) {
+        newSet.add(i)
+      }
+      return newSet
+    })
+  }, [props.images.length])
+
   // Track which slides are visible and load their images
   useEffect(() => {
     if (!embla) return
@@ -146,7 +159,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     src={image.image_path}
                     alt={image.alt}
                     decoding="async"
-                    loading="lazy"
+                    loading={index === 0 ? "eager" : "lazy"}
                     fetchPriority={index === 0 ? "high" : "auto"}
                     draggable="false"
                     sizes="(max-width: 1024px) 100vw, 70vw"
