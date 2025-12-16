@@ -1,13 +1,13 @@
-"use client"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Image, SimpleGrid, Stack, Text, Title } from "@mantine/core"
+import { getUnitTypes } from "@/api/services/lists"
 import { UnitTypeIcons } from "@/assets"
-import { useUnitTypes } from "@/context/global-data-context"
 import { Link } from "@/lib/i18n/navigation"
 
-const UnitTypes = () => {
-  const t = useTranslations("home.unit-types")
-  const unitTypes = useUnitTypes()
+const UnitTypes = async () => {
+  const t = await getTranslations("home.unit-types")
+  const response = await getUnitTypes()
+  const unitTypes = response.data.unit_types
   return (
     <section>
       <div className="container mx-auto py-4">

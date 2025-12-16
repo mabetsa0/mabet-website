@@ -7,6 +7,7 @@ import Hero from "./components/hero"
 import NewUnits from "./components/new-units"
 import SpecialUnits from "./components/special-units"
 import TopRatedUnits from "./components/top-rated-units"
+import UnitTypes from "./components/unit-types"
 
 // Lazy load non-critical components to reduce initial bundle size
 // Using ssr: false for client-only components and proper loading states
@@ -22,9 +23,7 @@ const AddYourUnit = dynamic(() => import("./components/add-your-unit"), {
 const DownLoadApp = dynamic(() => import("./components/download-app"), {
   loading: () => null,
 })
-const UnitTypes = dynamic(() => import("./components/unit-types"), {
-  loading: () => null,
-})
+
 const WhyMabet = dynamic(() => import("./components/why-mabet"), {
   loading: () => null,
 })
