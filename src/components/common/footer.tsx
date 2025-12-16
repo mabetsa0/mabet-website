@@ -122,7 +122,7 @@ const Footer = () => {
         <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb={"xl"} spacing="40px">
           <Stack>
             <div>
-              <Image loading="lazy" className="h-3.5" src={logo} alt="logo" />
+              <Image loading="lazy" src={logo} alt="logo" />
             </div>
             <Text c={"#767676"} fz={"sm"}>
               {t("desciption")}
