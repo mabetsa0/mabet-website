@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import {
   BackgroundImage,
   Group,
   SimpleGrid,
+  Space,
   Stack,
   Text,
   Title,
-  Space,
 } from "@mantine/core"
 import {
   appStore,
@@ -24,7 +23,7 @@ const DownLoadApp = () => {
   const t = useTranslations("home.download-app-banner")
   return (
     <section>
-      <div className="mx-auto mt-2 max-w-[1250px] bg-[linear-gradient(100.06deg,_#188078_42.47%,_#051A18_88.92%)] md:mt-9 md:rounded-[44px] xl:mt-10">
+      <div className="mx-auto mt-2 max-w-[1250px] bg-[linear-gradient(100.06deg,#188078_42.47%,#051A18_88.92%)] md:mt-9 md:rounded-[44px] xl:mt-10">
         <BackgroundImage src={dotImages.src}>
           <SimpleGrid
             cols={{ base: 1, md: 2 }}
@@ -41,15 +40,15 @@ const DownLoadApp = () => {
               <Space />
               <Group wrap="nowrap">
                 <a href={APP_LINK} target="_blank" rel="noopener">
-                  <img
-                    src={googlePlay.src}
+                  <Image
+                    src={googlePlay}
                     alt="download app via google play"
                     loading="lazy"
                   />
                 </a>
                 <a href={APP_LINK} target="_blank" rel="noopener">
-                  <img
-                    src={appStore.src}
+                  <Image
+                    src={appStore}
                     alt="download app via app store"
                     loading="lazy"
                   />

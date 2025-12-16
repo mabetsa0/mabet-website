@@ -40,11 +40,11 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   return (
     <>
       <Card
-        className="md:p-md border-[#F3F3F3] max-md:border-transparent md:rounded-md md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
+        className="md:p-md border-[#F3F3F3] max-md:border-transparent md:rounded-md md:[box-shadow:0px_12px_20px_0px_#0000000A]"
         withBorder
       >
         <Card.Section
-          className="pb-xs border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="pb-xs border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           withBorder
         >
           <Group align="start">
@@ -95,7 +95,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
 
         <Card.Section
-          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -109,7 +109,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
         <Card.Section
           visibleFrom="md"
-          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -119,7 +119,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         {prices ? (
           <Card.Section
             visibleFrom="md"
-            className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+            className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
             pb={12}
             withBorder
           >

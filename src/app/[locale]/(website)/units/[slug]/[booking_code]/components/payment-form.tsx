@@ -2,6 +2,7 @@
 "use client"
 import { useEffect, useMemo } from "react"
 import { useLocale, useTranslations } from "next-intl"
+import Image from "next/image"
 import Script from "next/script"
 import {
   Divider,
@@ -46,9 +47,9 @@ const PaymentForm = (booking: BookingDetails) => {
           <Group component={"span"}>
             {paymentCards.map((card, index) => (
               <span key={index} className="relative h-2 w-3">
-                <img
+                <Image
                   alt={"payment option"}
-                  src={card.src}
+                  src={card}
                   className="absolute inset-0 h-full w-full object-contain"
                   loading="lazy"
                 />
@@ -56,9 +57,9 @@ const PaymentForm = (booking: BookingDetails) => {
             ))}
             {paymentMethods.apple_pay.status && (
               <span className="relative h-2 w-3">
-                <img
+                <Image
                   alt={"payment option"}
-                  src={applePay.src}
+                  src={applePay}
                   className="absolute inset-0 h-full w-full object-contain"
                   loading="lazy"
                 />
@@ -85,7 +86,7 @@ const PaymentForm = (booking: BookingDetails) => {
         label: t("madfu"),
         description: (
           <Group component={"span"}>
-            <img alt="madfu" src={madfu.src} />
+            <Image alt="madfu" src={madfu} />
             <Text c={"#767676"} component="span">
               {t("madfu-description")}
             </Text>
@@ -101,7 +102,7 @@ const PaymentForm = (booking: BookingDetails) => {
         label: t("tamara"),
         description: (
           <Group component={"span"}>
-            <img alt="tamara" src={tamara.src} />
+            <Image alt="tamara" src={tamara} />
             <Text c={"#767676"} component="span">
               {t("madfu-description")}
             </Text>

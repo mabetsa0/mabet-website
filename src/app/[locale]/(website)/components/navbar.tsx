@@ -2,6 +2,7 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { AppShell, Burger, Group, UnstyledButton } from "@mantine/core"
 import { useDisclosure, useMediaQuery } from "@mantine/hooks"
@@ -75,7 +76,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
               style={{ flex: 1 }}
             >
               <Link href={"/"}>
-                <img alt="logo" src={logo.src} className="max-md:h-2" />
+                <Image alt="logo" src={logo} className="max-md:h-2" />
               </Link>
               <Group>
                 <Group me="md" gap={0} visibleFrom="md">

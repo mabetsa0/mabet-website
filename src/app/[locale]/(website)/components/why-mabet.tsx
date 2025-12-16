@@ -31,9 +31,9 @@ const WhyMabet = () => {
               className="md:-translate-x-2 md:rotate-12"
             >
               <div className="size-[32px] md:size-[48px]">
-                <img
+                <Image
                   className="h-full w-full object-contain"
-                  src={paymentSuccess.src}
+                  src={paymentSuccess}
                   alt="safe payment"
                 />
               </div>
@@ -53,9 +53,9 @@ const WhyMabet = () => {
               gap={"3px"}
             >
               <div className="size-[32px] md:size-[48px]">
-                <img
+                <Image
                   className="h-full w-full object-contain"
-                  src={moneySecurity.src}
+                  src={moneySecurity}
                   alt="money security"
                 />
               </div>
@@ -73,9 +73,9 @@ const WhyMabet = () => {
               gap={"3px"}
             >
               <div className="size-[32px] md:size-[48px]">
-                <img
+                <Image
                   className="h-full w-full object-contain"
-                  src={searchList.src}
+                  src={searchList}
                   alt="easy search"
                 />
               </div>
@@ -98,9 +98,9 @@ const WhyMabet = () => {
                 className="md:-translate-x-2 md:rotate-12"
               >
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={paymentSuccess.src}
+                    src={paymentSuccess}
                     alt="safe payment"
                   />
                 </div>
@@ -120,9 +120,9 @@ const WhyMabet = () => {
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={moneySecurity.src}
+                    src={moneySecurity}
                     alt="money security"
                   />
                 </div>
@@ -142,9 +142,9 @@ const WhyMabet = () => {
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={searchList.src}
+                    src={searchList}
                     alt="easy search"
                   />
                 </div>
@@ -164,9 +164,9 @@ const WhyMabet = () => {
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={newReleases.src}
+                    src={newReleases}
                     alt="licensed"
                   />
                 </div>
@@ -185,9 +185,9 @@ const WhyMabet = () => {
                 gap={"3px"}
               >
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={headset.src}
+                    src={headset}
                     alt="headset"
                   />
                 </div>
@@ -203,9 +203,9 @@ const WhyMabet = () => {
 
               <Stack className="md:-rotate-12" maw={290} gap={"3px"}>
                 <div className="size-[32px] md:size-[48px]">
-                  <img
+                  <Image
                     className="h-full w-full object-contain"
-                    src={imageIcon.src}
+                    src={imageIcon}
                     alt="image icon"
                   />
                 </div>

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Divider, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import { applePay, logo, mada, madfu, masterCard, tabby, visa } from "@/assets"
 import { useUnitTypes } from "@/context/global-data-context"
@@ -121,7 +122,7 @@ const Footer = () => {
         <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb={"xl"} spacing="40px">
           <Stack>
             <div>
-              <img className="h-3.5" src={logo.src} alt="logo" />
+              <Image loading="lazy" className="h-3.5" src={logo} alt="logo" />
             </div>
             <Text c={"#767676"} fz={"sm"}>
               {t("desciption")}
@@ -200,9 +201,9 @@ const Footer = () => {
           <Group className="max-md:justify-center" gap={"xs"}>
             {paymentCards.map((card, index) => (
               <div key={index} className="relative h-2 w-3">
-                <img
+                <Image
                   alt={"payment option"}
-                  src={card.src}
+                  src={card}
                   className="absolute inset-0 h-full w-full object-contain"
                   loading="lazy"
                 />

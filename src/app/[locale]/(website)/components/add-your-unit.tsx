@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { getTranslations } from "next-intl/server"
+import Image from "next/image"
 import { Button, SimpleGrid, Stack, Text, Title } from "@mantine/core"
 import {
   arrow1,
@@ -13,7 +14,13 @@ const AddYourUnit = async () => {
   const t = await getTranslations("home.add-your-unit")
   return (
     <section className="max-xs:overflow-hidden relative bg-[#FFFCF5]">
-      <img alt="curve" src={whiteCurve.src} className="w-full" />
+      <Image
+        loading="lazy"
+        decoding="async"
+        alt="curve"
+        src={whiteCurve}
+        className="w-full"
+      />
       <div className="container mx-auto pt-3 pb-5">
         <div className="flex flex-col gap-[4px] text-center">
           <Text mb={"xs"} className="max-md:text-sm" c={"primary"} fw={500}>
@@ -40,8 +47,10 @@ const AddYourUnit = async () => {
         >
           <Stack className="relative">
             <div className="relative flex h-[65px] w-[90px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                loading="lazy"
+                decoding="async"
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
@@ -51,9 +60,11 @@ const AddYourUnit = async () => {
               <Title order={4}>{t("card.1.title")}</Title>
               <Text c={"#767676"}>{t("card.1.description")}</Text>
             </div>
-            <img
+            <Image
+              loading="lazy"
+              decoding="async"
               alt="arrow"
-              src={arrow1.src}
+              src={arrow1}
               className="absolute start-[20%] -bottom-2 max-lg:w-[190px]"
             />
           </Stack>
@@ -63,35 +74,35 @@ const AddYourUnit = async () => {
               <Text c={"#767676"}>{t("card.2.description")}</Text>
             </div>
             <div className="relative flex h-[65px] w-[90px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
-              <Text className="text-h4 relative z-[1] font-bold">02</Text>
+              <Text className="text-h4 relative z-1 font-bold">02</Text>
             </div>
-            <img
+            <Image
               alt="arrow"
-              src={arrow2.src}
+              src={arrow2}
               className="absolute start-[35%] bottom-0.5 max-lg:w-[190px]"
             />
           </Stack>
           <Stack className="relative">
             <div className="relative flex h-[65px] w-[90px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
-              <Text className="text-h4 relative z-[1] font-bold">03</Text>
+              <Text className="text-h4 relative z-1 font-bold">03</Text>
             </div>
             <div>
               <Title order={4}>{t("card.3.title")}</Title>
               <Text c={"#767676"}>{t("card.3.description")}</Text>
             </div>
-            <img
+            <Image
               alt="arrow"
-              src={arrow1.src}
+              src={arrow1}
               className="absolute start-[20%] -bottom-2 max-lg:w-[190px]"
             />
           </Stack>
@@ -101,8 +112,8 @@ const AddYourUnit = async () => {
               <Text c={"#767676"}>{t("card.4.description")}</Text>
             </div>
             <div className="relative flex h-[65px] w-[90px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
@@ -113,8 +124,8 @@ const AddYourUnit = async () => {
         <SimpleGrid mt={"xl"} mx={"auto"} spacing="md" hiddenFrom="md" cols={1}>
           <Stack className="relative" gap="sm">
             <div className="relative flex h-[61px] w-[84px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
@@ -124,16 +135,16 @@ const AddYourUnit = async () => {
               <Title order={4}>{t("card.1.title")}</Title>
               <Text c={"#767676"}>{t("card.1.description")}</Text>
             </div>
-            <img
-              src={mobileArrows.src}
+            <Image
+              src={mobileArrows}
               alt="mobile arrows"
               className="absolute start-[75px] top-[5px] max-w-[calc(100vw_-_90px)] ltr:scale-x-[-1]"
             />
           </Stack>
           <Stack className="relative" gap="sm">
             <div className="relative flex h-[61px] w-[84px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
@@ -146,8 +157,8 @@ const AddYourUnit = async () => {
           </Stack>
           <Stack className="relative" gap="sm">
             <div className="relative flex h-[61px] w-[84px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
@@ -160,12 +171,12 @@ const AddYourUnit = async () => {
           </Stack>
           <Stack className="relative" gap="sm">
             <div className="relative flex h-[61px] w-[84px] items-center justify-center">
-              <img
-                src={logoWithoutWindows.src}
+              <Image
+                src={logoWithoutWindows}
                 alt="logo"
                 className="absolute inset-0 h-full w-full object-contain"
               />
-              <Text className="text-h4 relative z-[1] font-bold">04</Text>
+              <Text className="text-h4 relative z-1 font-bold">04</Text>
             </div>
             <div>
               <Title order={4}>{t("card.4.title")}</Title>

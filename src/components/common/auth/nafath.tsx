@@ -2,6 +2,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Box,
   Button,
@@ -237,7 +238,7 @@ const NafathModal = () => {
           )}
         </div>
         <Box visibleFrom="md" className="py-2">
-          <img alt="nafath" src={nafathIcon.src} />
+          <Image alt="nafath" src={nafathIcon} />
         </Box>
       </Group>
     </ModalDrawer>

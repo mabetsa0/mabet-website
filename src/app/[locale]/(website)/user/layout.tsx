@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image"
 import { Grid, GridCol } from "@mantine/core"
 import { dotBg } from "@/assets"
 import Footer from "@/components/common/footer"
@@ -23,10 +24,10 @@ export default async function Layout({
   return (
     <>
       <section className="relative bg-[linear-gradient(100.06deg,#188078_42.47%,#051A18_88.92%)]">
-        <img
+        <Image
           alt="dots"
           className="absolute h-full w-full object-cover"
-          src={dotBg.src}
+          src={dotBg}
           loading="lazy"
         />
         <div className="relative container">

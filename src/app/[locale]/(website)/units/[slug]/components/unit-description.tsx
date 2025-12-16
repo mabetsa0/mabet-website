@@ -1,6 +1,7 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Divider, Group, Space, Stack } from "@mantine/core"
 import { QrCode } from "lucide-react"
 import { torism } from "@/assets"
@@ -26,7 +27,7 @@ const UnitDescription = () => {
             wrap="nowrap"
             className="border-primary w-fit rounded-md border px-1.5 py-0.5"
           >
-            <img className="w-3" src={torism.src} alt="licence" />
+            <Image className="w-3" src={torism} alt="licence" />
             <p>{unit.licence.license_text}</p>
           </Group>
         </Stack>

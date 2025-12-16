@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Badge,
   Button,
@@ -137,9 +138,9 @@ const ReservationDetails = () => {
                 }
               >
                 {prices.discount_amount} <RiyalIcon />
-                <img
+                <Image
                   alt="sharp"
-                  src={sharpShape.src}
+                  src={sharpShape}
                   className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                 />
               </Badge>

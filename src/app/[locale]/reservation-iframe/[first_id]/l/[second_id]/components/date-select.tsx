@@ -2,6 +2,7 @@
 "use client"
 import { useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Button,
   Divider,
@@ -211,7 +212,7 @@ const DateSelect = ({
           >
             <Stack className="w-full" gap={0}>
               <Group gap={4}>
-                <img alt="icon" src={calenderIn.src} />
+                <Image alt="icon" src={calenderIn} />
                 <Text c="#767676" className="text-sm">
                   {t("iframe-labels.checkin")}
                 </Text>
@@ -230,7 +231,7 @@ const DateSelect = ({
             <Divider orientation="vertical" />
             <Stack className="w-full" gap={0}>
               <Group gap={4}>
-                <img alt="icon" src={calenderOut.src} />
+                <Image alt="icon" src={calenderOut} />
 
                 <Text c="#767676" className="text-sm">
                   {t("iframe-labels.checkout")}
@@ -282,7 +283,7 @@ const DateSelect = ({
       <Group wrap="nowrap" className="p-xs h-full w-full cursor-pointer">
         <Stack className="w-full" gap={0}>
           <Group gap={4}>
-            <img alt="icon" src={calenderIn.src} />
+            <Image alt="icon" src={calenderIn} />
             <Text className="text-sm">{t("iframe-labels.checkin-time")}</Text>
           </Group>
           <Group
@@ -294,7 +295,7 @@ const DateSelect = ({
         <Divider orientation="vertical" />
         <Stack className="w-full" gap={0}>
           <Group gap={4}>
-            <img alt="icon" src={calenderOut.src} />
+            <Image alt="icon" src={calenderOut} />
 
             <Text className="text-sm">{t("iframe-labels.checkout-time")}</Text>
           </Group>

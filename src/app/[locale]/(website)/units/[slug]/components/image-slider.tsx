@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useEffect, useState } from "react"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Modal } from "@mantine/core"
+import { EmblaCarouselType } from "embla-carousel"
 import { X } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
 import { useUnitData } from "../context/unit-context"
@@ -9,6 +11,8 @@ import ShareButton from "./share-button"
 
 const ImageSlider = () => {
   const unitData = useUnitData()
+  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0])) // Load first image immediately
   const [opened, setOpened] = useQueryState(
     "image-slider",
     parseAsBoolean.withDefault(false)
@@ -16,6 +20,48 @@ const ImageSlider = () => {
   const close = () => {
     setOpened(false)
   }
+
+  // Track which slides are visible and load their images
+  useEffect(() => {
+    if (!embla || !opened) return
+
+    const updateLoadedImages = () => {
+      const selectedIndex = embla.selectedScrollSnap()
+      const slidesInView = embla.slidesInView()
+
+      setLoadedImages((prev) => {
+        const newSet = new Set(prev)
+        // Load current slide
+        newSet.add(selectedIndex)
+        // Load adjacent slides for smooth transitions
+        if (selectedIndex > 0) newSet.add(selectedIndex - 1)
+        if (selectedIndex < unitData.images.length - 1)
+          newSet.add(selectedIndex + 1)
+        // Load all slides currently in view
+        slidesInView.forEach((index) => newSet.add(index))
+        return newSet
+      })
+    }
+
+    // Load images for initial slide
+    updateLoadedImages()
+
+    // Listen to slide changes
+    embla.on("select", updateLoadedImages)
+    embla.on("reInit", updateLoadedImages)
+
+    return () => {
+      embla.off("select", updateLoadedImages)
+      embla.off("reInit", updateLoadedImages)
+    }
+  }, [embla, unitData.images.length, opened])
+
+  // Reset loaded images when modal opens
+  useEffect(() => {
+    if (opened) {
+      setLoadedImages(new Set([0]))
+    }
+  }, [opened])
 
   return (
     <>
@@ -41,21 +87,29 @@ const ImageSlider = () => {
             <ShareButton variant="filled" />
           </Group>
           <Carousel
+            getEmblaApi={setEmbla}
             // loop
             height="100%"
             withIndicators
             emblaOptions={{ loop: true }}
           >
-            {unitData.images.map((image) => {
+            {unitData.images.map((image, index) => {
               return (
                 <Carousel.Slide key={image.image_path}>
                   <div className="relative flex h-[calc(100vh-80px)] items-center justify-center p-2 lg:p-5">
-                    <img
-                      src={image.image_path}
-                      alt={image.alt}
-                      loading="lazy"
-                      className="h-full w-full max-w-[70vw] object-contain"
-                    />
+                    {loadedImages.has(index) ? (
+                      <img
+                        src={image.image_path}
+                        alt={image.alt}
+                        className="h-full w-full max-w-[70vw] object-contain"
+                        decoding="async"
+                        fetchPriority={index === 0 ? "high" : "auto"}
+                        draggable="false"
+                        sizes="(max-width: 1024px) 100vw, 70vw"
+                      />
+                    ) : (
+                      <div className="h-full w-full max-w-[70vw] animate-pulse bg-gray-200" />
+                    )}
                   </div>
                 </Carousel.Slide>
               )

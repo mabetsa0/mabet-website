@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
 import { Carousel } from "@mantine/carousel"
 import {
@@ -16,6 +17,7 @@ import {
   Title,
 } from "@mantine/core"
 import dayjs from "dayjs"
+import { EmblaCarouselType } from "embla-carousel"
 import {
   Bath,
   BedSingle,
@@ -35,6 +37,8 @@ import { RiyalIcon } from "../icons"
 
 const UnitCard = (props: Unit & { className?: string }) => {
   const t = useTranslations("unit-card")
+  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0])) // Load first image immediately
 
   const { mutate, isPending, isFavorite } = useFavorite({
     is_favourite: props.is_favourite,
@@ -45,6 +49,41 @@ const UnitCard = (props: Unit & { className?: string }) => {
     from: parseAsString.withDefault(dayjs().format("YYYY-MM-DD")),
     to: parseAsString.withDefault(dayjs().add(1, "days").format("YYYY-MM-DD")),
   })
+
+  // Track which slides are visible and load their images
+  useEffect(() => {
+    if (!embla) return
+
+    const updateLoadedImages = () => {
+      const selectedIndex = embla.selectedScrollSnap()
+      const slidesInView = embla.slidesInView()
+
+      setLoadedImages((prev) => {
+        const newSet = new Set(prev)
+        // Load current slide
+        newSet.add(selectedIndex)
+        // Load adjacent slides for smooth transitions
+        if (selectedIndex > 0) newSet.add(selectedIndex - 1)
+        if (selectedIndex < props.images.length - 1)
+          newSet.add(selectedIndex + 1)
+        // Load all slides currently in view
+        slidesInView.forEach((index) => newSet.add(index))
+        return newSet
+      })
+    }
+
+    // Load images for initial slide
+    updateLoadedImages()
+
+    // Listen to slide changes
+    embla.on("select", updateLoadedImages)
+    embla.on("reInit", updateLoadedImages)
+
+    return () => {
+      embla.off("select", updateLoadedImages)
+      embla.off("reInit", updateLoadedImages)
+    }
+  }, [embla, props.images.length])
   return (
     <Card
       padding="xs"
@@ -70,7 +109,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           />
         </ActionIcon>
         <Badge
-          leftSection={<img src={fallingStar.src} alt="stars" />}
+          leftSection={<Image src={fallingStar} alt="stars" />}
           size="lg"
           radius={"0"}
           className="absolute top-0 right-0 z-1 rounded-bl-md border border-white"
@@ -79,6 +118,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
           {props.reviews_count ? `${props.reviews_count_text}` : ""}
         </Badge>
         <Carousel
+          getEmblaApi={setEmbla}
           slideSize={"100%"}
           h={"100%"}
           slideGap={"lg"}
@@ -100,12 +140,20 @@ const UnitCard = (props: Unit & { className?: string }) => {
           {props.images.map((image, index) => (
             <Carousel.Slide className="aspect-4/3 w-full" key={index}>
               <div className="aspect-4/3 w-full">
-                <Image
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                  src={image.image_path}
-                  alt={image.alt}
-                />
+                {loadedImages.has(index) ? (
+                  <img
+                    className="h-full w-full object-cover"
+                    src={image.image_path}
+                    alt={image.alt}
+                    decoding="async"
+                    loading="lazy"
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    draggable="false"
+                    sizes="(max-width: 1024px) 100vw, 70vw"
+                  />
+                ) : (
+                  <div className="h-full w-full animate-pulse bg-gray-200" />
+                )}
               </div>
             </Carousel.Slide>
           ))}
@@ -170,16 +218,16 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   }
                 >
                   {props.prices.discount_amount} <RiyalIcon />
-                  <img
+                  <Image
                     alt="sharp"
-                    src={sharpShape.src}
+                    src={sharpShape}
                     className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                   />
                 </Badge>
               ) : props.badge?.border_color ? (
                 <Badge
                   h={40}
-                  className="relative min-w-[120px] rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
+                  className="relative min-w-[120px] rounded-s-md rounded-e-none border-none! p-[4px]"
                   classNames={{
                     label: "text-start",
                   }}
@@ -199,9 +247,9 @@ const UnitCard = (props: Unit & { className?: string }) => {
                   }
                 >
                   {props.badge.text}{" "}
-                  <img
+                  <Image
                     alt="sharp"
-                    src={sharpShape.src}
+                    src={sharpShape}
                     className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
                   />
                 </Badge>
