@@ -122,7 +122,7 @@ const SearchBar = () => {
                           </Group>
                           <Group
                             className={cn(
-                              "h-[50px] !cursor-pointer items-center text-lg text-gray-600",
+                              "h-[50px] cursor-pointer items-center text-lg text-gray-600",
                               form.values.unit_type_id && "text-gray-700"
                             )}
                           >
@@ -147,7 +147,7 @@ const SearchBar = () => {
                                   key={type.id}
                                   radius="md"
                                   value={type.id + ""}
-                                  className="group data-[checked]:border-primary relative px-2.5 py-2.5 duration-300 data-[checked]:bg-[#18807826]"
+                                  className="group data-checked:border-primary relative px-2.5 py-2.5 duration-300 data-checked:bg-[#18807826]"
                                 >
                                   <Group wrap="nowrap" align="flex-start">
                                     <Radio.Indicator className="absolute opacity-0" />
@@ -171,7 +171,7 @@ const SearchBar = () => {
                                       <Text
                                         fz={"sm"}
                                         fw={700}
-                                        className="group-data-[checked]:text-primary duration-300"
+                                        className="group-data-checked:text-primary duration-300"
                                       >
                                         {type.name}
                                       </Text>

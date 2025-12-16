@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Button,
   Divider,
   Group,
-  Image,
   Popover,
   SegmentedControl,
   Stack,

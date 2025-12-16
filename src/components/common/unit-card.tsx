@@ -2,6 +2,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Carousel } from "@mantine/carousel"
 import {
   ActionIcon,
@@ -9,7 +10,6 @@ import {
   Card,
   Divider,
   Group,
-  Image,
   lighten,
   Space,
   Stack,
@@ -202,7 +202,7 @@ const UnitCard = (props: Unit & { className?: string }) => {
               {props.prices?.discount ? (
                 <Badge
                   h={40}
-                  className="relative min-w-[120px] rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
+                  className="relative min-w-[120px] rounded-s-md rounded-e-none! border-0! p-[4px]"
                   classNames={{
                     label: "text-start text-xs",
                   }}

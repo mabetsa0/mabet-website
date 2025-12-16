@@ -79,7 +79,7 @@ const DateSelect = ({
 
     if (isBusyDay) {
       return (
-        <div className={cn("!opacity-85")}>
+        <div className={cn("opacity-85")}>
           {date.getDate()}
           <div className="absolute inset-0 flex items-center justify-center">
             <Minus className="text-red-600" size={32} strokeWidth={1} />
