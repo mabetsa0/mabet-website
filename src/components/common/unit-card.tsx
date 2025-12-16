@@ -52,10 +52,10 @@ const UnitCard = (props: Unit & { className?: string }) => {
 
   // Load initial images on mount (fallback for when embla isn't ready yet)
   useEffect(() => {
-    // Load first 3 images immediately to ensure they're ready on page reload
+    // Load first 1 images immediately to ensure they're ready on page reload
     setLoadedImages((prev) => {
       const newSet = new Set(prev)
-      const imagesToLoad = Math.min(3, props.images.length)
+      const imagesToLoad = Math.min(1, props.images.length)
       for (let i = 0; i < imagesToLoad; i++) {
         newSet.add(i)
       }
