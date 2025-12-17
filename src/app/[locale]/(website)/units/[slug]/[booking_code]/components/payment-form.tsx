@@ -18,8 +18,6 @@ import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { BookingDetails } from "../payment-summary"
-import { STC } from "./stc"
-import { STCRedeem } from "./stc-redeem"
 
 const paymentCards = [masterCard, mada, visa]
 
