@@ -3,18 +3,10 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { Button, Group, Stack, Text, TextInput } from "@mantine/core"
-import { useMutation } from "@tanstack/react-query"
 import { useQueryState } from "nuqs"
-import Mabet from "@/services"
+import { ErrorResponse } from "@/@types/error"
+import { useCheckCoupon } from "@/hooks/use-check-coupon"
 import { useUnitData } from "../../context/unit-context"
-
-export interface CheckCouponResponse {
-  data: {
-    valid: boolean
-  }
-  message: null
-  success: boolean
-}
 
 const Coupon = ({ from, to }: { from: string; to: string }) => {
   const t = useTranslations()
@@ -22,25 +14,15 @@ const Coupon = ({ from, to }: { from: string; to: string }) => {
   const [error, setError] = useState("")
   const [value, setValue] = useState("")
   const unit = useUnitData()
-  const { mutate, isPending } = useMutation({
-    async mutationFn({ coupon }: { coupon: string }) {
-      const response = await Mabet.post<CheckCouponResponse>(
-        `/units/${unit.id}/check-coupon`,
-        {
-          coupon,
-          from: from,
-          to: to,
-        }
-      )
-
-      return response.data.data.valid
-    },
-    onMutate() {
-      setError("")
-    },
+  const {
+    mutate,
+    isPending,
+    error: checkCouponError,
+  } = useCheckCoupon({
+    unit_id: unit.id.toString(),
+    from: from,
+    to: to,
     onSuccess(data, { coupon }) {
-      console.log("🚀 ~ onSuccess ~ data:", data)
-
       setError(data ? "" : t("unit.invalid-coupon"))
       setCoupon(data ? coupon : "")
     },
@@ -80,6 +62,13 @@ const Coupon = ({ from, to }: { from: string; to: string }) => {
         {error && (
           <Text size="sm" c="red">
             {error}
+          </Text>
+        )}
+        {checkCouponError && (
+          <Text size="sm" c="red">
+            {(checkCouponError.response?.data as ErrorResponse).errors?.[0] ||
+              (checkCouponError.response?.data as ErrorResponse).message ||
+              checkCouponError.message}
           </Text>
         )}
       </Stack>

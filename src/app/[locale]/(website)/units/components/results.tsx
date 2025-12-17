@@ -304,7 +304,7 @@ const Results = () => {
           </ScrollArea>
 
           {status === "pending" ? (
-            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} pb="lg">
               {Array.from({ length: 6 }).map((_, index) => (
                 <UnitCardSkeleton
                   className="w-full lg:max-w-[unset]"

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Box,
   Button,
@@ -129,7 +130,7 @@ const UserDataModal = () => {
           </Stack>
         </form>
         <Box visibleFrom="md" className="py-2">
-          <img alt="nafath" src={emailIcon.src} />
+          <Image alt="nafath" src={emailIcon} />
         </Box>
       </Group>
     </ModalDrawer>

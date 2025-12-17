@@ -1,15 +1,17 @@
 "use client"
 /* eslint-disable @next/next/no-img-element */
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Badge, Divider, Group, Space, Stack, Text } from "@mantine/core"
 import { QrCode } from "lucide-react"
-import { mabetLogo, madfu, sharpShape, tabby, torism } from "@/assets"
+import { mabetLogo, madfu, sharpShape, tabby, tamara, torism } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { useUnitData } from "../context/unit-context"
 import useCheckAvailability from "../hooks/use-check-availability"
 import AboutUnit from "./about-unit"
 import Features from "./features"
 import ReservationDetails from "./reservation-details"
+import UnitPartnerData from "./unit-partner-data"
 
 const MobileUnitDescription = () => {
   const unit = useUnitData()
@@ -25,7 +27,7 @@ const MobileUnitDescription = () => {
         className="border-primary rounded border"
         bg={"#18807826"}
       >
-        <img alt="mabet" src={mabetLogo.src} width={42} />
+        <Image alt="mabet" src={mabetLogo} width={42} />
         <Stack gap={"4"}>
           <Text className="text-h5 font-bold">
             {t("unit.mabet-garentee")} 💚
@@ -60,9 +62,9 @@ const MobileUnitDescription = () => {
             }
           >
             {prices.discount_amount} <RiyalIcon />
-            <img
+            <Image
               alt="sharp"
-              src={sharpShape.src}
+              src={sharpShape}
               className="absolute end-0 top-0 bottom-0 ltr:scale-x-[-1]"
             />
           </Badge>
@@ -74,14 +76,15 @@ const MobileUnitDescription = () => {
       <Space />
       {unit.tabby.enabled ? (
         <Group p={"sm"} className="rounded border border-[#F3F3F3]">
-          <img src={tabby.src} alt="tabby" width={63} />
+          <Image src={tabby} alt="tabby" width={63} />
           <Text c={"#767676"}>{unit.tabby.tabby_text}</Text>
         </Group>
       ) : null}
-      {unit.madfu.enabled ? (
+
+      {unit.tamara.enabled ? (
         <Group p={"sm"} className="rounded border border-[#F3F3F3]">
-          <img src={madfu.src} alt="madfu" width={63} />
-          <Text c={"#767676"}>{unit.madfu.tabby_text}</Text>
+          <Image src={tamara} alt="tamara" width={63} />
+          <Text c={"#767676"}>{unit.tamara.tabby_text}</Text>
         </Group>
       ) : null}
       <Space />
@@ -99,11 +102,14 @@ const MobileUnitDescription = () => {
             wrap="nowrap"
             className="border-primary w-fit rounded-md border px-1.5 py-0.5"
           >
-            <img className="w-3" src={torism.src} alt="licence" />
+            <Image className="w-3" src={torism} alt="licence" />
             <p>{unit.licence.license_text}</p>
           </Group>
         </Stack>
       </Stack>
+      <Space />
+      <Divider />
+      <UnitPartnerData />
       <Divider />
       <Space />
       <Features />

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { Group, List, Space, Spoiler, Stack, Text } from "@mantine/core"
 import { Dot } from "lucide-react"
 import { useUnitData } from "../context/unit-context"
@@ -29,7 +30,7 @@ const Features = () => {
                 return (
                   <Stack key={index} className="pb-0.5">
                     <Group>
-                      <img
+                      <Image
                         className="h-2"
                         src={value.icon_svg}
                         alt={value.name}

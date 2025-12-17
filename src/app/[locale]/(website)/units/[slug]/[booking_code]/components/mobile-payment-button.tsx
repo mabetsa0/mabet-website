@@ -1,57 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import {
   Box,
   Button,
   Divider,
+  Group,
   Modal,
   NumberFormatter,
   ScrollArea,
   SimpleGrid,
+  Space,
   Stack,
+  Text,
 } from "@mantine/core"
-import { Group, Space, Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { useMutation } from "@tanstack/react-query"
 import { X } from "lucide-react"
-import {
-  parseAsBoolean,
-  parseAsString,
-  parseAsStringLiteral,
-  useQueryStates,
-} from "nuqs"
 import { ErrorResponse } from "@/@types/error"
 import { RiyalIcon } from "@/components/icons"
 import useMdScreen from "@/hooks/use-md-screen"
-import { useRouter } from "@/lib/i18n/navigation"
-import Mabet from "@/services"
-import { getIsPrivate } from "@/utils/get-is-private"
-import { ApproveBooking } from "../approve-booking"
-import { GetPaymentSummary } from "../get-payment-summary"
+import usePayment from "../hooks/use-payment"
+import { usePaymentState } from "../hooks/use-payment-state"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
 import PaymentForm from "./payment-form"
-
-interface PaymentResponse {
-  data: {
-    redirect_url: string
-  }
-  message: null
-  success: boolean
-}
-interface MadfuResponse {
-  data: {
-    image: string
-    amount: string
-    order_id: number
-    invoice_code: string
-  }
-  message: null
-  success: boolean
-}
 
 const MobilePaymentButton = ({
   booking_details,
@@ -62,153 +35,12 @@ const MobilePaymentButton = ({
   const matches = useMdScreen()
   const [opened, { open, close }] = useDisclosure(true)
   const t = useTranslations()
-  const [{ method, use_wallet, payment_option, coupon }] = useQueryStates({
-    method: parseAsString.withDefault("card"),
-    use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
-    payment_option: parseAsStringLiteral(["full", "partial"]).withDefault(
-      "partial"
-    ),
-    coupon: parseAsString.withDefault(""),
-    private: parseAsBoolean.withDefault(false),
-  })
-
+  const [{ method, use_wallet, payment_option, coupon }] = usePaymentState()
   const params = useParams() as { booking_code: string; slug: string }
-  const isPrivate = getIsPrivate(params.slug)
-  const [error, setError] = useState("")
-  const [madfu, setMadfu] = useState("")
-  const Router = useRouter()
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (args: {
-      payment_method: string
-      payment_option: string
-      use_wallet: string
-      coupon: string
-      isPrivate?: string
-    }) => {
-      await GetPaymentSummary(params.booking_code, {
-        ...args,
-        private: isPrivate ? 1 : undefined,
-      })
-      let paymentURL = ""
-
-      const canFullfilPartial =
-        args.payment_option === "partial" &&
-        Number(prices.wallet.current_balance) > Number(prices.full_payment)
-
-      const canFulfillFull =
-        args.payment_option === "full" &&
-        Number(prices.wallet.current_balance) > Number(prices.full_payment)
-
-      if (prices.to_pay.can_be_approved) {
-        await ApproveBooking({
-          bookingCode: params.booking_code,
-        })
-        return "/payment?payment_status=success&id=" + params.booking_code
-      }
-      if (args.use_wallet === "1" && (canFullfilPartial || canFulfillFull)) {
-        await Mabet.post<PaymentResponse>(
-          `/payment/${params.booking_code}/approve`,
-          {
-            ...args,
-            booking_code: params.booking_code,
-            private: isPrivate ? 1 : undefined,
-          }
-        )
-
-        return "/payment?payment_status=success&id=" + params.booking_code
-      }
-
-      if (args.payment_method === "card") {
-        const cardPayment = await Mabet.post<PaymentResponse>(
-          `/payment/pay-by-card`,
-          {
-            ...args,
-            booking_code: params.booking_code,
-            private: isPrivate ? 1 : undefined,
-          }
-        )
-
-        paymentURL = cardPayment.data.data.redirect_url
-      }
-      if (args.payment_method === "tabby") {
-        const tabbyPayment = await Mabet.get<PaymentResponse>(
-          `/payment/${params.booking_code}/pay-by-tabby`,
-          {
-            params: {
-              use_wallet: args.use_wallet,
-              coupon: args.coupon,
-              private: isPrivate ? 1 : undefined,
-            },
-          }
-        )
-        paymentURL = tabbyPayment.data.data.redirect_url
-      }
-
-      if (args.payment_method === "madfu") {
-        const madfuPayment = await Mabet.get<MadfuResponse>(
-          `/payment/${params.booking_code}/pay-by-madfu`,
-          {
-            params: {
-              use_wallet: args.use_wallet,
-              coupon: args.coupon,
-              private: isPrivate ? 1 : undefined,
-            },
-          }
-        )
-
-        paymentURL = madfuPayment.data.data.image
-      }
-
-      if (args.payment_method === "tamara") {
-        const tamaraPayment = await Mabet.get<PaymentResponse>(
-          `/payment/${params.booking_code}/pay-by-tamara`,
-          {
-            params: {
-              use_wallet: args.use_wallet,
-              coupon: args.coupon,
-              private: isPrivate ? 1 : undefined,
-            },
-          }
-        )
-        paymentURL = tamaraPayment.data.data.redirect_url
-      }
-
-      // if (args.payment_method === "wallet") {
-      //   const walletPayment = await Mabeet.post<PaymentResponse>(
-      //     `/payment/${params.booking_code}/approve`,
-      //     {
-      //       payment_option: data.payment_option,
-      //       use_wallet: data.use_wallet ? 1 : 0,
-      //       private: isPrivate ? 1 : undefined,
-      //       coupon: reservationState.coupon,
-      //     }
-      //   )
-
-      //   Router.push("/user/reservations?payment_status=success")
-      //   return
-      // }
-
-      return paymentURL
-    },
-    onError(error) {
-      setError(
-        (error.response?.data as { error: { message: string } })?.error
-          ?.message ||
-          (error.response?.data as ErrorResponse).message ||
-          error.message
-      )
-    },
-    onMutate() {
-      setError("")
-    },
-    onSuccess(data, variables) {
-      if (variables.payment_method === "madfu") {
-        setMadfu(data)
-        return
-      }
-
-      Router.push(data || "")
-    },
+  const { mutate, isPending, error, madfu, setMadfu } = usePayment({
+    booking_code: params.booking_code,
+    unit_id: params.slug,
+    booking_details,
   })
 
   if (!matches) return null
@@ -312,7 +144,6 @@ const MobilePaymentButton = ({
                 use_wallet: use_wallet,
                 payment_option,
                 coupon,
-                isPrivate: isPrivate ? "1" : undefined,
               })
             }}
             loading={isPending}
@@ -321,7 +152,10 @@ const MobilePaymentButton = ({
           </Button>
           {error ? (
             <Text c={"red"} ta={"center"}>
-              {error}
+              {(error.response?.data as { error: { message: string } })?.error
+                ?.message ||
+                (error.response?.data as ErrorResponse).message ||
+                error.message}
             </Text>
           ) : null}
         </Stack>

@@ -2,6 +2,7 @@
 "use client"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import {
   Button,
@@ -30,7 +31,7 @@ interface PaymentResponse {
 const paymentCards = [masterCard, mada, visa]
 const CompletePayment = (booking: Booking) => {
   const [{ use_wallet }, set] = useQueryStates({
-    use_wallet: parseAsStringLiteral(["0"]),
+    use_wallet: parseAsStringLiteral(["1", "0"]).withDefault("0"),
   })
   const t = useTranslations("payment-form")
   const [error, setError] = useState("")
@@ -118,18 +119,18 @@ const CompletePayment = (booking: Booking) => {
             <Group component={"span"}>
               {paymentCards.map((card, index) => (
                 <span key={index} className="relative h-2 w-3">
-                  <img
+                  <Image
                     alt={"payment option"}
-                    src={card.src}
+                    src={card}
                     className="absolute inset-0 h-full w-full object-contain"
                     loading="lazy"
                   />
                 </span>
               ))}
               <span className="relative h-2 w-3">
-                <img
+                <Image
                   alt={"payment option"}
-                  src={applePay.src}
+                  src={applePay}
                   className="absolute inset-0 h-full w-full object-contain"
                   loading="lazy"
                 />

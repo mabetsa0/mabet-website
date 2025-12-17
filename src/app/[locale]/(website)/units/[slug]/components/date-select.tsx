@@ -2,6 +2,7 @@
 "use client"
 import { ComponentRef, useEffect, useRef, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Button,
   Divider,
@@ -36,11 +37,9 @@ dayjs.extend(utc)
 const DateSelect = ({
   readOnly,
   initialValues,
-  mode,
 }: {
   readOnly?: boolean
   initialValues?: { from: Date; to: Date }
-  mode: "mobile" | "desktop"
 }) => {
   const unit = useUnitData()
   const ref = useRef<ComponentRef<"div">>(null)
@@ -51,7 +50,7 @@ const DateSelect = ({
 
   const [{ from, to }, setDates] = useQueryDates()
 
-  const [{ selectDate }] = useQueryStates({
+  const [{ selectDate }, setSelectDate] = useQueryStates({
     selectDate: parseAsBoolean.withDefault(false),
   })
 
@@ -80,7 +79,7 @@ const DateSelect = ({
 
     if (isBusyDay) {
       return (
-        <div className={cn("!opacity-85")}>
+        <div className={cn("opacity-85")}>
           {date.getDate()}
           <div className="absolute inset-0 flex items-center justify-center">
             <Minus className="text-red-600" size={32} strokeWidth={1} />
@@ -103,7 +102,7 @@ const DateSelect = ({
   const handleDateChange = (values: [string | null, string | null]) => {
     const days = getDaysBetweenDates(values[0], values[1])
 
-    const hasBusyDaysInRange = busyDays.find((busyDay, i) => {
+    const hasBusyDaysInRange = busyDays.find((busyDay) => {
       return days.slice(0, -1).includes(busyDay)
     })
 
@@ -201,13 +200,13 @@ const DateSelect = ({
           if (value[0] && value[1]) {
             setDates({ from: value[0], to: value[1] })
             console.log({ from: value[0], to: value[1] })
-            console.log("Mode is: " + mode)
           } else if (value[0] && !value[1]) {
             setDates({
               from: value[0],
               to: dayjs(value[0]).add(1, "day").toDate(),
             })
           }
+          setSelectDate({ selectDate: false })
           close()
         }}
         onDismiss={() => {
@@ -228,7 +227,7 @@ const DateSelect = ({
           >
             <Stack className="w-full" gap={0}>
               <Group gap={4}>
-                <img alt="icon" src={calenderIn.src} />
+                <Image alt="icon" src={calenderIn} />
                 <Text c="#767676" className="text-sm">
                   {t("date-range-picker.check-in")}
                 </Text>
@@ -247,7 +246,7 @@ const DateSelect = ({
             <Divider orientation="vertical" />
             <Stack className="w-full" gap={0}>
               <Group gap={4}>
-                <img alt="icon" src={calenderOut.src} />
+                <Image alt="icon" src={calenderOut} />
 
                 <Text c="#767676" className="text-sm">
                   {t("date-range-picker.check-out")}
@@ -295,7 +294,7 @@ const DateSelect = ({
       <Group wrap="nowrap" className="p-xs h-full w-full cursor-pointer">
         <Stack className="w-full" gap={0}>
           <Group gap={4}>
-            <img alt="icon" src={calenderIn.src} />
+            <Image alt="icon" src={calenderIn} />
             <Text className="text-sm">{t("date-range-picker.check-in")}</Text>
           </Group>
           <Group
@@ -307,7 +306,7 @@ const DateSelect = ({
         <Divider orientation="vertical" />
         <Stack className="w-full" gap={0}>
           <Group gap={4}>
-            <img alt="icon" src={calenderOut.src} />
+            <Image alt="icon" src={calenderOut} />
 
             <Text className="text-sm">{t("date-range-picker.check-out")}</Text>
           </Group>

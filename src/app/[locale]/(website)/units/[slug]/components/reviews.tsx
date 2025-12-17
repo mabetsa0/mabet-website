@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Avatar,
   Divider,
@@ -41,17 +42,17 @@ const Reviews = () => {
         <Divider />
         <Stack>
           <Group justify="center">
-            <img
-              src={reviewBorder.src}
+            <Image
+              src={reviewBorder}
               alt="reviews"
               className="ltr:scale-x-[-1]"
             />
             <Text className="text-[74.42px]" fw={700}>
               {unit.stars || "0.0"}
             </Text>
-            <img
+            <Image
               className="rtl:scale-x-[-1]"
-              src={reviewBorder.src}
+              src={reviewBorder}
               alt="reviews"
             />
           </Group>
@@ -75,7 +76,7 @@ const Reviews = () => {
                       {ele.stars}
                     </Text>
                   </Stack>
-                  <img className="w-2" src={ele.icon_svg} alt={ele.name} />
+                  <Image className="w-2" src={ele.icon_svg} alt={ele.name} />
                 </Stack>
               )
             })}

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Button,
   Divider,
@@ -46,7 +47,7 @@ const DateRangePicker = () => {
         >
           <Stack className="w-full" gap={2}>
             <Group gap={4}>
-              <img alt="icon" src={calenderIn.src} />
+              <Image alt="icon" src={calenderIn} />
               <Text className="text-sm">{t("check-in")}</Text>
             </Group>
             <Group
@@ -63,7 +64,7 @@ const DateRangePicker = () => {
           <Divider orientation="vertical" />
           <Stack className="w-full" gap={2}>
             <Group gap={4}>
-              <img alt="icon" src={calenderOut.src} />
+              <Image alt="icon" src={calenderOut} />
 
               <Text className="text-sm">{t("check-out")}</Text>
             </Group>

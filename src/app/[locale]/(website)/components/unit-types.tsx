@@ -1,13 +1,13 @@
-import React from "react"
 import { getTranslations } from "next-intl/server"
 import { Image, SimpleGrid, Stack, Text, Title } from "@mantine/core"
+import { getUnitTypes } from "@/api/services/lists"
 import { UnitTypeIcons } from "@/assets"
 import { Link } from "@/lib/i18n/navigation"
-import { getUnitTypes } from "@/services/lists"
 
 const UnitTypes = async () => {
-  const unitTypes = await getUnitTypes()
   const t = await getTranslations("home.unit-types")
+  const response = await getUnitTypes()
+  const unitTypes = response.data.unit_types
   return (
     <section>
       <div className="container mx-auto py-4">

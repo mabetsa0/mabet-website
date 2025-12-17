@@ -149,7 +149,7 @@
     "apply-filters": "تطبيق الفلترة",
     "clear": "مسح",
     "arrange": "ترتيب حسب",
-    "share": "مشاركة العقار",
+    "share": "مشاركة ",
     "show-all-images": "جميع الصور",
     "show-video": "عرض الفيديو",
     "night": "ليلة",
@@ -360,35 +360,19 @@
     "invalid-coupon": "كود خصم غير صالح",
     "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
     "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  ",
-    "stc-modal": {
-      "button": "احصل على مكافآتك",
-      "description": "أضف نقاط مكافآتك إلى حسابك.",
-      "enter-phone-number": "أدخل رقم الجوال المسجّل لدى STC"
-    },
-    "stc-redeem-modal": {
-      "button": "نقاط STC",
-      "description": "استبدل نقاط STC الخاصة بك",
-      "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC",
-      "success-title": "تم الاستبدال بنجاح",
-      "success-message": "تم استبدال نقاط STC وإضافتها بنجاح."
-    },
-    "stc-redeem-form": {
-      "you-have-points": "لديك {points} نقطة",
-      "points-to-redeem": "النقاط المراد استبدالها",
-      "you-will-get": "ستحصل على",
-      "confirm": "تأكيد",
-      "otp": "رمز التحقق",
-      "amount": "المبلغ",
-      "invalid-otp": "رمز التحقق غير صحيح",
-      "amount-required": "المبلغ مطلوب",
-      "success-title": "تم الاستبدال بنجاح\t",
-      "success-message": "تم استبدال نقاط STC وإضافتها بنجاح.\t",
-      "change-pohne-number": "تغير رقم الجوال",
-      "change-phone-number": "تغيير رقم الجوال"
-    }
+    "partner-data": "عن المضيف",
+    "view-profile": "عرض صفحة المضيف"
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
+  },
+  "video": {
+    "load-error-title": "فشل تحميل الفيديوهات",
+    "load-error-message": "حدث خطأ غير متوقع",
+    "no-videos-title": "لا توجد فيديوهات متاحة",
+    "no-videos-message": "لا توجد عناوين فيديو صالحة للعرض",
+    "invalid-url-title": "عنوان الفيديو غير متاح",
+    "invalid-url-message": "مصدر الفيديو مفقود أو غير صالح"
   },
   "generla": {
     "failer": "فشلت العملية"
@@ -592,5 +576,17 @@
       "success-message": "تم إضافة المبلغ لمحفظتك بنجاح"
     }
   },
-  "change-search-dates": "اختيار تواريخ اخرى"
+  "change-search-dates": "اختيار تواريخ اخرى",
+  "host-page": {
+    "title": "عن المضيف",
+    "share-text": "اكتشف عقارات {hostName} على مبيت!",
+    "rating": "تقييم",
+    "average-response-speed": "متوسط سرعة الرد",
+    "host-since": "منذ",
+    "number-of-units": "عدد الوحدات",
+    "units-title": "عقارات المضيف",
+    "units-description": "استكشف جميع العقارات من هذا المضيف",
+    "reviews-title": "التقييمات",
+    "reviews-description": "تقييمات المضيف "
+  }
 }

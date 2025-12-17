@@ -1,32 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useTranslations } from "next-intl"
 import { Carousel } from "@mantine/carousel"
 import { ActionIcon, Group, Loader, Modal } from "@mantine/core"
-import { useQuery } from "@tanstack/react-query"
 import { X } from "lucide-react"
 import { parseAsBoolean, useQueryState } from "nuqs"
-import Mabet from "@/services"
+import useUnitMedia from "@/hooks/use-unit-media"
 import { useUnitData } from "../context/unit-context"
 import ShareButton from "./share-button"
 import VideoPlayer from "./video-player"
 
-export interface UnitMediaResponse {
-  data: Data
-  message: null
-  success: boolean
-}
-
-export interface Data {
-  media: Media[]
-}
-
-export interface Media {
-  id: number
-  type: string
-  url: string
-}
-
 const VideoSlider = () => {
+  const t = useTranslations("video")
   const unitData = useUnitData()
   const [opened, setOpened] = useQueryState(
     "video",
@@ -36,16 +21,14 @@ const VideoSlider = () => {
     setOpened(false)
   }
 
-  const { data, status } = useQuery({
-    queryKey: ["video", unitData.id],
-    enabled: unitData.has_videos,
-    queryFn: async () => {
-      const response = await Mabet.get<UnitMediaResponse>(
-        `/units/${unitData.id}/media?type=videos`
-      )
-      return response.data.data.media
-    },
+  const { data, status, error } = useUnitMedia({
+    unitId: unitData.id,
+    type: "videos",
   })
+
+  // Filter out videos with empty URLs
+  const validVideos =
+    data?.filter((video) => video.url && video.url.trim() !== "") ?? []
 
   return (
     <>
@@ -77,18 +60,27 @@ const VideoSlider = () => {
           ) : null}
           {status === "error" ? (
             <div className="relative flex h-[calc(100vh-80px)] items-center justify-center p-2 lg:p-5">
-              error
+              <div className="text-center">
+                <p className="text-lg font-semibold text-red-500">
+                  {t("load-error-title")}
+                </p>
+                <p className="mt-2 text-sm text-gray-400">
+                  {error instanceof Error
+                    ? error.message
+                    : t("load-error-message")}
+                </p>
+              </div>
             </div>
           ) : null}
-          {status === "success" ? (
+          {status === "success" && validVideos.length > 0 ? (
             <Carousel
               emblaOptions={{ loop: true }}
               height="100%"
               withIndicators
             >
-              {data.map((video) => {
+              {validVideos.map((video) => {
                 return (
-                  <Carousel.Slide key={video.url}>
+                  <Carousel.Slide key={video.id || video.url}>
                     <div className="relative flex h-[calc(100vh-80px)] items-center justify-center p-2 lg:p-5">
                       <VideoPlayer src={video.url} />
                     </div>
@@ -96,6 +88,17 @@ const VideoSlider = () => {
                 )
               })}
             </Carousel>
+          ) : status === "success" && validVideos.length === 0 ? (
+            <div className="relative flex h-[calc(100vh-80px)] items-center justify-center p-2 lg:p-5">
+              <div className="text-center">
+                <p className="text-lg font-semibold text-gray-400">
+                  {t("no-videos-title")}
+                </p>
+                <p className="mt-2 text-sm text-gray-500">
+                  {t("no-videos-message")}
+                </p>
+              </div>
+            </div>
           ) : null}
         </div>
       </Modal>

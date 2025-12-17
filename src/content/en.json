@@ -361,35 +361,19 @@
     "invalid-coupon": "Invalid Coupon",
     "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
     "payment-accept-conditions-description": "Click to see the requirements",
-    "stc-modal": {
-      "button": "Get your rewards",
-      "description": "Add STC rewards points to your account.",
-      "enter-phone-number": "Enter your STC-registered phone number"
-    },
-    "stc-redeem-modal": {
-      "button": "STC Points",
-      "description": "Redeem your STC points",
-      "enter-phone-number": "Enter your mobile number register with STC",
-      "success-title": "Redeemed successfully",
-      "success-message": "Your STC points were redeemed and applied."
-    },
-    "stc-redeem-form": {
-      "you-have-points": "You have {points} points",
-      "points-to-redeem": "Amount",
-      "you-will-get": "You will get",
-      "confirm": "Confirm",
-      "otp": "OTP",
-      "amount": "Amount",
-      "invalid-otp": "Invalid OTP",
-      "amount-required": "Amount is required",
-      "success-title": "Redeemed successfully\t",
-      "success-message": "Your STC points were redeemed and applie…\t",
-      "change-pohne-number": "Change phone number",
-      "change-phone-number": "Change phone number"
-    }
+    "partner-data": "About the Host",
+    "view-profile": "View profile"
   },
   "errors": {
     "unknown-error": "Unknown error"
+  },
+  "video": {
+    "load-error-title": "Failed to load videos",
+    "load-error-message": "An unexpected error occurred",
+    "no-videos-title": "No videos available",
+    "no-videos-message": "There are no valid video URLs to display",
+    "invalid-url-title": "Video URL is not available",
+    "invalid-url-message": "The video source is missing or invalid"
   },
   "generla": {
     "failer": "Failer"
@@ -597,5 +581,17 @@
       "success-message": "Amount has been added to your wallet successfully"
     }
   },
-  "change-search-dates": "Choose different dates"
+  "change-search-dates": "Choose different dates",
+  "host-page": {
+    "title": "About the host",
+    "share-text": "Check out {hostName}'s properties on Mabet!",
+    "rating": "rating",
+    "average-response-speed": "Average response speed",
+    "host-since": "Host since",
+    "number-of-units": "Number of units",
+    "units-title": "Host properties",
+    "units-description": "Explore all properties from this host",
+    "reviews-title": "Ratings",
+    "reviews-description": "Host Ratings"
+  }
 }

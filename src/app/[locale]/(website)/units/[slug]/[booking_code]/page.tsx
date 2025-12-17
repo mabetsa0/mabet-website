@@ -43,17 +43,11 @@ const Page = (props: Props) => {
     Router.back()
   }
   useEffect(() => {
+    console.log("🚀 ~ useEffect ~ isAuthenticated:", isAuthenticated)
     if (!isAuthenticated) {
       Router.replace(`/units/${params.slug}`)
     }
-  }, [isAuthenticated, params.slug, Router])
-
-  useEffect(() => {
-    if (data?.booking_details.to_pay.can_be_approved) {
-      Router.replace(`/units/${params.slug}`)
-    }
-  }, [data?.booking_details.to_pay.can_be_approved, params.slug, Router])
-
+  }, [isAuthenticated, params.slug])
   const mathes = useMdScreen()
   if (status == "pending")
     return (
