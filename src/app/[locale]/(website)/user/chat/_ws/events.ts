@@ -25,7 +25,7 @@ export type WS_SEND_EVENTS_PAYLOADS = {
     message_id: string
   }
   GET_CONVERSATION_PAGE: {
-    oldest_conversation_uuid: string
+    oldest_conversation_uuid?: string | null
     conversations_page_size: number
   }
   TYPING_START: string

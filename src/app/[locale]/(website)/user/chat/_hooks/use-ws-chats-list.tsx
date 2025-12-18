@@ -14,23 +14,10 @@ export const useWsChatsList = (accessToken: string) => {
   const [hasMore, setHasMore] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { sendEvent } = useSendEvent()
-  const lastAuthenticateEventIdRef = useRef<string | null>(null)
   const lastGetPageEventIdRef = useRef<string | null>(null)
+  const isInitialLoadRef = useRef<boolean>(true)
   const triggerRef = useRef<HTMLDivElement>(null)
   const conversationsPageSize = 10
-
-  const handleAuthenticated: WsEventHandler<
-    typeof WS_ON_EVENTS.AUTHENTICATED
-  > = (data, id) => {
-    if (id !== lastAuthenticateEventIdRef.current) return
-
-    setIsLoading(false)
-    setError(null)
-    setConversations(data.first_conversations_page)
-    setHasMore(data.first_conversations_page.length >= conversationsPageSize)
-  }
-  // Register the event listener
-  useWsEvent(WS_ON_EVENTS.AUTHENTICATED, handleAuthenticated)
 
   const handleConversationsPage: WsEventHandler<
     typeof WS_ON_EVENTS.CONVERSATIONS_PAGE
@@ -38,9 +25,22 @@ export const useWsChatsList = (accessToken: string) => {
     // Only handle responses related to the latest GET_CONVERSATION_PAGE event we sent
     if (id !== lastGetPageEventIdRef.current) return
 
-    setIsFetchingNextPage(false)
+    const isInitialLoad = isInitialLoadRef.current
+    if (isInitialLoad) {
+      setIsLoading(false)
+      isInitialLoadRef.current = false
+    } else {
+      setIsFetchingNextPage(false)
+    }
+
+    setError(null)
+
     if (data.conversations_page.length > 0) {
-      setConversations((prev) => [...prev, ...data.conversations_page])
+      if (isInitialLoad) {
+        setConversations(data.conversations_page)
+      } else {
+        setConversations((prev) => [...prev, ...data.conversations_page])
+      }
       // If we got fewer conversations than requested, there are no more pages
       setHasMore(
         data.has_more !== undefined
@@ -49,42 +49,46 @@ export const useWsChatsList = (accessToken: string) => {
       )
     } else {
       setHasMore(false)
+      if (isInitialLoad) {
+        setConversations([])
+      }
     }
   }
 
   useWsEvent(WS_ON_EVENTS.CONVERSATIONS_PAGE, handleConversationsPage)
 
   const handleError: WsEventHandler<typeof WS_ON_EVENTS.ERROR> = (data, id) => {
-    // Handle errors related to AUTHENTICATE event
-    if (id === lastAuthenticateEventIdRef.current) {
-      setIsLoading(false)
-      setError(data.message)
-      setConversations([])
-      return
-    }
-
     // Handle errors related to GET_CONVERSATION_PAGE event
     if (id === lastGetPageEventIdRef.current) {
-      setIsFetchingNextPage(false)
+      if (isInitialLoadRef.current) {
+        setIsLoading(false)
+        isInitialLoadRef.current = false
+      } else {
+        setIsFetchingNextPage(false)
+      }
       setError(data.message)
+      if (isInitialLoadRef.current) {
+        setConversations([])
+      }
     }
   }
 
   useWsEvent(WS_ON_EVENTS.ERROR, handleError)
 
-  // Send authenticate event
+  // Initial load - send GET_CONVERSATION_PAGE with null to start from beginning
   useEffect(() => {
     setIsLoading(true)
     setHasMore(true)
     setConversations([])
-    lastAuthenticateEventIdRef.current = sendEvent(
-      WS_SEND_EVENTS.AUTHENTICATE,
+    isInitialLoadRef.current = true
+    lastGetPageEventIdRef.current = sendEvent(
+      WS_SEND_EVENTS.GET_CONVERSATION_PAGE,
       {
-        token: accessToken,
-        first_conversations_page_size: conversationsPageSize,
+        oldest_conversation_uuid: null,
+        conversations_page_size: conversationsPageSize,
       }
     )!
-  }, [accessToken])
+  }, [accessToken, sendEvent])
 
   // Fetch next page function
   const fetchNextPage = () => {
@@ -142,11 +146,12 @@ export const useWsChatsList = (accessToken: string) => {
     setIsLoading(true)
     setHasMore(true)
     setConversations([])
-    lastAuthenticateEventIdRef.current = sendEvent(
-      WS_SEND_EVENTS.AUTHENTICATE,
+    isInitialLoadRef.current = true
+    lastGetPageEventIdRef.current = sendEvent(
+      WS_SEND_EVENTS.GET_CONVERSATION_PAGE,
       {
-        token: accessToken,
-        first_conversations_page_size: conversationsPageSize,
+        oldest_conversation_uuid: null,
+        conversations_page_size: conversationsPageSize,
       }
     )!
   }

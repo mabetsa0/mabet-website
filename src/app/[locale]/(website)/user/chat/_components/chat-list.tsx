@@ -38,9 +38,11 @@ const ChatList = () => {
             className="flex h-[calc(100vh-165px)] flex-col items-center justify-center gap-2 text-red-500"
           >
             {error}
-            <Button onClick={refetch}>
-              <RefreshCcw className="size-4" />
-              <span>اعادة التحميل</span>
+            <Button
+              onClick={refetch}
+              leftSection={<RefreshCcw className="size-1" />}
+            >
+              اعادة التحميل
             </Button>
           </div>
         ) : data && data.length > 0 ? (
