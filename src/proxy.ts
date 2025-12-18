@@ -22,41 +22,36 @@ export default async function proxy(req: NextRequest) {
     )
   }
 
-  if (
-    req.nextUrl.pathname.includes("/chat") ||
-    req.nextUrl.pathname.includes("/units/")
-  ) {
-    const session = await getServerSession()
-    if (!session) {
-      return res
-    }
+  const session = await getServerSession()
+  if (!session) {
+    return res
+  }
 
-    // Check if chat access token is cached in cookies
-    const cachedToken = req.cookies.get(CHAT_SESSION_COOKIE)?.value
-    let chatAccessToken = cachedToken
+  // Check if chat access token is cached in cookies
+  const cachedToken = req.cookies.get(CHAT_SESSION_COOKIE)?.value
+  let chatAccessToken = cachedToken
 
-    // If no cached token, generate one from user access token
-    if (!chatAccessToken && session.access_token) {
-      try {
-        chatAccessToken = await getChatAccessToken(session.access_token)
+  // If no cached token, generate one from user access token
+  if (!chatAccessToken && session.access_token) {
+    try {
+      chatAccessToken = await getChatAccessToken(session.access_token)
 
-        if (chatAccessToken) {
-          // Store chat access token in cookies on the response
-          const expiresAt = new Date(Date.now() + 6 * 60 * 60 * 1000) // 6 hours
+      if (chatAccessToken) {
+        // Store chat access token in cookies on the response
+        const expiresAt = new Date(Date.now() + 6 * 60 * 60 * 1000) // 6 hours
 
-          res.cookies.set(CHAT_SESSION_COOKIE, chatAccessToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            secure: true,
-            expires: expiresAt,
-            path: "/",
-          })
-        }
-      } catch (error) {
-        // If token generation fails, log error but don't block the request
-        // The chat page can handle the error appropriately
-        console.error("Failed to generate chat access token:", error)
+        res.cookies.set(CHAT_SESSION_COOKIE, chatAccessToken, {
+          httpOnly: true,
+          sameSite: "lax",
+          secure: true,
+          expires: expiresAt,
+          path: "/",
+        })
       }
+    } catch (error) {
+      // If token generation fails, log error but don't block the request
+      // The chat page can handle the error appropriately
+      console.error("Failed to generate chat access token:", error)
     }
   }
 

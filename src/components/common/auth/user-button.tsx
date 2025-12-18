@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl"
 import { ActionIcon, Button, Menu } from "@mantine/core"
-import { ChevronDown, LogOut, UserCircle } from "lucide-react"
+import { ChevronDown, LogOut, MessageCircle, UserCircle } from "lucide-react"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { Link } from "@/lib/i18n/navigation"
@@ -92,6 +92,12 @@ const UserButton = () => {
             <Link className="flex items-center gap-0.5" href="/user/profile">
               <UserCircle strokeWidth={1.25} />
               {t("profile")}
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link className="flex items-center gap-0.5" href="/user/chat">
+              <MessageCircle strokeWidth={1.25} />
+              {t("chat")}
             </Link>
           </Menu.Item>
           <Menu.Item
