@@ -76,7 +76,7 @@ const Reviews = () => {
                       {ele.stars}
                     </Text>
                   </Stack>
-                  <Image className="w-2" src={ele.icon_svg} alt={ele.name} />
+                  <img className="w-2" src={ele.icon_svg} alt={ele.name} />
                 </Stack>
               )
             })}

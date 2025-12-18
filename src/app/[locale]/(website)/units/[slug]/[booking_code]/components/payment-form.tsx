@@ -18,6 +18,7 @@ import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs"
 import { applePay, mada, madfu, masterCard, tamara, visa } from "@/assets"
 import { RiyalIcon } from "@/components/icons"
 import { BookingDetails } from "../payment-summary"
+import { STCRedeem } from "./stc-redeem"
 
 const paymentCards = [masterCard, mada, visa]
 
@@ -181,7 +182,7 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
-
+      <STCRedeem />
       {showWalletOption && (
         <>
           <Group wrap="nowrap" align="start" mt={"sm"}>

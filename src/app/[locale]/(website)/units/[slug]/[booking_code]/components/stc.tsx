@@ -5,7 +5,7 @@ import { parseAsBoolean, useQueryState } from "nuqs"
 import { stcAr, stcEn } from "@/assets"
 import { cn } from "@/lib/cn"
 
-export const STC = () => {
+const STC = () => {
   const locale = useLocale()
   const stc = locale === "ar" ? stcAr : stcEn
   const [earn_qitaf_points, setEarnQitafPoints] = useQueryState(
@@ -43,3 +43,5 @@ export const STC = () => {
     </>
   )
 }
+
+export default STC

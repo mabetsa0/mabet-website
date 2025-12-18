@@ -21,10 +21,10 @@ const ErrorUI = ({
       window.location.reload()
     })
   return (
-    <div className="w-full min-h-[60vh] flex items-center justify-center px-4">
-      <Stack gap={12} align="center" className="text-center max-w-xl">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-50 text-red-600">
-          <AlertTriangle className="w-4 h-4" strokeWidth={1.25} aria-hidden />
+    <div className="flex min-h-[60vh] w-full items-center justify-center px-4">
+      <Stack gap={12} align="center" className="max-w-xl text-center">
+        <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-50 text-red-600">
+          <AlertTriangle className="h-4 w-4" strokeWidth={1.25} aria-hidden />
         </div>
         <Title order={2}>{title}</Title>
         {message && (

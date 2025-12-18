@@ -24,6 +24,7 @@ import usePayment from "../hooks/use-payment"
 import { usePaymentState } from "../hooks/use-payment-state"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
+import STC from "./stc"
 
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()

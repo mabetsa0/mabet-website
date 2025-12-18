@@ -3,10 +3,7 @@
 import { use, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { ActionIcon, Box, Group, Loader, Space, Stack } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
-import { useMutation } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
-import { ErrorResponse } from "@/@types/error"
 import Footer from "@/components/common/footer"
 import ErrorUI from "@/components/ui/error"
 import useMdScreen from "@/hooks/use-md-screen"
@@ -14,7 +11,6 @@ import { useRouter } from "@/lib/i18n/navigation"
 import { useSession } from "@/lib/session-store"
 import ImageGallery from "../components/image-gallery"
 import { UnitContextProvider } from "../context/unit-context"
-import { ApproveBooking } from "./approve-booking"
 import MobilePaymentButton from "./components/mobile-payment-button"
 import PaymentForm from "./components/payment-form"
 import ReservationDetails from "./components/reservation-details"
@@ -43,7 +39,6 @@ const Page = (props: Props) => {
     Router.back()
   }
   useEffect(() => {
-    console.log("🚀 ~ useEffect ~ isAuthenticated:", isAuthenticated)
     if (!isAuthenticated) {
       Router.replace(`/units/${params.slug}`)
     }
