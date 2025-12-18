@@ -103,7 +103,7 @@ const BookingCard = (booking: Props) => {
             </div>
           ) : null}
 
-          <div className="aspect-[4/3] w-full">
+          <div className="aspect-4/3 w-full">
             <Image
               loading="lazy"
               className="h-full w-full object-cover"
