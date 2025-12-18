@@ -30,7 +30,7 @@ const Features = () => {
                 return (
                   <Stack key={index} className="pb-0.5">
                     <Group>
-                      <Image
+                      <img
                         className="h-2"
                         src={value.icon_svg}
                         alt={value.name}
