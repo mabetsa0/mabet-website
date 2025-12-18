@@ -22,7 +22,7 @@ export const useWsChatsList = (accessToken: string) => {
   const handleConversationsPage: WsEventHandler<
     typeof WS_ON_EVENTS.CONVERSATIONS_PAGE
   > = (data, id) => {
-    // Only handle responses related to the latest GET_CONVERSATION_PAGE event we sent
+    // Only handle responses related to the latest GET_CONVERSATIONS_PAGE event we sent
     if (id !== lastGetPageEventIdRef.current) return
 
     const isInitialLoad = isInitialLoadRef.current
@@ -58,7 +58,7 @@ export const useWsChatsList = (accessToken: string) => {
   useWsEvent(WS_ON_EVENTS.CONVERSATIONS_PAGE, handleConversationsPage)
 
   const handleError: WsEventHandler<typeof WS_ON_EVENTS.ERROR> = (data, id) => {
-    // Handle errors related to GET_CONVERSATION_PAGE event
+    // Handle errors related to GET_CONVERSATIONS_PAGE event
     if (id === lastGetPageEventIdRef.current) {
       if (isInitialLoadRef.current) {
         setIsLoading(false)
@@ -75,14 +75,14 @@ export const useWsChatsList = (accessToken: string) => {
 
   useWsEvent(WS_ON_EVENTS.ERROR, handleError)
 
-  // Initial load - send GET_CONVERSATION_PAGE with null to start from beginning
+  // Initial load - send GET_CONVERSATIONS_PAGE with null to start from beginning
   useEffect(() => {
     setIsLoading(true)
     setHasMore(true)
     setConversations([])
     isInitialLoadRef.current = true
     lastGetPageEventIdRef.current = sendEvent(
-      WS_SEND_EVENTS.GET_CONVERSATION_PAGE,
+      WS_SEND_EVENTS.GET_CONVERSATIONS_PAGE,
       {
         oldest_conversation_uuid: null,
         conversations_page_size: conversationsPageSize,
@@ -101,7 +101,7 @@ export const useWsChatsList = (accessToken: string) => {
 
     setIsFetchingNextPage(true)
     lastGetPageEventIdRef.current = sendEvent(
-      WS_SEND_EVENTS.GET_CONVERSATION_PAGE,
+      WS_SEND_EVENTS.GET_CONVERSATIONS_PAGE,
       {
         oldest_conversation_uuid: oldestConversation.uuid,
         conversations_page_size: conversationsPageSize,
@@ -148,7 +148,7 @@ export const useWsChatsList = (accessToken: string) => {
     setConversations([])
     isInitialLoadRef.current = true
     lastGetPageEventIdRef.current = sendEvent(
-      WS_SEND_EVENTS.GET_CONVERSATION_PAGE,
+      WS_SEND_EVENTS.GET_CONVERSATIONS_PAGE,
       {
         oldest_conversation_uuid: null,
         conversations_page_size: conversationsPageSize,

@@ -7,7 +7,7 @@ export const WS_SEND_EVENTS = {
   TYPING_START: "typing_start",
   SEND_MESSAGE: "send_message",
   READ_MESSAGE: "read_message",
-  GET_CONVERSATION_PAGE: "get_conversation_page",
+  GET_CONVERSATIONS_PAGE: "get_conversations_page",
 } as const
 
 export type WS_SEND_EVENTS_PAYLOADS = {
@@ -24,7 +24,7 @@ export type WS_SEND_EVENTS_PAYLOADS = {
     conversation_uuid: string
     message_id: string
   }
-  GET_CONVERSATION_PAGE: {
+  GET_CONVERSATIONS_PAGE: {
     oldest_conversation_uuid?: string | null
     conversations_page_size: number
   }
