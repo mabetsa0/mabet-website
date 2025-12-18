@@ -18,12 +18,12 @@ const GoToBookings = () => {
   if (pathname.includes("/user")) return null
 
   return (
-    <div className="fixed end-2 bottom-2 z-10">
+    <div className="fixed end-2 bottom-8 z-10 md:bottom-2">
       <Tooltip label={t("general.goToBookings")} offset={10} position="top">
         <div>
           <ActionIcon
             className={"p-1 duration-200 hover:-translate-y-0.5"}
-            visibleFrom="sm"
+            visibleFrom="md"
             onClick={handleClick}
             size={70}
             aria-label="Go to bookings"
@@ -47,7 +47,7 @@ const GoToBookings = () => {
           </ActionIcon>
           <ActionIcon
             className={"p-0.5 duration-200 hover:-translate-y-0.5"}
-            hiddenFrom="sm"
+            hiddenFrom="md"
             onClick={handleClick}
             size={50}
             aria-label="Go to bookings"
