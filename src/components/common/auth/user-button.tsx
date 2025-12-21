@@ -76,6 +76,7 @@ const UserButton = () => {
 
   return (
     <>
+      <UserChats />
       <Menu shadow="lg" position="bottom" withArrow>
         <Menu.Target>
           {matches ? (
@@ -113,7 +114,6 @@ const UserButton = () => {
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <UserChats />
     </>
   )
 }
