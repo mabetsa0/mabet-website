@@ -8,10 +8,6 @@ export const deleteMessage = async ({
   messageId: string | number
   token: string
 }) => {
-  const response = await api.delete<ChatResponse>(`/messages/${messageId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+  const response = await api.delete<ChatResponse>(`/messages/${messageId}`)
   return response.data.data
 }

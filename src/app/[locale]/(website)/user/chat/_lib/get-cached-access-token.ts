@@ -1,3 +1,4 @@
+"use server"
 import { cookies } from "next/headers"
 import { CHAT_SESSION_COOKIE } from "@/config"
 

@@ -3,14 +3,12 @@
 import { useEffect, useRef } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { getChat } from "../_services/get-chat"
-import { useSessionStore } from "../_stores/session-store-provider"
 
 type UseInfiniteChatParams = {
   uuid: string
 }
 
 export const useInfiniteChat = ({ uuid }: UseInfiniteChatParams) => {
-  const accessToken = useSessionStore((state) => state.accessToken)
   const triggerRef = useRef<HTMLDivElement>(null)
 
   const query = useInfiniteQuery({
@@ -18,7 +16,6 @@ export const useInfiniteChat = ({ uuid }: UseInfiniteChatParams) => {
     queryFn: async ({ pageParam }) => {
       return await getChat({
         uuid,
-        token: accessToken,
         oldestMessageId: pageParam,
         pageSize: 20,
       })

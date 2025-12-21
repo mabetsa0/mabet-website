@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl"
 import { ActionIcon, Button, Menu } from "@mantine/core"
 import { ChevronDown, LogOut, MessageCircle, UserCircle } from "lucide-react"
+import UserChats from "@/app/[locale]/(website)/user/chat/_components/user-chats"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { Link } from "@/lib/i18n/navigation"
@@ -112,6 +113,7 @@ const UserButton = () => {
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
+      <UserChats />
     </>
   )
 }

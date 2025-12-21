@@ -1,8 +1,7 @@
-'use client'
+"use client"
 
-import { fetchAccessToken } from '@/services/get-access-token'
-import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect } from "react"
+import axios from "axios"
 
 export const CacheAccessToken = ({
   cached,
@@ -13,7 +12,7 @@ export const CacheAccessToken = ({
 }) => {
   useEffect(() => {
     if (!cached) {
-      axios.post('/api/cache-access-token', { accessToken: token })
+      axios.post("/api/cache-access-token", { accessToken: token })
     }
   }, [cached, token])
 

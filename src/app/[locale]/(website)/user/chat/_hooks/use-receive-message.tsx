@@ -2,14 +2,16 @@
 
 import { useQueryClient } from "@tanstack/react-query"
 import { Message } from "../_types/chat-response"
-import { WS_ON_EVENTS } from "../_ws/events"
+import { WS_ON_EVENTS, WS_ON_KEYS, WSOnEvents } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 import { useWsEvent } from "./use-ws-event"
 
 export const useReceiveMessage = () => {
   const queryClient = useQueryClient()
 
-  const handleReceiveMessage: WsEventHandler<Message> = (data: Message) => {
+  const handleReceiveMessage: WsEventHandler<
+    typeof WS_ON_EVENTS.MESSAGE_RECEIVED
+  > = (data: Message) => {
     const uuid = data.conversation_uuid
     queryClient.setQueryData<{
       pages: { messages: Message[]; has_more: boolean }[]
@@ -42,5 +44,5 @@ export const useReceiveMessage = () => {
     })
   }
   // Register the MESSAGE_SENT event listener
-  useWsEvent<Message>(WS_ON_EVENTS.MESSAGE_RECEIVED, handleReceiveMessage)
+  useWsEvent(WS_ON_EVENTS.MESSAGE_RECEIVED, handleReceiveMessage)
 }

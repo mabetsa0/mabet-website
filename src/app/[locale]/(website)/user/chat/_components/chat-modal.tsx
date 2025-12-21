@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { ActionIcon, Button, Drawer } from "@mantine/core"
+import { ActionIcon, Drawer } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { MessageCircle } from "lucide-react"
@@ -40,7 +40,6 @@ function ChatModal({
     await mutation.mutateAsync({
       topicId,
       partnerId,
-      accessToken,
     })
     open()
   }

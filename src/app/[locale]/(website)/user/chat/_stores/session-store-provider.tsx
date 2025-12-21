@@ -55,13 +55,13 @@ export const useSessionStore = <T,>(
  * @example
  * ```ts
  * // In a utility function
- * const store = getSessionStore()
+ * const store = getChatSessionStore()
  * if (store) {
  *   const accessToken = store.getState().accessToken
  *   store.setState({ accessToken: 'new-token' })
  * }
  * ```
  */
-export const getSessionStore = (): SessionStoreApi | null => {
+export const getChatSessionStore = (): SessionStoreApi | null => {
   return storeInstance
 }

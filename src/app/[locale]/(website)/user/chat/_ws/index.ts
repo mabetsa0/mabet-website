@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid"
-import { getSessionStore } from "../_stores/session-store-provider"
+import { getChatSessionStore } from "../_stores/session-store-provider"
 import { getUserStore } from "../_stores/user-store-provider"
 import {
   WSOnEvents,
@@ -86,7 +86,7 @@ function authenticateWebSocket() {
     return
   }
 
-  const store = getSessionStore()
+  const store = getChatSessionStore()
   if (!store) {
     console.warn("[WS] Session store not initialized, skipping authentication")
     return

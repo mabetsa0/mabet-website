@@ -2,12 +2,10 @@ import { ChatResponse } from "../_types/chat-response"
 import api from "./axios"
 
 export const getChat = async ({
-  token,
   uuid,
   oldestMessageId,
   pageSize = 20,
 }: {
-  token: string
   uuid: string
   oldestMessageId?: string | number
   pageSize?: number
@@ -15,9 +13,6 @@ export const getChat = async ({
   const response = await api.get<ChatResponse>(
     `/conversations/${uuid}/messages`,
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       params: {
         oldestMessageId,
         pageSize,

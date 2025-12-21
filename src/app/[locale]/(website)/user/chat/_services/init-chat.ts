@@ -4,21 +4,14 @@ import api from "./axios"
 export const initChat = async ({
   topicType = "unit",
   topicId,
-  accessToken,
   partnerId,
 }: {
   topicType?: string
   topicId: string
-  accessToken: string
   partnerId: string
 }) => {
   const response = await api.get<ChatInfoResponse>(
-    `/conversations/partner/${partnerId}?topicType=${topicType}&topicId=${topicId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
+    `/conversations/partner/${partnerId}?topicType=${topicType}&topicId=${topicId}`
   )
 
   return response.data.data

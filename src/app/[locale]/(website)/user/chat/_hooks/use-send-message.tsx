@@ -60,10 +60,7 @@ export const useSendMessage = () => {
   }
 
   // Register the MESSAGE_SENT event listener
-  useWsEvent<MessageSentEventPayload>(
-    WS_ON_EVENTS.MESSAGE_SENT,
-    handleMessageSent
-  )
+  useWsEvent(WS_ON_EVENTS.MESSAGE_SENT, handleMessageSent)
 
   const handleError = (data: { code: string; message: string }) => {
     setIsLoading(false)
