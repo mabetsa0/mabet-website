@@ -12,6 +12,8 @@ import { getServerSession } from "@/services/get-server-session"
 import { getCities, getUnitTypes } from "@/services/lists"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
+import { getCachedTokenFromCookie } from "./(website)/user/chat/_lib/get-cached-access-token"
+import { SessionStoreProvider } from "./(website)/user/chat/_stores/session-store-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
 
@@ -41,7 +43,7 @@ export default async function LocaleLayout({
   const [unitTypes, cities] = await Promise.all([getUnitTypes(), getCities()])
 
   const session = await getServerSession()
-
+  const chatAccessToken = await getCachedTokenFromCookie()
   return (
     <html
       lang={locale}
@@ -58,13 +60,15 @@ export default async function LocaleLayout({
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  <InitSession initialValue={session} />
-                  {children}
-                  {process.env.NEXT_PUBLIC_TEST == "true" && (
-                    <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
-                      <TestTube2 className="text-primary" />
-                    </div>
-                  )}
+                  <SessionStoreProvider accessToken={chatAccessToken}>
+                    <InitSession initialValue={session} />
+                    {children}
+                    {process.env.NEXT_PUBLIC_TEST == "true" && (
+                      <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
+                        <TestTube2 className="text-primary" />
+                      </div>
+                    )}
+                  </SessionStoreProvider>
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

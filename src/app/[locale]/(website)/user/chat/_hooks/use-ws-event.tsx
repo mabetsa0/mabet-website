@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { getOrInitWebSocket } from "../_ws"
-import { WSOnEventContentByEvent, WSOnEvents } from "../_ws/events"
+import { WSOnEvents } from "../_ws/events"
 import { onEvent, WsEventHandler } from "../_ws/events-handler"
 
 export function useWsEvent<T extends WSOnEvents>(

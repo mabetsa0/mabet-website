@@ -115,7 +115,6 @@ const page = async (props: Props) => {
         <Footer />
         {accessToken ? (
           <ChatModal
-            accessToken={accessToken}
             topicId={unit.id.toString()}
             partnerId={unit.partner.id.toString()}
           />

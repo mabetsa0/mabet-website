@@ -15,7 +15,7 @@ export const SessionStoreContext = createContext<SessionStoreApi | undefined>(
 )
 export interface SessionStoreProviderProps {
   children: ReactNode
-  accessToken: string
+  accessToken: string | null
 }
 
 export const SessionStoreProvider = ({

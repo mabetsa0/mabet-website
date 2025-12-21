@@ -7,18 +7,15 @@ import { useMutation } from "@tanstack/react-query"
 import { MessageCircle } from "lucide-react"
 import { ChatProvider } from "../_contexts/chat-context"
 import { initChat } from "../_services/init-chat"
-import { SessionStoreProvider } from "../_stores/session-store-provider"
 import { UserType } from "../_stores/user-store"
 import { UserStoreProvider } from "../_stores/user-store-provider"
 import { ChatInfo } from "../_types/chat-info-response"
 import ChatBody from "./chat-body"
 
 function ChatModal({
-  accessToken,
   topicId,
   partnerId,
 }: {
-  accessToken: string
   topicId: string
   partnerId: string
 }) {
@@ -63,11 +60,9 @@ function ChatModal({
             type: (chatInfo?.initiator_type as UserType) ?? "user",
           }}
         >
-          <SessionStoreProvider accessToken={accessToken}>
-            <ChatProvider chatData={chatInfo}>
-              <ChatBody uuid={chatInfo?.uuid ?? ""} isModal={true} />
-            </ChatProvider>
-          </SessionStoreProvider>
+          <ChatProvider chatData={chatInfo}>
+            <ChatBody uuid={chatInfo?.uuid ?? ""} isModal={true} />
+          </ChatProvider>
         </UserStoreProvider>
       </Drawer>
 
