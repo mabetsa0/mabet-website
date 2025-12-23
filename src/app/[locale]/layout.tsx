@@ -12,7 +12,9 @@ import { getServerSession } from "@/services/get-server-session"
 import { getCities, getUnitTypes } from "@/services/lists"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
+import ReceivedMessage from "./(website)/user/chat/_components/received-messages"
 import { getCachedTokenFromCookie } from "./(website)/user/chat/_lib/get-cached-access-token"
+import { ChatsListStoreProvider } from "./(website)/user/chat/_stores/chats-list-store-provider"
 import { SessionStoreProvider } from "./(website)/user/chat/_stores/session-store-provider"
 import { UserStoreProvider } from "./(website)/user/chat/_stores/user-store-provider"
 import { InitSession } from "./components/init-session"
@@ -63,13 +65,16 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider>
                   <SessionStoreProvider accessToken={chatAccessToken}>
                     <UserStoreProvider user={null}>
-                      <InitSession initialValue={session} />
-                      {children}
-                      {process.env.NEXT_PUBLIC_TEST == "true" && (
-                        <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
-                          <TestTube2 className="text-primary" />
-                        </div>
-                      )}
+                      <ChatsListStoreProvider>
+                        <InitSession initialValue={session} />
+                        {children}
+                        {process.env.NEXT_PUBLIC_TEST == "true" && (
+                          <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
+                            <TestTube2 className="text-primary" />
+                          </div>
+                        )}
+                        <ReceivedMessage />
+                      </ChatsListStoreProvider>
                     </UserStoreProvider>
                   </SessionStoreProvider>
                 </NextIntlClientProvider>

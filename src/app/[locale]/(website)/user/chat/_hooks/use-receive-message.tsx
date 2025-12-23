@@ -1,13 +1,18 @@
 "use client"
 
 import { useQueryClient } from "@tanstack/react-query"
+import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { Message } from "../_types/chat-response"
+import { type Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 import { useWsEvent } from "./use-ws-event"
 
 export const useReceiveMessage = () => {
   const queryClient = useQueryClient()
+  const { conversations, upsertConversation } = useChatsListStore(
+    (state) => state
+  )
 
   const handleReceiveMessage: WsEventHandler<
     typeof WS_ON_EVENTS.MESSAGE_RECEIVED
@@ -38,6 +43,32 @@ export const useReceiveMessage = () => {
         }),
       }
     })
+
+    // Update the chats list so that the corresponding conversation reflects
+    // the newest message and moves to the top of the list.
+    const existingConversation = conversations.find(
+      (conversation) => conversation.uuid === uuid
+    )
+
+    if (existingConversation) {
+      const updatedConversation: Conversation = {
+        ...existingConversation,
+        last_message: {
+          ...existingConversation.last_message,
+          id: data.id,
+          sender_id: data.sender_id,
+          sender_type: data.sender_type,
+          sender_name: data.sender_name,
+          conversation_uuid: data.conversation_uuid,
+          content: data.content,
+          // Ensure we store a string timestamp as expected by Conversation
+          created_at: new Date(data.created_at).toISOString(),
+        },
+        unread_messages_count: existingConversation.unread_messages_count + 1,
+      }
+
+      upsertConversation(updatedConversation)
+    }
   }
   // Register the MESSAGE_SENT event listener
   useWsEvent(WS_ON_EVENTS.MESSAGE_RECEIVED, handleReceiveMessage)

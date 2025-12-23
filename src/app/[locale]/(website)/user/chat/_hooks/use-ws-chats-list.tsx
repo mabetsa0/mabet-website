@@ -1,18 +1,27 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useWsEvent } from "../_hooks/use-ws-event"
-import { Conversation } from "../_types/chats-response"
+import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { WS_ON_EVENTS, WS_SEND_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 
 export const useWsChatsList = () => {
-  const [conversations, setConversations] = useState<Conversation[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false)
-  const [hasMore, setHasMore] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const {
+    conversations,
+    isLoading,
+    isFetchingNextPage,
+    hasMore,
+    error,
+    setConversations,
+    appendConversations,
+    setIsLoading,
+    setIsFetchingNextPage,
+    setHasMore,
+    setError,
+    reset,
+  } = useChatsListStore((state) => state)
   const { sendEvent } = useSendEvent()
   const lastGetPageEventIdRef = useRef<string | null>(null)
   const isInitialLoadRef = useRef<boolean>(true)
@@ -39,7 +48,7 @@ export const useWsChatsList = () => {
       if (isInitialLoad) {
         setConversations(data.conversations_page)
       } else {
-        setConversations((prev) => [...prev, ...data.conversations_page])
+        appendConversations(data.conversations_page)
       }
       // If we got fewer conversations than requested, there are no more pages
       setHasMore(
@@ -77,9 +86,9 @@ export const useWsChatsList = () => {
 
   // Initial load - send GET_CONVERSATIONS_PAGE with null to start from beginning
   useEffect(() => {
+    reset()
     setIsLoading(true)
     setHasMore(true)
-    setConversations([])
     isInitialLoadRef.current = true
     lastGetPageEventIdRef.current = sendEvent(
       WS_SEND_EVENTS.GET_CONVERSATIONS_PAGE,
@@ -143,9 +152,9 @@ export const useWsChatsList = () => {
 
   //   refetch the chats list
   const refetch = () => {
+    reset()
     setIsLoading(true)
     setHasMore(true)
-    setConversations([])
     isInitialLoadRef.current = true
     lastGetPageEventIdRef.current = sendEvent(
       WS_SEND_EVENTS.GET_CONVERSATIONS_PAGE,
