@@ -11,6 +11,7 @@ import "dayjs/locale/en"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { User } from "lucide-react"
 import { cn } from "@/lib/cn"
+import { useTypingIndicator } from "../_hooks/use-typing-indicator"
 import { Conversation } from "../_types/chats-response"
 
 dayjs.extend(relativeTime)
@@ -20,6 +21,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
   const locale = useLocale()
   dayjs.locale(locale)
   const t = useTranslations("chat")
+  const { isTyping } = useTypingIndicator(conversation.uuid)
 
   return (
     <div className="relative">
@@ -56,7 +58,12 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
               </p>
               <p className="text-xs font-semibold">
                 <span>
-                  {t("host")}: {conversation.title?.trim() || "unknown"}
+                  {t("host")}: {conversation.title?.trim() || "unknown"}{" "}
+                  {isTyping && (
+                    <span className="inline-block px-px text-[11px] text-gray-500">
+                      {t("is-typing")}...
+                    </span>
+                  )}
                 </span>
               </p>
             </div>

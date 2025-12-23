@@ -624,6 +624,7 @@
     },
     "errors": {
       "send-message": "Error"
-    }
+    },
+    "is-typing": "Write now."
   }
 }

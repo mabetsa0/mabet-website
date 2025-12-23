@@ -619,6 +619,7 @@
     },
     "errors": {
       "send-message": "خطأ"
-    }
+    },
+    "is-typing": "يكتب الآن."
   }
 }
