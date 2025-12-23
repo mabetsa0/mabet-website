@@ -6,7 +6,7 @@ export const WS_SEND_EVENTS = {
   AUTHENTICATE: "authenticate",
   TYPING_START: "typing_start",
   SEND_MESSAGE: "send_message",
-  READ_MESSAGE: "read_message",
+  READ_MESSAGE: "read_messages",
   GET_CONVERSATIONS_PAGE: "get_conversations_page",
 } as const
 

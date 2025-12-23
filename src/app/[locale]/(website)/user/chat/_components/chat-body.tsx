@@ -8,6 +8,7 @@ import { mabetLogo } from "@/assets"
 import { cn } from "@/lib/cn"
 import { useChatData } from "../_contexts/chat-context"
 import { useInfiniteChat } from "../_hooks/use-infinite-chat"
+import { useSendReadMessage } from "../_hooks/use-send-read-message"
 import { useUserStore } from "../_stores/user-store-provider"
 import ChatHeader from "./chat-header"
 import ChatInput from "./chat-input"
@@ -27,11 +28,13 @@ const ChatBody = ({
   const chatData = useChatData()
   const { messages, isLoading, isFetchingNextPage, hasNextPage, triggerRef } =
     useInfiniteChat({ uuid })
+  const { markAsRead } = useSendReadMessage(uuid)
 
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const lastMessageRef = useRef<HTMLDivElement>(null)
   const hasScrolledToBottomRef = useRef(false)
   const lastMessageIdRef = useRef<string | null>(null)
+  const lastReadReportedMessageIdRef = useRef<string | null>(null)
 
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
@@ -76,6 +79,22 @@ const ChatBody = ({
       scrollToBottom("smooth")
     }
   }, [messages])
+
+  // Mark the last message as read when:
+  // - the chat is first opened (after messages load)
+  // - new messages arrive while the user is on this chat
+  useEffect(() => {
+    if (!user?.id || messages.length === 0) return
+
+    const lastMessage = messages[messages.length - 1]
+    if (!lastMessage || String(lastMessage.sender_id) == String(user.id)) return
+
+    // Avoid sending duplicate READ_MESSAGE for the same last message
+    if (lastReadReportedMessageIdRef.current === lastMessage.id) return
+
+    lastReadReportedMessageIdRef.current = lastMessage.id
+    markAsRead(lastMessage.id)
+  }, [messages.length, user?.id, markAsRead])
 
   return (
     <div
