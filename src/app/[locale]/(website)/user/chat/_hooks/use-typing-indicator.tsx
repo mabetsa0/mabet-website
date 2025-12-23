@@ -20,15 +20,6 @@ export const useTypingIndicator = (conversationUuid: string) => {
     // Ignore updates for other conversations
     if (data.conversation_uuid !== conversationUuid) return
 
-    // Ignore our own typing updates
-    if (
-      user &&
-      data.user_id === Number(user.id) &&
-      data.user_type === user.type
-    ) {
-      return
-    }
-
     setIsTyping(data.is_typing)
   }
 
