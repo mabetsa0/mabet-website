@@ -71,7 +71,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
 
             <span
               className={cn(
-                "block truncate text-sm text-gray-500",
+                "block truncate text-sm text-[#767676]",
                 conversation.unread_messages_count > 0 && "font-bold text-black"
               )}
             >
@@ -79,7 +79,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
             </span>
           </div>
           <div className="ms-auto flex shrink-0 flex-col items-end justify-between">
-            <span className="block text-[10px] leading-loose text-gray-500">
+            <span className="block text-[10px] leading-loose text-gray-700">
               {(() => {
                 const date = dayjs(
                   conversation.last_message?.created_at ||
