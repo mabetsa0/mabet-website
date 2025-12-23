@@ -2,7 +2,7 @@
 
 import { useQueryClient } from "@tanstack/react-query"
 import { Message } from "../_types/chat-response"
-import { WS_ON_EVENTS, WS_ON_KEYS, WSOnEvents } from "../_ws/events"
+import { WS_ON_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 import { useWsEvent } from "./use-ws-event"
 
@@ -18,12 +18,8 @@ export const useReceiveMessage = () => {
     }>(["chat-messages", uuid], (oldData) => {
       if (!oldData) {
         return {
-          pages: [
-            {
-              messages: [data],
-              has_more: false,
-            },
-          ],
+          pages: [],
+          has_more: true,
         }
       }
 

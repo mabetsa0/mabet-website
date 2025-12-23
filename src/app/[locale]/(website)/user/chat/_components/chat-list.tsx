@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl"
 import { Button, Loader, ScrollArea } from "@mantine/core"
 import { MessageSquare, RefreshCcw } from "lucide-react"
 import { useWsChatsList } from "../_hooks/use-ws-chats-list"
-import { useSessionStore } from "../_stores/session-store-provider"
 import ChatItem from "./chat-item"
 
 const ChatList = () => {
@@ -41,7 +40,7 @@ const ChatList = () => {
               onClick={refetch}
               leftSection={<RefreshCcw className="size-1" />}
             >
-              اعادة التحميل
+              {t("reload")}
             </Button>
           </div>
         ) : data && data.length > 0 ? (
@@ -65,10 +64,10 @@ const ChatList = () => {
             <MessageSquare className="text-muted-foreground size-12" />
             <div className="space-y-2">
               <p className="text-muted-foreground text-lg font-medium">
-                لا توجد محادثات
+                {t("no-chats")}
               </p>
               <p className="text-muted-foreground text-sm">
-                لم يتم العثور على أي محادثات حتى الآن
+                {t("no-chats-description")}
               </p>
             </div>
           </div>
