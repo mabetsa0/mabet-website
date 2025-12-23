@@ -1,8 +1,11 @@
 import dayjs from "dayjs"
-import { AlertTriangle, Loader2 } from "lucide-react"
+import { AlertTriangle, Check, CheckCheck, Loader2 } from "lucide-react"
 import { cn } from "@/lib/cn"
+import { useChatData } from "../_contexts/chat-context"
+import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { useUserStore } from "../_stores/user-store-provider"
 import { Message as MessageType } from "../_types/chat-response"
+import { Conversation } from "../_types/chats-response"
 
 type MessageProps = MessageType & {
   errorMessage?: string
@@ -11,6 +14,7 @@ type MessageProps = MessageType & {
 }
 
 type MessageVariant = "admin" | "user" | "other" | "error"
+type MessageDeliveryStatus = "none" | "sent" | "read"
 
 // Constants
 const MESSAGE_BASE_STYLES = "rounded-md px-[12px] py-[8px] transition-colors"
@@ -86,6 +90,16 @@ const MessageTime = ({ timestamp }: { timestamp: Date }) => (
   <span className="text-[10px]">{dayjs(timestamp).format(TIME_FORMAT)}</span>
 )
 
+const MessageStatusIcon = ({ status }: { status: MessageDeliveryStatus }) => {
+  if (status === "sent") {
+    return <Check className="ml-1 size-1 text-gray-400" />
+  }
+  if (status === "read") {
+    return <CheckCheck className="ml-1 size-1 text-[#0e9fff]" />
+  }
+  return null
+}
+
 const MessageContent = ({
   content,
   variant,
@@ -111,8 +125,10 @@ const MessageStatus = ({
 }
 
 const Message = ({
+  id,
   sender_id,
   sender_type,
+  conversation_uuid,
   content,
   created_at,
   errorMessage,
@@ -120,6 +136,13 @@ const Message = ({
   className,
 }: MessageProps) => {
   const user = useUserStore((s) => s.user)
+  const chatData = useChatData()
+  const conversationFromStore = useChatsListStore<Conversation | undefined>(
+    (state) =>
+      state.conversations.find(
+        (c: Conversation) => c.uuid === conversation_uuid
+      )
+  )
   const variant = getMessageVariant(
     sender_type,
     sender_id,
@@ -127,6 +150,41 @@ const Message = ({
     !!errorMessage
   )
   const isAdmin = variant === "admin"
+  const isOwnMessage =
+    !!user && sender_id === Number(user.id) && sender_type === user.type
+
+  let deliveryStatus: MessageDeliveryStatus = "none"
+
+  // WhatsApp-like ticks only for the current user's non-admin messages
+  if (isOwnMessage && !isAdmin && !errorMessage && !isLoading) {
+    const currentUserIdNum = Number(user.id)
+    const currentUserType = user.type
+
+    const effectiveConversation = conversationFromStore ?? chatData
+
+    const othersReadPositions =
+      effectiveConversation.read_positions?.filter(
+        (pos) =>
+          !(
+            pos.user_id === currentUserIdNum &&
+            pos.user_type === currentUserType
+          )
+      ) ?? []
+
+    const messageTimestamp = created_at
+      ? new Date(created_at).getTime()
+      : Number.NaN
+
+    const hasBeenReadBySomeoneElse = othersReadPositions.some((pos) => {
+      const readTs = new Date(pos.timestamp).getTime()
+      if (Number.isNaN(readTs) || Number.isNaN(messageTimestamp)) return false
+      return readTs >= messageTimestamp
+    })
+
+    // Two blue ticks if at least one other participant has a read timestamp
+    // that is at or after this message; otherwise single gray tick.
+    deliveryStatus = hasBeenReadBySomeoneElse ? "read" : "sent"
+  }
 
   return (
     <div
@@ -141,8 +199,18 @@ const Message = ({
           className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
         >
           <MessageContent content={content} variant={variant} />
-          <MessageTime timestamp={created_at} />
-          <MessageStatus isLoading={!!isLoading} hasError={!!errorMessage} />
+          <div className="flex items-center justify-end gap-1">
+            {isOwnMessage && !isAdmin && !isLoading && !errorMessage ? (
+              <MessageStatusIcon status={deliveryStatus} />
+            ) : null}
+            <MessageTime timestamp={created_at} />
+            {isOwnMessage && !isAdmin ? (
+              <MessageStatus
+                isLoading={!!isLoading}
+                hasError={!!errorMessage}
+              />
+            ) : null}
+          </div>
         </div>
 
         {errorMessage && (

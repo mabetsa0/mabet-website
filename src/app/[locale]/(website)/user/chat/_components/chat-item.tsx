@@ -42,6 +42,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
             size={12}
             color="green"
             offset={10}
+            zIndex={1}
             disabled={conversation.online_participants.length == 0}
           >
             <Avatar
