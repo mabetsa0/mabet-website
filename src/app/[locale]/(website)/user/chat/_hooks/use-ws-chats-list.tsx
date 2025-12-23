@@ -7,7 +7,7 @@ import { Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS, WS_SEND_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 
-export const useWsChatsList = (accessToken: string) => {
+export const useWsChatsList = () => {
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false)
@@ -88,7 +88,7 @@ export const useWsChatsList = (accessToken: string) => {
         conversations_page_size: conversationsPageSize,
       }
     )!
-  }, [accessToken, sendEvent])
+  }, [sendEvent])
 
   // Fetch next page function
   const fetchNextPage = () => {

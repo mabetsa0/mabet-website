@@ -14,6 +14,7 @@ import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import { getCachedTokenFromCookie } from "./(website)/user/chat/_lib/get-cached-access-token"
 import { SessionStoreProvider } from "./(website)/user/chat/_stores/session-store-provider"
+import { UserStoreProvider } from "./(website)/user/chat/_stores/user-store-provider"
 import { InitSession } from "./components/init-session"
 import Scripts from "./components/scripts"
 
@@ -61,13 +62,15 @@ export default async function LocaleLayout({
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
                   <SessionStoreProvider accessToken={chatAccessToken}>
-                    <InitSession initialValue={session} />
-                    {children}
-                    {process.env.NEXT_PUBLIC_TEST == "true" && (
-                      <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
-                        <TestTube2 className="text-primary" />
-                      </div>
-                    )}
+                    <UserStoreProvider user={null}>
+                      <InitSession initialValue={session} />
+                      {children}
+                      {process.env.NEXT_PUBLIC_TEST == "true" && (
+                        <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
+                          <TestTube2 className="text-primary" />
+                        </div>
+                      )}
+                    </UserStoreProvider>
                   </SessionStoreProvider>
                 </NextIntlClientProvider>
               </MyMantineProvider>

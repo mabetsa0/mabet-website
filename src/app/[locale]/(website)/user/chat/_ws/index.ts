@@ -109,7 +109,7 @@ function authenticateWebSocket() {
     WS_SEND_EVENTS.AUTHENTICATE,
     {
       token: accessToken,
-      first_conversations_page_size: 1,
+      first_conversations_page_size: 0,
     },
     authId
   )

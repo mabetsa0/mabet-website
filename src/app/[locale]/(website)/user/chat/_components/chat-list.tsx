@@ -8,7 +8,6 @@ import { useSessionStore } from "../_stores/session-store-provider"
 import ChatItem from "./chat-item"
 
 const ChatList = () => {
-  const accessToken = useSessionStore((state) => state.accessToken)
   const {
     data,
     isLoading,
@@ -17,7 +16,7 @@ const ChatList = () => {
     error,
     refetch,
     triggerRef,
-  } = useWsChatsList(accessToken)
+  } = useWsChatsList()
   const t = useTranslations("chat")
   return (
     <div className="h-[calc(100vh-73px)]">
@@ -53,7 +52,7 @@ const ChatList = () => {
               </div>
             ))}
             {/* Trigger element for infinite scroll */}
-            <div ref={triggerRef} className="h-4" />
+            {hasMore && <div ref={triggerRef} className="h-4" />}
             {/* Loading indicator for next page */}
             {isFetchingNextPage && (
               <div className="flex w-full items-center justify-center py-4">
