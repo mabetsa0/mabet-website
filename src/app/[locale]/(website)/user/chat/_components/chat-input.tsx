@@ -5,13 +5,17 @@ import { useTranslations } from "next-intl"
 import { ActionIcon, Textarea } from "@mantine/core"
 import { Send } from "lucide-react"
 import { useChatData } from "../_contexts/chat-context"
+import { useSendEvent } from "../_hooks/use-send-event"
 import { useSendMessage } from "../_hooks/use-send-message"
+import { WS_SEND_EVENTS } from "../_ws/events"
 
 const ChatInput = () => {
   const textAreRef = useRef<HTMLTextAreaElement>(null)
+  const lastTypingStartSentAtRef = useRef<number>(0)
   const chatData = useChatData()
   const uuid = chatData.uuid
   const { sendMessage, isLoading, error } = useSendMessage()
+  const { sendEvent } = useSendEvent()
   const t = useTranslations("chat")
 
   // dynamic resizing text area
@@ -24,7 +28,20 @@ const ChatInput = () => {
   const handleInputMessageChange: React.ChangeEventHandler<
     HTMLTextAreaElement
   > = (e) => {
-    setInputMessage(e.target.value)
+    const value = e.target.value
+    setInputMessage(value)
+
+    // Send a throttled typing_start event so others see the typing indicator
+    const now = Date.now()
+    if (
+      uuid &&
+      value.trim().length > 0 &&
+      now - lastTypingStartSentAtRef.current > 3000
+    ) {
+      lastTypingStartSentAtRef.current = now
+      // Backend expects a string payload; send the conversation UUID
+      sendEvent(WS_SEND_EVENTS.TYPING_START, uuid)
+    }
   }
 
   const handleSendMessage = async () => {
