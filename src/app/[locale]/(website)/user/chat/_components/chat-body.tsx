@@ -35,6 +35,9 @@ const ChatBody = ({
   const hasScrolledToBottomRef = useRef(false)
   const lastMessageIdRef = useRef<string | null>(null)
   const lastReadReportedMessageIdRef = useRef<string | null>(null)
+  const previousScrollHeightRef = useRef<number>(0)
+  const previousMessageCountRef = useRef<number>(0)
+  const wasFetchingNextPageRef = useRef<boolean>(false)
 
   // Scroll to bottom function
   const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
@@ -59,8 +62,44 @@ const ChatBody = ({
       scrollToBottom("instant")
       hasScrolledToBottomRef.current = true
       lastMessageIdRef.current = messages[messages.length - 1]?.id || null
+      // Initialize scroll height ref
+      if (scrollAreaRef.current) {
+        previousScrollHeightRef.current = scrollAreaRef.current.scrollHeight
+        previousMessageCountRef.current = messages.length
+      }
     }
-  }, [isLoading, user?.id])
+  }, [isLoading, user?.id, messages])
+
+  // Preserve scroll position when loading older messages (scrolling to top)
+  useEffect(() => {
+    const viewport = scrollAreaRef.current
+    if (!viewport || isLoading || messages.length === 0) return
+
+    // Check if we just finished fetching next page (loading older messages)
+    const justFinishedFetching =
+      wasFetchingNextPageRef.current && !isFetchingNextPage
+    const messageCountIncreased =
+      messages.length > previousMessageCountRef.current
+
+    // Only preserve scroll if we just finished loading older messages
+    if (justFinishedFetching && messageCountIncreased) {
+      // Calculate the difference in scroll height
+      const currentScrollHeight = viewport.scrollHeight
+      const scrollHeightDiff =
+        currentScrollHeight - previousScrollHeightRef.current
+
+      // Preserve scroll position by adjusting scrollTop
+      // This keeps the user at the same visual position after new content is added above
+      if (scrollHeightDiff > 0) {
+        viewport.scrollTop = viewport.scrollTop + scrollHeightDiff
+      }
+    }
+
+    // Update refs for next comparison
+    wasFetchingNextPageRef.current = isFetchingNextPage
+    previousScrollHeightRef.current = viewport.scrollHeight
+    previousMessageCountRef.current = messages.length
+  }, [messages, isLoading, isFetchingNextPage])
 
   // Scroll to bottom when new messages are added at the end (after sending)
   useEffect(() => {

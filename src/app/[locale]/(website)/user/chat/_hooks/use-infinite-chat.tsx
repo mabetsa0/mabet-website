@@ -10,6 +10,8 @@ type UseInfiniteChatParams = {
 
 export const useInfiniteChat = ({ uuid }: UseInfiniteChatParams) => {
   const triggerRef = useRef<HTMLDivElement>(null)
+  const isFetchingRef = useRef(false)
+  const lastFetchTimeRef = useRef<number>(0)
 
   const query = useInfiniteQuery({
     queryKey: ["chat-messages", uuid],
@@ -31,6 +33,14 @@ export const useInfiniteChat = ({ uuid }: UseInfiniteChatParams) => {
     },
   })
 
+  // Update refs when fetching state changes
+  useEffect(() => {
+    isFetchingRef.current = query.isFetching || query.isFetchingNextPage
+    if (!isFetchingRef.current) {
+      lastFetchTimeRef.current = Date.now()
+    }
+  }, [query.isFetching, query.isFetchingNextPage])
+
   // Set up intersection observer for infinite scroll to top
   useEffect(() => {
     if (
@@ -46,12 +56,28 @@ export const useInfiniteChat = ({ uuid }: UseInfiniteChatParams) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            query.fetchNextPage()
+            // Prevent rapid successive fetches
+            const now = Date.now()
+            const timeSinceLastFetch = now - lastFetchTimeRef.current
+
+            // Only fetch if:
+            // 1. Not currently fetching
+            // 2. At least 500ms has passed since last fetch
+            // 3. Has next page
+            if (
+              !isFetchingRef.current &&
+              timeSinceLastFetch >= 500 &&
+              query.hasNextPage
+            ) {
+              isFetchingRef.current = true
+              query.fetchNextPage()
+            }
           }
         })
       },
       {
-        rootMargin: "100px", // Start loading when trigger is 100px away from viewport
+        rootMargin: "50px", // Reduced from 100px to be less aggressive
+        threshold: 0.1, // Only trigger when at least 10% visible
       }
     )
 
