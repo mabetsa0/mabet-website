@@ -1,5 +1,6 @@
+import { useState } from "react"
 import dayjs from "dayjs"
-import { AlertTriangle, Check, CheckCheck, Loader2 } from "lucide-react"
+import { AlertTriangle, Check, CheckCheck, Copy, Loader2 } from "lucide-react"
 import { cn } from "@/lib/cn"
 import { useChatData } from "../_contexts/chat-context"
 import { useChatsListStore } from "../_stores/chats-list-store-provider"
@@ -92,21 +93,97 @@ const MessageTime = ({ timestamp }: { timestamp: Date }) => (
 
 const MessageStatusIcon = ({ status }: { status: MessageDeliveryStatus }) => {
   if (status === "sent") {
-    return <Check className="ml-1 size-1 text-gray-400" />
+    return <Check className="me-1 size-1 text-gray-400" />
   }
   if (status === "read") {
-    return <CheckCheck className="ml-1 size-1 text-[#0e9fff]" />
+    return <CheckCheck className="me-1 size-1 text-[#0e9fff]" />
   }
   return null
 }
 
-const MessageContent = ({
+const CopyButton = ({
   content,
   variant,
 }: {
   content: string
   variant: MessageVariant
-}) => <p className={cn(getContentStyles(variant), "text-sm")}>{content}</p>
+}) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(content)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Failed to copy:", err)
+    }
+  }
+
+  const isLightVariant = variant === "user" || variant === "admin"
+  const iconColor = isLightVariant ? "text-primary" : "text-white"
+
+  return (
+    <button
+      onClick={handleCopy}
+      className={cn(
+        "flex items-center gap-0.5 rounded px-0.5 py-[4px] transition-colors",
+        isLightVariant ? "hover:bg-primary/10" : "hover:bg-white/20",
+        "active:scale-95"
+      )}
+      aria-label="Copy coupon code"
+    >
+      <Copy className={cn("size-1", iconColor)} />
+      <span className={cn("text-xs font-medium", getContentStyles(variant))}>
+        {copied ? "Copied!" : "Copy"}
+      </span>
+    </button>
+  )
+}
+
+const CouponMessageContent = ({
+  content,
+  variant,
+}: {
+  content: string
+  variant: MessageVariant
+}) => {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <div className="flex items-center justify-between gap-0.5">
+        <p className={cn(getContentStyles(variant), "text-sm font-medium")}>
+          {content}
+        </p>
+        <CopyButton content={content} variant={variant} />
+      </div>
+    </div>
+  )
+}
+
+const TextMessageContent = ({
+  content,
+  variant,
+}: {
+  content: string
+  variant: MessageVariant
+}) => {
+  return <p className={cn(getContentStyles(variant), "text-sm")}>{content}</p>
+}
+
+const MessageContent = ({
+  content,
+  variant,
+  messageType,
+}: {
+  content: string
+  variant: MessageVariant
+  messageType?: "text" | "coupon"
+}) => {
+  if (messageType === "coupon") {
+    return <CouponMessageContent content={content} variant={variant} />
+  }
+  return <TextMessageContent content={content} variant={variant} />
+}
 
 const MessageStatus = ({
   isLoading,
@@ -131,6 +208,7 @@ const Message = ({
   conversation_uuid,
   content,
   created_at,
+  message_type,
   errorMessage,
   isLoading,
   className,
@@ -198,7 +276,11 @@ const Message = ({
         <div
           className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
         >
-          <MessageContent content={content} variant={variant} />
+          <MessageContent
+            content={content}
+            variant={variant}
+            messageType={message_type}
+          />
           <div className="flex items-center justify-end gap-1">
             {isOwnMessage && !isAdmin && !isLoading && !errorMessage ? (
               <MessageStatusIcon status={deliveryStatus} />
