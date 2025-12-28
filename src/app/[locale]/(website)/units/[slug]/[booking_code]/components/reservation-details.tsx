@@ -24,6 +24,7 @@ import usePayment from "../hooks/use-payment"
 import { usePaymentState } from "../hooks/use-payment-state"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
+import STC from "./stc"
 
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
@@ -40,11 +41,11 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   return (
     <>
       <Card
-        className="md:p-md border-[#F3F3F3] max-md:border-transparent md:rounded-md md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
+        className="md:p-md border-[#F3F3F3] max-md:border-transparent md:rounded-md md:[box-shadow:0px_12px_20px_0px_#0000000A]"
         withBorder
       >
         <Card.Section
-          className="pb-xs border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="pb-xs border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           withBorder
         >
           <Group align="start">
@@ -95,7 +96,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
 
         <Card.Section
-          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -109,7 +110,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         </Card.Section>
         <Card.Section
           visibleFrom="md"
-          className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+          className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
           pb={12}
           withBorder
         >
@@ -119,7 +120,7 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
         {prices ? (
           <Card.Section
             visibleFrom="md"
-            className="border-[#F3F3F3] max-md:!border-none md:px-[24px] md:pt-[24px]"
+            className="border-[#F3F3F3] max-md:border-none! md:px-[24px] md:pt-[24px]"
             pb={12}
             withBorder
           >
@@ -158,6 +159,16 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
 
                   <Text ta="end" c="red">
                     - {prices.discount_amount}
+                    <RiyalIcon />
+                  </Text>
+                </SimpleGrid>
+              ) : null}
+              {prices.qitaf_amount > 0 ? (
+                <SimpleGrid cols={2}>
+                  <Text>{t("general.qitaf-amount")}</Text>
+
+                  <Text ta="end" c="red">
+                    - {prices.qitaf_amount}
                     <RiyalIcon />
                   </Text>
                 </SimpleGrid>
@@ -208,6 +219,14 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             </Stack>
           </Card.Section>
         ) : null}
+        <Card.Section
+          visibleFrom="md"
+          className="border-[#F3F3F3] max-md:!border-none md:px-[24px]"
+          pb={12}
+          withBorder
+        >
+          <STC />
+        </Card.Section>
       </Card>
       <Modal
         centered

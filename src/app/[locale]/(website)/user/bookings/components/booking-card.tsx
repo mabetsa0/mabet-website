@@ -1,5 +1,6 @@
 "use client"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import {
   Badge,
   Box,
@@ -7,7 +8,6 @@ import {
   Card,
   Divider,
   Group,
-  Image,
   SimpleGrid,
   Stack,
   Text,
@@ -104,7 +104,7 @@ const BookingCard = (booking: Props) => {
           ) : null}
 
           <div className="aspect-4/3 w-full">
-            <Image
+            <img
               loading="lazy"
               className="h-full w-full object-cover"
               src={booking.unit.images[0].image_path}
@@ -244,7 +244,7 @@ const BookingCard = (booking: Props) => {
             <Box visibleFrom="sm">
               <Image
                 alt="arrival instructions"
-                src={arrivalInstructionsImage.src}
+                src={arrivalInstructionsImage}
               />
             </Box>
           </SimpleGrid>

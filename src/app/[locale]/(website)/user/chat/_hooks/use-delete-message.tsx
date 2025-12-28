@@ -10,7 +10,7 @@ export const useDeleteMessage = () => {
   const { uuid } = useParams()
   const mutation = useMutation({
     mutationFn: ({ id }: { id: string | number }) => {
-      return deleteMessage({ messageId: id, token })
+      return deleteMessage({ messageId: id, token: token! })
     },
     onSuccess() {
       queryClient.invalidateQueries({

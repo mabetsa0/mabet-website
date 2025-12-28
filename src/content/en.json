@@ -85,6 +85,7 @@
     "nights": "nights",
     "date_extended_to": "the reservation has been extended to ",
     "goToBookings": "Go to bookings",
+    "qitaf-amount": "Amount paied via Qitaf",
     "chat": "Chats"
   },
   "home": {
@@ -230,7 +231,8 @@
     },
     "title": "Log in or sign up",
     "invalid-otp": "Invalid OTP",
-    "server-error": "Server Error"
+    "server-error": "Server Error",
+    "invalid-country-code": "Please, use a Saudi number"
   },
   "generl": {
     "search-results": "Results for"
@@ -362,7 +364,33 @@
     "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
     "payment-accept-conditions-description": "Click to see the requirements",
     "partner-data": "About the Host",
-    "view-profile": "View profile"
+    "view-profile": "View profile",
+    "stc-modal": {
+      "button": "Get your rewards",
+      "description": "Add STC rewards points to your account.",
+      "enter-phone-number": "Enter your STC-registered phone number"
+    },
+    "stc-redeem-modal": {
+      "button": "STC Points",
+      "description": "Redeem your STC points",
+      "enter-phone-number": "Enter your mobile number register with STC",
+      "success-title": "Redeemed successfully",
+      "success-message": "Your STC points were redeemed and applied."
+    },
+    "stc-redeem-form": {
+      "you-have-points": "You have {points} points",
+      "points-to-redeem": "Amount",
+      "you-will-get": "You will get",
+      "confirm": "Confirm",
+      "otp": "OTP",
+      "amount": "Amount",
+      "invalid-otp": "Invalid OTP",
+      "amount-required": "Amount is required",
+      "success-title": "Redeemed successfully\t",
+      "success-message": "Your STC points were redeemed and applie…\t",
+      "change-pohne-number": "Change phone number",
+      "change-phone-number": "Change phone number"
+    }
   },
   "errors": {
     "unknown-error": "Unknown error"
@@ -560,7 +588,8 @@
     "invoice": "View invoice",
     "conditions": "Reservation Conditions ",
     "cancel-policy": "Cancellation and retrieval policy",
-    "support": "Support and protect your rights"
+    "support": "Support and protect your rights",
+    "qitaf-amount": "Paied via Qitaf"
   },
   "wallet": {
     "card": {

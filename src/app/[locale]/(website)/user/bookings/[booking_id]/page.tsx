@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import {
@@ -5,6 +6,7 @@ import {
   Button,
   Divider,
   Group,
+  NumberFormatter,
   SimpleGrid,
   Space,
   Stack,
@@ -162,7 +164,12 @@ const page = async (props: Props) => {
             <div className="flex items-center justify-between gap-1">
               <p>{t("night-price")}</p>
               <span className="font-bold">
-                {booking.night_price} <RiyalIcon />
+                <NumberFormatter
+                  value={booking.night_price}
+                  thousandSeparator
+                  decimalScale={2}
+                />{" "}
+                <RiyalIcon />
               </span>
             </div>
 
@@ -170,14 +177,36 @@ const page = async (props: Props) => {
               <p>{t("nights-count")}</p>
               <span>{booking.duration}</span>
             </div>
+            {booking.qitaf_amount > 0 && (
+              <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
+                <p>{t("qitaf-amount")}</p>
+                <span>
+                  {booking.qitaf_amount} <RiyalIcon />
+                </span>
+              </div>
+            )}
             <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
               <p>{t("customer-fees")}</p>
-              <span>{booking.customer_fees_text}</span>
+              <span>
+                <NumberFormatter
+                  value={booking.customer_fees}
+                  thousandSeparator
+                  decimalScale={2}
+                />{" "}
+                <RiyalIcon />
+              </span>
             </div>
             <Divider />
             <div className="flex items-center justify-between py-1 text-lg font-bold">
               <p>{t("total")}</p>
-              <span>{booking.full_payment_text}</span>
+              <span>
+                <NumberFormatter
+                  value={booking.full_payment}
+                  thousandSeparator
+                  decimalScale={2}
+                />{" "}
+                <RiyalIcon />
+              </span>
             </div>
             <div>
               <Button
