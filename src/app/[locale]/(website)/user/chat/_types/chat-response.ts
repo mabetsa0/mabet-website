@@ -16,5 +16,5 @@ export interface Message {
   conversation_uuid: string
   content: string
   created_at: Date
-  message_type: "text" | "coupon"
+  message_type: "text" | "coupon" | "unit"
 }

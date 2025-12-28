@@ -1,8 +1,12 @@
 import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { Button } from "@mantine/core"
 import dayjs from "dayjs"
 import { AlertTriangle, Check, CheckCheck, Copy, Loader2 } from "lucide-react"
 import { cn } from "@/lib/cn"
+import { Link } from "@/lib/i18n/navigation"
 import { useChatData } from "../_contexts/chat-context"
+import { useUnitById } from "../_hooks/use-unit-by-id"
 import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { useUserStore } from "../_stores/user-store-provider"
 import { Message as MessageType } from "../_types/chat-response"
@@ -120,20 +124,16 @@ const CopyButton = ({
     }
   }
 
-  const isLightVariant = variant === "user" || variant === "admin"
-  const iconColor = isLightVariant ? "text-primary" : "text-white"
-
   return (
     <button
       onClick={handleCopy}
       className={cn(
         "flex items-center gap-0.5 rounded px-0.5 py-[4px] transition-colors",
-        isLightVariant ? "hover:bg-primary/10" : "hover:bg-white/20",
         "active:scale-95"
       )}
       aria-label="Copy coupon code"
     >
-      <Copy className={cn("size-1", iconColor)} />
+      <Copy className={cn("size-1")} />
       <span className={cn("text-xs font-medium", getContentStyles(variant))}>
         {copied ? "Copied!" : "Copy"}
       </span>
@@ -170,6 +170,80 @@ const TextMessageContent = ({
   return <p className={cn(getContentStyles(variant), "text-sm")}>{content}</p>
 }
 
+const UnitMessageContent = ({
+  content,
+  variant,
+}: {
+  content: string
+  variant: MessageVariant
+}) => {
+  const t = useTranslations("chat")
+
+  // Parse unit ID from content
+  const unitId = content.trim()
+
+  // Fetch unit data only when in viewport
+  const { data: unit, isLoading, error } = useUnitById(unitId)
+
+  if (error) {
+    return (
+      <div className="flex flex-col gap-2">
+        <p className={cn(getContentStyles(variant), "text-sm text-red-500")}>
+          Failed to load unit
+        </p>
+      </div>
+    )
+  }
+
+  if (isLoading || !unit) {
+    return (
+      <div className="flex items-center gap-0.5">
+        <Loader2 className="size-1 animate-spin" />
+        <p className={cn(getContentStyles(variant), "text-sm")}>
+          Loading unit...
+        </p>
+      </div>
+    )
+  }
+
+  const unitImage = unit.images?.[0]?.image_path || ""
+
+  return (
+    <div className="flex flex-col gap-0.5">
+      <div className="flex items-start gap-0.5">
+        {unitImage && (
+          <div className="size-3 shrink-0 overflow-hidden rounded-md">
+            <img
+              src={unitImage}
+              alt={unit.name}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+        <div className="flex flex-1 flex-col gap-[4px]">
+          <p className={cn(getContentStyles(variant), "text-sm font-semibold")}>
+            {unit.name}
+          </p>
+          {unit.code && (
+            <p className={cn(getContentStyles(variant), "text-xs opacity-70")}>
+              {unit.code}
+            </p>
+          )}
+        </div>
+      </div>
+      <Button
+        variant="white"
+        size="xs"
+        component={Link}
+        href={`/units/${unit.id}`}
+        fullWidth
+      >
+        {t("unit-card.book-now") || "Book Now"}
+      </Button>
+    </div>
+  )
+}
+
 const MessageContent = ({
   content,
   variant,
@@ -177,10 +251,13 @@ const MessageContent = ({
 }: {
   content: string
   variant: MessageVariant
-  messageType?: "text" | "coupon"
+  messageType?: "text" | "coupon" | "unit"
 }) => {
   if (messageType === "coupon") {
     return <CouponMessageContent content={content} variant={variant} />
+  }
+  if (messageType === "unit") {
+    return <UnitMessageContent content={content} variant={variant} />
   }
   return <TextMessageContent content={content} variant={variant} />
 }
