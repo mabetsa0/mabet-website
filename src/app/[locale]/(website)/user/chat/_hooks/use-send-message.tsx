@@ -122,6 +122,7 @@ export const useSendMessage = () => {
       conversation_uuid,
       content: content.trim(),
       created_at: new Date(),
+      message_type: "text",
     }
 
     // Add optimistic message to cache
