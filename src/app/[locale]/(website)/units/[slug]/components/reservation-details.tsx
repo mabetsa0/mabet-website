@@ -182,7 +182,7 @@ const ReservationDetails = () => {
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
                   <NumberFormatter
-                    value={prices.price_plain}
+                    value={prices.sub_price || prices.price_plain}
                     thousandSeparator
                     decimalScale={2}
                   />
@@ -190,7 +190,10 @@ const ReservationDetails = () => {
                 </Text>
               </Group>
               <Text ta="end" c="primary">
-                <NumberFormatter thousandSeparator value={prices.total_plain} />
+                <NumberFormatter
+                  thousandSeparator
+                  value={prices.sub_total_plain || prices.total_plain}
+                />
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
