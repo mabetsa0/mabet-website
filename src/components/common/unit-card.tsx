@@ -11,6 +11,7 @@ import {
   Divider,
   Group,
   lighten,
+  NumberFormatter,
   Space,
   Stack,
   Text,
@@ -135,8 +136,6 @@ const UnitCard = (props: Unit & { className?: string }) => {
           slideSize={"100%"}
           h={"100%"}
           slideGap={"lg"}
-          // loop
-          // align="start"
           emblaOptions={{ loop: true }}
           withControls={false}
           withIndicators
@@ -191,7 +190,11 @@ const UnitCard = (props: Unit & { className?: string }) => {
               <div>
                 <Group gap={"4"}>
                   <Title order={5} c={"#188078"}>
-                    {props.prices?.price_plain}
+                    <NumberFormatter
+                      thousandSeparator
+                      value={props.prices.full_payment}
+                      decimalScale={2}
+                    />{" "}
                     <RiyalIcon />
                   </Title>
                   <Text className="text-sm text-[#767676]">
@@ -201,7 +204,12 @@ const UnitCard = (props: Unit & { className?: string }) => {
                 {props.prices?.discount ? (
                   <Text className="text-[12px] text-[#767676] line-through">
                     {" "}
-                    {Number(props.prices.sub_price)} <RiyalIcon />
+                    <NumberFormatter
+                      thousandSeparator
+                      value={props.prices.sub_price}
+                      decimalScale={2}
+                    />{" "}
+                    <RiyalIcon />
                     <span className="text-[10px]">
                       /{props.prices.duration_text}
                     </span>
@@ -230,7 +238,12 @@ const UnitCard = (props: Unit & { className?: string }) => {
                     </div>
                   }
                 >
-                  {props.prices.discount_amount} <RiyalIcon />
+                  <NumberFormatter
+                    thousandSeparator
+                    value={props.prices.discount}
+                    decimalScale={2}
+                  />{" "}
+                  <RiyalIcon />
                   <Image
                     alt="sharp"
                     src={sharpShape}

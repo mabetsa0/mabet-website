@@ -205,7 +205,12 @@ const ReservationDetails = () => {
                 </Group>
 
                 <Text ta="end" c="red">
-                  - {prices.discount_amount}
+                  -{" "}
+                  <NumberFormatter
+                    thousandSeparator
+                    value={prices.discount}
+                    decimalScale={2}
+                  />{" "}
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>
@@ -240,9 +245,7 @@ const ReservationDetails = () => {
               <Text ta="end" c="#767676">
                 <NumberFormatter
                   thousandSeparator
-                  value={
-                    parseFloat(prices.customer_fees) + prices.customer_taxes
-                  }
+                  value={prices.customer_fees_total}
                   decimalScale={2}
                 />{" "}
                 <RiyalIcon />
@@ -269,9 +272,7 @@ const ReservationDetails = () => {
               onClick={handleCreateBooking}
             >
               {t("unit.create-booking", {
-                value: prices.full_payment_text
-                  .replace("SAR", "")
-                  .replace("ر.س", ""),
+                value: prices.full_payment,
               })}{" "}
               <RiyalIcon />
             </Button>

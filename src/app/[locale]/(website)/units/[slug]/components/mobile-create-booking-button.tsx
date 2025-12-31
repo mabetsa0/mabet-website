@@ -75,7 +75,12 @@ const MobileCreateBookingButton = () => {
             {prices?.discount ? (
               <Text className="text-[12px] text-[#767676] line-through">
                 {" "}
-                {Number(prices.sub_price)} <RiyalIcon />
+                <NumberFormatter
+                  thousandSeparator
+                  value={prices.sub_price}
+                  decimalScale={2}
+                />{" "}
+                <RiyalIcon />
                 <span className="text-[10px]">/{prices.duration_text}</span>
               </Text>
             ) : null}

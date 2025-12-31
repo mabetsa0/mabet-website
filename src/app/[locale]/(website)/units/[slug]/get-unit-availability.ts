@@ -1,4 +1,4 @@
-import Mabet from "@/services"
+import { apiV2_1 } from "@/services"
 import { UnitAvailabilityResponse } from "./@types"
 
 export const GetUnitAvailability = async ({
@@ -8,7 +8,7 @@ export const GetUnitAvailability = async ({
   id: string | number
   params: Record<string, string> | URLSearchParams
 }) => {
-  const response = await Mabet.get<UnitAvailabilityResponse>(
+  const response = await apiV2_1.get<UnitAvailabilityResponse>(
     `/units/${id}/availability`,
     { params }
   )

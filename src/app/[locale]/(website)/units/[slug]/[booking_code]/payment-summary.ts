@@ -1,14 +1,12 @@
 import { FullUnitData } from "../@types"
 
 export interface PaymentSummaryResponse {
-  data: Data
+  data: {
+    unit: FullUnitData
+    booking_details: BookingDetails
+  }
   message: null
   success: boolean
-}
-
-export interface Data {
-  unit: FullUnitData
-  booking_details: BookingDetails
 }
 
 export interface BookingDetails {
@@ -42,23 +40,30 @@ export interface BookingDetails {
   discount_text: string
   discount_percent: string
   discount_percent_text: number
+  qitaf_amount: null
+  qitaf_amount_text: string
   saved_text: string
-  additional_receipt_params: unknown[]
+  additional_receipt_params: any[]
   wallet: Wallet
+  qitaf_points: QitafPoints
   to_pay: ToPay
 }
 
 export interface PaymentMethods {
   track_id: string
-  apple_pay: PaymentMethodStatus
-  cards: PaymentMethodStatus
-  tabby: PaymentMethodStatus
-  madfu: PaymentMethodStatus
-  tamara: PaymentMethodStatus
+  apple_pay: ApplePay
+  cards: ApplePay
+  tabby: ApplePay
+  tamara: ApplePay
+  madfu: ApplePay
 }
 
-export interface PaymentMethodStatus {
+export interface ApplePay {
   status: boolean
+}
+
+export interface QitafPoints {
+  current_balance: number
 }
 
 export interface ToPay {
