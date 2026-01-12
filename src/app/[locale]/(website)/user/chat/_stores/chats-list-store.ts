@@ -27,6 +27,8 @@ export type ChatsListActions = {
    * If the conversation does not exist, this is a no-op.
    */
   updateConversationInPlace: (conversation: Conversation) => void
+  //
+  appendSingleConversation: (conversation: Conversation) => void
 }
 
 export type ChatsListStore = ChatsListState & ChatsListActions
@@ -56,6 +58,7 @@ export const createChatsListStore = (
     setHasMore: (hasMore: boolean) => set({ hasMore }),
     setError: (error: string | null) => set({ error }),
     reset: () => set(() => ({ ...defaultInitState })),
+
     upsertConversation: (conversation: Conversation) =>
       set((state) => {
         const exists = state.conversations.some(
@@ -88,6 +91,12 @@ export const createChatsListStore = (
 
         return {
           conversations: updated,
+        }
+      }),
+    appendSingleConversation: (conversation: Conversation) =>
+      set((state) => {
+        return {
+          conversations: [conversation, ...state.conversations],
         }
       }),
   }))

@@ -658,5 +658,11 @@
     "reload": "Reload",
     "no-chats": "There are no conversations",
     "no-chats-description": "No conversations found yet"
+  },
+  "chat-list": {
+    "errors": {
+      "title": "Error",
+      "message": "Could not fetch conversation"
+    }
   }
 }

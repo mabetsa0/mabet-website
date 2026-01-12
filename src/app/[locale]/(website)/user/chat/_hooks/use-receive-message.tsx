@@ -1,6 +1,9 @@
 "use client"
 
-import { useQueryClient } from "@tanstack/react-query"
+import { useTranslations } from "next-intl"
+import { notifications } from "@mantine/notifications"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { getChatInfo } from "../_services/get-chat-info"
 import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { Message } from "../_types/chat-response"
 import { type Conversation } from "../_types/chats-response"
@@ -10,13 +13,26 @@ import { useWsEvent } from "./use-ws-event"
 
 export const useReceiveMessage = () => {
   const queryClient = useQueryClient()
-  const { conversations, upsertConversation } = useChatsListStore(
-    (state) => state
-  )
+  const { conversations, upsertConversation, appendSingleConversation } =
+    useChatsListStore((state) => state)
+  const t = useTranslations("chat-list")
 
+  const mutation = useMutation({
+    mutationFn: getChatInfo,
+    onSuccess(data) {
+      appendSingleConversation(data)
+    },
+    onError() {
+      notifications.show({
+        color: "red",
+        title: t("errors.title"),
+        message: t("errors.message"),
+      })
+    },
+  })
   const handleReceiveMessage: WsEventHandler<
     typeof WS_ON_EVENTS.MESSAGE_RECEIVED
-  > = (data: Message) => {
+  > = (data) => {
     const uuid = data.conversation_uuid
     queryClient.setQueryData<{
       pages: { messages: Message[]; has_more: boolean }[]
@@ -68,7 +84,11 @@ export const useReceiveMessage = () => {
       }
 
       upsertConversation(updatedConversation)
+      return
     }
+
+    // refresh the chats list
+    mutation.mutate({ uuid })
   }
   // Register the MESSAGE_SENT event listener
   useWsEvent(WS_ON_EVENTS.MESSAGE_RECEIVED, handleReceiveMessage)
