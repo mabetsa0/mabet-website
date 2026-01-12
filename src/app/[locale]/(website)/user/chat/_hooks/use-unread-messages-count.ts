@@ -3,16 +3,16 @@ import api from "../_services/axios"
 import { WS_ON_EVENTS } from "../_ws/events"
 import { useWsEvent } from "./use-ws-event"
 
-type UnreadCountResponse = {
+type UnreadMessagesCountResponse = {
   data: {
     count: number
   }
   status: "success"
 }
 
-const getUnreadChatsCount = async (): Promise<number> => {
-  const response = await api.get<UnreadCountResponse>(
-    `/conversations/unread-count`
+const getUnreadMessagesCount = async (): Promise<number> => {
+  const response = await api.get<UnreadMessagesCountResponse>(
+    `/messages/unread-count`
   )
 
   const data = response.data
@@ -20,15 +20,15 @@ const getUnreadChatsCount = async (): Promise<number> => {
   return data.data.count
 }
 
-export const useUnreadChatsCount = () => {
+export const useUnreadMessagesCount = () => {
   const query = useQuery({
-    queryKey: ["unread-chats-count"],
+    queryKey: ["unread-messages-count"],
     queryFn: () => {
-      return getUnreadChatsCount()
+      return getUnreadMessagesCount()
     },
     staleTime: Infinity,
   })
-  useWsEvent(WS_ON_EVENTS.UNREAD_CONVERSATIONS_COUNT_UPDATE, () => {
+  useWsEvent(WS_ON_EVENTS.UNREAD_MESSAGES_COUNT_UPDATE, () => {
     query.refetch()
   })
   return query

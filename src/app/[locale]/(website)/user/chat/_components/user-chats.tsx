@@ -2,11 +2,11 @@
 
 import { ActionIcon, Indicator } from "@mantine/core"
 import { MessageCircle } from "lucide-react"
-import { useUnreadChatsCount } from "@/app/[locale]/(website)/user/chat/_hooks/use-unread-chats-count"
+import { useUnreadMessagesCount } from "@/app/[locale]/(website)/user/chat/_hooks/use-unread-messages-count"
 import { Link } from "@/lib/i18n/navigation"
 
 const UserChats = () => {
-  const { data: unreadCount = 0 } = useUnreadChatsCount()
+  const { data: unreadCount = 0 } = useUnreadMessagesCount()
 
   return (
     <Link href="/user/chat">
