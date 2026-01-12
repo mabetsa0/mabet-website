@@ -2,10 +2,20 @@ import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { Button } from "@mantine/core"
 import dayjs from "dayjs"
-import { AlertTriangle, Check, CheckCheck, Copy, Loader2 } from "lucide-react"
+import {
+  AlertTriangle,
+  Building2,
+  Calendar,
+  Check,
+  CheckCheck,
+  Copy,
+  Loader2,
+  Percent,
+} from "lucide-react"
 import { cn } from "@/lib/cn"
 import { Link } from "@/lib/i18n/navigation"
 import { useChatData } from "../_contexts/chat-context"
+import { useGetCoupon } from "../_hooks/use-get-coupon"
 import { useUnitById } from "../_hooks/use-unit-by-id"
 import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { useUserStore } from "../_stores/user-store-provider"
@@ -112,6 +122,7 @@ const CopyButton = ({
   content: string
   variant: MessageVariant
 }) => {
+  const t = useTranslations("chat")
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -131,11 +142,11 @@ const CopyButton = ({
         "flex items-center gap-0.5 rounded px-0.5 py-[4px] transition-colors",
         "active:scale-95"
       )}
-      aria-label="Copy coupon code"
+      aria-label={t("copy.aria-label")}
     >
       <Copy className={cn("size-1")} />
       <span className={cn("text-xs font-medium", getContentStyles(variant))}>
-        {copied ? "Copied!" : "Copy"}
+        {copied ? t("copy.copied") : t("copy.button")}
       </span>
     </button>
   )
@@ -148,13 +159,97 @@ const CouponMessageContent = ({
   content: string
   variant: MessageVariant
 }) => {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex items-center justify-between gap-0.5">
-        <p className={cn(getContentStyles(variant), "text-sm font-medium")}>
-          {content}
+  const t = useTranslations("chat")
+  const couponCode = content.trim()
+  const { data: coupon, isLoading, error } = useGetCoupon(couponCode)
+
+  if (error) {
+    return (
+      <div className="flex flex-col gap-0.5">
+        <p className={cn(getContentStyles(variant), "text-sm text-red-500")}>
+          {t("coupon.load-error")}
         </p>
-        <CopyButton content={content} variant={variant} />
+        <div className="flex items-center justify-between gap-0.5">
+          <p className={cn(getContentStyles(variant), "text-sm font-medium")}>
+            {couponCode}
+          </p>
+          <CopyButton content={couponCode} variant={variant} />
+        </div>
+      </div>
+    )
+  }
+
+  if (isLoading || !coupon) {
+    return (
+      <div className="flex flex-col gap-0.5">
+        <div className="flex items-center gap-0.5">
+          <Loader2 className="size-1 animate-spin" />
+          <p className={cn(getContentStyles(variant), "text-sm")}>
+            {t("coupon.loading")}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  const expirationDate = coupon.expires_at
+    ? dayjs(coupon.expires_at)
+    : coupon.dates?.[0]?.end_date
+      ? dayjs(coupon.dates[0].end_date)
+      : null
+
+  return (
+    <div className="flex flex-col gap-1">
+      {/* Coupon Code Box */}
+      <div className="flex items-center justify-center rounded-md bg-white px-2 py-1.5">
+        <div className="flex items-center gap-1.5">
+          <div className="bg-primary flex size-4 items-center justify-center rounded">
+            <Copy className="size-2 text-white" />
+          </div>
+          <div className="bg-primary h-3 w-px" />
+          <p className="text-primary text-sm font-bold">{coupon.coupon}</p>
+        </div>
+      </div>
+
+      {/* Coupon Details */}
+      <div className="flex flex-col gap-1">
+        {/* Unit Name - Check if units exists and is not null */}
+        {coupon.units != null && (
+          <div className="flex items-center gap-1">
+            <Building2 className="size-3 shrink-0" />
+            <p className={cn(getContentStyles(variant), "text-xs")}>
+              {typeof coupon.units === "object" &&
+              coupon.units !== null &&
+              "name" in coupon.units
+                ? String((coupon.units as { name: string }).name)
+                : String(coupon.units)}
+            </p>
+          </div>
+        )}
+
+        {/* Expiration Date */}
+        {expirationDate && (
+          <div className="flex items-center gap-1">
+            <Calendar className="size-3 shrink-0" />
+            <p className={cn(getContentStyles(variant), "text-xs")}>
+              {t("coupon.valid-until")}: {expirationDate.format("DD MMM YYYY")}{" "}
+              - {expirationDate.format("hh:mm A")}
+            </p>
+          </div>
+        )}
+
+        {/* Discount */}
+        <div className="flex items-center gap-1">
+          <Percent className="size-3 shrink-0" />
+          <p className={cn(getContentStyles(variant), "text-xs font-medium")}>
+            {t("coupon.discount")} {coupon.discount}%
+          </p>
+        </div>
+      </div>
+
+      {/* Copy Button */}
+      <div className="flex items-center justify-end">
+        <CopyButton content={couponCode} variant={variant} />
       </div>
     </div>
   )
@@ -189,7 +284,7 @@ const UnitMessageContent = ({
     return (
       <div className="flex flex-col gap-2">
         <p className={cn(getContentStyles(variant), "text-sm text-red-500")}>
-          Failed to load unit
+          {t("unit-card.load-error")}
         </p>
       </div>
     )
@@ -200,7 +295,7 @@ const UnitMessageContent = ({
       <div className="flex items-center gap-0.5">
         <Loader2 className="size-1 animate-spin" />
         <p className={cn(getContentStyles(variant), "text-sm")}>
-          Loading unit...
+          {t("unit-card.loading")}
         </p>
       </div>
     )
@@ -238,7 +333,7 @@ const UnitMessageContent = ({
         href={`/units/${unit.id}`}
         fullWidth
       >
-        {t("unit-card.book-now") || "Book Now"}
+        {t("unit-card.book-now")}
       </Button>
     </div>
   )

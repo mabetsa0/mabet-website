@@ -2,7 +2,7 @@ import { mainApi } from "./axios"
 
 export const getChatAccessToken = async (token: string) => {
   const response = await mainApi.post<{ token: string; type: string }>(
-    `/chat/api/v2/chat-token`,
+    `/chat-token`,
     {},
     {
       headers: {

@@ -641,7 +641,20 @@
     "unit-card": {
       "inquiry-about-booking": "Inquiry about booking {name}",
       "view-unit": "View unit",
-      "book-now": "Book now"
+      "book-now": "Book now",
+      "loading": "Loading unit...",
+      "load-error": "Failed to load unit"
+    },
+    "copy": {
+      "button": "Copy",
+      "copied": "Copied!",
+      "aria-label": "Copy coupon code"
+    },
+    "coupon": {
+      "loading": "Loading coupon...",
+      "load-error": "Failed to load coupon",
+      "valid-until": "Valid until",
+      "discount": "Discount"
     },
     "important-note": {
       "title": "Important note!",

@@ -636,7 +636,20 @@
     "unit-card": {
       "inquiry-about-booking": "استفسار عن حجز {name}",
       "view-unit": "عرض الوحدة",
-      "book-now": "احجز الان"
+      "book-now": "احجز الان",
+      "loading": "جاري تحميل الوحدة...",
+      "load-error": "فشل تحميل الوحدة"
+    },
+    "copy": {
+      "button": "نسخ",
+      "copied": "تم النسخ!",
+      "aria-label": "نسخ كود الخصم"
+    },
+    "coupon": {
+      "loading": "جاري تحميل الكوبون...",
+      "load-error": "فشل تحميل الكوبون",
+      "valid-until": "صالح المدة",
+      "discount": "الخصم"
     },
     "important-note": {
       "title": "ملاحظة مهمة !",

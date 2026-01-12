@@ -60,13 +60,11 @@ const ChatList = () => {
             )}
           </div>
         ) : (
-          <div className="flex h-[calc(100vh-65px)] flex-col items-center justify-center gap-4 text-center">
-            <MessageSquare className="text-muted-foreground size-12" />
-            <div className="space-y-2">
-              <p className="text-muted-foreground text-lg font-medium">
-                {t("no-chats")}
-              </p>
-              <p className="text-muted-foreground text-sm">
+          <div className="flex h-[calc(100vh-65px)] flex-col items-center justify-center gap-1 text-center">
+            <MessageSquare strokeWidth={1.2} className="size-4 text-gray-700" />
+            <div className="">
+              <p className="text-lg font-medium text-black">{t("no-chats")}</p>
+              <p className="text-sm text-gray-500">
                 {t("no-chats-description")}
               </p>
             </div>
