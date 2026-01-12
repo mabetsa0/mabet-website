@@ -22,6 +22,11 @@ export type ChatsListActions = {
    * If the conversation does not exist, it will be appended.
    */
   upsertConversation: (conversation: Conversation) => void
+  /**
+   * Update an existing conversation in place without moving it to the top.
+   * If the conversation does not exist, this is a no-op.
+   */
+  updateConversationInPlace: (conversation: Conversation) => void
 }
 
 export type ChatsListStore = ChatsListState & ChatsListActions
@@ -64,6 +69,25 @@ export const createChatsListStore = (
 
         return {
           conversations: [conversation, ...remaining],
+        }
+      }),
+    updateConversationInPlace: (conversation: Conversation) =>
+      set((state) => {
+        const index = state.conversations.findIndex(
+          (c) => c.uuid === conversation.uuid
+        )
+
+        if (index === -1) {
+          // Conversation doesn't exist, no-op
+          return state
+        }
+
+        // Update in place without changing order
+        const updated = [...state.conversations]
+        updated[index] = conversation
+
+        return {
+          conversations: updated,
         }
       }),
   }))

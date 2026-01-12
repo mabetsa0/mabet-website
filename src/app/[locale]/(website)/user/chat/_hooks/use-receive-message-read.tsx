@@ -10,7 +10,7 @@ import { useWsEvent } from "./use-ws-event"
 
 export const useReceiveMessageRead = () => {
   const queryClient = useQueryClient()
-  const { conversations, upsertConversation } = useChatsListStore(
+  const { conversations, updateConversationInPlace } = useChatsListStore(
     (state) => state
   )
   const user = useUserStore((state) => state.user)
@@ -60,16 +60,16 @@ export const useReceiveMessageRead = () => {
       },
     ]
 
-    // const updatedConversation: Conversation = {
-    //   ...existingConversation,
-    //   read_positions: updatedReadPositions,
-    //   // If the current user is the reader, locally clear unread messages count
-    //   ...(user && Number(user.id) === user_id
-    //     ? { unread_messages_count: 0 }
-    //     : {}),
-    // }
+    const updatedConversation: Conversation = {
+      ...existingConversation,
+      read_positions: updatedReadPositions,
+      // If the current user is the reader, locally clear unread messages count
+      ...(user && Number(user.id) === user_id
+        ? { unread_messages_count: 0 }
+        : {}),
+    }
 
-    // upsertConversation(updatedConversation)
+    updateConversationInPlace(updatedConversation)
   }
 
   useWsEvent(WS_ON_EVENTS.MESSAGE_READ, handleMessageRead)
