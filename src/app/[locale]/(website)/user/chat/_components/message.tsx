@@ -201,36 +201,32 @@ const CouponMessageContent = ({
   return (
     <div className="flex flex-col gap-1">
       {/* Coupon Code Box */}
-      <div className="flex items-center justify-center rounded-md bg-white px-2 py-1.5">
-        <div className="flex items-center gap-1.5">
-          <div className="bg-primary flex size-4 items-center justify-center rounded">
-            <Copy className="size-2 text-white" />
+      <div className="py-[6px flex items-center justify-center rounded-md bg-white px-0.5">
+        <div className="flex items-center gap-[6px]">
+          <div className="bg-primary flex size-1 items-center justify-center rounded">
+            <Copy className="size-0.5 text-white" />
           </div>
-          <div className="bg-primary h-3 w-px" />
+          <div className="bg-primary h-[12px] w-px" />
           <p className="text-primary text-sm font-bold">{coupon.coupon}</p>
         </div>
       </div>
 
       {/* Coupon Details */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-[4px]">
         {/* Unit Name - Check if units exists and is not null */}
         {coupon.units != null && (
-          <div className="flex items-center gap-1">
-            <Building2 className="size-3 shrink-0" />
+          <div className="flex items-center gap-[4px]">
+            <Building2 className="size-1 shrink-0" />
             <p className={cn(getContentStyles(variant), "text-xs")}>
-              {typeof coupon.units === "object" &&
-              coupon.units !== null &&
-              "name" in coupon.units
-                ? String((coupon.units as { name: string }).name)
-                : String(coupon.units)}
+              {coupon.units[0].name}
             </p>
           </div>
         )}
 
         {/* Expiration Date */}
         {expirationDate && (
-          <div className="flex items-center gap-1">
-            <Calendar className="size-3 shrink-0" />
+          <div className="flex items-center gap-[4px]">
+            <Calendar className="size-1 shrink-0" />
             <p className={cn(getContentStyles(variant), "text-xs")}>
               {t("coupon.valid-until")}: {expirationDate.format("DD MMM YYYY")}{" "}
               - {expirationDate.format("hh:mm A")}
@@ -239,8 +235,8 @@ const CouponMessageContent = ({
         )}
 
         {/* Discount */}
-        <div className="flex items-center gap-1">
-          <Percent className="size-3 shrink-0" />
+        <div className="flex items-center gap-[4px]">
+          <Percent className="size-1 shrink-0" />
           <p className={cn(getContentStyles(variant), "text-xs font-medium")}>
             {t("coupon.discount")} {coupon.discount}%
           </p>
