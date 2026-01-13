@@ -16,14 +16,37 @@ export const useReceivePresenceUpdate = () => {
   > = (data) => {
     const { user_id, user_type, user_name, is_online } = data
 
-    // Update all conversations that contain this user
+    // Update only conversations where this user is actually a participant
     conversations.forEach((conversation) => {
+      // Check if user is a participant in this conversation
+      const isInitiator =
+        conversation.initiator_id === user_id &&
+        conversation.initiator_type === user_type
+
+      const isInReadPositions = conversation.read_positions.some(
+        (readPosition) =>
+          readPosition.user_id === user_id &&
+          readPosition.user_type === user_type
+      )
+
+      const isInLastMessage =
+        conversation.last_message?.sender_id === user_id &&
+        conversation.last_message?.sender_type === user_type
+
       const participantIndex = conversation.online_participants.findIndex(
         (participant) =>
           participant.id === user_id && participant.type === user_type
       )
 
       const hasParticipant = participantIndex !== -1
+
+      // Only process if user is actually a participant in this conversation
+      const isParticipant =
+        isInitiator || isInReadPositions || isInLastMessage || hasParticipant
+
+      if (!isParticipant) {
+        return
+      }
 
       // Skip if user is offline and not in the list (no update needed)
       if (!is_online && !hasParticipant) {
@@ -34,7 +57,6 @@ export const useReceivePresenceUpdate = () => {
 
       if (is_online && !hasParticipant) {
         // User is online and not in the list, add them
-        // Backend should only send updates for relevant users
         updatedConversation = {
           ...conversation,
           online_participants: [
