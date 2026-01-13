@@ -11,6 +11,7 @@ import {
   Copy,
   Loader2,
   Percent,
+  Timer,
 } from "lucide-react"
 import { cn } from "@/lib/cn"
 import { Link } from "@/lib/i18n/navigation"
@@ -353,10 +354,10 @@ const MessageStatus = ({
   hasError: boolean
 }) => {
   if (isLoading) {
-    return <Loader2 className="size-1 animate-spin" />
+    return <Timer className="size-1 text-gray-400" />
   }
   if (hasError) {
-    return <AlertTriangle className="size-5" />
+    return <AlertTriangle className="size-1 text-red-500" />
   }
   return null
 }
@@ -445,13 +446,13 @@ const Message = ({
             {isOwnMessage && !isAdmin && !isLoading && !errorMessage ? (
               <MessageStatusIcon status={deliveryStatus} />
             ) : null}
-            <MessageTime timestamp={created_at} />
             {isOwnMessage && !isAdmin ? (
               <MessageStatus
                 isLoading={!!isLoading}
                 hasError={!!errorMessage}
               />
             ) : null}
+            <MessageTime timestamp={created_at} />
           </div>
         </div>
 

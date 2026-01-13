@@ -143,7 +143,7 @@ export const useSendMessage = () => {
         return {
           pages: [
             {
-              messages: [optimisticMessage],
+              messages: [{ ...optimisticMessage, isLoading: true }],
               has_more: false,
             },
           ],
@@ -158,7 +158,10 @@ export const useSendMessage = () => {
           if (index === 0) {
             return {
               ...page,
-              messages: [optimisticMessage, ...page.messages],
+              messages: [
+                { ...optimisticMessage, isLoading: true },
+                ...page.messages,
+              ],
             }
           }
           return page
