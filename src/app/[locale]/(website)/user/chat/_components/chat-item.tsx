@@ -57,7 +57,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
               <p className="line-clamp-1 w-full font-bold">
                 {conversation.topic_name || "unknown"}
               </p>
-              <p className="text-xs font-semibold">
+              <p className="line-clamp-1 text-xs font-semibold">
                 <span>
                   {t("host")}: {conversation.title?.trim() || "unknown"}{" "}
                   {isTyping && (

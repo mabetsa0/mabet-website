@@ -185,6 +185,53 @@ export function closeSocket() {
   socket = null
 }
 
+export function getConnectionStatus():
+  | "connecting"
+  | "open"
+  | "closed"
+  | "disconnected" {
+  if (typeof window === "undefined") return "disconnected"
+
+  if (!socket) {
+    return manuallyClosed ? "disconnected" : "closed"
+  }
+
+  switch (socket.readyState) {
+    case WebSocket.CONNECTING:
+      return "connecting"
+    case WebSocket.OPEN:
+      return "open"
+    case WebSocket.CLOSING:
+    case WebSocket.CLOSED:
+      return manuallyClosed ? "disconnected" : "closed"
+    default:
+      return "closed"
+  }
+}
+
+export function connectSocket() {
+  if (typeof window === "undefined") return
+
+  manuallyClosed = false
+  if (reconnectTimer) {
+    window.clearTimeout(reconnectTimer)
+    reconnectTimer = null
+  }
+
+  // If socket exists and is already open or connecting, do nothing
+  if (socket) {
+    if (
+      socket.readyState === WebSocket.OPEN ||
+      socket.readyState === WebSocket.CONNECTING
+    ) {
+      return
+    }
+  }
+
+  // Create new socket if none exists or if current one is closed
+  createWebSocket()
+}
+
 export function wsSendEvent<T extends WSSendEvents>(
   event: T,
   payload: WSSendEventPayloadByEvent[T],

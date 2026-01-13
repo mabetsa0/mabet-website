@@ -9,6 +9,7 @@ import { getServerSession } from "@/services/get-server-session"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
 import ReceivedMessage from "./(website)/user/chat/_components/received-messages"
+import { WsConnectionButton } from "./(website)/user/chat/_components/ws-connection-button"
 import { getCachedTokenFromCookie } from "./(website)/user/chat/_lib/get-cached-access-token"
 import { ChatsListStoreProvider } from "./(website)/user/chat/_stores/chats-list-store-provider"
 import { SessionStoreProvider } from "./(website)/user/chat/_stores/session-store-provider"
@@ -69,9 +70,12 @@ export default async function LocaleLayout({
                         <InitializeClientSession initialValue={session} />
                         {children}
                         {process.env.NEXT_PUBLIC_TEST == "true" && (
-                          <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
-                            <TestTube2 className="text-primary" />
-                          </div>
+                          <>
+                            <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
+                              <TestTube2 className="text-primary" />
+                            </div>
+                            <WsConnectionButton />
+                          </>
                         )}
                         <ReceivedMessage />
                       </ChatsListStoreProvider>
