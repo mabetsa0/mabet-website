@@ -84,7 +84,8 @@ const ChatInput = () => {
               size={"xl"}
               radius={"xl"}
               onClick={handleSendMessage}
-              disabled={isLoading || !inputMessage.trim()}
+              loading={isLoading}
+              disabled={!inputMessage.trim()}
             >
               <Send className="rtl:-rotate-90" />
             </ActionIcon>

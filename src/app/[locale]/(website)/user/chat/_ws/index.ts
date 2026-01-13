@@ -159,6 +159,7 @@ function createWebSocket() {
 export function getOrInitWebSocket() {
   if (typeof window === "undefined") return null
 
+  if (manuallyClosed) return null
   // If an open/connecting socket already exists, reuse it
   if (
     socket &&
@@ -181,8 +182,6 @@ export function closeSocket() {
   if (socket && socket.readyState === WebSocket.OPEN) {
     socket.close()
   }
-
-  socket = null
 }
 
 export function getConnectionStatus():
@@ -211,8 +210,8 @@ export function getConnectionStatus():
 
 export function connectSocket() {
   if (typeof window === "undefined") return
+  if (manuallyClosed) return
 
-  manuallyClosed = false
   if (reconnectTimer) {
     window.clearTimeout(reconnectTimer)
     reconnectTimer = null
@@ -229,6 +228,37 @@ export function connectSocket() {
   }
 
   // Create new socket if none exists or if current one is closed
+  createWebSocket()
+}
+
+export function openSocket() {
+  if (typeof window === "undefined") return
+  manuallyClosed = false
+
+  // Clear any pending reconnect timer
+  if (reconnectTimer) {
+    window.clearTimeout(reconnectTimer)
+    reconnectTimer = null
+  }
+
+  // If socket exists and is already open or connecting, do nothing
+  if (socket) {
+    if (
+      socket.readyState === WebSocket.OPEN ||
+      socket.readyState === WebSocket.CONNECTING
+    ) {
+      return
+    }
+    // If socket exists but is closed/closing, clean it up first
+    if (
+      socket.readyState === WebSocket.CLOSING ||
+      socket.readyState === WebSocket.CLOSED
+    ) {
+      socket = null
+    }
+  }
+
+  // Create new socket if none exists or if current one was closed
   createWebSocket()
 }
 

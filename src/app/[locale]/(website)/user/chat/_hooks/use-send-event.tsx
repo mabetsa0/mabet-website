@@ -12,8 +12,12 @@ type PendingEvent<T extends WSSendEvents> = {
 export function useSendEvent() {
   const [lastEventId, setLastEventId] = useState<string>()
   const queueRef = useRef<PendingEvent<WSSendEvents>[]>([])
+  const socketRef = useRef<WebSocket | null>(null)
+  const handlerRef = useRef<(() => void) | null>(null)
+  const wasOpenRef = useRef(false)
 
   const flushQueue = () => {
+    console.log("[useSendEvent] Flushing queue")
     const socket = getOrInitWebSocket()
     if (!socket || socket.readyState !== WebSocket.OPEN) return
 
@@ -26,38 +30,85 @@ export function useSendEvent() {
   }
 
   useEffect(() => {
-    // Initialize socket when hook mounts to ensure it's ready
-    const socket = getOrInitWebSocket()
-    if (!socket) {
-      console.warn("[useSendEvent] WebSocket initialization failed")
-      return
+    // Function to set up event listener for current socket
+    const setupSocketListener = (socket: WebSocket) => {
+      // Remove old listener if it exists
+      if (socketRef.current && handlerRef.current) {
+        socketRef.current.removeEventListener("open", handlerRef.current)
+      }
+
+      // Create new handler
+      const handleOpen = () => {
+        console.log("[useSendEvent] WebSocket opened, flushing queue")
+        wasOpenRef.current = true
+        flushQueue()
+      }
+
+      // Store references
+      socketRef.current = socket
+      handlerRef.current = handleOpen
+
+      // Add listener to new socket
+      socket.addEventListener("open", handleOpen)
+
+      // If socket is already open, flush immediately
+      if (socket.readyState === WebSocket.OPEN) {
+        if (!wasOpenRef.current) {
+          console.log("[useSendEvent] WebSocket already open, flushing queue")
+          wasOpenRef.current = true
+          flushQueue()
+        }
+      } else {
+        wasOpenRef.current = false
+      }
     }
 
-    // Always set up the listener, even if socket is already open
-    // This handles reconnections and ensures queue is flushed
-    const handleOpen = () => {
-      console.log("[useSendEvent] WebSocket opened, flushing queue")
-      flushQueue()
+    // Check socket state periodically to catch new socket instances
+    const checkSocket = () => {
+      const socket = getOrInitWebSocket()
+
+      if (!socket) {
+        // Socket doesn't exist, reset tracking
+        if (socketRef.current) {
+          socketRef.current = null
+          handlerRef.current = null
+          wasOpenRef.current = false
+        }
+        return
+      }
+
+      // If socket instance changed, set up listener for new socket
+      if (socket !== socketRef.current) {
+        console.log(
+          "[useSendEvent] Socket instance changed, setting up new listener"
+        )
+        setupSocketListener(socket)
+      } else if (socket.readyState === WebSocket.OPEN && !wasOpenRef.current) {
+        // Same socket instance but just became open
+        console.log("[useSendEvent] Socket became open, flushing queue")
+        wasOpenRef.current = true
+        flushQueue()
+      } else if (socket.readyState !== WebSocket.OPEN) {
+        wasOpenRef.current = false
+      }
     }
 
-    socket.addEventListener("open", handleOpen)
+    // Initial check
+    checkSocket()
 
-    // If socket is already open, flush immediately
-    if (socket.readyState === WebSocket.OPEN) {
-      console.log("[useSendEvent] WebSocket already open, flushing queue")
-      flushQueue()
-    } else {
-      console.log(
-        "[useSendEvent] WebSocket state:",
-        socket.readyState,
-        "waiting for open..."
-      )
-    }
+    // Poll every 200ms to catch socket instance changes and state transitions
+    const interval = setInterval(checkSocket, 200)
 
     return () => {
-      socket.removeEventListener("open", handleOpen)
+      clearInterval(interval)
+      // Clean up event listener
+      if (socketRef.current && handlerRef.current) {
+        socketRef.current.removeEventListener("open", handlerRef.current)
+      }
+      socketRef.current = null
+      handlerRef.current = null
     }
-  }, [flushQueue])
+  }, [])
 
   const sendEvent = <E extends WSSendEvents>(
     event: E,

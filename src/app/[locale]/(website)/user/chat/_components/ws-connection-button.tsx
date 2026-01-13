@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ActionIcon, Badge, Button, Popover } from "@mantine/core"
+import { ActionIcon, Badge, Popover } from "@mantine/core"
 import { Wifi, WifiOff } from "lucide-react"
-import { closeSocket, connectSocket, getConnectionStatus } from "../_ws"
+import { closeSocket, getConnectionStatus, openSocket } from "../_ws"
 
 type ConnectionStatus = "connecting" | "open" | "closed" | "disconnected"
 
@@ -28,7 +28,7 @@ export function WsConnectionButton() {
       closeSocket()
       setStatus("disconnected")
     } else {
-      connectSocket()
+      openSocket()
       setStatus("connecting")
     }
   }
