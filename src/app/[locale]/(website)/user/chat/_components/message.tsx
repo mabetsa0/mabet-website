@@ -192,21 +192,11 @@ const CouponMessageContent = ({
     )
   }
 
-  const expirationDate = coupon.expires_at
-    ? dayjs(coupon.expires_at)
-    : coupon.dates?.[0]?.end_date
-      ? dayjs(coupon.dates[0].end_date)
-      : null
-
   return (
     <div className="flex flex-col gap-1">
       {/* Coupon Code Box */}
-      <div className="py-[6px flex items-center justify-center rounded-md bg-white px-0.5">
+      <div className="flex items-center justify-center rounded-md bg-white px-0.5 py-[6px]">
         <div className="flex items-center gap-[6px]">
-          <div className="bg-primary flex size-1 items-center justify-center rounded">
-            <Copy className="size-0.5 text-white" />
-          </div>
-          <div className="bg-primary h-[12px] w-px" />
           <p className="text-primary text-sm font-bold">{coupon.coupon}</p>
         </div>
       </div>
@@ -224,19 +214,17 @@ const CouponMessageContent = ({
         )}
 
         {/* Expiration Date */}
-        {expirationDate && (
-          <div className="flex items-center gap-[4px]">
-            <Calendar className="size-1 shrink-0" />
-            <p className={cn(getContentStyles(variant), "text-xs")}>
-              {t("coupon.valid-until")}: {expirationDate.format("DD MMM YYYY")}{" "}
-              - {expirationDate.format("hh:mm A")}
-            </p>
-          </div>
-        )}
+        <div className="flex items-center gap-[4px]">
+          <Calendar className="size-1 shrink-0" />
+          <p className={cn(getContentStyles(variant), "text-xs")}>
+            {t("coupon.valid-until")} : {coupon.expires_at}
+          </p>
+        </div>
 
         {/* Discount */}
         <div className="flex items-center gap-[4px]">
           <Percent className="size-1 shrink-0" />
+
           <p className={cn(getContentStyles(variant), "text-xs font-medium")}>
             {t("coupon.discount")} {coupon.discount}%
           </p>
@@ -258,7 +246,11 @@ const TextMessageContent = ({
   content: string
   variant: MessageVariant
 }) => {
-  return <p className={cn(getContentStyles(variant), "text-sm")}>{content}</p>
+  return (
+    <p className={cn(getContentStyles(variant), "text-sm wrap-anywhere")}>
+      {content}
+    </p>
+  )
 }
 
 const UnitMessageContent = ({
@@ -440,7 +432,7 @@ const Message = ({
         className
       )}
     >
-      <div className={getMessageStyles(variant)}>
+      <div className={cn(getMessageStyles(variant), "max-w-[70%]")}>
         <div
           className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
         >
