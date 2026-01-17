@@ -93,6 +93,7 @@ export type WS_ON_EVENTS_CONTENT = {
   }
   typing_started: {}
   PRESENCE_UPDATE: {
+    conversation_uuid: string
     user_id: number
     user_type: string
     user_name: string

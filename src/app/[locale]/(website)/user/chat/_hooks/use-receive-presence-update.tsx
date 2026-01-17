@@ -14,90 +14,73 @@ export const useReceivePresenceUpdate = () => {
   const handlePresenceUpdate: WsEventHandler<
     typeof WS_ON_EVENTS.PRESENCE_UPDATE
   > = (data) => {
-    const { user_id, user_type, user_name, is_online } = data
+    const { conversation_uuid, user_id, user_type, user_name, is_online } = data
 
-    // Update only conversations where this user is actually a participant
-    conversations.forEach((conversation) => {
-      // Check if user is a participant in this conversation
-      const isInitiator =
-        conversation.initiator_id === user_id &&
-        conversation.initiator_type === user_type
+    // Find the specific conversation by UUID
+    const conversation = conversations.find(
+      (conv) => conv.uuid === conversation_uuid
+    )
 
-      const isInReadPositions = conversation.read_positions.some(
-        (readPosition) =>
-          readPosition.user_id === user_id &&
-          readPosition.user_type === user_type
-      )
+    if (!conversation) {
+      return
+    }
 
-      const isInLastMessage =
-        conversation.last_message?.sender_id === user_id &&
-        conversation.last_message?.sender_type === user_type
+    const participantIndex = conversation.online_participants.findIndex(
+      (participant) =>
+        participant.id === user_id && participant.type === user_type
+    )
 
-      const participantIndex = conversation.online_participants.findIndex(
-        (participant) =>
-          participant.id === user_id && participant.type === user_type
-      )
+    const hasParticipant = participantIndex !== -1
 
-      const hasParticipant = participantIndex !== -1
+    // Skip if user is offline and not in the list (no update needed)
+    if (!is_online && !hasParticipant) {
+      return
+    }
 
-      // Only process if user is actually a participant in this conversation
-      const isParticipant =
-        isInitiator || isInReadPositions || isInLastMessage || hasParticipant
+    let updatedConversation: Conversation | null = null
 
-      if (!isParticipant) {
-        return
+    if (is_online && !hasParticipant) {
+      // User is online and not in the list, add them
+      updatedConversation = {
+        ...conversation,
+        online_participants: [
+          ...conversation.online_participants,
+          {
+            id: user_id,
+            type: user_type,
+            name: user_name,
+          },
+        ],
       }
-
-      // Skip if user is offline and not in the list (no update needed)
-      if (!is_online && !hasParticipant) {
-        return
+    } else if (!is_online && hasParticipant) {
+      // User is offline and in the list, remove them
+      updatedConversation = {
+        ...conversation,
+        online_participants: conversation.online_participants.filter(
+          (participant) =>
+            !(participant.id === user_id && participant.type === user_type)
+        ),
       }
-
-      let updatedConversation: Conversation | null = null
-
-      if (is_online && !hasParticipant) {
-        // User is online and not in the list, add them
+    } else if (is_online && hasParticipant) {
+      // User is online and already in the list, update their name if it changed
+      const currentParticipant =
+        conversation.online_participants[participantIndex]
+      if (currentParticipant.name !== user_name) {
         updatedConversation = {
           ...conversation,
-          online_participants: [
-            ...conversation.online_participants,
-            {
-              id: user_id,
-              type: user_type,
-              name: user_name,
-            },
-          ],
-        }
-      } else if (!is_online && hasParticipant) {
-        // User is offline and in the list, remove them
-        updatedConversation = {
-          ...conversation,
-          online_participants: conversation.online_participants.filter(
+          online_participants: conversation.online_participants.map(
             (participant) =>
-              !(participant.id === user_id && participant.type === user_type)
+              participant.id === user_id && participant.type === user_type
+                ? { ...participant, name: user_name }
+                : participant
           ),
         }
-      } else if (is_online && hasParticipant) {
-        // User is online and already in the list, update their name if it changed
-        const currentParticipant =
-          conversation.online_participants[participantIndex]
-        if (currentParticipant.name !== user_name) {
-          updatedConversation = {
-            ...conversation,
-            online_participants: conversation.online_participants.map(
-              (participant) =>
-                participant.id === user_id && participant.type === user_type
-                  ? { ...participant, name: user_name }
-                  : participant
-            ),
-          }
-        }
       }
+    }
 
-      if (updatedConversation) {
-        updateConversationInPlace(updatedConversation)
-      }
-    })
+    if (updatedConversation) {
+      updateConversationInPlace(updatedConversation)
+    }
   }
 
   useWsEvent(WS_ON_EVENTS.PRESENCE_UPDATE, handlePresenceUpdate)
