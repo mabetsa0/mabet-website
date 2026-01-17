@@ -9,9 +9,9 @@ import { WS_SEND_EVENTS } from "../_ws/events"
 
 export const useSendReadMessage = (conversationUuid: string) => {
   const { sendEvent } = useSendEvent()
-  const { conversations, upsertConversation } = useChatsListStore((state) => ({
+  const { conversations, updateConversationInPlace } = useChatsListStore((state) => ({
     conversations: state.conversations,
-    upsertConversation: state.upsertConversation,
+    updateConversationInPlace: state.updateConversationInPlace,
   }))
   const user = useUserStore((state) => state.user)
 
@@ -60,9 +60,9 @@ export const useSendReadMessage = (conversationUuid: string) => {
         unread_messages_count: 0,
       }
 
-      upsertConversation(updatedConversation)
+      updateConversationInPlace(updatedConversation)
     },
-    [conversationUuid, conversations, sendEvent, upsertConversation, user]
+    [conversationUuid, conversations, sendEvent, updateConversationInPlace, user]
   )
 
   return { markAsRead }

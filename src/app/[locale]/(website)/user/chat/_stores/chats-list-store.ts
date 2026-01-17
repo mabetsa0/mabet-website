@@ -44,7 +44,8 @@ export const defaultInitState: ChatsListState = {
 export const createChatsListStore = (
   initState: Partial<ChatsListState> = {}
 ) => {
-  return createStore<ChatsListStore>()((set) => ({
+  return createStore<ChatsListStore>()((set) => {
+    return {
     ...defaultInitState,
     ...initState,
     setConversations: (conversations: Conversation[]) => set({ conversations }),
@@ -75,6 +76,7 @@ export const createChatsListStore = (
         }
       }),
     updateConversationInPlace: (conversation: Conversation) =>
+      
       set((state) => {
         const index = state.conversations.findIndex(
           (c) => c.uuid === conversation.uuid
@@ -99,5 +101,6 @@ export const createChatsListStore = (
           conversations: [conversation, ...state.conversations],
         }
       }),
-  }))
+  };
+  })
 }
