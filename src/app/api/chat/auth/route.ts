@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Save to cookies
-      const expiresAt = new Date(Date.now() + 6 * 60 * 60 * 1000)
+      const expiresAt = new Date(Date.now() + 5 * 60 * 60 * 1000)
 
       cookieStore.set(CHAT_SESSION_COOKIE, accessToken, {
         httpOnly: true,
