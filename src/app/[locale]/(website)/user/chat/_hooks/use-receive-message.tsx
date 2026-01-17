@@ -10,6 +10,7 @@ import { type Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS } from "../_ws/events"
 import { WsEventHandler } from "../_ws/events-handler"
 import { useWsEvent } from "./use-ws-event"
+import { useUserStore } from "../_stores/user-store-provider"
 
 export const useReceiveMessage = () => {
   const queryClient = useQueryClient()
@@ -34,6 +35,7 @@ export const useReceiveMessage = () => {
     typeof WS_ON_EVENTS.MESSAGE_RECEIVED
   > = (data) => {
     const uuid = data.conversation_uuid
+    const user = useUserStore((state) => state.user)
     queryClient.setQueryData<{
       pages: { messages: Message[]; has_more: boolean }[]
     }>(["chat-messages", uuid], (oldData) => {
@@ -80,7 +82,7 @@ export const useReceiveMessage = () => {
           // Ensure we store a string timestamp as expected by Conversation
           created_at: new Date(data.created_at).toISOString(),
         },
-        unread_messages_count: existingConversation.unread_messages_count + 1,
+        unread_messages_count: (Number(user?.id) === Number(data.sender_id))   ? 0 : existingConversation.unread_messages_count + 1,
       }
 
       upsertConversation(updatedConversation)
