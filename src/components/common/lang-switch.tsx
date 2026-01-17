@@ -18,7 +18,15 @@ const LanguageSwitcher = () => {
   const changeLanguage = (newLocale: string) => {
     const searchParams = window.location.search
     const newPath = `/${newLocale}${pathname}${searchParams}`
-    router.push(newPath)
+    if (pathname.includes('/user/chat')) {
+      window.location.href = newPath
+
+
+    } else {
+
+      router.push(newPath)
+    }
+
   }
 
   return (
