@@ -12,5 +12,5 @@
   "i18n-ally.sourceLanguage": "en",
   "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
 }

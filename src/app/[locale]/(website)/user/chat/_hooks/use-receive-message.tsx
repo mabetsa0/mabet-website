@@ -17,6 +17,7 @@ export const useReceiveMessage = () => {
   const { conversations, upsertConversation, appendSingleConversation } =
     useChatsListStore((state) => state)
   const t = useTranslations("chat-list")
+  const user = useUserStore((state) => state.user)
 
   const mutation = useMutation({
     mutationFn: getChatInfo,
@@ -35,7 +36,6 @@ export const useReceiveMessage = () => {
     typeof WS_ON_EVENTS.MESSAGE_RECEIVED
   > = (data) => {
     const uuid = data.conversation_uuid
-    const user = useUserStore((state) => state.user)
     queryClient.setQueryData<{
       pages: { messages: Message[]; has_more: boolean }[]
     }>(["chat-messages", uuid], (oldData) => {
@@ -82,7 +82,7 @@ export const useReceiveMessage = () => {
           // Ensure we store a string timestamp as expected by Conversation
           created_at: new Date(data.created_at).toISOString(),
         },
-        unread_messages_count: (Number(user?.id) === Number(data.sender_id))   ? 0 : existingConversation.unread_messages_count + 1,
+        unread_messages_count: (Number(user?.id) === Number(data.sender_id)) ? 0 : existingConversation.unread_messages_count + 1,
       }
 
       upsertConversation(updatedConversation)

@@ -7,8 +7,10 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useChatData } from "../_contexts/chat-context"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useWsEvent } from "../_hooks/use-ws-event"
+import { useChatsListStore } from "../_stores/chats-list-store-provider"
 import { useUserStore } from "../_stores/user-store-provider"
 import { Message } from "../_types/chat-response"
+import { type Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS, WS_SEND_EVENTS } from "../_ws/events"
 import useWsError from "./use-ws-error"
 
@@ -22,10 +24,12 @@ type SendMessageParams = {
 export const useSendMessage = () => {
   const t = useTranslations("chat")
   const user = useUserStore((state) => state.user)
+
   const chatData = useChatData()
   const uuid = chatData?.uuid
   const queryClient = useQueryClient()
   const { sendEvent } = useSendEvent()
+  const { conversations, upsertConversation } = useChatsListStore((state) => state)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const lastSendMessageEventIdRef = useRef<string | null>(null)
@@ -54,6 +58,33 @@ export const useSendMessage = () => {
         })),
       }
     })
+
+    // Update the chats list so that the corresponding conversation reflects
+    // the newest message and moves to the top of the list.
+    const conversationUuid = data.conversation_uuid
+    const existingConversation = conversations.find(
+      (conversation) => conversation.uuid === conversationUuid
+    )
+
+    if (existingConversation) {
+      const updatedConversation: Conversation = {
+        ...existingConversation,
+        last_message: {
+          ...existingConversation.last_message,
+          id: data.id,
+          sender_id: data.sender_id,
+          sender_type: data.sender_type,
+          sender_name: data.sender_name,
+          conversation_uuid: data.conversation_uuid,
+          content: data.content,
+          message_type: data.message_type,
+          // Ensure we store a string timestamp as expected by Conversation
+          created_at: new Date(data.created_at).toISOString(),
+        },
+      }
+
+      upsertConversation(updatedConversation)
+    }
 
     // Clear the optimistic message ID
     optimisticMessageIdRef.current = null

@@ -215,25 +215,25 @@ const ChatBody = ({
           {/* Messages */}
           {messages.length > 0 && user?.id
             ? messages.map((message, index) => {
-                return (
-                  <React.Fragment key={`message_${message.id}`}>
-                    {index === 0 ||
+              return (
+                <React.Fragment key={`message_${message.id}`}>
+                  {index === 0 ||
                     dayjs(message.created_at).format("DD/MM/YYYY") !==
-                      dayjs(messages[index - 1]?.created_at).format(
-                        "DD/MM/YYYY"
-                      ) ? (
-                      <DateIndicator date={message.created_at} />
-                    ) : null}
-                    <div
-                      ref={
-                        index === messages.length - 1 ? lastMessageRef : null
-                      }
-                    >
-                      <Message {...message} />
-                    </div>
-                  </React.Fragment>
-                )
-              })
+                    dayjs(messages[index - 1]?.created_at).format(
+                      "DD/MM/YYYY"
+                    ) ? (
+                    <DateIndicator date={message.created_at} />
+                  ) : null}
+                  <div
+                    ref={
+                      index === messages.length - 1 ? lastMessageRef : null
+                    }
+                  >
+                    <Message {...message} />
+                  </div>
+                </React.Fragment>
+              )
+            })
             : null}
         </div>
       </ScrollArea>
