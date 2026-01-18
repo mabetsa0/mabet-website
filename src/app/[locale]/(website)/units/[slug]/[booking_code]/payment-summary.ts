@@ -15,6 +15,8 @@ export interface BookingDetails {
   from: string
   to: string
   duration: number
+  night_sub_price: string
+  night_sub_price_text: string
   night_price: string
   night_price_text: string
   sub_total: string
@@ -40,6 +42,8 @@ export interface BookingDetails {
   discount_text: string
   discount_percent: string
   discount_percent_text: number
+  offers_discount_percent: number
+  offers_discount: number
   qitaf_amount: null
   qitaf_amount_text: string
   saved_text: string

@@ -6,11 +6,12 @@ import { useSession } from "@/lib/session-store"
 import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getSession } from "@/utils/get-session"
 
-const baseURL =
-  process.env.NEXT_PUBLIC_TEST == "true"
-    ? "https://mabet.dev/api"
-    : "https://app.mabet.com.sa/api"
-// const baseURL = "https://mabet.dev/api/v2";
+// const baseURL =
+//   process.env.NEXT_PUBLIC_TEST == "true"
+//     ? "https://mabet.dev/api"
+//     : "https://app.mabet.com.sa/api"
+
+const baseURL = "http://mabeet.test/api";
 
 const Mabet = axios.create({
   baseURL: baseURL + "/v2",
