@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useRef } from "react"
 import { useTranslations } from "next-intl"
 import { ActionIcon, Textarea } from "@mantine/core"
 import { Send } from "lucide-react"
 import { useChatData } from "../_contexts/chat-context"
 import { useSendEvent } from "../_hooks/use-send-event"
 import { useSendMessage } from "../_hooks/use-send-message"
+import { useChatDraft } from "../_hooks/use-chat-draft"
 import { WS_SEND_EVENTS } from "../_ws/events"
 
 const ChatInput = () => {
@@ -16,20 +17,18 @@ const ChatInput = () => {
   const uuid = chatData.uuid
   const { sendMessage, isLoading, error } = useSendMessage()
   const { sendEvent } = useSendEvent()
+  const { draft, setDraft, clearDraft } = useChatDraft(uuid)
   const t = useTranslations("chat")
 
   // dynamic resizing text area
-  const textRowCount = textAreRef.current
-    ? textAreRef.current.value.split("\n").length
-    : 1
+  const textRowCount = draft.split("\n").length
   const rows = textRowCount <= 3 ? textRowCount : 3
 
-  const [inputMessage, setInputMessage] = useState("")
   const handleInputMessageChange: React.ChangeEventHandler<
     HTMLTextAreaElement
   > = (e) => {
     const value = e.target.value
-    setInputMessage(value)
+    setDraft(value)
 
     // Send a throttled typing_start event so others see the typing indicator
     const now = Date.now()
@@ -45,15 +44,15 @@ const ChatInput = () => {
   }
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim() || isLoading) return
+    if (!draft.trim() || isLoading) return
 
     sendMessage({
       conversation_uuid: uuid,
-      content: inputMessage,
+      content: draft,
     })
 
     // Clear input after sending
-    setInputMessage("")
+    clearDraft()
     // Reset textarea height
     if (textAreRef.current) {
       textAreRef.current.style.height = "auto"
@@ -85,13 +84,13 @@ const ChatInput = () => {
               radius={"xl"}
               onClick={handleSendMessage}
               loading={isLoading}
-              disabled={!inputMessage.trim()}
+              disabled={!draft.trim()}
             >
               <Send className="rtl:-rotate-90" />
             </ActionIcon>
           }
           placeholder={t("input.placeholder")}
-          value={inputMessage}
+          value={draft}
           onChange={handleInputMessageChange}
           onKeyDown={handleEnterKeyDown}
           size="lg"
