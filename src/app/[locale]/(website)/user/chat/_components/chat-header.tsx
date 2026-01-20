@@ -25,7 +25,7 @@ const ChatHeader = () => {
           position="top-start"
           size={12}
           color="green"
-          offset={10}
+          offset={5}
           zIndex={1}
           disabled={chatData.online_participants.length == 0}
         >

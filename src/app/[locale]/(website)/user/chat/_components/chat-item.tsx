@@ -9,12 +9,25 @@ import dayjs from "dayjs"
 import "dayjs/locale/ar"
 import "dayjs/locale/en"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { User } from "lucide-react"
+import { Check, CheckCheck, User } from "lucide-react"
 import { cn } from "@/lib/cn"
 import { useTypingIndicator } from "../_hooks/use-typing-indicator"
+import { useUserStore } from "../_stores/user-store-provider"
 import { Conversation } from "../_types/chats-response"
 
 dayjs.extend(relativeTime)
+
+type MessageDeliveryStatus = "none" | "sent" | "read"
+
+const MessageStatusIcon = ({ status }: { status: MessageDeliveryStatus }) => {
+  if (status === "sent") {
+    return <Check className="size-1 text-gray-400" />
+  }
+  if (status === "read") {
+    return <CheckCheck className="size-1 text-[#0e9fff]" />
+  }
+  return null
+}
 
 const ChatItem = ({ conversation }: { conversation: Conversation }) => {
   const pathName = usePathname()
@@ -22,6 +35,47 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
   dayjs.locale(locale)
   const t = useTranslations("chat")
   const { isTyping } = useTypingIndicator(conversation.uuid)
+  const user = useUserStore((s) => s.user)
+
+  // Calculate delivery status for last message
+  let deliveryStatus: MessageDeliveryStatus = "none"
+  const lastMessage = conversation.last_message
+
+  if (lastMessage && user) {
+    const isOwnMessage =
+      lastMessage.sender_id === Number(user.id) &&
+      lastMessage.sender_type === user.type
+    const isAdmin = lastMessage.sender_type === "admin"
+
+    // WhatsApp-like ticks only for the current user's non-admin messages
+    if (isOwnMessage && !isAdmin) {
+      const currentUserIdNum = Number(user.id)
+      const currentUserType = user.type
+
+      const othersReadPositions =
+        conversation.read_positions?.filter(
+          (pos) =>
+            !(
+              pos.user_id === currentUserIdNum &&
+              pos.user_type === currentUserType
+            )
+        ) ?? []
+
+      const messageTimestamp = lastMessage.created_at
+        ? new Date(lastMessage.created_at).getTime()
+        : Number.NaN
+
+      const hasBeenReadBySomeoneElse = othersReadPositions.some((pos) => {
+        const readTs = new Date(pos.timestamp).getTime()
+        if (Number.isNaN(readTs) || Number.isNaN(messageTimestamp)) return false
+        return readTs >= messageTimestamp
+      })
+
+      // Two blue ticks if at least one other participant has a read timestamp
+      // that is at or after this message; otherwise single gray tick.
+      deliveryStatus = hasBeenReadBySomeoneElse ? "read" : "sent"
+    }
+  }
 
   return (
     <div className="relative">
@@ -69,14 +123,20 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
               </p>
             </div>
 
-            <span
-              className={cn(
-                "block truncate text-sm text-[#767676]",
-                conversation.unread_messages_count > 0 && "font-bold text-black"
+            <div className="flex items-center gap-1">
+              {deliveryStatus !== "none" && (
+                <MessageStatusIcon status={deliveryStatus} />
               )}
-            >
-              {conversation.last_message?.content}
-            </span>
+              <span
+                className={cn(
+                  "block truncate text-sm text-[#767676]",
+                  conversation.unread_messages_count > 0 && "font-bold text-black"
+                )}
+              >
+                {conversation.last_message?.content}
+              </span>
+
+            </div>
           </div>
           <div className="ms-auto flex shrink-0 flex-col items-end justify-between">
             <span className="block text-[10px] leading-loose text-gray-700">
