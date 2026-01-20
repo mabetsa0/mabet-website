@@ -366,6 +366,7 @@ const Message = ({
   id,
   sender_id,
   sender_type,
+  sender_name,
   conversation_uuid,
   content,
   created_at,
@@ -374,6 +375,7 @@ const Message = ({
   isLoading,
   className,
 }: MessageProps) => {
+  const t = useTranslations("chat")
   const user = useUserStore((s) => s.user)
   const chatData = useChatData()
   const conversationFromStore = useChatsListStore<Conversation | undefined>(
@@ -437,6 +439,23 @@ const Message = ({
         <div
           className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
         >
+          {isOwnMessage ? <span
+            className={cn(
+              "text-xs font-medium",
+              variant === "other" ? "text-white/90" : "text-primary"
+            )}
+          >
+            {t("you")}
+          </span> : (
+            <span
+              className={cn(
+                "text-xs font-medium",
+                variant === "other" ? "text-white/90" : "text-primary"
+              )}
+            >
+              {sender_name}
+            </span>
+          )}
           <MessageContent
             content={content}
             variant={variant}

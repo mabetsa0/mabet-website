@@ -23,6 +23,7 @@ import { useNafath } from "@/hooks/use-nafath"
 import { cn } from "@/lib/cn"
 import { Link, usePathname, useRouter } from "@/lib/i18n/navigation"
 import useUser from "../hooks/use-user"
+import { logout } from "@/services/logout"
 
 const SideBar = () => {
   const { user } = useUser()
@@ -30,7 +31,6 @@ const SideBar = () => {
   const pathname = usePathname()
   const t = useTranslations("general")
   const [_, { onOpen }] = useNafath()
-
   const items = [
     {
       Icon: <UserRound />,
@@ -114,6 +114,7 @@ const SideBar = () => {
           })}
           <div className="w-full pb-0.5">
             <Button
+              onClick={() => logout()}
               fullWidth
               justify="start"
               variant={"white"}
