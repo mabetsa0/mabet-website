@@ -62,7 +62,7 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
                   {t("host")}: {conversation.title?.trim() || "unknown"}{" "}
                   {isTyping && (
                     <span className="inline-block px-px text-[11px] text-gray-500">
-                      {t("is-typing")}...
+                      {t("is-typing")}
                     </span>
                   )}
                 </span>
@@ -83,10 +83,10 @@ const ChatItem = ({ conversation }: { conversation: Conversation }) => {
               {(() => {
                 const date = dayjs(
                   conversation.last_message?.created_at ||
-                    conversation.created_at
+                  conversation.created_at
                 )
                 return date.isSame(dayjs(), "day")
-                  ? date.fromNow()
+                  ? date.format("hh:mm A")
                   : date.format("DD MMM YYYY")
               })()}
             </span>

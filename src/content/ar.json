@@ -662,7 +662,7 @@
     "errors": {
       "send-message": "خطأ"
     },
-    "is-typing": "يكتب الآن.",
+    "is-typing": "يكتب الآن...",
     "reload": "اعادة التحميل",
     "no-chats": "لا توجد محادثات",
     "no-chats-description": "               لم يتم العثور على أي محادثات حتى الآن\n"

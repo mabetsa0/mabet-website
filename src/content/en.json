@@ -667,7 +667,7 @@
     "errors": {
       "send-message": "Error"
     },
-    "is-typing": "Write now.",
+    "is-typing": "Is writing...",
     "reload": "Reload",
     "no-chats": "There are no conversations",
     "no-chats-description": "No conversations found yet"

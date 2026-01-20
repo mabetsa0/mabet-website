@@ -1,6 +1,7 @@
 "use client"
 
 import { useChatsListStore } from "../_stores/chats-list-store-provider"
+import { useUserStore } from "../_stores/user-store-provider"
 import { type Conversation } from "../_types/chats-response"
 import { WS_ON_EVENTS } from "../_ws/events"
 import { type WsEventHandler } from "../_ws/events-handler"
@@ -10,11 +11,13 @@ export const useReceivePresenceUpdate = () => {
   const { conversations, updateConversationInPlace } = useChatsListStore(
     (state) => state
   )
-
+  const user = useUserStore(s => s.user)
   const handlePresenceUpdate: WsEventHandler<
     typeof WS_ON_EVENTS.PRESENCE_UPDATE
   > = (data) => {
     const { conversation_uuid, user_id, user_type, user_name, is_online } = data
+
+    if (String(user_id) == String(user?.id)) return
 
     // Find the specific conversation by UUID
     const conversation = conversations.find(
