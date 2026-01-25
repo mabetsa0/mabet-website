@@ -1,12 +1,19 @@
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { ActionIcon, Avatar, Indicator } from "@mantine/core"
 import { ChevronRight, User } from "lucide-react"
 import { useChatData } from "../_contexts/chat-context"
 import { useTypingIndicator } from "../_hooks/use-typing-indicator"
-import { useTranslations } from "next-intl"
+import { useChatsListStore } from "../_stores/chats-list-store-provider"
 
 const ChatHeader = () => {
   const chatData = useChatData()
+
+  const chatList = useChatsListStore((s) => s.conversations)
+
+  const online_participants =
+    chatList.find((c) => c.uuid === chatData.uuid)?.online_participants || []
+
   const router = useRouter()
   const { isTyping } = useTypingIndicator(chatData.uuid)
   const t = useTranslations("chat")
@@ -27,12 +34,9 @@ const ChatHeader = () => {
           color="green"
           offset={5}
           zIndex={1}
-          disabled={chatData.online_participants.length == 0}
+          disabled={online_participants.length == 0}
         >
-          <Avatar
-            src={chatData.image}
-            className="size-3"
-          >
+          <Avatar src={chatData.image} className="size-3">
             <User />
           </Avatar>
         </Indicator>
@@ -43,10 +47,7 @@ const ChatHeader = () => {
             </p>
           </div>
           {isTyping && (
-            <span className="text-[11px] text-gray-500">
-
-              {t("is-typing")}
-            </span>
+            <span className="text-[11px] text-gray-500">{t("is-typing")}</span>
           )}
         </div>
       </div>
