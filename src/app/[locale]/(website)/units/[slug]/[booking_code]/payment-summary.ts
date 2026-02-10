@@ -44,17 +44,12 @@ export interface BookingDetails {
   discount_percent_text: number
   offers_discount_percent: number
   offers_discount: number
-  qitaf_amount: null
   qitaf_amount_text: string
-  qitaf_amount: number
   saved_text: string
   additional_receipt_params: any[]
   wallet: Wallet
   qitaf_points: QitafPoints
   to_pay: ToPay
-  qitaf_points: {
-    current_balance: number
-  }
 }
 
 export interface PaymentMethods {

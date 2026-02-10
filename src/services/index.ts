@@ -118,7 +118,7 @@ apiV2_1.interceptors.request.use(
       config.headers["Accept-Language"] = locale
     } else {
       // Client-side
-      session = getSession()
+      session = getClientSession()
       config.headers["Accept-Language"] = getLocaleFromUrl()
     }
     if (session?.access_token) {
