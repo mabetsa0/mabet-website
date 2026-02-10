@@ -1,9 +1,10 @@
 "use client"
 import { useTranslations } from "next-intl"
-import { Loader, SimpleGrid, Space, Stack, Text } from "@mantine/core"
+import { SimpleGrid, Space, Stack, Text } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { parseAsInteger, useQueryState } from "nuqs"
 import UnitCard from "@/components/common/unit-card"
+import UnitCardSkeleton from "@/components/common/unit-card-skeleton"
 import Mabet from "@/services"
 import Pagination from "../../units/components/pagination"
 import { FavouritesResponse } from "./@type"
@@ -24,7 +25,7 @@ const Page = () => {
   })
 
   return (
-    <Stack>
+    <Stack className="pt-lg">
       <Space />
       <Stack>
         <Text className="text-h3 md:text-h2 font-bold">
@@ -33,11 +34,13 @@ const Page = () => {
         <Text className="md:text-lg">{t("user.favourites.description")}</Text>
       </Stack>
 
-      {status === "pending" && (
-        <div className="flex min-h-20 items-center justify-center">
-          <Loader />
-        </div>
-      )}
+      {status === "pending" ? (
+        <SimpleGrid cols={{ base: 1, sm: 2 }} pb="lg">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <UnitCardSkeleton className="w-full sm:max-w-[unset]" key={index} />
+          ))}
+        </SimpleGrid>
+      ) : null}
 
       {status === "error" && (
         <div className="flex min-h-20 items-center justify-center">

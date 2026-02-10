@@ -1,4 +1,4 @@
-import { getServerSession } from "@/lib/get-server-session"
+import { getServerSession } from "@/services/get-server-session"
 import InitializeClientSession from "./init-client-session"
 
 export async function InitSession() {

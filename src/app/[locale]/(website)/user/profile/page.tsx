@@ -6,9 +6,9 @@ import { Button, Group, Space, Stack, Text, TextInput } from "@mantine/core"
 import { isEmail, useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { BadgeCheck, Mail, Phone, UserIcon } from "lucide-react"
-import Mabeet from "@/api"
 import { useNafath } from "@/hooks/use-nafath"
-import { useSession } from "@/lib/session-store"
+import Mabeet from "@/services"
+import { useSession } from "@/stores/session-store"
 import { handleFormError } from "@/utils/handle-form-errors"
 import useUser from "../hooks/use-user"
 
@@ -56,7 +56,7 @@ const Profile = () => {
   })
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="pt-lg">
       <Stack>
         <Space />
         <Stack>

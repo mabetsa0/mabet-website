@@ -2,7 +2,6 @@
 
 "use client"
 
-import { useCallback } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { Box, Button, Menu, UnstyledButton } from "@mantine/core"
@@ -16,14 +15,19 @@ const LanguageSwitcher = () => {
   const router = useRouter()
   const currentLocale = useLocale()
 
-  const changeLanguage = useCallback(
-    (newLocale: string) => {
-      const searchParams = window.location.search
-      const newPath = `/${newLocale}${pathname}${searchParams}`
+  const changeLanguage = (newLocale: string) => {
+    const searchParams = window.location.search
+    const newPath = `/${newLocale}${pathname}${searchParams}`
+    if (pathname.includes('/user/chat')) {
+      window.location.href = newPath
+
+
+    } else {
+
       router.push(newPath)
-    },
-    [router, pathname]
-  )
+    }
+
+  }
 
   return (
     <>

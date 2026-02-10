@@ -53,7 +53,7 @@ const BookingCard = (booking: Props) => {
         withBorder
         className={cn("w-full border-[#F3F3F3]")}
       >
-        <div className="relative aspect-[4/3] h-[230px] w-full overflow-hidden rounded">
+        <div className="relative aspect-4/3 h-[230px] w-full overflow-hidden rounded">
           <Badge
             autoContrast
             color={booking.status.bg_color}
@@ -103,7 +103,7 @@ const BookingCard = (booking: Props) => {
             </div>
           ) : null}
 
-          <div className="aspect-[4/3] w-full">
+          <div className="aspect-4/3 w-full">
             <img
               loading="lazy"
               className="h-full w-full object-cover"

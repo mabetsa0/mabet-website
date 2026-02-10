@@ -1,5 +1,5 @@
 import { Blog } from "@/@types/blog-response"
-import { BlogApi } from "../api"
+import { BlogApi } from "../services"
 
 export const getRelatedBlogs = async (slug: string) => {
   if (!slug) throw new Error("no url provided to getBlogs function")

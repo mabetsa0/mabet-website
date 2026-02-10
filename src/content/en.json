@@ -13,7 +13,8 @@
     "profile": "Profile",
     "logout": "Logout",
     "search": "Search",
-    "download-mabet-app": "Downlaod Mabet app for better experience "
+    "download-mabet-app": "Downlaod Mabet app for better experience ",
+    "chat": "Conversations"
   },
   "general": {
     "locales": {
@@ -83,7 +84,9 @@
     "min_stay_warning": "Warning the minimum residence",
     "nights": "nights",
     "date_extended_to": "the reservation has been extended to ",
-    "goToBookings": "Go to bookings"
+    "goToBookings": "Go to bookings",
+    "qitaf-amount": "Amount paied via Qitaf",
+    "chat": "Chats"
   },
   "home": {
     "special-units": {
@@ -228,7 +231,8 @@
     },
     "title": "Log in or sign up",
     "invalid-otp": "Invalid OTP",
-    "server-error": "Server Error"
+    "server-error": "Server Error",
+    "invalid-country-code": "Please, use a Saudi number"
   },
   "generl": {
     "search-results": "Results for"
@@ -360,7 +364,33 @@
     "payment-accept-conditions": "I agree on the conditions and provisions of the housing",
     "payment-accept-conditions-description": "Click to see the requirements",
     "partner-data": "About the Host",
-    "view-profile": "View profile"
+    "view-profile": "View profile",
+    "stc-modal": {
+      "button": "Get your rewards",
+      "description": "Add STC rewards points to your account.",
+      "enter-phone-number": "Enter your STC-registered phone number"
+    },
+    "stc-redeem-modal": {
+      "button": "STC Points",
+      "description": "Redeem your STC points",
+      "enter-phone-number": "Enter your mobile number register with STC",
+      "success-title": "Redeemed successfully",
+      "success-message": "Your STC points were redeemed and applied."
+    },
+    "stc-redeem-form": {
+      "you-have-points": "You have {points} points",
+      "points-to-redeem": "Amount",
+      "you-will-get": "You will get",
+      "confirm": "Confirm",
+      "otp": "OTP",
+      "amount": "Amount",
+      "invalid-otp": "Invalid OTP",
+      "amount-required": "Amount is required",
+      "success-title": "Redeemed successfully\t",
+      "success-message": "Your STC points were redeemed and applie…\t",
+      "change-pohne-number": "Change phone number",
+      "change-phone-number": "Change phone number"
+    }
   },
   "errors": {
     "unknown-error": "Unknown error"
@@ -558,7 +588,8 @@
     "invoice": "View invoice",
     "conditions": "Reservation Conditions ",
     "cancel-policy": "Cancellation and retrieval policy",
-    "support": "Support and protect your rights"
+    "support": "Support and protect your rights",
+    "qitaf-amount": "Paied via Qitaf"
   },
   "wallet": {
     "card": {
@@ -590,5 +621,62 @@
     "units-description": "Explore all properties from this host",
     "reviews-title": "Ratings",
     "reviews-description": "Host Ratings"
+  },
+  "chat": {
+    "title": "Conversations",
+    "host": "Host",
+    "empty-state": {
+      "title": "Choose a conversation to display",
+      "description": "Choose a conversation from the sidebar to start chatting or view previous messages"
+    },
+    "input": {
+      "placeholder": "Ask host whatever you want.....",
+      "send": "Send",
+      "sending": "Sending..."
+    },
+    "date": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "unit-card": {
+      "inquiry-about-booking": "Inquiry about booking {name}",
+      "view-unit": "View unit",
+      "book-now": "Book now",
+      "loading": "Loading unit...",
+      "load-error": "Failed to load unit"
+    },
+    "copy": {
+      "button": "Copy",
+      "copied": "Copied!",
+      "aria-label": "Copy coupon code"
+    },
+    "coupon": {
+      "loading": "Loading coupon...",
+      "load-error": "Failed to load coupon",
+      "valid-until": "Valid until",
+      "discount": "Discount"
+    },
+    "important-note": {
+      "title": "Important note!",
+      "description": "Host contact information will appear directly after booking. Please do not contact the host outside the platform, as this will lead to suspension of your account and loss of your rights."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "description": "The platform disclaims responsibility for any financial transfers made outside the platform. Any insurance or remaining balance must also be paid before entering the unit."
+    },
+    "errors": {
+      "send-message": "Error"
+    },
+    "is-typing": "Is writing...",
+    "reload": "Reload",
+    "no-chats": "There are no conversations",
+    "no-chats-description": "No conversations found yet",
+    "you": "You"
+  },
+  "chat-list": {
+    "errors": {
+      "title": "Error",
+      "message": "Could not fetch conversation"
+    }
   }
 }

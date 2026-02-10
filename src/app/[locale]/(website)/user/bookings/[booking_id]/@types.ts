@@ -69,6 +69,7 @@ export interface DetailedBooking {
   additional_receipt_params: any[]
   wallet: Wallet
   support: Support
+  qitaf_amount: number
 }
 
 export interface ArrivalInstruction {

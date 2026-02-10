@@ -25,7 +25,7 @@ const Page = () => {
   })
 
   return (
-    <Stack>
+    <Stack className="pt-lg">
       <Space />
       <Group wrap="nowrap">
         <Stack className="grow">

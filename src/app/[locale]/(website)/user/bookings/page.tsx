@@ -45,7 +45,7 @@ const Page = () => {
   })
 
   return (
-    <Stack>
+    <Stack className="pt-lg">
       <Space />
       <Stack>
         <Text className="text-h3 md:text-h2 font-bold">

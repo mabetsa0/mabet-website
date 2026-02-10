@@ -9,5 +9,8 @@
   "editor.formatOnSave": true,
   "i18n-ally.localesPaths": ["src/content"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.sourceLanguage": "ar"
+  "i18n-ally.sourceLanguage": "en",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }

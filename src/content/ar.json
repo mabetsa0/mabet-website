@@ -13,7 +13,8 @@
     "profile": "الملف الشخصي",
     "logout": "تسجيل الخروج",
     "search": "البحث",
-    "download-mabet-app": "لتجربة افضل واسرع \nحمل تطبيق مبيت"
+    "download-mabet-app": "لتجربة افضل واسرع \nحمل تطبيق مبيت",
+    "chat": "محادثاتي"
   },
   "home": {
     "hero": {
@@ -174,7 +175,9 @@
     "min_stay_warning": "تحذير الحد الادنى للاقامة",
     "nights": "ليلة",
     "date_extended_to": "تم تمديد الحجز حتى ",
-    "goToBookings": "عرض الحجوزات"
+    "goToBookings": "عرض الحجوزات",
+    "qitaf-amount": "المبلغ المدفوع عبر قطاف",
+    "chat": "المحادثات"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -227,7 +230,8 @@
     },
     "title": "تسجيل الدخول أو سجل حساب جديد",
     "invalid-otp": "كود غير صحيح",
-    "server-error": "خطا غير معروف"
+    "server-error": "خطا غير معروف",
+    "invalid-country-code": "من فضلك استخدم رقم سعودي"
   },
   "generl": {
     "search-results": "نتاج بحث"
@@ -359,7 +363,33 @@
     "payment-accept-conditions": "اوافق على شروط واحكام المسكن",
     "payment-accept-conditions-description": " اضغط لمشاهدة الاشتراطات  ",
     "partner-data": "عن المضيف",
-    "view-profile": "عرض صفحة المضيف"
+    "view-profile": "عرض صفحة المضيف",
+    "stc-modal": {
+      "button": "احصل على مكافآتك",
+      "description": "أضف نقاط مكافآتك إلى حسابك.",
+      "enter-phone-number": "أدخل رقم الجوال المسجّل لدى STC"
+    },
+    "stc-redeem-modal": {
+      "button": "نقاط STC",
+      "description": "استبدل نقاط STC الخاصة بك",
+      "enter-phone-number": "أدخل رقم جوالك المسجل لدى STC",
+      "success-title": "تم الاستبدال بنجاح",
+      "success-message": "تم استبدال نقاط STC وإضافتها بنجاح."
+    },
+    "stc-redeem-form": {
+      "you-have-points": "لديك {points} نقطة",
+      "points-to-redeem": "النقاط المراد استبدالها",
+      "you-will-get": "ستحصل على",
+      "confirm": "تأكيد",
+      "otp": "رمز التحقق",
+      "amount": "المبلغ",
+      "invalid-otp": "رمز التحقق غير صحيح",
+      "amount-required": "المبلغ مطلوب",
+      "success-title": "تم الاستبدال بنجاح\t",
+      "success-message": "تم استبدال نقاط STC وإضافتها بنجاح.\t",
+      "change-pohne-number": "تغير رقم الجوال",
+      "change-phone-number": "تغيير رقم الجوال"
+    }
   },
   "errors": {
     "unknown-error": "خطأ غير معروف"
@@ -553,7 +583,8 @@
     "invoice": "عرض الفاتورة",
     "conditions": "شروط الحجز",
     "cancel-policy": "سياسة الإلغاء والاسترجاع",
-    "support": "دعم وحماية حقوقك"
+    "support": "دعم وحماية حقوقك",
+    "qitaf-amount": "تم الدفع عن طريق قطاف"
   },
   "wallet": {
     "card": {
@@ -585,5 +616,62 @@
     "units-description": "استكشف جميع العقارات من هذا المضيف",
     "reviews-title": "التقييمات",
     "reviews-description": "تقييمات المضيف "
+  },
+  "chat": {
+    "title": "محادثاتي",
+    "host": "المضيف",
+    "empty-state": {
+      "title": "اختر محادثة لعرضها",
+      "description": "اختر محادثة من القائمة الجانبية لبدء المحادثة أو عرض الرسائل السابقة"
+    },
+    "input": {
+      "placeholder": "اكتب ما تريد الاستفسار عنه .....",
+      "send": "ارسال",
+      "sending": "جاري الإرسال..."
+    },
+    "date": {
+      "today": "اليوم",
+      "yesterday": "أمس"
+    },
+    "unit-card": {
+      "inquiry-about-booking": "استفسار عن حجز {name}",
+      "view-unit": "عرض الوحدة",
+      "book-now": "احجز الان",
+      "loading": "جاري تحميل الوحدة...",
+      "load-error": "فشل تحميل الوحدة"
+    },
+    "copy": {
+      "button": "نسخ",
+      "copied": "تم النسخ!",
+      "aria-label": "نسخ كود الخصم"
+    },
+    "coupon": {
+      "loading": "جاري تحميل الكوبون...",
+      "load-error": "فشل تحميل الكوبون",
+      "valid-until": "صالح المدة",
+      "discount": "الخصم"
+    },
+    "important-note": {
+      "title": "ملاحظة مهمة !",
+      "description": "سيظهر معلومات التواصل مع المضيف مباشرة بعد الحجز. يرجى عدم التواصل مع المضيف خارج المنصة، حيث سيؤدي ذلك إلى تعليق حسابك وفقدان حقوقك."
+    },
+    "disclaimer": {
+      "title": "إخلاء مسؤولية",
+      "description": "تخلّي المنصة عن مسؤولية أي تحويلات مالية تتم خارج المنصة. كما يجب دفع أي تأمين أو رصيد متبقي قبل دخول الوحدة."
+    },
+    "errors": {
+      "send-message": "خطأ"
+    },
+    "is-typing": "يكتب الآن...",
+    "reload": "اعادة التحميل",
+    "no-chats": "لا توجد محادثات",
+    "no-chats-description": "               لم يتم العثور على أي محادثات حتى الآن\n",
+    "you": "أنت"
+  },
+  "chat-list": {
+    "errors": {
+      "title": "خطأ",
+      "message": "تعذر جلب المحادثة"
+    }
   }
 }

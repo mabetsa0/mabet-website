@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
 import { ActionIcon, Tooltip } from "@mantine/core"
-import { useSession } from "@/lib/session-store"
+import { useSession } from "@/stores/session-store"
 
 const GoToBookings = () => {
   const router = useRouter()

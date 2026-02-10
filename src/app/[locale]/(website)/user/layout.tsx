@@ -3,8 +3,8 @@ import Image from "next/image"
 import { Grid, GridCol } from "@mantine/core"
 import { dotBg } from "@/assets"
 import Footer from "@/components/common/footer"
-import { getServerSession } from "@/lib/get-server-session"
 import { redirect } from "@/lib/i18n/navigation"
+import { getServerSession } from "@/services/get-server-session"
 import SideBar from "./components/side-bar"
 import UserStatus from "./components/user-status"
 
@@ -36,14 +36,13 @@ export default async function Layout({
       </section>
       <section className="relative">
         <div className="container">
-          <Grid columns={4} className="md:-translate-y-9">
+          <Grid columns={4} className="pb-lg md:-mt-9">
             <GridCol span={{ base: 4, md: "content" }} className="relative">
               <SideBar />
             </GridCol>
             <GridCol
-              className="break md:mt-[9.5rem] md:max-w-[calc(62em-300px)] lg:max-w-[calc(75em-300px)] xl:max-w-[calc(88em-300px)]"
+              className="break ps-md pt-0 md:mt-[9rem] md:max-w-[calc(62rem-230px)] lg:max-w-[calc(75rem-230px)] xl:max-w-[calc(88rem-230px)]"
               span={{ base: 4, md: "auto" }}
-              p={{ base: "sm", md: "xl" }}
             >
               {children}
             </GridCol>

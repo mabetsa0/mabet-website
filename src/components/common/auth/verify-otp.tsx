@@ -6,9 +6,11 @@ import { useForm } from "@mantine/form"
 import axios from "axios"
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs"
 import { Session } from "@/@types/user"
+import { getChatSessionStore } from "@/app/[locale]/(website)/user/chat/_stores/session-store-provider"
+import { getOrInitWebSocket } from "@/app/[locale]/(website)/user/chat/_ws"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import { useUserDataModal } from "@/hooks/use-user-data-modal"
-import { useSession } from "@/lib/session-store"
+import { useSession } from "@/stores/session-store"
 import ResendOtpButton from "./resend-otp-button"
 
 const VerifyOtp = () => {
@@ -44,6 +46,43 @@ const VerifyOtp = () => {
       updateSession(user)
       setPhoneNumber(null)
       onClose()
+
+      // Initialize WebSocket after login
+      try {
+        // Fetch chat access token
+        const chatAuthResponse = await axios.post<{ token: string }>(
+          "/api/chat/auth",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+            },
+          }
+        )
+
+        const chatAccessToken = chatAuthResponse.data.token
+
+        // Update chat session store with access token
+        const chatSessionStore = getChatSessionStore()
+        if (chatSessionStore && chatAccessToken) {
+          chatSessionStore.getState().setAccessToken(chatAccessToken)
+
+          // Initialize WebSocket after a brief delay to ensure store is ready
+          if (typeof window !== "undefined") {
+            // Use setTimeout to ensure the store update is processed
+            setTimeout(() => {
+              getOrInitWebSocket()
+            }, 100)
+          }
+        } else {
+          console.warn(
+            "[WS] Chat session store not available or no access token, WebSocket not initialized"
+          )
+        }
+      } catch (error) {
+        // Log error but don't block login flow
+        console.error("[WS] Failed to initialize WebSocket after login:", error)
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         form.setErrors({

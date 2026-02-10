@@ -44,7 +44,6 @@ export interface BookingDetails {
   discount_percent_text: number
   offers_discount_percent: number
   offers_discount: number
-  qitaf_amount: null
   qitaf_amount_text: string
   saved_text: string
   additional_receipt_params: any[]

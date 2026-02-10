@@ -1,4 +1,3 @@
-import { Suspense } from "react"
 import { NextIntlClientProvider } from "next-intl"
 import { IBM_Plex_Sans_Arabic } from "next/font/google"
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core"
@@ -6,9 +5,16 @@ import { TestTube2 } from "lucide-react"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import GlobalDataContextProvider from "@/context/global-data-context"
 import MyReactQueryProvider from "@/lib/react-query"
+import { getServerSession } from "@/services/get-server-session"
 import "../globals.css"
 import MyMantineProvider from "../mantine-provider"
-import { InitSession } from "./components/init-session"
+import ReceivedMessage from "./(website)/user/chat/_components/received-messages"
+import { WsConnectionButton } from "./(website)/user/chat/_components/ws-connection-button"
+import { getCachedTokenFromCookie } from "./(website)/user/chat/_lib/get-cached-access-token"
+import { ChatsListStoreProvider } from "./(website)/user/chat/_stores/chats-list-store-provider"
+import { SessionStoreProvider } from "./(website)/user/chat/_stores/session-store-provider"
+import { UserStoreProvider } from "./(website)/user/chat/_stores/user-store-provider"
+import InitializeClientSession from "./components/init-client-session"
 import Scripts from "./components/scripts"
 
 const arFont = IBM_Plex_Sans_Arabic({
@@ -29,6 +35,8 @@ export default async function LocaleLayout({
   // Ensure that the incoming `locale` is valid
   const { locale } = await params
 
+  const session = await getServerSession()
+  const chatAccessToken = await getCachedTokenFromCookie()
   return (
     <html
       lang={locale}
@@ -56,15 +64,23 @@ export default async function LocaleLayout({
             <NuqsAdapter>
               <MyMantineProvider locale={locale}>
                 <NextIntlClientProvider>
-                  {children}
-                  {process.env.NEXT_PUBLIC_TEST == "true" && (
-                    <div className="fixed right-1 bottom-4 z-10 rounded-full bg-gray-200 p-0.5">
-                      <TestTube2 className="text-primary" />
-                    </div>
-                  )}
-                  <Suspense>
-                    <InitSession />
-                  </Suspense>
+                  <SessionStoreProvider accessToken={chatAccessToken}>
+                    <UserStoreProvider user={null}>
+                      <ChatsListStoreProvider>
+                        <InitializeClientSession initialValue={session} />
+                        {children}
+                        {process.env.NEXT_PUBLIC_TEST == "true" && (
+                          <>
+                            <div className="fixed end-1 bottom-9 z-10 rounded-full bg-gray-200 p-0.5 md:bottom-4">
+                              <TestTube2 className="text-primary" />
+                            </div>
+                            <WsConnectionButton />
+                          </>
+                        )}
+                        <ReceivedMessage />
+                      </ChatsListStoreProvider>
+                    </UserStoreProvider>
+                  </SessionStoreProvider>
                 </NextIntlClientProvider>
               </MyMantineProvider>
             </NuqsAdapter>

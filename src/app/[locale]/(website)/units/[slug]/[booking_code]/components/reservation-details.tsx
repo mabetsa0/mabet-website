@@ -24,6 +24,7 @@ import usePayment from "../hooks/use-payment"
 import { usePaymentState } from "../hooks/use-payment-state"
 import { BookingDetails } from "../payment-summary"
 import Coupon from "./coupon"
+import STC from "./stc"
 
 const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
   const t = useTranslations()
@@ -128,7 +129,6 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <Group gap={"3"}>
                   {prices.duration}{" "}
                   <X className="text-primary" strokeWidth={4} size={20} />{" "}
-
                   {/* Old price (only if different) */}
                   {/* {prices.night_sub_price !== prices.night_price && (
                     <Text fw={500} c="dimmed" td="line-through">
@@ -140,7 +140,6 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                       <RiyalIcon />
                     </Text>
                   )} */}
-
                   {/* Final price */}
                   <Text fw={600}>
                     <NumberFormatter
@@ -186,22 +185,22 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 </SimpleGrid>
               ) : null}
 
-                {Number(prices.offers_discount_percent) > 0 ? (
-                  <SimpleGrid cols={2}>
-                    <Group gap={3}>
-                      <Text fw={500}>خصم العروض</Text>
-                      <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
-                        {Number(prices.offers_discount_percent)}%
-                      </div>
-                    </Group>
+              {Number(prices.offers_discount_percent) > 0 ? (
+                <SimpleGrid cols={2}>
+                  <Group gap={3}>
+                    <Text fw={500}>خصم العروض</Text>
+                    <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
+                      {Number(prices.offers_discount_percent)}%
+                    </div>
+                  </Group>
 
-                    <Text ta="end" c="red">
-                      - {Number(prices.offers_discount)}
-                      <RiyalIcon />
-                    </Text>
-                  </SimpleGrid>
-                ) : null}
-              
+                  <Text ta="end" c="red">
+                    - {Number(prices.offers_discount)}
+                    <RiyalIcon />
+                  </Text>
+                </SimpleGrid>
+              ) : null}
+
               <Divider />
               <SimpleGrid cols={2}>
                 <Text fw={700}>{t("general.total-price")}</Text>
@@ -240,6 +239,14 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             </Stack>
           </Card.Section>
         ) : null}
+        {/* <Card.Section
+          visibleFrom="md"
+          className="border-[#F3F3F3] max-md:!border-none md:px-[24px]"
+          pb={12}
+          withBorder
+        >
+          <STC />
+        </Card.Section> */}
       </Card>
       <Modal
         centered

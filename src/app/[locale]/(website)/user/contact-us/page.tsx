@@ -24,7 +24,7 @@ const Page = () => {
   ]
 
   return (
-    <Stack>
+    <Stack className="pt-lg">
       <Stack>
         <Text className="text-h3 md:text-h2 font-bold">
           {t("user.contact.title")}

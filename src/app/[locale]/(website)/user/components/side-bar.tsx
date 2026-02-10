@@ -17,11 +17,13 @@ import {
   LogOut,
   UserRound,
   Wallet,
+  MessageCircle,
 } from "lucide-react"
 import { useNafath } from "@/hooks/use-nafath"
 import { cn } from "@/lib/cn"
 import { Link, usePathname, useRouter } from "@/lib/i18n/navigation"
 import useUser from "../hooks/use-user"
+import { logout } from "@/services/logout"
 
 const SideBar = () => {
   const { user } = useUser()
@@ -29,7 +31,6 @@ const SideBar = () => {
   const pathname = usePathname()
   const t = useTranslations("general")
   const [_, { onOpen }] = useNafath()
-
   const items = [
     {
       Icon: <UserRound />,
@@ -45,6 +46,11 @@ const SideBar = () => {
       Icon: <Wallet />,
       label: t("wallet"),
       path: "/user/wallet",
+    },
+    {
+      Icon: <MessageCircle />,
+      label: t("chat"),
+      path: "/user/chat",
     },
     {
       Icon: <Heart />,
@@ -63,7 +69,7 @@ const SideBar = () => {
     <>
       <Card
         visibleFrom="md"
-        className="sticky top-16 bg-white"
+        className=" bg-white"
         radius={"16px"}
         shadow="md"
         w={"260px"}
@@ -108,6 +114,7 @@ const SideBar = () => {
           })}
           <div className="w-full pb-0.5">
             <Button
+              onClick={() => logout()}
               fullWidth
               justify="start"
               variant={"white"}

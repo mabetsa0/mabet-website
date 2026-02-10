@@ -97,6 +97,7 @@ const nextConfig = withBundleAnalyzer(
         static: 180,
       },
     },
+    reactCompiler: true,
     // Optimize production builds
     compiler: {
       removeConsole:

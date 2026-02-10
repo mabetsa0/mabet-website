@@ -1,11 +1,12 @@
 import { useTranslations } from "next-intl"
 import { ActionIcon, Button, Menu } from "@mantine/core"
-import { ChevronDown, LogOut, UserCircle } from "lucide-react"
+import { ChevronDown, LogOut, MessageCircle, UserCircle } from "lucide-react"
+import UserChats from "@/app/[locale]/(website)/user/chat/_components/user-chats"
 import { useAuthModal } from "@/hooks/use-auth-modal"
 import useMdScreen from "@/hooks/use-md-screen"
 import { Link } from "@/lib/i18n/navigation"
-import { useSession } from "@/lib/session-store"
 import { logout } from "@/services/logout"
+import { useSession } from "@/stores/session-store"
 
 const UserButton = () => {
   const t = useTranslations("header")
@@ -75,6 +76,7 @@ const UserButton = () => {
 
   return (
     <>
+      <UserChats />
       <Menu shadow="lg" position="bottom" withArrow>
         <Menu.Target>
           {matches ? (
@@ -92,6 +94,12 @@ const UserButton = () => {
             <Link className="flex items-center gap-0.5" href="/user/profile">
               <UserCircle strokeWidth={1.25} />
               {t("profile")}
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link className="flex items-center gap-0.5" href="/user/chat">
+              <MessageCircle strokeWidth={1.25} />
+              {t("chat")}
             </Link>
           </Menu.Item>
           <Menu.Item

@@ -3,8 +3,8 @@ import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { notifications } from "@mantine/notifications"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useSession } from "@/lib/session-store"
 import Mabet from "@/services"
+import { useSession } from "@/stores/session-store"
 import { useAuthModal } from "./use-auth-modal"
 
 const addToFavorite = async (id: number) => {
