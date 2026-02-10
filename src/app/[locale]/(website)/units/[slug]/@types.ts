@@ -138,70 +138,109 @@ export interface UnitFor {
 
 export interface UnitAvailabilityResponse {
   data: {
-    prices: Prices
+    prices: PricesV2_1
   }
   message: null
   success: boolean
 }
 
-export interface Prices {
+// export interface Prices {
+//   from: string
+//   to: string
+//   min_stay: number
+//   duration: number
+//   duration_count: string
+//   coupon: null
+//   coupon_id: null
+//   discount_percent: null
+//   discount_text: null
+//   discount: number
+//   customer_fees: string
+//   customer_taxes: number
+//   price_before: string
+//   price_before_plain: number
+//   price: string
+//   price_plain: number
+//   insurance: number
+//   total_before: string
+//   total_before_plain: number
+//   sub_total: string
+//   sub_total_plain: number
+//   down_payment_percentage: number
+//   down_payment_percent: number
+//   down_payment_before: string
+//   down_payment_before_plain: number
+//   down_payment: number
+//   down_payment_plain: number
+//   pre_down_payment: string
+//   total: string
+//   total_plain: number
+//   profit: number
+//   profit_taxes: number
+//   profit_percentage: number
+//   timer: null
+//   from_text: string
+//   to_text: string
+//   additional_receipt_params: unknown[]
+//   saved_text: string
+//   additional_amount: string
+//   // additionals: unknown[]
+//   discount_amount: null
+//   discount_amount_text: null
+//   discount_percent_text: null
+//   down_payment_text: string
+//   duration_text: string
+//   full_payment: string
+//   full_payment_text: string
+//   marketing_id: string
+//   marketing_profit_percent: number
+//   show_down_payment: boolean
+//   sub_price: string
+//   sub_price_text: string
+//   additionals: {
+//     label: string
+//     value: string
+//     color?: string
+//   }[]
+// }
+
+export interface PricesV2_1 {
   from: string
   to: string
   min_stay: number
   duration: number
-  duration_count: string
+  duration_text: string
   coupon: null
   coupon_id: null
-  discount_percent: null
-  discount_text: null
+  discount_amount: string
+  discount_amount_text: string
+  discount_percent: string
+  discount_percent_text: number
+  discount_text: string
   discount: number
   customer_fees: string
   customer_taxes: number
-  price_before: string
-  price_before_plain: number
+  sub_price: string
+  sub_price_text: string
   price: string
   price_plain: number
   insurance: number
-  total_before: string
-  total_before_plain: number
-  sub_total: string
   sub_total_plain: number
-  down_payment_percentage: number
-  down_payment_percent: number
-  down_payment_before: string
+  show_down_payment: boolean
+
   down_payment_before_plain: number
-  down_payment: number
-  down_payment_plain: number
-  pre_down_payment: string
+  down_payment: string
   total: string
   total_plain: number
-  profit: number
-  profit_taxes: number
-  profit_percentage: number
-  timer: null
-  from_text: string
-  to_text: string
-  additional_receipt_params: unknown[]
-  saved_text: string
-  additional_amount: string
-  // additionals: unknown[]
-  discount_amount: null
-  discount_amount_text: null
-  discount_percent_text: null
-  down_payment_text: string
-  duration_text: string
   full_payment: string
-  full_payment_text: string
-  marketing_id: string
-  marketing_profit_percent: number
-  show_down_payment: boolean
-  sub_price: string
-  sub_price_text: string
   additionals: {
     label: string
     value: string
     color?: string
   }[]
+  additional_receipt_params: any[]
+  saved_text: string
+  customer_fees_total: number
 }
 
 export interface BusyDaysResponse {

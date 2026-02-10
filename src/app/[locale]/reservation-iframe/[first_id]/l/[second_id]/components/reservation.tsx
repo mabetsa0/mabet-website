@@ -220,7 +220,7 @@ const Reservation = () => {
               {prices?.discount ? (
                 <Text className="text-[12px] text-[#767676] line-through">
                   {" "}
-                  {Number(prices.price_before_plain)} <RiyalIcon />
+                  {Number(prices.sub_price)} <RiyalIcon />
                   <span className="text-[10px]">/{prices.duration_text}</span>
                 </Text>
               ) : null}
@@ -304,16 +304,12 @@ const Reservation = () => {
                 {prices.duration_text}{" "}
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
-                  {prices.discount
-                    ? prices.price_before_plain
-                    : prices.price_plain}{" "}
+                  {prices.discount ? prices.sub_price : prices.price_plain}{" "}
                   <RiyalIcon />
                 </Text>
               </Group>
               <Text ta="end" c="#767676">
-                <span className="text-primary">
-                  {prices.total_before_plain}
-                </span>
+                <span className="text-primary">{prices.sub_price}</span>
                 <RiyalIcon />
               </Text>
             </SimpleGrid>

@@ -29,9 +29,8 @@ const Features = () => {
                 return (
                   <Stack key={index} className="pb-0.5">
                     <Group>
-                      <Image
-                        h={32}
-                        w={32}
+                      <img
+                        className="h-2"
                         src={value.icon_svg}
                         alt={value.name}
                       />

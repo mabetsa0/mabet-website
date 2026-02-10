@@ -182,7 +182,7 @@ const ReservationDetails = () => {
                 <X className="text-primary" strokeWidth={4} size={20} />{" "}
                 <Text fw={500}>
                   <NumberFormatter
-                    value={prices.price_plain}
+                    value={prices.sub_price || prices.price_plain}
                     thousandSeparator
                     decimalScale={2}
                   />
@@ -190,7 +190,10 @@ const ReservationDetails = () => {
                 </Text>
               </Group>
               <Text ta="end" c="primary">
-                <NumberFormatter thousandSeparator value={prices.total_plain} />
+                <NumberFormatter
+                  thousandSeparator
+                  value={prices.sub_total_plain || prices.total_plain}
+                />
                 <RiyalIcon />
               </Text>
             </SimpleGrid>
@@ -205,7 +208,12 @@ const ReservationDetails = () => {
                 </Group>
 
                 <Text ta="end" c="red">
-                  - {prices.discount_amount}
+                  -{" "}
+                  <NumberFormatter
+                    thousandSeparator
+                    value={prices.discount}
+                    decimalScale={2}
+                  />{" "}
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>
@@ -240,9 +248,7 @@ const ReservationDetails = () => {
               <Text ta="end" c="#767676">
                 <NumberFormatter
                   thousandSeparator
-                  value={
-                    parseFloat(prices.customer_fees) + prices.customer_taxes
-                  }
+                  value={prices.customer_fees_total}
                   decimalScale={2}
                 />{" "}
                 <RiyalIcon />
@@ -269,9 +275,7 @@ const ReservationDetails = () => {
               onClick={handleCreateBooking}
             >
               {t("unit.create-booking", {
-                value: prices.full_payment_text
-                  .replace("SAR", "")
-                  .replace("ر.س", ""),
+                value: prices.full_payment,
               })}{" "}
               <RiyalIcon />
             </Button>

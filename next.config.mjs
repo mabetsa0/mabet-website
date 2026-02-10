@@ -51,6 +51,10 @@ const nextConfig = withBundleAnalyzer(
           source: "/gathern",
           destination: "/ar/units",
         },
+        {
+          source: "/.well-known/:path*",
+          destination: "https://app.mabet.com.sa/.well-known/:path*",
+        },
       ]
     },
     async redirects() {
