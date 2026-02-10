@@ -128,9 +128,23 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <Group gap={"3"}>
                   {prices.duration}{" "}
                   <X className="text-primary" strokeWidth={4} size={20} />{" "}
-                  <Text fw={500}>
+
+                  {/* Old price (only if different) */}
+                  {/* {prices.night_sub_price !== prices.night_price && (
+                    <Text fw={500} c="dimmed" td="line-through">
+                      <NumberFormatter
+                        value={prices.night_sub_price}
+                        thousandSeparator
+                        decimalScale={2}
+                      />
+                      <RiyalIcon />
+                    </Text>
+                  )} */}
+
+                  {/* Final price */}
+                  <Text fw={600}>
                     <NumberFormatter
-                      value={prices.night_price}
+                      value={prices.night_sub_price}
                       thousandSeparator
                       decimalScale={2}
                     />
@@ -139,10 +153,19 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 </Group>
                 <Text ta="end" c="primary">
                   <NumberFormatter
-                    value={prices.total}
+                    value={prices.sub_total}
                     thousandSeparator
                     decimalScale={2}
                   />
+                  <RiyalIcon />
+                </Text>
+              </SimpleGrid>
+
+              <SimpleGrid cols={2}>
+                <Text>{t("general.customer-fees")}</Text>
+
+                <Text ta="end" c="#767676">
+                  {parseFloat(prices.customer_fees).toFixed(2)}
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>
@@ -162,14 +185,23 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                   </Text>
                 </SimpleGrid>
               ) : null}
-              <SimpleGrid cols={2}>
-                <Text>{t("general.customer-fees")}</Text>
 
-                <Text ta="end" c="#767676">
-                  {parseFloat(prices.customer_fees).toFixed(2)}
-                  <RiyalIcon />
-                </Text>
-              </SimpleGrid>
+                {Number(prices.offers_discount_percent) > 0 ? (
+                  <SimpleGrid cols={2}>
+                    <Group gap={3}>
+                      <Text fw={500}>خصم العروض</Text>
+                      <div className="flex h-[39px] w-[39px] shrink-0 items-center justify-center rounded bg-[#E8123D26] text-xs font-bold text-[#E8123D]">
+                        {Number(prices.offers_discount_percent)}%
+                      </div>
+                    </Group>
+
+                    <Text ta="end" c="red">
+                      - {Number(prices.offers_discount)}
+                      <RiyalIcon />
+                    </Text>
+                  </SimpleGrid>
+                ) : null}
+              
               <Divider />
               <SimpleGrid cols={2}>
                 <Text fw={700}>{t("general.total-price")}</Text>
