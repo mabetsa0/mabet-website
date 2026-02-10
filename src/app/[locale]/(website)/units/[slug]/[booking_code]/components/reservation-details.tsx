@@ -239,14 +239,14 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
             </Stack>
           </Card.Section>
         ) : null}
-        <Card.Section
+        {/* <Card.Section
           visibleFrom="md"
           className="border-[#F3F3F3] max-md:!border-none md:px-[24px]"
           pb={12}
           withBorder
         >
           <STC />
-        </Card.Section>
+        </Card.Section> */}
       </Card>
       <Modal
         centered

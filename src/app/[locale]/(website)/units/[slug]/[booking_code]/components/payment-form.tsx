@@ -182,7 +182,7 @@ const PaymentForm = (booking: BookingDetails) => {
           {t("description")}
         </Text>
       </Stack>
-      <STCRedeem />
+      {/* <STCRedeem /> */}
       {showWalletOption && (
         <>
           <Group wrap="nowrap" align="start" mt={"sm"}>
