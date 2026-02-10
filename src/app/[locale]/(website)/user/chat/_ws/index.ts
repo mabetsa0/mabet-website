@@ -11,7 +11,10 @@ import {
 } from "./events"
 import { emitEvent, onEvent } from "./events-handler"
 
-const wsUrl = "wss://chat-experimental.mabet-app.com/api/v1/ws?lang=ar"
+const wsUrl =
+  process.env.NEXT_PUBLIC_TEST == "true"
+    ? "wss://chat-experimental.mabet-app.com/api/v1/ws?lang=ar"
+    : "wss://chat.mabet-app.com/api/v1/ws?lang=ar"
 
 // Singleton WebSocket instance with auto‑reconnect
 let socket: WebSocket | null = null
