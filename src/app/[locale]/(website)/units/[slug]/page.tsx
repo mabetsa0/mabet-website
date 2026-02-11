@@ -63,7 +63,7 @@ const page = async (props: Props) => {
   const params = await props.params
   try {
     const unit = await GetUnit({ slug: params.slug })
-    const accessToken = await getCachedTokenFromCookie()
+    // const accessToken = await getCachedTokenFromCookie()
 
     return (
       <UnitContextProvider value={unit}>
@@ -113,12 +113,12 @@ const page = async (props: Props) => {
           <MobileCreateBookingButton />
         </Suspense>
         <Footer />
-        {accessToken ? (
+        {/* {accessToken ? (
           <ChatModal
             topicId={unit.id.toString()}
             partnerId={unit.partner.id.toString()}
           />
-        ) : null}
+        ) : null} */}
       </UnitContextProvider>
     )
   } catch (error) {

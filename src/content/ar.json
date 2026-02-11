@@ -666,7 +666,8 @@
     "reload": "اعادة التحميل",
     "no-chats": "لا توجد محادثات",
     "no-chats-description": "               لم يتم العثور على أي محادثات حتى الآن\n",
-    "you": "أنت"
+    "you": "أنت",
+    "contact-with-host": "تواصل بالمضيف"
   },
   "chat-list": {
     "errors": {

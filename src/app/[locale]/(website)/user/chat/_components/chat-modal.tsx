@@ -1,10 +1,12 @@
 "use client"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { ActionIcon, Drawer } from "@mantine/core"
+import { ActionIcon, Button, Drawer } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { MessageCircle } from "lucide-react"
+import { useAuthModal } from "@/hooks/use-auth-modal"
+import { useSession } from "@/stores/session-store"
 import { ChatProvider } from "../_contexts/chat-context"
 import { initChat } from "../_services/init-chat"
 import { UserType } from "../_stores/user-store"
@@ -29,7 +31,14 @@ function ChatModal({
     },
   })
 
+  const session = useSession()
+  const [_, { onOpen }] = useAuthModal()
+
   const handleInitChat = async () => {
+    if (!session.isAuthenticated) {
+      onOpen()
+      return
+    }
     if (chatInfo) {
       open()
       return
@@ -66,7 +75,7 @@ function ChatModal({
         </UserStoreProvider>
       </Drawer>
 
-      <ActionIcon
+      {/* <ActionIcon
         size={50}
         loading={mutation.isPending}
         className="fixed start-1.5 bottom-9 z-50 md:start-3 md:bottom-3"
@@ -75,7 +84,14 @@ function ChatModal({
         radius="xl"
       >
         <MessageCircle size={20} />
-      </ActionIcon>
+      </ActionIcon> */}
+      <Button
+        loading={mutation.isPending}
+        leftSection={<MessageCircle size={20} />}
+        onClick={handleInitChat}
+      >
+        {t("contact-with-host")}
+      </Button>
     </>
   )
 }

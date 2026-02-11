@@ -671,7 +671,8 @@
     "reload": "Reload",
     "no-chats": "There are no conversations",
     "no-chats-description": "No conversations found yet",
-    "you": "You"
+    "you": "You",
+    "contact-with-host": "Contact host"
   },
   "chat-list": {
     "errors": {
