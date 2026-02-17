@@ -44,14 +44,14 @@ const AuthModal = () => {
           withControls={false}
           plugins={[autoplay.current]}
         >
-          <Carousel.Slide className="!h-full">
+          <Carousel.Slide className="h-full!">
             <Image
               className="h-full w-full object-cover"
               src={loginImage1}
               alt="login"
             />
           </Carousel.Slide>
-          <Carousel.Slide className="!h-full">
+          <Carousel.Slide className="h-full!">
             <Image
               className="h-full w-full object-cover"
               src={loginImage2}

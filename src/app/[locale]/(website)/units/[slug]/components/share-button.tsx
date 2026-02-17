@@ -12,7 +12,7 @@ const ShareButton = ({ variant }: { variant?: ButtonVariant }) => {
     const shareData = {
       title: unit.name,
       text: `تمتع بافضل خدمة ممكنة في ${unit.name} `,
-      url: window.location.href,
+      url: unit.link,
     }
     try {
       if (!window.navigator.share) return
