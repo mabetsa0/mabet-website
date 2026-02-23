@@ -94,22 +94,24 @@ const page = async (props: Props) => {
                 </div>
               </SimpleGrid>
               <Divider />
-              <div className="space-y-0.5">
-                <p className="text-2xl">{t("unit-location")}</p>
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="size-1" />
-                  <p>{booking.unit.location}</p>
+              {booking.maps_link ? (
+                <div className="space-y-0.5">
+                  <p className="text-2xl">{t("unit-location")}</p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="size-1" />
+                    <p>{booking.unit.location}</p>
+                  </div>
+                  <Button
+                    fullWidth
+                    className="max-w-sm"
+                    component={"a"}
+                    href={booking.maps_link}
+                    target="_blank"
+                  >
+                    {t("view-map")}
+                  </Button>
                 </div>
-                <Button
-                  fullWidth
-                  className="max-w-sm"
-                  component={"a"}
-                  href={booking.maps_link}
-                  target="_blank"
-                >
-                  {t("view-map")}
-                </Button>
-              </div>
+              ) : null}
             </Stack>
           </Group>
 
