@@ -3,6 +3,10 @@
     "title": "Hello world!",
     "about": "Go to the about page"
   },
+  "whatsappBar": {
+    "title": "Mabet Customer Service",
+    "cta": "Click to start a conversation with Mabet Customer Service."
+  },
   "header": {
     "about-us": "About Mabet",
     "blog": "blog",

@@ -3,6 +3,10 @@
     "title": "Hello world!",
     "about": "Go to the about page"
   },
+  "whatsappBar": {
+    "title": "خدمة عملاء مبيت",
+    "cta": "إضغط لبدء محادثة مع خدمة عملاء مبيت."
+  },
   "header": {
     "blog": "المدونة",
     "download-app": "تطبيق مبيت",

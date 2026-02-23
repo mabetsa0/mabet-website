@@ -5,6 +5,7 @@ import { Button, Loader, ScrollArea } from "@mantine/core"
 import { MessageSquare, RefreshCcw } from "lucide-react"
 import { useWsChatsList } from "../_hooks/use-ws-chats-list"
 import ChatItem from "./chat-item"
+import WhatsAppSupport from "./whatsapp-fixed-chat"
 
 const ChatList = () => {
   const {
@@ -45,6 +46,8 @@ const ChatList = () => {
           </div>
         ) : data && data.length > 0 ? (
           <div key="data" className="divide-y divide-gray-100">
+            <WhatsAppSupport />
+
             {data.map((conversation) => (
               <div key={conversation.uuid}>
                 <ChatItem key={conversation.uuid} conversation={conversation} />
