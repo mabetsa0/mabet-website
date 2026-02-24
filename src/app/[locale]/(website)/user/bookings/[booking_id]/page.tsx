@@ -70,10 +70,7 @@ const page = async (props: Props) => {
                     ({unit.code})
                   </span>
                 </h3>
-                <Link
-                  className="block w-full max-w-xs"
-                  href={`/unit/${unit.id}`}
-                >
+                <Link className="block w-full max-w-xs" href={unit.link}>
                   <Button fullWidth variant="light" size="sm">
                     {t("view-unit")}
                   </Button>
