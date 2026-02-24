@@ -119,7 +119,12 @@ const Footer = () => {
   return (
     <footer className="bg-[#fafafa]">
       <div className="container pt-4">
-        <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} mb={"xl"} spacing="40px">
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, md: 4 }}
+          mb={"xl"}
+          spacing="40px"
+          className="space-y-2"
+        >
           <Stack>
             <div>
               <Image loading="lazy" src={logo} alt="logo" />
@@ -127,7 +132,7 @@ const Footer = () => {
             <Text c={"#767676"} fz={"sm"}>
               {t("desciption")}
             </Text>
-            <div className="max-w-md text-sm shadow-sm">
+            <div className="mb-1 max-w-md rounded-md p-1 text-sm shadow-sm">
               <ul className="space-y-1 leading-relaxed text-gray-600">
                 <li>{t("license_number")}</li>
                 <li>{t("license_category")}</li>
@@ -141,7 +146,7 @@ const Footer = () => {
             </Title>
             {unitTypes.map((type) => {
               return (
-                <Link key={type.id} href={`/units?unit_type=${type.id}`}>
+                <Link key={type.id} href={`/units?unit_type_id=${type.id}`}>
                   {type.name}
                 </Link>
               )

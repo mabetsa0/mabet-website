@@ -70,10 +70,7 @@ const page = async (props: Props) => {
                     ({unit.code})
                   </span>
                 </h3>
-                <Link
-                  className="block w-full max-w-xs"
-                  href={`/unit/${unit.id}`}
-                >
+                <Link className="block w-full max-w-xs" href={unit.link}>
                   <Button fullWidth variant="light" size="sm">
                     {t("view-unit")}
                   </Button>
@@ -94,22 +91,24 @@ const page = async (props: Props) => {
                 </div>
               </SimpleGrid>
               <Divider />
-              <div className="space-y-0.5">
-                <p className="text-2xl">{t("unit-location")}</p>
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="size-1" />
-                  <p>{booking.unit.location}</p>
+              {booking.maps_link ? (
+                <div className="space-y-0.5">
+                  <p className="text-2xl">{t("unit-location")}</p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="size-1" />
+                    <p>{booking.unit.location}</p>
+                  </div>
+                  <Button
+                    fullWidth
+                    className="max-w-sm"
+                    component={"a"}
+                    href={booking.maps_link}
+                    target="_blank"
+                  >
+                    {t("view-map")}
+                  </Button>
                 </div>
-                <Button
-                  fullWidth
-                  className="max-w-sm"
-                  component={"a"}
-                  href={booking.maps_link}
-                  target="_blank"
-                >
-                  {t("view-map")}
-                </Button>
-              </div>
+              ) : null}
             </Stack>
           </Group>
 
@@ -141,21 +140,23 @@ const page = async (props: Props) => {
             </ul>
             {/* </Spoiler> */}
           </div>
-          <div className="space-y-0.5 rounded bg-gray-50 p-0.5">
-            <p className="text-2xl">{t("owner-information")}</p>
-            <p className="ms-1">
-              {t("owner-name")}: {booking.partner.name}
-            </p>
-            <p className="ms-1">
-              {t("owner-number")} :{" "}
-              <a
-                className="text-primary"
-                href={`tel:+966${booking.partner.phone}`}
-              >
-                {booking.partner.phone}
-              </a>
-            </p>
-          </div>
+          {booking.partner.name || booking.partner.phone ? (
+            <div className="space-y-0.5 rounded bg-gray-50 p-0.5">
+              <p className="text-2xl">{t("owner-information")}</p>
+              <p className="ms-1">
+                {t("owner-name")}: {booking.partner.name}
+              </p>
+              <p className="ms-1">
+                {t("owner-number")} :{" "}
+                <a
+                  className="text-primary"
+                  href={`tel:+966${booking.partner.phone}`}
+                >
+                  {booking.partner.phone}
+                </a>
+              </p>
+            </div>
+          ) : null}
           <Divider />
 
           <div className="space-y-[12px]">

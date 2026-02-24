@@ -3,6 +3,10 @@
     "title": "Hello world!",
     "about": "Go to the about page"
   },
+  "whatsappBar": {
+    "title": "خدمة عملاء مبيت",
+    "cta": "إضغط لبدء محادثة مع خدمة عملاء مبيت."
+  },
   "header": {
     "blog": "المدونة",
     "download-app": "تطبيق مبيت",
@@ -177,7 +181,8 @@
     "date_extended_to": "تم تمديد الحجز حتى ",
     "goToBookings": "عرض الحجوزات",
     "qitaf-amount": "المبلغ المدفوع عبر قطاف",
-    "chat": "المحادثات"
+    "chat": "المحادثات",
+    "taxes": "ضريبة القيمة المضافة"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",
@@ -667,7 +672,7 @@
     "no-chats": "لا توجد محادثات",
     "no-chats-description": "               لم يتم العثور على أي محادثات حتى الآن\n",
     "you": "أنت",
-    "contact-with-host": "تواصل بالمضيف"
+    "contact-with-host": "تواصل مع المضيف"
   },
   "chat-list": {
     "errors": {

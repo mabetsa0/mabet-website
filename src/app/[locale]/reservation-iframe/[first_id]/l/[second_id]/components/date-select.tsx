@@ -219,7 +219,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center text-lg font-medium text-gray-600",
+                  "h-[44px] items-center text-base font-medium text-gray-600",
                   value[0] && "text-dark"
                 )}
               >
@@ -239,7 +239,7 @@ const DateSelect = ({
               </Group>
               <Group
                 className={cn(
-                  "h-[44px] items-center text-lg font-medium text-gray-600",
+                  "h-[44px] items-center text-base font-medium text-gray-600",
                   value[1] && "text-dark"
                 )}
               >

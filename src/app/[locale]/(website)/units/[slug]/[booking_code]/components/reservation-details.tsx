@@ -164,7 +164,23 @@ const ReservationDetails = ({ prices }: { prices: BookingDetails }) => {
                 <Text>{t("general.customer-fees")}</Text>
 
                 <Text ta="end" c="#767676">
-                  {parseFloat(prices.customer_fees).toFixed(2)}
+                  <NumberFormatter
+                    thousandSeparator
+                    value={prices.customer_fees}
+                    decimalScale={2}
+                  />{" "}
+                  <RiyalIcon />
+                </Text>
+              </SimpleGrid>
+              <SimpleGrid cols={2}>
+                <Text>{t("general.taxes")}</Text>
+
+                <Text ta="end" c="#767676">
+                  <NumberFormatter
+                    thousandSeparator
+                    value={prices.taxes}
+                    decimalScale={2}
+                  />{" "}
                   <RiyalIcon />
                 </Text>
               </SimpleGrid>

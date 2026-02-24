@@ -62,7 +62,7 @@ const ReservationDetails = () => {
   return (
     <Card
       className={
-        "md:p-md border-[#F3F3F3] md:rounded-md md:[box-shadow:_0px_12px_20px_0px_#0000000A]"
+        "md:p-md border-[#F3F3F3] md:rounded-md md:[box-shadow:0px_12px_20px_0px_#0000000A]"
       }
       withBorder={!matches}
     >
@@ -122,7 +122,7 @@ const ReservationDetails = () => {
             {prices?.discount ? (
               <Badge
                 h={40}
-                className="relative min-w-7 rounded-s-md !rounded-e-[0] !border-0 p-[4px]"
+                className="relative min-w-7 rounded-s-md rounded-e-none! border-0! p-[4px]"
                 classNames={{
                   label: "text-start text-xs",
                 }}
@@ -249,6 +249,17 @@ const ReservationDetails = () => {
                 <NumberFormatter
                   thousandSeparator
                   value={prices.customer_fees_total}
+                  decimalScale={2}
+                />{" "}
+                <RiyalIcon />
+              </Text>
+            </SimpleGrid>
+            <SimpleGrid cols={2}>
+              <Text>{t("general.taxes")}</Text>
+              <Text ta="end" c="#767676">
+                <NumberFormatter
+                  thousandSeparator
+                  value={prices.taxes}
                   decimalScale={2}
                 />{" "}
                 <RiyalIcon />

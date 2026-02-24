@@ -20,7 +20,7 @@ const ContactForm = () => {
   const t = useTranslations()
 
   const form = useForm({
-    mode: "uncontrolled",
+    mode: "controlled",
     initialValues: {
       message: "",
       subject: "",
@@ -64,6 +64,8 @@ const ContactForm = () => {
                   {t("user.contact-form.subject.label")}
                 </Group>
               }
+              key={form.key("subject")}
+              {...form.getInputProps("subject")}
             />
           </div>
           <div className="rounded-lg border border-[#F3F3F3]">
@@ -84,6 +86,8 @@ const ContactForm = () => {
                   {t("user.contact-form.message.placeholder")}
                 </Group>
               }
+              key={form.key("message")}
+              {...form.getInputProps("message")}
             />
           </div>
 

@@ -439,18 +439,20 @@ const Message = ({
         <div
           className={cn("flex flex-col gap-[4px]", isAdmin && "items-center")}
         >
-          {isOwnMessage ? <span
-            className={cn(
-              "text-xs font-medium",
-              variant === "other" ? "text-white/90" : "text-primary"
-            )}
-          >
-            {t("you")}
-          </span> : (
+          {isOwnMessage ? (
             <span
               className={cn(
                 "text-xs font-medium",
                 variant === "other" ? "text-white/90" : "text-primary"
+              )}
+            >
+              {t("you")}
+            </span>
+          ) : (
+            <span
+              className={cn(
+                "text-xs font-medium",
+                variant === "other" ? "text-end text-white/90" : "text-primary"
               )}
             >
               {sender_name}
