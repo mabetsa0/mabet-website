@@ -140,21 +140,23 @@ const page = async (props: Props) => {
             </ul>
             {/* </Spoiler> */}
           </div>
-          <div className="space-y-0.5 rounded bg-gray-50 p-0.5">
-            <p className="text-2xl">{t("owner-information")}</p>
-            <p className="ms-1">
-              {t("owner-name")}: {booking.partner.name}
-            </p>
-            <p className="ms-1">
-              {t("owner-number")} :{" "}
-              <a
-                className="text-primary"
-                href={`tel:+966${booking.partner.phone}`}
-              >
-                {booking.partner.phone}
-              </a>
-            </p>
-          </div>
+          {booking.partner.name || booking.partner.phone ? (
+            <div className="space-y-0.5 rounded bg-gray-50 p-0.5">
+              <p className="text-2xl">{t("owner-information")}</p>
+              <p className="ms-1">
+                {t("owner-name")}: {booking.partner.name}
+              </p>
+              <p className="ms-1">
+                {t("owner-number")} :{" "}
+                <a
+                  className="text-primary"
+                  href={`tel:+966${booking.partner.phone}`}
+                >
+                  {booking.partner.phone}
+                </a>
+              </p>
+            </div>
+          ) : null}
           <Divider />
 
           <div className="space-y-[12px]">
