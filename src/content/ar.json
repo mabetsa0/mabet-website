@@ -181,7 +181,8 @@
     "date_extended_to": "تم تمديد الحجز حتى ",
     "goToBookings": "عرض الحجوزات",
     "qitaf-amount": "المبلغ المدفوع عبر قطاف",
-    "chat": "المحادثات"
+    "chat": "المحادثات",
+    "taxes": "ضريبة القيمة المضافة"
   },
   "date-range-picker": {
     "check-in": "تسجيل الوصول",

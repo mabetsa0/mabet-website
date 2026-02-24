@@ -23,6 +23,8 @@ export interface BookingDetails {
   sub_total_text: string
   insurance: string
   insurance_text: string
+  taxes: number
+
   total: string
   total_text: string
   customer_fees: string
