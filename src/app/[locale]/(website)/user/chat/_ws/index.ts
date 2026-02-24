@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid"
+import { getLocaleFromUrl } from "@/utils/get-locale"
 import { getChatSessionStore } from "../_stores/session-store-provider"
 import { getUserStore } from "../_stores/user-store-provider"
 import {
@@ -13,8 +14,8 @@ import { emitEvent, onEvent } from "./events-handler"
 
 const wsUrl =
   process.env.NEXT_PUBLIC_TEST == "true"
-    ? "wss://chat-experimental.mabet-app.com/api/v1/ws?lang=ar"
-    : "wss://chat.mabet-app.com/api/v1/ws?lang=ar"
+    ? `wss://chat-experimental.mabet-app.com/api/v1/ws?lang=${getLocaleFromUrl()}`
+    : `wss://chat.mabet-app.com/api/v1/ws?lang=${getLocaleFromUrl()}`
 
 // Singleton WebSocket instance with auto‑reconnect
 let socket: WebSocket | null = null

@@ -101,7 +101,7 @@ const Profile = () => {
               readOnly
               variant="unstyled"
               classNames={{
-                input: "px-1 rounded-t-[none]  py-[3px] bg-[#F6F4F8] ",
+                input: "px-1 rounded-t-[none]  py-[3px] bg-[#F6F4F8]  h-[40px]",
                 wrapper: "!rounded-t-[none] ",
                 label: " border-b w-full border-b-[#F3F3F3] px-1 py-[12px]",
               }}

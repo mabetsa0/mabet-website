@@ -33,6 +33,7 @@ import loginImage1 from "./login-1.jpeg"
 import loginImage2 from "./login-2.jpeg"
 import logoWithoutWindows from "./mabet-logo-without-windows.svg"
 import mabetLogo from "./mabet-logo.svg"
+import MabetSupport from "./mabet-support.svg"
 import mada from "./mada-icon.svg"
 import madfu from "./madfu-icon.svg"
 import logo from "./main-logo.svg"
@@ -104,6 +105,7 @@ export {
   tamara,
   stcAr,
   stcEn,
+  MabetSupport,
 }
 export const UnitTypeIcons = {
   "2": type1Icon.src as string,

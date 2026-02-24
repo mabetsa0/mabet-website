@@ -227,6 +227,7 @@ export interface PricesV2_1 {
   insurance: number
   sub_total_plain: number
   show_down_payment: boolean
+  taxes: number
 
   down_payment_before_plain: number
   down_payment: string
