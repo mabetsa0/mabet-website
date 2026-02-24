@@ -146,7 +146,7 @@ const Footer = () => {
             </Title>
             {unitTypes.map((type) => {
               return (
-                <Link key={type.id} href={`/units?unit_type=${type.id}`}>
+                <Link key={type.id} href={`/units?unit_type_id=${type.id}`}>
                   {type.name}
                 </Link>
               )
