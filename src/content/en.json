@@ -594,7 +594,8 @@
     "conditions": "Reservation Conditions ",
     "cancel-policy": "Cancellation and retrieval policy",
     "support": "Support and protect your rights",
-    "qitaf-amount": "Paied via Qitaf"
+    "qitaf-amount": "Paied via Qitaf",
+    "taxes": "Taxes"
   },
   "wallet": {
     "card": {
