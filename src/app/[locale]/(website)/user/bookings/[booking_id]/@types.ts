@@ -70,6 +70,7 @@ export interface DetailedBooking {
   wallet: Wallet
   support: Support
   qitaf_amount: number
+  taxes?: number
 }
 
 export interface ArrivalInstruction {

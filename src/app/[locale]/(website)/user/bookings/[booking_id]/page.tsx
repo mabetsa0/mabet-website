@@ -197,6 +197,20 @@ const page = async (props: Props) => {
                 <RiyalIcon />
               </span>
             </div>
+            {booking.taxes ? (
+              <div className="text-foreground-500 flex items-center justify-between gap-1 text-sm">
+                <p>{t("taxes")}</p>
+
+                <Text ta="end" c="#767676">
+                  <NumberFormatter
+                    thousandSeparator
+                    value={booking.taxes}
+                    decimalScale={2}
+                  />{" "}
+                  <RiyalIcon />
+                </Text>
+              </div>
+            ) : null}
             <Divider />
             <div className="flex items-center justify-between py-1 text-lg font-bold">
               <p>{t("total")}</p>

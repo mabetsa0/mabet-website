@@ -116,6 +116,18 @@ const MobilePaymentButton = ({
                       <RiyalIcon />
                     </Text>
                   </SimpleGrid>
+                  <SimpleGrid cols={2}>
+                    <Text>{t("general.taxes")}</Text>
+
+                    <Text ta="end" c="#767676">
+                      <NumberFormatter
+                        thousandSeparator
+                        value={prices.taxes}
+                        decimalScale={2}
+                      />{" "}
+                      <RiyalIcon />
+                    </Text>
+                  </SimpleGrid>
                   <Divider />
                   <SimpleGrid cols={2}>
                     <Text fw={700}>{t("general.total-price")}</Text>
