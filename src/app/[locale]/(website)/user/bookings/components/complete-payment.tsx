@@ -86,7 +86,7 @@ const CompletePayment = (booking: Booking) => {
       {Number(booking.wallet?.current_balance) ? (
         <Group wrap="nowrap" align="start" mt={"sm"}>
           <Switch
-            checked={!!use_wallet}
+            checked={!!Number(use_wallet)}
             onChange={(e) => {
               set({ use_wallet: e.target.checked ? "1" : null })
             }}
